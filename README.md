@@ -1,5 +1,6 @@
-go-cloudstack
+cloudstack-go
 =============
+
 A CloudStack API client enabling Go programs to interact with CloudStack in a simple and uniform way
 
 ## Status
@@ -57,14 +58,18 @@ I fully understand I need to document this all a little more/better and there sh
 
 ## Getting Help
 
-_Please try to see if [GoDocs](http://godoc.org/github.com/xanzy/go-cloudstack) can provide some answers first!_
+_Please try to see if [GoDocs](http://godoc.org/github.com/apache/cloudstack-go) can provide some answers first!_
 
-* If you have an issue: report it on the [issue tracker](https://github.com/xanzy/go-cloudstack/issues)
+* If you have an issue: report it on the [issue tracker](https://github.com/apache/cloudstack-go/issues)
 
-## Author
+## History
 
-Sander van Harmelen (<sander@vanharmelen.nl>)
+Sander van Harmelen (<sander@vanharmelen.nl>) was the original author of this repo
+which was donated to the Apache CloudStack project under an [IP
+clearance](https://github.com/apache/cloudstack/issues/5159) process.
 
 ## License
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at <http://www.apache.org/licenses/LICENSE-2.0>
