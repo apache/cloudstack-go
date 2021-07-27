@@ -1,5 +1,6 @@
-cloudstack-go
-=============
+# cloudstack-go
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/apache/cloudstack-go/cloudstack.svg)](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack)
 
 A CloudStack API client enabling Go programs to interact with CloudStack in a simple and uniform way
 
@@ -13,7 +14,7 @@ To be able to find the API command you want, they are grouped by 'services' whic
 
 The cloudstack package is always generated against the latest stable CloudStack release (currently v4.11.x). Luckily the API doesn't change that much, and were it does we try to make sure the generated package is able handle both the old and the new case. Over time it will be impossible to support all version with just one package, but until now we seem to manage this pretty well.
 
-Please see the package documentation on [GoDocs](http://godoc.org/github.com/xanzy/go-cloudstack/cloudstack).
+Please see the package documentation on [go.dev](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack).
 
 ## Example
 
@@ -58,7 +59,7 @@ I fully understand I need to document this all a little more/better and there sh
 
 ## Getting Help
 
-_Please try to see if [GoDocs](http://godoc.org/github.com/apache/cloudstack-go) can provide some answers first!_
+_Please try to see if the [module documentation](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack) can provide some answers first!_
 
 * If you have an issue: report it on the [issue tracker](https://github.com/apache/cloudstack-go/issues)
 
