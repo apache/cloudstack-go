@@ -1,6 +1,6 @@
 github:
   description: "CloudStack Go SDK"
-  homepage: https://cloudstack.apache.org/
+  homepage: https://cloudstack.apache.org
   labels:
     - go
     - golang
