@@ -548,12 +548,6 @@ var layout = apiInfo{
 		"removeRegion",
 		"updateRegion",
 	},
-	"NuageVSPService": {
-		"addNuageVspDevice",
-		"deleteNuageVspDevice",
-		"listNuageVspDevices",
-		"updateNuageVspDevice",
-	},
 	"NicService": {
 		"addIpToNic",
 		"listNics",
