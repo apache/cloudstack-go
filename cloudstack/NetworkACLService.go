@@ -222,6 +222,7 @@ func (s *NetworkACLService) CreateNetworkACL(p *CreateNetworkACLParams) (*Create
 
 type CreateNetworkACLResponse struct {
 	Aclid       string `json:"aclid"`
+	Aclname     string `json:"aclname"`
 	Action      string `json:"action"`
 	Cidrlist    string `json:"cidrlist"`
 	Endport     string `json:"endport"`
@@ -996,6 +997,7 @@ type ListNetworkACLsResponse struct {
 
 type NetworkACL struct {
 	Aclid       string `json:"aclid"`
+	Aclname     string `json:"aclname"`
 	Action      string `json:"action"`
 	Cidrlist    string `json:"cidrlist"`
 	Endport     string `json:"endport"`
@@ -1308,6 +1310,7 @@ func (s *NetworkACLService) UpdateNetworkACLItem(p *UpdateNetworkACLItemParams) 
 
 type UpdateNetworkACLItemResponse struct {
 	Aclid       string `json:"aclid"`
+	Aclname     string `json:"aclname"`
 	Action      string `json:"action"`
 	Cidrlist    string `json:"cidrlist"`
 	Endport     string `json:"endport"`

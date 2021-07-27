@@ -112,7 +112,6 @@ type CloudStackClient struct {
 	Network             *NetworkService
 	Nic                 *NicService
 	NiciraNVP           *NiciraNVPService
-	NuageVSP            *NuageVSPService
 	OutofbandManagement *OutofbandManagementService
 	OvsElement          *OvsElementService
 	Pod                 *PodService
@@ -216,7 +215,6 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
-	cs.NuageVSP = NewNuageVSPService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
 	cs.OvsElement = NewOvsElementService(cs)
 	cs.Pod = NewPodService(cs)
@@ -851,14 +849,6 @@ type NiciraNVPService struct {
 
 func NewNiciraNVPService(cs *CloudStackClient) *NiciraNVPService {
 	return &NiciraNVPService{cs: cs}
-}
-
-type NuageVSPService struct {
-	cs *CloudStackClient
-}
-
-func NewNuageVSPService(cs *CloudStackClient) *NuageVSPService {
-	return &NuageVSPService{cs: cs}
 }
 
 type OutofbandManagementService struct {

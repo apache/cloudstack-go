@@ -42,6 +42,9 @@ func (p *CreateRoleParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["roleid"]; found {
+		u.Set("roleid", v.(string))
+	}
 	if v, found := p.p["type"]; found {
 		u.Set("type", v.(string))
 	}
@@ -62,6 +65,13 @@ func (p *CreateRoleParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateRoleParams) SetRoleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["roleid"] = v
+}
+
 func (p *CreateRoleParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -71,11 +81,10 @@ func (p *CreateRoleParams) SetType(v string) {
 
 // You should always use this function to get a new CreateRoleParams instance,
 // as then you are sure you have configured all required params
-func (s *RoleService) NewCreateRoleParams(name string, roleType string) *CreateRoleParams {
+func (s *RoleService) NewCreateRoleParams(name string) *CreateRoleParams {
 	p := &CreateRoleParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
-	p.p["type"] = roleType
 	return p
 }
 
@@ -97,6 +106,7 @@ func (s *RoleService) CreateRole(p *CreateRoleParams) (*CreateRoleResponse, erro
 type CreateRoleResponse struct {
 	Description string `json:"description"`
 	Id          string `json:"id"`
+	Isdefault   bool   `json:"isdefault"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
@@ -166,7 +176,7 @@ func (s *RoleService) NewCreateRolePermissionParams(permission string, roleid st
 	return p
 }
 
-// Adds a API permission to a role
+// Adds an API permission to a role
 func (s *RoleService) CreateRolePermission(p *CreateRolePermissionParams) (*CreateRolePermissionResponse, error) {
 	resp, err := s.cs.newRequest("createRolePermission", p.toURLValues())
 	if err != nil {
@@ -425,8 +435,19 @@ func (p *ListRolesParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
 	}
 	if v, found := p.p["type"]; found {
 		u.Set("type", v.(string))
@@ -441,11 +462,32 @@ func (p *ListRolesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListRolesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
 func (p *ListRolesParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListRolesParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListRolesParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
 }
 
 func (p *ListRolesParams) SetType(v string) {
@@ -569,6 +611,7 @@ type ListRolesResponse struct {
 type Role struct {
 	Description string `json:"description"`
 	Id          string `json:"id"`
+	Isdefault   bool   `json:"isdefault"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
@@ -583,6 +626,9 @@ func (p *UpdateRoleParams) toURLValues() url.Values {
 	u := url.Values{}
 	if p.p == nil {
 		return u
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
 	}
 	if v, found := p.p["description"]; found {
 		u.Set("description", v.(string))
@@ -654,6 +700,7 @@ func (s *RoleService) UpdateRole(p *UpdateRoleParams) (*UpdateRoleResponse, erro
 type UpdateRoleResponse struct {
 	Description string `json:"description"`
 	Id          string `json:"id"`
+	Isdefault   bool   `json:"isdefault"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`

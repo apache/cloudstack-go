@@ -719,6 +719,9 @@ func (p *UpdateStoragePoolParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["tags"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("tags", vv)
@@ -752,6 +755,13 @@ func (p *UpdateStoragePoolParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateStoragePoolParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
 }
 
 func (p *UpdateStoragePoolParams) SetTags(v []string) {

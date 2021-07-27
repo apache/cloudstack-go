@@ -94,52 +94,52 @@ func (s *ProjectService) ActivateProject(p *ActivateProjectParams) (*ActivatePro
 }
 
 type ActivateProjectResponse struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type CreateProjectParams struct {
@@ -154,6 +154,9 @@ func (p *CreateProjectParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
@@ -163,6 +166,9 @@ func (p *CreateProjectParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
+	}
 	return u
 }
 
@@ -171,6 +177,13 @@ func (p *CreateProjectParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *CreateProjectParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
 }
 
 func (p *CreateProjectParams) SetDisplaytext(v string) {
@@ -192,6 +205,13 @@ func (p *CreateProjectParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateProjectParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
 }
 
 // You should always use this function to get a new CreateProjectParams instance,
@@ -240,52 +260,52 @@ func (s *ProjectService) CreateProject(p *CreateProjectParams) (*CreateProjectRe
 }
 
 type CreateProjectResponse struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type DeleteProjectParams struct {
@@ -471,6 +491,9 @@ func (p *ListProjectInvitationsParams) toURLValues() url.Values {
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
 	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
+	}
 	return u
 }
 
@@ -551,6 +574,13 @@ func (p *ListProjectInvitationsParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListProjectInvitationsParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
+}
+
 // You should always use this function to get a new ListProjectInvitationsParams instance,
 // as then you are sure you have configured all required params
 func (s *ProjectService) NewListProjectInvitationsParams() *ListProjectInvitationsParams {
@@ -623,6 +653,7 @@ type ProjectInvitation struct {
 	Project   string `json:"project"`
 	Projectid string `json:"projectid"`
 	State     string `json:"state"`
+	Userid    string `json:"userid"`
 }
 
 type ListProjectsParams struct {
@@ -636,6 +667,10 @@ func (p *ListProjectsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
+	}
+	if v, found := p.p["details"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("details", vv)
 	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
@@ -678,6 +713,9 @@ func (p *ListProjectsParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
 		}
 	}
+	if v, found := p.p["username"]; found {
+		u.Set("username", v.(string))
+	}
 	return u
 }
 
@@ -686,6 +724,13 @@ func (p *ListProjectsParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *ListProjectsParams) SetDetails(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
 }
 
 func (p *ListProjectsParams) SetDisplaytext(v string) {
@@ -763,6 +808,13 @@ func (p *ListProjectsParams) SetTags(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *ListProjectsParams) SetUsername(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["username"] = v
 }
 
 // You should always use this function to get a new ListProjectsParams instance,
@@ -877,52 +929,52 @@ type ListProjectsResponse struct {
 }
 
 type Project struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type SuspendProjectParams struct {
@@ -992,52 +1044,52 @@ func (s *ProjectService) SuspendProject(p *SuspendProjectParams) (*SuspendProjec
 }
 
 type SuspendProjectResponse struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type UpdateProjectParams struct {
@@ -1057,6 +1109,16 @@ func (p *UpdateProjectParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["roletype"]; found {
+		u.Set("roletype", v.(string))
+	}
+	if v, found := p.p["swapowner"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("swapowner", vv)
+	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
 	}
 	return u
 }
@@ -1080,6 +1142,27 @@ func (p *UpdateProjectParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateProjectParams) SetRoletype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["roletype"] = v
+}
+
+func (p *UpdateProjectParams) SetSwapowner(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["swapowner"] = v
+}
+
+func (p *UpdateProjectParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
 }
 
 // You should always use this function to get a new UpdateProjectParams instance,
@@ -1127,52 +1210,52 @@ func (s *ProjectService) UpdateProject(p *UpdateProjectParams) (*UpdateProjectRe
 }
 
 type UpdateProjectResponse struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type UpdateProjectInvitationParams struct {
@@ -1196,6 +1279,9 @@ func (p *UpdateProjectInvitationParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["token"]; found {
 		u.Set("token", v.(string))
+	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
 	}
 	return u
 }
@@ -1226,6 +1312,13 @@ func (p *UpdateProjectInvitationParams) SetToken(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["token"] = v
+}
+
+func (p *UpdateProjectInvitationParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
 }
 
 // You should always use this function to get a new UpdateProjectInvitationParams instance,

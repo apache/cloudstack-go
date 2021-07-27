@@ -99,7 +99,9 @@ func (s *SystemVMService) ChangeServiceForSystemVm(p *ChangeServiceForSystemVmPa
 
 type ChangeServiceForSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -116,6 +118,7 @@ type ChangeServiceForSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -126,6 +129,8 @@ type ChangeServiceForSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -198,7 +203,9 @@ func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySys
 
 type DestroySystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -215,6 +222,7 @@ type DestroySystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -225,6 +233,8 @@ type DestroySystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -466,7 +476,9 @@ type ListSystemVmsResponse struct {
 
 type SystemVm struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -483,6 +495,7 @@ type SystemVm struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -493,6 +506,8 @@ type SystemVm struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -576,7 +591,9 @@ func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSys
 
 type MigrateSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -593,6 +610,7 @@ type MigrateSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -603,6 +621,8 @@ type MigrateSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -675,7 +695,9 @@ func (s *SystemVMService) RebootSystemVm(p *RebootSystemVmParams) (*RebootSystem
 
 type RebootSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -692,6 +714,7 @@ type RebootSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -702,6 +725,8 @@ type RebootSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -798,7 +823,9 @@ func (s *SystemVMService) ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmR
 
 type ScaleSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -815,6 +842,7 @@ type ScaleSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -825,6 +853,8 @@ type ScaleSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -897,7 +927,9 @@ func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmR
 
 type StartSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -914,6 +946,7 @@ type StartSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -924,6 +957,8 @@ type StartSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }
@@ -1007,7 +1042,9 @@ func (s *SystemVMService) StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResp
 
 type StopSystemVmResponse struct {
 	Activeviewersessions int      `json:"activeviewersessions"`
+	Agentstate           string   `json:"agentstate"`
 	Created              string   `json:"created"`
+	Disconnected         string   `json:"disconnected"`
 	Dns1                 string   `json:"dns1"`
 	Dns2                 string   `json:"dns2"`
 	Gateway              string   `json:"gateway"`
@@ -1024,6 +1061,7 @@ type StopSystemVmResponse struct {
 	Name                 string   `json:"name"`
 	Networkdomain        string   `json:"networkdomain"`
 	Podid                string   `json:"podid"`
+	Podname              string   `json:"podname"`
 	Privateip            string   `json:"privateip"`
 	Privatemacaddress    string   `json:"privatemacaddress"`
 	Privatenetmask       string   `json:"privatenetmask"`
@@ -1034,6 +1072,8 @@ type StopSystemVmResponse struct {
 	State                string   `json:"state"`
 	Systemvmtype         string   `json:"systemvmtype"`
 	Templateid           string   `json:"templateid"`
+	Templatename         string   `json:"templatename"`
+	Version              string   `json:"version"`
 	Zoneid               string   `json:"zoneid"`
 	Zonename             string   `json:"zonename"`
 }

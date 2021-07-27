@@ -141,6 +141,10 @@ func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachine
 type AddNicToVirtualMachineResponse struct {
 	Account               string                                        `json:"account"`
 	Affinitygroup         []AddNicToVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                        `json:"backupofferingid"`
+	Backupofferingname    string                                        `json:"backupofferingname"`
+	Bootmode              string                                        `json:"bootmode"`
+	Boottype              string                                        `json:"boottype"`
 	Cpunumber             int                                           `json:"cpunumber"`
 	Cpuspeed              int                                           `json:"cpuspeed"`
 	Cpuused               string                                        `json:"cpuused"`
@@ -181,6 +185,7 @@ type AddNicToVirtualMachineResponse struct {
 	Networkkbsread        int64                                         `json:"networkkbsread"`
 	Networkkbswrite       int64                                         `json:"networkkbswrite"`
 	Nic                   []Nic                                         `json:"nic"`
+	Osdisplayname         string                                        `json:"osdisplayname"`
 	Ostypeid              string                                        `json:"ostypeid"`
 	Password              string                                        `json:"password"`
 	Passwordenabled       bool                                          `json:"passwordenabled"`
@@ -188,6 +193,7 @@ type AddNicToVirtualMachineResponse struct {
 	Projectid             string                                        `json:"projectid"`
 	Publicip              string                                        `json:"publicip"`
 	Publicipid            string                                        `json:"publicipid"`
+	Readonlyuidetails     string                                        `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                         `json:"rootdeviceid"`
 	Rootdevicetype        string                                        `json:"rootdevicetype"`
 	Securitygroup         []AddNicToVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -376,6 +382,10 @@ func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachinePara
 type AssignVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []AssignVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                      `json:"backupofferingid"`
+	Backupofferingname    string                                      `json:"backupofferingname"`
+	Bootmode              string                                      `json:"bootmode"`
+	Boottype              string                                      `json:"boottype"`
 	Cpunumber             int                                         `json:"cpunumber"`
 	Cpuspeed              int                                         `json:"cpuspeed"`
 	Cpuused               string                                      `json:"cpuused"`
@@ -416,6 +426,7 @@ type AssignVirtualMachineResponse struct {
 	Networkkbsread        int64                                       `json:"networkkbsread"`
 	Networkkbswrite       int64                                       `json:"networkkbswrite"`
 	Nic                   []Nic                                       `json:"nic"`
+	Osdisplayname         string                                      `json:"osdisplayname"`
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
@@ -423,6 +434,7 @@ type AssignVirtualMachineResponse struct {
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
+	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []AssignVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -583,6 +595,10 @@ func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceF
 type ChangeServiceForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ChangeServiceForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                                `json:"backupofferingid"`
+	Backupofferingname    string                                                `json:"backupofferingname"`
+	Bootmode              string                                                `json:"bootmode"`
+	Boottype              string                                                `json:"boottype"`
 	Cpunumber             int                                                   `json:"cpunumber"`
 	Cpuspeed              int                                                   `json:"cpuspeed"`
 	Cpuused               string                                                `json:"cpuused"`
@@ -623,6 +639,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Networkkbsread        int64                                                 `json:"networkkbsread"`
 	Networkkbswrite       int64                                                 `json:"networkkbswrite"`
 	Nic                   []Nic                                                 `json:"nic"`
+	Osdisplayname         string                                                `json:"osdisplayname"`
 	Ostypeid              string                                                `json:"ostypeid"`
 	Password              string                                                `json:"password"`
 	Passwordenabled       bool                                                  `json:"passwordenabled"`
@@ -630,6 +647,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Projectid             string                                                `json:"projectid"`
 	Publicip              string                                                `json:"publicip"`
 	Publicipid            string                                                `json:"publicipid"`
+	Readonlyuidetails     string                                                `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                                 `json:"rootdeviceid"`
 	Rootdevicetype        string                                                `json:"rootdevicetype"`
 	Securitygroup         []ChangeServiceForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -794,6 +812,23 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("affinitygroupnames", vv)
 	}
+	if v, found := p.p["bootintosetup"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("bootintosetup", vv)
+	}
+	if v, found := p.p["bootmode"]; found {
+		u.Set("bootmode", v.(string))
+	}
+	if v, found := p.p["boottype"]; found {
+		u.Set("boottype", v.(string))
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["copyimagetags"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("copyimagetags", vv)
+	}
 	if v, found := p.p["customid"]; found {
 		u.Set("customid", v.(string))
 	}
@@ -874,8 +909,25 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("networkids", vv)
 	}
+	if v, found := p.p["nicnetworklist"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nicnetworklist[%d].key", i), k)
+			u.Set(fmt.Sprintf("nicnetworklist[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["properties"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("properties[%d].key", i), k)
+			u.Set(fmt.Sprintf("properties[%d].value", i), m[k])
+		}
 	}
 	if v, found := p.p["rootdisksize"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
@@ -931,6 +983,41 @@ func (p *DeployVirtualMachineParams) SetAffinitygroupnames(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupnames"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetBootintosetup(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bootintosetup"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetBootmode(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bootmode"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetBoottype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["boottype"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetCopyimagetags(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["copyimagetags"] = v
 }
 
 func (p *DeployVirtualMachineParams) SetCustomid(v string) {
@@ -1080,11 +1167,32 @@ func (p *DeployVirtualMachineParams) SetNetworkids(v []string) {
 	p.p["networkids"] = v
 }
 
+func (p *DeployVirtualMachineParams) SetNicnetworklist(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nicnetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
 func (p *DeployVirtualMachineParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeployVirtualMachineParams) SetProperties(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["properties"] = v
 }
 
 func (p *DeployVirtualMachineParams) SetRootdisksize(v int64) {
@@ -1199,6 +1307,10 @@ func (s *VirtualMachineService) DeployVirtualMachine(p *DeployVirtualMachinePara
 type DeployVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []DeployVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                      `json:"backupofferingid"`
+	Backupofferingname    string                                      `json:"backupofferingname"`
+	Bootmode              string                                      `json:"bootmode"`
+	Boottype              string                                      `json:"boottype"`
 	Cpunumber             int                                         `json:"cpunumber"`
 	Cpuspeed              int                                         `json:"cpuspeed"`
 	Cpuused               string                                      `json:"cpuused"`
@@ -1239,6 +1351,7 @@ type DeployVirtualMachineResponse struct {
 	Networkkbsread        int64                                       `json:"networkkbsread"`
 	Networkkbswrite       int64                                       `json:"networkkbswrite"`
 	Nic                   []Nic                                       `json:"nic"`
+	Osdisplayname         string                                      `json:"osdisplayname"`
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
@@ -1246,6 +1359,7 @@ type DeployVirtualMachineResponse struct {
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
+	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []DeployVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -1386,7 +1500,7 @@ func (s *VirtualMachineService) NewDestroyVirtualMachineParams(id string) *Destr
 	return p
 }
 
-// Destroys a virtual machine.
+// Destroys a virtual machine. Once destroyed, only the administrator can recover it.
 func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error) {
 	resp, err := s.cs.newRequest("destroyVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -1424,6 +1538,10 @@ func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachinePa
 type DestroyVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []DestroyVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                       `json:"backupofferingid"`
+	Backupofferingname    string                                       `json:"backupofferingname"`
+	Bootmode              string                                       `json:"bootmode"`
+	Boottype              string                                       `json:"boottype"`
 	Cpunumber             int                                          `json:"cpunumber"`
 	Cpuspeed              int                                          `json:"cpuspeed"`
 	Cpuused               string                                       `json:"cpuused"`
@@ -1464,6 +1582,7 @@ type DestroyVirtualMachineResponse struct {
 	Networkkbsread        int64                                        `json:"networkkbsread"`
 	Networkkbswrite       int64                                        `json:"networkkbswrite"`
 	Nic                   []Nic                                        `json:"nic"`
+	Osdisplayname         string                                       `json:"osdisplayname"`
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
@@ -1471,6 +1590,7 @@ type DestroyVirtualMachineResponse struct {
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
+	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []DestroyVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -1711,6 +1831,13 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["groupid"]; found {
 		u.Set("groupid", v.(string))
 	}
+	if v, found := p.p["haenable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("haenable", vv)
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
 	}
@@ -1758,14 +1885,23 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["podid"]; found {
 		u.Set("podid", v.(string))
 	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["securitygroupid"]; found {
+		u.Set("securitygroupid", v.(string))
 	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
@@ -1839,6 +1975,13 @@ func (p *ListVirtualMachinesParams) SetGroupid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["groupid"] = v
+}
+
+func (p *ListVirtualMachinesParams) SetHaenable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["haenable"] = v
 }
 
 func (p *ListVirtualMachinesParams) SetHostid(v string) {
@@ -1944,6 +2087,13 @@ func (p *ListVirtualMachinesParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVirtualMachinesParams) SetSecuritygroupid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["securitygroupid"] = v
 }
 
 func (p *ListVirtualMachinesParams) SetServiceofferingid(v string) {
@@ -2116,6 +2266,10 @@ type ListVirtualMachinesResponse struct {
 type VirtualMachine struct {
 	Account               string                        `json:"account"`
 	Affinitygroup         []VirtualMachineAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                        `json:"backupofferingid"`
+	Backupofferingname    string                        `json:"backupofferingname"`
+	Bootmode              string                        `json:"bootmode"`
+	Boottype              string                        `json:"boottype"`
 	Cpunumber             int                           `json:"cpunumber"`
 	Cpuspeed              int                           `json:"cpuspeed"`
 	Cpuused               string                        `json:"cpuused"`
@@ -2156,6 +2310,7 @@ type VirtualMachine struct {
 	Networkkbsread        int64                         `json:"networkkbsread"`
 	Networkkbswrite       int64                         `json:"networkkbswrite"`
 	Nic                   []Nic                         `json:"nic"`
+	Osdisplayname         string                        `json:"osdisplayname"`
 	Ostypeid              string                        `json:"ostypeid"`
 	Password              string                        `json:"password"`
 	Passwordenabled       bool                          `json:"passwordenabled"`
@@ -2163,6 +2318,7 @@ type VirtualMachine struct {
 	Projectid             string                        `json:"projectid"`
 	Publicip              string                        `json:"publicip"`
 	Publicipid            string                        `json:"publicipid"`
+	Readonlyuidetails     string                        `json:"readonlyuidetails"`
 	Rootdeviceid          int64                         `json:"rootdeviceid"`
 	Rootdevicetype        string                        `json:"rootdevicetype"`
 	Securitygroup         []VirtualMachineSecuritygroup `json:"securitygroup"`
@@ -2283,8 +2439,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["groupid"]; found {
 		u.Set("groupid", v.(string))
 	}
-	if v, found := p.p["hostid"]; found {
-		u.Set("hostid", v.(string))
+	if v, found := p.p["haenable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("haenable", vv)
 	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
@@ -2333,20 +2490,17 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["podid"]; found {
 		u.Set("podid", v.(string))
 	}
-	if v, found := p.p["podid"]; found {
-		u.Set("podid", v.(string))
-	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["securitygroupid"]; found {
+		u.Set("securitygroupid", v.(string))
 	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
-	}
-	if v, found := p.p["storageid"]; found {
-		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
@@ -2420,6 +2574,13 @@ func (p *ListVirtualMachinesMetricsParams) SetGroupid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["groupid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetHaenable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["haenable"] = v
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetHostid(v string) {
@@ -2525,6 +2686,13 @@ func (p *ListVirtualMachinesMetricsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetSecuritygroupid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["securitygroupid"] = v
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetServiceofferingid(v string) {
@@ -2697,6 +2865,10 @@ type ListVirtualMachinesMetricsResponse struct {
 type VirtualMachinesMetric struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []VirtualMachinesMetricAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                               `json:"backupofferingid"`
+	Backupofferingname    string                               `json:"backupofferingname"`
+	Bootmode              string                               `json:"bootmode"`
+	Boottype              string                               `json:"boottype"`
 	Cpunumber             int                                  `json:"cpunumber"`
 	Cpuspeed              int                                  `json:"cpuspeed"`
 	Cputotal              string                               `json:"cputotal"`
@@ -2745,6 +2917,7 @@ type VirtualMachinesMetric struct {
 	Networkread           string                               `json:"networkread"`
 	Networkwrite          string                               `json:"networkwrite"`
 	Nic                   []Nic                                `json:"nic"`
+	Osdisplayname         string                               `json:"osdisplayname"`
 	Ostypeid              string                               `json:"ostypeid"`
 	Password              string                               `json:"password"`
 	Passwordenabled       bool                                 `json:"passwordenabled"`
@@ -2752,6 +2925,7 @@ type VirtualMachinesMetric struct {
 	Projectid             string                               `json:"projectid"`
 	Publicip              string                               `json:"publicip"`
 	Publicipid            string                               `json:"publicipid"`
+	Readonlyuidetails     string                               `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                `json:"rootdeviceid"`
 	Rootdevicetype        string                               `json:"rootdevicetype"`
 	Securitygroup         []VirtualMachinesMetricSecuritygroup `json:"securitygroup"`
@@ -2928,6 +3102,10 @@ func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachinePa
 type MigrateVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                       `json:"backupofferingid"`
+	Backupofferingname    string                                       `json:"backupofferingname"`
+	Bootmode              string                                       `json:"bootmode"`
+	Boottype              string                                       `json:"boottype"`
 	Cpunumber             int                                          `json:"cpunumber"`
 	Cpuspeed              int                                          `json:"cpuspeed"`
 	Cpuused               string                                       `json:"cpuused"`
@@ -2968,6 +3146,7 @@ type MigrateVirtualMachineResponse struct {
 	Networkkbsread        int64                                        `json:"networkkbsread"`
 	Networkkbswrite       int64                                        `json:"networkkbswrite"`
 	Nic                   []Nic                                        `json:"nic"`
+	Osdisplayname         string                                       `json:"osdisplayname"`
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
@@ -2975,6 +3154,7 @@ type MigrateVirtualMachineResponse struct {
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
+	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []MigrateVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -3156,6 +3336,10 @@ func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtua
 type MigrateVirtualMachineWithVolumeResponse struct {
 	Account               string                                                 `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineWithVolumeResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                                 `json:"backupofferingid"`
+	Backupofferingname    string                                                 `json:"backupofferingname"`
+	Bootmode              string                                                 `json:"bootmode"`
+	Boottype              string                                                 `json:"boottype"`
 	Cpunumber             int                                                    `json:"cpunumber"`
 	Cpuspeed              int                                                    `json:"cpuspeed"`
 	Cpuused               string                                                 `json:"cpuused"`
@@ -3196,6 +3380,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Networkkbsread        int64                                                  `json:"networkkbsread"`
 	Networkkbswrite       int64                                                  `json:"networkkbswrite"`
 	Nic                   []Nic                                                  `json:"nic"`
+	Osdisplayname         string                                                 `json:"osdisplayname"`
 	Ostypeid              string                                                 `json:"ostypeid"`
 	Password              string                                                 `json:"password"`
 	Passwordenabled       bool                                                   `json:"passwordenabled"`
@@ -3203,6 +3388,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Projectid             string                                                 `json:"projectid"`
 	Publicip              string                                                 `json:"publicip"`
 	Publicipid            string                                                 `json:"publicipid"`
+	Readonlyuidetails     string                                                 `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                                  `json:"rootdeviceid"`
 	Rootdevicetype        string                                                 `json:"rootdevicetype"`
 	Securitygroup         []MigrateVirtualMachineWithVolumeResponseSecuritygroup `json:"securitygroup"`
@@ -3299,10 +3485,21 @@ func (p *RebootVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["bootintosetup"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("bootintosetup", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *RebootVirtualMachineParams) SetBootintosetup(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bootintosetup"] = v
 }
 
 func (p *RebootVirtualMachineParams) SetId(v string) {
@@ -3359,6 +3556,10 @@ func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachinePara
 type RebootVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []RebootVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                      `json:"backupofferingid"`
+	Backupofferingname    string                                      `json:"backupofferingname"`
+	Bootmode              string                                      `json:"bootmode"`
+	Boottype              string                                      `json:"boottype"`
 	Cpunumber             int                                         `json:"cpunumber"`
 	Cpuspeed              int                                         `json:"cpuspeed"`
 	Cpuused               string                                      `json:"cpuused"`
@@ -3399,6 +3600,7 @@ type RebootVirtualMachineResponse struct {
 	Networkkbsread        int64                                       `json:"networkkbsread"`
 	Networkkbswrite       int64                                       `json:"networkkbswrite"`
 	Nic                   []Nic                                       `json:"nic"`
+	Osdisplayname         string                                      `json:"osdisplayname"`
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
@@ -3406,6 +3608,7 @@ type RebootVirtualMachineResponse struct {
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
+	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []RebootVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -3542,6 +3745,10 @@ func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachinePa
 type RecoverVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RecoverVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                       `json:"backupofferingid"`
+	Backupofferingname    string                                       `json:"backupofferingname"`
+	Bootmode              string                                       `json:"bootmode"`
+	Boottype              string                                       `json:"boottype"`
 	Cpunumber             int                                          `json:"cpunumber"`
 	Cpuspeed              int                                          `json:"cpuspeed"`
 	Cpuused               string                                       `json:"cpuused"`
@@ -3582,6 +3789,7 @@ type RecoverVirtualMachineResponse struct {
 	Networkkbsread        int64                                        `json:"networkkbsread"`
 	Networkkbswrite       int64                                        `json:"networkkbswrite"`
 	Nic                   []Nic                                        `json:"nic"`
+	Osdisplayname         string                                       `json:"osdisplayname"`
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
@@ -3589,6 +3797,7 @@ type RecoverVirtualMachineResponse struct {
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
+	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []RecoverVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -3756,6 +3965,10 @@ func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirt
 type RemoveNicFromVirtualMachineResponse struct {
 	Account               string                                             `json:"account"`
 	Affinitygroup         []RemoveNicFromVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                             `json:"backupofferingid"`
+	Backupofferingname    string                                             `json:"backupofferingname"`
+	Bootmode              string                                             `json:"bootmode"`
+	Boottype              string                                             `json:"boottype"`
 	Cpunumber             int                                                `json:"cpunumber"`
 	Cpuspeed              int                                                `json:"cpuspeed"`
 	Cpuused               string                                             `json:"cpuused"`
@@ -3796,6 +4009,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Networkkbsread        int64                                              `json:"networkkbsread"`
 	Networkkbswrite       int64                                              `json:"networkkbswrite"`
 	Nic                   []Nic                                              `json:"nic"`
+	Osdisplayname         string                                             `json:"osdisplayname"`
 	Ostypeid              string                                             `json:"ostypeid"`
 	Password              string                                             `json:"password"`
 	Passwordenabled       bool                                               `json:"passwordenabled"`
@@ -3803,6 +4017,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Projectid             string                                             `json:"projectid"`
 	Publicip              string                                             `json:"publicip"`
 	Publicipid            string                                             `json:"publicipid"`
+	Readonlyuidetails     string                                             `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                              `json:"rootdeviceid"`
 	Rootdevicetype        string                                             `json:"rootdevicetype"`
 	Securitygroup         []RemoveNicFromVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -3959,6 +4174,10 @@ func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordF
 type ResetPasswordForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetPasswordForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                                `json:"backupofferingid"`
+	Backupofferingname    string                                                `json:"backupofferingname"`
+	Bootmode              string                                                `json:"bootmode"`
+	Boottype              string                                                `json:"boottype"`
 	Cpunumber             int                                                   `json:"cpunumber"`
 	Cpuspeed              int                                                   `json:"cpuspeed"`
 	Cpuused               string                                                `json:"cpuused"`
@@ -3999,6 +4218,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Networkkbsread        int64                                                 `json:"networkkbsread"`
 	Networkkbswrite       int64                                                 `json:"networkkbswrite"`
 	Nic                   []Nic                                                 `json:"nic"`
+	Osdisplayname         string                                                `json:"osdisplayname"`
 	Ostypeid              string                                                `json:"ostypeid"`
 	Password              string                                                `json:"password"`
 	Passwordenabled       bool                                                  `json:"passwordenabled"`
@@ -4006,6 +4226,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Projectid             string                                                `json:"projectid"`
 	Publicip              string                                                `json:"publicip"`
 	Publicipid            string                                                `json:"publicipid"`
+	Readonlyuidetails     string                                                `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                                 `json:"rootdeviceid"`
 	Rootdevicetype        string                                                `json:"rootdevicetype"`
 	Securitygroup         []ResetPasswordForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -4172,6 +4393,10 @@ func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachinePa
 type RestoreVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RestoreVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                       `json:"backupofferingid"`
+	Backupofferingname    string                                       `json:"backupofferingname"`
+	Bootmode              string                                       `json:"bootmode"`
+	Boottype              string                                       `json:"boottype"`
 	Cpunumber             int                                          `json:"cpunumber"`
 	Cpuspeed              int                                          `json:"cpuspeed"`
 	Cpuused               string                                       `json:"cpuused"`
@@ -4212,6 +4437,7 @@ type RestoreVirtualMachineResponse struct {
 	Networkkbsread        int64                                        `json:"networkkbsread"`
 	Networkkbswrite       int64                                        `json:"networkkbswrite"`
 	Nic                   []Nic                                        `json:"nic"`
+	Osdisplayname         string                                       `json:"osdisplayname"`
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
@@ -4219,6 +4445,7 @@ type RestoreVirtualMachineResponse struct {
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
+	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []RestoreVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -4407,6 +4634,13 @@ func (p *StartVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["bootintosetup"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("bootintosetup", vv)
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
 	if v, found := p.p["deploymentplanner"]; found {
 		u.Set("deploymentplanner", v.(string))
 	}
@@ -4416,7 +4650,24 @@ func (p *StartVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
 	return u
+}
+
+func (p *StartVirtualMachineParams) SetBootintosetup(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bootintosetup"] = v
+}
+
+func (p *StartVirtualMachineParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
 }
 
 func (p *StartVirtualMachineParams) SetDeploymentplanner(v string) {
@@ -4438,6 +4689,13 @@ func (p *StartVirtualMachineParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *StartVirtualMachineParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
 }
 
 // You should always use this function to get a new StartVirtualMachineParams instance,
@@ -4487,6 +4745,10 @@ func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams
 type StartVirtualMachineResponse struct {
 	Account               string                                     `json:"account"`
 	Affinitygroup         []StartVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                     `json:"backupofferingid"`
+	Backupofferingname    string                                     `json:"backupofferingname"`
+	Bootmode              string                                     `json:"bootmode"`
+	Boottype              string                                     `json:"boottype"`
 	Cpunumber             int                                        `json:"cpunumber"`
 	Cpuspeed              int                                        `json:"cpuspeed"`
 	Cpuused               string                                     `json:"cpuused"`
@@ -4527,6 +4789,7 @@ type StartVirtualMachineResponse struct {
 	Networkkbsread        int64                                      `json:"networkkbsread"`
 	Networkkbswrite       int64                                      `json:"networkkbswrite"`
 	Nic                   []Nic                                      `json:"nic"`
+	Osdisplayname         string                                     `json:"osdisplayname"`
 	Ostypeid              string                                     `json:"ostypeid"`
 	Password              string                                     `json:"password"`
 	Passwordenabled       bool                                       `json:"passwordenabled"`
@@ -4534,6 +4797,7 @@ type StartVirtualMachineResponse struct {
 	Projectid             string                                     `json:"projectid"`
 	Publicip              string                                     `json:"publicip"`
 	Publicipid            string                                     `json:"publicipid"`
+	Readonlyuidetails     string                                     `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                      `json:"rootdeviceid"`
 	Rootdevicetype        string                                     `json:"rootdevicetype"`
 	Securitygroup         []StartVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -4701,6 +4965,10 @@ func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) 
 type StopVirtualMachineResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []StopVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                    `json:"backupofferingid"`
+	Backupofferingname    string                                    `json:"backupofferingname"`
+	Bootmode              string                                    `json:"bootmode"`
+	Boottype              string                                    `json:"boottype"`
 	Cpunumber             int                                       `json:"cpunumber"`
 	Cpuspeed              int                                       `json:"cpuspeed"`
 	Cpuused               string                                    `json:"cpuused"`
@@ -4741,6 +5009,7 @@ type StopVirtualMachineResponse struct {
 	Networkkbsread        int64                                     `json:"networkkbsread"`
 	Networkkbswrite       int64                                     `json:"networkkbswrite"`
 	Nic                   []Nic                                     `json:"nic"`
+	Osdisplayname         string                                    `json:"osdisplayname"`
 	Ostypeid              string                                    `json:"ostypeid"`
 	Password              string                                    `json:"password"`
 	Passwordenabled       bool                                      `json:"passwordenabled"`
@@ -4748,6 +5017,7 @@ type StopVirtualMachineResponse struct {
 	Projectid             string                                    `json:"projectid"`
 	Publicip              string                                    `json:"publicip"`
 	Publicipid            string                                    `json:"publicipid"`
+	Readonlyuidetails     string                                    `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                     `json:"rootdeviceid"`
 	Rootdevicetype        string                                    `json:"rootdevicetype"`
 	Securitygroup         []StopVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -4915,6 +5185,10 @@ func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefau
 type UpdateDefaultNicForVirtualMachineResponse struct {
 	Account               string                                                   `json:"account"`
 	Affinitygroup         []UpdateDefaultNicForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                                   `json:"backupofferingid"`
+	Backupofferingname    string                                                   `json:"backupofferingname"`
+	Bootmode              string                                                   `json:"bootmode"`
+	Boottype              string                                                   `json:"boottype"`
 	Cpunumber             int                                                      `json:"cpunumber"`
 	Cpuspeed              int                                                      `json:"cpuspeed"`
 	Cpuused               string                                                   `json:"cpuused"`
@@ -4955,6 +5229,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Networkkbsread        int64                                                    `json:"networkkbsread"`
 	Networkkbswrite       int64                                                    `json:"networkkbswrite"`
 	Nic                   []Nic                                                    `json:"nic"`
+	Osdisplayname         string                                                   `json:"osdisplayname"`
 	Ostypeid              string                                                   `json:"ostypeid"`
 	Password              string                                                   `json:"password"`
 	Passwordenabled       bool                                                     `json:"passwordenabled"`
@@ -4962,6 +5237,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Projectid             string                                                   `json:"projectid"`
 	Publicip              string                                                   `json:"publicip"`
 	Publicipid            string                                                   `json:"publicipid"`
+	Readonlyuidetails     string                                                   `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                                    `json:"rootdeviceid"`
 	Rootdevicetype        string                                                   `json:"rootdevicetype"`
 	Securitygroup         []UpdateDefaultNicForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
@@ -5271,6 +5547,10 @@ func (s *VirtualMachineService) UpdateVirtualMachine(p *UpdateVirtualMachinePara
 type UpdateVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []UpdateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                      `json:"backupofferingid"`
+	Backupofferingname    string                                      `json:"backupofferingname"`
+	Bootmode              string                                      `json:"bootmode"`
+	Boottype              string                                      `json:"boottype"`
 	Cpunumber             int                                         `json:"cpunumber"`
 	Cpuspeed              int                                         `json:"cpuspeed"`
 	Cpuused               string                                      `json:"cpuused"`
@@ -5311,6 +5591,7 @@ type UpdateVirtualMachineResponse struct {
 	Networkkbsread        int64                                       `json:"networkkbsread"`
 	Networkkbswrite       int64                                       `json:"networkkbswrite"`
 	Nic                   []Nic                                       `json:"nic"`
+	Osdisplayname         string                                      `json:"osdisplayname"`
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
@@ -5318,6 +5599,7 @@ type UpdateVirtualMachineResponse struct {
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
+	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []UpdateVirtualMachineResponseSecuritygroup `json:"securitygroup"`

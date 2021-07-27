@@ -128,6 +128,10 @@ type AttachVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -380,6 +384,10 @@ type CreateVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -609,6 +617,10 @@ type DetachVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -1133,6 +1145,9 @@ func (p *ListVolumesParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["state"]; found {
+		u.Set("state", v.(string))
+	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
 	}
@@ -1265,6 +1280,13 @@ func (p *ListVolumesParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVolumesParams) SetState(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["state"] = v
 }
 
 func (p *ListVolumesParams) SetStorageid(v string) {
@@ -1426,6 +1448,10 @@ type Volume struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -1587,6 +1613,10 @@ type MigrateVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -1770,6 +1800,10 @@ type ResizeVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -1959,6 +1993,10 @@ type UpdateVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`
@@ -2181,6 +2219,10 @@ type UploadVolumeResponse struct {
 	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
 	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
 	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
 	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
 	Diskofferingid             string `json:"diskofferingid"`
 	Diskofferingname           string `json:"diskofferingname"`

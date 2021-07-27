@@ -346,6 +346,10 @@ func (p *ListInternalLoadBalancerVMsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["fetchhealthcheckresults"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fetchhealthcheckresults", vv)
+	}
 	if v, found := p.p["forvpc"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvpc", vv)
@@ -411,6 +415,13 @@ func (p *ListInternalLoadBalancerVMsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) SetFetchhealthcheckresults(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fetchhealthcheckresults"] = v
 }
 
 func (p *ListInternalLoadBalancerVMsParams) SetForvpc(v bool) {
@@ -630,54 +641,66 @@ type ListInternalLoadBalancerVMsResponse struct {
 }
 
 type InternalLoadBalancerVM struct {
-	Account             string `json:"account"`
-	Created             string `json:"created"`
-	Dns1                string `json:"dns1"`
-	Dns2                string `json:"dns2"`
-	Domain              string `json:"domain"`
-	Domainid            string `json:"domainid"`
-	Gateway             string `json:"gateway"`
-	Guestipaddress      string `json:"guestipaddress"`
-	Guestmacaddress     string `json:"guestmacaddress"`
-	Guestnetmask        string `json:"guestnetmask"`
-	Guestnetworkid      string `json:"guestnetworkid"`
-	Guestnetworkname    string `json:"guestnetworkname"`
-	Hostid              string `json:"hostid"`
-	Hostname            string `json:"hostname"`
-	Hypervisor          string `json:"hypervisor"`
-	Id                  string `json:"id"`
-	Ip6dns1             string `json:"ip6dns1"`
-	Ip6dns2             string `json:"ip6dns2"`
-	Isredundantrouter   bool   `json:"isredundantrouter"`
-	JobID               string `json:"jobid"`
-	Jobstatus           int    `json:"jobstatus"`
-	Linklocalip         string `json:"linklocalip"`
-	Linklocalmacaddress string `json:"linklocalmacaddress"`
-	Linklocalnetmask    string `json:"linklocalnetmask"`
-	Linklocalnetworkid  string `json:"linklocalnetworkid"`
-	Name                string `json:"name"`
-	Networkdomain       string `json:"networkdomain"`
-	Nic                 []Nic  `json:"nic"`
-	Podid               string `json:"podid"`
-	Project             string `json:"project"`
-	Projectid           string `json:"projectid"`
-	Publicip            string `json:"publicip"`
-	Publicmacaddress    string `json:"publicmacaddress"`
-	Publicnetmask       string `json:"publicnetmask"`
-	Publicnetworkid     string `json:"publicnetworkid"`
-	Redundantstate      string `json:"redundantstate"`
-	Requiresupgrade     bool   `json:"requiresupgrade"`
-	Role                string `json:"role"`
-	Scriptsversion      string `json:"scriptsversion"`
-	Serviceofferingid   string `json:"serviceofferingid"`
-	Serviceofferingname string `json:"serviceofferingname"`
-	State               string `json:"state"`
-	Templateid          string `json:"templateid"`
-	Version             string `json:"version"`
-	Vpcid               string `json:"vpcid"`
-	Vpcname             string `json:"vpcname"`
-	Zoneid              string `json:"zoneid"`
-	Zonename            string `json:"zonename"`
+	Account             string                                     `json:"account"`
+	Created             string                                     `json:"created"`
+	Dns1                string                                     `json:"dns1"`
+	Dns2                string                                     `json:"dns2"`
+	Domain              string                                     `json:"domain"`
+	Domainid            string                                     `json:"domainid"`
+	Gateway             string                                     `json:"gateway"`
+	Guestipaddress      string                                     `json:"guestipaddress"`
+	Guestmacaddress     string                                     `json:"guestmacaddress"`
+	Guestnetmask        string                                     `json:"guestnetmask"`
+	Guestnetworkid      string                                     `json:"guestnetworkid"`
+	Guestnetworkname    string                                     `json:"guestnetworkname"`
+	Healthcheckresults  []InternalLoadBalancerVMHealthcheckresults `json:"healthcheckresults"`
+	Healthchecksfailed  bool                                       `json:"healthchecksfailed"`
+	Hostid              string                                     `json:"hostid"`
+	Hostname            string                                     `json:"hostname"`
+	Hypervisor          string                                     `json:"hypervisor"`
+	Id                  string                                     `json:"id"`
+	Ip6dns1             string                                     `json:"ip6dns1"`
+	Ip6dns2             string                                     `json:"ip6dns2"`
+	Isredundantrouter   bool                                       `json:"isredundantrouter"`
+	JobID               string                                     `json:"jobid"`
+	Jobstatus           int                                        `json:"jobstatus"`
+	Linklocalip         string                                     `json:"linklocalip"`
+	Linklocalmacaddress string                                     `json:"linklocalmacaddress"`
+	Linklocalnetmask    string                                     `json:"linklocalnetmask"`
+	Linklocalnetworkid  string                                     `json:"linklocalnetworkid"`
+	Name                string                                     `json:"name"`
+	Networkdomain       string                                     `json:"networkdomain"`
+	Nic                 []Nic                                      `json:"nic"`
+	Podid               string                                     `json:"podid"`
+	Podname             string                                     `json:"podname"`
+	Project             string                                     `json:"project"`
+	Projectid           string                                     `json:"projectid"`
+	Publicip            string                                     `json:"publicip"`
+	Publicmacaddress    string                                     `json:"publicmacaddress"`
+	Publicnetmask       string                                     `json:"publicnetmask"`
+	Publicnetworkid     string                                     `json:"publicnetworkid"`
+	Redundantstate      string                                     `json:"redundantstate"`
+	Requiresupgrade     bool                                       `json:"requiresupgrade"`
+	Role                string                                     `json:"role"`
+	Scriptsversion      string                                     `json:"scriptsversion"`
+	Serviceofferingid   string                                     `json:"serviceofferingid"`
+	Serviceofferingname string                                     `json:"serviceofferingname"`
+	State               string                                     `json:"state"`
+	Templateid          string                                     `json:"templateid"`
+	Templatename        string                                     `json:"templatename"`
+	Version             string                                     `json:"version"`
+	Vpcid               string                                     `json:"vpcid"`
+	Vpcname             string                                     `json:"vpcname"`
+	Zoneid              string                                     `json:"zoneid"`
+	Zonename            string                                     `json:"zonename"`
+}
+
+type InternalLoadBalancerVMHealthcheckresults struct {
+	Checkname   string `json:"checkname"`
+	Checktype   string `json:"checktype"`
+	Details     string `json:"details"`
+	Lastupdated string `json:"lastupdated"`
+	Success     bool   `json:"success"`
 }
 
 type StartInternalLoadBalancerVMParams struct {
@@ -747,54 +770,66 @@ func (s *InternalLBService) StartInternalLoadBalancerVM(p *StartInternalLoadBala
 }
 
 type StartInternalLoadBalancerVMResponse struct {
-	Account             string `json:"account"`
-	Created             string `json:"created"`
-	Dns1                string `json:"dns1"`
-	Dns2                string `json:"dns2"`
-	Domain              string `json:"domain"`
-	Domainid            string `json:"domainid"`
-	Gateway             string `json:"gateway"`
-	Guestipaddress      string `json:"guestipaddress"`
-	Guestmacaddress     string `json:"guestmacaddress"`
-	Guestnetmask        string `json:"guestnetmask"`
-	Guestnetworkid      string `json:"guestnetworkid"`
-	Guestnetworkname    string `json:"guestnetworkname"`
-	Hostid              string `json:"hostid"`
-	Hostname            string `json:"hostname"`
-	Hypervisor          string `json:"hypervisor"`
-	Id                  string `json:"id"`
-	Ip6dns1             string `json:"ip6dns1"`
-	Ip6dns2             string `json:"ip6dns2"`
-	Isredundantrouter   bool   `json:"isredundantrouter"`
-	JobID               string `json:"jobid"`
-	Jobstatus           int    `json:"jobstatus"`
-	Linklocalip         string `json:"linklocalip"`
-	Linklocalmacaddress string `json:"linklocalmacaddress"`
-	Linklocalnetmask    string `json:"linklocalnetmask"`
-	Linklocalnetworkid  string `json:"linklocalnetworkid"`
-	Name                string `json:"name"`
-	Networkdomain       string `json:"networkdomain"`
-	Nic                 []Nic  `json:"nic"`
-	Podid               string `json:"podid"`
-	Project             string `json:"project"`
-	Projectid           string `json:"projectid"`
-	Publicip            string `json:"publicip"`
-	Publicmacaddress    string `json:"publicmacaddress"`
-	Publicnetmask       string `json:"publicnetmask"`
-	Publicnetworkid     string `json:"publicnetworkid"`
-	Redundantstate      string `json:"redundantstate"`
-	Requiresupgrade     bool   `json:"requiresupgrade"`
-	Role                string `json:"role"`
-	Scriptsversion      string `json:"scriptsversion"`
-	Serviceofferingid   string `json:"serviceofferingid"`
-	Serviceofferingname string `json:"serviceofferingname"`
-	State               string `json:"state"`
-	Templateid          string `json:"templateid"`
-	Version             string `json:"version"`
-	Vpcid               string `json:"vpcid"`
-	Vpcname             string `json:"vpcname"`
-	Zoneid              string `json:"zoneid"`
-	Zonename            string `json:"zonename"`
+	Account             string                                                  `json:"account"`
+	Created             string                                                  `json:"created"`
+	Dns1                string                                                  `json:"dns1"`
+	Dns2                string                                                  `json:"dns2"`
+	Domain              string                                                  `json:"domain"`
+	Domainid            string                                                  `json:"domainid"`
+	Gateway             string                                                  `json:"gateway"`
+	Guestipaddress      string                                                  `json:"guestipaddress"`
+	Guestmacaddress     string                                                  `json:"guestmacaddress"`
+	Guestnetmask        string                                                  `json:"guestnetmask"`
+	Guestnetworkid      string                                                  `json:"guestnetworkid"`
+	Guestnetworkname    string                                                  `json:"guestnetworkname"`
+	Healthcheckresults  []StartInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
+	Healthchecksfailed  bool                                                    `json:"healthchecksfailed"`
+	Hostid              string                                                  `json:"hostid"`
+	Hostname            string                                                  `json:"hostname"`
+	Hypervisor          string                                                  `json:"hypervisor"`
+	Id                  string                                                  `json:"id"`
+	Ip6dns1             string                                                  `json:"ip6dns1"`
+	Ip6dns2             string                                                  `json:"ip6dns2"`
+	Isredundantrouter   bool                                                    `json:"isredundantrouter"`
+	JobID               string                                                  `json:"jobid"`
+	Jobstatus           int                                                     `json:"jobstatus"`
+	Linklocalip         string                                                  `json:"linklocalip"`
+	Linklocalmacaddress string                                                  `json:"linklocalmacaddress"`
+	Linklocalnetmask    string                                                  `json:"linklocalnetmask"`
+	Linklocalnetworkid  string                                                  `json:"linklocalnetworkid"`
+	Name                string                                                  `json:"name"`
+	Networkdomain       string                                                  `json:"networkdomain"`
+	Nic                 []Nic                                                   `json:"nic"`
+	Podid               string                                                  `json:"podid"`
+	Podname             string                                                  `json:"podname"`
+	Project             string                                                  `json:"project"`
+	Projectid           string                                                  `json:"projectid"`
+	Publicip            string                                                  `json:"publicip"`
+	Publicmacaddress    string                                                  `json:"publicmacaddress"`
+	Publicnetmask       string                                                  `json:"publicnetmask"`
+	Publicnetworkid     string                                                  `json:"publicnetworkid"`
+	Redundantstate      string                                                  `json:"redundantstate"`
+	Requiresupgrade     bool                                                    `json:"requiresupgrade"`
+	Role                string                                                  `json:"role"`
+	Scriptsversion      string                                                  `json:"scriptsversion"`
+	Serviceofferingid   string                                                  `json:"serviceofferingid"`
+	Serviceofferingname string                                                  `json:"serviceofferingname"`
+	State               string                                                  `json:"state"`
+	Templateid          string                                                  `json:"templateid"`
+	Templatename        string                                                  `json:"templatename"`
+	Version             string                                                  `json:"version"`
+	Vpcid               string                                                  `json:"vpcid"`
+	Vpcname             string                                                  `json:"vpcname"`
+	Zoneid              string                                                  `json:"zoneid"`
+	Zonename            string                                                  `json:"zonename"`
+}
+
+type StartInternalLoadBalancerVMResponseHealthcheckresults struct {
+	Checkname   string `json:"checkname"`
+	Checktype   string `json:"checktype"`
+	Details     string `json:"details"`
+	Lastupdated string `json:"lastupdated"`
+	Success     bool   `json:"success"`
 }
 
 type StopInternalLoadBalancerVMParams struct {
@@ -875,52 +910,64 @@ func (s *InternalLBService) StopInternalLoadBalancerVM(p *StopInternalLoadBalanc
 }
 
 type StopInternalLoadBalancerVMResponse struct {
-	Account             string `json:"account"`
-	Created             string `json:"created"`
-	Dns1                string `json:"dns1"`
-	Dns2                string `json:"dns2"`
-	Domain              string `json:"domain"`
-	Domainid            string `json:"domainid"`
-	Gateway             string `json:"gateway"`
-	Guestipaddress      string `json:"guestipaddress"`
-	Guestmacaddress     string `json:"guestmacaddress"`
-	Guestnetmask        string `json:"guestnetmask"`
-	Guestnetworkid      string `json:"guestnetworkid"`
-	Guestnetworkname    string `json:"guestnetworkname"`
-	Hostid              string `json:"hostid"`
-	Hostname            string `json:"hostname"`
-	Hypervisor          string `json:"hypervisor"`
-	Id                  string `json:"id"`
-	Ip6dns1             string `json:"ip6dns1"`
-	Ip6dns2             string `json:"ip6dns2"`
-	Isredundantrouter   bool   `json:"isredundantrouter"`
-	JobID               string `json:"jobid"`
-	Jobstatus           int    `json:"jobstatus"`
-	Linklocalip         string `json:"linklocalip"`
-	Linklocalmacaddress string `json:"linklocalmacaddress"`
-	Linklocalnetmask    string `json:"linklocalnetmask"`
-	Linklocalnetworkid  string `json:"linklocalnetworkid"`
-	Name                string `json:"name"`
-	Networkdomain       string `json:"networkdomain"`
-	Nic                 []Nic  `json:"nic"`
-	Podid               string `json:"podid"`
-	Project             string `json:"project"`
-	Projectid           string `json:"projectid"`
-	Publicip            string `json:"publicip"`
-	Publicmacaddress    string `json:"publicmacaddress"`
-	Publicnetmask       string `json:"publicnetmask"`
-	Publicnetworkid     string `json:"publicnetworkid"`
-	Redundantstate      string `json:"redundantstate"`
-	Requiresupgrade     bool   `json:"requiresupgrade"`
-	Role                string `json:"role"`
-	Scriptsversion      string `json:"scriptsversion"`
-	Serviceofferingid   string `json:"serviceofferingid"`
-	Serviceofferingname string `json:"serviceofferingname"`
-	State               string `json:"state"`
-	Templateid          string `json:"templateid"`
-	Version             string `json:"version"`
-	Vpcid               string `json:"vpcid"`
-	Vpcname             string `json:"vpcname"`
-	Zoneid              string `json:"zoneid"`
-	Zonename            string `json:"zonename"`
+	Account             string                                                 `json:"account"`
+	Created             string                                                 `json:"created"`
+	Dns1                string                                                 `json:"dns1"`
+	Dns2                string                                                 `json:"dns2"`
+	Domain              string                                                 `json:"domain"`
+	Domainid            string                                                 `json:"domainid"`
+	Gateway             string                                                 `json:"gateway"`
+	Guestipaddress      string                                                 `json:"guestipaddress"`
+	Guestmacaddress     string                                                 `json:"guestmacaddress"`
+	Guestnetmask        string                                                 `json:"guestnetmask"`
+	Guestnetworkid      string                                                 `json:"guestnetworkid"`
+	Guestnetworkname    string                                                 `json:"guestnetworkname"`
+	Healthcheckresults  []StopInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
+	Healthchecksfailed  bool                                                   `json:"healthchecksfailed"`
+	Hostid              string                                                 `json:"hostid"`
+	Hostname            string                                                 `json:"hostname"`
+	Hypervisor          string                                                 `json:"hypervisor"`
+	Id                  string                                                 `json:"id"`
+	Ip6dns1             string                                                 `json:"ip6dns1"`
+	Ip6dns2             string                                                 `json:"ip6dns2"`
+	Isredundantrouter   bool                                                   `json:"isredundantrouter"`
+	JobID               string                                                 `json:"jobid"`
+	Jobstatus           int                                                    `json:"jobstatus"`
+	Linklocalip         string                                                 `json:"linklocalip"`
+	Linklocalmacaddress string                                                 `json:"linklocalmacaddress"`
+	Linklocalnetmask    string                                                 `json:"linklocalnetmask"`
+	Linklocalnetworkid  string                                                 `json:"linklocalnetworkid"`
+	Name                string                                                 `json:"name"`
+	Networkdomain       string                                                 `json:"networkdomain"`
+	Nic                 []Nic                                                  `json:"nic"`
+	Podid               string                                                 `json:"podid"`
+	Podname             string                                                 `json:"podname"`
+	Project             string                                                 `json:"project"`
+	Projectid           string                                                 `json:"projectid"`
+	Publicip            string                                                 `json:"publicip"`
+	Publicmacaddress    string                                                 `json:"publicmacaddress"`
+	Publicnetmask       string                                                 `json:"publicnetmask"`
+	Publicnetworkid     string                                                 `json:"publicnetworkid"`
+	Redundantstate      string                                                 `json:"redundantstate"`
+	Requiresupgrade     bool                                                   `json:"requiresupgrade"`
+	Role                string                                                 `json:"role"`
+	Scriptsversion      string                                                 `json:"scriptsversion"`
+	Serviceofferingid   string                                                 `json:"serviceofferingid"`
+	Serviceofferingname string                                                 `json:"serviceofferingname"`
+	State               string                                                 `json:"state"`
+	Templateid          string                                                 `json:"templateid"`
+	Templatename        string                                                 `json:"templatename"`
+	Version             string                                                 `json:"version"`
+	Vpcid               string                                                 `json:"vpcid"`
+	Vpcname             string                                                 `json:"vpcname"`
+	Zoneid              string                                                 `json:"zoneid"`
+	Zonename            string                                                 `json:"zonename"`
+}
+
+type StopInternalLoadBalancerVMResponseHealthcheckresults struct {
+	Checkname   string `json:"checkname"`
+	Checktype   string `json:"checktype"`
+	Details     string `json:"details"`
+	Lastupdated string `json:"lastupdated"`
+	Success     bool   `json:"success"`
 }

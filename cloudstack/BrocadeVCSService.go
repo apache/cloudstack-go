@@ -326,11 +326,13 @@ type ListBrocadeVcsDeviceNetworksResponse struct {
 type BrocadeVcsDeviceNetwork struct {
 	Account                     string                           `json:"account"`
 	Aclid                       string                           `json:"aclid"`
+	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
 	Cidr                        string                           `json:"cidr"`
+	Details                     map[string]string                `json:"details"`
 	Displaynetwork              bool                             `json:"displaynetwork"`
 	Displaytext                 string                           `json:"displaytext"`
 	Dns1                        string                           `json:"dns1"`
@@ -373,6 +375,7 @@ type BrocadeVcsDeviceNetwork struct {
 	Type                        string                           `json:"type"`
 	Vlan                        string                           `json:"vlan"`
 	Vpcid                       string                           `json:"vpcid"`
+	Vpcname                     string                           `json:"vpcname"`
 	Zoneid                      string                           `json:"zoneid"`
 	Zonename                    string                           `json:"zonename"`
 	Zonesnetworkspans           []interface{}                    `json:"zonesnetworkspans"`

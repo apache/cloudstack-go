@@ -230,6 +230,7 @@ type ListNicsResponse struct {
 }
 
 type Nic struct {
+	Adaptertype          string   `json:"adaptertype"`
 	Broadcasturi         string   `json:"broadcasturi"`
 	Deviceid             string   `json:"deviceid"`
 	Extradhcpoption      []string `json:"extradhcpoption"`
@@ -239,7 +240,10 @@ type Nic struct {
 	Ip6cidr              string   `json:"ip6cidr"`
 	Ip6gateway           string   `json:"ip6gateway"`
 	Ipaddress            string   `json:"ipaddress"`
+	Ipaddresses          []string `json:"ipaddresses"`
 	Isdefault            bool     `json:"isdefault"`
+	Isolatedpvlan        int      `json:"isolatedpvlan"`
+	Isolatedpvlantype    string   `json:"isolatedpvlantype"`
 	Isolationuri         string   `json:"isolationuri"`
 	JobID                string   `json:"jobid"`
 	Jobstatus            int      `json:"jobstatus"`
@@ -256,6 +260,7 @@ type Nic struct {
 	Traffictype      string `json:"traffictype"`
 	Type             string `json:"type"`
 	Virtualmachineid string `json:"virtualmachineid"`
+	Vlanid           int    `json:"vlanid"`
 }
 
 type RemoveIpFromNicParams struct {
@@ -405,6 +410,10 @@ func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpRespon
 type UpdateVmNicIpResponse struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []UpdateVmNicIpResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                               `json:"backupofferingid"`
+	Backupofferingname    string                               `json:"backupofferingname"`
+	Bootmode              string                               `json:"bootmode"`
+	Boottype              string                               `json:"boottype"`
 	Cpunumber             int                                  `json:"cpunumber"`
 	Cpuspeed              int                                  `json:"cpuspeed"`
 	Cpuused               string                               `json:"cpuused"`
@@ -445,6 +454,7 @@ type UpdateVmNicIpResponse struct {
 	Networkkbsread        int64                                `json:"networkkbsread"`
 	Networkkbswrite       int64                                `json:"networkkbswrite"`
 	Nic                   []Nic                                `json:"nic"`
+	Osdisplayname         string                               `json:"osdisplayname"`
 	Ostypeid              string                               `json:"ostypeid"`
 	Password              string                               `json:"password"`
 	Passwordenabled       bool                                 `json:"passwordenabled"`
@@ -452,6 +462,7 @@ type UpdateVmNicIpResponse struct {
 	Projectid             string                               `json:"projectid"`
 	Publicip              string                               `json:"publicip"`
 	Publicipid            string                               `json:"publicipid"`
+	Readonlyuidetails     string                               `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                `json:"rootdeviceid"`
 	Rootdevicetype        string                               `json:"rootdevicetype"`
 	Securitygroup         []UpdateVmNicIpResponseSecuritygroup `json:"securitygroup"`

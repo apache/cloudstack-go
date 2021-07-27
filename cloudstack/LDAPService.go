@@ -320,14 +320,15 @@ func (s *LDAPService) ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUser
 }
 
 type ImportLdapUsersResponse struct {
-	Domain    string `json:"domain"`
-	Email     string `json:"email"`
-	Firstname string `json:"firstname"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Lastname  string `json:"lastname"`
-	Principal string `json:"principal"`
-	Username  string `json:"username"`
+	Conflictingusersource string `json:"conflictingusersource"`
+	Domain                string `json:"domain"`
+	Email                 string `json:"email"`
+	Firstname             string `json:"firstname"`
+	JobID                 string `json:"jobid"`
+	Jobstatus             int    `json:"jobstatus"`
+	Lastname              string `json:"lastname"`
+	Principal             string `json:"principal"`
+	Username              string `json:"username"`
 }
 
 type LdapConfigParams struct {
@@ -630,6 +631,7 @@ type LdapCreateAccountResponse struct {
 	Defaultzoneid             string                          `json:"defaultzoneid"`
 	Domain                    string                          `json:"domain"`
 	Domainid                  string                          `json:"domainid"`
+	Domainpath                string                          `json:"domainpath"`
 	Groups                    []string                        `json:"groups"`
 	Id                        string                          `json:"id"`
 	Ipavailable               string                          `json:"ipavailable"`
@@ -881,6 +883,10 @@ func (p *ListLdapConfigurationsParams) toURLValues() url.Values {
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("page", vv)
@@ -915,6 +921,13 @@ func (p *ListLdapConfigurationsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListLdapConfigurationsParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
 }
 
 func (p *ListLdapConfigurationsParams) SetPage(v int) {
@@ -983,6 +996,9 @@ func (p *ListLdapUsersParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
@@ -997,7 +1013,17 @@ func (p *ListLdapUsersParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["userfilter"]; found {
+		u.Set("userfilter", v.(string))
+	}
 	return u
+}
+
+func (p *ListLdapUsersParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
 }
 
 func (p *ListLdapUsersParams) SetKeyword(v string) {
@@ -1028,6 +1054,13 @@ func (p *ListLdapUsersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListLdapUsersParams) SetUserfilter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userfilter"] = v
+}
+
 // You should always use this function to get a new ListLdapUsersParams instance,
 // as then you are sure you have configured all required params
 func (s *LDAPService) NewListLdapUsersParams() *ListLdapUsersParams {
@@ -1036,7 +1069,7 @@ func (s *LDAPService) NewListLdapUsersParams() *ListLdapUsersParams {
 	return p
 }
 
-// Lists all LDAP Users
+// Lists LDAP Users according to the specifications from the user request.
 func (s *LDAPService) ListLdapUsers(p *ListLdapUsersParams) (*ListLdapUsersResponse, error) {
 	resp, err := s.cs.newRequest("listLdapUsers", p.toURLValues())
 	if err != nil {
@@ -1057,14 +1090,15 @@ type ListLdapUsersResponse struct {
 }
 
 type LdapUser struct {
-	Domain    string `json:"domain"`
-	Email     string `json:"email"`
-	Firstname string `json:"firstname"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Lastname  string `json:"lastname"`
-	Principal string `json:"principal"`
-	Username  string `json:"username"`
+	Conflictingusersource string `json:"conflictingusersource"`
+	Domain                string `json:"domain"`
+	Email                 string `json:"email"`
+	Firstname             string `json:"firstname"`
+	JobID                 string `json:"jobid"`
+	Jobstatus             int    `json:"jobstatus"`
+	Lastname              string `json:"lastname"`
+	Principal             string `json:"principal"`
+	Username              string `json:"username"`
 }
 
 type SearchLdapParams struct {
@@ -1146,12 +1180,13 @@ func (s *LDAPService) SearchLdap(p *SearchLdapParams) (*SearchLdapResponse, erro
 }
 
 type SearchLdapResponse struct {
-	Domain    string `json:"domain"`
-	Email     string `json:"email"`
-	Firstname string `json:"firstname"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Lastname  string `json:"lastname"`
-	Principal string `json:"principal"`
-	Username  string `json:"username"`
+	Conflictingusersource string `json:"conflictingusersource"`
+	Domain                string `json:"domain"`
+	Email                 string `json:"email"`
+	Firstname             string `json:"firstname"`
+	JobID                 string `json:"jobid"`
+	Jobstatus             int    `json:"jobstatus"`
+	Lastname              string `json:"lastname"`
+	Principal             string `json:"principal"`
+	Username              string `json:"username"`
 }

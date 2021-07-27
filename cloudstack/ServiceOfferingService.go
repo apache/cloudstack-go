@@ -60,6 +60,9 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("byteswriteratemaxlength", vv)
 	}
+	if v, found := p.p["cachemode"]; found {
+		u.Set("cachemode", v.(string))
+	}
 	if v, found := p.p["cpunumber"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("cpunumber", vv)
@@ -67,6 +70,10 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["cpuspeed"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("cpuspeed", vv)
+	}
+	if v, found := p.p["customized"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("customized", vv)
 	}
 	if v, found := p.p["customizediops"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -79,7 +86,8 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		u.Set("displaytext", v.(string))
 	}
 	if v, found := p.p["domainid"]; found {
-		u.Set("domainid", v.(string))
+		vv := strings.Join(v.([]string), ",")
+		u.Set("domainid", vv)
 	}
 	if v, found := p.p["hosttags"]; found {
 		u.Set("hosttags", v.(string))
@@ -124,17 +132,33 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("limitcpuuse", vv)
 	}
+	if v, found := p.p["maxcpunumber"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("maxcpunumber", vv)
+	}
 	if v, found := p.p["maxiops"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("maxiops", vv)
+	}
+	if v, found := p.p["maxmemory"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("maxmemory", vv)
 	}
 	if v, found := p.p["memory"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("memory", vv)
 	}
+	if v, found := p.p["mincpunumber"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("mincpunumber", vv)
+	}
 	if v, found := p.p["miniops"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("miniops", vv)
+	}
+	if v, found := p.p["minmemory"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("minmemory", vv)
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -150,12 +174,19 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["provisioningtype"]; found {
 		u.Set("provisioningtype", v.(string))
 	}
+	if v, found := p.p["rootdisksize"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("rootdisksize", vv)
+	}
 	if v, found := p.p["serviceofferingdetails"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
 			u.Set(fmt.Sprintf("serviceofferingdetails[%d].key", i), k)
 			u.Set(fmt.Sprintf("serviceofferingdetails[%d].value", i), m[k])
 		}
+	}
+	if v, found := p.p["storagepolicy"]; found {
+		u.Set("storagepolicy", v.(string))
 	}
 	if v, found := p.p["storagetype"]; found {
 		u.Set("storagetype", v.(string))
@@ -165,6 +196,10 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("zoneid", vv)
 	}
 	return u
 }
@@ -211,6 +246,13 @@ func (p *CreateServiceOfferingParams) SetByteswriteratemaxlength(v int64) {
 	p.p["byteswriteratemaxlength"] = v
 }
 
+func (p *CreateServiceOfferingParams) SetCachemode(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cachemode"] = v
+}
+
 func (p *CreateServiceOfferingParams) SetCpunumber(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -223,6 +265,13 @@ func (p *CreateServiceOfferingParams) SetCpuspeed(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cpuspeed"] = v
+}
+
+func (p *CreateServiceOfferingParams) SetCustomized(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["customized"] = v
 }
 
 func (p *CreateServiceOfferingParams) SetCustomizediops(v bool) {
@@ -246,7 +295,7 @@ func (p *CreateServiceOfferingParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
-func (p *CreateServiceOfferingParams) SetDomainid(v string) {
+func (p *CreateServiceOfferingParams) SetDomainid(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -330,11 +379,25 @@ func (p *CreateServiceOfferingParams) SetLimitcpuuse(v bool) {
 	p.p["limitcpuuse"] = v
 }
 
+func (p *CreateServiceOfferingParams) SetMaxcpunumber(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["maxcpunumber"] = v
+}
+
 func (p *CreateServiceOfferingParams) SetMaxiops(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxiops"] = v
+}
+
+func (p *CreateServiceOfferingParams) SetMaxmemory(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["maxmemory"] = v
 }
 
 func (p *CreateServiceOfferingParams) SetMemory(v int) {
@@ -344,11 +407,25 @@ func (p *CreateServiceOfferingParams) SetMemory(v int) {
 	p.p["memory"] = v
 }
 
+func (p *CreateServiceOfferingParams) SetMincpunumber(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["mincpunumber"] = v
+}
+
 func (p *CreateServiceOfferingParams) SetMiniops(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["miniops"] = v
+}
+
+func (p *CreateServiceOfferingParams) SetMinmemory(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["minmemory"] = v
 }
 
 func (p *CreateServiceOfferingParams) SetName(v string) {
@@ -379,11 +456,25 @@ func (p *CreateServiceOfferingParams) SetProvisioningtype(v string) {
 	p.p["provisioningtype"] = v
 }
 
+func (p *CreateServiceOfferingParams) SetRootdisksize(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["rootdisksize"] = v
+}
+
 func (p *CreateServiceOfferingParams) SetServiceofferingdetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingdetails"] = v
+}
+
+func (p *CreateServiceOfferingParams) SetStoragepolicy(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagepolicy"] = v
 }
 
 func (p *CreateServiceOfferingParams) SetStoragetype(v string) {
@@ -405,6 +496,13 @@ func (p *CreateServiceOfferingParams) SetTags(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *CreateServiceOfferingParams) SetZoneid(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new CreateServiceOfferingParams instance,
@@ -437,6 +535,7 @@ func (s *ServiceOfferingService) CreateServiceOffering(p *CreateServiceOfferingP
 }
 
 type CreateServiceOfferingResponse struct {
+	CacheMode                   string            `json:"cacheMode"`
 	Cpunumber                   int               `json:"cpunumber"`
 	Cpuspeed                    int               `json:"cpuspeed"`
 	Created                     string            `json:"created"`
@@ -474,10 +573,14 @@ type CreateServiceOfferingResponse struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
 	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }
 
 type DeleteServiceOfferingParams struct {
@@ -569,6 +672,14 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cpunumber"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("cpunumber", vv)
+	}
+	if v, found := p.p["cpuspeed"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("cpuspeed", vv)
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -590,6 +701,10 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["memory"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("memory", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -607,7 +722,24 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
 	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
+}
+
+func (p *ListServiceOfferingsParams) SetCpunumber(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cpunumber"] = v
+}
+
+func (p *ListServiceOfferingsParams) SetCpuspeed(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cpuspeed"] = v
 }
 
 func (p *ListServiceOfferingsParams) SetDomainid(v string) {
@@ -652,6 +784,13 @@ func (p *ListServiceOfferingsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListServiceOfferingsParams) SetMemory(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["memory"] = v
+}
+
 func (p *ListServiceOfferingsParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -685,6 +824,13 @@ func (p *ListServiceOfferingsParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListServiceOfferingsParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new ListServiceOfferingsParams instance,
@@ -799,6 +945,7 @@ type ListServiceOfferingsResponse struct {
 }
 
 type ServiceOffering struct {
+	CacheMode                   string            `json:"cacheMode"`
 	Cpunumber                   int               `json:"cpunumber"`
 	Cpuspeed                    int               `json:"cpuspeed"`
 	Created                     string            `json:"created"`
@@ -836,10 +983,14 @@ type ServiceOffering struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
 	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }
 
 type UpdateServiceOfferingParams struct {
@@ -854,6 +1005,9 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -864,6 +1018,9 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("sortkey", vv)
 	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
 }
 
@@ -872,6 +1029,13 @@ func (p *UpdateServiceOfferingParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *UpdateServiceOfferingParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
 }
 
 func (p *UpdateServiceOfferingParams) SetId(v string) {
@@ -893,6 +1057,13 @@ func (p *UpdateServiceOfferingParams) SetSortkey(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sortkey"] = v
+}
+
+func (p *UpdateServiceOfferingParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new UpdateServiceOfferingParams instance,
@@ -920,6 +1091,7 @@ func (s *ServiceOfferingService) UpdateServiceOffering(p *UpdateServiceOfferingP
 }
 
 type UpdateServiceOfferingResponse struct {
+	CacheMode                   string            `json:"cacheMode"`
 	Cpunumber                   int               `json:"cpunumber"`
 	Cpuspeed                    int               `json:"cpuspeed"`
 	Created                     string            `json:"created"`
@@ -957,8 +1129,12 @@ type UpdateServiceOfferingResponse struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
 	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }

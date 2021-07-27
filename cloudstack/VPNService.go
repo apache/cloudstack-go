@@ -396,6 +396,7 @@ type CreateVpnConnectionResponse struct {
 	Id                   string `json:"id"`
 	Ikelifetime          int64  `json:"ikelifetime"`
 	Ikepolicy            string `json:"ikepolicy"`
+	Ikeversion           string `json:"ikeversion"`
 	Ipsecpsk             string `json:"ipsecpsk"`
 	JobID                string `json:"jobid"`
 	Jobstatus            int    `json:"jobstatus"`
@@ -406,6 +407,7 @@ type CreateVpnConnectionResponse struct {
 	Removed              string `json:"removed"`
 	S2scustomergatewayid string `json:"s2scustomergatewayid"`
 	S2svpngatewayid      string `json:"s2svpngatewayid"`
+	Splitconnections     bool   `json:"splitconnections"`
 	State                string `json:"state"`
 }
 
@@ -452,6 +454,9 @@ func (p *CreateVpnCustomerGatewayParams) toURLValues() url.Values {
 	if v, found := p.p["ikepolicy"]; found {
 		u.Set("ikepolicy", v.(string))
 	}
+	if v, found := p.p["ikeversion"]; found {
+		u.Set("ikeversion", v.(string))
+	}
 	if v, found := p.p["ipsecpsk"]; found {
 		u.Set("ipsecpsk", v.(string))
 	}
@@ -460,6 +465,10 @@ func (p *CreateVpnCustomerGatewayParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["splitconnections"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("splitconnections", vv)
 	}
 	return u
 }
@@ -534,6 +543,13 @@ func (p *CreateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 	p.p["ikepolicy"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) SetIkeversion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ikeversion"] = v
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -553,6 +569,13 @@ func (p *CreateVpnCustomerGatewayParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["splitconnections"] = v
 }
 
 // You should always use this function to get a new CreateVpnCustomerGatewayParams instance,
@@ -604,26 +627,28 @@ func (s *VPNService) CreateVpnCustomerGateway(p *CreateVpnCustomerGatewayParams)
 }
 
 type CreateVpnCustomerGatewayResponse struct {
-	Account     string `json:"account"`
-	Cidrlist    string `json:"cidrlist"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Dpd         bool   `json:"dpd"`
-	Esplifetime int64  `json:"esplifetime"`
-	Esppolicy   string `json:"esppolicy"`
-	Forceencap  bool   `json:"forceencap"`
-	Gateway     string `json:"gateway"`
-	Id          string `json:"id"`
-	Ikelifetime int64  `json:"ikelifetime"`
-	Ikepolicy   string `json:"ikepolicy"`
-	Ipaddress   string `json:"ipaddress"`
-	Ipsecpsk    string `json:"ipsecpsk"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Project     string `json:"project"`
-	Projectid   string `json:"projectid"`
-	Removed     string `json:"removed"`
+	Account          string `json:"account"`
+	Cidrlist         string `json:"cidrlist"`
+	Domain           string `json:"domain"`
+	Domainid         string `json:"domainid"`
+	Dpd              bool   `json:"dpd"`
+	Esplifetime      int64  `json:"esplifetime"`
+	Esppolicy        string `json:"esppolicy"`
+	Forceencap       bool   `json:"forceencap"`
+	Gateway          string `json:"gateway"`
+	Id               string `json:"id"`
+	Ikelifetime      int64  `json:"ikelifetime"`
+	Ikepolicy        string `json:"ikepolicy"`
+	Ikeversion       string `json:"ikeversion"`
+	Ipaddress        string `json:"ipaddress"`
+	Ipsecpsk         string `json:"ipsecpsk"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Project          string `json:"project"`
+	Projectid        string `json:"projectid"`
+	Removed          string `json:"removed"`
+	Splitconnections bool   `json:"splitconnections"`
 }
 
 type CreateVpnGatewayParams struct {
@@ -716,6 +741,7 @@ type CreateVpnGatewayResponse struct {
 	Publicip   string `json:"publicip"`
 	Removed    string `json:"removed"`
 	Vpcid      string `json:"vpcid"`
+	Vpcname    string `json:"vpcname"`
 }
 
 type DeleteRemoteAccessVpnParams struct {
@@ -1408,6 +1434,7 @@ type VpnConnection struct {
 	Id                   string `json:"id"`
 	Ikelifetime          int64  `json:"ikelifetime"`
 	Ikepolicy            string `json:"ikepolicy"`
+	Ikeversion           string `json:"ikeversion"`
 	Ipsecpsk             string `json:"ipsecpsk"`
 	JobID                string `json:"jobid"`
 	Jobstatus            int    `json:"jobstatus"`
@@ -1418,6 +1445,7 @@ type VpnConnection struct {
 	Removed              string `json:"removed"`
 	S2scustomergatewayid string `json:"s2scustomergatewayid"`
 	S2svpngatewayid      string `json:"s2svpngatewayid"`
+	Splitconnections     bool   `json:"splitconnections"`
 	State                string `json:"state"`
 }
 
@@ -1639,26 +1667,28 @@ type ListVpnCustomerGatewaysResponse struct {
 }
 
 type VpnCustomerGateway struct {
-	Account     string `json:"account"`
-	Cidrlist    string `json:"cidrlist"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Dpd         bool   `json:"dpd"`
-	Esplifetime int64  `json:"esplifetime"`
-	Esppolicy   string `json:"esppolicy"`
-	Forceencap  bool   `json:"forceencap"`
-	Gateway     string `json:"gateway"`
-	Id          string `json:"id"`
-	Ikelifetime int64  `json:"ikelifetime"`
-	Ikepolicy   string `json:"ikepolicy"`
-	Ipaddress   string `json:"ipaddress"`
-	Ipsecpsk    string `json:"ipsecpsk"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Project     string `json:"project"`
-	Projectid   string `json:"projectid"`
-	Removed     string `json:"removed"`
+	Account          string `json:"account"`
+	Cidrlist         string `json:"cidrlist"`
+	Domain           string `json:"domain"`
+	Domainid         string `json:"domainid"`
+	Dpd              bool   `json:"dpd"`
+	Esplifetime      int64  `json:"esplifetime"`
+	Esppolicy        string `json:"esppolicy"`
+	Forceencap       bool   `json:"forceencap"`
+	Gateway          string `json:"gateway"`
+	Id               string `json:"id"`
+	Ikelifetime      int64  `json:"ikelifetime"`
+	Ikepolicy        string `json:"ikepolicy"`
+	Ikeversion       string `json:"ikeversion"`
+	Ipaddress        string `json:"ipaddress"`
+	Ipsecpsk         string `json:"ipsecpsk"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Project          string `json:"project"`
+	Projectid        string `json:"projectid"`
+	Removed          string `json:"removed"`
+	Splitconnections bool   `json:"splitconnections"`
 }
 
 type ListVpnGatewaysParams struct {
@@ -1862,6 +1892,7 @@ type VpnGateway struct {
 	Publicip   string `json:"publicip"`
 	Removed    string `json:"removed"`
 	Vpcid      string `json:"vpcid"`
+	Vpcname    string `json:"vpcname"`
 }
 
 type ListVpnUsersParams struct {
@@ -2253,6 +2284,7 @@ type ResetVpnConnectionResponse struct {
 	Id                   string `json:"id"`
 	Ikelifetime          int64  `json:"ikelifetime"`
 	Ikepolicy            string `json:"ikepolicy"`
+	Ikeversion           string `json:"ikeversion"`
 	Ipsecpsk             string `json:"ipsecpsk"`
 	JobID                string `json:"jobid"`
 	Jobstatus            int    `json:"jobstatus"`
@@ -2263,6 +2295,7 @@ type ResetVpnConnectionResponse struct {
 	Removed              string `json:"removed"`
 	S2scustomergatewayid string `json:"s2scustomergatewayid"`
 	S2svpngatewayid      string `json:"s2svpngatewayid"`
+	Splitconnections     bool   `json:"splitconnections"`
 	State                string `json:"state"`
 }
 
@@ -2472,6 +2505,7 @@ type UpdateVpnConnectionResponse struct {
 	Id                   string `json:"id"`
 	Ikelifetime          int64  `json:"ikelifetime"`
 	Ikepolicy            string `json:"ikepolicy"`
+	Ikeversion           string `json:"ikeversion"`
 	Ipsecpsk             string `json:"ipsecpsk"`
 	JobID                string `json:"jobid"`
 	Jobstatus            int    `json:"jobstatus"`
@@ -2482,6 +2516,7 @@ type UpdateVpnConnectionResponse struct {
 	Removed              string `json:"removed"`
 	S2scustomergatewayid string `json:"s2scustomergatewayid"`
 	S2svpngatewayid      string `json:"s2svpngatewayid"`
+	Splitconnections     bool   `json:"splitconnections"`
 	State                string `json:"state"`
 }
 
@@ -2531,11 +2566,18 @@ func (p *UpdateVpnCustomerGatewayParams) toURLValues() url.Values {
 	if v, found := p.p["ikepolicy"]; found {
 		u.Set("ikepolicy", v.(string))
 	}
+	if v, found := p.p["ikeversion"]; found {
+		u.Set("ikeversion", v.(string))
+	}
 	if v, found := p.p["ipsecpsk"]; found {
 		u.Set("ipsecpsk", v.(string))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["splitconnections"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("splitconnections", vv)
 	}
 	return u
 }
@@ -2617,6 +2659,13 @@ func (p *UpdateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 	p.p["ikepolicy"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) SetIkeversion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ikeversion"] = v
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2629,6 +2678,13 @@ func (p *UpdateVpnCustomerGatewayParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["splitconnections"] = v
 }
 
 // You should always use this function to get a new UpdateVpnCustomerGatewayParams instance,
@@ -2681,26 +2737,28 @@ func (s *VPNService) UpdateVpnCustomerGateway(p *UpdateVpnCustomerGatewayParams)
 }
 
 type UpdateVpnCustomerGatewayResponse struct {
-	Account     string `json:"account"`
-	Cidrlist    string `json:"cidrlist"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Dpd         bool   `json:"dpd"`
-	Esplifetime int64  `json:"esplifetime"`
-	Esppolicy   string `json:"esppolicy"`
-	Forceencap  bool   `json:"forceencap"`
-	Gateway     string `json:"gateway"`
-	Id          string `json:"id"`
-	Ikelifetime int64  `json:"ikelifetime"`
-	Ikepolicy   string `json:"ikepolicy"`
-	Ipaddress   string `json:"ipaddress"`
-	Ipsecpsk    string `json:"ipsecpsk"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Project     string `json:"project"`
-	Projectid   string `json:"projectid"`
-	Removed     string `json:"removed"`
+	Account          string `json:"account"`
+	Cidrlist         string `json:"cidrlist"`
+	Domain           string `json:"domain"`
+	Domainid         string `json:"domainid"`
+	Dpd              bool   `json:"dpd"`
+	Esplifetime      int64  `json:"esplifetime"`
+	Esppolicy        string `json:"esppolicy"`
+	Forceencap       bool   `json:"forceencap"`
+	Gateway          string `json:"gateway"`
+	Id               string `json:"id"`
+	Ikelifetime      int64  `json:"ikelifetime"`
+	Ikepolicy        string `json:"ikepolicy"`
+	Ikeversion       string `json:"ikeversion"`
+	Ipaddress        string `json:"ipaddress"`
+	Ipsecpsk         string `json:"ipsecpsk"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Project          string `json:"project"`
+	Projectid        string `json:"projectid"`
+	Removed          string `json:"removed"`
+	Splitconnections bool   `json:"splitconnections"`
 }
 
 type UpdateVpnGatewayParams struct {
@@ -2803,4 +2861,5 @@ type UpdateVpnGatewayResponse struct {
 	Publicip   string `json:"publicip"`
 	Removed    string `json:"removed"`
 	Vpcid      string `json:"vpcid"`
+	Vpcname    string `json:"vpcname"`
 }

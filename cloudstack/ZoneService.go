@@ -1122,6 +1122,10 @@ func (p *UpdateZoneParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["sortkey"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("sortkey", vv)
+	}
 	return u
 }
 
@@ -1235,6 +1239,13 @@ func (p *UpdateZoneParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateZoneParams) SetSortkey(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sortkey"] = v
 }
 
 // You should always use this function to get a new UpdateZoneParams instance,

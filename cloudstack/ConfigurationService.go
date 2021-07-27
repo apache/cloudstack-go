@@ -65,23 +65,27 @@ type ListCapabilitiesResponse struct {
 }
 
 type Capability struct {
-	Allowusercreateprojects   bool   `json:"allowusercreateprojects"`
-	Allowuserexpungerecovervm bool   `json:"allowuserexpungerecovervm"`
-	Allowuserviewdestroyedvm  bool   `json:"allowuserviewdestroyedvm"`
-	Apilimitinterval          int    `json:"apilimitinterval"`
-	Apilimitmax               int    `json:"apilimitmax"`
-	Cloudstackversion         string `json:"cloudstackversion"`
-	Customdiskofferingmaxsize int64  `json:"customdiskofferingmaxsize"`
-	Customdiskofferingminsize int64  `json:"customdiskofferingminsize"`
-	Dynamicrolesenabled       bool   `json:"dynamicrolesenabled"`
-	JobID                     string `json:"jobid"`
-	Jobstatus                 int    `json:"jobstatus"`
-	Kvmsnapshotenabled        bool   `json:"kvmsnapshotenabled"`
-	Projectinviterequired     bool   `json:"projectinviterequired"`
-	Regionsecondaryenabled    bool   `json:"regionsecondaryenabled"`
-	Securitygroupsenabled     bool   `json:"securitygroupsenabled"`
-	SupportELB                string `json:"supportELB"`
-	Userpublictemplateenabled bool   `json:"userpublictemplateenabled"`
+	Allowusercreateprojects                      bool   `json:"allowusercreateprojects"`
+	Allowuserexpungerecovervm                    bool   `json:"allowuserexpungerecovervm"`
+	Allowuserexpungerecovervolume                bool   `json:"allowuserexpungerecovervolume"`
+	Allowuserviewalldomainaccounts               bool   `json:"allowuserviewalldomainaccounts"`
+	Allowuserviewdestroyedvm                     bool   `json:"allowuserviewdestroyedvm"`
+	Apilimitinterval                             int    `json:"apilimitinterval"`
+	Apilimitmax                                  int    `json:"apilimitmax"`
+	Cloudstackversion                            string `json:"cloudstackversion"`
+	Customdiskofferingmaxsize                    int64  `json:"customdiskofferingmaxsize"`
+	Customdiskofferingminsize                    int64  `json:"customdiskofferingminsize"`
+	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
+	JobID                                        string `json:"jobid"`
+	Jobstatus                                    int    `json:"jobstatus"`
+	Kubernetesclusterexperimentalfeaturesenabled bool   `json:"kubernetesclusterexperimentalfeaturesenabled"`
+	Kubernetesserviceenabled                     bool   `json:"kubernetesserviceenabled"`
+	Kvmsnapshotenabled                           bool   `json:"kvmsnapshotenabled"`
+	Projectinviterequired                        bool   `json:"projectinviterequired"`
+	Regionsecondaryenabled                       bool   `json:"regionsecondaryenabled"`
+	Securitygroupsenabled                        bool   `json:"securitygroupsenabled"`
+	SupportELB                                   string `json:"supportELB"`
+	Userpublictemplateenabled                    bool   `json:"userpublictemplateenabled"`
 }
 
 type ListConfigurationsParams struct {
@@ -240,6 +244,7 @@ type Configuration struct {
 	Category    string `json:"category"`
 	Description string `json:"description"`
 	Id          int64  `json:"id"`
+	Isdynamic   bool   `json:"isdynamic"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
@@ -445,6 +450,7 @@ type UpdateConfigurationResponse struct {
 	Category    string `json:"category"`
 	Description string `json:"description"`
 	Id          int64  `json:"id"`
+	Isdynamic   bool   `json:"isdynamic"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`

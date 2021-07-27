@@ -59,6 +59,13 @@ func (p *CreateSnapshotParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("quiescevm", vv)
 	}
+	if v, found := p.p["tags"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tags[%d].key", i), k)
+			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["volumeid"]; found {
 		u.Set("volumeid", v.(string))
 	}
@@ -112,6 +119,13 @@ func (p *CreateSnapshotParams) SetQuiescevm(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["quiescevm"] = v
+}
+
+func (p *CreateSnapshotParams) SetTags(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
 }
 
 func (p *CreateSnapshotParams) SetVolumeid(v string) {
@@ -242,6 +256,13 @@ func (p *CreateSnapshotPolicyParams) toURLValues() url.Values {
 	if v, found := p.p["schedule"]; found {
 		u.Set("schedule", v.(string))
 	}
+	if v, found := p.p["tags"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tags[%d].key", i), k)
+			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["timezone"]; found {
 		u.Set("timezone", v.(string))
 	}
@@ -277,6 +298,13 @@ func (p *CreateSnapshotPolicyParams) SetSchedule(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["schedule"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) SetTags(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
 }
 
 func (p *CreateSnapshotPolicyParams) SetTimezone(v string) {
@@ -329,6 +357,7 @@ type CreateSnapshotPolicyResponse struct {
 	Jobstatus    int    `json:"jobstatus"`
 	Maxsnaps     int    `json:"maxsnaps"`
 	Schedule     string `json:"schedule"`
+	Tags         []Tags `json:"tags"`
 	Timezone     string `json:"timezone"`
 	Volumeid     string `json:"volumeid"`
 }
@@ -442,25 +471,29 @@ func (s *SnapshotService) CreateVMSnapshot(p *CreateVMSnapshotParams) (*CreateVM
 }
 
 type CreateVMSnapshotResponse struct {
-	Account          string `json:"account"`
-	Created          string `json:"created"`
-	Current          bool   `json:"current"`
-	Description      string `json:"description"`
-	Displayname      string `json:"displayname"`
-	Domain           string `json:"domain"`
-	Domainid         string `json:"domainid"`
-	Id               string `json:"id"`
-	JobID            string `json:"jobid"`
-	Jobstatus        int    `json:"jobstatus"`
-	Name             string `json:"name"`
-	Parent           string `json:"parent"`
-	ParentName       string `json:"parentName"`
-	Project          string `json:"project"`
-	Projectid        string `json:"projectid"`
-	State            string `json:"state"`
-	Type             string `json:"type"`
-	Virtualmachineid string `json:"virtualmachineid"`
-	Zoneid           string `json:"zoneid"`
+	Account            string `json:"account"`
+	Created            string `json:"created"`
+	Current            bool   `json:"current"`
+	Description        string `json:"description"`
+	Displayname        string `json:"displayname"`
+	Domain             string `json:"domain"`
+	Domainid           string `json:"domainid"`
+	Hypervisor         string `json:"hypervisor"`
+	Id                 string `json:"id"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Name               string `json:"name"`
+	Parent             string `json:"parent"`
+	ParentName         string `json:"parentName"`
+	Project            string `json:"project"`
+	Projectid          string `json:"projectid"`
+	State              string `json:"state"`
+	Tags               []Tags `json:"tags"`
+	Type               string `json:"type"`
+	Virtualmachineid   string `json:"virtualmachineid"`
+	Virtualmachinename string `json:"virtualmachinename"`
+	Zoneid             string `json:"zoneid"`
+	Zonename           string `json:"zonename"`
 }
 
 type DeleteSnapshotParams struct {
@@ -833,6 +866,7 @@ type SnapshotPolicy struct {
 	Jobstatus    int    `json:"jobstatus"`
 	Maxsnaps     int    `json:"maxsnaps"`
 	Schedule     string `json:"schedule"`
+	Tags         []Tags `json:"tags"`
 	Timezone     string `json:"timezone"`
 	Volumeid     string `json:"volumeid"`
 }
@@ -1409,25 +1443,29 @@ type ListVMSnapshotResponse struct {
 }
 
 type VMSnapshot struct {
-	Account          string `json:"account"`
-	Created          string `json:"created"`
-	Current          bool   `json:"current"`
-	Description      string `json:"description"`
-	Displayname      string `json:"displayname"`
-	Domain           string `json:"domain"`
-	Domainid         string `json:"domainid"`
-	Id               string `json:"id"`
-	JobID            string `json:"jobid"`
-	Jobstatus        int    `json:"jobstatus"`
-	Name             string `json:"name"`
-	Parent           string `json:"parent"`
-	ParentName       string `json:"parentName"`
-	Project          string `json:"project"`
-	Projectid        string `json:"projectid"`
-	State            string `json:"state"`
-	Type             string `json:"type"`
-	Virtualmachineid string `json:"virtualmachineid"`
-	Zoneid           string `json:"zoneid"`
+	Account            string `json:"account"`
+	Created            string `json:"created"`
+	Current            bool   `json:"current"`
+	Description        string `json:"description"`
+	Displayname        string `json:"displayname"`
+	Domain             string `json:"domain"`
+	Domainid           string `json:"domainid"`
+	Hypervisor         string `json:"hypervisor"`
+	Id                 string `json:"id"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Name               string `json:"name"`
+	Parent             string `json:"parent"`
+	ParentName         string `json:"parentName"`
+	Project            string `json:"project"`
+	Projectid          string `json:"projectid"`
+	State              string `json:"state"`
+	Tags               []Tags `json:"tags"`
+	Type               string `json:"type"`
+	Virtualmachineid   string `json:"virtualmachineid"`
+	Virtualmachinename string `json:"virtualmachinename"`
+	Zoneid             string `json:"zoneid"`
+	Zonename           string `json:"zonename"`
 }
 
 type RevertSnapshotParams struct {
@@ -1619,6 +1657,10 @@ func (s *SnapshotService) RevertToVMSnapshot(p *RevertToVMSnapshotParams) (*Reve
 type RevertToVMSnapshotResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []RevertToVMSnapshotResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                    `json:"backupofferingid"`
+	Backupofferingname    string                                    `json:"backupofferingname"`
+	Bootmode              string                                    `json:"bootmode"`
+	Boottype              string                                    `json:"boottype"`
 	Cpunumber             int                                       `json:"cpunumber"`
 	Cpuspeed              int                                       `json:"cpuspeed"`
 	Cpuused               string                                    `json:"cpuused"`
@@ -1659,6 +1701,7 @@ type RevertToVMSnapshotResponse struct {
 	Networkkbsread        int64                                     `json:"networkkbsread"`
 	Networkkbswrite       int64                                     `json:"networkkbswrite"`
 	Nic                   []Nic                                     `json:"nic"`
+	Osdisplayname         string                                    `json:"osdisplayname"`
 	Ostypeid              string                                    `json:"ostypeid"`
 	Password              string                                    `json:"password"`
 	Passwordenabled       bool                                      `json:"passwordenabled"`
@@ -1666,6 +1709,7 @@ type RevertToVMSnapshotResponse struct {
 	Projectid             string                                    `json:"projectid"`
 	Publicip              string                                    `json:"publicip"`
 	Publicipid            string                                    `json:"publicipid"`
+	Readonlyuidetails     string                                    `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                     `json:"rootdeviceid"`
 	Rootdevicetype        string                                    `json:"rootdevicetype"`
 	Securitygroup         []RevertToVMSnapshotResponseSecuritygroup `json:"securitygroup"`
@@ -1847,6 +1891,7 @@ type UpdateSnapshotPolicyResponse struct {
 	Jobstatus    int    `json:"jobstatus"`
 	Maxsnaps     int    `json:"maxsnaps"`
 	Schedule     string `json:"schedule"`
+	Tags         []Tags `json:"tags"`
 	Timezone     string `json:"timezone"`
 	Volumeid     string `json:"volumeid"`
 }

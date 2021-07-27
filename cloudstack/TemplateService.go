@@ -133,11 +133,14 @@ type CopyTemplateResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -167,6 +170,7 @@ type CopyTemplateResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -445,11 +449,14 @@ type CreateTemplateResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -479,6 +486,7 @@ type CreateTemplateResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -734,6 +742,10 @@ func (p *GetUploadParamsForTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["checksum"]; found {
 		u.Set("checksum", v.(string))
 	}
+	if v, found := p.p["deployasis"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("deployasis", vv)
+	}
 	if v, found := p.p["details"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -821,6 +833,13 @@ func (p *GetUploadParamsForTemplateParams) SetChecksum(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["checksum"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) SetDeployasis(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["deployasis"] = v
 }
 
 func (p *GetUploadParamsForTemplateParams) SetDetails(v map[string]string) {
@@ -951,14 +970,13 @@ func (p *GetUploadParamsForTemplateParams) SetZoneid(v string) {
 
 // You should always use this function to get a new GetUploadParamsForTemplateParams instance,
 // as then you are sure you have configured all required params
-func (s *TemplateService) NewGetUploadParamsForTemplateParams(displaytext string, format string, hypervisor string, name string, ostypeid string, zoneid string) *GetUploadParamsForTemplateParams {
+func (s *TemplateService) NewGetUploadParamsForTemplateParams(displaytext string, format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams {
 	p := &GetUploadParamsForTemplateParams{}
 	p.p = make(map[string]interface{})
 	p.p["displaytext"] = displaytext
 	p.p["format"] = format
 	p.p["hypervisor"] = hypervisor
 	p.p["name"] = name
-	p.p["ostypeid"] = ostypeid
 	p.p["zoneid"] = zoneid
 	return p
 }
@@ -1094,6 +1112,10 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["details"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("details", vv)
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -1139,6 +1161,10 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showremoved", vv)
 	}
+	if v, found := p.p["showunique"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showunique", vv)
+	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -1160,6 +1186,13 @@ func (p *ListTemplatesParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *ListTemplatesParams) SetDetails(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
 }
 
 func (p *ListTemplatesParams) SetDomainid(v string) {
@@ -1251,6 +1284,13 @@ func (p *ListTemplatesParams) SetShowremoved(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showremoved"] = v
+}
+
+func (p *ListTemplatesParams) SetShowunique(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showunique"] = v
 }
 
 func (p *ListTemplatesParams) SetTags(v map[string]string) {
@@ -1398,11 +1438,14 @@ type Template struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1432,6 +1475,7 @@ type Template struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -1539,11 +1583,14 @@ type PrepareTemplateResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1573,6 +1620,7 @@ type PrepareTemplateResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -1622,6 +1670,10 @@ func (p *RegisterTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["checksum"]; found {
 		u.Set("checksum", v.(string))
+	}
+	if v, found := p.p["deployasis"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("deployasis", vv)
 	}
 	if v, found := p.p["details"]; found {
 		m := v.(map[string]string)
@@ -1721,6 +1773,13 @@ func (p *RegisterTemplateParams) SetChecksum(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["checksum"] = v
+}
+
+func (p *RegisterTemplateParams) SetDeployasis(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["deployasis"] = v
 }
 
 func (p *RegisterTemplateParams) SetDetails(v map[string]string) {
@@ -1872,14 +1931,13 @@ func (p *RegisterTemplateParams) SetZoneids(v []string) {
 
 // You should always use this function to get a new RegisterTemplateParams instance,
 // as then you are sure you have configured all required params
-func (s *TemplateService) NewRegisterTemplateParams(displaytext string, format string, hypervisor string, name string, ostypeid string, url string) *RegisterTemplateParams {
+func (s *TemplateService) NewRegisterTemplateParams(displaytext string, format string, hypervisor string, name string, url string) *RegisterTemplateParams {
 	p := &RegisterTemplateParams{}
 	p.p = make(map[string]interface{})
 	p.p["displaytext"] = displaytext
 	p.p["format"] = format
 	p.p["hypervisor"] = hypervisor
 	p.p["name"] = name
-	p.p["ostypeid"] = ostypeid
 	p.p["url"] = url
 	return p
 }
@@ -1913,11 +1971,14 @@ type RegisterTemplate struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1947,6 +2008,7 @@ type RegisterTemplate struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -2039,6 +2101,9 @@ func (p *UpdateTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["sshkeyenabled"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("sshkeyenabled", vv)
+	}
+	if v, found := p.p["templatetype"]; found {
+		u.Set("templatetype", v.(string))
 	}
 	return u
 }
@@ -2141,6 +2206,13 @@ func (p *UpdateTemplateParams) SetSshkeyenabled(v bool) {
 	p.p["sshkeyenabled"] = v
 }
 
+func (p *UpdateTemplateParams) SetTemplatetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templatetype"] = v
+}
+
 // You should always use this function to get a new UpdateTemplateParams instance,
 // as then you are sure you have configured all required params
 func (s *TemplateService) NewUpdateTemplateParams(id string) *UpdateTemplateParams {
@@ -2174,11 +2246,14 @@ type UpdateTemplateResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -2208,6 +2283,7 @@ type UpdateTemplateResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }

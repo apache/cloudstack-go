@@ -861,8 +861,16 @@ func (p *ListUsageRecordsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("includetags", vv)
 	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["oldformat"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("oldformat", vv)
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -923,11 +931,25 @@ func (p *ListUsageRecordsParams) SetIncludetags(v bool) {
 	p.p["includetags"] = v
 }
 
+func (p *ListUsageRecordsParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
 func (p *ListUsageRecordsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListUsageRecordsParams) SetOldformat(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["oldformat"] = v
 }
 
 func (p *ListUsageRecordsParams) SetPage(v int) {
@@ -1020,6 +1042,10 @@ type UsageRecord struct {
 	Name             string `json:"name"`
 	Networkid        string `json:"networkid"`
 	Offeringid       string `json:"offeringid"`
+	Oscategoryid     string `json:"oscategoryid"`
+	Oscategoryname   string `json:"oscategoryname"`
+	Osdisplayname    string `json:"osdisplayname"`
+	Ostypeid         string `json:"ostypeid"`
 	Project          string `json:"project"`
 	Projectid        string `json:"projectid"`
 	Rawusage         string `json:"rawusage"`
@@ -1033,7 +1059,35 @@ type UsageRecord struct {
 	Usagetype        int    `json:"usagetype"`
 	Virtualmachineid string `json:"virtualmachineid"`
 	Virtualsize      int64  `json:"virtualsize"`
+	Vpcid            string `json:"vpcid"`
 	Zoneid           string `json:"zoneid"`
+}
+
+func (r *UsageRecord) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias UsageRecord
+	return json.Unmarshal(b, (*alias)(r))
 }
 
 type ListUsageTypesParams struct {

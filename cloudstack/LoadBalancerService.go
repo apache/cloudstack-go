@@ -4514,6 +4514,10 @@ func (p *UploadSslCertParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["enabledrevocationcheck"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enabledrevocationcheck", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -4555,6 +4559,13 @@ func (p *UploadSslCertParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UploadSslCertParams) SetEnabledrevocationcheck(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enabledrevocationcheck"] = v
 }
 
 func (p *UploadSslCertParams) SetName(v string) {

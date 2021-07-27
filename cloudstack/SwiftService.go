@@ -103,16 +103,19 @@ func (s *SwiftService) AddSwift(p *AddSwiftParams) (*AddSwiftResponse, error) {
 }
 
 type AddSwiftResponse struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type ListSwiftsParams struct {
@@ -235,14 +238,17 @@ type ListSwiftsResponse struct {
 }
 
 type Swift struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }

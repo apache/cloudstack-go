@@ -46,6 +46,9 @@ func (p *AssociateIpAddressParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("fordisplay", vv)
 	}
+	if v, found := p.p["ipaddress"]; found {
+		u.Set("ipaddress", v.(string))
+	}
 	if v, found := p.p["isportable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("isportable", vv)
@@ -88,6 +91,13 @@ func (p *AssociateIpAddressParams) SetFordisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *AssociateIpAddressParams) SetIpaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ipaddress"] = v
 }
 
 func (p *AssociateIpAddressParams) SetIsportable(v bool) {
@@ -140,7 +150,7 @@ func (s *AddressService) NewAssociateIpAddressParams() *AssociateIpAddressParams
 	return p
 }
 
-// Acquires and associates a public IP to an account. Either of the parameters are required, i.e. either zoneId, or networkId, or vpcId
+// Acquires and associates a public IP to an account.
 func (s *AddressService) AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error) {
 	resp, err := s.cs.newRequest("associateIpAddress", p.toURLValues())
 	if err != nil {
@@ -193,6 +203,7 @@ type AssociateIpAddressResponse struct {
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
 	Networkid                 string `json:"networkid"`
+	Networkname               string `json:"networkname"`
 	Physicalnetworkid         string `json:"physicalnetworkid"`
 	Project                   string `json:"project"`
 	Projectid                 string `json:"projectid"`
@@ -206,6 +217,7 @@ type AssociateIpAddressResponse struct {
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
 	Vpcid                     string `json:"vpcid"`
+	Vpcname                   string `json:"vpcname"`
 	Zoneid                    string `json:"zoneid"`
 	Zonename                  string `json:"zonename"`
 }
@@ -336,6 +348,9 @@ func (p *ListPublicIpAddressesParams) toURLValues() url.Values {
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -469,6 +484,13 @@ func (p *ListPublicIpAddressesParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListPublicIpAddressesParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
 }
 
 func (p *ListPublicIpAddressesParams) SetPage(v int) {
@@ -613,6 +635,7 @@ type PublicIpAddress struct {
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
 	Networkid                 string `json:"networkid"`
+	Networkname               string `json:"networkname"`
 	Physicalnetworkid         string `json:"physicalnetworkid"`
 	Project                   string `json:"project"`
 	Projectid                 string `json:"projectid"`
@@ -626,6 +649,7 @@ type PublicIpAddress struct {
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
 	Vpcid                     string `json:"vpcid"`
+	Vpcname                   string `json:"vpcname"`
 	Zoneid                    string `json:"zoneid"`
 	Zonename                  string `json:"zonename"`
 }
@@ -735,6 +759,7 @@ type UpdateIpAddressResponse struct {
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
 	Networkid                 string `json:"networkid"`
+	Networkname               string `json:"networkname"`
 	Physicalnetworkid         string `json:"physicalnetworkid"`
 	Project                   string `json:"project"`
 	Projectid                 string `json:"projectid"`
@@ -748,6 +773,7 @@ type UpdateIpAddressResponse struct {
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
 	Vpcid                     string `json:"vpcid"`
+	Vpcname                   string `json:"vpcname"`
 	Zoneid                    string `json:"zoneid"`
 	Zonename                  string `json:"zonename"`
 }

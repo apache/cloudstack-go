@@ -118,16 +118,19 @@ func (s *ImageStoreService) AddImageStore(p *AddImageStoreParams) (*AddImageStor
 }
 
 type AddImageStoreResponse struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type AddImageStoreS3Params struct {
@@ -286,16 +289,19 @@ func (s *ImageStoreService) AddImageStoreS3(p *AddImageStoreS3Params) (*AddImage
 }
 
 type AddImageStoreS3Response struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type CreateSecondaryStagingStoreParams struct {
@@ -389,16 +395,19 @@ func (s *ImageStoreService) CreateSecondaryStagingStore(p *CreateSecondaryStagin
 }
 
 type CreateSecondaryStagingStoreResponse struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type DeleteImageStoreParams struct {
@@ -593,6 +602,10 @@ func (p *ListImageStoresParams) toURLValues() url.Values {
 	if v, found := p.p["provider"]; found {
 		u.Set("provider", v.(string))
 	}
+	if v, found := p.p["readonly"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("readonly", vv)
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -646,6 +659,13 @@ func (p *ListImageStoresParams) SetProvider(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provider"] = v
+}
+
+func (p *ListImageStoresParams) SetReadonly(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["readonly"] = v
 }
 
 func (p *ListImageStoresParams) SetZoneid(v string) {
@@ -767,16 +787,19 @@ type ListImageStoresResponse struct {
 }
 
 type ImageStore struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type ListSecondaryStagingStoresParams struct {
@@ -985,16 +1008,19 @@ type ListSecondaryStagingStoresResponse struct {
 }
 
 type SecondaryStagingStore struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }
 
 type UpdateCloudToUseObjectStoreParams struct {
@@ -1078,14 +1104,17 @@ func (s *ImageStoreService) UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjec
 }
 
 type UpdateCloudToUseObjectStoreResponse struct {
-	Id           string `json:"id"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Providername string `json:"providername"`
-	Scope        string `json:"scope"`
-	Url          string `json:"url"`
-	Zoneid       string `json:"zoneid"`
-	Zonename     string `json:"zonename"`
+	Disksizetotal int64  `json:"disksizetotal"`
+	Disksizeused  int64  `json:"disksizeused"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Protocol      string `json:"protocol"`
+	Providername  string `json:"providername"`
+	Readonly      bool   `json:"readonly"`
+	Scope         string `json:"scope"`
+	Url           string `json:"url"`
+	Zoneid        string `json:"zoneid"`
+	Zonename      string `json:"zonename"`
 }

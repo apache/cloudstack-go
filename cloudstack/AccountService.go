@@ -45,6 +45,12 @@ func (p *AddAccountToProjectParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["projectroleid"]; found {
+		u.Set("projectroleid", v.(string))
+	}
+	if v, found := p.p["roletype"]; found {
+		u.Set("roletype", v.(string))
+	}
 	return u
 }
 
@@ -67,6 +73,20 @@ func (p *AddAccountToProjectParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *AddAccountToProjectParams) SetProjectroleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectroleid"] = v
+}
+
+func (p *AddAccountToProjectParams) SetRoletype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["roletype"] = v
 }
 
 // You should always use this function to get a new AddAccountToProjectParams instance,
@@ -313,6 +333,7 @@ type CreateAccountResponse struct {
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
+	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`
@@ -642,6 +663,7 @@ type DisableAccountResponse struct {
 	Defaultzoneid             string                       `json:"defaultzoneid"`
 	Domain                    string                       `json:"domain"`
 	Domainid                  string                       `json:"domainid"`
+	Domainpath                string                       `json:"domainpath"`
 	Groups                    []string                     `json:"groups"`
 	Id                        string                       `json:"id"`
 	Ipavailable               string                       `json:"ipavailable"`
@@ -792,6 +814,7 @@ type EnableAccountResponse struct {
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
+	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`
@@ -944,6 +967,10 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("accounttype", vv)
 	}
+	if v, found := p.p["details"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("details", vv)
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -987,6 +1014,13 @@ func (p *ListAccountsParams) SetAccounttype(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *ListAccountsParams) SetDetails(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
 }
 
 func (p *ListAccountsParams) SetDomainid(v string) {
@@ -1179,6 +1213,7 @@ type Account struct {
 	Defaultzoneid             string            `json:"defaultzoneid"`
 	Domain                    string            `json:"domain"`
 	Domainid                  string            `json:"domainid"`
+	Domainpath                string            `json:"domainpath"`
 	Groups                    []string          `json:"groups"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
@@ -1281,8 +1316,14 @@ func (p *ListProjectAccountsParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["projectroleid"]; found {
+		u.Set("projectroleid", v.(string))
+	}
 	if v, found := p.p["role"]; found {
 		u.Set("role", v.(string))
+	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
 	}
 	return u
 }
@@ -1322,11 +1363,25 @@ func (p *ListProjectAccountsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListProjectAccountsParams) SetProjectroleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectroleid"] = v
+}
+
 func (p *ListProjectAccountsParams) SetRole(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["role"] = v
+}
+
+func (p *ListProjectAccountsParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
 }
 
 // You should always use this function to get a new ListProjectAccountsParams instance,
@@ -1396,52 +1451,52 @@ type ListProjectAccountsResponse struct {
 }
 
 type ProjectAccount struct {
-	Account                   string  `json:"account"`
-	Cpuavailable              string  `json:"cpuavailable"`
-	Cpulimit                  string  `json:"cpulimit"`
-	Cputotal                  int64   `json:"cputotal"`
-	Displaytext               string  `json:"displaytext"`
-	Domain                    string  `json:"domain"`
-	Domainid                  string  `json:"domainid"`
-	Id                        string  `json:"id"`
-	Ipavailable               string  `json:"ipavailable"`
-	Iplimit                   string  `json:"iplimit"`
-	Iptotal                   int64   `json:"iptotal"`
-	JobID                     string  `json:"jobid"`
-	Jobstatus                 int     `json:"jobstatus"`
-	Memoryavailable           string  `json:"memoryavailable"`
-	Memorylimit               string  `json:"memorylimit"`
-	Memorytotal               int64   `json:"memorytotal"`
-	Name                      string  `json:"name"`
-	Networkavailable          string  `json:"networkavailable"`
-	Networklimit              string  `json:"networklimit"`
-	Networktotal              int64   `json:"networktotal"`
-	Primarystorageavailable   string  `json:"primarystorageavailable"`
-	Primarystoragelimit       string  `json:"primarystoragelimit"`
-	Primarystoragetotal       int64   `json:"primarystoragetotal"`
-	Projectaccountname        string  `json:"projectaccountname"`
-	Secondarystorageavailable string  `json:"secondarystorageavailable"`
-	Secondarystoragelimit     string  `json:"secondarystoragelimit"`
-	Secondarystoragetotal     float64 `json:"secondarystoragetotal"`
-	Snapshotavailable         string  `json:"snapshotavailable"`
-	Snapshotlimit             string  `json:"snapshotlimit"`
-	Snapshottotal             int64   `json:"snapshottotal"`
-	State                     string  `json:"state"`
-	Tags                      []Tags  `json:"tags"`
-	Templateavailable         string  `json:"templateavailable"`
-	Templatelimit             string  `json:"templatelimit"`
-	Templatetotal             int64   `json:"templatetotal"`
-	Vmavailable               string  `json:"vmavailable"`
-	Vmlimit                   string  `json:"vmlimit"`
-	Vmrunning                 int     `json:"vmrunning"`
-	Vmstopped                 int     `json:"vmstopped"`
-	Vmtotal                   int64   `json:"vmtotal"`
-	Volumeavailable           string  `json:"volumeavailable"`
-	Volumelimit               string  `json:"volumelimit"`
-	Volumetotal               int64   `json:"volumetotal"`
-	Vpcavailable              string  `json:"vpcavailable"`
-	Vpclimit                  string  `json:"vpclimit"`
-	Vpctotal                  int64   `json:"vpctotal"`
+	Cpuavailable              string   `json:"cpuavailable"`
+	Cpulimit                  string   `json:"cpulimit"`
+	Cputotal                  int64    `json:"cputotal"`
+	Displaytext               string   `json:"displaytext"`
+	Domain                    string   `json:"domain"`
+	Domainid                  string   `json:"domainid"`
+	Id                        string   `json:"id"`
+	Ipavailable               string   `json:"ipavailable"`
+	Iplimit                   string   `json:"iplimit"`
+	Iptotal                   int64    `json:"iptotal"`
+	JobID                     string   `json:"jobid"`
+	Jobstatus                 int      `json:"jobstatus"`
+	Memoryavailable           string   `json:"memoryavailable"`
+	Memorylimit               string   `json:"memorylimit"`
+	Memorytotal               int64    `json:"memorytotal"`
+	Name                      string   `json:"name"`
+	Networkavailable          string   `json:"networkavailable"`
+	Networklimit              string   `json:"networklimit"`
+	Networktotal              int64    `json:"networktotal"`
+	Owner                     []string `json:"owner"`
+	Primarystorageavailable   string   `json:"primarystorageavailable"`
+	Primarystoragelimit       string   `json:"primarystoragelimit"`
+	Primarystoragetotal       int64    `json:"primarystoragetotal"`
+	Projectaccountname        string   `json:"projectaccountname"`
+	Secondarystorageavailable string   `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string   `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64  `json:"secondarystoragetotal"`
+	Snapshotavailable         string   `json:"snapshotavailable"`
+	Snapshotlimit             string   `json:"snapshotlimit"`
+	Snapshottotal             int64    `json:"snapshottotal"`
+	State                     string   `json:"state"`
+	Tags                      []Tags   `json:"tags"`
+	Templateavailable         string   `json:"templateavailable"`
+	Templatelimit             string   `json:"templatelimit"`
+	Templatetotal             int64    `json:"templatetotal"`
+	Vmavailable               string   `json:"vmavailable"`
+	Vmlimit                   string   `json:"vmlimit"`
+	Vmrunning                 int      `json:"vmrunning"`
+	Vmstopped                 int      `json:"vmstopped"`
+	Vmtotal                   int64    `json:"vmtotal"`
+	Volumeavailable           string   `json:"volumeavailable"`
+	Volumelimit               string   `json:"volumelimit"`
+	Volumetotal               int64    `json:"volumetotal"`
+	Vpcavailable              string   `json:"vpcavailable"`
+	Vpclimit                  string   `json:"vpclimit"`
+	Vpctotal                  int64    `json:"vpctotal"`
 }
 
 type Tags struct {
@@ -1523,6 +1578,7 @@ type LockAccountResponse struct {
 	Defaultzoneid             string                    `json:"defaultzoneid"`
 	Domain                    string                    `json:"domain"`
 	Domainid                  string                    `json:"domainid"`
+	Domainpath                string                    `json:"domainpath"`
 	Groups                    []string                  `json:"groups"`
 	Id                        string                    `json:"id"`
 	Ipavailable               string                    `json:"ipavailable"`
@@ -1696,6 +1752,7 @@ type MarkDefaultZoneForAccountResponse struct {
 	Defaultzoneid             string                                  `json:"defaultzoneid"`
 	Domain                    string                                  `json:"domain"`
 	Domainid                  string                                  `json:"domainid"`
+	Domainpath                string                                  `json:"domainpath"`
 	Groups                    []string                                `json:"groups"`
 	Id                        string                                  `json:"id"`
 	Ipavailable               string                                  `json:"ipavailable"`
@@ -1890,6 +1947,7 @@ type UpdateAccountResponse struct {
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
+	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`

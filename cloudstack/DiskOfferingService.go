@@ -60,6 +60,9 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("byteswriteratemaxlength", vv)
 	}
+	if v, found := p.p["cachemode"]; found {
+		u.Set("cachemode", v.(string))
+	}
 	if v, found := p.p["customized"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("customized", vv)
@@ -80,7 +83,8 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 		u.Set("displaytext", v.(string))
 	}
 	if v, found := p.p["domainid"]; found {
-		u.Set("domainid", v.(string))
+		vv := strings.Join(v.([]string), ",")
+		u.Set("domainid", vv)
 	}
 	if v, found := p.p["hypervisorsnapshotreserve"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -124,11 +128,18 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["provisioningtype"]; found {
 		u.Set("provisioningtype", v.(string))
 	}
+	if v, found := p.p["storagepolicy"]; found {
+		u.Set("storagepolicy", v.(string))
+	}
 	if v, found := p.p["storagetype"]; found {
 		u.Set("storagetype", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("zoneid", vv)
 	}
 	return u
 }
@@ -175,6 +186,13 @@ func (p *CreateDiskOfferingParams) SetByteswriteratemaxlength(v int64) {
 	p.p["byteswriteratemaxlength"] = v
 }
 
+func (p *CreateDiskOfferingParams) SetCachemode(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cachemode"] = v
+}
+
 func (p *CreateDiskOfferingParams) SetCustomized(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -210,7 +228,7 @@ func (p *CreateDiskOfferingParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
-func (p *CreateDiskOfferingParams) SetDomainid(v string) {
+func (p *CreateDiskOfferingParams) SetDomainid(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -294,6 +312,13 @@ func (p *CreateDiskOfferingParams) SetProvisioningtype(v string) {
 	p.p["provisioningtype"] = v
 }
 
+func (p *CreateDiskOfferingParams) SetStoragepolicy(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagepolicy"] = v
+}
+
 func (p *CreateDiskOfferingParams) SetStoragetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -306,6 +331,13 @@ func (p *CreateDiskOfferingParams) SetTags(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *CreateDiskOfferingParams) SetZoneid(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new CreateDiskOfferingParams instance,
@@ -365,6 +397,9 @@ type CreateDiskOfferingResponse struct {
 	Provisioningtype            string `json:"provisioningtype"`
 	Storagetype                 string `json:"storagetype"`
 	Tags                        string `json:"tags"`
+	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
+	Zone                        string `json:"zone"`
+	Zoneid                      string `json:"zoneid"`
 }
 
 type DeleteDiskOfferingParams struct {
@@ -484,6 +519,9 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
 }
 
@@ -541,6 +579,13 @@ func (p *ListDiskOfferingsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListDiskOfferingsParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new ListDiskOfferingsParams instance,
@@ -686,6 +731,9 @@ type DiskOffering struct {
 	Provisioningtype            string `json:"provisioningtype"`
 	Storagetype                 string `json:"storagetype"`
 	Tags                        string `json:"tags"`
+	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
+	Zone                        string `json:"zone"`
+	Zoneid                      string `json:"zoneid"`
 }
 
 type UpdateDiskOfferingParams struct {
@@ -697,6 +745,33 @@ func (p *UpdateDiskOfferingParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["bytesreadrate"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("bytesreadrate", vv)
+	}
+	if v, found := p.p["bytesreadratemax"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("bytesreadratemax", vv)
+	}
+	if v, found := p.p["bytesreadratemaxlength"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("bytesreadratemaxlength", vv)
+	}
+	if v, found := p.p["byteswriterate"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("byteswriterate", vv)
+	}
+	if v, found := p.p["byteswriteratemax"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("byteswriteratemax", vv)
+	}
+	if v, found := p.p["byteswriteratemaxlength"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("byteswriteratemaxlength", vv)
+	}
+	if v, found := p.p["cachemode"]; found {
+		u.Set("cachemode", v.(string))
+	}
 	if v, found := p.p["displayoffering"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("displayoffering", vv)
@@ -704,8 +779,35 @@ func (p *UpdateDiskOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["iopsreadrate"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopsreadrate", vv)
+	}
+	if v, found := p.p["iopsreadratemax"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopsreadratemax", vv)
+	}
+	if v, found := p.p["iopsreadratemaxlength"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopsreadratemaxlength", vv)
+	}
+	if v, found := p.p["iopswriterate"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopswriterate", vv)
+	}
+	if v, found := p.p["iopswriteratemax"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopswriteratemax", vv)
+	}
+	if v, found := p.p["iopswriteratemaxlength"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("iopswriteratemaxlength", vv)
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -714,7 +816,62 @@ func (p *UpdateDiskOfferingParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("sortkey", vv)
 	}
+	if v, found := p.p["tags"]; found {
+		u.Set("tags", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
+}
+
+func (p *UpdateDiskOfferingParams) SetBytesreadrate(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bytesreadrate"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetBytesreadratemax(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bytesreadratemax"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetBytesreadratemaxlength(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bytesreadratemaxlength"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetByteswriterate(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["byteswriterate"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetByteswriteratemax(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["byteswriteratemax"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetByteswriteratemaxlength(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["byteswriteratemaxlength"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetCachemode(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cachemode"] = v
 }
 
 func (p *UpdateDiskOfferingParams) SetDisplayoffering(v bool) {
@@ -731,11 +888,60 @@ func (p *UpdateDiskOfferingParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *UpdateDiskOfferingParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
 func (p *UpdateDiskOfferingParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopsreadrate(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopsreadrate"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopsreadratemax(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopsreadratemax"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopsreadratemaxlength(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopsreadratemaxlength"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopswriterate(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopswriterate"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopswriteratemax(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopswriteratemax"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetIopswriteratemaxlength(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iopswriteratemaxlength"] = v
 }
 
 func (p *UpdateDiskOfferingParams) SetName(v string) {
@@ -750,6 +956,20 @@ func (p *UpdateDiskOfferingParams) SetSortkey(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sortkey"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetTags(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
+}
+
+func (p *UpdateDiskOfferingParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
 }
 
 // You should always use this function to get a new UpdateDiskOfferingParams instance,
@@ -808,4 +1028,7 @@ type UpdateDiskOfferingResponse struct {
 	Provisioningtype            string `json:"provisioningtype"`
 	Storagetype                 string `json:"storagetype"`
 	Tags                        string `json:"tags"`
+	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
+	Zone                        string `json:"zone"`
+	Zoneid                      string `json:"zoneid"`
 }

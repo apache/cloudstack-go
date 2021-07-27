@@ -36,6 +36,10 @@ func (p *AttachIsoParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -43,6 +47,13 @@ func (p *AttachIsoParams) toURLValues() url.Values {
 		u.Set("virtualmachineid", v.(string))
 	}
 	return u
+}
+
+func (p *AttachIsoParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
 }
 
 func (p *AttachIsoParams) SetId(v string) {
@@ -107,6 +118,10 @@ func (s *ISOService) AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error) {
 type AttachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []AttachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                           `json:"backupofferingid"`
+	Backupofferingname    string                           `json:"backupofferingname"`
+	Bootmode              string                           `json:"bootmode"`
+	Boottype              string                           `json:"boottype"`
 	Cpunumber             int                              `json:"cpunumber"`
 	Cpuspeed              int                              `json:"cpuspeed"`
 	Cpuused               string                           `json:"cpuused"`
@@ -147,6 +162,7 @@ type AttachIsoResponse struct {
 	Networkkbsread        int64                            `json:"networkkbsread"`
 	Networkkbswrite       int64                            `json:"networkkbswrite"`
 	Nic                   []Nic                            `json:"nic"`
+	Osdisplayname         string                           `json:"osdisplayname"`
 	Ostypeid              string                           `json:"ostypeid"`
 	Password              string                           `json:"password"`
 	Passwordenabled       bool                             `json:"passwordenabled"`
@@ -154,6 +170,7 @@ type AttachIsoResponse struct {
 	Projectid             string                           `json:"projectid"`
 	Publicip              string                           `json:"publicip"`
 	Publicipid            string                           `json:"publicipid"`
+	Readonlyuidetails     string                           `json:"readonlyuidetails"`
 	Rootdeviceid          int64                            `json:"rootdeviceid"`
 	Rootdevicetype        string                           `json:"rootdevicetype"`
 	Securitygroup         []AttachIsoResponseSecuritygroup `json:"securitygroup"`
@@ -347,11 +364,14 @@ type CopyIsoResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -381,6 +401,7 @@ type CopyIsoResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -499,10 +520,21 @@ func (p *DetachIsoParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
 	}
 	return u
+}
+
+func (p *DetachIsoParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
 }
 
 func (p *DetachIsoParams) SetVirtualmachineid(v string) {
@@ -559,6 +591,10 @@ func (s *ISOService) DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error) {
 type DetachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []DetachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                           `json:"backupofferingid"`
+	Backupofferingname    string                           `json:"backupofferingname"`
+	Bootmode              string                           `json:"bootmode"`
+	Boottype              string                           `json:"boottype"`
 	Cpunumber             int                              `json:"cpunumber"`
 	Cpuspeed              int                              `json:"cpuspeed"`
 	Cpuused               string                           `json:"cpuused"`
@@ -599,6 +635,7 @@ type DetachIsoResponse struct {
 	Networkkbsread        int64                            `json:"networkkbsread"`
 	Networkkbswrite       int64                            `json:"networkkbswrite"`
 	Nic                   []Nic                            `json:"nic"`
+	Osdisplayname         string                           `json:"osdisplayname"`
 	Ostypeid              string                           `json:"ostypeid"`
 	Password              string                           `json:"password"`
 	Passwordenabled       bool                             `json:"passwordenabled"`
@@ -606,6 +643,7 @@ type DetachIsoResponse struct {
 	Projectid             string                           `json:"projectid"`
 	Publicip              string                           `json:"publicip"`
 	Publicipid            string                           `json:"publicipid"`
+	Readonlyuidetails     string                           `json:"readonlyuidetails"`
 	Rootdeviceid          int64                            `json:"rootdeviceid"`
 	Rootdevicetype        string                           `json:"rootdevicetype"`
 	Securitygroup         []DetachIsoResponseSecuritygroup `json:"securitygroup"`
@@ -968,6 +1006,10 @@ func (p *ListIsosParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showremoved", vv)
 	}
+	if v, found := p.p["showunique"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showunique", vv)
+	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -1091,6 +1133,13 @@ func (p *ListIsosParams) SetShowremoved(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showremoved"] = v
+}
+
+func (p *ListIsosParams) SetShowunique(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showunique"] = v
 }
 
 func (p *ListIsosParams) SetTags(v map[string]string) {
@@ -1229,11 +1278,14 @@ type Iso struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1263,6 +1315,7 @@ type Iso struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -1519,11 +1572,14 @@ type RegisterIsoResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1553,6 +1609,7 @@ type RegisterIsoResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -1780,11 +1837,14 @@ type UpdateIsoResponse struct {
 	Childtemplates        []interface{}     `json:"childtemplates"`
 	Created               string            `json:"created"`
 	CrossZones            bool              `json:"crossZones"`
+	Deployasis            bool              `json:"deployasis"`
+	Deployasisdetails     map[string]string `json:"deployasisdetails"`
 	Details               map[string]string `json:"details"`
 	Directdownload        bool              `json:"directdownload"`
 	Displaytext           string            `json:"displaytext"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Downloaddetails       []string          `json:"downloaddetails"`
 	Format                string            `json:"format"`
 	Hostid                string            `json:"hostid"`
 	Hostname              string            `json:"hostname"`
@@ -1814,6 +1874,7 @@ type UpdateIsoResponse struct {
 	Tags                  []Tags            `json:"tags"`
 	Templatetag           string            `json:"templatetag"`
 	Templatetype          string            `json:"templatetype"`
+	Url                   string            `json:"url"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }

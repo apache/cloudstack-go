@@ -290,6 +290,10 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["gateway"]; found {
 		u.Set("gateway", v.(string))
 	}
+	if v, found := p.p["hideipaddressusage"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("hideipaddressusage", vv)
+	}
 	if v, found := p.p["ip6cidr"]; found {
 		u.Set("ip6cidr", v.(string))
 	}
@@ -298,6 +302,9 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["isolatedpvlan"]; found {
 		u.Set("isolatedpvlan", v.(string))
+	}
+	if v, found := p.p["isolatedpvlantype"]; found {
+		u.Set("isolatedpvlantype", v.(string))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -416,6 +423,13 @@ func (p *CreateNetworkParams) SetGateway(v string) {
 	p.p["gateway"] = v
 }
 
+func (p *CreateNetworkParams) SetHideipaddressusage(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hideipaddressusage"] = v
+}
+
 func (p *CreateNetworkParams) SetIp6cidr(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -435,6 +449,13 @@ func (p *CreateNetworkParams) SetIsolatedpvlan(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isolatedpvlan"] = v
+}
+
+func (p *CreateNetworkParams) SetIsolatedpvlantype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isolatedpvlantype"] = v
 }
 
 func (p *CreateNetworkParams) SetName(v string) {
@@ -555,11 +576,13 @@ func (s *NetworkService) CreateNetwork(p *CreateNetworkParams) (*CreateNetworkRe
 type CreateNetworkResponse struct {
 	Account                     string                         `json:"account"`
 	Aclid                       string                         `json:"aclid"`
+	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
 	Cidr                        string                         `json:"cidr"`
+	Details                     map[string]string              `json:"details"`
 	Displaynetwork              bool                           `json:"displaynetwork"`
 	Displaytext                 string                         `json:"displaytext"`
 	Dns1                        string                         `json:"dns1"`
@@ -602,6 +625,7 @@ type CreateNetworkResponse struct {
 	Type                        string                         `json:"type"`
 	Vlan                        string                         `json:"vlan"`
 	Vpcid                       string                         `json:"vpcid"`
+	Vpcname                     string                         `json:"vpcname"`
 	Zoneid                      string                         `json:"zoneid"`
 	Zonename                    string                         `json:"zonename"`
 	Zonesnetworkspans           []interface{}                  `json:"zonesnetworkspans"`
@@ -781,6 +805,7 @@ type CreatePhysicalNetworkResponse struct {
 	Tags                 string `json:"tags"`
 	Vlan                 string `json:"vlan"`
 	Zoneid               string `json:"zoneid"`
+	Zonename             string `json:"zonename"`
 }
 
 type CreateServiceInstanceParams struct {
@@ -1668,11 +1693,13 @@ type ListNetscalerLoadBalancerNetworksResponse struct {
 type NetscalerLoadBalancerNetwork struct {
 	Account                     string                                `json:"account"`
 	Aclid                       string                                `json:"aclid"`
+	Aclname                     string                                `json:"aclname"`
 	Acltype                     string                                `json:"acltype"`
 	Broadcastdomaintype         string                                `json:"broadcastdomaintype"`
 	Broadcasturi                string                                `json:"broadcasturi"`
 	Canusefordeploy             bool                                  `json:"canusefordeploy"`
 	Cidr                        string                                `json:"cidr"`
+	Details                     map[string]string                     `json:"details"`
 	Displaynetwork              bool                                  `json:"displaynetwork"`
 	Displaytext                 string                                `json:"displaytext"`
 	Dns1                        string                                `json:"dns1"`
@@ -1715,6 +1742,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Type                        string                                `json:"type"`
 	Vlan                        string                                `json:"vlan"`
 	Vpcid                       string                                `json:"vpcid"`
+	Vpcname                     string                                `json:"vpcname"`
 	Zoneid                      string                                `json:"zoneid"`
 	Zonename                    string                                `json:"zonename"`
 	Zonesnetworkspans           []interface{}                         `json:"zonesnetworkspans"`
@@ -2018,6 +2046,9 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["networkofferingid"]; found {
+		u.Set("networkofferingid", v.(string))
+	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("page", vv)
@@ -2141,6 +2172,13 @@ func (p *ListNetworksParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListNetworksParams) SetNetworkofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkofferingid"] = v
 }
 
 func (p *ListNetworksParams) SetPage(v int) {
@@ -2341,11 +2379,13 @@ type ListNetworksResponse struct {
 type Network struct {
 	Account                     string                   `json:"account"`
 	Aclid                       string                   `json:"aclid"`
+	Aclname                     string                   `json:"aclname"`
 	Acltype                     string                   `json:"acltype"`
 	Broadcastdomaintype         string                   `json:"broadcastdomaintype"`
 	Broadcasturi                string                   `json:"broadcasturi"`
 	Canusefordeploy             bool                     `json:"canusefordeploy"`
 	Cidr                        string                   `json:"cidr"`
+	Details                     map[string]string        `json:"details"`
 	Displaynetwork              bool                     `json:"displaynetwork"`
 	Displaytext                 string                   `json:"displaytext"`
 	Dns1                        string                   `json:"dns1"`
@@ -2388,6 +2428,7 @@ type Network struct {
 	Type                        string                   `json:"type"`
 	Vlan                        string                   `json:"vlan"`
 	Vpcid                       string                   `json:"vpcid"`
+	Vpcname                     string                   `json:"vpcname"`
 	Zoneid                      string                   `json:"zoneid"`
 	Zonename                    string                   `json:"zonename"`
 	Zonesnetworkspans           []interface{}            `json:"zonesnetworkspans"`
@@ -2538,11 +2579,13 @@ type ListNiciraNvpDeviceNetworksResponse struct {
 type NiciraNvpDeviceNetwork struct {
 	Account                     string                          `json:"account"`
 	Aclid                       string                          `json:"aclid"`
+	Aclname                     string                          `json:"aclname"`
 	Acltype                     string                          `json:"acltype"`
 	Broadcastdomaintype         string                          `json:"broadcastdomaintype"`
 	Broadcasturi                string                          `json:"broadcasturi"`
 	Canusefordeploy             bool                            `json:"canusefordeploy"`
 	Cidr                        string                          `json:"cidr"`
+	Details                     map[string]string               `json:"details"`
 	Displaynetwork              bool                            `json:"displaynetwork"`
 	Displaytext                 string                          `json:"displaytext"`
 	Dns1                        string                          `json:"dns1"`
@@ -2585,6 +2628,7 @@ type NiciraNvpDeviceNetwork struct {
 	Type                        string                          `json:"type"`
 	Vlan                        string                          `json:"vlan"`
 	Vpcid                       string                          `json:"vpcid"`
+	Vpcname                     string                          `json:"vpcname"`
 	Zoneid                      string                          `json:"zoneid"`
 	Zonename                    string                          `json:"zonename"`
 	Zonesnetworkspans           []interface{}                   `json:"zonesnetworkspans"`
@@ -2838,11 +2882,13 @@ type ListPaloAltoFirewallNetworksResponse struct {
 type PaloAltoFirewallNetwork struct {
 	Account                     string                           `json:"account"`
 	Aclid                       string                           `json:"aclid"`
+	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
 	Cidr                        string                           `json:"cidr"`
+	Details                     map[string]string                `json:"details"`
 	Displaynetwork              bool                             `json:"displaynetwork"`
 	Displaytext                 string                           `json:"displaytext"`
 	Dns1                        string                           `json:"dns1"`
@@ -2885,6 +2931,7 @@ type PaloAltoFirewallNetwork struct {
 	Type                        string                           `json:"type"`
 	Vlan                        string                           `json:"vlan"`
 	Vpcid                       string                           `json:"vpcid"`
+	Vpcname                     string                           `json:"vpcname"`
 	Zoneid                      string                           `json:"zoneid"`
 	Zonename                    string                           `json:"zonename"`
 	Zonesnetworkspans           []interface{}                    `json:"zonesnetworkspans"`
@@ -3110,6 +3157,7 @@ type PhysicalNetwork struct {
 	Tags                 string `json:"tags"`
 	Vlan                 string `json:"vlan"`
 	Zoneid               string `json:"zoneid"`
+	Zonename             string `json:"zonename"`
 }
 
 type ListStorageNetworkIpRangeParams struct {
@@ -3563,6 +3611,7 @@ type RestartNetworkResponse struct {
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
 	Networkid                 string `json:"networkid"`
+	Networkname               string `json:"networkname"`
 	Physicalnetworkid         string `json:"physicalnetworkid"`
 	Project                   string `json:"project"`
 	Projectid                 string `json:"projectid"`
@@ -3576,6 +3625,7 @@ type RestartNetworkResponse struct {
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
 	Vpcid                     string `json:"vpcid"`
+	Vpcname                   string `json:"vpcname"`
 	Zoneid                    string `json:"zoneid"`
 	Zonename                  string `json:"zonename"`
 }
@@ -3609,6 +3659,10 @@ func (p *UpdateNetworkParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["guestvmcidr"]; found {
 		u.Set("guestvmcidr", v.(string))
+	}
+	if v, found := p.p["hideipaddressusage"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("hideipaddressusage", vv)
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
@@ -3669,6 +3723,13 @@ func (p *UpdateNetworkParams) SetGuestvmcidr(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["guestvmcidr"] = v
+}
+
+func (p *UpdateNetworkParams) SetHideipaddressusage(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hideipaddressusage"] = v
 }
 
 func (p *UpdateNetworkParams) SetId(v string) {
@@ -3753,11 +3814,13 @@ func (s *NetworkService) UpdateNetwork(p *UpdateNetworkParams) (*UpdateNetworkRe
 type UpdateNetworkResponse struct {
 	Account                     string                         `json:"account"`
 	Aclid                       string                         `json:"aclid"`
+	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
 	Cidr                        string                         `json:"cidr"`
+	Details                     map[string]string              `json:"details"`
 	Displaynetwork              bool                           `json:"displaynetwork"`
 	Displaytext                 string                         `json:"displaytext"`
 	Dns1                        string                         `json:"dns1"`
@@ -3800,6 +3863,7 @@ type UpdateNetworkResponse struct {
 	Type                        string                         `json:"type"`
 	Vlan                        string                         `json:"vlan"`
 	Vpcid                       string                         `json:"vpcid"`
+	Vpcname                     string                         `json:"vpcname"`
 	Zoneid                      string                         `json:"zoneid"`
 	Zonename                    string                         `json:"zonename"`
 	Zonesnetworkspans           []interface{}                  `json:"zonesnetworkspans"`
@@ -4046,6 +4110,7 @@ type UpdatePhysicalNetworkResponse struct {
 	Tags                 string `json:"tags"`
 	Vlan                 string `json:"vlan"`
 	Zoneid               string `json:"zoneid"`
+	Zonename             string `json:"zonename"`
 }
 
 type UpdateStorageNetworkIpRangeParams struct {

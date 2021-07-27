@@ -705,6 +705,10 @@ func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupPar
 type UpdateVMAffinityGroupResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []UpdateVMAffinityGroupResponseAffinitygroup `json:"affinitygroup"`
+	Backupofferingid      string                                       `json:"backupofferingid"`
+	Backupofferingname    string                                       `json:"backupofferingname"`
+	Bootmode              string                                       `json:"bootmode"`
+	Boottype              string                                       `json:"boottype"`
 	Cpunumber             int                                          `json:"cpunumber"`
 	Cpuspeed              int                                          `json:"cpuspeed"`
 	Cpuused               string                                       `json:"cpuused"`
@@ -745,6 +749,7 @@ type UpdateVMAffinityGroupResponse struct {
 	Networkkbsread        int64                                        `json:"networkkbsread"`
 	Networkkbswrite       int64                                        `json:"networkkbswrite"`
 	Nic                   []Nic                                        `json:"nic"`
+	Osdisplayname         string                                       `json:"osdisplayname"`
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
@@ -752,6 +757,7 @@ type UpdateVMAffinityGroupResponse struct {
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
+	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []UpdateVMAffinityGroupResponseSecuritygroup `json:"securitygroup"`

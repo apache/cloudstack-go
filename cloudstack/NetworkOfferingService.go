@@ -52,6 +52,10 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("domainid", vv)
+	}
 	if v, found := p.p["egressdefaultpolicy"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("egressdefaultpolicy", vv)
@@ -117,6 +121,10 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["traffictype"]; found {
 		u.Set("traffictype", v.(string))
 	}
+	if v, found := p.p["zoneid"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("zoneid", vv)
+	}
 	return u
 }
 
@@ -146,6 +154,13 @@ func (p *CreateNetworkOfferingParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *CreateNetworkOfferingParams) SetDomainid(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
 }
 
 func (p *CreateNetworkOfferingParams) SetEgressdefaultpolicy(v bool) {
@@ -260,6 +275,13 @@ func (p *CreateNetworkOfferingParams) SetTraffictype(v string) {
 	p.p["traffictype"] = v
 }
 
+func (p *CreateNetworkOfferingParams) SetZoneid(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
 // You should always use this function to get a new CreateNetworkOfferingParams instance,
 // as then you are sure you have configured all required params
 func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, supportedservices []string, traffictype string) *CreateNetworkOfferingParams {
@@ -298,6 +320,8 @@ type CreateNetworkOfferingResponse struct {
 	Created                  string                                 `json:"created"`
 	Details                  map[string]string                      `json:"details"`
 	Displaytext              string                                 `json:"displaytext"`
+	Domain                   string                                 `json:"domain"`
+	Domainid                 string                                 `json:"domainid"`
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
@@ -318,6 +342,8 @@ type CreateNetworkOfferingResponse struct {
 	Supportsstrechedl2subnet bool                                   `json:"supportsstrechedl2subnet"`
 	Tags                     string                                 `json:"tags"`
 	Traffictype              string                                 `json:"traffictype"`
+	Zone                     string                                 `json:"zone"`
+	Zoneid                   string                                 `json:"zoneid"`
 }
 
 type CreateNetworkOfferingResponseService struct {
@@ -437,6 +463,9 @@ func (p *ListNetworkOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["forvpc"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvpc", vv)
@@ -515,6 +544,13 @@ func (p *ListNetworkOfferingsParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *ListNetworkOfferingsParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
 }
 
 func (p *ListNetworkOfferingsParams) SetForvpc(v bool) {
@@ -760,6 +796,8 @@ type NetworkOffering struct {
 	Created                  string                           `json:"created"`
 	Details                  map[string]string                `json:"details"`
 	Displaytext              string                           `json:"displaytext"`
+	Domain                   string                           `json:"domain"`
+	Domainid                 string                           `json:"domainid"`
 	Egressdefaultpolicy      bool                             `json:"egressdefaultpolicy"`
 	Forvpc                   bool                             `json:"forvpc"`
 	Guestiptype              string                           `json:"guestiptype"`
@@ -780,6 +818,8 @@ type NetworkOffering struct {
 	Supportsstrechedl2subnet bool                             `json:"supportsstrechedl2subnet"`
 	Tags                     string                           `json:"tags"`
 	Traffictype              string                           `json:"traffictype"`
+	Zone                     string                           `json:"zone"`
+	Zoneid                   string                           `json:"zoneid"`
 }
 
 type NetworkOfferingServiceInternal struct {
@@ -819,6 +859,9 @@ func (p *UpdateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -843,6 +886,9 @@ func (p *UpdateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
 	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
 }
 
@@ -858,6 +904,13 @@ func (p *UpdateNetworkOfferingParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
 }
 
 func (p *UpdateNetworkOfferingParams) SetId(v string) {
@@ -909,6 +962,13 @@ func (p *UpdateNetworkOfferingParams) SetTags(v string) {
 	p.p["tags"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
 // You should always use this function to get a new UpdateNetworkOfferingParams instance,
 // as then you are sure you have configured all required params
 func (s *NetworkOfferingService) NewUpdateNetworkOfferingParams() *UpdateNetworkOfferingParams {
@@ -938,6 +998,8 @@ type UpdateNetworkOfferingResponse struct {
 	Created                  string                                 `json:"created"`
 	Details                  map[string]string                      `json:"details"`
 	Displaytext              string                                 `json:"displaytext"`
+	Domain                   string                                 `json:"domain"`
+	Domainid                 string                                 `json:"domainid"`
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
@@ -958,6 +1020,8 @@ type UpdateNetworkOfferingResponse struct {
 	Supportsstrechedl2subnet bool                                   `json:"supportsstrechedl2subnet"`
 	Tags                     string                                 `json:"tags"`
 	Traffictype              string                                 `json:"traffictype"`
+	Zone                     string                                 `json:"zone"`
+	Zoneid                   string                                 `json:"zoneid"`
 }
 
 type UpdateNetworkOfferingResponseService struct {
