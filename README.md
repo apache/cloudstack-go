@@ -1,6 +1,6 @@
 # cloudstack-go
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/apache/cloudstack-go/cloudstack.svg)](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack)
+[![Go Reference](https://pkg.go.dev/badge/github.com/apache/cloudstack-go/v2/cloudstack.svg)](https://pkg.go.dev/github.com/apache/cloudstack-go/v2/cloudstack)
 
 A CloudStack API client enabling Go programs to interact with CloudStack in a simple and uniform way
 
@@ -8,13 +8,13 @@ A CloudStack API client enabling Go programs to interact with CloudStack in a si
 
 This package covers the complete CloudStack API and is well tested. Of course there will still be untested corner cases when you have over 400 API commands that you can use, but over all it's safe to use this package.
 
-To be able to find the API command you want, they are grouped by 'services' which match the grouping you can see/find on the [CloudStack API docs](http://cloudstack.apache.org/docs/api/apidocs-4.11/TOC_Root_Admin.html) website.
+To be able to find the API command you want, they are grouped by 'services' which match the grouping you can see/find on the [CloudStack API docs](https://cloudstack.apache.org/api/apidocs-4.15/) website.
 
 ## Usage
 
 The cloudstack package is always generated against the latest stable CloudStack release (currently v4.11.x). Luckily the API doesn't change that much, and were it does we try to make sure the generated package is able handle both the old and the new case. Over time it will be impossible to support all version with just one package, but until now we seem to manage this pretty well.
 
-Please see the package documentation on [go.dev](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack).
+Please see the package documentation on [go.dev](https://pkg.go.dev/github.com/apache/cloudstack-go/v2/cloudstack).
 
 ## Example
 
@@ -59,7 +59,7 @@ I fully understand I need to document this all a little more/better and there sh
 
 ## Getting Help
 
-_Please try to see if the [module documentation](https://pkg.go.dev/github.com/apache/cloudstack-go/cloudstack) can provide some answers first!_
+_Please try to see if the [module documentation](https://pkg.go.dev/github.com/apache/cloudstack-go/v2/cloudstack) can provide some answers first!_
 
 * If you have an issue: report it on the [issue tracker](https://github.com/apache/cloudstack-go/issues)
 
