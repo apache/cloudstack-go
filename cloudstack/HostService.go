@@ -189,7 +189,7 @@ type AddBaremetalHostResponse struct {
 	Cpuallocatedpercentage           string                             `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                              `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                             `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                             `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                            `json:"cpuloadaverage"`
 	Cpunumber                        int                                `json:"cpunumber"`
 	Cpusockets                       int                                `json:"cpusockets"`
 	Cpuspeed                         int64                              `json:"cpuspeed"`
@@ -204,7 +204,7 @@ type AddBaremetalHostResponse struct {
 	Gpugroup                         []AddBaremetalHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                               `json:"hahost"`
 	Hasenoughcapacity                bool                               `json:"hasenoughcapacity"`
-	Hostha                           string                             `json:"hostha"`
+	Hostha                           HostHostha                         `json:"hostha"`
 	Hosttags                         string                             `json:"hosttags"`
 	Hypervisor                       string                             `json:"hypervisor"`
 	Hypervisorversion                string                             `json:"hypervisorversion"`
@@ -511,7 +511,7 @@ type AddHostResponse struct {
 	Cpuallocatedpercentage           string                      `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                       `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                      `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                      `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                     `json:"cpuloadaverage"`
 	Cpunumber                        int                         `json:"cpunumber"`
 	Cpusockets                       int                         `json:"cpusockets"`
 	Cpuspeed                         int64                       `json:"cpuspeed"`
@@ -526,7 +526,7 @@ type AddHostResponse struct {
 	Gpugroup                         []AddHostResponseGpugroup   `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           string                      `json:"hostha"`
+	Hostha                           HostHostha                  `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -728,7 +728,7 @@ type CancelHostMaintenanceResponse struct {
 	Cpuallocatedpercentage           string                                  `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                                   `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                                  `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                                  `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                                 `json:"cpuloadaverage"`
 	Cpunumber                        int                                     `json:"cpunumber"`
 	Cpusockets                       int                                     `json:"cpusockets"`
 	Cpuspeed                         int64                                   `json:"cpuspeed"`
@@ -743,7 +743,7 @@ type CancelHostMaintenanceResponse struct {
 	Gpugroup                         []CancelHostMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                    `json:"hahost"`
 	Hasenoughcapacity                bool                                    `json:"hasenoughcapacity"`
-	Hostha                           string                                  `json:"hostha"`
+	Hostha                           HostHostha                              `json:"hostha"`
 	Hosttags                         string                                  `json:"hosttags"`
 	Hypervisor                       string                                  `json:"hypervisor"`
 	Hypervisorversion                string                                  `json:"hypervisorversion"`
@@ -1269,7 +1269,7 @@ type FindHostsForMigrationResponse struct {
 	JobID                            string `json:"jobid"`
 	Jobstatus                        int    `json:"jobstatus"`
 	Lastpinged                       string `json:"lastpinged"`
-	Managementserverid               int64  `json:"managementserverid"`
+	Managementserverid               string `json:"managementserverid"`
 	Memoryallocated                  string `json:"memoryallocated"`
 	Memoryallocatedbytes             int64  `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string `json:"memoryallocatedpercentage"`
@@ -1841,7 +1841,7 @@ type Host struct {
 	Cpuallocatedpercentage           string                      `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                       `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                      `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                      `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                     `json:"cpuloadaverage"`
 	Cpunumber                        int                         `json:"cpunumber"`
 	Cpusockets                       int                         `json:"cpusockets"`
 	Cpuspeed                         int64                       `json:"cpuspeed"`
@@ -1856,7 +1856,7 @@ type Host struct {
 	Gpugroup                         []HostGpugroup              `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           string                      `json:"hostha"`
+	Hostha                           HostHostha                  `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -1908,6 +1908,11 @@ type HostGpugroupVgpu struct {
 	Remainingcapacity int64  `json:"remainingcapacity"`
 	Vgputype          string `json:"vgputype"`
 	Videoram          int64  `json:"videoram"`
+}
+
+type HostHostha struct {
+	Haenable bool   `json:"haenable"`
+	Hastate  string `json:"hastate"`
 }
 
 type ListHostsMetricsParams struct {
@@ -2222,7 +2227,7 @@ type HostsMetric struct {
 	Cpuallocatedvalue                int64                       `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                      `json:"cpuallocatedwithoverprovisioning"`
 	Cpudisablethreshold              bool                        `json:"cpudisablethreshold"`
-	Cpuloadaverage                   string                      `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                     `json:"cpuloadaverage"`
 	Cpunumber                        int                         `json:"cpunumber"`
 	Cpusockets                       int                         `json:"cpusockets"`
 	Cpuspeed                         int64                       `json:"cpuspeed"`
@@ -2240,7 +2245,7 @@ type HostsMetric struct {
 	Gpugroup                         []HostsMetricGpugroup       `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           string                      `json:"hostha"`
+	Hostha                           HostHostha                  `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -2381,7 +2386,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Cpuallocatedpercentage           string                                      `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                                       `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                                      `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                                      `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                                     `json:"cpuloadaverage"`
 	Cpunumber                        int                                         `json:"cpunumber"`
 	Cpusockets                       int                                         `json:"cpusockets"`
 	Cpuspeed                         int64                                       `json:"cpuspeed"`
@@ -2396,7 +2401,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Gpugroup                         []PrepareHostForMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                        `json:"hahost"`
 	Hasenoughcapacity                bool                                        `json:"hasenoughcapacity"`
-	Hostha                           string                                      `json:"hostha"`
+	Hostha                           HostHostha                                  `json:"hostha"`
 	Hosttags                         string                                      `json:"hosttags"`
 	Hypervisor                       string                                      `json:"hypervisor"`
 	Hypervisorversion                string                                      `json:"hypervisorversion"`
@@ -2526,7 +2531,7 @@ type ReconnectHostResponse struct {
 	Cpuallocatedpercentage           string                          `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                           `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                          `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                          `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                         `json:"cpuloadaverage"`
 	Cpunumber                        int                             `json:"cpunumber"`
 	Cpusockets                       int                             `json:"cpusockets"`
 	Cpuspeed                         int64                           `json:"cpuspeed"`
@@ -2541,7 +2546,7 @@ type ReconnectHostResponse struct {
 	Gpugroup                         []ReconnectHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                            `json:"hahost"`
 	Hasenoughcapacity                bool                            `json:"hasenoughcapacity"`
-	Hostha                           string                          `json:"hostha"`
+	Hostha                           HostHostha                      `json:"hostha"`
 	Hosttags                         string                          `json:"hosttags"`
 	Hypervisor                       string                          `json:"hypervisor"`
 	Hypervisorversion                string                          `json:"hypervisorversion"`
@@ -2848,7 +2853,7 @@ type UpdateHostResponse struct {
 	Cpuallocatedpercentage           string                       `json:"cpuallocatedpercentage"`
 	Cpuallocatedvalue                int64                        `json:"cpuallocatedvalue"`
 	Cpuallocatedwithoverprovisioning string                       `json:"cpuallocatedwithoverprovisioning"`
-	Cpuloadaverage                   string                       `json:"cpuloadaverage"`
+	Cpuloadaverage                   float64                      `json:"cpuloadaverage"`
 	Cpunumber                        int                          `json:"cpunumber"`
 	Cpusockets                       int                          `json:"cpusockets"`
 	Cpuspeed                         int64                        `json:"cpuspeed"`
@@ -2863,7 +2868,7 @@ type UpdateHostResponse struct {
 	Gpugroup                         []UpdateHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                         `json:"hahost"`
 	Hasenoughcapacity                bool                         `json:"hasenoughcapacity"`
-	Hostha                           string                       `json:"hostha"`
+	Hostha                           HostHostha                   `json:"hostha"`
 	Hosttags                         string                       `json:"hosttags"`
 	Hypervisor                       string                       `json:"hypervisor"`
 	Hypervisorversion                string                       `json:"hypervisorversion"`
