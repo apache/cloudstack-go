@@ -215,7 +215,7 @@ type AddBaremetalHostResponse struct {
 	Jobstatus                        int                                `json:"jobstatus"`
 	Lastannotated                    string                             `json:"lastannotated"`
 	Lastpinged                       string                             `json:"lastpinged"`
-	Managementserverid               string                             `json:"managementserverid"`
+	Managementserverid               ManagementServerId                 `json:"managementserverid"`
 	Memoryallocated                  int64                              `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                              `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                             `json:"memoryallocatedpercentage"`
@@ -537,7 +537,7 @@ type AddHostResponse struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               ManagementServerId          `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -754,7 +754,7 @@ type CancelHostMaintenanceResponse struct {
 	Jobstatus                        int                                     `json:"jobstatus"`
 	Lastannotated                    string                                  `json:"lastannotated"`
 	Lastpinged                       string                                  `json:"lastpinged"`
-	Managementserverid               string                                  `json:"managementserverid"`
+	Managementserverid               ManagementServerId                      `json:"managementserverid"`
 	Memoryallocated                  int64                                   `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                   `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                  `json:"memoryallocatedpercentage"`
@@ -1240,58 +1240,58 @@ func (s *HostService) FindHostsForMigration(p *FindHostsForMigrationParams) (*Fi
 }
 
 type FindHostsForMigrationResponse struct {
-	Averageload                      int64  `json:"averageload"`
-	Capabilities                     string `json:"capabilities"`
-	Clusterid                        string `json:"clusterid"`
-	Clustername                      string `json:"clustername"`
-	Clustertype                      string `json:"clustertype"`
-	Cpuallocated                     string `json:"cpuallocated"`
-	Cpuallocatedpercentage           string `json:"cpuallocatedpercentage"`
-	Cpuallocatedvalue                int64  `json:"cpuallocatedvalue"`
-	Cpuallocatedwithoverprovisioning string `json:"cpuallocatedwithoverprovisioning"`
-	Cpunumber                        int    `json:"cpunumber"`
-	Cpuspeed                         int64  `json:"cpuspeed"`
-	Cpuused                          string `json:"cpuused"`
-	Cpuwithoverprovisioning          string `json:"cpuwithoverprovisioning"`
-	Created                          string `json:"created"`
-	Disconnected                     string `json:"disconnected"`
-	Disksizeallocated                int64  `json:"disksizeallocated"`
-	Disksizetotal                    int64  `json:"disksizetotal"`
-	Events                           string `json:"events"`
-	Hahost                           bool   `json:"hahost"`
-	Hasenoughcapacity                bool   `json:"hasenoughcapacity"`
-	Hosttags                         string `json:"hosttags"`
-	Hypervisor                       string `json:"hypervisor"`
-	Hypervisorversion                string `json:"hypervisorversion"`
-	Id                               string `json:"id"`
-	Ipaddress                        string `json:"ipaddress"`
-	Islocalstorageactive             bool   `json:"islocalstorageactive"`
-	JobID                            string `json:"jobid"`
-	Jobstatus                        int    `json:"jobstatus"`
-	Lastpinged                       string `json:"lastpinged"`
-	Managementserverid               string `json:"managementserverid"`
-	Memoryallocated                  string `json:"memoryallocated"`
-	Memoryallocatedbytes             int64  `json:"memoryallocatedbytes"`
-	Memoryallocatedpercentage        string `json:"memoryallocatedpercentage"`
-	Memorytotal                      int64  `json:"memorytotal"`
-	Memoryused                       int64  `json:"memoryused"`
-	Memorywithoverprovisioning       string `json:"memorywithoverprovisioning"`
-	Name                             string `json:"name"`
-	Networkkbsread                   int64  `json:"networkkbsread"`
-	Networkkbswrite                  int64  `json:"networkkbswrite"`
-	Oscategoryid                     string `json:"oscategoryid"`
-	Oscategoryname                   string `json:"oscategoryname"`
-	Podid                            string `json:"podid"`
-	Podname                          string `json:"podname"`
-	Removed                          string `json:"removed"`
-	RequiresStorageMotion            bool   `json:"requiresStorageMotion"`
-	Resourcestate                    string `json:"resourcestate"`
-	State                            string `json:"state"`
-	Suitableformigration             bool   `json:"suitableformigration"`
-	Type                             string `json:"type"`
-	Version                          string `json:"version"`
-	Zoneid                           string `json:"zoneid"`
-	Zonename                         string `json:"zonename"`
+	Averageload                      int64              `json:"averageload"`
+	Capabilities                     string             `json:"capabilities"`
+	Clusterid                        string             `json:"clusterid"`
+	Clustername                      string             `json:"clustername"`
+	Clustertype                      string             `json:"clustertype"`
+	Cpuallocated                     string             `json:"cpuallocated"`
+	Cpuallocatedpercentage           string             `json:"cpuallocatedpercentage"`
+	Cpuallocatedvalue                int64              `json:"cpuallocatedvalue"`
+	Cpuallocatedwithoverprovisioning string             `json:"cpuallocatedwithoverprovisioning"`
+	Cpunumber                        int                `json:"cpunumber"`
+	Cpuspeed                         int64              `json:"cpuspeed"`
+	Cpuused                          string             `json:"cpuused"`
+	Cpuwithoverprovisioning          string             `json:"cpuwithoverprovisioning"`
+	Created                          string             `json:"created"`
+	Disconnected                     string             `json:"disconnected"`
+	Disksizeallocated                int64              `json:"disksizeallocated"`
+	Disksizetotal                    int64              `json:"disksizetotal"`
+	Events                           string             `json:"events"`
+	Hahost                           bool               `json:"hahost"`
+	Hasenoughcapacity                bool               `json:"hasenoughcapacity"`
+	Hosttags                         string             `json:"hosttags"`
+	Hypervisor                       string             `json:"hypervisor"`
+	Hypervisorversion                string             `json:"hypervisorversion"`
+	Id                               string             `json:"id"`
+	Ipaddress                        string             `json:"ipaddress"`
+	Islocalstorageactive             bool               `json:"islocalstorageactive"`
+	JobID                            string             `json:"jobid"`
+	Jobstatus                        int                `json:"jobstatus"`
+	Lastpinged                       string             `json:"lastpinged"`
+	Managementserverid               ManagementServerId `json:"managementserverid"`
+	Memoryallocated                  string             `json:"memoryallocated"`
+	Memoryallocatedbytes             int64              `json:"memoryallocatedbytes"`
+	Memoryallocatedpercentage        string             `json:"memoryallocatedpercentage"`
+	Memorytotal                      int64              `json:"memorytotal"`
+	Memoryused                       int64              `json:"memoryused"`
+	Memorywithoverprovisioning       string             `json:"memorywithoverprovisioning"`
+	Name                             string             `json:"name"`
+	Networkkbsread                   int64              `json:"networkkbsread"`
+	Networkkbswrite                  int64              `json:"networkkbswrite"`
+	Oscategoryid                     string             `json:"oscategoryid"`
+	Oscategoryname                   string             `json:"oscategoryname"`
+	Podid                            string             `json:"podid"`
+	Podname                          string             `json:"podname"`
+	Removed                          string             `json:"removed"`
+	RequiresStorageMotion            bool               `json:"requiresStorageMotion"`
+	Resourcestate                    string             `json:"resourcestate"`
+	State                            string             `json:"state"`
+	Suitableformigration             bool               `json:"suitableformigration"`
+	Type                             string             `json:"type"`
+	Version                          string             `json:"version"`
+	Zoneid                           string             `json:"zoneid"`
+	Zonename                         string             `json:"zonename"`
 }
 
 type ListDedicatedHostsParams struct {
@@ -1867,7 +1867,7 @@ type Host struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               ManagementServerId          `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -1913,6 +1913,18 @@ type HostGpugroupVgpu struct {
 type HostHostha struct {
 	Haenable bool   `json:"haenable"`
 	Hastate  string `json:"hastate"`
+}
+
+type ManagementServerId string
+
+func (id *ManagementServerId) UnmarshalJSON(b []byte) error {
+	unquoted, err := strconv.Unquote(string(b))
+	if err != nil {
+		*id = ManagementServerId(string(b))
+		return nil
+	}
+	*id = ManagementServerId(unquoted)
+	return nil
 }
 
 type ListHostsMetricsParams struct {
@@ -2257,7 +2269,7 @@ type HostsMetric struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               ManagementServerId          `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocateddisablethreshold  bool                        `json:"memoryallocateddisablethreshold"`
@@ -2412,7 +2424,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Jobstatus                        int                                         `json:"jobstatus"`
 	Lastannotated                    string                                      `json:"lastannotated"`
 	Lastpinged                       string                                      `json:"lastpinged"`
-	Managementserverid               string                                      `json:"managementserverid"`
+	Managementserverid               ManagementServerId                          `json:"managementserverid"`
 	Memoryallocated                  int64                                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                      `json:"memoryallocatedpercentage"`
@@ -2557,7 +2569,7 @@ type ReconnectHostResponse struct {
 	Jobstatus                        int                             `json:"jobstatus"`
 	Lastannotated                    string                          `json:"lastannotated"`
 	Lastpinged                       string                          `json:"lastpinged"`
-	Managementserverid               string                          `json:"managementserverid"`
+	Managementserverid               ManagementServerId              `json:"managementserverid"`
 	Memoryallocated                  int64                           `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                           `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                          `json:"memoryallocatedpercentage"`
@@ -2879,7 +2891,7 @@ type UpdateHostResponse struct {
 	Jobstatus                        int                          `json:"jobstatus"`
 	Lastannotated                    string                       `json:"lastannotated"`
 	Lastpinged                       string                       `json:"lastpinged"`
-	Managementserverid               string                       `json:"managementserverid"`
+	Managementserverid               ManagementServerId           `json:"managementserverid"`
 	Memoryallocated                  int64                        `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                        `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                       `json:"memoryallocatedpercentage"`
