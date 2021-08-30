@@ -49,6 +49,20 @@ var detailsRequireKeyValue = map[string]bool{
 	"updateZone":                  true,
 }
 
+var mapRequireList = map[string]map[string]bool{
+	"deployVirtualMachine": map[string]bool{
+		"dhcpoptionsnetworklist": true,
+		"iptonetworklist": true,
+		"nicnetworklist": true,
+	},
+	"updateVirtualMachine": map[string]bool{
+		"dhcpoptionsnetworklist": true,
+	},
+	"migrateVirtualMachineWithVolume": map[string]bool{
+		"migrateto": true,
+	},
+}
+
 // We prefill this one value to make sure it is not
 // created twice, as this is also a top level type.
 var typeNames = map[string]bool{"Nic": true}
@@ -890,7 +904,7 @@ func (s *service) generateToURLValuesFunc(a *API) {
 	pn("	}")
 	for _, ap := range a.Params {
 		pn("	if v, found := p.p[\"%s\"]; found {", ap.Name)
-		s.generateConvertCode(a.Name, ap.Name, mapType(ap.Type))
+		s.generateConvertCode(a.Name, ap.Name, mapType(a.Name, ap.Name, ap.Type))
 		pn("	}")
 	}
 	pn("	return u")
@@ -916,6 +930,13 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	case "[]string":
 		pn("vv := strings.Join(v.([]string), \",\")")
 		pn("u.Set(\"%s\", vv)", name)
+	case "[]map[string]string":
+		pn("l := v.([]map[string]string)")
+		pn("for i, m := range l {")
+		pn("  for key, val := range m {")
+		pn("	  u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, key), val)", name)
+		pn("  }")
+		pn("}")
 	case "map[string]string":
 		pn("m := v.(map[string]string)")
 		pn("for i, k := range getSortedKeysFromMap(m) {")
@@ -954,13 +975,30 @@ func (s *service) generateParamSettersFunc(a *API) {
 
 	for _, ap := range a.Params {
 		if !found[ap.Name] {
-			pn("func (p *%s) Set%s(v %s) {", capitalize(a.Name+"Params"), capitalize(ap.Name), mapType(ap.Type))
+			pn("func (p *%s) Set%s(v %s) {", capitalize(a.Name+"Params"), capitalize(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 			pn("	if p.p == nil {")
 			pn("		p.p = make(map[string]interface{})")
 			pn("	}")
 			pn("	p.p[\"%s\"] = v", ap.Name)
 			pn("}")
 			pn("")
+
+			if mapRequireList[a.Name] != nil && mapRequireList[a.Name][ap.Name] {
+				pn("func (p *%s) Add%s(item map[string]string) {", capitalize(a.Name+"Params"), capitalize(ap.Name))
+				pn("	if p.p == nil {")
+				pn("		p.p = make(map[string]interface{})")
+				pn("	}")
+				pn("	val, found := p.p[\"%s\"]", ap.Name)
+				pn("	if !found {")
+				pn("	  p.p[\"%s\"] = []map[string]string{}", ap.Name)
+				pn("	  val = p.p[\"%s\"]", ap.Name)
+				pn("	}")
+				pn("	l := val.([]map[string]string)")
+				pn("	l = append(l, item)")
+				pn("	p.p[\"%s\"] = l", ap.Name)
+				pn("}")
+				pn("")
+			}
 			found[ap.Name] = true
 		}
 	}
@@ -978,7 +1016,7 @@ func (s *service) generateNewParamTypeFunc(a *API) {
 	for _, ap := range a.Params {
 		if ap.Required {
 			rp = append(rp, ap)
-			p("%s %s, ", s.parseParamName(ap.Name), mapType(ap.Type))
+			p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 		}
 	}
 	pn(") *%s {", tn)
@@ -999,8 +1037,8 @@ func (s *service) generateHelperFuncs(a *API) {
 	p, pn := s.p, s.pn
 
 	if strings.HasPrefix(a.Name, "list") {
-		v, found := hasNameOrKeywordParamField(a.Params)
-		if found && hasIDAndNameResponseField(a.Response) {
+		v, found := hasNameOrKeywordParamField(a.Name, a.Params)
+		if found && hasIDAndNameResponseField(a.Name, a.Response) {
 			ln := strings.TrimPrefix(a.Name, "list")
 
 			// Check if ID is a required parameters and bail if so
@@ -1015,7 +1053,7 @@ func (s *service) generateHelperFuncs(a *API) {
 			p("func (s *%s) Get%sID(%s string, ", s.name, parseSingular(ln), v)
 			for _, ap := range a.Params {
 				if ap.Required {
-					p("%s %s, ", s.parseParamName(ap.Name), mapType(ap.Type))
+					p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 				}
 			}
 			if parseSingular(ln) == "Iso" {
@@ -1079,13 +1117,13 @@ func (s *service) generateHelperFuncs(a *API) {
 			pn("}\n")
 			pn("")
 
-			if hasIDParamField(a.Params) {
+			if hasIDParamField(a.Name, a.Params) {
 				// Generate the function signature
 				pn("// This is a courtesy helper function, which in some cases may not work as expected!")
 				p("func (s *%s) Get%sByName(name string, ", s.name, parseSingular(ln))
 				for _, ap := range a.Params {
 					if ap.Required {
-						p("%s %s, ", s.parseParamName(ap.Name), mapType(ap.Type))
+						p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 					}
 				}
 				if parseSingular(ln) == "Iso" {
@@ -1130,7 +1168,7 @@ func (s *service) generateHelperFuncs(a *API) {
 			}
 		}
 
-		if hasIDParamField(a.Params) {
+		if hasIDParamField(a.Name, a.Params) {
 			ln := strings.TrimPrefix(a.Name, "list")
 
 			// Generate the function signature
@@ -1138,7 +1176,7 @@ func (s *service) generateHelperFuncs(a *API) {
 			p("func (s *%s) Get%sByID(id string, ", s.name, parseSingular(ln))
 			for _, ap := range a.Params {
 				if ap.Required && s.parseParamName(ap.Name) != "id" {
-					p("%s %s, ", ap.Name, mapType(ap.Type))
+					p("%s %s, ", ap.Name, mapType(a.Name, ap.Name, ap.Type))
 				}
 			}
 			if ln == "LoadBalancerRuleInstances" {
@@ -1194,13 +1232,13 @@ func (s *service) generateHelperFuncs(a *API) {
 	}
 }
 
-func hasNameOrKeywordParamField(params APIParams) (v string, found bool) {
+func hasNameOrKeywordParamField(aName string, params APIParams) (v string, found bool) {
 	for _, p := range params {
-		if p.Name == "keyword" && mapType(p.Type) == "string" {
+		if p.Name == "keyword" && mapType(aName, p.Name, p.Type) == "string" {
 			v = "keyword"
 			found = true
 		}
-		if p.Name == "name" && mapType(p.Type) == "string" {
+		if p.Name == "name" && mapType(aName, p.Name, p.Type) == "string" {
 			return "name", true
 		}
 
@@ -1208,24 +1246,24 @@ func hasNameOrKeywordParamField(params APIParams) (v string, found bool) {
 	return v, found
 }
 
-func hasIDParamField(params APIParams) bool {
+func hasIDParamField(aName string, params APIParams) bool {
 	for _, p := range params {
-		if p.Name == "id" && mapType(p.Type) == "string" {
+		if p.Name == "id" && mapType(aName, p.Name, p.Type) == "string" {
 			return true
 		}
 	}
 	return false
 }
 
-func hasIDAndNameResponseField(resp APIResponses) bool {
+func hasIDAndNameResponseField(aName string, resp APIResponses) bool {
 	id := false
 	name := false
 
 	for _, r := range resp {
-		if r.Name == "id" && mapType(r.Type) == "string" {
+		if r.Name == "id" && mapType(aName, r.Name, r.Type) == "string" {
 			id = true
 		}
-		if r.Name == "name" && mapType(r.Type) == "string" {
+		if r.Name == "name" && mapType(aName, r.Name, r.Type) == "string" {
 			name = true
 		}
 	}
@@ -1395,7 +1433,7 @@ func (s *service) generateResponseType(a *API) {
 	}
 
 	sort.Sort(a.Response)
-	customMarshal := s.recusiveGenerateResponseType(tn, a.Response, a.Isasync)
+	customMarshal := s.recusiveGenerateResponseType(a.Name, tn, a.Response, a.Isasync)
 
 	if customMarshal {
 		pn("func (r *%s) UnmarshalJSON(b []byte) error {", tn)
@@ -1438,7 +1476,7 @@ func parseSingular(n string) string {
 	return strings.TrimSuffix(n, "s")
 }
 
-func (s *service) recusiveGenerateResponseType(tn string, resp APIResponses, async bool) bool {
+func (s *service) recusiveGenerateResponseType(aName string, tn string, resp APIResponses, async bool) bool {
 	pn := s.pn
 	customMarshal := false
 	found := make(map[string]bool)
@@ -1461,7 +1499,7 @@ func (s *service) recusiveGenerateResponseType(tn string, resp APIResponses, asy
 			typeName, create := getUniqueTypeName(tn, r.Name)
 			pn("%s []%s `json:\"%s\"`", capitalize(r.Name), typeName, r.Name)
 			if create {
-				defer s.recusiveGenerateResponseType(typeName, r.Response, false)
+				defer s.recusiveGenerateResponseType(aName, typeName, r.Response, false)
 			}
 		} else {
 			if !found[r.Name] {
@@ -1477,7 +1515,7 @@ func (s *service) recusiveGenerateResponseType(tn string, resp APIResponses, asy
 					pn("%s string `json:\"%s\"`", capitalize(r.Name), r.Name)
 					customMarshal = true
 				default:
-					pn("%s %s `json:\"%s\"`", capitalize(r.Name), mapType(r.Type), r.Name)
+					pn("%s %s `json:\"%s\"`", capitalize(r.Name), mapType(aName, r.Name, r.Type), r.Name)
 				}
 				found[r.Name] = true
 			}
@@ -1587,8 +1625,8 @@ func sourceDir() (string, error) {
 	return outdir, nil
 }
 
-func mapType(t string) string {
-	switch t {
+func mapType(aName string, pName string, pType string) string {
+	switch pType {
 	case "boolean":
 		return "bool"
 	case "short", "int", "integer":
@@ -1600,6 +1638,9 @@ func mapType(t string) string {
 	case "list":
 		return "[]string"
 	case "map":
+		if mapRequireList[aName] != nil && mapRequireList[aName][pName] {
+			return "[]map[string]string"
+		}
 		return "map[string]string"
 	case "set":
 		return "[]interface{}"
