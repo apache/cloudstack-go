@@ -849,10 +849,11 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		}
 	}
 	if v, found := p.p["dhcpoptionsnetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["diskofferingid"]; found {
@@ -887,10 +888,11 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		u.Set("ipaddress", v.(string))
 	}
 	if v, found := p.p["iptonetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("iptonetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("iptonetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("iptonetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["keyboard"]; found {
@@ -910,10 +912,11 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		u.Set("networkids", vv)
 	}
 	if v, found := p.p["nicnetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("nicnetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("nicnetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("nicnetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["podid"]; found {
@@ -1048,11 +1051,25 @@ func (p *DeployVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
-func (p *DeployVirtualMachineParams) SetDhcpoptionsnetworklist(v map[string]string) {
+func (p *DeployVirtualMachineParams) SetDhcpoptionsnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dhcpoptionsnetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) AddDhcpoptionsnetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["dhcpoptionsnetworklist"]
+	if !found {
+		p.p["dhcpoptionsnetworklist"] = []map[string]string{}
+		val = p.p["dhcpoptionsnetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["dhcpoptionsnetworklist"] = l
 }
 
 func (p *DeployVirtualMachineParams) SetDiskofferingid(v string) {
@@ -1125,11 +1142,25 @@ func (p *DeployVirtualMachineParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
-func (p *DeployVirtualMachineParams) SetIptonetworklist(v map[string]string) {
+func (p *DeployVirtualMachineParams) SetIptonetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iptonetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) AddIptonetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["iptonetworklist"]
+	if !found {
+		p.p["iptonetworklist"] = []map[string]string{}
+		val = p.p["iptonetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["iptonetworklist"] = l
 }
 
 func (p *DeployVirtualMachineParams) SetKeyboard(v string) {
@@ -1167,11 +1198,25 @@ func (p *DeployVirtualMachineParams) SetNetworkids(v []string) {
 	p.p["networkids"] = v
 }
 
-func (p *DeployVirtualMachineParams) SetNicnetworklist(v map[string]string) {
+func (p *DeployVirtualMachineParams) SetNicnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicnetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) AddNicnetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["nicnetworklist"]
+	if !found {
+		p.p["nicnetworklist"] = []map[string]string{}
+		val = p.p["nicnetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["nicnetworklist"] = l
 }
 
 func (p *DeployVirtualMachineParams) SetPodid(v string) {
@@ -3255,10 +3300,11 @@ func (p *MigrateVirtualMachineWithVolumeParams) toURLValues() url.Values {
 		u.Set("hostid", v.(string))
 	}
 	if v, found := p.p["migrateto"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("migrateto[%d].key", i), k)
-			u.Set(fmt.Sprintf("migrateto[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("migrateto[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["virtualmachineid"]; found {
@@ -3274,11 +3320,25 @@ func (p *MigrateVirtualMachineWithVolumeParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
-func (p *MigrateVirtualMachineWithVolumeParams) SetMigrateto(v map[string]string) {
+func (p *MigrateVirtualMachineWithVolumeParams) SetMigrateto(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["migrateto"] = v
+}
+
+func (p *MigrateVirtualMachineWithVolumeParams) AddMigrateto(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["migrateto"]
+	if !found {
+		p.p["migrateto"] = []map[string]string{}
+		val = p.p["migrateto"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["migrateto"] = l
 }
 
 func (p *MigrateVirtualMachineWithVolumeParams) SetVirtualmachineid(v string) {
@@ -5348,10 +5408,11 @@ func (p *UpdateVirtualMachineParams) toURLValues() url.Values {
 		}
 	}
 	if v, found := p.p["dhcpoptionsnetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["displayname"]; found {
@@ -5422,11 +5483,25 @@ func (p *UpdateVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
-func (p *UpdateVirtualMachineParams) SetDhcpoptionsnetworklist(v map[string]string) {
+func (p *UpdateVirtualMachineParams) SetDhcpoptionsnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dhcpoptionsnetworklist"] = v
+}
+
+func (p *UpdateVirtualMachineParams) AddDhcpoptionsnetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["dhcpoptionsnetworklist"]
+	if !found {
+		p.p["dhcpoptionsnetworklist"] = []map[string]string{}
+		val = p.p["dhcpoptionsnetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["dhcpoptionsnetworklist"] = l
 }
 
 func (p *UpdateVirtualMachineParams) SetDisplayname(v string) {
