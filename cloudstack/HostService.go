@@ -204,7 +204,7 @@ type AddBaremetalHostResponse struct {
 	Gpugroup                         []AddBaremetalHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                               `json:"hahost"`
 	Hasenoughcapacity                bool                               `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                         `json:"hostha"`
+	Hostha                           HAForHostResponse                  `json:"hostha"`
 	Hosttags                         string                             `json:"hosttags"`
 	Hypervisor                       string                             `json:"hypervisor"`
 	Hypervisorversion                string                             `json:"hypervisorversion"`
@@ -215,7 +215,7 @@ type AddBaremetalHostResponse struct {
 	Jobstatus                        int                                `json:"jobstatus"`
 	Lastannotated                    string                             `json:"lastannotated"`
 	Lastpinged                       string                             `json:"lastpinged"`
-	Managementserverid               ManagementServerId                 `json:"managementserverid"`
+	Managementserverid               string                             `json:"managementserverid"`
 	Memoryallocated                  int64                              `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                              `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                             `json:"memoryallocatedpercentage"`
@@ -526,7 +526,7 @@ type AddHostResponse struct {
 	Gpugroup                         []AddHostResponseGpugroup   `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                  `json:"hostha"`
+	Hostha                           HAForHostResponse           `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -537,7 +537,7 @@ type AddHostResponse struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               ManagementServerId          `json:"managementserverid"`
+	Managementserverid               string                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -743,7 +743,7 @@ type CancelHostMaintenanceResponse struct {
 	Gpugroup                         []CancelHostMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                    `json:"hahost"`
 	Hasenoughcapacity                bool                                    `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                              `json:"hostha"`
+	Hostha                           HAForHostResponse                       `json:"hostha"`
 	Hosttags                         string                                  `json:"hosttags"`
 	Hypervisor                       string                                  `json:"hypervisor"`
 	Hypervisorversion                string                                  `json:"hypervisorversion"`
@@ -754,7 +754,7 @@ type CancelHostMaintenanceResponse struct {
 	Jobstatus                        int                                     `json:"jobstatus"`
 	Lastannotated                    string                                  `json:"lastannotated"`
 	Lastpinged                       string                                  `json:"lastpinged"`
-	Managementserverid               ManagementServerId                      `json:"managementserverid"`
+	Managementserverid               string                                  `json:"managementserverid"`
 	Memoryallocated                  int64                                   `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                   `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                  `json:"memoryallocatedpercentage"`
@@ -795,6 +795,169 @@ type CancelHostMaintenanceResponseGpugroupVgpu struct {
 	Remainingcapacity int64  `json:"remainingcapacity"`
 	Vgputype          string `json:"vgputype"`
 	Videoram          int64  `json:"videoram"`
+}
+
+type ConfigureHAForHostParams struct {
+	p map[string]interface{}
+}
+
+func (p *ConfigureHAForHostParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
+	}
+	return u
+}
+
+func (p *ConfigureHAForHostParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ConfigureHAForHostParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+// You should always use this function to get a new ConfigureHAForHostParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewConfigureHAForHostParams(hostid string, provider string) *ConfigureHAForHostParams {
+	p := &ConfigureHAForHostParams{}
+	p.p = make(map[string]interface{})
+	p.p["hostid"] = hostid
+	p.p["provider"] = provider
+	return p
+}
+
+// Configures HA for a host
+func (s *HostService) ConfigureHAForHost(p *ConfigureHAForHostParams) (*HAForHostResponse, error) {
+	resp, err := s.cs.newRequest("configureHAForHost", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r HAForHostResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type HAForHostResponse struct {
+	Haenable   bool   `json:"haenable"`
+	Haprovider string `json:"haprovider"`
+	Hastate    string `json:"hastate"`
+	Hostid     string `json:"hostid"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Status     bool   `json:"status"`
+}
+
+type EnableHAForHostParams struct {
+	p map[string]interface{}
+}
+
+func (p *EnableHAForHostParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	return u
+}
+
+func (p *EnableHAForHostParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+// You should always use this function to get a new EnableHAForHostParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewEnableHAForHostParams(hostid string) *EnableHAForHostParams {
+	p := &EnableHAForHostParams{}
+	p.p = make(map[string]interface{})
+	p.p["hostid"] = hostid
+	return p
+}
+
+// Enables HA for a host
+func (s *HostService) EnableHAForHost(p *EnableHAForHostParams) (*EnableHAForHostResponse, error) {
+	resp, err := s.cs.newRequest("enableHAForHost", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r EnableHAForHostResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type EnableHAForHostResponse struct {
+	Haenable   bool   `json:"haenable"`
+	Haprovider string `json:"haprovider"`
+	Hastate    string `json:"hastate"`
+	Hostid     string `json:"hostid"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Status     bool   `json:"status"`
 }
 
 type DedicateHostParams struct {
@@ -1240,58 +1403,58 @@ func (s *HostService) FindHostsForMigration(p *FindHostsForMigrationParams) (*Fi
 }
 
 type FindHostsForMigrationResponse struct {
-	Averageload                      int64              `json:"averageload"`
-	Capabilities                     string             `json:"capabilities"`
-	Clusterid                        string             `json:"clusterid"`
-	Clustername                      string             `json:"clustername"`
-	Clustertype                      string             `json:"clustertype"`
-	Cpuallocated                     string             `json:"cpuallocated"`
-	Cpuallocatedpercentage           string             `json:"cpuallocatedpercentage"`
-	Cpuallocatedvalue                int64              `json:"cpuallocatedvalue"`
-	Cpuallocatedwithoverprovisioning string             `json:"cpuallocatedwithoverprovisioning"`
-	Cpunumber                        int                `json:"cpunumber"`
-	Cpuspeed                         int64              `json:"cpuspeed"`
-	Cpuused                          string             `json:"cpuused"`
-	Cpuwithoverprovisioning          string             `json:"cpuwithoverprovisioning"`
-	Created                          string             `json:"created"`
-	Disconnected                     string             `json:"disconnected"`
-	Disksizeallocated                int64              `json:"disksizeallocated"`
-	Disksizetotal                    int64              `json:"disksizetotal"`
-	Events                           string             `json:"events"`
-	Hahost                           bool               `json:"hahost"`
-	Hasenoughcapacity                bool               `json:"hasenoughcapacity"`
-	Hosttags                         string             `json:"hosttags"`
-	Hypervisor                       string             `json:"hypervisor"`
-	Hypervisorversion                string             `json:"hypervisorversion"`
-	Id                               string             `json:"id"`
-	Ipaddress                        string             `json:"ipaddress"`
-	Islocalstorageactive             bool               `json:"islocalstorageactive"`
-	JobID                            string             `json:"jobid"`
-	Jobstatus                        int                `json:"jobstatus"`
-	Lastpinged                       string             `json:"lastpinged"`
-	Managementserverid               ManagementServerId `json:"managementserverid"`
-	Memoryallocated                  string             `json:"memoryallocated"`
-	Memoryallocatedbytes             int64              `json:"memoryallocatedbytes"`
-	Memoryallocatedpercentage        string             `json:"memoryallocatedpercentage"`
-	Memorytotal                      int64              `json:"memorytotal"`
-	Memoryused                       int64              `json:"memoryused"`
-	Memorywithoverprovisioning       string             `json:"memorywithoverprovisioning"`
-	Name                             string             `json:"name"`
-	Networkkbsread                   int64              `json:"networkkbsread"`
-	Networkkbswrite                  int64              `json:"networkkbswrite"`
-	Oscategoryid                     string             `json:"oscategoryid"`
-	Oscategoryname                   string             `json:"oscategoryname"`
-	Podid                            string             `json:"podid"`
-	Podname                          string             `json:"podname"`
-	Removed                          string             `json:"removed"`
-	RequiresStorageMotion            bool               `json:"requiresStorageMotion"`
-	Resourcestate                    string             `json:"resourcestate"`
-	State                            string             `json:"state"`
-	Suitableformigration             bool               `json:"suitableformigration"`
-	Type                             string             `json:"type"`
-	Version                          string             `json:"version"`
-	Zoneid                           string             `json:"zoneid"`
-	Zonename                         string             `json:"zonename"`
+	Averageload                      int64  `json:"averageload"`
+	Capabilities                     string `json:"capabilities"`
+	Clusterid                        string `json:"clusterid"`
+	Clustername                      string `json:"clustername"`
+	Clustertype                      string `json:"clustertype"`
+	Cpuallocated                     string `json:"cpuallocated"`
+	Cpuallocatedpercentage           string `json:"cpuallocatedpercentage"`
+	Cpuallocatedvalue                int64  `json:"cpuallocatedvalue"`
+	Cpuallocatedwithoverprovisioning string `json:"cpuallocatedwithoverprovisioning"`
+	Cpunumber                        int    `json:"cpunumber"`
+	Cpuspeed                         int64  `json:"cpuspeed"`
+	Cpuused                          string `json:"cpuused"`
+	Cpuwithoverprovisioning          string `json:"cpuwithoverprovisioning"`
+	Created                          string `json:"created"`
+	Disconnected                     string `json:"disconnected"`
+	Disksizeallocated                int64  `json:"disksizeallocated"`
+	Disksizetotal                    int64  `json:"disksizetotal"`
+	Events                           string `json:"events"`
+	Hahost                           bool   `json:"hahost"`
+	Hasenoughcapacity                bool   `json:"hasenoughcapacity"`
+	Hosttags                         string `json:"hosttags"`
+	Hypervisor                       string `json:"hypervisor"`
+	Hypervisorversion                string `json:"hypervisorversion"`
+	Id                               string `json:"id"`
+	Ipaddress                        string `json:"ipaddress"`
+	Islocalstorageactive             bool   `json:"islocalstorageactive"`
+	JobID                            string `json:"jobid"`
+	Jobstatus                        int    `json:"jobstatus"`
+	Lastpinged                       string `json:"lastpinged"`
+	Managementserverid               int64  `json:"managementserverid"`
+	Memoryallocated                  string `json:"memoryallocated"`
+	Memoryallocatedbytes             int64  `json:"memoryallocatedbytes"`
+	Memoryallocatedpercentage        string `json:"memoryallocatedpercentage"`
+	Memorytotal                      int64  `json:"memorytotal"`
+	Memoryused                       int64  `json:"memoryused"`
+	Memorywithoverprovisioning       string `json:"memorywithoverprovisioning"`
+	Name                             string `json:"name"`
+	Networkkbsread                   int64  `json:"networkkbsread"`
+	Networkkbswrite                  int64  `json:"networkkbswrite"`
+	Oscategoryid                     string `json:"oscategoryid"`
+	Oscategoryname                   string `json:"oscategoryname"`
+	Podid                            string `json:"podid"`
+	Podname                          string `json:"podname"`
+	Removed                          string `json:"removed"`
+	RequiresStorageMotion            bool   `json:"requiresStorageMotion"`
+	Resourcestate                    string `json:"resourcestate"`
+	State                            string `json:"state"`
+	Suitableformigration             bool   `json:"suitableformigration"`
+	Type                             string `json:"type"`
+	Version                          string `json:"version"`
+	Zoneid                           string `json:"zoneid"`
+	Zonename                         string `json:"zonename"`
 }
 
 type ListDedicatedHostsParams struct {
@@ -1856,7 +2019,7 @@ type Host struct {
 	Gpugroup                         []HostGpugroup              `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                  `json:"hostha"`
+	Hostha                           HAForHostResponse           `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -1867,7 +2030,7 @@ type Host struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               ManagementServerId          `json:"managementserverid"`
+	Managementserverid               string                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -1908,23 +2071,6 @@ type HostGpugroupVgpu struct {
 	Remainingcapacity int64  `json:"remainingcapacity"`
 	Vgputype          string `json:"vgputype"`
 	Videoram          int64  `json:"videoram"`
-}
-
-type HostHostha struct {
-	Haenable bool   `json:"haenable"`
-	Hastate  string `json:"hastate"`
-}
-
-type ManagementServerId string
-
-func (id *ManagementServerId) UnmarshalJSON(b []byte) error {
-	unquoted, err := strconv.Unquote(string(b))
-	if err != nil {
-		*id = ManagementServerId(string(b))
-		return nil
-	}
-	*id = ManagementServerId(unquoted)
-	return nil
 }
 
 type ListHostsMetricsParams struct {
@@ -2257,7 +2403,7 @@ type HostsMetric struct {
 	Gpugroup                         []HostsMetricGpugroup       `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                  `json:"hostha"`
+	Hostha                           HAForHostResponse           `json:"hostha"`
 	Hosttags                         string                      `json:"hosttags"`
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
@@ -2269,7 +2415,7 @@ type HostsMetric struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               ManagementServerId          `json:"managementserverid"`
+	Managementserverid               string                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocateddisablethreshold  bool                        `json:"memoryallocateddisablethreshold"`
@@ -2413,7 +2559,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Gpugroup                         []PrepareHostForMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                        `json:"hahost"`
 	Hasenoughcapacity                bool                                        `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                                  `json:"hostha"`
+	Hostha                           HAForHostResponse                           `json:"hostha"`
 	Hosttags                         string                                      `json:"hosttags"`
 	Hypervisor                       string                                      `json:"hypervisor"`
 	Hypervisorversion                string                                      `json:"hypervisorversion"`
@@ -2424,7 +2570,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Jobstatus                        int                                         `json:"jobstatus"`
 	Lastannotated                    string                                      `json:"lastannotated"`
 	Lastpinged                       string                                      `json:"lastpinged"`
-	Managementserverid               ManagementServerId                          `json:"managementserverid"`
+	Managementserverid               string                                      `json:"managementserverid"`
 	Memoryallocated                  int64                                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                      `json:"memoryallocatedpercentage"`
@@ -2558,7 +2704,7 @@ type ReconnectHostResponse struct {
 	Gpugroup                         []ReconnectHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                            `json:"hahost"`
 	Hasenoughcapacity                bool                            `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                      `json:"hostha"`
+	Hostha                           HAForHostResponse               `json:"hostha"`
 	Hosttags                         string                          `json:"hosttags"`
 	Hypervisor                       string                          `json:"hypervisor"`
 	Hypervisorversion                string                          `json:"hypervisorversion"`
@@ -2569,7 +2715,7 @@ type ReconnectHostResponse struct {
 	Jobstatus                        int                             `json:"jobstatus"`
 	Lastannotated                    string                          `json:"lastannotated"`
 	Lastpinged                       string                          `json:"lastpinged"`
-	Managementserverid               ManagementServerId              `json:"managementserverid"`
+	Managementserverid               string                          `json:"managementserverid"`
 	Memoryallocated                  int64                           `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                           `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                          `json:"memoryallocatedpercentage"`
@@ -2880,7 +3026,7 @@ type UpdateHostResponse struct {
 	Gpugroup                         []UpdateHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                         `json:"hahost"`
 	Hasenoughcapacity                bool                         `json:"hasenoughcapacity"`
-	Hostha                           HostHostha                   `json:"hostha"`
+	Hostha                           HAForHostResponse            `json:"hostha"`
 	Hosttags                         string                       `json:"hosttags"`
 	Hypervisor                       string                       `json:"hypervisor"`
 	Hypervisorversion                string                       `json:"hypervisorversion"`
@@ -2891,7 +3037,7 @@ type UpdateHostResponse struct {
 	Jobstatus                        int                          `json:"jobstatus"`
 	Lastannotated                    string                       `json:"lastannotated"`
 	Lastpinged                       string                       `json:"lastpinged"`
-	Managementserverid               ManagementServerId           `json:"managementserverid"`
+	Managementserverid               string                       `json:"managementserverid"`
 	Memoryallocated                  int64                        `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                        `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                       `json:"memoryallocatedpercentage"`

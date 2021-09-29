@@ -593,6 +593,142 @@ type EnableOutOfBandManagementForZoneResponse struct {
 	Username    string `json:"username"`
 }
 
+type DisableHAForZoneParams struct {
+	p map[string]interface{}
+}
+
+func (p *DisableHAForZoneParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *DisableHAForZoneParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+// You should always use this function to get a new DisableHAForZoneParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewDisableHAForZoneParams(zoneid string) *DisableHAForZoneParams {
+	p := &DisableHAForZoneParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Disables HA for a zone
+func (s *ZoneService) DisableHAForZone(p *DisableHAForZoneParams) (*DisableHAForZoneResponse, error) {
+	resp, err := s.cs.newRequest("disableHAForZone", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DisableHAForZoneResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DisableHAForZoneResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+type EnableHAForZoneParams struct {
+	p map[string]interface{}
+}
+
+func (p *EnableHAForZoneParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *EnableHAForZoneParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+// You should always use this function to get a new EnableHAForZoneParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewEnableHAForZoneParams(zoneid string) *EnableHAForZoneParams {
+	p := &EnableHAForZoneParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Enables HA for a zone
+func (s *ZoneService) EnableHAForZone(p *EnableHAForZoneParams) (*EnableHAForZoneResponse, error) {
+	resp, err := s.cs.newRequest("enableHAForZone", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r EnableHAForZoneResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type EnableHAForZoneResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
 type ListDedicatedZonesParams struct {
 	p map[string]interface{}
 }
