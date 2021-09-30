@@ -634,6 +634,142 @@ type EnableOutOfBandManagementForClusterResponse struct {
 	Username    string `json:"username"`
 }
 
+type EnableHAForClusterParams struct {
+	p map[string]interface{}
+}
+
+func (p *EnableHAForClusterParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	return u
+}
+
+func (p *EnableHAForClusterParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+// You should always use this function to get a new EnableHAForClusterParams instance,
+// as then you are sure you have configured all required params
+func (s *ClusterService) NewEnableHAForClusterParams(clusterid string) *EnableHAForClusterParams {
+	p := &EnableHAForClusterParams{}
+	p.p = make(map[string]interface{})
+	p.p["clusterid"] = clusterid
+	return p
+}
+
+// Enables HA cluster-wide
+func (s *ClusterService) EnableHAForCluster(p *EnableHAForClusterParams) (*EnableHAForClusterResponse, error) {
+	resp, err := s.cs.newRequest("enableHAForCluster", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r EnableHAForClusterResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type EnableHAForClusterResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+type DisableHAForClusterParams struct {
+	p map[string]interface{}
+}
+
+func (p *DisableHAForClusterParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	return u
+}
+
+func (p *DisableHAForClusterParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+// You should always use this function to get a new DisableHAForClusterParams instance,
+// as then you are sure you have configured all required params
+func (s *ClusterService) NewDisableHAForClusterParams(clusterid string) *DisableHAForClusterParams {
+	p := &DisableHAForClusterParams{}
+	p.p = make(map[string]interface{})
+	p.p["clusterid"] = clusterid
+	return p
+}
+
+// Disables HA cluster-wide
+func (s *ClusterService) DisableHAForCluster(p *DisableHAForClusterParams) (*DisableHAForClusterResponse, error) {
+	resp, err := s.cs.newRequest("disableHAForCluster", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DisableHAForClusterResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DisableHAForClusterResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
 type ListClustersParams struct {
 	p map[string]interface{}
 }

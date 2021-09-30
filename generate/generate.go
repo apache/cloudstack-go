@@ -52,8 +52,8 @@ var detailsRequireKeyValue = map[string]bool{
 var mapRequireList = map[string]map[string]bool{
 	"deployVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
-		"iptonetworklist": true,
-		"nicnetworklist": true,
+		"iptonetworklist":        true,
+		"nicnetworklist":         true,
 	},
 	"updateVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
@@ -1633,7 +1633,7 @@ func mapType(aName string, pName string, pType string) string {
 		return "int"
 	case "long":
 		return "int64"
-	case "float":
+	case "float", "double":
 		return "float64"
 	case "list":
 		return "[]string"
@@ -1651,6 +1651,8 @@ func mapType(aName string, pName string, pType string) string {
 		return "*VirtualMachine"
 	case "outofbandmanagementresponse":
 		return "OutOfBandManagementResponse"
+	case "hostharesponse":
+		return "HAForHostResponse"
 	default:
 		return "string"
 	}
