@@ -1636,6 +1636,9 @@ func mapType(aName string, pName string, pType string) string {
 	case "float", "double":
 		return "float64"
 	case "list":
+		if pName == "downloaddetails" {
+			return "[]map[string]string"
+		}
 		return "[]string"
 	case "map":
 		if mapRequireList[aName] != nil && mapRequireList[aName][pName] {
