@@ -398,6 +398,10 @@ func (s *UserService) EnableUser(p *EnableUserParams) (*EnableUserResponse, erro
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r EnableUserResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
@@ -810,6 +814,10 @@ func (s *UserService) NewLockUserParams(id string) *LockUserParams {
 func (s *UserService) LockUser(p *LockUserParams) (*LockUserResponse, error) {
 	resp, err := s.cs.newRequest("lockUser", p.toURLValues())
 	if err != nil {
+		return nil, err
+	}
+
+	if resp, err = getRawValue(resp); err != nil {
 		return nil, err
 	}
 

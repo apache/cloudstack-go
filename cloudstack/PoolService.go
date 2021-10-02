@@ -193,6 +193,10 @@ func (s *PoolService) CreateStoragePool(p *CreateStoragePoolParams) (*CreateStor
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreateStoragePoolResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

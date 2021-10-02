@@ -1082,6 +1082,10 @@ func (s *ServiceOfferingService) UpdateServiceOffering(p *UpdateServiceOfferingP
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdateServiceOfferingResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

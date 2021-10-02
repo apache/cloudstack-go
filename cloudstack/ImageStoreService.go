@@ -109,6 +109,10 @@ func (s *ImageStoreService) AddImageStore(p *AddImageStoreParams) (*AddImageStor
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r AddImageStoreResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
