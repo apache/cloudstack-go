@@ -1,3 +1,22 @@
+//
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+//
+
 package main
 
 import (
@@ -8,11 +27,9 @@ import (
 )
 
 func main()  {
-	cs := cloudstack.NewAsyncClient("http://localhost:8080/client/api",
-		"zNeTB-XgjvqRLrlf0t_dfVc1kLPBOv88wyUKaUcD0ycCJOkkxe3iRoZcv4JGxaU1882dGuCnCkUcDsirK3M8nw",
-		"JmdgVR-TXsozU1sRBYaBs1ctCWUEnvoxKYwJw_xZW4TRMFu4SU3J9tP8hEw5od26iU9HWX0w_oUWv07EcXnItw", false)
-	p := cs.Host.NewAddHostParams("Simulator", "password", "5382edc2-e689-4074-bd67-0e1a236eb2bc",
-		"http://sim/c0/h0", "root", "d4a81f75-5d92-415e-ab59-e85cc2ce56d9")
+	cs := cloudstack.NewAsyncClient(ApiUrl, ApiKey, SecretKey, false)
+	p := cs.Host.NewAddHostParams("Simulator", "password", PodId,
+		"http://sim/c0/h0", "root", ZoneId)
 	resp, err := cs.Host.AddHost(p)
 	if err != nil {
 		fmt.Errorf("Failed to add host due to: %v", err)
