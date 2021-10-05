@@ -6,13 +6,14 @@ A CloudStack API client enabling Go programs to interact with CloudStack in a si
 
 ## Status
 
-This package covers the complete CloudStack API and is well tested. Of course there will still be untested corner cases when you have over 400 API commands that you can use, but over all it's safe to use this package.
+This package covers the complete CloudStack API and is well tested. There may be some untested corner cases as there are over 600 API commands, but over all, it's safe to use this package.
 
 To be able to find the API command you want, they are grouped by 'services' which match the grouping you can see/find on the [CloudStack API docs](https://cloudstack.apache.org/api/apidocs-4.15/) website.
 
 ## Usage
 
-The cloudstack package is always generated against the latest stable CloudStack release (currently v4.15.x). Luckily the API doesn't change that much, and were it does we try to make sure the generated package is able handle both the old and the new case. Over time it will be impossible to support all version with just one package, but until now we seem to manage this pretty well.
+The cloudstack package is always generated against the latest stable CloudStack release (currently v4.15.x). As long as the API changes were minimum across subsequent CloudStack releases it was possible to have the generator code handle API changes such that they were backward compatible.
+However, over time, with frequent API changes observed across releases of Apache CloudStack(ACS), we will have the SDK releases tagged based on the ACS version.
 
 Please see the package documentation on [go.dev](https://pkg.go.dev/github.com/apache/cloudstack-go/v2/cloudstack).
 
@@ -40,22 +41,33 @@ if err != nil {
 	log.Fatalf("Error creating the new instance %s: %s", name, err)
 }
 
-fmt.Printf("UUID or the newly created machine: %s", r.ID)
+fmt.Printf("UUID or the newly created machine: %s", r.Id)
 ```
 
 ## Features
 
-Next to the API commands CloudStack itself offers, there are a few additional features/function that are helpful. For starters there are two clients, an normal one (created with `NewClient(...)`) and an async client (created with `NewAsyncClient(...)`). The async client has a buildin waiting/polling feature that waits for a configured amount of time (defaults to 300 seconds) on running async jobs. This is very helpfull if you do not want to continue with your program execution until the async job is done.
+Apart from the API commands CloudStack itself offers, there are a few additional features/functions that are helpful. For starters, there are two clients, a normal one (created with `NewClient(...)`) and an async client (created with `NewAsyncClient(...)`). The async client has a builtin waiting/polling feature that waits for a configured amount of time (defaults to 300 seconds) on running async jobs. This is very helpful if you do not want to continue with your program execution until the async job is done.
 
-There is also a function you can call manually (`GetAsyncJobResult(...)`) that does the same, but then as a seperate call after you started the async job.
+There is also a function that can be called manually (`GetAsyncJobResult(...)`) that does the same, but then as a separate call after the async job has started.
 
-Another nice feature is the fact that for every API command you can create the needed parameter struct using a `New...Params` function, like for example `NewListTemplatesParams`. The advantage of using this functions to create a new parameter struct, is that these functions know what the required parameters are of ever API command, and they require you to supply these when creating the new struct. Every additional paramater can be set after creating the struct by using `SetName()` like functions.
+Another nice feature is the fact that for every API command you can create the needed parameter struct using a `New...Params` function, like for example `NewListTemplatesParams`. The advantage of using this functions to create a new parameter struct, is that these functions know what the required parameters are for every API command, and they require you to supply these when creating the new struct. Every additional parameter can be set after creating the struct by using the appropriate setters, e.g., `SetName()`.
 
-Last but not least there are a whole lot of helper function that will try to automatically find an UUID for you for a certain item (disk, template, virtualmachine, network...). This makes it much easier and faster to work with the API commands and in most cases you can just use then if you know the name instead of the UUID.
+Last but not the least, there are a lot of helper functions that will try to automatically find a UUID for you for various resources (disk, template, virtualmachine, network...). This makes it much easier and faster to work with the API commands and in most cases you can just use then if you know the name instead of the UUID.
 
-## ToDo
+## Developer Guide
 
-I fully understand I need to document this all a little more/better and there should also be some tests added.
+The SDK relies on the  `generate.go` script to auto generate the code for all the supported APIs listed in the `listApis.json` file.
+The `listAPIs.json` file holds the output of `listApis` command for a specific release of CloudStack. 
+
+```
+# Build the generate.go script 
+cd generate/
+go build 
+
+# Run the generator to auto-generate the code 
+./generate -api listApis.json
+
+```
 
 ## Getting Help
 
