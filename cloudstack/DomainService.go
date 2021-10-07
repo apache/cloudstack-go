@@ -95,6 +95,10 @@ func (s *DomainService) CreateDomain(p *CreateDomainParams) (*CreateDomainRespon
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreateDomainResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
@@ -792,6 +796,10 @@ func (s *DomainService) NewUpdateDomainParams(id string) *UpdateDomainParams {
 func (s *DomainService) UpdateDomain(p *UpdateDomainParams) (*UpdateDomainResponse, error) {
 	resp, err := s.cs.newRequest("updateDomain", p.toURLValues())
 	if err != nil {
+		return nil, err
+	}
+
+	if resp, err = getRawValue(resp); err != nil {
 		return nil, err
 	}
 

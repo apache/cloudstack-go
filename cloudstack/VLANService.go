@@ -351,6 +351,10 @@ func (s *VLANService) DedicateGuestVlanRange(p *DedicateGuestVlanRangeParams) (*
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r DedicateGuestVlanRangeResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

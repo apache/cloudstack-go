@@ -1319,14 +1319,23 @@ func (s *service) generateNewAPICallFunc(a *API) {
 	pn("")
 	switch n {
 	case
+		"AddImageStore",
 		"CreateAccount",
+		"CreateDomain",
+		"UpdateDomain",
 		"CreateNetwork",
+		"CreateStoragePool",
 		"CreateNetworkOffering",
+		"UpdateNetworkOffering",
+		"UpdateServiceOffering",
 		"CreateSSHKeyPair",
 		"CreateSecurityGroup",
 		"CreateServiceOffering",
 		"CreateUser",
+		"DedicateGuestVlanRange",
+		"EnableUser",
 		"GetVirtualMachineUserData",
+		"LockUser",
 		"RegisterSSHKeyPair",
 		"RegisterUserKeys":
 		pn("	if resp, err = getRawValue(resp); err != nil {")
@@ -1655,7 +1664,7 @@ func mapType(aName string, pName string, pType string) string {
 	case "float", "double":
 		return "float64"
 	case "list":
-		if pName == "downloaddetails" {
+		if pName == "downloaddetails" || pName == "owner" {
 			return "[]map[string]string"
 		}
 		return "[]string"

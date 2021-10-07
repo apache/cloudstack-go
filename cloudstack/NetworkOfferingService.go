@@ -984,6 +984,10 @@ func (s *NetworkOfferingService) UpdateNetworkOffering(p *UpdateNetworkOfferingP
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdateNetworkOfferingResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
