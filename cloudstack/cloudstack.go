@@ -487,6 +487,26 @@ func WithHTTPClient(client *http.Client) ClientOption {
 	}
 }
 
+// ListallSetter is an interface that every type that can set listall must implement
+type ListallSetter interface {
+	SetListall(bool)
+}
+
+// WithListall takes either a project name or ID and sets the `listall` parameter
+func WithListall(listall bool) OptionFunc {
+	return func(cs *CloudStackClient, p interface{}) error {
+		ps, ok := p.(ListallSetter)
+
+		if !ok {
+			return nil
+		}
+
+		ps.SetListall(listall)
+
+		return nil
+	}
+}
+
 // ProjectIDSetter is an interface that every type that can set a project ID must implement
 type ProjectIDSetter interface {
 	SetProjectid(string)
