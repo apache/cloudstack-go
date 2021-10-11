@@ -20,28 +20,11 @@
 package cloudstack
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
-
-func readData() (map[string]interface{} , error) {
-	var resp interface{}
-	apis, err := ioutil.ReadFile("AccountServiceTestData.json")
-	if err != nil {
-		return nil, err
-	}
-
-	if err := json.Unmarshal(apis, &resp); err != nil {
-		return nil, err
-	}
-
-	data := resp.(map[string]interface{})
-	return data, nil
-}
 
 func TestListAccounts(t *testing.T) {
 	apiName := "listAccountsResponse"

@@ -79,7 +79,11 @@ func TestNetworkService_DeleteNetwork(t *testing.T) {
 		if err != nil {
 			t.Errorf("Failed to parse response, due to: %v", err)
 		}
+<<<<<<< HEAD
 
+=======
+		fmt.Println(response)
+>>>>>>> Decouple Test data from tests
 		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
