@@ -28,181 +28,12 @@ import (
 
 func TestNetworkService_CreateNetwork(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"createnetworkresponse": {
-				"network": {
-					"id": "eb9c270d-dd66-443b-9524-ada1eff4442a",
-					"name": "testIsolatedNet",
-					"displaytext": "testIsolatedNet",
-					"broadcastdomaintype": "Vlan",
-					"traffictype": "Guest",
-					"gateway": "10.1.1.1",
-					"netmask": "255.255.255.0",
-					"cidr": "10.1.1.0/24",
-					"zoneid": "04ccc336-d730-42fe-8ff6-5ae36e141e81",
-					"zonename": "SimZone1",
-					"networkofferingid": "69b7f746-208a-47c3-a940-4d3ebb720372",
-					"networkofferingname": "DefaultIsolatedNetworkOfferingWithSourceNatService",
-					"networkofferingdisplaytext": "Offering for Isolated networks with Source Nat service enabled",
-					"networkofferingconservemode": true,
-					"networkofferingavailability": "Required",
-					"issystem": false,
-					"state": "Allocated",
-					"related": "eb9c270d-dd66-443b-9524-ada1eff4442a",
-					"dns1": "10.147.28.6",
-					"type": "Isolated",
-					"acltype": "Account",
-					"account": "admin",
-					"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"domain": "ROOT",
-					"service": [
-						{
-							"name": "Lb",
-							"capability": [
-								{
-									"name": "SupportedLBIsolation",
-									"value": "dedicated",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedLbAlgorithms",
-									"value": "roundrobin,leastconn,source",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedProtocols",
-									"value": "tcp, udp, tcp-proxy",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "LbSchemes",
-									"value": "Public",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedStickinessMethods",
-									"value": "[{\"methodname\":\"LbCookie\",\"paramlist\":[{\"paramname\":\"cookie-name\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"mode\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"nocache\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"indirect\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"postonly\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"domain\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is loadbalancer cookie based stickiness method.\"},{\"methodname\":\"AppCookie\",\"paramlist\":[{\"paramname\":\"cookie-name\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"length\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"holdtime\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"request-learn\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"prefix\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"mode\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is App session based sticky method. Define session stickiness on an existing application cookie. It can be used only for a specific http traffic\"},{\"methodname\":\"SourceBased\",\"paramlist\":[{\"paramname\":\"tablesize\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"expire\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is source based Stickiness method, it can be used for any type of protocol.\"}]",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "AutoScaleCounters",
-									"value": "[{\"methodname\":\"cpu\",\"paramlist\":[]},{\"methodname\":\"memory\",\"paramlist\":[]}]",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "PortForwarding",
-							"capability": [
-								{
-									"name": "SupportedProtocols",
-									"value": "tcp,udp",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "SourceNat",
-							"capability": [
-								{
-									"name": "SupportedSourceNatTypes",
-									"value": "peraccount",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "RedundantRouter",
-									"value": "true",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "Vpn",
-							"capability": [
-								{
-									"name": "VpnTypes",
-									"value": "removeaccessvpn",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedVpnTypes",
-									"value": "pptp,l2tp,ipsec",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "Dns",
-							"capability": [
-								{
-									"name": "AllowDnsSuffixModification",
-									"value": "true",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "Dhcp",
-							"capability": [
-								{
-									"name": "DhcpAccrossMultipleSubnets",
-									"value": "true",
-									"canchooseservicecapability": false
-								}
-							]
-						},
-						{
-							"name": "StaticNat"
-						},
-						{
-							"name": "UserData"
-						},
-						{
-							"name": "Firewall",
-							"capability": [
-								{
-									"name": "TrafficStatistics",
-									"value": "per public ip",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedProtocols",
-									"value": "tcp,udp,icmp",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "MultipleIps",
-									"value": "true",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedTrafficDirection",
-									"value": "ingress, egress",
-									"canchooseservicecapability": false
-								},
-								{
-									"name": "SupportedEgressProtocols",
-									"value": "tcp,udp,icmp, all",
-									"canchooseservicecapability": false
-								}
-							]
-						}
-					],
-					"networkdomain": "cs2sandbox.simulator",
-					"physicalnetworkid": "8e27a637-7525-49ed-81ce-52bd5e5d9ea2",
-					"restartrequired": false,
-					"specifyipranges": false,
-					"canusefordeploy": true,
-					"ispersistent": false,
-					"tags": [],
-					"details": {},
-					"displaynetwork": true,
-					"strechedl2subnet": false,
-					"redundantrouter": false
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createNetwork"
+		response, err := ReadData(apiName, "NetworkService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -218,184 +49,12 @@ func TestNetworkService_CreateNetwork(t *testing.T) {
 
 func TestNetworkService_ListNetworks(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listnetworksresponse": {
-				"count": 1,
-				"network": [
-					{
-						"id": "eb9c270d-dd66-443b-9524-ada1eff4442a",
-						"name": "testIsolatedNet",
-						"displaytext": "testIsolatedNet",
-						"broadcastdomaintype": "Vlan",
-						"traffictype": "Guest",
-						"gateway": "10.1.1.1",
-						"netmask": "255.255.255.0",
-						"cidr": "10.1.1.0/24",
-						"zoneid": "04ccc336-d730-42fe-8ff6-5ae36e141e81",
-						"zonename": "SimZone1",
-						"networkofferingid": "69b7f746-208a-47c3-a940-4d3ebb720372",
-						"networkofferingname": "DefaultIsolatedNetworkOfferingWithSourceNatService",
-						"networkofferingdisplaytext": "Offering for Isolated networks with Source Nat service enabled",
-						"networkofferingconservemode": true,
-						"networkofferingavailability": "Required",
-						"issystem": false,
-						"state": "Allocated",
-						"related": "eb9c270d-dd66-443b-9524-ada1eff4442a",
-						"dns1": "10.147.28.6",
-						"type": "Isolated",
-						"acltype": "Account",
-						"account": "admin",
-						"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						"domain": "ROOT",
-						"service": [
-							{
-								"name": "Lb",
-								"capability": [
-									{
-										"name": "SupportedLBIsolation",
-										"value": "dedicated",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedLbAlgorithms",
-										"value": "roundrobin,leastconn,source",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedProtocols",
-										"value": "tcp, udp, tcp-proxy",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "LbSchemes",
-										"value": "Public",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedStickinessMethods",
-										"value": "[{\"methodname\":\"LbCookie\",\"paramlist\":[{\"paramname\":\"cookie-name\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"mode\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"nocache\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"indirect\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"postonly\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"domain\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is loadbalancer cookie based stickiness method.\"},{\"methodname\":\"AppCookie\",\"paramlist\":[{\"paramname\":\"cookie-name\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"length\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"holdtime\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"request-learn\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"prefix\",\"required\":false,\"isflag\":true,\"description\":\" \"},{\"paramname\":\"mode\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is App session based sticky method. Define session stickiness on an existing application cookie. It can be used only for a specific http traffic\"},{\"methodname\":\"SourceBased\",\"paramlist\":[{\"paramname\":\"tablesize\",\"required\":false,\"isflag\":false,\"description\":\" \"},{\"paramname\":\"expire\",\"required\":false,\"isflag\":false,\"description\":\" \"}],\"description\":\"This is source based Stickiness method, it can be used for any type of protocol.\"}]",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "AutoScaleCounters",
-										"value": "[{\"methodname\":\"cpu\",\"paramlist\":[]},{\"methodname\":\"memory\",\"paramlist\":[]}]",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "PortForwarding",
-								"capability": [
-									{
-										"name": "SupportedProtocols",
-										"value": "tcp,udp",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "SourceNat",
-								"capability": [
-									{
-										"name": "SupportedSourceNatTypes",
-										"value": "peraccount",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "RedundantRouter",
-										"value": "true",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "Vpn",
-								"capability": [
-									{
-										"name": "VpnTypes",
-										"value": "removeaccessvpn",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedVpnTypes",
-										"value": "pptp,l2tp,ipsec",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "Dns",
-								"capability": [
-									{
-										"name": "AllowDnsSuffixModification",
-										"value": "true",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "Dhcp",
-								"capability": [
-									{
-										"name": "DhcpAccrossMultipleSubnets",
-										"value": "true",
-										"canchooseservicecapability": false
-									}
-								]
-							},
-							{
-								"name": "StaticNat"
-							},
-							{
-								"name": "UserData"
-							},
-							{
-								"name": "Firewall",
-								"capability": [
-									{
-										"name": "TrafficStatistics",
-										"value": "per public ip",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedProtocols",
-										"value": "tcp,udp,icmp",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "MultipleIps",
-										"value": "true",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedTrafficDirection",
-										"value": "ingress, egress",
-										"canchooseservicecapability": false
-									},
-									{
-										"name": "SupportedEgressProtocols",
-										"value": "tcp,udp,icmp, all",
-										"canchooseservicecapability": false
-									}
-								]
-							}
-						],
-						"networkdomain": "cs2sandbox.simulator",
-						"physicalnetworkid": "8e27a637-7525-49ed-81ce-52bd5e5d9ea2",
-						"restartrequired": false,
-						"specifyipranges": false,
-						"canusefordeploy": true,
-						"ispersistent": false,
-						"tags": [],
-						"details": {},
-						"displaynetwork": true,
-						"strechedl2subnet": false,
-						"redundantrouter": false
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listNetworks"
+		response, err := ReadData(apiName, "NetworkService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -415,32 +74,13 @@ func TestNetworkService_ListNetworks(t *testing.T) {
 
 func TestNetworkService_DeleteNetwork(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses := map[string]string{
-			"deleteNetwork": `{
-				"deletenetworkresponse": {
-					"jobid": "8fe59207-90f5-4382-af17-e8b413bda517"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.user.network.DeleteNetworkCmd",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"success": true
-					},
-					"jobinstancetype": "Network",
-					"created": "2021-10-04T05:11:01+0000",
-					"completed": "2021-10-04T05:11:02+0000",
-					"jobid": "8fe59207-90f5-4382-af17-e8b413bda517"
-				}
-			}`,
+		apiName := "deleteNetwork"
+		response, err := ParseAsyncResponse(apiName, "NetworkService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[request.FormValue("command")])
+		fmt.Println(response)
+		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -496,42 +136,12 @@ func TestNetworkService_DeleteNetwork(t *testing.T) {
 
 func TestNetworkService_CreatePhysicalNetwork(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses := map[string]string{
-			"createPhysicalNetwork": `{
-				"createphysicalnetworkresponse": {
-					"id": "256b3b3f-4a31-48f3-a939-79b01357fb87",
-					"jobid": "a52138ee-752e-400a-8289-c534eebca026"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "bc1b501c-1d18-11ec-9173-50eb7122da94",
-					"userid": "bc1b6b47-1d18-11ec-9173-50eb7122da94",
-					"cmd": "org.apache.cloudstack.api.command.admin.network.CreatePhysicalNetworkCmd",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"physicalnetwork": {
-							"id": "256b3b3f-4a31-48f3-a939-79b01357fb87",
-							"name": "testPhyNet",
-							"broadcastdomainrange": "ZONE",
-							"zoneid": "d4a81f75-5d92-415e-ab59-e85cc2ce56d9",
-							"zonename": "Sandbox-simulator",
-							"state": "Disabled",
-							"isolationmethods": "VLAN"
-						}
-					},
-					"jobinstancetype": "PhysicalNetwork",
-					"jobinstanceid": "256b3b3f-4a31-48f3-a939-79b01357fb87",
-					"created": "2021-10-04T11:26:38+0530",
-					"completed": "2021-10-04T11:26:38+0530",
-					"jobid": "a52138ee-752e-400a-8289-c534eebca026"
-				}
-			}`,
+		apiName := "createPhysicalNetwork"
+		response, err := ParseAsyncResponse(apiName, "NetworkService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[request.FormValue("command")])
+		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)

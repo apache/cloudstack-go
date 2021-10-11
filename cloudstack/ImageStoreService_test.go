@@ -28,22 +28,12 @@ import (
 
 func TestImageStoreService_AddImageStore(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"addimagestoreresponse": {
-				"imagestore": {
-					"id": "0ac85364-e31a-4840-97a4-a237b4291dfa",
-					"zoneid": "04ccc336-d730-42fe-8ff6-5ae36e141e81",
-					"zonename": "SimZone1",
-					"name": "nfs://192.168.0.20/export/testing/secondary",
-					"url": "nfs://192.168.0.20/export/testing/secondary",
-					"protocol": "nfs",
-					"providername": "NFS",
-					"scope": "ZONE",
-					"readonly": false
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "addImageStore"
+		response, err := ReadData(apiName, "ImageStoreService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintln(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -61,25 +51,12 @@ func TestImageStoreService_AddImageStore(t *testing.T) {
 
 func TestImageStoreService_ListImageStores(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listimagestoresresponse": {
-				"count": 1,
-				"imagestore": [
-					{
-						"id": "06f9e780-fac0-42fa-ac0e-e6eb6a038178",
-						"zoneid": "3fc049b0-87ae-4d77-90c1-cce70da17db6",
-						"zonename": "testAdvZone2",
-						"name": "testAdvSecondaryStorage",
-						"url": "nfs://10.70.4.150/export/testing/secondary2",
-						"protocol": "nfs",
-						"providername": "NFS",
-						"scope": "ZONE",
-						"readonly": false
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listImageStores"
+		response, err := ReadData(apiName, "ImageStoreService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintln(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -97,12 +74,12 @@ func TestImageStoreService_ListImageStores(t *testing.T) {
 
 func TestImageStoreService_DeleteImageStore(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"deleteimagestoreresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteImageStore"
+		response, err := ReadData(apiName, "ImageStoreService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintln(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)

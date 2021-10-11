@@ -20,44 +20,27 @@
 package cloudstack
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
-func readData() (map[string]interface{} , error) {
-	var resp interface{}
-	apis, err := ioutil.ReadFile("AccountServiceTestData.json")
-	if err != nil {
-		return nil, err
-	}
-
-	if err := json.Unmarshal(apis, &resp); err != nil {
-		return nil, err
-	}
-
-	data := resp.(map[string]interface{})
-	return data, nil
-}
-
 func TestListAccounts(t *testing.T) {
+	apiName := "listAccountsResponse"
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		data, err := readData()
+		resp, err := ReadData(apiName, "AccountService")
 		if err != nil {
+			t.Errorf("Failed to read response data, due to: %v", err)
 			return
 		}
-		resp := data["listAccountsResponse"]
-		fmt.Fprintln(w, resp)
+		fmt.Fprintln(w, resp[apiName])
 	}))
 	defer server.Close()
 
 	client := newClient(server.URL, "APIKEY", "SECRETKEY", true, true)
 	p := client.Account.NewListAccountsParams()
 	acc, _ := client.Account.ListAccounts(p)
-
 	accounts := acc.Accounts
 	if len(accounts) != 1 {
 		t.Errorf("length: actual %d, expected 1", len(accounts))
@@ -81,82 +64,14 @@ func TestListAccounts(t *testing.T) {
 }
 
 func TestCreateAccounts(t *testing.T) {
+	apiName := "createAccountsResponse"
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp := `
-{
-    "createaccountresponse": {
-        "account": {
-            "accountdetails": {
-                "key0": "value0",
-                "key1": "value1"
-            },
-            "accounttype": 2,
-            "cpuavailable": "40",
-            "cpulimit": "40",
-            "cputotal": 0,
-            "domain": "ROOT",
-            "domainid": "62f5fe2e-5f5a-11e5-bc86-0242ac11180a",
-            "groups": [],
-            "id": "c9cb9df8-dcd5-44c5-a40d-2e7d266669a6",
-            "ipavailable": "20",
-            "iplimit": "20",
-            "iptotal": 0,
-            "isdefault": false,
-            "memoryavailable": "40960",
-            "memorylimit": "40960",
-            "memorytotal": 0,
-            "name": "user01",
-            "networkavailable": "20",
-            "networklimit": "20",
-            "networktotal": 0,
-            "primarystorageavailable": "200",
-            "primarystoragelimit": "200",
-            "primarystoragetotal": 0,
-            "projectavailable": "Unlimited",
-            "projectlimit": "Unlimited",
-            "projecttotal": 0,
-            "secondarystorageavailable": "400",
-            "secondarystoragelimit": "400",
-            "secondarystoragetotal": 0,
-            "snapshotavailable": "20",
-            "snapshotlimit": "20",
-            "snapshottotal": 0,
-            "state": "enabled",
-            "templateavailable": "20",
-            "templatelimit": "20",
-            "templatetotal": 0,
-            "user": [
-                {
-                    "account": "user01",
-                    "accountid": "c9cb9df8-dcd5-44c5-a40d-2e7d266669a6",
-                    "accounttype": 2,
-                    "created": "2016-07-26T02:17:17+0000",
-                    "domain": "ROOT",
-                    "domainid": "62f5fe2e-5f5a-11e5-bc86-0242ac11180a",
-                    "email": "user01@example.com",
-                    "firstname": "user01",
-                    "id": "1d69ac45-a8f7-469c-ab24-d2b0382fa8be",
-                    "iscallerchilddomain": false,
-                    "isdefault": false,
-                    "lastname": "user01",
-                    "state": "enabled",
-                    "username": "user01"
-                }
-            ],
-            "vmavailable": "20",
-            "vmlimit": "20",
-            "vmtotal": 0,
-            "volumeavailable": "20",
-            "volumelimit": "20",
-            "volumetotal": 0,
-            "vpcavailable": "20",
-            "vpclimit": "20",
-            "vpctotal": 0
-        }
-    }
-}
-		`
-		fmt.Fprintln(w, resp)
+		resp, err := ReadData(apiName, "AccountService")
+		if err != nil {
+			t.Errorf("Failed to read response data, due to: %v", err)
+			return
+		}
+		fmt.Fprintln(w, resp[apiName])
 	}))
 	defer server.Close()
 

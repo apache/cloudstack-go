@@ -28,23 +28,12 @@ import (
 
 func TestHypervisorService_ListSpecificHypervisorCapabilities(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listhypervisorcapabilitiesresponse": {
-				"count": 1,
-				"hypervisorCapabilities": [
-					{
-						"id": "1",
-						"hypervisorversion": "default",
-						"hypervisor": "XenServer",
-						"maxguestslimit": 50,
-						"securitygroupenabled": true,
-						"maxdatavolumeslimit": 6,
-						"storagemotionenabled": false
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listHypervisorCapabilities"
+		response, err := ReadData(apiName, "HypervisorService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)

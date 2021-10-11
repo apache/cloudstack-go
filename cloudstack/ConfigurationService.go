@@ -438,6 +438,10 @@ func (s *ConfigurationService) UpdateConfiguration(p *UpdateConfigurationParams)
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdateConfigurationResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

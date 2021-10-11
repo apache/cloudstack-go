@@ -28,32 +28,12 @@ import (
 
 func TestNetworkOfferingService_CreateNetworkOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"createnetworkofferingresponse": {
-				"networkoffering": {
-					"id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
-					"name": "testNetOffering",
-					"displaytext": "testNetOffering",
-					"traffictype": "Guest",
-					"isdefault": false,
-					"specifyvlan": true,
-					"conservemode": true,
-					"specifyipranges": false,
-					"availability": "Optional",
-					"networkrate": 200,
-					"state": "Disabled",
-					"guestiptype": "L2",
-					"serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
-					"service": [],
-					"forvpc": false,
-					"ispersistent": false,
-					"egressdefaultpolicy": true,
-					"supportsstrechedl2subnet": false,
-					"supportspublicaccess": false
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createNetworkOffering"
+		response, err := ReadData(apiName, "NetworkOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -69,32 +49,12 @@ func TestNetworkOfferingService_CreateNetworkOffering(t *testing.T) {
 
 func TestNetworkOfferingService_UpdateNetworkOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"updatenetworkofferingresponse": {
-				"networkoffering": {
-					"id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
-					"name": "testNetOffering",
-					"displaytext": "testNetOffering",
-					"traffictype": "Guest",
-					"isdefault": false,
-					"specifyvlan": true,
-					"conservemode": true,
-					"specifyipranges": false,
-					"availability": "Optional",
-					"networkrate": 200,
-					"state": "Enabled",
-					"guestiptype": "L2",
-					"serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
-					"service": [],
-					"forvpc": false,
-					"ispersistent": false,
-					"egressdefaultpolicy": true,
-					"supportsstrechedl2subnet": false,
-					"supportspublicaccess": false
-				}
-			}
-		}`
-		fmt.Fprintln(writer, response)
+		apiName := "updateNetworkOffering"
+		response, err := ReadData(apiName, "NetworkOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -112,35 +72,12 @@ func TestNetworkOfferingService_UpdateNetworkOffering(t *testing.T) {
 
 func TestNetworkOfferingService_ListNetworkOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listnetworkofferingsresponse": {
-				"count": 1,
-				"networkoffering": [
-					{
-						"id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
-						"name": "testNetOffering",
-						"displaytext": "testNetOffering",
-						"traffictype": "Guest",
-						"isdefault": false,
-						"specifyvlan": true,
-						"conservemode": true,
-						"specifyipranges": false,
-						"availability": "Optional",
-						"networkrate": 200,
-						"state": "Enabled",
-						"guestiptype": "L2",
-						"serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
-						"service": [],
-						"forvpc": false,
-						"ispersistent": false,
-						"egressdefaultpolicy": true,
-						"supportsstrechedl2subnet": false,
-						"supportspublicaccess": false
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listNetworkOfferings"
+		response, err := ReadData(apiName, "NetworkOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -158,12 +95,12 @@ func TestNetworkOfferingService_ListNetworkOffering(t *testing.T) {
 
 func TestNetworkOfferingService_DeleteNetworkOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"deletenetworkofferingresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteNetworkOffering"
+		response, err := ReadData(apiName, "NetworkOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)

@@ -28,19 +28,12 @@ import (
 
 func TestSSHService_CreateSSHKeyPair(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"createsshkeypairresponse": {
-				"keypair": {
-					"privatekey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAlMDlCrzlmEBwmPmQBhvD4PeRdEUV2tyoEuLLwkg7FkZFrjdd\nZaC8+N82Jm/lr27sqq5xVoo6n54k3hG9HVxNZjQBY5IiRNeQIF30Ye5c6TzboCCH\nAJVZYf4Dj5ucJvxg+V1+rZMNNJs6y2tMRGfmQ9zdrHZwOutKBeWTlGLtXyMabc5o\nVVe4hjngxh7s+CbEAA8oE9KFk1ZyhJ7SDj6G9vrMoBYNgqNGG6DHF/NM0A0yaEnj\nZU5MECXnw9qT7W8ggy5UM9AYtfzAyWBrS3jDwFgOjEZ+TW7vvC1Q3lnGkzpTHlye\nRppPm/7Xa8xapIdDV2UdEXnChHj9+Jwpa5nBJQIDAQABAoIBABaReW56oD7MMAkV\ne+NhXQOJq/i+7oTpC1rqK83LFaPYf4PiBHqBu4nqm5WTTn6iTqfKlYlyqVhELwW+\nHToSIfAKnddUeXyGU+iFOKmO92uvfwa5SKIvBoOWfUXRbwx/J9tNcwW0lMFRd8ca\n/VQ3izjqjns28OoPfoiMfyp5I9hWCNoC0KmIqHClqSVU5rpYpEcm70jA1PhLMItf\n8ECEPRQBBoFAEQSnyqohFBOKxna0Urs8qUOJ38FfK883h+ltRSzna7D9QetC+lny\n9OTuAMYe7ytnzGPJITLXjIN3Nj40n+dNmcRl7y0u00FdVpN92HlosCJvQqeJYY5V\nhcfi/aECgYEAxSKvGknRtQjuT+emmG4TmC110ZCcQY1tgIMwkPL++rR9Qp8M5t5p\nocxpK5NYhGgai4Kep5F4P2nePHFemwgP1jHawxsc3G/IA+0c27Y+9uAZSM2mDCcf\nXIvBxkOGcI1UcJYUTwAYdfgtJmVkS3Mj519r1lk2+pJAN14NkC87wekCgYEAwSvS\no7ILlqZo//DThhHakFFLFRKD82ghNMc0b8yheSY+V+tkzW+nugqvm5rhH3GH+M8U\nMLm5sdWauT2/1l7kaUla923lwMDxhd4Buv6v6IZYVNyzJLA5DAT3T7i5fmixE1MG\ncpmZhbpsuikFRUP3Z2td1D8cuZxHN6OrWtCso90CgYEAtJIGji/b1NVvZOWtZaY+\ncIADkYfCeREQokyIqdzKzd2Rdvq1GKvVWg0gsHdw9ydcWTm2FYtb98oDdJ3rqFoE\nF5Dm7xvgndIOBfqlGmOe3Qd8YYFtfWhAg8bIIdEsTeBG3jG6PHq77SL8SFVLPwki\ndAalgluJzo80HwMZrV52gDECgYA5JXm/K6D6BGjzro8lDosWPrZzmXKnw5pvPq9o\nk6UBbirrX5wGmo2IIDkrU3peDvwmwzw53fftgD+xpW7nQFNaQnVC1aQujeXlsHPa\nmhX4OCZRlKj6pZd60s1HLGLT3qzkBp/Vr1MXmLspp5EDmMPMOJsdez5IOs9mymib\nCTjJkQKBgFv0d3RnnxOU9EuTA6DmqxrYnWCQVEl1jwTJwfX6+1hfiBzLMCKWxEZ4\nla4rcmvMkL+uWwfLp/R29ciZC+G08Tc7tPVmZunqT3XBgSAt0y3Q3WXkkZG9RHlS\nCK2YbtViHML+G5dackvASf1p7+w2b3WS8fHFH2GTSTiM/OqReBVF\n-----END RSA PRIVATE KEY-----\n",
-					"name": "testSSHKey",
-					"account": "admin",
-					"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"domain": "ROOT",
-					"fingerprint": "3b:f7:0b:34:40:0d:a5:3c:2a:75:f8:82:1d:88:99:36"
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createSSHKeyPair"
+		response, err := ReadData(apiName, "SSHService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -57,21 +50,12 @@ func TestSSHService_CreateSSHKeyPair(t *testing.T) {
 
 func TestSSHService_ListSSHKeyPairs(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"listsshkeypairsresponse": {
-				  "count": 1,
-				  "sshkeypair": [
-					{
-					  "account": "admin",
-					  "domain": "ROOT",
-					  "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					  "fingerprint": "3b:f7:0b:34:40:0d:a5:3c:2a:75:f8:82:1d:88:99:36",
-					  "name": "testSSHKey"
-					}
-				  ]
-				}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listSSHKeyPairs"
+		response, err := ReadData(apiName, "SSHService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -89,119 +73,12 @@ func TestSSHService_ListSSHKeyPairs(t *testing.T) {
 
 func TestSSHService_ResetSSHKeyForVirtualMachine(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		responses := map[string]string{
-			"resetSSHKeyForVirtualMachine": `{
-				"resetSSHKeyforvirtualmachineresponse": {
-					"jobid": "da766971-3902-4675-9cf2-8bcb2398aba3"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.admin.vm.ResetVMSSHKeyCmdByAdmin",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"virtualmachine": {
-							"id": "8aa29529-b238-45f3-8992-5befadcd8bb0",
-							"name": "Admin-VPC-T3-VM",
-							"displayname": "abc12",
-							"account": "admin",
-							"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-							"username": "admin",
-							"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-							"domain": "ROOT",
-							"created": "2021-07-05T09:16:22+0000",
-							"state": "Stopped",
-							"haenable": false,
-							"zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
-							"zonename": "shouldwork",
-							"templateid": "50459b99-5fe0-11ea-9a56-1e006800018c",
-							"templatename": "CentOS 5.6 (64-bit)",
-							"templatedisplaytext": "CentOS 5.6 (64-bit) no GUI",
-							"passwordenabled": false,
-							"serviceofferingid": "79802d1a-186b-4e34-a550-220987cb03c2",
-							"serviceofferingname": "const1",
-							"diskofferingid": "3d321179-f9c6-4a77-8f47-6fae3a8126d1",
-							"diskofferingname": "Medium",
-							"backupofferingid": "7c42d74e-c029-4431-9025-6caa8b903472",
-							"backupofferingname": "BackupGoldDummy",
-							"cpunumber": 1,
-							"cpuspeed": 1000,
-							"memory": 256,
-							"cpuused": "10%",
-							"networkkbsread": 209485824,
-							"networkkbswrite": 104742912,
-							"diskkbsread": 0,
-							"diskkbswrite": 0,
-							"memorykbs": 0,
-							"memoryintfreekbs": 0,
-							"memorytargetkbs": 0,
-							"diskioread": 0,
-							"diskiowrite": 0,
-							"guestosid": "e53f7606-5fdf-11ea-9a56-1e006800018c",
-							"rootdeviceid": 1,
-							"rootdevicetype": "DATADISK",
-							"securitygroup": [],
-							"nic": [
-								{
-									"id": "511941ff-229d-4a3b-8b09-f83b0608ed6b",
-									"networkid": "30358053-0f9d-4112-9948-976477896db6",
-									"networkname": "test-network-2",
-									"netmask": "255.255.255.0",
-									"gateway": "10.1.2.1",
-									"ipaddress": "10.1.2.71",
-									"traffictype": "Guest",
-									"type": "Isolated",
-									"isdefault": true,
-									"macaddress": "02:00:35:ff:00:0c",
-									"secondaryip": [],
-									"extradhcpoption": []
-								},
-								{
-									"id": "186e56ee-8de8-4869-ac00-dc91dc51d6f2",
-									"networkid": "6463e120-c36a-4569-aaa7-729922a55825",
-									"networkname": "sw1",
-									"traffictype": "Guest",
-									"type": "L2",
-									"isdefault": false,
-									"macaddress": "02:00:3d:a2:00:02",
-									"secondaryip": [],
-									"extradhcpoption": []
-								}
-							],
-							"hypervisor": "Simulator",
-							"instancename": "i-2-613-QA",
-							"details": {
-								"cpuNumber": "1",
-								"memory": "256",
-								"Message.ReservedCapacityFreed.Flag": "true",
-								"SSH.PublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUwOUKvOWYQHCY+ZAGG8Pg95F0RRXa3KgS4svCSDsWRkWuN11loLz43zYmb+WvbuyqrnFWijqfniTeEb0dXE1mNAFjkiJE15AgXfRh7lzpPNugIIcAlVlh/gOPm5wm/GD5XX6tkw00mzrLa0xEZ+ZD3N2sdnA660oF5ZOUYu1fIxptzmhVV7iGOeDGHuz4JsQADygT0oWTVnKEntIOPob2+sygFg2Co0YboMcX80zQDTJoSeNlTkwQJefD2pPtbyCDLlQz0Bi1/MDJYGtLeMPAWA6MRn5Nbu+8LVDeWcaTOlMeXJ5Gmk+b/tdrzFqkh0NXZR0RecKEeP34nClrmcEl \n",
-								"Encrypted.Password": "YcyvikAL5LHq4gXwGVE3yW0j7iuuTWcxnMpYQDqHn+6R1agzIibv3eoF1onUFgHYQ0XtJUzMR4QfZDzlHnqYDTB+rKjjc9YcZzWhVSoVKQ45bUqAKFBXJTfDLQ3ZmvULxJ2VXf/HuuOh5Th5S62bP68QrrVCMPUArUYRRFPw0EkQVdvjwF1raNXpKWDAtcwITaroxW0pL9S8ome5R7JHKPxyK9G8/lqC4ywodvPaG+vGV0eHTiQeUab/dQ8Pxze6Ny88uwv8oH2vu+zMbs91uDDL9lMl7WV5Rq6RucKRAjOBLfPj+f+8jq3xnCG8JzUa63G2lAvP9qIzk3eYzoeYkw=="
-							},
-							"keypair": "testSSHKey",
-							"affinitygroup": [],
-							"displayvm": true,
-							"isdynamicallyscalable": false,
-							"ostypeid": "e53f7606-5fdf-11ea-9a56-1e006800018c",
-							"osdisplayname": "CentOS 5.6 (64-bit)",
-							"tags": [],
-							"jobid": "da766971-3902-4675-9cf2-8bcb2398aba3",
-							"jobstatus": 0
-						}
-					},
-					"jobinstancetype": "VirtualMachine",
-					"jobinstanceid": "8aa29529-b238-45f3-8992-5befadcd8bb0",
-					"created": "2021-10-04T07:39:55+0000",
-					"completed": "2021-10-04T07:39:55+0000",
-					"jobid": "da766971-3902-4675-9cf2-8bcb2398aba3"
-				}
-			}`,
+		apiName := "resetSSHKeyForVirtualMachine"
+		response, err := ParseAsyncResponse(apiName, "SSHService", *r)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintln(writer, responses[r.FormValue("command")])
+		fmt.Fprintln(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -218,12 +95,12 @@ func TestSSHService_ResetSSHKeyForVirtualMachine(t *testing.T) {
 
 func TestSSHService_DeleteSSHKeyPair(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"deletesshkeypairresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteSSHKeyPair"
+		response, err := ReadData(apiName, "SSHService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)

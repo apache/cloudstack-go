@@ -1,0 +1,15 @@
+{
+  "dedicateGuestVlanRange": {
+    "dedicateguestvlanrangeresponse": {
+      "dedicatedguestvlanrange": {
+        "id": "b1afc5fe-b17c-4db3-8411-c323e4997ead",
+        "account": "admin",
+        "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
+        "domain": "ROOT",
+        "guestvlanrange": "100-110",
+        "physicalnetworkid": 200,
+        "zoneid": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "createDiskOffering": {
+    "creatediskofferingresponse": {
+      "diskoffering": {
+        "id": "7662b6ae-f00b-4268-973f-f3f87eaf82c5",
+        "name": "test",
+        "displaytext": "test",
+        "disksize": 0,
+        "created": "2021-10-02T15:19:25+0000",
+        "iscustomized": true,
+        "storagetype": "shared",
+        "provisioningtype": "thin",
+        "cacheMode": "none",
+        "displayoffering": true
+      }
+    }
+  },
+  "listDiskOfferings": {
+    "listdiskofferingsresponse": {
+      "count": 1,
+      "diskoffering": [
+        {
+          "id": "7662b6ae-f00b-4268-973f-f3f87eaf82c5",
+          "name": "test",
+          "displaytext": "test",
+          "disksize": 0,
+          "created": "2021-10-02T15:19:25+0000",
+          "iscustomized": true,
+          "storagetype": "shared",
+          "provisioningtype": "thin",
+          "cacheMode": "none",
+          "displayoffering": true
+        }
+      ]
+    }
+  },
+  "deleteDiskOffering": {
+    "deletediskofferingresponse": {
+      "success": true
+    }
+  }
+}

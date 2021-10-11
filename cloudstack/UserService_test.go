@@ -28,31 +28,12 @@ import (
 
 func TestUserService_CreateUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"createuserresponse": {
-				"user": {
-					"id": "cd2b5afa-db4d-4532-88ec-1356a273e534",
-					"username": "dummyUser",
-					"firstname": "firstname",
-					"lastname": "lastname",
-					"email": "user@xyz.com",
-					"created": "2021-10-04T08:57:35+0000",
-					"state": "enabled",
-					"account": "admin",
-					"accounttype": 1,
-					"usersource": "native",
-					"roleid": "16919363-5fe0-11ea-9a56-1e006800018c",
-					"roletype": "Admin",
-					"rolename": "Root Admin",
-					"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"domain": "ROOT",
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"iscallerchilddomain": false,
-					"isdefault": false
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createUser"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -70,31 +51,12 @@ func TestUserService_CreateUser(t *testing.T) {
 
 func TestUserService_EnableUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"enableuserresponse": {
-				  "user": {
-					"account": "admin",
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"accounttype": 1,
-					"created": "2021-10-04T08:57:35+0000",
-					"domain": "ROOT",
-					"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"email": "user@xyz.com",
-					"firstname": "firstname",
-					"id": "cd2b5afa-db4d-4532-88ec-1356a273e534",
-					"iscallerchilddomain": false,
-					"isdefault": false,
-					"lastname": "lastname",
-					"roleid": "16919363-5fe0-11ea-9a56-1e006800018c",
-					"rolename": "Root Admin",
-					"roletype": "Admin",
-					"state": "enabled",
-					"username": "dummyUser",
-					"usersource": "native"
-				  }
-				}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "enableUser"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -112,50 +74,12 @@ func TestUserService_EnableUser(t *testing.T) {
 
 func TestUserService_DisableUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses := map[string]string{
-			"disableUser": `{
-				"disableResponse": {
-					"jobid": "e4eb553f-6188-441c-beb8-09056b0a1e1f"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					  "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					  "cmd": "org.apache.cloudstack.api.command.admin.user.DisableUserCmd",
-					  "completed": "2021-10-04T09:06:53+0000",
-					  "created": "2021-10-04T09:06:52+0000",
-					  "jobid": "e4eb553f-6188-441c-beb8-09056b0a1e1f",
-					  "jobprocstatus": 0,
-					  "jobresult": {
-						"user": {
-						  "account": "admin",
-						  "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-						  "accounttype": 1,
-						  "created": "2021-10-04T08:57:35+0000",
-						  "domain": "ROOT",
-						  "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						  "email": "user@xyz.com",
-						  "firstname": "firstname",
-						  "id": "cd2b5afa-db4d-4532-88ec-1356a273e534",
-						  "iscallerchilddomain": false,
-						  "isdefault": false,
-						  "lastname": "lastname",
-						  "roleid": "16919363-5fe0-11ea-9a56-1e006800018c",
-						  "rolename": "Root Admin",
-						  "roletype": "Admin",
-						  "state": "disabled",
-						  "username": "dummyUser",
-						  "usersource": "native"
-						}
-					  },
-					  "jobresultcode": 0,
-					  "jobresulttype": "object",
-					  "jobstatus": 1,
-					  "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
-					}
-				}`,
+		apiName := "disableUser"
+		response, err := ParseAsyncResponse(apiName, "UserService", *request)
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[request.FormValue("command")])
+		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -173,35 +97,12 @@ func TestUserService_DisableUser(t *testing.T) {
 
 func TestUserService_ListUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listusersresponse": {
-				"count": 1,
-				"user": [
-					{
-						"id": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-						"username": "admin",
-						"firstname": "admin",
-						"lastname": "cloud",
-						"created": "2020-03-06T20:24:53+0000",
-						"state": "enabled",
-						"account": "admin",
-						"accounttype": 1,
-						"usersource": "native",
-						"roleid": "16919363-5fe0-11ea-9a56-1e006800018c",
-						"roletype": "Admin",
-						"rolename": "Root Admin",
-						"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						"domain": "ROOT",
-						"timezone": "PST",
-						"apikey": "DN7uIwbqAMASSB1GUGHWvXqUlDDBf7H6A3XI-kNeXahW5LMUoqgfDEDWMv8zWKaj51fDozg8fjqc7tGCSozScA",
-						"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-						"iscallerchilddomain": false,
-						"isdefault": true
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listUsers"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -220,32 +121,12 @@ func TestUserService_ListUser(t *testing.T) {
 
 func TestUserService_LockUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"lockuserresponse": {
-			  "user": {
-				"account": "kittycat",
-				"accountid": "2841efe4-aba4-4abf-bfdc-c6d0825c29a6",
-				"accounttype": 0,
-				"created": "2020-06-26T18:21:57+0000",
-				"domain": "saml",
-				"domainid": "1d4a08f6-5c37-4385-9d95-fa4e654ecf4e",
-				"email": "cat@cat.com",
-				"firstname": "Ashley",
-				"id": "3b7325b3-849c-4314-ad19-dd3c483b6d1a",
-				"iscallerchilddomain": false,
-				"isdefault": false,
-				"lastname": "Cat",
-				"roleid": "1691ce2c-5fe0-11ea-9a56-1e006800018c",
-				"rolename": "User",
-				"roletype": "User",
-				"state": "locked",
-				"timezone": "IST",
-				"username": "ashley",
-				"usersource": "saml2disabled"
-			  }
-			}
-		}`
-		fmt.Fprintln(writer, response)
+		apiName := "lockUser"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -263,12 +144,12 @@ func TestUserService_LockUser(t *testing.T) {
 
 func TestUserService_DeleteUser(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"deleteuserresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteUser"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
