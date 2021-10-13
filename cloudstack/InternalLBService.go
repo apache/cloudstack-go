@@ -888,6 +888,7 @@ type InternalLoadBalancerVM struct {
 	Guestnetmask        string                                     `json:"guestnetmask"`
 	Guestnetworkid      string                                     `json:"guestnetworkid"`
 	Guestnetworkname    string                                     `json:"guestnetworkname"`
+	Hasannotations      bool                                       `json:"hasannotations"`
 	Healthcheckresults  []InternalLoadBalancerVMHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                       `json:"healthchecksfailed"`
 	Hostid              string                                     `json:"hostid"`
@@ -1025,6 +1026,7 @@ type StartInternalLoadBalancerVMResponse struct {
 	Guestnetmask        string                                                  `json:"guestnetmask"`
 	Guestnetworkid      string                                                  `json:"guestnetworkid"`
 	Guestnetworkname    string                                                  `json:"guestnetworkname"`
+	Hasannotations      bool                                                    `json:"hasannotations"`
 	Healthcheckresults  []StartInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                                    `json:"healthchecksfailed"`
 	Hostid              string                                                  `json:"hostid"`
@@ -1181,6 +1183,7 @@ type StopInternalLoadBalancerVMResponse struct {
 	Guestnetmask        string                                                 `json:"guestnetmask"`
 	Guestnetworkid      string                                                 `json:"guestnetworkid"`
 	Guestnetworkname    string                                                 `json:"guestnetworkname"`
+	Hasannotations      bool                                                   `json:"hasannotations"`
 	Healthcheckresults  []StopInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                                   `json:"healthchecksfailed"`
 	Hostid              string                                                 `json:"hostid"`

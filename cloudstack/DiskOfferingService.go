@@ -85,6 +85,12 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("customizediops", vv)
 	}
+	if v, found := p.p["details"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("details[%d].%s", i, k), m[k])
+		}
+	}
 	if v, found := p.p["disksize"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("disksize", vv)
@@ -290,6 +296,21 @@ func (p *CreateDiskOfferingParams) GetCustomizediops() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["customizediops"].(bool)
+	return value, ok
+}
+
+func (p *CreateDiskOfferingParams) SetDetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
+}
+
+func (p *CreateDiskOfferingParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
 	return value, ok
 }
 
@@ -623,6 +644,7 @@ type CreateDiskOfferingResponse struct {
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`
 	Domainid                    string `json:"domainid"`
+	Hasannotations              bool   `json:"hasannotations"`
 	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
 	Id                          string `json:"id"`
 	Iscustomized                bool   `json:"iscustomized"`
@@ -1037,6 +1059,7 @@ type DiskOffering struct {
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`
 	Domainid                    string `json:"domainid"`
+	Hasannotations              bool   `json:"hasannotations"`
 	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
 	Id                          string `json:"id"`
 	Iscustomized                bool   `json:"iscustomized"`
@@ -1502,6 +1525,7 @@ type UpdateDiskOfferingResponse struct {
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`
 	Domainid                    string `json:"domainid"`
+	Hasannotations              bool   `json:"hasannotations"`
 	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
 	Id                          string `json:"id"`
 	Iscustomized                bool   `json:"iscustomized"`

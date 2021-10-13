@@ -360,6 +360,8 @@ type CreateZoneResponse struct {
 	Domainid              string                       `json:"domainid"`
 	Domainname            string                       `json:"domainname"`
 	Guestcidraddress      string                       `json:"guestcidraddress"`
+	Hasannotations        bool                         `json:"hasannotations"`
+	Icon                  string                       `json:"icon"`
 	Id                    string                       `json:"id"`
 	Internaldns1          string                       `json:"internaldns1"`
 	Internaldns2          string                       `json:"internaldns2"`
@@ -1152,6 +1154,10 @@ func (p *ListZonesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showcapacities", vv)
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -1297,6 +1303,21 @@ func (p *ListZonesParams) GetShowcapacities() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListZonesParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListZonesParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1435,6 +1456,8 @@ type Zone struct {
 	Domainid              string            `json:"domainid"`
 	Domainname            string            `json:"domainname"`
 	Guestcidraddress      string            `json:"guestcidraddress"`
+	Hasannotations        bool              `json:"hasannotations"`
+	Icon                  string            `json:"icon"`
 	Id                    string            `json:"id"`
 	Internaldns1          string            `json:"internaldns1"`
 	Internaldns2          string            `json:"internaldns2"`
@@ -1904,6 +1927,8 @@ type UpdateZoneResponse struct {
 	Domainid              string                       `json:"domainid"`
 	Domainname            string                       `json:"domainname"`
 	Guestcidraddress      string                       `json:"guestcidraddress"`
+	Hasannotations        bool                         `json:"hasannotations"`
+	Icon                  string                       `json:"icon"`
 	Id                    string                       `json:"id"`
 	Internaldns1          string                       `json:"internaldns1"`
 	Internaldns2          string                       `json:"internaldns2"`

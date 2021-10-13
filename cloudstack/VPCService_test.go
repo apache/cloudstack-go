@@ -17,31 +17,32 @@
 // under the License.
 //
 
-package main
+package cloudstack
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
-
-	"github.com/apache/cloudstack-go/v2/cloudstack"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
-func AddHost() {
-	cs := cloudstack.NewAsyncClient(ApiUrl, ApiKey, SecretKey, false)
-	p := cs.Host.NewAddHostParams("Simulator", PodId,
-		"http://sim/c0/h0", ZoneId)
-	p.SetUsername("root")
-	p.SetPassword("password")
-	resp, err := cs.Host.AddHost(p)
+func TestVPCService_RestartVPC(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		apiName := "restartVPC"
+		response, err := ParseAsyncResponse(apiName, "VPCService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
+		}
+		fmt.Fprintln(writer, response)
+	}))
+	defer server.Close()
+	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
+	params := client.VPC.NewRestartVPCParams("f9ec95f3-70be-448a-8ba2-cb6388dce55a")
+	resp, err := client.VPC.RestartVPC(params)
 	if err != nil {
-		fmt.Errorf("Failed to add host due to: %v", err)
+		t.Errorf("Failed to restart VPC network due to: %v", err)
 	}
-
-	b, err := json.MarshalIndent(resp, "", "    ")
-	if err != nil {
-		fmt.Errorf("%v", err)
-		return
+	if resp == nil {
+		t.Errorf("Failed to restart VPC network")
 	}
-	log.Printf("Host response : %v", string(b))
 }

@@ -115,3 +115,28 @@ func TestProjectService_UpdateProject(t *testing.T) {
 		t.Errorf("Failed to update project name")
 	}
 }
+
+func TestProjectService_listProjectRolePermissions(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
+		apiName := "listProjectRolePermissions"
+		response, err := ReadData(apiName, "ProjectService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintln(writer, response[apiName])
+	}))
+	defer server.Close()
+	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
+	params := client.Project.NewListProjectRolePermissionsParams("69646881-8d7f-4800-987d-106698a42608")
+	params.SetProjectroleid("fa089002-d055-46b5-aa0a-18f2eae2b4fc")
+	resp, err := client.Project.ListProjectRolePermissions(params)
+	if err != nil {
+		t.Errorf("Failed to list project role permissions due to %v", err)
+		return
+	}
+
+	fmt.Println(resp)
+	if resp == nil || resp.Count != 1 {
+		t.Errorf("Failed to list VM")
+	}
+}

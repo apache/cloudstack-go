@@ -447,6 +447,7 @@ type AddClusterResponse struct {
 	Capacity              []AddClusterResponseCapacity `json:"capacity"`
 	Clustertype           string                       `json:"clustertype"`
 	Cpuovercommitratio    string                       `json:"cpuovercommitratio"`
+	Hasannotations        bool                         `json:"hasannotations"`
 	Hypervisortype        string                       `json:"hypervisortype"`
 	Id                    string                       `json:"id"`
 	JobID                 string                       `json:"jobid"`
@@ -1366,6 +1367,7 @@ type Cluster struct {
 	Capacity              []ClusterCapacity `json:"capacity"`
 	Clustertype           string            `json:"clustertype"`
 	Cpuovercommitratio    string            `json:"cpuovercommitratio"`
+	Hasannotations        bool              `json:"hasannotations"`
 	Hypervisortype        string            `json:"hypervisortype"`
 	Id                    string            `json:"id"`
 	JobID                 string            `json:"jobid"`
@@ -1751,6 +1753,7 @@ type ClustersMetric struct {
 	Cputhreshold                    bool                     `json:"cputhreshold"`
 	Cputotal                        string                   `json:"cputotal"`
 	Cpuused                         string                   `json:"cpuused"`
+	Hasannotations                  bool                     `json:"hasannotations"`
 	Hosts                           string                   `json:"hosts"`
 	Hypervisortype                  string                   `json:"hypervisortype"`
 	Id                              string                   `json:"id"`
@@ -2199,6 +2202,7 @@ type UpdateClusterResponse struct {
 	Capacity              []UpdateClusterResponseCapacity `json:"capacity"`
 	Clustertype           string                          `json:"clustertype"`
 	Cpuovercommitratio    string                          `json:"cpuovercommitratio"`
+	Hasannotations        bool                            `json:"hasannotations"`
 	Hypervisortype        string                          `json:"hypervisortype"`
 	Id                    string                          `json:"id"`
 	JobID                 string                          `json:"jobid"`

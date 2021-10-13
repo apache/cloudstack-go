@@ -440,17 +440,17 @@ func (mr *MockHostServiceIfaceMockRecorder) ListHostsMetrics(p interface{}) *gom
 }
 
 // NewAddBaremetalHostParams mocks base method.
-func (m *MockHostServiceIface) NewAddBaremetalHostParams(hypervisor, password, podid, url, username, zoneid string) *AddBaremetalHostParams {
+func (m *MockHostServiceIface) NewAddBaremetalHostParams(hypervisor, podid, url, zoneid string) *AddBaremetalHostParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewAddBaremetalHostParams", hypervisor, password, podid, url, username, zoneid)
+	ret := m.ctrl.Call(m, "NewAddBaremetalHostParams", hypervisor, podid, url, zoneid)
 	ret0, _ := ret[0].(*AddBaremetalHostParams)
 	return ret0
 }
 
 // NewAddBaremetalHostParams indicates an expected call of NewAddBaremetalHostParams.
-func (mr *MockHostServiceIfaceMockRecorder) NewAddBaremetalHostParams(hypervisor, password, podid, url, username, zoneid interface{}) *gomock.Call {
+func (mr *MockHostServiceIfaceMockRecorder) NewAddBaremetalHostParams(hypervisor, podid, url, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddBaremetalHostParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewAddBaremetalHostParams), hypervisor, password, podid, url, username, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddBaremetalHostParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewAddBaremetalHostParams), hypervisor, podid, url, zoneid)
 }
 
 // NewAddGloboDnsHostParams mocks base method.
@@ -468,17 +468,17 @@ func (mr *MockHostServiceIfaceMockRecorder) NewAddGloboDnsHostParams(password, p
 }
 
 // NewAddHostParams mocks base method.
-func (m *MockHostServiceIface) NewAddHostParams(hypervisor, password, podid, url, username, zoneid string) *AddHostParams {
+func (m *MockHostServiceIface) NewAddHostParams(hypervisor, podid, url, zoneid string) *AddHostParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewAddHostParams", hypervisor, password, podid, url, username, zoneid)
+	ret := m.ctrl.Call(m, "NewAddHostParams", hypervisor, podid, url, zoneid)
 	ret0, _ := ret[0].(*AddHostParams)
 	return ret0
 }
 
 // NewAddHostParams indicates an expected call of NewAddHostParams.
-func (mr *MockHostServiceIfaceMockRecorder) NewAddHostParams(hypervisor, password, podid, url, username, zoneid interface{}) *gomock.Call {
+func (mr *MockHostServiceIfaceMockRecorder) NewAddHostParams(hypervisor, podid, url, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddHostParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewAddHostParams), hypervisor, password, podid, url, username, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddHostParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewAddHostParams), hypervisor, podid, url, zoneid)
 }
 
 // NewAddSecondaryStorageParams mocks base method.

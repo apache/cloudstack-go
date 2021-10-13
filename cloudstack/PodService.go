@@ -219,7 +219,9 @@ type CreatePodResponse struct {
 	Endip           []string                    `json:"endip"`
 	Forsystemvms    []string                    `json:"forsystemvms"`
 	Gateway         string                      `json:"gateway"`
+	Hasannotations  bool                        `json:"hasannotations"`
 	Id              string                      `json:"id"`
+	Ipranges        []CreatePodResponseIpranges `json:"ipranges"`
 	JobID           string                      `json:"jobid"`
 	Jobstatus       int                         `json:"jobstatus"`
 	Name            string                      `json:"name"`
@@ -228,6 +230,13 @@ type CreatePodResponse struct {
 	Vlanid          []string                    `json:"vlanid"`
 	Zoneid          string                      `json:"zoneid"`
 	Zonename        string                      `json:"zonename"`
+}
+
+type CreatePodResponseIpranges struct {
+	Endip        string `json:"endip"`
+	Forsystemvms string `json:"forsystemvms"`
+	Startip      string `json:"startip"`
+	Vlanid       string `json:"vlanid"`
 }
 
 type CreatePodResponseCapacity struct {
@@ -910,7 +919,9 @@ type Pod struct {
 	Endip           []string      `json:"endip"`
 	Forsystemvms    []string      `json:"forsystemvms"`
 	Gateway         string        `json:"gateway"`
+	Hasannotations  bool          `json:"hasannotations"`
 	Id              string        `json:"id"`
+	Ipranges        []PodIpranges `json:"ipranges"`
 	JobID           string        `json:"jobid"`
 	Jobstatus       int           `json:"jobstatus"`
 	Name            string        `json:"name"`
@@ -919,6 +930,13 @@ type Pod struct {
 	Vlanid          []string      `json:"vlanid"`
 	Zoneid          string        `json:"zoneid"`
 	Zonename        string        `json:"zonename"`
+}
+
+type PodIpranges struct {
+	Endip        string `json:"endip"`
+	Forsystemvms string `json:"forsystemvms"`
+	Startip      string `json:"startip"`
+	Vlanid       string `json:"vlanid"`
 }
 
 type PodCapacity struct {
@@ -1180,7 +1198,9 @@ type UpdatePodResponse struct {
 	Endip           []string                    `json:"endip"`
 	Forsystemvms    []string                    `json:"forsystemvms"`
 	Gateway         string                      `json:"gateway"`
+	Hasannotations  bool                        `json:"hasannotations"`
 	Id              string                      `json:"id"`
+	Ipranges        []UpdatePodResponseIpranges `json:"ipranges"`
 	JobID           string                      `json:"jobid"`
 	Jobstatus       int                         `json:"jobstatus"`
 	Name            string                      `json:"name"`
@@ -1189,6 +1209,13 @@ type UpdatePodResponse struct {
 	Vlanid          []string                    `json:"vlanid"`
 	Zoneid          string                      `json:"zoneid"`
 	Zonename        string                      `json:"zonename"`
+}
+
+type UpdatePodResponseIpranges struct {
+	Endip        string `json:"endip"`
+	Forsystemvms string `json:"forsystemvms"`
+	Startip      string `json:"startip"`
+	Vlanid       string `json:"vlanid"`
 }
 
 type UpdatePodResponseCapacity struct {

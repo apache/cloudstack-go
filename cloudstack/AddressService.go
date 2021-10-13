@@ -286,6 +286,7 @@ type AssociateIpAddressResponse struct {
 	Domainid                  string `json:"domainid"`
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
+	Hasannotations            bool   `json:"hasannotations"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`
@@ -918,6 +919,7 @@ type PublicIpAddress struct {
 	Domainid                  string `json:"domainid"`
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
+	Hasannotations            bool   `json:"hasannotations"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`
@@ -1066,6 +1068,7 @@ type UpdateIpAddressResponse struct {
 	Domainid                  string `json:"domainid"`
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
+	Hasannotations            bool   `json:"hasannotations"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`

@@ -436,5 +436,110 @@
         }
       ]
     }
+  },
+  "scaleVirtualMachine": {
+    "scaleVirtualMachine": {
+      "scalevirtualmachineresponse": {
+        "jobid": "f9a9af61-47ea-4fb7-acc9-93ea50f12042"
+      }
+    },
+    "queryAsyncJobResult": {
+      "queryasyncjobresultresponse": {
+        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+        "cmd": "org.apache.cloudstack.api.command.admin.vm.ScaleVMCmdByAdmin",
+        "jobstatus": 1,
+        "jobprocstatus": 0,
+        "jobresultcode": 0,
+        "jobresulttype": "object",
+        "jobresult": {
+          "virtualmachine": {
+            "id": "88dedd6b-4fc0-44bf-b76f-441a13bc1f99",
+            "name": "QA-88dedd6b-4fc0-44bf-b76f-441a13bc1f99",
+            "displayname": "QA-88dedd6b-4fc0-44bf-b76f-441a13bc1f99",
+            "account": "admin",
+            "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+            "username": "admin",
+            "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
+            "domain": "ROOT",
+            "created": "2020-05-22T19:52:22+0000",
+            "lastupdated": "2021-10-06T09:57:19+0000",
+            "state": "Stopped",
+            "haenable": false,
+            "zoneid": "04ccc336-d730-42fe-8ff6-5ae36e141e81",
+            "zonename": "SimZone1",
+            "templateid": "56217438-4f36-450b-9246-850a10a3e57b",
+            "templatename": "macha-sim1",
+            "templatedisplaytext": "macha-simm",
+            "passwordenabled": true,
+            "isoid": "169fe81d-47e0-4119-b38c-f6ce42dcf451",
+            "isoname": "k8s-1.16.3-Kubernetes-Binaries-ISO",
+            "isodisplaytext": "k8s-1.16.3-Kubernetes-Binaries-IS",
+            "serviceofferingid": "57aba75e-5567-44c9-bfcc-c2c14503a5a6",
+            "serviceofferingname": "Medium Instanc",
+            "backupofferingid": "7c42d74e-c029-4431-9025-6caa8b903472",
+            "backupofferingname": "BackupGoldDummy",
+            "cpunumber": 1,
+            "cpuspeed": 1000,
+            "memory": 1024,
+            "guestosid": "12fea95b-5fe0-11ea-9a56-1e006800018c",
+            "rootdeviceid": 0,
+            "rootdevicetype": "ROOT",
+            "securitygroup": [],
+            "nic": [
+              {
+                "id": "c26193a6-9b41-4149-b836-e48bc46fc5c8",
+                "networkid": "b9bb5ef5-16cd-413c-996e-3671d8a2bc20",
+                "networkname": "test",
+                "netmask": "255.255.255.0",
+                "gateway": "10.1.1.1",
+                "ipaddress": "10.1.1.208",
+                "traffictype": "Guest",
+                "type": "Isolated",
+                "isdefault": false,
+                "macaddress": "02:00:63:59:00:05",
+                "secondaryip": [],
+                "extradhcpoption": [],
+                "deviceid": "1"
+              },
+              {
+                "id": "d9f8203d-e680-438a-86b6-327c69271011",
+                "networkid": "cc39d938-5ea0-4d9c-b89d-421da3274e54",
+                "networkname": "testNet2",
+                "netmask": "255.255.255.0",
+                "gateway": "10.1.1.1",
+                "ipaddress": "10.1.1.177",
+                "traffictype": "Guest",
+                "type": "Isolated",
+                "isdefault": true,
+                "macaddress": "02:00:22:f7:00:08",
+                "secondaryip": [],
+                "extradhcpoption": [],
+                "deviceid": "0"
+              }
+            ],
+            "hypervisor": "Simulator",
+            "instancename": "i-2-101-QA",
+            "details": {
+              "keyboard": "us",
+              "Message.ReservedCapacityFreed.Flag": "true"
+            },
+            "affinitygroup": [],
+            "displayvm": true,
+            "isdynamicallyscalable": false,
+            "ostypeid": "12fea95b-5fe0-11ea-9a56-1e006800018c",
+            "osdisplayname": "CentOS 6 (64-bit)",
+            "pooltype": "NetworkFilesystem",
+            "receivedbytes": 0,
+            "sentbytes": 0,
+            "tags": [],
+            "hasannotations": true
+          }
+        },
+        "created": "2021-10-13T04:54:55+0000",
+        "completed": "2021-10-13T04:54:56+0000",
+        "jobid": "f9a9af61-47ea-4fb7-acc9-93ea50f12042"
+      }
+    }
   }
 }

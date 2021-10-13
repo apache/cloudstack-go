@@ -205,9 +205,11 @@ type CopyTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -657,9 +659,11 @@ type CreateTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -1596,6 +1600,10 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["showremoved"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showremoved", vv)
@@ -1830,6 +1838,21 @@ func (p *ListTemplatesParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListTemplatesParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListTemplatesParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListTemplatesParams) SetShowremoved(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2038,9 +2061,11 @@ type Template struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2207,9 +2232,11 @@ type PrepareTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2795,9 +2822,11 @@ type RegisterTemplate struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -3190,9 +3219,11 @@ type UpdateTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`

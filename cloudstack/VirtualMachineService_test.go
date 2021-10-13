@@ -145,3 +145,26 @@ func TestVirtualMachineService_ListVirtualMachines(t *testing.T) {
 		t.Errorf("Failed to list VM")
 	}
 }
+
+func TestVirtualMachineService_ScaleVirtualMachine(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
+		apiName := "scaleVirtualMachine"
+		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintln(writer, response)
+	}))
+	defer server.Close()
+	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
+	params := client.VirtualMachine.NewScaleVirtualMachineParams("88dedd6b-4fc0-44bf-b76f-441a13bc1f99", "57aba75e-5567-44c9-bfcc-c2c14503a5a6")
+	resp, err := client.VirtualMachine.ScaleVirtualMachine(params)
+	if err != nil {
+		t.Errorf("Failed to scale VM due to %v", err)
+		return
+	}
+
+	if resp == nil {
+		t.Errorf("Failed to list VM")
+	}
+}

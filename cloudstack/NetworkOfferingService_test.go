@@ -37,7 +37,7 @@ func TestNetworkOfferingService_CreateNetworkOffering(t *testing.T) {
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
-	params := client.NetworkOffering.NewCreateNetworkOfferingParams("testNetOffering", "L2", "testNetOffering", []string{}, "Guest")
+	params := client.NetworkOffering.NewCreateNetworkOfferingParams("testNetOffering", "L2", "testNetOffering", "Guest")
 	resp, err := client.NetworkOffering.CreateNetworkOffering(params)
 	if err != nil {
 		t.Errorf("Failed to create network offering due to: %v", err)

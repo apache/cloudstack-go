@@ -21,11 +21,12 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/apache/cloudstack-go/v2/cloudstack"
 	"log"
+
+	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func main() {
+func PerformHostOperations() {
 	cs := cloudstack.NewAsyncClient(ApiUrl, ApiKey, SecretKey, false)
 	zone, _, err := cs.Zone.GetZoneByID(ZoneId)
 	if err != nil {

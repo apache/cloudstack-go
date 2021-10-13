@@ -334,6 +334,7 @@ type CreateStoragePoolResponse struct {
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
@@ -581,6 +582,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
@@ -934,6 +936,7 @@ type StoragePool struct {
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
@@ -1112,6 +1115,7 @@ type UpdateStoragePoolResponse struct {
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`

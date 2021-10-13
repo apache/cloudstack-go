@@ -926,6 +926,7 @@ type CreateVpnCustomerGatewayResponse struct {
 	Esppolicy        string `json:"esppolicy"`
 	Forceencap       bool   `json:"forceencap"`
 	Gateway          string `json:"gateway"`
+	Hasannotations   bool   `json:"hasannotations"`
 	Id               string `json:"id"`
 	Ikelifetime      int64  `json:"ikelifetime"`
 	Ikepolicy        string `json:"ikepolicy"`
@@ -2270,6 +2271,7 @@ type VpnCustomerGateway struct {
 	Esppolicy        string `json:"esppolicy"`
 	Forceencap       bool   `json:"forceencap"`
 	Gateway          string `json:"gateway"`
+	Hasannotations   bool   `json:"hasannotations"`
 	Id               string `json:"id"`
 	Ikelifetime      int64  `json:"ikelifetime"`
 	Ikepolicy        string `json:"ikepolicy"`
@@ -3732,6 +3734,7 @@ type UpdateVpnCustomerGatewayResponse struct {
 	Esppolicy        string `json:"esppolicy"`
 	Forceencap       bool   `json:"forceencap"`
 	Gateway          string `json:"gateway"`
+	Hasannotations   bool   `json:"hasannotations"`
 	Id               string `json:"id"`
 	Ikelifetime      int64  `json:"ikelifetime"`
 	Ikepolicy        string `json:"ikepolicy"`

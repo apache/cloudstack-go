@@ -416,6 +416,7 @@ type BrocadeVcsDeviceNetwork struct {
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
 	Cidr                        string                           `json:"cidr"`
+	Created                     string                           `json:"created"`
 	Details                     map[string]string                `json:"details"`
 	Displaynetwork              bool                             `json:"displaynetwork"`
 	Displaytext                 string                           `json:"displaytext"`
@@ -425,6 +426,8 @@ type BrocadeVcsDeviceNetwork struct {
 	Domainid                    string                           `json:"domainid"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
+	Hasannotations              bool                             `json:"hasannotations"`
+	Icon                        string                           `json:"icon"`
 	Id                          string                           `json:"id"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
@@ -445,10 +448,12 @@ type BrocadeVcsDeviceNetwork struct {
 	Physicalnetworkid           string                           `json:"physicalnetworkid"`
 	Project                     string                           `json:"project"`
 	Projectid                   string                           `json:"projectid"`
+	Receivedbytes               int64                            `json:"receivedbytes"`
 	Redundantrouter             bool                             `json:"redundantrouter"`
 	Related                     string                           `json:"related"`
 	Reservediprange             string                           `json:"reservediprange"`
 	Restartrequired             bool                             `json:"restartrequired"`
+	Sentbytes                   int64                            `json:"sentbytes"`
 	Service                     []BrocadeVcsDeviceNetworkService `json:"service"`
 	Specifyipranges             bool                             `json:"specifyipranges"`
 	State                       string                           `json:"state"`

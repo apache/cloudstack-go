@@ -22,11 +22,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/apache/cloudstack-go/v2/cloudstack"
 	"log"
+
+	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func main() {
+func CreateDomain() {
 	domainName := "DummyDomain"
 	cs := cloudstack.NewAsyncClient(ApiUrl, ApiKey, SecretKey, false)
 	domain, _, err := cs.Domain.GetDomainByName(domainName)
@@ -62,7 +63,6 @@ func main() {
 	}
 	fmt.Printf("Create Domain response : %v\n\n", string(b))
 }
-
 
 func parseResponse(resp interface{}) ([]byte, error) {
 	b, err := json.MarshalIndent(resp, "", "    ")

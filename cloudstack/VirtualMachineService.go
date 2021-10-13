@@ -57,7 +57,7 @@ type VirtualMachineServiceIface interface {
 	MigrateVirtualMachine(p *MigrateVirtualMachineParams) (*MigrateVirtualMachineResponse, error)
 	NewMigrateVirtualMachineParams(virtualmachineid string) *MigrateVirtualMachineParams
 	MigrateVirtualMachineWithVolume(p *MigrateVirtualMachineWithVolumeParams) (*MigrateVirtualMachineWithVolumeResponse, error)
-	NewMigrateVirtualMachineWithVolumeParams(hostid string, virtualmachineid string) *MigrateVirtualMachineWithVolumeParams
+	NewMigrateVirtualMachineWithVolumeParams(virtualmachineid string) *MigrateVirtualMachineWithVolumeParams
 	RebootVirtualMachine(p *RebootVirtualMachineParams) (*RebootVirtualMachineResponse, error)
 	NewRebootVirtualMachineParams(id string) *RebootVirtualMachineParams
 	RecoverVirtualMachine(p *RecoverVirtualMachineParams) (*RecoverVirtualMachineResponse, error)
@@ -258,9 +258,11 @@ type AddNicToVirtualMachineResponse struct {
 	Groupid               string                                        `json:"groupid"`
 	Guestosid             string                                        `json:"guestosid"`
 	Haenable              bool                                          `json:"haenable"`
+	Hasannotations        bool                                          `json:"hasannotations"`
 	Hostid                string                                        `json:"hostid"`
 	Hostname              string                                        `json:"hostname"`
 	Hypervisor            string                                        `json:"hypervisor"`
+	Icon                  string                                        `json:"icon"`
 	Id                    string                                        `json:"id"`
 	Instancename          string                                        `json:"instancename"`
 	Isdynamicallyscalable bool                                          `json:"isdynamicallyscalable"`
@@ -270,6 +272,7 @@ type AddNicToVirtualMachineResponse struct {
 	JobID                 string                                        `json:"jobid"`
 	Jobstatus             int                                           `json:"jobstatus"`
 	Keypair               string                                        `json:"keypair"`
+	Lastupdated           string                                        `json:"lastupdated"`
 	Memory                int                                           `json:"memory"`
 	Memoryintfreekbs      int64                                         `json:"memoryintfreekbs"`
 	Memorykbs             int64                                         `json:"memorykbs"`
@@ -282,14 +285,17 @@ type AddNicToVirtualMachineResponse struct {
 	Ostypeid              string                                        `json:"ostypeid"`
 	Password              string                                        `json:"password"`
 	Passwordenabled       bool                                          `json:"passwordenabled"`
+	Pooltype              string                                        `json:"pooltype"`
 	Project               string                                        `json:"project"`
 	Projectid             string                                        `json:"projectid"`
 	Publicip              string                                        `json:"publicip"`
 	Publicipid            string                                        `json:"publicipid"`
-	Readonlyuidetails     string                                        `json:"readonlyuidetails"`
+	Readonlydetails       string                                        `json:"readonlydetails"`
+	Receivedbytes         int64                                         `json:"receivedbytes"`
 	Rootdeviceid          int64                                         `json:"rootdeviceid"`
 	Rootdevicetype        string                                        `json:"rootdevicetype"`
 	Securitygroup         []AddNicToVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                         `json:"sentbytes"`
 	Serviceofferingid     string                                        `json:"serviceofferingid"`
 	Serviceofferingname   string                                        `json:"serviceofferingname"`
 	Servicestate          string                                        `json:"servicestate"`
@@ -547,9 +553,11 @@ type AssignVirtualMachineResponse struct {
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
+	Hasannotations        bool                                        `json:"hasannotations"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
+	Icon                  string                                      `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -559,6 +567,7 @@ type AssignVirtualMachineResponse struct {
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypair               string                                      `json:"keypair"`
+	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -571,14 +580,17 @@ type AssignVirtualMachineResponse struct {
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
+	Pooltype              string                                      `json:"pooltype"`
 	Project               string                                      `json:"project"`
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
-	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
+	Readonlydetails       string                                      `json:"readonlydetails"`
+	Receivedbytes         int64                                       `json:"receivedbytes"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []AssignVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                       `json:"sentbytes"`
 	Serviceofferingid     string                                      `json:"serviceofferingid"`
 	Serviceofferingname   string                                      `json:"serviceofferingname"`
 	Servicestate          string                                      `json:"servicestate"`
@@ -742,7 +754,7 @@ func (s *VirtualMachineService) NewChangeServiceForVirtualMachineParams(id strin
 	return p
 }
 
-// Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect.
+// Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect. Note that it only changes the VM's compute offering and it does not update the root volume offering. If the Service Offering has a root disk size the volume will be resized only if using API command 'scaleVirtualMachine'.
 func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error) {
 	resp, err := s.cs.newRequest("changeServiceForVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -784,9 +796,11 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Groupid               string                                                `json:"groupid"`
 	Guestosid             string                                                `json:"guestosid"`
 	Haenable              bool                                                  `json:"haenable"`
+	Hasannotations        bool                                                  `json:"hasannotations"`
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
+	Icon                  string                                                `json:"icon"`
 	Id                    string                                                `json:"id"`
 	Instancename          string                                                `json:"instancename"`
 	Isdynamicallyscalable bool                                                  `json:"isdynamicallyscalable"`
@@ -796,6 +810,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	JobID                 string                                                `json:"jobid"`
 	Jobstatus             int                                                   `json:"jobstatus"`
 	Keypair               string                                                `json:"keypair"`
+	Lastupdated           string                                                `json:"lastupdated"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                 `json:"memorykbs"`
@@ -808,14 +823,17 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Ostypeid              string                                                `json:"ostypeid"`
 	Password              string                                                `json:"password"`
 	Passwordenabled       bool                                                  `json:"passwordenabled"`
+	Pooltype              string                                                `json:"pooltype"`
 	Project               string                                                `json:"project"`
 	Projectid             string                                                `json:"projectid"`
 	Publicip              string                                                `json:"publicip"`
 	Publicipid            string                                                `json:"publicipid"`
-	Readonlyuidetails     string                                                `json:"readonlyuidetails"`
+	Readonlydetails       string                                                `json:"readonlydetails"`
+	Receivedbytes         int64                                                 `json:"receivedbytes"`
 	Rootdeviceid          int64                                                 `json:"rootdeviceid"`
 	Rootdevicetype        string                                                `json:"rootdevicetype"`
 	Securitygroup         []ChangeServiceForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                                 `json:"sentbytes"`
 	Serviceofferingid     string                                                `json:"serviceofferingid"`
 	Serviceofferingname   string                                                `json:"serviceofferingname"`
 	Servicestate          string                                                `json:"servicestate"`
@@ -1033,6 +1051,10 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["dynamicscalingenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("dynamicscalingenabled", vv)
 	}
 	if v, found := p.p["extraconfig"]; found {
 		u.Set("extraconfig", v.(string))
@@ -1398,6 +1420,21 @@ func (p *DeployVirtualMachineParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetDynamicscalingenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dynamicscalingenabled"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetDynamicscalingenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dynamicscalingenabled"].(bool)
 	return value, ok
 }
 
@@ -1877,9 +1914,11 @@ type DeployVirtualMachineResponse struct {
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
+	Hasannotations        bool                                        `json:"hasannotations"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
+	Icon                  string                                      `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -1889,6 +1928,7 @@ type DeployVirtualMachineResponse struct {
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypair               string                                      `json:"keypair"`
+	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -1901,14 +1941,17 @@ type DeployVirtualMachineResponse struct {
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
+	Pooltype              string                                      `json:"pooltype"`
 	Project               string                                      `json:"project"`
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
-	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
+	Readonlydetails       string                                      `json:"readonlydetails"`
+	Receivedbytes         int64                                       `json:"receivedbytes"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []DeployVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                       `json:"sentbytes"`
 	Serviceofferingid     string                                      `json:"serviceofferingid"`
 	Serviceofferingname   string                                      `json:"serviceofferingname"`
 	Servicestate          string                                      `json:"servicestate"`
@@ -2132,9 +2175,11 @@ type DestroyVirtualMachineResponse struct {
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
+	Hasannotations        bool                                         `json:"hasannotations"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
+	Icon                  string                                       `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -2144,6 +2189,7 @@ type DestroyVirtualMachineResponse struct {
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypair               string                                       `json:"keypair"`
+	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -2156,14 +2202,17 @@ type DestroyVirtualMachineResponse struct {
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
+	Pooltype              string                                       `json:"pooltype"`
 	Project               string                                       `json:"project"`
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
-	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
+	Readonlydetails       string                                       `json:"readonlydetails"`
+	Receivedbytes         int64                                        `json:"receivedbytes"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []DestroyVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                        `json:"sentbytes"`
 	Serviceofferingid     string                                       `json:"serviceofferingid"`
 	Serviceofferingname   string                                       `json:"serviceofferingname"`
 	Servicestate          string                                       `json:"servicestate"`
@@ -2399,6 +2448,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
 	if v, found := p.p["details"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("details", vv)
@@ -2483,6 +2535,10 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
 	}
@@ -2541,6 +2597,21 @@ func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
 	return value, ok
 }
 
@@ -2889,6 +2960,21 @@ func (p *ListVirtualMachinesParams) GetServiceofferingid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3132,9 +3218,11 @@ type VirtualMachine struct {
 	Groupid               string                        `json:"groupid"`
 	Guestosid             string                        `json:"guestosid"`
 	Haenable              bool                          `json:"haenable"`
+	Hasannotations        bool                          `json:"hasannotations"`
 	Hostid                string                        `json:"hostid"`
 	Hostname              string                        `json:"hostname"`
 	Hypervisor            string                        `json:"hypervisor"`
+	Icon                  string                        `json:"icon"`
 	Id                    string                        `json:"id"`
 	Instancename          string                        `json:"instancename"`
 	Isdynamicallyscalable bool                          `json:"isdynamicallyscalable"`
@@ -3144,6 +3232,7 @@ type VirtualMachine struct {
 	JobID                 string                        `json:"jobid"`
 	Jobstatus             int                           `json:"jobstatus"`
 	Keypair               string                        `json:"keypair"`
+	Lastupdated           string                        `json:"lastupdated"`
 	Memory                int                           `json:"memory"`
 	Memoryintfreekbs      int64                         `json:"memoryintfreekbs"`
 	Memorykbs             int64                         `json:"memorykbs"`
@@ -3156,14 +3245,17 @@ type VirtualMachine struct {
 	Ostypeid              string                        `json:"ostypeid"`
 	Password              string                        `json:"password"`
 	Passwordenabled       bool                          `json:"passwordenabled"`
+	Pooltype              string                        `json:"pooltype"`
 	Project               string                        `json:"project"`
 	Projectid             string                        `json:"projectid"`
 	Publicip              string                        `json:"publicip"`
 	Publicipid            string                        `json:"publicipid"`
-	Readonlyuidetails     string                        `json:"readonlyuidetails"`
+	Readonlydetails       string                        `json:"readonlydetails"`
+	Receivedbytes         int64                         `json:"receivedbytes"`
 	Rootdeviceid          int64                         `json:"rootdeviceid"`
 	Rootdevicetype        string                        `json:"rootdevicetype"`
 	Securitygroup         []VirtualMachineSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                         `json:"sentbytes"`
 	Serviceofferingid     string                        `json:"serviceofferingid"`
 	Serviceofferingname   string                        `json:"serviceofferingname"`
 	Servicestate          string                        `json:"servicestate"`
@@ -3340,6 +3432,10 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
+	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
@@ -3744,6 +3840,21 @@ func (p *ListVirtualMachinesMetricsParams) GetServiceofferingid() (string, bool)
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3991,9 +4102,11 @@ type VirtualMachinesMetric struct {
 	Groupid               string                               `json:"groupid"`
 	Guestosid             string                               `json:"guestosid"`
 	Haenable              bool                                 `json:"haenable"`
+	Hasannotations        bool                                 `json:"hasannotations"`
 	Hostid                string                               `json:"hostid"`
 	Hostname              string                               `json:"hostname"`
 	Hypervisor            string                               `json:"hypervisor"`
+	Icon                  string                               `json:"icon"`
 	Id                    string                               `json:"id"`
 	Instancename          string                               `json:"instancename"`
 	Ipaddress             string                               `json:"ipaddress"`
@@ -4004,6 +4117,7 @@ type VirtualMachinesMetric struct {
 	JobID                 string                               `json:"jobid"`
 	Jobstatus             int                                  `json:"jobstatus"`
 	Keypair               string                               `json:"keypair"`
+	Lastupdated           string                               `json:"lastupdated"`
 	Memory                int                                  `json:"memory"`
 	Memoryintfreekbs      int64                                `json:"memoryintfreekbs"`
 	Memorykbs             int64                                `json:"memorykbs"`
@@ -4019,14 +4133,17 @@ type VirtualMachinesMetric struct {
 	Ostypeid              string                               `json:"ostypeid"`
 	Password              string                               `json:"password"`
 	Passwordenabled       bool                                 `json:"passwordenabled"`
+	Pooltype              string                               `json:"pooltype"`
 	Project               string                               `json:"project"`
 	Projectid             string                               `json:"projectid"`
 	Publicip              string                               `json:"publicip"`
 	Publicipid            string                               `json:"publicipid"`
-	Readonlyuidetails     string                               `json:"readonlyuidetails"`
+	Readonlydetails       string                               `json:"readonlydetails"`
+	Receivedbytes         int64                                `json:"receivedbytes"`
 	Rootdeviceid          int64                                `json:"rootdeviceid"`
 	Rootdevicetype        string                               `json:"rootdevicetype"`
 	Securitygroup         []VirtualMachinesMetricSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                `json:"sentbytes"`
 	Serviceofferingid     string                               `json:"serviceofferingid"`
 	Serviceofferingname   string                               `json:"serviceofferingname"`
 	Servicestate          string                               `json:"servicestate"`
@@ -4120,6 +4237,10 @@ func (p *MigrateVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["autoselect"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("autoselect", vv)
+	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
 	}
@@ -4130,6 +4251,21 @@ func (p *MigrateVirtualMachineParams) toURLValues() url.Values {
 		u.Set("virtualmachineid", v.(string))
 	}
 	return u
+}
+
+func (p *MigrateVirtualMachineParams) SetAutoselect(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["autoselect"] = v
+}
+
+func (p *MigrateVirtualMachineParams) GetAutoselect() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["autoselect"].(bool)
+	return value, ok
 }
 
 func (p *MigrateVirtualMachineParams) SetHostid(v string) {
@@ -4248,9 +4384,11 @@ type MigrateVirtualMachineResponse struct {
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
+	Hasannotations        bool                                         `json:"hasannotations"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
+	Icon                  string                                       `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -4260,6 +4398,7 @@ type MigrateVirtualMachineResponse struct {
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypair               string                                       `json:"keypair"`
+	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -4272,14 +4411,17 @@ type MigrateVirtualMachineResponse struct {
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
+	Pooltype              string                                       `json:"pooltype"`
 	Project               string                                       `json:"project"`
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
-	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
+	Readonlydetails       string                                       `json:"readonlydetails"`
+	Receivedbytes         int64                                        `json:"receivedbytes"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []MigrateVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                        `json:"sentbytes"`
 	Serviceofferingid     string                                       `json:"serviceofferingid"`
 	Serviceofferingname   string                                       `json:"serviceofferingname"`
 	Servicestate          string                                       `json:"servicestate"`
@@ -4451,10 +4593,9 @@ func (p *MigrateVirtualMachineWithVolumeParams) GetVirtualmachineid() (string, b
 
 // You should always use this function to get a new MigrateVirtualMachineWithVolumeParams instance,
 // as then you are sure you have configured all required params
-func (s *VirtualMachineService) NewMigrateVirtualMachineWithVolumeParams(hostid string, virtualmachineid string) *MigrateVirtualMachineWithVolumeParams {
+func (s *VirtualMachineService) NewMigrateVirtualMachineWithVolumeParams(virtualmachineid string) *MigrateVirtualMachineWithVolumeParams {
 	p := &MigrateVirtualMachineWithVolumeParams{}
 	p.p = make(map[string]interface{})
-	p.p["hostid"] = hostid
 	p.p["virtualmachineid"] = virtualmachineid
 	return p
 }
@@ -4521,9 +4662,11 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Groupid               string                                                 `json:"groupid"`
 	Guestosid             string                                                 `json:"guestosid"`
 	Haenable              bool                                                   `json:"haenable"`
+	Hasannotations        bool                                                   `json:"hasannotations"`
 	Hostid                string                                                 `json:"hostid"`
 	Hostname              string                                                 `json:"hostname"`
 	Hypervisor            string                                                 `json:"hypervisor"`
+	Icon                  string                                                 `json:"icon"`
 	Id                    string                                                 `json:"id"`
 	Instancename          string                                                 `json:"instancename"`
 	Isdynamicallyscalable bool                                                   `json:"isdynamicallyscalable"`
@@ -4533,6 +4676,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	JobID                 string                                                 `json:"jobid"`
 	Jobstatus             int                                                    `json:"jobstatus"`
 	Keypair               string                                                 `json:"keypair"`
+	Lastupdated           string                                                 `json:"lastupdated"`
 	Memory                int                                                    `json:"memory"`
 	Memoryintfreekbs      int64                                                  `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                  `json:"memorykbs"`
@@ -4545,14 +4689,17 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Ostypeid              string                                                 `json:"ostypeid"`
 	Password              string                                                 `json:"password"`
 	Passwordenabled       bool                                                   `json:"passwordenabled"`
+	Pooltype              string                                                 `json:"pooltype"`
 	Project               string                                                 `json:"project"`
 	Projectid             string                                                 `json:"projectid"`
 	Publicip              string                                                 `json:"publicip"`
 	Publicipid            string                                                 `json:"publicipid"`
-	Readonlyuidetails     string                                                 `json:"readonlyuidetails"`
+	Readonlydetails       string                                                 `json:"readonlydetails"`
+	Receivedbytes         int64                                                  `json:"receivedbytes"`
 	Rootdeviceid          int64                                                  `json:"rootdeviceid"`
 	Rootdevicetype        string                                                 `json:"rootdevicetype"`
 	Securitygroup         []MigrateVirtualMachineWithVolumeResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                                  `json:"sentbytes"`
 	Serviceofferingid     string                                                 `json:"serviceofferingid"`
 	Serviceofferingname   string                                                 `json:"serviceofferingname"`
 	Servicestate          string                                                 `json:"servicestate"`
@@ -4650,6 +4797,10 @@ func (p *RebootVirtualMachineParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bootintosetup", vv)
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -4668,6 +4819,21 @@ func (p *RebootVirtualMachineParams) GetBootintosetup() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["bootintosetup"].(bool)
+	return value, ok
+}
+
+func (p *RebootVirtualMachineParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *RebootVirtualMachineParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
 	return value, ok
 }
 
@@ -4757,9 +4923,11 @@ type RebootVirtualMachineResponse struct {
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
+	Hasannotations        bool                                        `json:"hasannotations"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
+	Icon                  string                                      `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -4769,6 +4937,7 @@ type RebootVirtualMachineResponse struct {
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypair               string                                      `json:"keypair"`
+	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -4781,14 +4950,17 @@ type RebootVirtualMachineResponse struct {
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
+	Pooltype              string                                      `json:"pooltype"`
 	Project               string                                      `json:"project"`
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
-	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
+	Readonlydetails       string                                      `json:"readonlydetails"`
+	Receivedbytes         int64                                       `json:"receivedbytes"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []RebootVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                       `json:"sentbytes"`
 	Serviceofferingid     string                                      `json:"serviceofferingid"`
 	Serviceofferingname   string                                      `json:"serviceofferingname"`
 	Servicestate          string                                      `json:"servicestate"`
@@ -4954,9 +5126,11 @@ type RecoverVirtualMachineResponse struct {
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
+	Hasannotations        bool                                         `json:"hasannotations"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
+	Icon                  string                                       `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -4966,6 +5140,7 @@ type RecoverVirtualMachineResponse struct {
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypair               string                                       `json:"keypair"`
+	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -4978,14 +5153,17 @@ type RecoverVirtualMachineResponse struct {
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
+	Pooltype              string                                       `json:"pooltype"`
 	Project               string                                       `json:"project"`
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
-	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
+	Readonlydetails       string                                       `json:"readonlydetails"`
+	Receivedbytes         int64                                        `json:"receivedbytes"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []RecoverVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                        `json:"sentbytes"`
 	Serviceofferingid     string                                       `json:"serviceofferingid"`
 	Serviceofferingname   string                                       `json:"serviceofferingname"`
 	Servicestate          string                                       `json:"servicestate"`
@@ -5190,9 +5368,11 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Groupid               string                                             `json:"groupid"`
 	Guestosid             string                                             `json:"guestosid"`
 	Haenable              bool                                               `json:"haenable"`
+	Hasannotations        bool                                               `json:"hasannotations"`
 	Hostid                string                                             `json:"hostid"`
 	Hostname              string                                             `json:"hostname"`
 	Hypervisor            string                                             `json:"hypervisor"`
+	Icon                  string                                             `json:"icon"`
 	Id                    string                                             `json:"id"`
 	Instancename          string                                             `json:"instancename"`
 	Isdynamicallyscalable bool                                               `json:"isdynamicallyscalable"`
@@ -5202,6 +5382,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	JobID                 string                                             `json:"jobid"`
 	Jobstatus             int                                                `json:"jobstatus"`
 	Keypair               string                                             `json:"keypair"`
+	Lastupdated           string                                             `json:"lastupdated"`
 	Memory                int                                                `json:"memory"`
 	Memoryintfreekbs      int64                                              `json:"memoryintfreekbs"`
 	Memorykbs             int64                                              `json:"memorykbs"`
@@ -5214,14 +5395,17 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Ostypeid              string                                             `json:"ostypeid"`
 	Password              string                                             `json:"password"`
 	Passwordenabled       bool                                               `json:"passwordenabled"`
+	Pooltype              string                                             `json:"pooltype"`
 	Project               string                                             `json:"project"`
 	Projectid             string                                             `json:"projectid"`
 	Publicip              string                                             `json:"publicip"`
 	Publicipid            string                                             `json:"publicipid"`
-	Readonlyuidetails     string                                             `json:"readonlyuidetails"`
+	Readonlydetails       string                                             `json:"readonlydetails"`
+	Receivedbytes         int64                                              `json:"receivedbytes"`
 	Rootdeviceid          int64                                              `json:"rootdeviceid"`
 	Rootdevicetype        string                                             `json:"rootdevicetype"`
 	Securitygroup         []RemoveNicFromVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                              `json:"sentbytes"`
 	Serviceofferingid     string                                             `json:"serviceofferingid"`
 	Serviceofferingname   string                                             `json:"serviceofferingname"`
 	Servicestate          string                                             `json:"servicestate"`
@@ -5407,9 +5591,11 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Groupid               string                                                `json:"groupid"`
 	Guestosid             string                                                `json:"guestosid"`
 	Haenable              bool                                                  `json:"haenable"`
+	Hasannotations        bool                                                  `json:"hasannotations"`
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
+	Icon                  string                                                `json:"icon"`
 	Id                    string                                                `json:"id"`
 	Instancename          string                                                `json:"instancename"`
 	Isdynamicallyscalable bool                                                  `json:"isdynamicallyscalable"`
@@ -5419,6 +5605,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	JobID                 string                                                `json:"jobid"`
 	Jobstatus             int                                                   `json:"jobstatus"`
 	Keypair               string                                                `json:"keypair"`
+	Lastupdated           string                                                `json:"lastupdated"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                 `json:"memorykbs"`
@@ -5431,14 +5618,17 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Ostypeid              string                                                `json:"ostypeid"`
 	Password              string                                                `json:"password"`
 	Passwordenabled       bool                                                  `json:"passwordenabled"`
+	Pooltype              string                                                `json:"pooltype"`
 	Project               string                                                `json:"project"`
 	Projectid             string                                                `json:"projectid"`
 	Publicip              string                                                `json:"publicip"`
 	Publicipid            string                                                `json:"publicipid"`
-	Readonlyuidetails     string                                                `json:"readonlyuidetails"`
+	Readonlydetails       string                                                `json:"readonlydetails"`
+	Receivedbytes         int64                                                 `json:"receivedbytes"`
 	Rootdeviceid          int64                                                 `json:"rootdeviceid"`
 	Rootdevicetype        string                                                `json:"rootdevicetype"`
 	Securitygroup         []ResetPasswordForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                                 `json:"sentbytes"`
 	Serviceofferingid     string                                                `json:"serviceofferingid"`
 	Serviceofferingname   string                                                `json:"serviceofferingname"`
 	Servicestate          string                                                `json:"servicestate"`
@@ -5642,9 +5832,11 @@ type RestoreVirtualMachineResponse struct {
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
+	Hasannotations        bool                                         `json:"hasannotations"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
+	Icon                  string                                       `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -5654,6 +5846,7 @@ type RestoreVirtualMachineResponse struct {
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypair               string                                       `json:"keypair"`
+	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -5666,14 +5859,17 @@ type RestoreVirtualMachineResponse struct {
 	Ostypeid              string                                       `json:"ostypeid"`
 	Password              string                                       `json:"password"`
 	Passwordenabled       bool                                         `json:"passwordenabled"`
+	Pooltype              string                                       `json:"pooltype"`
 	Project               string                                       `json:"project"`
 	Projectid             string                                       `json:"projectid"`
 	Publicip              string                                       `json:"publicip"`
 	Publicipid            string                                       `json:"publicipid"`
-	Readonlyuidetails     string                                       `json:"readonlyuidetails"`
+	Readonlydetails       string                                       `json:"readonlydetails"`
+	Receivedbytes         int64                                        `json:"receivedbytes"`
 	Rootdeviceid          int64                                        `json:"rootdeviceid"`
 	Rootdevicetype        string                                       `json:"rootdevicetype"`
 	Securitygroup         []RestoreVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                        `json:"sentbytes"`
 	Serviceofferingid     string                                       `json:"serviceofferingid"`
 	Serviceofferingname   string                                       `json:"serviceofferingname"`
 	Servicestate          string                                       `json:"servicestate"`
@@ -5837,7 +6033,7 @@ func (s *VirtualMachineService) NewScaleVirtualMachineParams(id string, serviceo
 	return p
 }
 
-// Scales the virtual machine to a new service offering.
+// Scales the virtual machine to a new service offering. This command also takes into account the Volume and it may resize the root disk size according to the service offering.
 func (s *VirtualMachineService) ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error) {
 	resp, err := s.cs.newRequest("scaleVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -6066,9 +6262,11 @@ type StartVirtualMachineResponse struct {
 	Groupid               string                                     `json:"groupid"`
 	Guestosid             string                                     `json:"guestosid"`
 	Haenable              bool                                       `json:"haenable"`
+	Hasannotations        bool                                       `json:"hasannotations"`
 	Hostid                string                                     `json:"hostid"`
 	Hostname              string                                     `json:"hostname"`
 	Hypervisor            string                                     `json:"hypervisor"`
+	Icon                  string                                     `json:"icon"`
 	Id                    string                                     `json:"id"`
 	Instancename          string                                     `json:"instancename"`
 	Isdynamicallyscalable bool                                       `json:"isdynamicallyscalable"`
@@ -6078,6 +6276,7 @@ type StartVirtualMachineResponse struct {
 	JobID                 string                                     `json:"jobid"`
 	Jobstatus             int                                        `json:"jobstatus"`
 	Keypair               string                                     `json:"keypair"`
+	Lastupdated           string                                     `json:"lastupdated"`
 	Memory                int                                        `json:"memory"`
 	Memoryintfreekbs      int64                                      `json:"memoryintfreekbs"`
 	Memorykbs             int64                                      `json:"memorykbs"`
@@ -6090,14 +6289,17 @@ type StartVirtualMachineResponse struct {
 	Ostypeid              string                                     `json:"ostypeid"`
 	Password              string                                     `json:"password"`
 	Passwordenabled       bool                                       `json:"passwordenabled"`
+	Pooltype              string                                     `json:"pooltype"`
 	Project               string                                     `json:"project"`
 	Projectid             string                                     `json:"projectid"`
 	Publicip              string                                     `json:"publicip"`
 	Publicipid            string                                     `json:"publicipid"`
-	Readonlyuidetails     string                                     `json:"readonlyuidetails"`
+	Readonlydetails       string                                     `json:"readonlydetails"`
+	Receivedbytes         int64                                      `json:"receivedbytes"`
 	Rootdeviceid          int64                                      `json:"rootdeviceid"`
 	Rootdevicetype        string                                     `json:"rootdevicetype"`
 	Securitygroup         []StartVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                      `json:"sentbytes"`
 	Serviceofferingid     string                                     `json:"serviceofferingid"`
 	Serviceofferingname   string                                     `json:"serviceofferingname"`
 	Servicestate          string                                     `json:"servicestate"`
@@ -6302,9 +6504,11 @@ type StopVirtualMachineResponse struct {
 	Groupid               string                                    `json:"groupid"`
 	Guestosid             string                                    `json:"guestosid"`
 	Haenable              bool                                      `json:"haenable"`
+	Hasannotations        bool                                      `json:"hasannotations"`
 	Hostid                string                                    `json:"hostid"`
 	Hostname              string                                    `json:"hostname"`
 	Hypervisor            string                                    `json:"hypervisor"`
+	Icon                  string                                    `json:"icon"`
 	Id                    string                                    `json:"id"`
 	Instancename          string                                    `json:"instancename"`
 	Isdynamicallyscalable bool                                      `json:"isdynamicallyscalable"`
@@ -6314,6 +6518,7 @@ type StopVirtualMachineResponse struct {
 	JobID                 string                                    `json:"jobid"`
 	Jobstatus             int                                       `json:"jobstatus"`
 	Keypair               string                                    `json:"keypair"`
+	Lastupdated           string                                    `json:"lastupdated"`
 	Memory                int                                       `json:"memory"`
 	Memoryintfreekbs      int64                                     `json:"memoryintfreekbs"`
 	Memorykbs             int64                                     `json:"memorykbs"`
@@ -6326,14 +6531,17 @@ type StopVirtualMachineResponse struct {
 	Ostypeid              string                                    `json:"ostypeid"`
 	Password              string                                    `json:"password"`
 	Passwordenabled       bool                                      `json:"passwordenabled"`
+	Pooltype              string                                    `json:"pooltype"`
 	Project               string                                    `json:"project"`
 	Projectid             string                                    `json:"projectid"`
 	Publicip              string                                    `json:"publicip"`
 	Publicipid            string                                    `json:"publicipid"`
-	Readonlyuidetails     string                                    `json:"readonlyuidetails"`
+	Readonlydetails       string                                    `json:"readonlydetails"`
+	Receivedbytes         int64                                     `json:"receivedbytes"`
 	Rootdeviceid          int64                                     `json:"rootdeviceid"`
 	Rootdevicetype        string                                    `json:"rootdevicetype"`
 	Securitygroup         []StopVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                     `json:"sentbytes"`
 	Serviceofferingid     string                                    `json:"serviceofferingid"`
 	Serviceofferingname   string                                    `json:"serviceofferingname"`
 	Servicestate          string                                    `json:"servicestate"`
@@ -6538,9 +6746,11 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Groupid               string                                                   `json:"groupid"`
 	Guestosid             string                                                   `json:"guestosid"`
 	Haenable              bool                                                     `json:"haenable"`
+	Hasannotations        bool                                                     `json:"hasannotations"`
 	Hostid                string                                                   `json:"hostid"`
 	Hostname              string                                                   `json:"hostname"`
 	Hypervisor            string                                                   `json:"hypervisor"`
+	Icon                  string                                                   `json:"icon"`
 	Id                    string                                                   `json:"id"`
 	Instancename          string                                                   `json:"instancename"`
 	Isdynamicallyscalable bool                                                     `json:"isdynamicallyscalable"`
@@ -6550,6 +6760,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	JobID                 string                                                   `json:"jobid"`
 	Jobstatus             int                                                      `json:"jobstatus"`
 	Keypair               string                                                   `json:"keypair"`
+	Lastupdated           string                                                   `json:"lastupdated"`
 	Memory                int                                                      `json:"memory"`
 	Memoryintfreekbs      int64                                                    `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                    `json:"memorykbs"`
@@ -6562,14 +6773,17 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Ostypeid              string                                                   `json:"ostypeid"`
 	Password              string                                                   `json:"password"`
 	Passwordenabled       bool                                                     `json:"passwordenabled"`
+	Pooltype              string                                                   `json:"pooltype"`
 	Project               string                                                   `json:"project"`
 	Projectid             string                                                   `json:"projectid"`
 	Publicip              string                                                   `json:"publicip"`
 	Publicipid            string                                                   `json:"publicipid"`
-	Readonlyuidetails     string                                                   `json:"readonlyuidetails"`
+	Readonlydetails       string                                                   `json:"readonlydetails"`
+	Receivedbytes         int64                                                    `json:"receivedbytes"`
 	Rootdeviceid          int64                                                    `json:"rootdeviceid"`
 	Rootdevicetype        string                                                   `json:"rootdevicetype"`
 	Securitygroup         []UpdateDefaultNicForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                                    `json:"sentbytes"`
 	Serviceofferingid     string                                                   `json:"serviceofferingid"`
 	Serviceofferingname   string                                                   `json:"serviceofferingname"`
 	Servicestate          string                                                   `json:"servicestate"`
@@ -7051,9 +7265,11 @@ type UpdateVirtualMachineResponse struct {
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
+	Hasannotations        bool                                        `json:"hasannotations"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
+	Icon                  string                                      `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -7063,6 +7279,7 @@ type UpdateVirtualMachineResponse struct {
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypair               string                                      `json:"keypair"`
+	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -7075,14 +7292,17 @@ type UpdateVirtualMachineResponse struct {
 	Ostypeid              string                                      `json:"ostypeid"`
 	Password              string                                      `json:"password"`
 	Passwordenabled       bool                                        `json:"passwordenabled"`
+	Pooltype              string                                      `json:"pooltype"`
 	Project               string                                      `json:"project"`
 	Projectid             string                                      `json:"projectid"`
 	Publicip              string                                      `json:"publicip"`
 	Publicipid            string                                      `json:"publicipid"`
-	Readonlyuidetails     string                                      `json:"readonlyuidetails"`
+	Readonlydetails       string                                      `json:"readonlydetails"`
+	Receivedbytes         int64                                       `json:"receivedbytes"`
 	Rootdeviceid          int64                                       `json:"rootdeviceid"`
 	Rootdevicetype        string                                      `json:"rootdevicetype"`
 	Securitygroup         []UpdateVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                       `json:"sentbytes"`
 	Serviceofferingid     string                                      `json:"serviceofferingid"`
 	Serviceofferingname   string                                      `json:"serviceofferingname"`
 	Servicestate          string                                      `json:"servicestate"`
