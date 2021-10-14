@@ -1,0 +1,18 @@
+{
+  "listHypervisorCapabilities": {
+    "listhypervisorcapabilitiesresponse": {
+      "count": 1,
+      "hypervisorCapabilities": [
+        {
+          "id": "1",
+          "hypervisorversion": "default",
+          "hypervisor": "XenServer",
+          "maxguestslimit": 50,
+          "securitygroupenabled": true,
+          "maxdatavolumeslimit": 6,
+          "storagemotionenabled": false
+        }
+      ]
+    }
+  }
+}

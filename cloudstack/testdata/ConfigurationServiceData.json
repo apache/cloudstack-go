@@ -1,0 +1,51 @@
+{
+  "listCapabilities": {
+    "listcapabilitiesresponse": {
+      "capability": {
+        "securitygroupsenabled": true,
+        "dynamicrolesenabled": true,
+        "cloudstackversion": "4.15.2.0",
+        "userpublictemplateenabled": false,
+        "supportELB": "false",
+        "projectinviterequired": true,
+        "allowusercreateprojects": true,
+        "customdiskofferingminsize": 1,
+        "customdiskofferingmaxsize": 1024,
+        "regionsecondaryenabled": false,
+        "kvmsnapshotenabled": true,
+        "allowuserviewdestroyedvm": true,
+        "allowuserexpungerecovervm": true,
+        "allowuserexpungerecovervolume": true,
+        "allowuserviewalldomainaccounts": false,
+        "kubernetesserviceenabled": true,
+        "kubernetesclusterexperimentalfeaturesenabled": true,
+        "defaultuipagesize": 20
+      }
+    }
+  },
+  "listConfigurations": {
+    "listconfigurationsresponse": {
+      "configuration": [
+        {
+          "category": "Project Defaults",
+          "description": "If regular user can create a project; true by default",
+          "isdynamic": false,
+          "name": "allow.user.create.projects",
+          "value": "true"
+        }
+      ],
+      "count": 1
+    }
+  },
+  "updateConfiguration": {
+    "updateconfigurationresponse": {
+      "configuration": {
+        "category": "Project Defaults",
+        "name": "allow.user.create.projects",
+        "value": "false",
+        "description": "If regular user can create a project; true by default",
+        "isdynamic": false
+      }
+    }
+  }
+}

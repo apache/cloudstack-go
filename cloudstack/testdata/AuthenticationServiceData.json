@@ -1,0 +1,23 @@
+{
+  "login": {
+    "loginresponse": {
+      "username": "admin",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
+      "timeout": 3600,
+      "account": "admin",
+      "firstname": "admin",
+      "lastname": "cloud",
+      "type": "1",
+      "timezone": "PST",
+      "timezoneoffset": "-7.0",
+      "registered": "false",
+      "sessionkey": "umn5ciBuEdorc784g4pJr-U5POM"
+    }
+  },
+  "logout": {
+    "logoutresponse": {
+      "description": "success"
+    }
+  }
+}

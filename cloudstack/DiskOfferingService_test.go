@@ -28,23 +28,12 @@ import (
 
 func TestDiskOfferingService_CreateDiskOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"creatediskofferingresponse": {
-				"diskoffering": {
-					"id": "7662b6ae-f00b-4268-973f-f3f87eaf82c5",
-						"name": "test",
-						"displaytext": "test",
-						"disksize": 0,
-						"created": "2021-10-02T15:19:25+0000",
-						"iscustomized": true,
-						"storagetype": "shared",
-						"provisioningtype": "thin",
-						"cacheMode": "none",
-						"displayoffering": true
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createDiskOffering"
+		response, err := ReadData(apiName, "DiskOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.DiskOffering.NewCreateDiskOfferingParams("test", "test")
@@ -60,26 +49,12 @@ func TestDiskOfferingService_CreateDiskOffering(t *testing.T) {
 
 func TestDiskOfferingService_ListDiskOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listdiskofferingsresponse": {
-				"count": 1,
-				"diskoffering": [
-					{
-						"id": "7662b6ae-f00b-4268-973f-f3f87eaf82c5",
-						"name": "test",
-						"displaytext": "test",
-						"disksize": 0,
-						"created": "2021-10-02T15:19:25+0000",
-						"iscustomized": true,
-						"storagetype": "shared",
-						"provisioningtype": "thin",
-						"cacheMode": "none",
-						"displayoffering": true
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listDiskOfferings"
+		response, err := ReadData(apiName, "DiskOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.DiskOffering.NewListDiskOfferingsParams()
@@ -96,12 +71,12 @@ func TestDiskOfferingService_ListDiskOffering(t *testing.T) {
 
 func TestDiskOfferingService_DeleteDiskOffering(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"deletediskofferingresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteDiskOffering"
+		response, err := ReadData(apiName, "DiskOfferingService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.DiskOffering.NewDeleteDiskOfferingParams("7662b6ae-f00b-4268-973f-f3f87eaf82c5")

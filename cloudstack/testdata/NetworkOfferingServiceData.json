@@ -1,0 +1,85 @@
+{
+  "createNetworkOffering": {
+    "createnetworkofferingresponse": {
+      "networkoffering": {
+        "id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
+        "name": "testNetOffering",
+        "displaytext": "testNetOffering",
+        "traffictype": "Guest",
+        "isdefault": false,
+        "specifyvlan": true,
+        "conservemode": true,
+        "specifyipranges": false,
+        "availability": "Optional",
+        "networkrate": 200,
+        "state": "Disabled",
+        "guestiptype": "L2",
+        "serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
+        "service": [],
+        "forvpc": false,
+        "ispersistent": false,
+        "egressdefaultpolicy": true,
+        "supportsstrechedl2subnet": false,
+        "supportspublicaccess": false
+      }
+    }
+  },
+  "updateNetworkOffering": {
+    "updatenetworkofferingresponse": {
+      "networkoffering": {
+        "id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
+        "name": "testNetOffering",
+        "displaytext": "testNetOffering",
+        "traffictype": "Guest",
+        "isdefault": false,
+        "specifyvlan": true,
+        "conservemode": true,
+        "specifyipranges": false,
+        "availability": "Optional",
+        "networkrate": 200,
+        "state": "Enabled",
+        "guestiptype": "L2",
+        "serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
+        "service": [],
+        "forvpc": false,
+        "ispersistent": false,
+        "egressdefaultpolicy": true,
+        "supportsstrechedl2subnet": false,
+        "supportspublicaccess": false
+      }
+    }
+  },
+  "listNetworkOfferings": {
+    "listnetworkofferingsresponse": {
+      "count": 1,
+      "networkoffering": [
+        {
+          "id": "c2000683-68fd-437e-a4cf-f3676e1d18c1",
+          "name": "testNetOffering",
+          "displaytext": "testNetOffering",
+          "traffictype": "Guest",
+          "isdefault": false,
+          "specifyvlan": true,
+          "conservemode": true,
+          "specifyipranges": false,
+          "availability": "Optional",
+          "networkrate": 200,
+          "state": "Enabled",
+          "guestiptype": "L2",
+          "serviceofferingid": "c4b50796-22a5-4347-ae81-79911e44ac8d",
+          "service": [],
+          "forvpc": false,
+          "ispersistent": false,
+          "egressdefaultpolicy": true,
+          "supportsstrechedl2subnet": false,
+          "supportspublicaccess": false
+        }
+      ]
+    }
+  },
+  "deleteNetworkOffering": {
+    "deletenetworkofferingresponse": {
+      "success": true
+    }
+  }
+}

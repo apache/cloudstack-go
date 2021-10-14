@@ -28,53 +28,12 @@ import (
 
 func TestLoadBalancerService_CreateLoadBalancerRule(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses := map[string]string{
-			"createLoadBalancerRule": `{
-				"createloadbalancerruleresponse": {
-					"id": "d9186a3e-b39a-473f-8d5e-70cf1a7aed44",
-					"jobid": "83ab0ded-225b-4a91-9aed-c17b1da07989"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse":{
-					  "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					  "cmd": "org.apache.cloudstack.api.command.user.loadbalancer.CreateLoadBalancerRuleCmd",
-					  "completed": "2021-10-04T04:37:08+0000",
-					  "created": "2021-10-04T04:37:08+0000",
-					  "jobid": "83ab0ded-225b-4a91-9aed-c17b1da07989",
-					  "jobinstanceid": "d9186a3e-b39a-473f-8d5e-70cf1a7aed44",
-					  "jobinstancetype": "FirewallRule",
-					  "jobprocstatus": 0,
-					  "jobresult": {
-						"loadbalancer": {
-						  "account": "admin",
-						  "algorithm": "roundrobin",
-						  "cidrlist": "",
-						  "domain": "ROOT",
-						  "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						  "fordisplay": true,
-						  "id": "d9186a3e-b39a-473f-8d5e-70cf1a7aed44",
-						  "name": "testLBRule",
-						  "networkid": "cc39d938-5ea0-4d9c-b89d-421da3274e54",
-						  "privateport": "9090",
-						  "protocol": "tcp",
-						  "publicip": "192.168.2.107",
-						  "publicipid": "bab02a09-1244-4235-a938-150e75e04ce0",
-						  "publicport": "9090",
-						  "state": "Add",
-						  "tags": [],
-						  "zoneid": "04ccc336-d730-42fe-8ff6-5ae36e141e81",
-						  "zonename": "SimZone1"
-						}
-					  },
-					  "jobresultcode": 0,
-					  "jobresulttype": "object",
-					  "jobstatus": 1,
-					  "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
-					}
-				}`,
+		apiName := "createLoadBalancerRule"
+		response, err := ParseAsyncResponse(apiName, "LoadBalancerService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[request.FormValue("command")])
+		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -93,31 +52,12 @@ func TestLoadBalancerService_CreateLoadBalancerRule(t *testing.T) {
 
 func TestLoadBalancerService_AssignLoadBalancerRule(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses := map[string]string{
-			"assignToLoadBalancerRule": `{
-				"assigntoloadbalancerruleresponse": {
-					"jobid": "7ab605d2-cddd-4f90-bd6b-884a8f62c16b"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.user.loadbalancer.AssignToLoadBalancerRuleCmd",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"success": true
-					},
-					"created": "2021-10-03T07:52:26+0000",
-					"completed": "2021-10-03T07:52:26+0000",
-					"jobid": "7ab605d2-cddd-4f90-bd6b-884a8f62c16b"
-				}
-			}`,
+		apiName := "assignLoadBalancerRule"
+		response, err := ParseAsyncResponse(apiName, "LoadBalancerService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[request.FormValue("command")])
+		fmt.Fprintf(writer, response)
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)

@@ -28,21 +28,12 @@ import (
 
 func TestDomainService_CreateDomain(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"createdomainresponse": {
-				"domain": {
-					"id": "1530cc8c-efe7-4dff-84c4-96a1e8a1cd7a",
-					"name": "testDomain",
-					"level": 1,
-					"parentdomainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"parentdomainname": "ROOT",
-					"haschild": false,
-					"path": "ROOT/testDomain",
-					"secondarystoragetotal": 0
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createDomain"
+		response, err := ReadData(apiName, "DomainService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -60,21 +51,12 @@ func TestDomainService_CreateDomain(t *testing.T) {
 
 func TestDomainService_UpdateDomain(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"updatedomainresponse": {
-				"domain": {
-					"id": "ee05fd92-7365-4421-a15b-abfa11dfc4f6",
-					"name": "testDomainUpdated",
-					"level": 1,
-					"parentdomainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-					"parentdomainname": "ROOT",
-					"haschild": false,
-					"path": "ROOT/testDomainUpdated",
-					"secondarystoragetotal": 0
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "updateDomain"
+		response, err := ReadData(apiName, "DomainService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -93,60 +75,12 @@ func TestDomainService_UpdateDomain(t *testing.T) {
 
 func TestDomainService_ListDomains(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listdomainsresponse": {
-				"count": 1,
-				"domain": [
-					{
-						"id": "097d3992-7a67-42e1-afb5-b4d2d81e280f",
-						"name": "DummyDomain",
-						"level": 1,
-						"parentdomainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						"parentdomainname": "ROOT",
-						"haschild": false,
-						"path": "ROOT/DummyDomain",
-						"state": "Active",
-						"vmlimit": "Unlimited",
-						"vmtotal": 0,
-						"vmavailable": "Unlimited",
-						"iplimit": "Unlimited",
-						"iptotal": 0,
-						"ipavailable": "Unlimited",
-						"volumelimit": "Unlimited",
-						"volumetotal": 0,
-						"volumeavailable": "Unlimited",
-						"snapshotlimit": "Unlimited",
-						"snapshottotal": 0,
-						"snapshotavailable": "Unlimited",
-						"templatelimit": "Unlimited",
-						"templatetotal": 0,
-						"templateavailable": "Unlimited",
-						"projectlimit": "Unlimited",
-						"projecttotal": 0,
-						"projectavailable": "Unlimited",
-						"networklimit": "Unlimited",
-						"networktotal": 0,
-						"networkavailable": "Unlimited",
-						"vpclimit": "Unlimited",
-						"vpctotal": 0,
-						"vpcavailable": "Unlimited",
-						"cpulimit": "Unlimited",
-						"cputotal": 0,
-						"cpuavailable": "Unlimited",
-						"memorylimit": "Unlimited",
-						"memorytotal": 0,
-						"memoryavailable": "Unlimited",
-						"primarystoragelimit": "-1",
-						"primarystoragetotal": 0,
-						"primarystorageavailable": "-1",
-						"secondarystoragelimit": "-1",
-						"secondarystoragetotal": 0,
-						"secondarystorageavailable": "-1.0"
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listDomains"
+		response, err := ReadData(apiName, "DomainService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -166,24 +100,12 @@ func TestDomainService_ListDomains(t *testing.T) {
 
 func TestDomainService_ListDomainChildren(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := `{
-			"listdomainchildrenresponse": {
-				"count": 1,
-				"domain": [
-					{
-						"id": "bfe3c14c-3a4a-4f85-b03c-308852967296",
-						"name": "subdomain",
-						"level": 2,
-						"parentdomainid": "99becf06-7f0f-4eb4-bdc3-44fecb8cb829",
-						"parentdomainname": "domain",
-						"haschild": false,
-						"path": "ROOT/domain/subdomain",
-						"secondarystoragetotal": 0
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listDomainChildren"
+		response, err := ReadData(apiName, "DomainService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
@@ -200,31 +122,12 @@ func TestDomainService_ListDomainChildren(t *testing.T) {
 
 func TestDomainService_DeleteDomain(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response := map[string]string{
-			"deleteDomain": `{
-				"deletedomainresponse": {
-					"jobid": "318c77c0-8c42-42fb-8c23-363819c85dd3"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.admin.domain.DeleteDomainCmd",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"success": true
-					},
-					"created": "2021-10-02T17:44:42+0000",
-					"completed": "2021-10-02T17:44:42+0000",
-					"jobid": "318c77c0-8c42-42fb-8c23-363819c85dd3"
-				}
-			}`,
+		apiName := "deleteDomain"
+		response, err := ParseAsyncResponse(apiName, "DomainService", *request)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, response[request.FormValue("command")])
+		fmt.Fprintln(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)

@@ -28,31 +28,12 @@ import (
 
 func TestConfigurationService_ListCapabilities(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp := `{
-			"listcapabilitiesresponse": {
-			"capability": {
-			"securitygroupsenabled": true,
-			"dynamicrolesenabled": true,
-			"cloudstackversion": "4.15.2.0",
-			"userpublictemplateenabled": false,
-			"supportELB": "false",
-			"projectinviterequired": true,
-			"allowusercreateprojects": true,
-			"customdiskofferingminsize": 1,
-			"customdiskofferingmaxsize": 1024,
-			"regionsecondaryenabled": false,
-			"kvmsnapshotenabled": true,
-			"allowuserviewdestroyedvm": true,
-			"allowuserexpungerecovervm": true,
-			"allowuserexpungerecovervolume": true,
-			"allowuserviewalldomainaccounts": false,
-			"kubernetesserviceenabled": true,
-			"kubernetesclusterexperimentalfeaturesenabled": true,
-			"defaultuipagesize": 20
-			}
+		apiName := "listCapabilities"
+		resp, err := ReadData(apiName, "ConfigurationService")
+		if err != nil {
+			t.Errorf("Failed to read response data, due to: %v", err)
 		}
-	}`
-		fmt.Fprintf(w, resp)
+		fmt.Fprintf(w, resp[apiName])
 	}))
 	defer server.Close()
 
@@ -70,21 +51,12 @@ func TestConfigurationService_ListCapabilities(t *testing.T) {
 
 func TestConfigurationService_ListConfigurations(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp := `{
-			"listconfigurationsresponse": {
-			  "configuration": [
-				{
-				  "category": "Project Defaults",
-				  "description": "If regular user can create a project; true by default",
-				  "isdynamic": false,
-				  "name": "allow.user.create.projects",
-				  "value": "true"
-				}
-			  ],
-			  "count": 1
-			}
-		}`
-		fmt.Fprintf(w, resp)
+		apiName := "listConfigurations"
+		resp, err := ReadData(apiName, "ConfigurationService")
+		if err != nil {
+			t.Errorf("Failed to read response data, due to: %v", err)
+		}
+		fmt.Fprintf(w, resp[apiName])
 	}))
 	client := newClient(server.URL, "APIKEY", "SECRETKEY", true, true)
 	p := client.Configuration.NewListConfigurationsParams()
@@ -98,30 +70,24 @@ func TestConfigurationService_ListConfigurations(t *testing.T) {
 	}
 }
 
-//func TestConfigurationService_UpdateConfigurations(t *testing.T) {
-//	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-//		resp := `{
-//			"updateconfigurationresponse": {
-//				"configuration": {
-//					"category": "Project Defaults",
-//					"name": "allow.user.create.projects",
-//					"value": "false",
-//					"description": "If regular user can create a project; true by default",
-//					"isdynamic": false
-//				}
-//			}
-//		}`
-//		fmt.Fprintf(w, resp)
-//	}))
-//	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
-//	p := client.Configuration.NewUpdateConfigurationParams("allow.user.create.projects")
-//	p.SetValue("false")
-//	resp, err := client.Configuration.UpdateConfiguration(p)
-//	if err != nil {
-//		t.Errorf("Failed to update configuration due to: %v", err)
-//	}
-//	fmt.Println(resp.Value)
-//	if resp.Value != "false" {
-//		t.Errorf("Failed to update configuration")
-//	}
-//}
+func TestConfigurationService_UpdateConfigurations(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		apiName := "updateConfiguration"
+		resp, err := ReadData(apiName, "ConfigurationService")
+		if err != nil {
+			t.Errorf("Failed to read response data, due to: %v", err)
+		}
+		fmt.Fprintf(w, resp[apiName])
+	}))
+	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
+	p := client.Configuration.NewUpdateConfigurationParams("allow.user.create.projects")
+	p.SetValue("false")
+	resp, err := client.Configuration.UpdateConfiguration(p)
+	if err != nil {
+		t.Errorf("Failed to update configuration due to: %v", err)
+	}
+	fmt.Println(resp)
+	if resp.Value != "false" {
+		t.Errorf("Failed to update configuration")
+	}
+}

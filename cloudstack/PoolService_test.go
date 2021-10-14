@@ -28,31 +28,12 @@ import (
 
 func TestPoolService_CreateStoragePool(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"createstoragepoolresponse": {
-				"storagepool": {
-					"id": "3fd44942-4881-3fb0-95f1-5d7b7ae64cfb",
-					"zoneid": "6ebc7a1c-ff98-425c-ac0d-b6c2e3ae6e33",
-					"zonename": "TestZone",
-					"podid": "6a1dbf48-8b8e-45ab-8249-cf43a86f012d",
-					"podname": "TestPod",
-					"name": "testPrimary1",
-					"ipaddress": "10.1.1.2",
-					"path": "/export/primary1",
-					"created": "2021-10-04T08:17:38+0000",
-					"type": "NetworkFilesystem",
-					"clusterid": "a73fb4a4-642b-4ea4-92b8-b74ec8908534",
-					"clustername": "TestCluster",
-					"disksizetotal": 1099511627776,
-					"disksizeallocated": 0,
-					"state": "Up",
-					"scope": "CLUSTER",
-					"overprovisionfactor": "2.0",
-					"provider": "DefaultPrimary"
-				}
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "createStoragePool"
+		response, err := ReadData(apiName, "PoolService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -70,38 +51,12 @@ func TestPoolService_CreateStoragePool(t *testing.T) {
 
 func TestPoolService_ListStoragePools(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"liststoragepoolsresponse": {
-			  "count": 1,
-			  "storagepool": [
-				{
-				  "clusterid": "a73fb4a4-642b-4ea4-92b8-b74ec8908534",
-				  "clustername": "TestCluster",
-				  "created": "2021-10-04T08:17:38+0000",
-				  "disksizeallocated": 0,
-				  "disksizetotal": 1099511627776,
-				  "disksizeused": 0,
-				  "id": "3fd44942-4881-3fb0-95f1-5d7b7ae64cfb",
-				  "ipaddress": "10.1.1.2",
-				  "name": "testPrimary1",
-				  "overprovisionfactor": "2.0",
-				  "path": "/export/primary1",
-				  "podid": "6a1dbf48-8b8e-45ab-8249-cf43a86f012d",
-				  "podname": "TestPod",
-				  "provider": "DefaultPrimary",
-				  "scope": "CLUSTER",
-				  "state": "Up",
-				  "storagecapabilities": {
-					"VOLUME_SNAPSHOT_QUIESCEVM": "false"
-				  },
-				  "type": "NetworkFilesystem",
-				  "zoneid": "6ebc7a1c-ff98-425c-ac0d-b6c2e3ae6e33",
-				  "zonename": "TestZone"
-				}
-			  ]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "listStoragePools"
+		response, err := ReadData(apiName, "PoolService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -120,12 +75,12 @@ func TestPoolService_ListStoragePools(t *testing.T) {
 
 func TestPoolService_DeleteStoragePool(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"deletestoragepoolresponse": {
-				"success": true
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "deleteStoragePool"
+		response, err := ReadData(apiName, "PoolService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)

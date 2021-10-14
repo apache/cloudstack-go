@@ -27,25 +27,13 @@ import (
 )
 
 func TestAuthenticationService_Login(t *testing.T) {
+	apiName := "login"
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		loginResponse := `{
-	"loginresponse": {
-		"username": "admin",
-		"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-		"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-		"timeout": 3600,
-		"account": "admin",
-		"firstname": "admin",
-		"lastname": "cloud",
-		"type": "1",
-		"timezone": "PST",
-		"timezoneoffset": "-7.0",
-		"registered": "false",
-		"sessionkey": "umn5ciBuEdorc784g4pJr-U5POM"
-	}
-}	
-	`
-		fmt.Fprintf(writer, loginResponse)
+		loginResponse, err := ReadData(apiName, "AuthenticationService")
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
+		}
+		fmt.Fprintf(writer, loginResponse[apiName])
 	}))
 	defer server.Close()
 
@@ -68,13 +56,12 @@ func TestAuthenticationService_Login(t *testing.T) {
 
 func TestAuthenticationService_Logout(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		logoutResponse := `{
-	"logoutresponse": {
-		"description": "success"
-	}
-}
-	`
-		fmt.Fprintln(writer, logoutResponse)
+		apiName := "logout"
+		logoutResponse, err := ReadData(apiName, "AuthenticationService")
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
+		}
+		fmt.Fprintln(writer, logoutResponse[apiName])
 	}))
 
 	defer server.Close()

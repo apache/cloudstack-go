@@ -1629,6 +1629,10 @@ func (s *ClusterService) UpdateCluster(p *UpdateClusterParams) (*UpdateClusterRe
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdateClusterResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

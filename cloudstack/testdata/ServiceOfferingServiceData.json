@@ -1,0 +1,53 @@
+{
+  "createServiceOffering": {
+    "createserviceofferingresponse": {
+      "serviceoffering": {
+        "id": "efaeeab0-4b09-4729-8b6f-62645db41b37",
+        "name": "testServiceOffering",
+        "displaytext": "testServiceOffering",
+        "cpunumber": 2,
+        "cpuspeed": 1000,
+        "memory": 2048,
+        "created": "2021-10-04T07:16:42+0000",
+        "storagetype": "shared",
+        "provisioningtype": "thin",
+        "offerha": false,
+        "limitcpuuse": false,
+        "isvolatile": false,
+        "issystem": false,
+        "defaultuse": false,
+        "iscustomized": false,
+        "cacheMode": "none",
+        "rootdisksize": 0
+      }
+    }
+  },
+  "updateServiceOffering": {
+    "updateserviceofferingresponse": {
+      "serviceoffering": {
+        "id": "efaeeab0-4b09-4729-8b6f-62645db41b37",
+        "name": "testServiceOfferingUpdated",
+        "displaytext": "testServiceOffering",
+        "cpunumber": 2,
+        "cpuspeed": 1000,
+        "memory": 2048,
+        "created": "2021-10-04T07:16:42+0000",
+        "storagetype": "shared",
+        "provisioningtype": "thin",
+        "offerha": false,
+        "limitcpuuse": false,
+        "isvolatile": false,
+        "issystem": false,
+        "defaultuse": false,
+        "iscustomized": false,
+        "cacheMode": "none",
+        "rootdisksize": 0
+      }
+    }
+  },
+  "deleteServiceOffering": {
+    "deleteserviceofferingresponse": {
+      "success": true
+    }
+  }
+}

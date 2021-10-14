@@ -1328,6 +1328,8 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		"CreateNetworkOffering",
 		"UpdateNetworkOffering",
 		"UpdateServiceOffering",
+		"UpdateConfiguration",
+		"UpdateCluster",
 		"CreateSSHKeyPair",
 		"CreateSecurityGroup",
 		"CreateServiceOffering",

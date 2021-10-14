@@ -28,55 +28,12 @@ import (
 
 func TestTemplateService_RegisterTemplate(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		response := `{
-			"registertemplateresponse": {
-				"count": 1,
-				"template": [
-					{
-						"id": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
-						"name": "testTemplate",
-						"displaytext": "testTemplate",
-						"ispublic": false,
-						"created": "2021-10-04T08:41:23+0000",
-						"isready": true,
-						"passwordenabled": false,
-						"format": "VHD",
-						"isfeatured": false,
-						"crossZones": false,
-						"ostypeid": "f3404cc6-c38c-11eb-848b-1e006800018c",
-						"ostypename": "Amazon Linux 3 (64 bit)",
-						"account": "admin",
-						"zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
-						"zonename": "shouldwork",
-						"status": "Download Complete",
-						"size": 5242880,
-						"physicalsize": 5242880,
-						"templatetype": "USER",
-						"hypervisor": "Simulator",
-						"domain": "ROOT",
-						"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-						"isextractable": false,
-						"details": {},
-						"downloaddetails": [
-							{
-								"downloadState": "DOWNLOADED",
-								"datastore": "secon",
-								"downloadPercent": "100"
-							}
-						],
-						"bits": 0,
-						"sshkeyenabled": false,
-						"isdynamicallyscalable": false,
-						"directdownload": false,
-						"deployasis": false,
-						"requireshvm": true,
-						"url": "http://dl.openvm.eu/cloudstack/macchinina/x86_64/macchinina-xen.vhd.bz2",
-						"tags": []
-					}
-				]
-			}
-		}`
-		fmt.Fprintf(writer, response)
+		apiName := "registerTemplate"
+		response, err := ReadData(apiName, "TemplateService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
 	}))
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -95,72 +52,12 @@ func TestTemplateService_RegisterTemplate(t *testing.T) {
 
 func TestTemplateService_CreateTemplate(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		responses := map[string]string{
-			"createTemplate": `{
-				"createtemplateresponse": {
-					"id": "b07dd9e4-1720-4122-b840-1e57a79e0dd9",
-					"jobid": "13cc57e2-f388-49d5-95f3-de5ba43835fb"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.admin.template.CreateTemplateCmdByAdmin",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"template": {
-							"id": "b07dd9e4-1720-4122-b840-1e57a79e0dd9",
-							"name": "createTempFromVol",
-							"displaytext": "createTempFromVol",
-							"ispublic": false,
-							"created": "2021-10-04T08:45:37+0000",
-							"isready": true,
-							"passwordenabled": false,
-							"format": "RAW",
-							"isfeatured": false,
-							"crossZones": false,
-							"ostypeid": "e510f742-5fdf-11ea-9a56-1e006800018c",
-							"ostypename": "Other (64-bit)",
-							"account": "admin",
-							"zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
-							"zonename": "shouldwork",
-							"status": "Download Complete",
-							"size": 21474836480,
-							"templatetype": "USER",
-							"hypervisor": "Simulator",
-							"domain": "ROOT",
-							"domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-							"isextractable": false,
-							"details": {},
-							"downloaddetails": [
-								{
-									"downloadState": "DOWNLOADED",
-									"datastore": "secon",
-									"downloadPercent": "100"
-								}
-							],
-							"bits": 0,
-							"sshkeyenabled": false,
-							"isdynamicallyscalable": false,
-							"directdownload": false,
-							"deployasis": false,
-							"requireshvm": false,
-							"tags": []
-						}
-					},
-					"jobinstancetype": "Template",
-					"jobinstanceid": "b07dd9e4-1720-4122-b840-1e57a79e0dd9",
-					"created": "2021-10-04T08:45:37+0000",
-					"completed": "2021-10-04T08:45:37+0000",
-					"jobid": "13cc57e2-f388-49d5-95f3-de5ba43835fb"
-				}
-			}`,
+		apiName := "createTemplate"
+		response, err := ParseAsyncResponse(apiName, "TemplateService", *r)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[r.FormValue("command")])
+		fmt.Fprintln(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
@@ -177,42 +74,12 @@ func TestTemplateService_CreateTemplate(t *testing.T) {
 
 func TestTemplateService_ExtractTemplate(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		responses := map[string]string{
-			"extractTemplate": `{
-				"extracttemplateresponse": {
-					"jobid": "d2c86fca-26ca-436e-b5cf-60754c598da3"
-				}
-			}`,
-			"queryAsyncJobResult": `{
-				"queryasyncjobresultresponse": {
-					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-					"cmd": "org.apache.cloudstack.api.command.user.template.ExtractTemplateCmd",
-					"jobstatus": 1,
-					"jobprocstatus": 0,
-					"jobresultcode": 0,
-					"jobresulttype": "object",
-					"jobresult": {
-						"template": {
-							"id": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
-							"name": "testTemplate",
-							"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-							"state": "DOWNLOAD_URL_CREATED",
-							"zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
-							"zonename": "shouldwork",
-							"extractMode": "HTTP_DOWNLOAD",
-							"url": "http://172.17.1.11/userdata/a7a2ca0e-65c7-4b9e-bc61-3a4ab6adf6c0.vhd"
-						}
-					},
-					"jobinstancetype": "Template",
-					"jobinstanceid": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
-					"created": "2021-10-04T08:50:45+0000",
-					"completed": "2021-10-04T08:50:46+0000",
-					"jobid": "d2c86fca-26ca-436e-b5cf-60754c598da3"
-				}
-			}`,
+		apiName := "extractTemplate"
+		response, err := ParseAsyncResponse(apiName, "TemplateService", *r)
+		if err != nil {
+			t.Errorf("Failed to parse response, due to: %v", err)
 		}
-		fmt.Fprintf(writer, responses[r.FormValue("command")])
+		fmt.Fprintln(writer, response)
 	}))
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
