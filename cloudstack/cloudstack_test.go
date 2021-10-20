@@ -47,7 +47,6 @@ func ReadData(apiName string, testDataFile string) (map[string]string, error) {
 	jsonBytes, err := json.Marshal(data.(map[string]interface{})[apiName])
 
 	if err != nil {
-		// fmt.Println(err)
 		return nil, err
 	}
 	response := make(map[string]string)

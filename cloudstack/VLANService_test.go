@@ -45,7 +45,7 @@ func TestNetworkService_DedicateGuestVLANRange(t *testing.T) {
 		t.Errorf("Failed to dedicate guest VLAN range for physical network due to: %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.Guestvlanrange != "100-110" {
 		t.Errorf("Failed to dedicate guest VLAN range for physical network")
 	}

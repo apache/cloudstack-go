@@ -68,7 +68,7 @@ func TestServiceOfferingService_UpdateServiceOffering(t *testing.T) {
 		t.Errorf("Failed to update service offering due to %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.Name != "testServiceOfferingUpdated" {
 		t.Errorf("Failed to create service offering name")
 	}

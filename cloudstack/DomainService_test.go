@@ -43,7 +43,7 @@ func TestDomainService_CreateDomain(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to create domain due to: %v", err)
 	}
-	fmt.Println(resp)
+
 	if resp.Name != "testDomain" {
 		t.Errorf("Failed to create domain")
 	}
@@ -67,7 +67,6 @@ func TestDomainService_UpdateDomain(t *testing.T) {
 		t.Errorf("Failed to update domain name due to: %v", err)
 	}
 
-	fmt.Println(resp)
 	if resp.Name != "testDomainUpdated" {
 		t.Errorf("Failed to update domain name")
 	}

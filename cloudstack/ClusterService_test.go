@@ -255,7 +255,6 @@ func TestClusterService_UpdateCluster(t *testing.T) {
 		t.Errorf("Failed to updated cluster details - name, due to: %v", err)
 	}
 
-	fmt.Println(resp)
 	if resp.Name != "TestClusterUpdated" {
 		t.Errorf("Failed to updated cluster name")
 	}

@@ -66,7 +66,7 @@ func TestUserService_EnableUser(t *testing.T) {
 		t.Errorf("Failed to enable user due to %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.State != "enabled" {
 		t.Errorf("Failed to enable user")
 	}
@@ -136,7 +136,7 @@ func TestUserService_LockUser(t *testing.T) {
 		t.Errorf("Failed to lock user due to %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.State != "locked" {
 		t.Errorf("Failed to lock user")
 	}

@@ -50,7 +50,7 @@ func TestUploadCustomCertificate(t *testing.T) {
 	}
 
 	if resp.Jobstatus == 1 {
-		fmt.Println("Successfully uploaded certificate")
+		t.Log("Successfully uploaded certificate")
 	}
 
 }
