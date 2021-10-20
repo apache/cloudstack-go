@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type NATServiceIface interface {
+	CreateIpForwardingRule(p *CreateIpForwardingRuleParams) (*CreateIpForwardingRuleResponse, error)
+	NewCreateIpForwardingRuleParams(ipaddressid string, protocol string, startport int) *CreateIpForwardingRuleParams
+	DeleteIpForwardingRule(p *DeleteIpForwardingRuleParams) (*DeleteIpForwardingRuleResponse, error)
+	NewDeleteIpForwardingRuleParams(id string) *DeleteIpForwardingRuleParams
+	DisableStaticNat(p *DisableStaticNatParams) (*DisableStaticNatResponse, error)
+	NewDisableStaticNatParams(ipaddressid string) *DisableStaticNatParams
+	EnableStaticNat(p *EnableStaticNatParams) (*EnableStaticNatResponse, error)
+	NewEnableStaticNatParams(ipaddressid string, virtualmachineid string) *EnableStaticNatParams
+	ListIpForwardingRules(p *ListIpForwardingRulesParams) (*ListIpForwardingRulesResponse, error)
+	NewListIpForwardingRulesParams() *ListIpForwardingRulesParams
+	GetIpForwardingRuleByID(id string, opts ...OptionFunc) (*IpForwardingRule, int, error)
+}
+
 type CreateIpForwardingRuleParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,33 @@ import (
 	"strings"
 )
 
+type ISOServiceIface interface {
+	AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error)
+	NewAttachIsoParams(id string, virtualmachineid string) *AttachIsoParams
+	CopyIso(p *CopyIsoParams) (*CopyIsoResponse, error)
+	NewCopyIsoParams(id string) *CopyIsoParams
+	DeleteIso(p *DeleteIsoParams) (*DeleteIsoResponse, error)
+	NewDeleteIsoParams(id string) *DeleteIsoParams
+	DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error)
+	NewDetachIsoParams(virtualmachineid string) *DetachIsoParams
+	ExtractIso(p *ExtractIsoParams) (*ExtractIsoResponse, error)
+	NewExtractIsoParams(id string, mode string) *ExtractIsoParams
+	ListIsoPermissions(p *ListIsoPermissionsParams) (*ListIsoPermissionsResponse, error)
+	NewListIsoPermissionsParams(id string) *ListIsoPermissionsParams
+	GetIsoPermissionByID(id string, opts ...OptionFunc) (*IsoPermission, int, error)
+	ListIsos(p *ListIsosParams) (*ListIsosResponse, error)
+	NewListIsosParams() *ListIsosParams
+	GetIsoID(name string, isofilter string, zoneid string, opts ...OptionFunc) (string, int, error)
+	GetIsoByName(name string, isofilter string, zoneid string, opts ...OptionFunc) (*Iso, int, error)
+	GetIsoByID(id string, opts ...OptionFunc) (*Iso, int, error)
+	RegisterIso(p *RegisterIsoParams) (*RegisterIsoResponse, error)
+	NewRegisterIsoParams(displaytext string, name string, url string, zoneid string) *RegisterIsoParams
+	UpdateIso(p *UpdateIsoParams) (*UpdateIsoResponse, error)
+	NewUpdateIsoParams(id string) *UpdateIsoParams
+	UpdateIsoPermissions(p *UpdateIsoPermissionsParams) (*UpdateIsoPermissionsResponse, error)
+	NewUpdateIsoPermissionsParams(id string) *UpdateIsoPermissionsParams
+}
+
 type AttachIsoParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,38 @@ import (
 	"strings"
 )
 
+type SnapshotServiceIface interface {
+	CreateSnapshot(p *CreateSnapshotParams) (*CreateSnapshotResponse, error)
+	NewCreateSnapshotParams(volumeid string) *CreateSnapshotParams
+	CreateSnapshotPolicy(p *CreateSnapshotPolicyParams) (*CreateSnapshotPolicyResponse, error)
+	NewCreateSnapshotPolicyParams(intervaltype string, maxsnaps int, schedule string, timezone string, volumeid string) *CreateSnapshotPolicyParams
+	CreateVMSnapshot(p *CreateVMSnapshotParams) (*CreateVMSnapshotResponse, error)
+	NewCreateVMSnapshotParams(virtualmachineid string) *CreateVMSnapshotParams
+	DeleteSnapshot(p *DeleteSnapshotParams) (*DeleteSnapshotResponse, error)
+	NewDeleteSnapshotParams(id string) *DeleteSnapshotParams
+	DeleteSnapshotPolicies(p *DeleteSnapshotPoliciesParams) (*DeleteSnapshotPoliciesResponse, error)
+	NewDeleteSnapshotPoliciesParams() *DeleteSnapshotPoliciesParams
+	DeleteVMSnapshot(p *DeleteVMSnapshotParams) (*DeleteVMSnapshotResponse, error)
+	NewDeleteVMSnapshotParams(vmsnapshotid string) *DeleteVMSnapshotParams
+	ListSnapshotPolicies(p *ListSnapshotPoliciesParams) (*ListSnapshotPoliciesResponse, error)
+	NewListSnapshotPoliciesParams() *ListSnapshotPoliciesParams
+	GetSnapshotPolicyByID(id string, opts ...OptionFunc) (*SnapshotPolicy, int, error)
+	ListSnapshots(p *ListSnapshotsParams) (*ListSnapshotsResponse, error)
+	NewListSnapshotsParams() *ListSnapshotsParams
+	GetSnapshotID(name string, opts ...OptionFunc) (string, int, error)
+	GetSnapshotByName(name string, opts ...OptionFunc) (*Snapshot, int, error)
+	GetSnapshotByID(id string, opts ...OptionFunc) (*Snapshot, int, error)
+	ListVMSnapshot(p *ListVMSnapshotParams) (*ListVMSnapshotResponse, error)
+	NewListVMSnapshotParams() *ListVMSnapshotParams
+	GetVMSnapshotID(name string, opts ...OptionFunc) (string, int, error)
+	RevertSnapshot(p *RevertSnapshotParams) (*RevertSnapshotResponse, error)
+	NewRevertSnapshotParams(id string) *RevertSnapshotParams
+	RevertToVMSnapshot(p *RevertToVMSnapshotParams) (*RevertToVMSnapshotResponse, error)
+	NewRevertToVMSnapshotParams(vmsnapshotid string) *RevertToVMSnapshotParams
+	UpdateSnapshotPolicy(p *UpdateSnapshotPolicyParams) (*UpdateSnapshotPolicyResponse, error)
+	NewUpdateSnapshotPolicyParams() *UpdateSnapshotPolicyParams
+}
+
 type CreateSnapshotParams struct {
 	p map[string]interface{}
 }

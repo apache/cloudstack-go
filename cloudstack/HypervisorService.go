@@ -27,6 +27,16 @@ import (
 	"strings"
 )
 
+type HypervisorServiceIface interface {
+	ListHypervisorCapabilities(p *ListHypervisorCapabilitiesParams) (*ListHypervisorCapabilitiesResponse, error)
+	NewListHypervisorCapabilitiesParams() *ListHypervisorCapabilitiesParams
+	GetHypervisorCapabilityByID(id string, opts ...OptionFunc) (*HypervisorCapability, int, error)
+	ListHypervisors(p *ListHypervisorsParams) (*ListHypervisorsResponse, error)
+	NewListHypervisorsParams() *ListHypervisorsParams
+	UpdateHypervisorCapabilities(p *UpdateHypervisorCapabilitiesParams) (*UpdateHypervisorCapabilitiesResponse, error)
+	NewUpdateHypervisorCapabilitiesParams() *UpdateHypervisorCapabilitiesParams
+}
+
 type ListHypervisorCapabilitiesParams struct {
 	p map[string]interface{}
 }

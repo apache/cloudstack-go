@@ -27,6 +27,22 @@ import (
 	"strings"
 )
 
+type PoolServiceIface interface {
+	CreateStoragePool(p *CreateStoragePoolParams) (*CreateStoragePoolResponse, error)
+	NewCreateStoragePoolParams(name string, url string, zoneid string) *CreateStoragePoolParams
+	DeleteStoragePool(p *DeleteStoragePoolParams) (*DeleteStoragePoolResponse, error)
+	NewDeleteStoragePoolParams(id string) *DeleteStoragePoolParams
+	FindStoragePoolsForMigration(p *FindStoragePoolsForMigrationParams) (*FindStoragePoolsForMigrationResponse, error)
+	NewFindStoragePoolsForMigrationParams(id string) *FindStoragePoolsForMigrationParams
+	ListStoragePools(p *ListStoragePoolsParams) (*ListStoragePoolsResponse, error)
+	NewListStoragePoolsParams() *ListStoragePoolsParams
+	GetStoragePoolID(name string, opts ...OptionFunc) (string, int, error)
+	GetStoragePoolByName(name string, opts ...OptionFunc) (*StoragePool, int, error)
+	GetStoragePoolByID(id string, opts ...OptionFunc) (*StoragePool, int, error)
+	UpdateStoragePool(p *UpdateStoragePoolParams) (*UpdateStoragePoolResponse, error)
+	NewUpdateStoragePoolParams(id string) *UpdateStoragePoolParams
+}
+
 type CreateStoragePoolParams struct {
 	p map[string]interface{}
 }

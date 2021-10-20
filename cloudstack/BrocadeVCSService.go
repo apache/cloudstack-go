@@ -26,6 +26,18 @@ import (
 	"strconv"
 )
 
+type BrocadeVCSServiceIface interface {
+	AddBrocadeVcsDevice(p *AddBrocadeVcsDeviceParams) (*AddBrocadeVcsDeviceResponse, error)
+	NewAddBrocadeVcsDeviceParams(hostname string, password string, physicalnetworkid string, username string) *AddBrocadeVcsDeviceParams
+	DeleteBrocadeVcsDevice(p *DeleteBrocadeVcsDeviceParams) (*DeleteBrocadeVcsDeviceResponse, error)
+	NewDeleteBrocadeVcsDeviceParams(vcsdeviceid string) *DeleteBrocadeVcsDeviceParams
+	ListBrocadeVcsDeviceNetworks(p *ListBrocadeVcsDeviceNetworksParams) (*ListBrocadeVcsDeviceNetworksResponse, error)
+	NewListBrocadeVcsDeviceNetworksParams(vcsdeviceid string) *ListBrocadeVcsDeviceNetworksParams
+	GetBrocadeVcsDeviceNetworkID(keyword string, vcsdeviceid string, opts ...OptionFunc) (string, int, error)
+	ListBrocadeVcsDevices(p *ListBrocadeVcsDevicesParams) (*ListBrocadeVcsDevicesResponse, error)
+	NewListBrocadeVcsDevicesParams() *ListBrocadeVcsDevicesParams
+}
+
 type AddBrocadeVcsDeviceParams struct {
 	p map[string]interface{}
 }

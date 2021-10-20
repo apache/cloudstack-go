@@ -25,6 +25,17 @@ import (
 	"strconv"
 )
 
+type RegionServiceIface interface {
+	AddRegion(p *AddRegionParams) (*AddRegionResponse, error)
+	NewAddRegionParams(endpoint string, id int, name string) *AddRegionParams
+	ListRegions(p *ListRegionsParams) (*ListRegionsResponse, error)
+	NewListRegionsParams() *ListRegionsParams
+	RemoveRegion(p *RemoveRegionParams) (*RemoveRegionResponse, error)
+	NewRemoveRegionParams(id int) *RemoveRegionParams
+	UpdateRegion(p *UpdateRegionParams) (*UpdateRegionResponse, error)
+	NewUpdateRegionParams(id int) *UpdateRegionParams
+}
+
 type AddRegionParams struct {
 	p map[string]interface{}
 }

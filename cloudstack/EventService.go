@@ -27,6 +27,18 @@ import (
 	"strings"
 )
 
+type EventServiceIface interface {
+	ArchiveEvents(p *ArchiveEventsParams) (*ArchiveEventsResponse, error)
+	NewArchiveEventsParams() *ArchiveEventsParams
+	DeleteEvents(p *DeleteEventsParams) (*DeleteEventsResponse, error)
+	NewDeleteEventsParams() *DeleteEventsParams
+	ListEventTypes(p *ListEventTypesParams) (*ListEventTypesResponse, error)
+	NewListEventTypesParams() *ListEventTypesParams
+	ListEvents(p *ListEventsParams) (*ListEventsResponse, error)
+	NewListEventsParams() *ListEventsParams
+	GetEventByID(id string, opts ...OptionFunc) (*Event, int, error)
+}
+
 type ArchiveEventsParams struct {
 	p map[string]interface{}
 }

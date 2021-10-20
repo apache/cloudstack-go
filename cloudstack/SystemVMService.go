@@ -27,6 +27,28 @@ import (
 	"strings"
 )
 
+type SystemVMServiceIface interface {
+	ChangeServiceForSystemVm(p *ChangeServiceForSystemVmParams) (*ChangeServiceForSystemVmResponse, error)
+	NewChangeServiceForSystemVmParams(id string, serviceofferingid string) *ChangeServiceForSystemVmParams
+	DestroySystemVm(p *DestroySystemVmParams) (*DestroySystemVmResponse, error)
+	NewDestroySystemVmParams(id string) *DestroySystemVmParams
+	ListSystemVms(p *ListSystemVmsParams) (*ListSystemVmsResponse, error)
+	NewListSystemVmsParams() *ListSystemVmsParams
+	GetSystemVmID(name string, opts ...OptionFunc) (string, int, error)
+	GetSystemVmByName(name string, opts ...OptionFunc) (*SystemVm, int, error)
+	GetSystemVmByID(id string, opts ...OptionFunc) (*SystemVm, int, error)
+	MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSystemVmResponse, error)
+	NewMigrateSystemVmParams(hostid string, virtualmachineid string) *MigrateSystemVmParams
+	RebootSystemVm(p *RebootSystemVmParams) (*RebootSystemVmResponse, error)
+	NewRebootSystemVmParams(id string) *RebootSystemVmParams
+	ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmResponse, error)
+	NewScaleSystemVmParams(id string, serviceofferingid string) *ScaleSystemVmParams
+	StartSystemVm(p *StartSystemVmParams) (*StartSystemVmResponse, error)
+	NewStartSystemVmParams(id string) *StartSystemVmParams
+	StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResponse, error)
+	NewStopSystemVmParams(id string) *StopSystemVmParams
+}
+
 type ChangeServiceForSystemVmParams struct {
 	p map[string]interface{}
 }

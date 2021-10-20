@@ -27,6 +27,30 @@ import (
 	"strings"
 )
 
+type UserServiceIface interface {
+	CreateUser(p *CreateUserParams) (*CreateUserResponse, error)
+	NewCreateUserParams(account string, email string, firstname string, lastname string, password string, username string) *CreateUserParams
+	DeleteUser(p *DeleteUserParams) (*DeleteUserResponse, error)
+	NewDeleteUserParams(id string) *DeleteUserParams
+	DisableUser(p *DisableUserParams) (*DisableUserResponse, error)
+	NewDisableUserParams(id string) *DisableUserParams
+	EnableUser(p *EnableUserParams) (*EnableUserResponse, error)
+	NewEnableUserParams(id string) *EnableUserParams
+	GetUser(p *GetUserParams) (*GetUserResponse, error)
+	NewGetUserParams(userapikey string) *GetUserParams
+	GetVirtualMachineUserData(p *GetVirtualMachineUserDataParams) (*GetVirtualMachineUserDataResponse, error)
+	NewGetVirtualMachineUserDataParams(virtualmachineid string) *GetVirtualMachineUserDataParams
+	ListUsers(p *ListUsersParams) (*ListUsersResponse, error)
+	NewListUsersParams() *ListUsersParams
+	GetUserByID(id string, opts ...OptionFunc) (*User, int, error)
+	LockUser(p *LockUserParams) (*LockUserResponse, error)
+	NewLockUserParams(id string) *LockUserParams
+	RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUserKeysResponse, error)
+	NewRegisterUserKeysParams(id string) *RegisterUserKeysParams
+	UpdateUser(p *UpdateUserParams) (*UpdateUserResponse, error)
+	NewUpdateUserParams(id string) *UpdateUserParams
+}
+
 type CreateUserParams struct {
 	p map[string]interface{}
 }

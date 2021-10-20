@@ -24,6 +24,11 @@ import (
 	"net/url"
 )
 
+type APIDiscoveryServiceIface interface {
+	ListApis(p *ListApisParams) (*ListApisResponse, error)
+	NewListApisParams() *ListApisParams
+}
+
 type ListApisParams struct {
 	p map[string]interface{}
 }

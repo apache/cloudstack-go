@@ -25,6 +25,15 @@ import (
 	"strconv"
 )
 
+type OutofbandManagementServiceIface interface {
+	ChangeOutOfBandManagementPassword(p *ChangeOutOfBandManagementPasswordParams) (*ChangeOutOfBandManagementPasswordResponse, error)
+	NewChangeOutOfBandManagementPasswordParams(hostid string) *ChangeOutOfBandManagementPasswordParams
+	ConfigureOutOfBandManagement(p *ConfigureOutOfBandManagementParams) (*OutOfBandManagementResponse, error)
+	NewConfigureOutOfBandManagementParams(address string, driver string, hostid string, password string, port string, username string) *ConfigureOutOfBandManagementParams
+	IssueOutOfBandManagementPowerAction(p *IssueOutOfBandManagementPowerActionParams) (*IssueOutOfBandManagementPowerActionResponse, error)
+	NewIssueOutOfBandManagementPowerActionParams(action string, hostid string) *IssueOutOfBandManagementPowerActionParams
+}
+
 type ChangeOutOfBandManagementPasswordParams struct {
 	p map[string]interface{}
 }

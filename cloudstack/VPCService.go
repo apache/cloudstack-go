@@ -27,6 +27,47 @@ import (
 	"strings"
 )
 
+type VPCServiceIface interface {
+	CreatePrivateGateway(p *CreatePrivateGatewayParams) (*CreatePrivateGatewayResponse, error)
+	NewCreatePrivateGatewayParams(gateway string, ipaddress string, netmask string, vlan string, vpcid string) *CreatePrivateGatewayParams
+	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
+	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
+	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
+	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
+	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
+	NewCreateVPCOfferingParams(displaytext string, name string, supportedservices []string) *CreateVPCOfferingParams
+	DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error)
+	NewDeletePrivateGatewayParams(id string) *DeletePrivateGatewayParams
+	DeleteStaticRoute(p *DeleteStaticRouteParams) (*DeleteStaticRouteResponse, error)
+	NewDeleteStaticRouteParams(id string) *DeleteStaticRouteParams
+	DeleteVPC(p *DeleteVPCParams) (*DeleteVPCResponse, error)
+	NewDeleteVPCParams(id string) *DeleteVPCParams
+	DeleteVPCOffering(p *DeleteVPCOfferingParams) (*DeleteVPCOfferingResponse, error)
+	NewDeleteVPCOfferingParams(id string) *DeleteVPCOfferingParams
+	ListPrivateGateways(p *ListPrivateGatewaysParams) (*ListPrivateGatewaysResponse, error)
+	NewListPrivateGatewaysParams() *ListPrivateGatewaysParams
+	GetPrivateGatewayByID(id string, opts ...OptionFunc) (*PrivateGateway, int, error)
+	ListStaticRoutes(p *ListStaticRoutesParams) (*ListStaticRoutesResponse, error)
+	NewListStaticRoutesParams() *ListStaticRoutesParams
+	GetStaticRouteByID(id string, opts ...OptionFunc) (*StaticRoute, int, error)
+	ListVPCOfferings(p *ListVPCOfferingsParams) (*ListVPCOfferingsResponse, error)
+	NewListVPCOfferingsParams() *ListVPCOfferingsParams
+	GetVPCOfferingID(name string, opts ...OptionFunc) (string, int, error)
+	GetVPCOfferingByName(name string, opts ...OptionFunc) (*VPCOffering, int, error)
+	GetVPCOfferingByID(id string, opts ...OptionFunc) (*VPCOffering, int, error)
+	ListVPCs(p *ListVPCsParams) (*ListVPCsResponse, error)
+	NewListVPCsParams() *ListVPCsParams
+	GetVPCID(name string, opts ...OptionFunc) (string, int, error)
+	GetVPCByName(name string, opts ...OptionFunc) (*VPC, int, error)
+	GetVPCByID(id string, opts ...OptionFunc) (*VPC, int, error)
+	RestartVPC(p *RestartVPCParams) (*RestartVPCResponse, error)
+	NewRestartVPCParams(id string) *RestartVPCParams
+	UpdateVPC(p *UpdateVPCParams) (*UpdateVPCResponse, error)
+	NewUpdateVPCParams(id string) *UpdateVPCParams
+	UpdateVPCOffering(p *UpdateVPCOfferingParams) (*UpdateVPCOfferingResponse, error)
+	NewUpdateVPCOfferingParams(id string) *UpdateVPCOfferingParams
+}
+
 type CreatePrivateGatewayParams struct {
 	p map[string]interface{}
 }

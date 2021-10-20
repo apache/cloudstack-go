@@ -25,6 +25,17 @@ import (
 	"strconv"
 )
 
+type NicServiceIface interface {
+	AddIpToNic(p *AddIpToNicParams) (*AddIpToNicResponse, error)
+	NewAddIpToNicParams(nicid string) *AddIpToNicParams
+	ListNics(p *ListNicsParams) (*ListNicsResponse, error)
+	NewListNicsParams(virtualmachineid string) *ListNicsParams
+	RemoveIpFromNic(p *RemoveIpFromNicParams) (*RemoveIpFromNicResponse, error)
+	NewRemoveIpFromNicParams(id string) *RemoveIpFromNicParams
+	UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpResponse, error)
+	NewUpdateVmNicIpParams(nicid string) *UpdateVmNicIpParams
+}
+
 type AddIpToNicParams struct {
 	p map[string]interface{}
 }

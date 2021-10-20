@@ -27,6 +27,18 @@ import (
 	"strings"
 )
 
+type ResourcetagsServiceIface interface {
+	CreateTags(p *CreateTagsParams) (*CreateTagsResponse, error)
+	NewCreateTagsParams(resourceids []string, resourcetype string, tags map[string]string) *CreateTagsParams
+	DeleteTags(p *DeleteTagsParams) (*DeleteTagsResponse, error)
+	NewDeleteTagsParams(resourceids []string, resourcetype string) *DeleteTagsParams
+	ListStorageTags(p *ListStorageTagsParams) (*ListStorageTagsResponse, error)
+	NewListStorageTagsParams() *ListStorageTagsParams
+	GetStorageTagID(keyword string, opts ...OptionFunc) (string, int, error)
+	ListTags(p *ListTagsParams) (*ListTagsResponse, error)
+	NewListTagsParams() *ListTagsParams
+}
+
 type CreateTagsParams struct {
 	p map[string]interface{}
 }

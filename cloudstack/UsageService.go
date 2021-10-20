@@ -26,6 +26,34 @@ import (
 	"strconv"
 )
 
+type UsageServiceIface interface {
+	AddTrafficMonitor(p *AddTrafficMonitorParams) (*AddTrafficMonitorResponse, error)
+	NewAddTrafficMonitorParams(url string, zoneid string) *AddTrafficMonitorParams
+	AddTrafficType(p *AddTrafficTypeParams) (*AddTrafficTypeResponse, error)
+	NewAddTrafficTypeParams(physicalnetworkid string, traffictype string) *AddTrafficTypeParams
+	DeleteTrafficMonitor(p *DeleteTrafficMonitorParams) (*DeleteTrafficMonitorResponse, error)
+	NewDeleteTrafficMonitorParams(id string) *DeleteTrafficMonitorParams
+	DeleteTrafficType(p *DeleteTrafficTypeParams) (*DeleteTrafficTypeResponse, error)
+	NewDeleteTrafficTypeParams(id string) *DeleteTrafficTypeParams
+	GenerateUsageRecords(p *GenerateUsageRecordsParams) (*GenerateUsageRecordsResponse, error)
+	NewGenerateUsageRecordsParams(enddate string, startdate string) *GenerateUsageRecordsParams
+	ListTrafficMonitors(p *ListTrafficMonitorsParams) (*ListTrafficMonitorsResponse, error)
+	NewListTrafficMonitorsParams(zoneid string) *ListTrafficMonitorsParams
+	ListTrafficTypeImplementors(p *ListTrafficTypeImplementorsParams) (*ListTrafficTypeImplementorsResponse, error)
+	NewListTrafficTypeImplementorsParams() *ListTrafficTypeImplementorsParams
+	ListTrafficTypes(p *ListTrafficTypesParams) (*ListTrafficTypesResponse, error)
+	NewListTrafficTypesParams(physicalnetworkid string) *ListTrafficTypesParams
+	GetTrafficTypeID(keyword string, physicalnetworkid string, opts ...OptionFunc) (string, int, error)
+	ListUsageRecords(p *ListUsageRecordsParams) (*ListUsageRecordsResponse, error)
+	NewListUsageRecordsParams(enddate string, startdate string) *ListUsageRecordsParams
+	ListUsageTypes(p *ListUsageTypesParams) (*ListUsageTypesResponse, error)
+	NewListUsageTypesParams() *ListUsageTypesParams
+	RemoveRawUsageRecords(p *RemoveRawUsageRecordsParams) (*RemoveRawUsageRecordsResponse, error)
+	NewRemoveRawUsageRecordsParams(interval int) *RemoveRawUsageRecordsParams
+	UpdateTrafficType(p *UpdateTrafficTypeParams) (*UpdateTrafficTypeResponse, error)
+	NewUpdateTrafficTypeParams(id string) *UpdateTrafficTypeParams
+}
+
 type AddTrafficMonitorParams struct {
 	p map[string]interface{}
 }

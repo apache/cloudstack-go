@@ -25,6 +25,11 @@ import (
 	"strconv"
 )
 
+type SystemCapacityServiceIface interface {
+	ListCapacity(p *ListCapacityParams) (*ListCapacityResponse, error)
+	NewListCapacityParams() *ListCapacityParams
+}
+
 type ListCapacityParams struct {
 	p map[string]interface{}
 }

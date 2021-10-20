@@ -77,3 +77,6 @@ func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result
 
 	return json.Unmarshal(resp, result)
 }
+
+type CustomServiceIface interface {
+}

@@ -59,6 +59,26 @@ func convertAuthorizeSecurityGroupEgressResponse(b []byte) ([]byte, error) {
 	return json.Marshal(raw.Egressrule[0])
 }
 
+type SecurityGroupServiceIface interface {
+	AuthorizeSecurityGroupEgress(p *AuthorizeSecurityGroupEgressParams) (*AuthorizeSecurityGroupEgressResponse, error)
+	NewAuthorizeSecurityGroupEgressParams() *AuthorizeSecurityGroupEgressParams
+	AuthorizeSecurityGroupIngress(p *AuthorizeSecurityGroupIngressParams) (*AuthorizeSecurityGroupIngressResponse, error)
+	NewAuthorizeSecurityGroupIngressParams() *AuthorizeSecurityGroupIngressParams
+	CreateSecurityGroup(p *CreateSecurityGroupParams) (*CreateSecurityGroupResponse, error)
+	NewCreateSecurityGroupParams(name string) *CreateSecurityGroupParams
+	DeleteSecurityGroup(p *DeleteSecurityGroupParams) (*DeleteSecurityGroupResponse, error)
+	NewDeleteSecurityGroupParams() *DeleteSecurityGroupParams
+	ListSecurityGroups(p *ListSecurityGroupsParams) (*ListSecurityGroupsResponse, error)
+	NewListSecurityGroupsParams() *ListSecurityGroupsParams
+	GetSecurityGroupID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetSecurityGroupByName(name string, opts ...OptionFunc) (*SecurityGroup, int, error)
+	GetSecurityGroupByID(id string, opts ...OptionFunc) (*SecurityGroup, int, error)
+	RevokeSecurityGroupEgress(p *RevokeSecurityGroupEgressParams) (*RevokeSecurityGroupEgressResponse, error)
+	NewRevokeSecurityGroupEgressParams(id string) *RevokeSecurityGroupEgressParams
+	RevokeSecurityGroupIngress(p *RevokeSecurityGroupIngressParams) (*RevokeSecurityGroupIngressResponse, error)
+	NewRevokeSecurityGroupIngressParams(id string) *RevokeSecurityGroupIngressParams
+}
+
 type AuthorizeSecurityGroupEgressParams struct {
 	p map[string]interface{}
 }

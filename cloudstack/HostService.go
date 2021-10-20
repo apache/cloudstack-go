@@ -27,6 +27,60 @@ import (
 	"strings"
 )
 
+type HostServiceIface interface {
+	AddBaremetalHost(p *AddBaremetalHostParams) (*AddBaremetalHostResponse, error)
+	NewAddBaremetalHostParams(hypervisor string, password string, podid string, url string, username string, zoneid string) *AddBaremetalHostParams
+	AddGloboDnsHost(p *AddGloboDnsHostParams) (*AddGloboDnsHostResponse, error)
+	NewAddGloboDnsHostParams(password string, physicalnetworkid string, url string, username string) *AddGloboDnsHostParams
+	AddHost(p *AddHostParams) (*AddHostResponse, error)
+	NewAddHostParams(hypervisor string, password string, podid string, url string, username string, zoneid string) *AddHostParams
+	AddSecondaryStorage(p *AddSecondaryStorageParams) (*AddSecondaryStorageResponse, error)
+	NewAddSecondaryStorageParams(url string) *AddSecondaryStorageParams
+	CancelHostMaintenance(p *CancelHostMaintenanceParams) (*CancelHostMaintenanceResponse, error)
+	NewCancelHostMaintenanceParams(id string) *CancelHostMaintenanceParams
+	ConfigureHAForHost(p *ConfigureHAForHostParams) (*HAForHostResponse, error)
+	NewConfigureHAForHostParams(hostid string, provider string) *ConfigureHAForHostParams
+	EnableHAForHost(p *EnableHAForHostParams) (*EnableHAForHostResponse, error)
+	NewEnableHAForHostParams(hostid string) *EnableHAForHostParams
+	DedicateHost(p *DedicateHostParams) (*DedicateHostResponse, error)
+	NewDedicateHostParams(domainid string, hostid string) *DedicateHostParams
+	DeleteHost(p *DeleteHostParams) (*DeleteHostResponse, error)
+	NewDeleteHostParams(id string) *DeleteHostParams
+	DisableOutOfBandManagementForHost(p *DisableOutOfBandManagementForHostParams) (*DisableOutOfBandManagementForHostResponse, error)
+	NewDisableOutOfBandManagementForHostParams(hostid string) *DisableOutOfBandManagementForHostParams
+	EnableOutOfBandManagementForHost(p *EnableOutOfBandManagementForHostParams) (*EnableOutOfBandManagementForHostResponse, error)
+	NewEnableOutOfBandManagementForHostParams(hostid string) *EnableOutOfBandManagementForHostParams
+	FindHostsForMigration(p *FindHostsForMigrationParams) (*FindHostsForMigrationResponse, error)
+	NewFindHostsForMigrationParams(virtualmachineid string) *FindHostsForMigrationParams
+	ListDedicatedHosts(p *ListDedicatedHostsParams) (*ListDedicatedHostsResponse, error)
+	NewListDedicatedHostsParams() *ListDedicatedHostsParams
+	ListHostTags(p *ListHostTagsParams) (*ListHostTagsResponse, error)
+	NewListHostTagsParams() *ListHostTagsParams
+	GetHostTagID(keyword string, opts ...OptionFunc) (string, int, error)
+	ListHosts(p *ListHostsParams) (*ListHostsResponse, error)
+	NewListHostsParams() *ListHostsParams
+	GetHostID(name string, opts ...OptionFunc) (string, int, error)
+	GetHostByName(name string, opts ...OptionFunc) (*Host, int, error)
+	GetHostByID(id string, opts ...OptionFunc) (*Host, int, error)
+	ListHostsMetrics(p *ListHostsMetricsParams) (*ListHostsMetricsResponse, error)
+	NewListHostsMetricsParams() *ListHostsMetricsParams
+	GetHostsMetricID(name string, opts ...OptionFunc) (string, int, error)
+	GetHostsMetricByName(name string, opts ...OptionFunc) (*HostsMetric, int, error)
+	GetHostsMetricByID(id string, opts ...OptionFunc) (*HostsMetric, int, error)
+	PrepareHostForMaintenance(p *PrepareHostForMaintenanceParams) (*PrepareHostForMaintenanceResponse, error)
+	NewPrepareHostForMaintenanceParams(id string) *PrepareHostForMaintenanceParams
+	ReconnectHost(p *ReconnectHostParams) (*ReconnectHostResponse, error)
+	NewReconnectHostParams(id string) *ReconnectHostParams
+	ReleaseDedicatedHost(p *ReleaseDedicatedHostParams) (*ReleaseDedicatedHostResponse, error)
+	NewReleaseDedicatedHostParams(hostid string) *ReleaseDedicatedHostParams
+	ReleaseHostReservation(p *ReleaseHostReservationParams) (*ReleaseHostReservationResponse, error)
+	NewReleaseHostReservationParams(id string) *ReleaseHostReservationParams
+	UpdateHost(p *UpdateHostParams) (*UpdateHostResponse, error)
+	NewUpdateHostParams(id string) *UpdateHostParams
+	UpdateHostPassword(p *UpdateHostPasswordParams) (*UpdateHostPasswordResponse, error)
+	NewUpdateHostPasswordParams(password string, username string) *UpdateHostPasswordParams
+}
+
 type AddBaremetalHostParams struct {
 	p map[string]interface{}
 }

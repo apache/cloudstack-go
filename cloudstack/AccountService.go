@@ -27,6 +27,37 @@ import (
 	"strings"
 )
 
+type AccountServiceIface interface {
+	AddAccountToProject(p *AddAccountToProjectParams) (*AddAccountToProjectResponse, error)
+	NewAddAccountToProjectParams(projectid string) *AddAccountToProjectParams
+	CreateAccount(p *CreateAccountParams) (*CreateAccountResponse, error)
+	NewCreateAccountParams(email string, firstname string, lastname string, password string, username string) *CreateAccountParams
+	DeleteAccount(p *DeleteAccountParams) (*DeleteAccountResponse, error)
+	NewDeleteAccountParams(id string) *DeleteAccountParams
+	DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error)
+	NewDeleteAccountFromProjectParams(account string, projectid string) *DeleteAccountFromProjectParams
+	DisableAccount(p *DisableAccountParams) (*DisableAccountResponse, error)
+	NewDisableAccountParams(lock bool) *DisableAccountParams
+	EnableAccount(p *EnableAccountParams) (*EnableAccountResponse, error)
+	NewEnableAccountParams() *EnableAccountParams
+	GetSolidFireAccountId(p *GetSolidFireAccountIdParams) (*GetSolidFireAccountIdResponse, error)
+	NewGetSolidFireAccountIdParams(accountid string, storageid string) *GetSolidFireAccountIdParams
+	ListAccounts(p *ListAccountsParams) (*ListAccountsResponse, error)
+	NewListAccountsParams() *ListAccountsParams
+	GetAccountID(name string, opts ...OptionFunc) (string, int, error)
+	GetAccountByName(name string, opts ...OptionFunc) (*Account, int, error)
+	GetAccountByID(id string, opts ...OptionFunc) (*Account, int, error)
+	ListProjectAccounts(p *ListProjectAccountsParams) (*ListProjectAccountsResponse, error)
+	NewListProjectAccountsParams(projectid string) *ListProjectAccountsParams
+	GetProjectAccountID(keyword string, projectid string, opts ...OptionFunc) (string, int, error)
+	LockAccount(p *LockAccountParams) (*LockAccountResponse, error)
+	NewLockAccountParams(account string, domainid string) *LockAccountParams
+	MarkDefaultZoneForAccount(p *MarkDefaultZoneForAccountParams) (*MarkDefaultZoneForAccountResponse, error)
+	NewMarkDefaultZoneForAccountParams(account string, domainid string, zoneid string) *MarkDefaultZoneForAccountParams
+	UpdateAccount(p *UpdateAccountParams) (*UpdateAccountResponse, error)
+	NewUpdateAccountParams() *UpdateAccountParams
+}
+
 type AddAccountToProjectParams struct {
 	p map[string]interface{}
 }

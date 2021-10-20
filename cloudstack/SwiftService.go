@@ -26,6 +26,14 @@ import (
 	"strconv"
 )
 
+type SwiftServiceIface interface {
+	AddSwift(p *AddSwiftParams) (*AddSwiftResponse, error)
+	NewAddSwiftParams(url string) *AddSwiftParams
+	ListSwifts(p *ListSwiftsParams) (*ListSwiftsResponse, error)
+	NewListSwiftsParams() *ListSwiftsParams
+	GetSwiftID(keyword string, opts ...OptionFunc) (string, int, error)
+}
+
 type AddSwiftParams struct {
 	p map[string]interface{}
 }

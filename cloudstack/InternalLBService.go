@@ -27,6 +27,25 @@ import (
 	"strings"
 )
 
+type InternalLBServiceIface interface {
+	ConfigureInternalLoadBalancerElement(p *ConfigureInternalLoadBalancerElementParams) (*InternalLoadBalancerElementResponse, error)
+	NewConfigureInternalLoadBalancerElementParams(enabled bool, id string) *ConfigureInternalLoadBalancerElementParams
+	CreateInternalLoadBalancerElement(p *CreateInternalLoadBalancerElementParams) (*CreateInternalLoadBalancerElementResponse, error)
+	NewCreateInternalLoadBalancerElementParams(nspid string) *CreateInternalLoadBalancerElementParams
+	ListInternalLoadBalancerElements(p *ListInternalLoadBalancerElementsParams) (*ListInternalLoadBalancerElementsResponse, error)
+	NewListInternalLoadBalancerElementsParams() *ListInternalLoadBalancerElementsParams
+	GetInternalLoadBalancerElementByID(id string, opts ...OptionFunc) (*InternalLoadBalancerElement, int, error)
+	ListInternalLoadBalancerVMs(p *ListInternalLoadBalancerVMsParams) (*ListInternalLoadBalancerVMsResponse, error)
+	NewListInternalLoadBalancerVMsParams() *ListInternalLoadBalancerVMsParams
+	GetInternalLoadBalancerVMID(name string, opts ...OptionFunc) (string, int, error)
+	GetInternalLoadBalancerVMByName(name string, opts ...OptionFunc) (*InternalLoadBalancerVM, int, error)
+	GetInternalLoadBalancerVMByID(id string, opts ...OptionFunc) (*InternalLoadBalancerVM, int, error)
+	StartInternalLoadBalancerVM(p *StartInternalLoadBalancerVMParams) (*StartInternalLoadBalancerVMResponse, error)
+	NewStartInternalLoadBalancerVMParams(id string) *StartInternalLoadBalancerVMParams
+	StopInternalLoadBalancerVM(p *StopInternalLoadBalancerVMParams) (*StopInternalLoadBalancerVMResponse, error)
+	NewStopInternalLoadBalancerVMParams(id string) *StopInternalLoadBalancerVMParams
+}
+
 type ConfigureInternalLoadBalancerElementParams struct {
 	p map[string]interface{}
 }

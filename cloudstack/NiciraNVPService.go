@@ -25,6 +25,15 @@ import (
 	"strconv"
 )
 
+type NiciraNVPServiceIface interface {
+	AddNiciraNvpDevice(p *AddNiciraNvpDeviceParams) (*AddNiciraNvpDeviceResponse, error)
+	NewAddNiciraNvpDeviceParams(hostname string, password string, physicalnetworkid string, transportzoneuuid string, username string) *AddNiciraNvpDeviceParams
+	DeleteNiciraNvpDevice(p *DeleteNiciraNvpDeviceParams) (*DeleteNiciraNvpDeviceResponse, error)
+	NewDeleteNiciraNvpDeviceParams(nvpdeviceid string) *DeleteNiciraNvpDeviceParams
+	ListNiciraNvpDevices(p *ListNiciraNvpDevicesParams) (*ListNiciraNvpDevicesResponse, error)
+	NewListNiciraNvpDevicesParams() *ListNiciraNvpDevicesParams
+}
+
 type AddNiciraNvpDeviceParams struct {
 	p map[string]interface{}
 }

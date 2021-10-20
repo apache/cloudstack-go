@@ -27,6 +27,31 @@ import (
 	"strings"
 )
 
+type NetworkACLServiceIface interface {
+	CreateNetworkACL(p *CreateNetworkACLParams) (*CreateNetworkACLResponse, error)
+	NewCreateNetworkACLParams(protocol string) *CreateNetworkACLParams
+	CreateNetworkACLList(p *CreateNetworkACLListParams) (*CreateNetworkACLListResponse, error)
+	NewCreateNetworkACLListParams(name string, vpcid string) *CreateNetworkACLListParams
+	DeleteNetworkACL(p *DeleteNetworkACLParams) (*DeleteNetworkACLResponse, error)
+	NewDeleteNetworkACLParams(id string) *DeleteNetworkACLParams
+	DeleteNetworkACLList(p *DeleteNetworkACLListParams) (*DeleteNetworkACLListResponse, error)
+	NewDeleteNetworkACLListParams(id string) *DeleteNetworkACLListParams
+	ListNetworkACLLists(p *ListNetworkACLListsParams) (*ListNetworkACLListsResponse, error)
+	NewListNetworkACLListsParams() *ListNetworkACLListsParams
+	GetNetworkACLListID(name string, opts ...OptionFunc) (string, int, error)
+	GetNetworkACLListByName(name string, opts ...OptionFunc) (*NetworkACLList, int, error)
+	GetNetworkACLListByID(id string, opts ...OptionFunc) (*NetworkACLList, int, error)
+	ListNetworkACLs(p *ListNetworkACLsParams) (*ListNetworkACLsResponse, error)
+	NewListNetworkACLsParams() *ListNetworkACLsParams
+	GetNetworkACLByID(id string, opts ...OptionFunc) (*NetworkACL, int, error)
+	ReplaceNetworkACLList(p *ReplaceNetworkACLListParams) (*ReplaceNetworkACLListResponse, error)
+	NewReplaceNetworkACLListParams(aclid string) *ReplaceNetworkACLListParams
+	UpdateNetworkACLItem(p *UpdateNetworkACLItemParams) (*UpdateNetworkACLItemResponse, error)
+	NewUpdateNetworkACLItemParams(id string) *UpdateNetworkACLItemParams
+	UpdateNetworkACLList(p *UpdateNetworkACLListParams) (*UpdateNetworkACLListResponse, error)
+	NewUpdateNetworkACLListParams(id string) *UpdateNetworkACLListParams
+}
+
 type CreateNetworkACLParams struct {
 	p map[string]interface{}
 }

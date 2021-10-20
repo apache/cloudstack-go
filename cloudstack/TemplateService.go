@@ -27,6 +27,37 @@ import (
 	"strings"
 )
 
+type TemplateServiceIface interface {
+	CopyTemplate(p *CopyTemplateParams) (*CopyTemplateResponse, error)
+	NewCopyTemplateParams(id string) *CopyTemplateParams
+	CreateTemplate(p *CreateTemplateParams) (*CreateTemplateResponse, error)
+	NewCreateTemplateParams(displaytext string, name string, ostypeid string) *CreateTemplateParams
+	DeleteTemplate(p *DeleteTemplateParams) (*DeleteTemplateResponse, error)
+	NewDeleteTemplateParams(id string) *DeleteTemplateParams
+	ExtractTemplate(p *ExtractTemplateParams) (*ExtractTemplateResponse, error)
+	NewExtractTemplateParams(id string, mode string) *ExtractTemplateParams
+	GetUploadParamsForTemplate(p *GetUploadParamsForTemplateParams) (*GetUploadParamsForTemplateResponse, error)
+	NewGetUploadParamsForTemplateParams(displaytext string, format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams
+	ListTemplatePermissions(p *ListTemplatePermissionsParams) (*ListTemplatePermissionsResponse, error)
+	NewListTemplatePermissionsParams(id string) *ListTemplatePermissionsParams
+	GetTemplatePermissionByID(id string, opts ...OptionFunc) (*TemplatePermission, int, error)
+	ListTemplates(p *ListTemplatesParams) (*ListTemplatesResponse, error)
+	NewListTemplatesParams(templatefilter string) *ListTemplatesParams
+	GetTemplateID(name string, templatefilter string, zoneid string, opts ...OptionFunc) (string, int, error)
+	GetTemplateByName(name string, templatefilter string, zoneid string, opts ...OptionFunc) (*Template, int, error)
+	GetTemplateByID(id string, templatefilter string, opts ...OptionFunc) (*Template, int, error)
+	PrepareTemplate(p *PrepareTemplateParams) (*PrepareTemplateResponse, error)
+	NewPrepareTemplateParams(templateid string, zoneid string) *PrepareTemplateParams
+	RegisterTemplate(p *RegisterTemplateParams) (*RegisterTemplateResponse, error)
+	NewRegisterTemplateParams(displaytext string, format string, hypervisor string, name string, url string) *RegisterTemplateParams
+	UpdateTemplate(p *UpdateTemplateParams) (*UpdateTemplateResponse, error)
+	NewUpdateTemplateParams(id string) *UpdateTemplateParams
+	UpdateTemplatePermissions(p *UpdateTemplatePermissionsParams) (*UpdateTemplatePermissionsResponse, error)
+	NewUpdateTemplatePermissionsParams(id string) *UpdateTemplatePermissionsParams
+	UpgradeRouterTemplate(p *UpgradeRouterTemplateParams) (*UpgradeRouterTemplateResponse, error)
+	NewUpgradeRouterTemplateParams() *UpgradeRouterTemplateParams
+}
+
 type CopyTemplateParams struct {
 	p map[string]interface{}
 }

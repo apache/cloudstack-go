@@ -26,6 +26,15 @@ import (
 	"strconv"
 )
 
+type NetworkDeviceServiceIface interface {
+	AddNetworkDevice(p *AddNetworkDeviceParams) (*AddNetworkDeviceResponse, error)
+	NewAddNetworkDeviceParams() *AddNetworkDeviceParams
+	DeleteNetworkDevice(p *DeleteNetworkDeviceParams) (*DeleteNetworkDeviceResponse, error)
+	NewDeleteNetworkDeviceParams(id string) *DeleteNetworkDeviceParams
+	ListNetworkDevice(p *ListNetworkDeviceParams) (*ListNetworkDeviceResponse, error)
+	NewListNetworkDeviceParams() *ListNetworkDeviceParams
+}
+
 type AddNetworkDeviceParams struct {
 	p map[string]interface{}
 }

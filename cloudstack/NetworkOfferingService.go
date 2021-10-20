@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type NetworkOfferingServiceIface interface {
+	CreateNetworkOffering(p *CreateNetworkOfferingParams) (*CreateNetworkOfferingResponse, error)
+	NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, supportedservices []string, traffictype string) *CreateNetworkOfferingParams
+	DeleteNetworkOffering(p *DeleteNetworkOfferingParams) (*DeleteNetworkOfferingResponse, error)
+	NewDeleteNetworkOfferingParams(id string) *DeleteNetworkOfferingParams
+	ListNetworkOfferings(p *ListNetworkOfferingsParams) (*ListNetworkOfferingsResponse, error)
+	NewListNetworkOfferingsParams() *ListNetworkOfferingsParams
+	GetNetworkOfferingID(name string, opts ...OptionFunc) (string, int, error)
+	GetNetworkOfferingByName(name string, opts ...OptionFunc) (*NetworkOffering, int, error)
+	GetNetworkOfferingByID(id string, opts ...OptionFunc) (*NetworkOffering, int, error)
+	UpdateNetworkOffering(p *UpdateNetworkOfferingParams) (*UpdateNetworkOfferingResponse, error)
+	NewUpdateNetworkOfferingParams() *UpdateNetworkOfferingParams
+}
+
 type CreateNetworkOfferingParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,40 @@ import (
 	"strings"
 )
 
+type VolumeServiceIface interface {
+	AttachVolume(p *AttachVolumeParams) (*AttachVolumeResponse, error)
+	NewAttachVolumeParams(id string, virtualmachineid string) *AttachVolumeParams
+	CreateVolume(p *CreateVolumeParams) (*CreateVolumeResponse, error)
+	NewCreateVolumeParams() *CreateVolumeParams
+	DeleteVolume(p *DeleteVolumeParams) (*DeleteVolumeResponse, error)
+	NewDeleteVolumeParams(id string) *DeleteVolumeParams
+	DetachVolume(p *DetachVolumeParams) (*DetachVolumeResponse, error)
+	NewDetachVolumeParams() *DetachVolumeParams
+	ExtractVolume(p *ExtractVolumeParams) (*ExtractVolumeResponse, error)
+	NewExtractVolumeParams(id string, mode string, zoneid string) *ExtractVolumeParams
+	GetPathForVolume(p *GetPathForVolumeParams) (*GetPathForVolumeResponse, error)
+	NewGetPathForVolumeParams(volumeid string) *GetPathForVolumeParams
+	GetSolidFireVolumeSize(p *GetSolidFireVolumeSizeParams) (*GetSolidFireVolumeSizeResponse, error)
+	NewGetSolidFireVolumeSizeParams(volumeid string) *GetSolidFireVolumeSizeParams
+	GetUploadParamsForVolume(p *GetUploadParamsForVolumeParams) (*GetUploadParamsForVolumeResponse, error)
+	NewGetUploadParamsForVolumeParams(format string, name string, zoneid string) *GetUploadParamsForVolumeParams
+	GetVolumeiScsiName(p *GetVolumeiScsiNameParams) (*GetVolumeiScsiNameResponse, error)
+	NewGetVolumeiScsiNameParams(volumeid string) *GetVolumeiScsiNameParams
+	ListVolumes(p *ListVolumesParams) (*ListVolumesResponse, error)
+	NewListVolumesParams() *ListVolumesParams
+	GetVolumeID(name string, opts ...OptionFunc) (string, int, error)
+	GetVolumeByName(name string, opts ...OptionFunc) (*Volume, int, error)
+	GetVolumeByID(id string, opts ...OptionFunc) (*Volume, int, error)
+	MigrateVolume(p *MigrateVolumeParams) (*MigrateVolumeResponse, error)
+	NewMigrateVolumeParams(storageid string, volumeid string) *MigrateVolumeParams
+	ResizeVolume(p *ResizeVolumeParams) (*ResizeVolumeResponse, error)
+	NewResizeVolumeParams(id string) *ResizeVolumeParams
+	UpdateVolume(p *UpdateVolumeParams) (*UpdateVolumeResponse, error)
+	NewUpdateVolumeParams() *UpdateVolumeParams
+	UploadVolume(p *UploadVolumeParams) (*UploadVolumeResponse, error)
+	NewUploadVolumeParams(format string, name string, url string, zoneid string) *UploadVolumeParams
+}
+
 type AttachVolumeParams struct {
 	p map[string]interface{}
 }

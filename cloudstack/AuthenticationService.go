@@ -25,6 +25,13 @@ import (
 	"strconv"
 )
 
+type AuthenticationServiceIface interface {
+	Login(p *LoginParams) (*LoginResponse, error)
+	NewLoginParams(password string, username string) *LoginParams
+	Logout(p *LogoutParams) (*LogoutResponse, error)
+	NewLogoutParams() *LogoutParams
+}
+
 type LoginParams struct {
 	p map[string]interface{}
 }

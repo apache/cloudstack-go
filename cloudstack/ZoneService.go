@@ -27,6 +27,34 @@ import (
 	"strings"
 )
 
+type ZoneServiceIface interface {
+	CreateZone(p *CreateZoneParams) (*CreateZoneResponse, error)
+	NewCreateZoneParams(dns1 string, internaldns1 string, name string, networktype string) *CreateZoneParams
+	DedicateZone(p *DedicateZoneParams) (*DedicateZoneResponse, error)
+	NewDedicateZoneParams(domainid string, zoneid string) *DedicateZoneParams
+	DeleteZone(p *DeleteZoneParams) (*DeleteZoneResponse, error)
+	NewDeleteZoneParams(id string) *DeleteZoneParams
+	DisableOutOfBandManagementForZone(p *DisableOutOfBandManagementForZoneParams) (*DisableOutOfBandManagementForZoneResponse, error)
+	NewDisableOutOfBandManagementForZoneParams(zoneid string) *DisableOutOfBandManagementForZoneParams
+	EnableOutOfBandManagementForZone(p *EnableOutOfBandManagementForZoneParams) (*EnableOutOfBandManagementForZoneResponse, error)
+	NewEnableOutOfBandManagementForZoneParams(zoneid string) *EnableOutOfBandManagementForZoneParams
+	DisableHAForZone(p *DisableHAForZoneParams) (*DisableHAForZoneResponse, error)
+	NewDisableHAForZoneParams(zoneid string) *DisableHAForZoneParams
+	EnableHAForZone(p *EnableHAForZoneParams) (*EnableHAForZoneResponse, error)
+	NewEnableHAForZoneParams(zoneid string) *EnableHAForZoneParams
+	ListDedicatedZones(p *ListDedicatedZonesParams) (*ListDedicatedZonesResponse, error)
+	NewListDedicatedZonesParams() *ListDedicatedZonesParams
+	ListZones(p *ListZonesParams) (*ListZonesResponse, error)
+	NewListZonesParams() *ListZonesParams
+	GetZoneID(name string, opts ...OptionFunc) (string, int, error)
+	GetZoneByName(name string, opts ...OptionFunc) (*Zone, int, error)
+	GetZoneByID(id string, opts ...OptionFunc) (*Zone, int, error)
+	ReleaseDedicatedZone(p *ReleaseDedicatedZoneParams) (*ReleaseDedicatedZoneResponse, error)
+	NewReleaseDedicatedZoneParams(zoneid string) *ReleaseDedicatedZoneParams
+	UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, error)
+	NewUpdateZoneParams(id string) *UpdateZoneParams
+}
+
 type CreateZoneParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type ServiceOfferingServiceIface interface {
+	CreateServiceOffering(p *CreateServiceOfferingParams) (*CreateServiceOfferingResponse, error)
+	NewCreateServiceOfferingParams(displaytext string, name string) *CreateServiceOfferingParams
+	DeleteServiceOffering(p *DeleteServiceOfferingParams) (*DeleteServiceOfferingResponse, error)
+	NewDeleteServiceOfferingParams(id string) *DeleteServiceOfferingParams
+	ListServiceOfferings(p *ListServiceOfferingsParams) (*ListServiceOfferingsResponse, error)
+	NewListServiceOfferingsParams() *ListServiceOfferingsParams
+	GetServiceOfferingID(name string, opts ...OptionFunc) (string, int, error)
+	GetServiceOfferingByName(name string, opts ...OptionFunc) (*ServiceOffering, int, error)
+	GetServiceOfferingByID(id string, opts ...OptionFunc) (*ServiceOffering, int, error)
+	UpdateServiceOffering(p *UpdateServiceOfferingParams) (*UpdateServiceOfferingResponse, error)
+	NewUpdateServiceOfferingParams(id string) *UpdateServiceOfferingParams
+}
+
 type CreateServiceOfferingParams struct {
 	p map[string]interface{}
 }

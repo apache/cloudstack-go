@@ -25,6 +25,15 @@ import (
 	"strconv"
 )
 
+type StoragePoolServiceIface interface {
+	CancelStorageMaintenance(p *CancelStorageMaintenanceParams) (*CancelStorageMaintenanceResponse, error)
+	NewCancelStorageMaintenanceParams(id string) *CancelStorageMaintenanceParams
+	EnableStorageMaintenance(p *EnableStorageMaintenanceParams) (*EnableStorageMaintenanceResponse, error)
+	NewEnableStorageMaintenanceParams(id string) *EnableStorageMaintenanceParams
+	ListStorageProviders(p *ListStorageProvidersParams) (*ListStorageProvidersResponse, error)
+	NewListStorageProvidersParams(storagePoolType string) *ListStorageProvidersParams
+}
+
 type CancelStorageMaintenanceParams struct {
 	p map[string]interface{}
 }

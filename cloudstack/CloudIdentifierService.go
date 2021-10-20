@@ -24,6 +24,11 @@ import (
 	"net/url"
 )
 
+type CloudIdentifierServiceIface interface {
+	GetCloudIdentifier(p *GetCloudIdentifierParams) (*GetCloudIdentifierResponse, error)
+	NewGetCloudIdentifierParams(userid string) *GetCloudIdentifierParams
+}
+
 type GetCloudIdentifierParams struct {
 	p map[string]interface{}
 }

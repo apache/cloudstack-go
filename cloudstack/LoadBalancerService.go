@@ -27,6 +27,89 @@ import (
 	"strings"
 )
 
+type LoadBalancerServiceIface interface {
+	AddNetscalerLoadBalancer(p *AddNetscalerLoadBalancerParams) (*AddNetscalerLoadBalancerResponse, error)
+	NewAddNetscalerLoadBalancerParams(networkdevicetype string, password string, physicalnetworkid string, url string, username string) *AddNetscalerLoadBalancerParams
+	AssignCertToLoadBalancer(p *AssignCertToLoadBalancerParams) (*AssignCertToLoadBalancerResponse, error)
+	NewAssignCertToLoadBalancerParams(certid string, lbruleid string) *AssignCertToLoadBalancerParams
+	AssignToGlobalLoadBalancerRule(p *AssignToGlobalLoadBalancerRuleParams) (*AssignToGlobalLoadBalancerRuleResponse, error)
+	NewAssignToGlobalLoadBalancerRuleParams(id string, loadbalancerrulelist []string) *AssignToGlobalLoadBalancerRuleParams
+	AssignToLoadBalancerRule(p *AssignToLoadBalancerRuleParams) (*AssignToLoadBalancerRuleResponse, error)
+	NewAssignToLoadBalancerRuleParams(id string) *AssignToLoadBalancerRuleParams
+	ConfigureNetscalerLoadBalancer(p *ConfigureNetscalerLoadBalancerParams) (*NetscalerLoadBalancerResponse, error)
+	NewConfigureNetscalerLoadBalancerParams(lbdeviceid string) *ConfigureNetscalerLoadBalancerParams
+	CreateGlobalLoadBalancerRule(p *CreateGlobalLoadBalancerRuleParams) (*CreateGlobalLoadBalancerRuleResponse, error)
+	NewCreateGlobalLoadBalancerRuleParams(gslbdomainname string, gslbservicetype string, name string, regionid int) *CreateGlobalLoadBalancerRuleParams
+	CreateLBHealthCheckPolicy(p *CreateLBHealthCheckPolicyParams) (*CreateLBHealthCheckPolicyResponse, error)
+	NewCreateLBHealthCheckPolicyParams(lbruleid string) *CreateLBHealthCheckPolicyParams
+	CreateLBStickinessPolicy(p *CreateLBStickinessPolicyParams) (*CreateLBStickinessPolicyResponse, error)
+	NewCreateLBStickinessPolicyParams(lbruleid string, methodname string, name string) *CreateLBStickinessPolicyParams
+	CreateLoadBalancer(p *CreateLoadBalancerParams) (*CreateLoadBalancerResponse, error)
+	NewCreateLoadBalancerParams(algorithm string, instanceport int, name string, networkid string, scheme string, sourceipaddressnetworkid string, sourceport int) *CreateLoadBalancerParams
+	CreateLoadBalancerRule(p *CreateLoadBalancerRuleParams) (*CreateLoadBalancerRuleResponse, error)
+	NewCreateLoadBalancerRuleParams(algorithm string, name string, privateport int, publicport int) *CreateLoadBalancerRuleParams
+	DeleteGlobalLoadBalancerRule(p *DeleteGlobalLoadBalancerRuleParams) (*DeleteGlobalLoadBalancerRuleResponse, error)
+	NewDeleteGlobalLoadBalancerRuleParams(id string) *DeleteGlobalLoadBalancerRuleParams
+	DeleteLBHealthCheckPolicy(p *DeleteLBHealthCheckPolicyParams) (*DeleteLBHealthCheckPolicyResponse, error)
+	NewDeleteLBHealthCheckPolicyParams(id string) *DeleteLBHealthCheckPolicyParams
+	DeleteLBStickinessPolicy(p *DeleteLBStickinessPolicyParams) (*DeleteLBStickinessPolicyResponse, error)
+	NewDeleteLBStickinessPolicyParams(id string) *DeleteLBStickinessPolicyParams
+	DeleteLoadBalancer(p *DeleteLoadBalancerParams) (*DeleteLoadBalancerResponse, error)
+	NewDeleteLoadBalancerParams(id string) *DeleteLoadBalancerParams
+	DeleteLoadBalancerRule(p *DeleteLoadBalancerRuleParams) (*DeleteLoadBalancerRuleResponse, error)
+	NewDeleteLoadBalancerRuleParams(id string) *DeleteLoadBalancerRuleParams
+	DeleteNetscalerLoadBalancer(p *DeleteNetscalerLoadBalancerParams) (*DeleteNetscalerLoadBalancerResponse, error)
+	NewDeleteNetscalerLoadBalancerParams(lbdeviceid string) *DeleteNetscalerLoadBalancerParams
+	DeleteSslCert(p *DeleteSslCertParams) (*DeleteSslCertResponse, error)
+	NewDeleteSslCertParams(id string) *DeleteSslCertParams
+	ListGlobalLoadBalancerRules(p *ListGlobalLoadBalancerRulesParams) (*ListGlobalLoadBalancerRulesResponse, error)
+	NewListGlobalLoadBalancerRulesParams() *ListGlobalLoadBalancerRulesParams
+	GetGlobalLoadBalancerRuleID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetGlobalLoadBalancerRuleByName(name string, opts ...OptionFunc) (*GlobalLoadBalancerRule, int, error)
+	GetGlobalLoadBalancerRuleByID(id string, opts ...OptionFunc) (*GlobalLoadBalancerRule, int, error)
+	ListLBHealthCheckPolicies(p *ListLBHealthCheckPoliciesParams) (*ListLBHealthCheckPoliciesResponse, error)
+	NewListLBHealthCheckPoliciesParams() *ListLBHealthCheckPoliciesParams
+	GetLBHealthCheckPolicyByID(id string, opts ...OptionFunc) (*LBHealthCheckPolicy, int, error)
+	ListLBStickinessPolicies(p *ListLBStickinessPoliciesParams) (*ListLBStickinessPoliciesResponse, error)
+	NewListLBStickinessPoliciesParams() *ListLBStickinessPoliciesParams
+	GetLBStickinessPolicyByID(id string, opts ...OptionFunc) (*LBStickinessPolicy, int, error)
+	ListLoadBalancerRuleInstances(p *ListLoadBalancerRuleInstancesParams) (*ListLoadBalancerRuleInstancesResponse, error)
+	NewListLoadBalancerRuleInstancesParams(id string) *ListLoadBalancerRuleInstancesParams
+	GetLoadBalancerRuleInstanceByID(id string, opts ...OptionFunc) (*VirtualMachine, int, error)
+	ListLoadBalancerRules(p *ListLoadBalancerRulesParams) (*ListLoadBalancerRulesResponse, error)
+	NewListLoadBalancerRulesParams() *ListLoadBalancerRulesParams
+	GetLoadBalancerRuleID(name string, opts ...OptionFunc) (string, int, error)
+	GetLoadBalancerRuleByName(name string, opts ...OptionFunc) (*LoadBalancerRule, int, error)
+	GetLoadBalancerRuleByID(id string, opts ...OptionFunc) (*LoadBalancerRule, int, error)
+	ListLoadBalancers(p *ListLoadBalancersParams) (*ListLoadBalancersResponse, error)
+	NewListLoadBalancersParams() *ListLoadBalancersParams
+	GetLoadBalancerID(name string, opts ...OptionFunc) (string, int, error)
+	GetLoadBalancerByName(name string, opts ...OptionFunc) (*LoadBalancer, int, error)
+	GetLoadBalancerByID(id string, opts ...OptionFunc) (*LoadBalancer, int, error)
+	ListNetscalerLoadBalancers(p *ListNetscalerLoadBalancersParams) (*ListNetscalerLoadBalancersResponse, error)
+	NewListNetscalerLoadBalancersParams() *ListNetscalerLoadBalancersParams
+	ListSslCerts(p *ListSslCertsParams) (*ListSslCertsResponse, error)
+	NewListSslCertsParams() *ListSslCertsParams
+	RemoveCertFromLoadBalancer(p *RemoveCertFromLoadBalancerParams) (*RemoveCertFromLoadBalancerResponse, error)
+	NewRemoveCertFromLoadBalancerParams(lbruleid string) *RemoveCertFromLoadBalancerParams
+	RemoveFromGlobalLoadBalancerRule(p *RemoveFromGlobalLoadBalancerRuleParams) (*RemoveFromGlobalLoadBalancerRuleResponse, error)
+	NewRemoveFromGlobalLoadBalancerRuleParams(id string, loadbalancerrulelist []string) *RemoveFromGlobalLoadBalancerRuleParams
+	RemoveFromLoadBalancerRule(p *RemoveFromLoadBalancerRuleParams) (*RemoveFromLoadBalancerRuleResponse, error)
+	NewRemoveFromLoadBalancerRuleParams(id string) *RemoveFromLoadBalancerRuleParams
+	UpdateGlobalLoadBalancerRule(p *UpdateGlobalLoadBalancerRuleParams) (*UpdateGlobalLoadBalancerRuleResponse, error)
+	NewUpdateGlobalLoadBalancerRuleParams(id string) *UpdateGlobalLoadBalancerRuleParams
+	UpdateLBHealthCheckPolicy(p *UpdateLBHealthCheckPolicyParams) (*UpdateLBHealthCheckPolicyResponse, error)
+	NewUpdateLBHealthCheckPolicyParams(id string) *UpdateLBHealthCheckPolicyParams
+	UpdateLBStickinessPolicy(p *UpdateLBStickinessPolicyParams) (*UpdateLBStickinessPolicyResponse, error)
+	NewUpdateLBStickinessPolicyParams(id string) *UpdateLBStickinessPolicyParams
+	UpdateLoadBalancer(p *UpdateLoadBalancerParams) (*UpdateLoadBalancerResponse, error)
+	NewUpdateLoadBalancerParams(id string) *UpdateLoadBalancerParams
+	UpdateLoadBalancerRule(p *UpdateLoadBalancerRuleParams) (*UpdateLoadBalancerRuleResponse, error)
+	NewUpdateLoadBalancerRuleParams(id string) *UpdateLoadBalancerRuleParams
+	UploadSslCert(p *UploadSslCertParams) (*UploadSslCertResponse, error)
+	NewUploadSslCertParams(certificate string, name string, privatekey string) *UploadSslCertParams
+}
+
 type AddNetscalerLoadBalancerParams struct {
 	p map[string]interface{}
 }

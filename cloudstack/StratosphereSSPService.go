@@ -25,6 +25,13 @@ import (
 	"strconv"
 )
 
+type StratosphereSSPServiceIface interface {
+	AddStratosphereSsp(p *AddStratosphereSspParams) (*AddStratosphereSspResponse, error)
+	NewAddStratosphereSspParams(name string, url string, zoneid string) *AddStratosphereSspParams
+	DeleteStratosphereSsp(p *DeleteStratosphereSspParams) (*DeleteStratosphereSspResponse, error)
+	NewDeleteStratosphereSspParams(hostid string) *DeleteStratosphereSspParams
+}
+
 type AddStratosphereSspParams struct {
 	p map[string]interface{}
 }

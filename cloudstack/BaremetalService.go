@@ -25,6 +25,27 @@ import (
 	"strconv"
 )
 
+type BaremetalServiceIface interface {
+	AddBaremetalDhcp(p *AddBaremetalDhcpParams) (*AddBaremetalDhcpResponse, error)
+	NewAddBaremetalDhcpParams(dhcpservertype string, password string, physicalnetworkid string, url string, username string) *AddBaremetalDhcpParams
+	AddBaremetalPxeKickStartServer(p *AddBaremetalPxeKickStartServerParams) (*AddBaremetalPxeKickStartServerResponse, error)
+	NewAddBaremetalPxeKickStartServerParams(password string, physicalnetworkid string, pxeservertype string, tftpdir string, url string, username string) *AddBaremetalPxeKickStartServerParams
+	AddBaremetalPxePingServer(p *AddBaremetalPxePingServerParams) (*AddBaremetalPxePingServerResponse, error)
+	NewAddBaremetalPxePingServerParams(password string, physicalnetworkid string, pingdir string, pingstorageserverip string, pxeservertype string, tftpdir string, url string, username string) *AddBaremetalPxePingServerParams
+	AddBaremetalRct(p *AddBaremetalRctParams) (*AddBaremetalRctResponse, error)
+	NewAddBaremetalRctParams(baremetalrcturl string) *AddBaremetalRctParams
+	DeleteBaremetalRct(p *DeleteBaremetalRctParams) (*DeleteBaremetalRctResponse, error)
+	NewDeleteBaremetalRctParams(id string) *DeleteBaremetalRctParams
+	ListBaremetalDhcp(p *ListBaremetalDhcpParams) (*ListBaremetalDhcpResponse, error)
+	NewListBaremetalDhcpParams(physicalnetworkid string) *ListBaremetalDhcpParams
+	ListBaremetalPxeServers(p *ListBaremetalPxeServersParams) (*ListBaremetalPxeServersResponse, error)
+	NewListBaremetalPxeServersParams(physicalnetworkid string) *ListBaremetalPxeServersParams
+	ListBaremetalRct(p *ListBaremetalRctParams) (*ListBaremetalRctResponse, error)
+	NewListBaremetalRctParams() *ListBaremetalRctParams
+	NotifyBaremetalProvisionDone(p *NotifyBaremetalProvisionDoneParams) (*NotifyBaremetalProvisionDoneResponse, error)
+	NewNotifyBaremetalProvisionDoneParams(mac string) *NotifyBaremetalProvisionDoneParams
+}
+
 type AddBaremetalDhcpParams struct {
 	p map[string]interface{}
 }

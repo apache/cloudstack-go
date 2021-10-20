@@ -25,6 +25,19 @@ import (
 	"strconv"
 )
 
+type SSHServiceIface interface {
+	CreateSSHKeyPair(p *CreateSSHKeyPairParams) (*CreateSSHKeyPairResponse, error)
+	NewCreateSSHKeyPairParams(name string) *CreateSSHKeyPairParams
+	DeleteSSHKeyPair(p *DeleteSSHKeyPairParams) (*DeleteSSHKeyPairResponse, error)
+	NewDeleteSSHKeyPairParams(name string) *DeleteSSHKeyPairParams
+	ListSSHKeyPairs(p *ListSSHKeyPairsParams) (*ListSSHKeyPairsResponse, error)
+	NewListSSHKeyPairsParams() *ListSSHKeyPairsParams
+	RegisterSSHKeyPair(p *RegisterSSHKeyPairParams) (*RegisterSSHKeyPairResponse, error)
+	NewRegisterSSHKeyPairParams(name string, publickey string) *RegisterSSHKeyPairParams
+	ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachineParams) (*ResetSSHKeyForVirtualMachineResponse, error)
+	NewResetSSHKeyForVirtualMachineParams(id string, keypair string) *ResetSSHKeyForVirtualMachineParams
+}
+
 type CreateSSHKeyPairParams struct {
 	p map[string]interface{}
 }

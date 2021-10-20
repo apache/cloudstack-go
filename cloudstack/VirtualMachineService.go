@@ -27,6 +27,59 @@ import (
 	"strings"
 )
 
+type VirtualMachineServiceIface interface {
+	AddNicToVirtualMachine(p *AddNicToVirtualMachineParams) (*AddNicToVirtualMachineResponse, error)
+	NewAddNicToVirtualMachineParams(networkid string, virtualmachineid string) *AddNicToVirtualMachineParams
+	AssignVirtualMachine(p *AssignVirtualMachineParams) (*AssignVirtualMachineResponse, error)
+	NewAssignVirtualMachineParams(virtualmachineid string) *AssignVirtualMachineParams
+	ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error)
+	NewChangeServiceForVirtualMachineParams(id string, serviceofferingid string) *ChangeServiceForVirtualMachineParams
+	CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error)
+	NewCleanVMReservationsParams() *CleanVMReservationsParams
+	DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error)
+	NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams
+	DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error)
+	NewDestroyVirtualMachineParams(id string) *DestroyVirtualMachineParams
+	ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error)
+	NewExpungeVirtualMachineParams(id string) *ExpungeVirtualMachineParams
+	GetVMPassword(p *GetVMPasswordParams) (*GetVMPasswordResponse, error)
+	NewGetVMPasswordParams(id string) *GetVMPasswordParams
+	ListVirtualMachines(p *ListVirtualMachinesParams) (*ListVirtualMachinesResponse, error)
+	NewListVirtualMachinesParams() *ListVirtualMachinesParams
+	GetVirtualMachineID(name string, opts ...OptionFunc) (string, int, error)
+	GetVirtualMachineByName(name string, opts ...OptionFunc) (*VirtualMachine, int, error)
+	GetVirtualMachineByID(id string, opts ...OptionFunc) (*VirtualMachine, int, error)
+	ListVirtualMachinesMetrics(p *ListVirtualMachinesMetricsParams) (*ListVirtualMachinesMetricsResponse, error)
+	NewListVirtualMachinesMetricsParams() *ListVirtualMachinesMetricsParams
+	GetVirtualMachinesMetricID(name string, opts ...OptionFunc) (string, int, error)
+	GetVirtualMachinesMetricByName(name string, opts ...OptionFunc) (*VirtualMachinesMetric, int, error)
+	GetVirtualMachinesMetricByID(id string, opts ...OptionFunc) (*VirtualMachinesMetric, int, error)
+	MigrateVirtualMachine(p *MigrateVirtualMachineParams) (*MigrateVirtualMachineResponse, error)
+	NewMigrateVirtualMachineParams(virtualmachineid string) *MigrateVirtualMachineParams
+	MigrateVirtualMachineWithVolume(p *MigrateVirtualMachineWithVolumeParams) (*MigrateVirtualMachineWithVolumeResponse, error)
+	NewMigrateVirtualMachineWithVolumeParams(hostid string, virtualmachineid string) *MigrateVirtualMachineWithVolumeParams
+	RebootVirtualMachine(p *RebootVirtualMachineParams) (*RebootVirtualMachineResponse, error)
+	NewRebootVirtualMachineParams(id string) *RebootVirtualMachineParams
+	RecoverVirtualMachine(p *RecoverVirtualMachineParams) (*RecoverVirtualMachineResponse, error)
+	NewRecoverVirtualMachineParams(id string) *RecoverVirtualMachineParams
+	RemoveNicFromVirtualMachine(p *RemoveNicFromVirtualMachineParams) (*RemoveNicFromVirtualMachineResponse, error)
+	NewRemoveNicFromVirtualMachineParams(nicid string, virtualmachineid string) *RemoveNicFromVirtualMachineParams
+	ResetPasswordForVirtualMachine(p *ResetPasswordForVirtualMachineParams) (*ResetPasswordForVirtualMachineResponse, error)
+	NewResetPasswordForVirtualMachineParams(id string) *ResetPasswordForVirtualMachineParams
+	RestoreVirtualMachine(p *RestoreVirtualMachineParams) (*RestoreVirtualMachineResponse, error)
+	NewRestoreVirtualMachineParams(virtualmachineid string) *RestoreVirtualMachineParams
+	ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error)
+	NewScaleVirtualMachineParams(id string, serviceofferingid string) *ScaleVirtualMachineParams
+	StartVirtualMachine(p *StartVirtualMachineParams) (*StartVirtualMachineResponse, error)
+	NewStartVirtualMachineParams(id string) *StartVirtualMachineParams
+	StopVirtualMachine(p *StopVirtualMachineParams) (*StopVirtualMachineResponse, error)
+	NewStopVirtualMachineParams(id string) *StopVirtualMachineParams
+	UpdateDefaultNicForVirtualMachine(p *UpdateDefaultNicForVirtualMachineParams) (*UpdateDefaultNicForVirtualMachineResponse, error)
+	NewUpdateDefaultNicForVirtualMachineParams(nicid string, virtualmachineid string) *UpdateDefaultNicForVirtualMachineParams
+	UpdateVirtualMachine(p *UpdateVirtualMachineParams) (*UpdateVirtualMachineResponse, error)
+	NewUpdateVirtualMachineParams(id string) *UpdateVirtualMachineParams
+}
+
 type AddNicToVirtualMachineParams struct {
 	p map[string]interface{}
 }

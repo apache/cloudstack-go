@@ -25,6 +25,15 @@ import (
 	"strconv"
 )
 
+type BigSwitchBCFServiceIface interface {
+	AddBigSwitchBcfDevice(p *AddBigSwitchBcfDeviceParams) (*AddBigSwitchBcfDeviceResponse, error)
+	NewAddBigSwitchBcfDeviceParams(hostname string, nat bool, password string, physicalnetworkid string, username string) *AddBigSwitchBcfDeviceParams
+	DeleteBigSwitchBcfDevice(p *DeleteBigSwitchBcfDeviceParams) (*DeleteBigSwitchBcfDeviceResponse, error)
+	NewDeleteBigSwitchBcfDeviceParams(bcfdeviceid string) *DeleteBigSwitchBcfDeviceParams
+	ListBigSwitchBcfDevices(p *ListBigSwitchBcfDevicesParams) (*ListBigSwitchBcfDevicesResponse, error)
+	NewListBigSwitchBcfDevicesParams() *ListBigSwitchBcfDevicesParams
+}
+
 type AddBigSwitchBcfDeviceParams struct {
 	p map[string]interface{}
 }

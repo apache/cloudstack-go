@@ -27,6 +27,31 @@ import (
 	"strings"
 )
 
+type ImageStoreServiceIface interface {
+	AddImageStore(p *AddImageStoreParams) (*AddImageStoreResponse, error)
+	NewAddImageStoreParams(provider string) *AddImageStoreParams
+	AddImageStoreS3(p *AddImageStoreS3Params) (*AddImageStoreS3Response, error)
+	NewAddImageStoreS3Params(accesskey string, bucket string, endpoint string, secretkey string) *AddImageStoreS3Params
+	CreateSecondaryStagingStore(p *CreateSecondaryStagingStoreParams) (*CreateSecondaryStagingStoreResponse, error)
+	NewCreateSecondaryStagingStoreParams(url string) *CreateSecondaryStagingStoreParams
+	DeleteImageStore(p *DeleteImageStoreParams) (*DeleteImageStoreResponse, error)
+	NewDeleteImageStoreParams(id string) *DeleteImageStoreParams
+	DeleteSecondaryStagingStore(p *DeleteSecondaryStagingStoreParams) (*DeleteSecondaryStagingStoreResponse, error)
+	NewDeleteSecondaryStagingStoreParams(id string) *DeleteSecondaryStagingStoreParams
+	ListImageStores(p *ListImageStoresParams) (*ListImageStoresResponse, error)
+	NewListImageStoresParams() *ListImageStoresParams
+	GetImageStoreID(name string, opts ...OptionFunc) (string, int, error)
+	GetImageStoreByName(name string, opts ...OptionFunc) (*ImageStore, int, error)
+	GetImageStoreByID(id string, opts ...OptionFunc) (*ImageStore, int, error)
+	ListSecondaryStagingStores(p *ListSecondaryStagingStoresParams) (*ListSecondaryStagingStoresResponse, error)
+	NewListSecondaryStagingStoresParams() *ListSecondaryStagingStoresParams
+	GetSecondaryStagingStoreID(name string, opts ...OptionFunc) (string, int, error)
+	GetSecondaryStagingStoreByName(name string, opts ...OptionFunc) (*SecondaryStagingStore, int, error)
+	GetSecondaryStagingStoreByID(id string, opts ...OptionFunc) (*SecondaryStagingStore, int, error)
+	UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjectStoreParams) (*UpdateCloudToUseObjectStoreResponse, error)
+	NewUpdateCloudToUseObjectStoreParams(provider string) *UpdateCloudToUseObjectStoreParams
+}
+
 type AddImageStoreParams struct {
 	p map[string]interface{}
 }

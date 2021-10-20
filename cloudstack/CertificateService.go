@@ -25,6 +25,11 @@ import (
 	"strconv"
 )
 
+type CertificateServiceIface interface {
+	UploadCustomCertificate(p *UploadCustomCertificateParams) (*UploadCustomCertificateResponse, error)
+	NewUploadCustomCertificateParams(certificate string, domainsuffix string) *UploadCustomCertificateParams
+}
+
 type UploadCustomCertificateParams struct {
 	p map[string]interface{}
 }

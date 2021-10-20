@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type VMGroupServiceIface interface {
+	CreateInstanceGroup(p *CreateInstanceGroupParams) (*CreateInstanceGroupResponse, error)
+	NewCreateInstanceGroupParams(name string) *CreateInstanceGroupParams
+	DeleteInstanceGroup(p *DeleteInstanceGroupParams) (*DeleteInstanceGroupResponse, error)
+	NewDeleteInstanceGroupParams(id string) *DeleteInstanceGroupParams
+	ListInstanceGroups(p *ListInstanceGroupsParams) (*ListInstanceGroupsResponse, error)
+	NewListInstanceGroupsParams() *ListInstanceGroupsParams
+	GetInstanceGroupID(name string, opts ...OptionFunc) (string, int, error)
+	GetInstanceGroupByName(name string, opts ...OptionFunc) (*InstanceGroup, int, error)
+	GetInstanceGroupByID(id string, opts ...OptionFunc) (*InstanceGroup, int, error)
+	UpdateInstanceGroup(p *UpdateInstanceGroupParams) (*UpdateInstanceGroupResponse, error)
+	NewUpdateInstanceGroupParams(id string) *UpdateInstanceGroupParams
+}
+
 type CreateInstanceGroupParams struct {
 	p map[string]interface{}
 }

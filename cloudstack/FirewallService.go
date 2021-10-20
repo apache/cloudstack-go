@@ -77,6 +77,44 @@ func convertFirewallServiceListResponse(b []byte) ([]byte, error) {
 	return json.Marshal(rawList)
 }
 
+type FirewallServiceIface interface {
+	AddPaloAltoFirewall(p *AddPaloAltoFirewallParams) (*AddPaloAltoFirewallResponse, error)
+	NewAddPaloAltoFirewallParams(networkdevicetype string, password string, physicalnetworkid string, url string, username string) *AddPaloAltoFirewallParams
+	ConfigurePaloAltoFirewall(p *ConfigurePaloAltoFirewallParams) (*PaloAltoFirewallResponse, error)
+	NewConfigurePaloAltoFirewallParams(fwdeviceid string) *ConfigurePaloAltoFirewallParams
+	CreateEgressFirewallRule(p *CreateEgressFirewallRuleParams) (*CreateEgressFirewallRuleResponse, error)
+	NewCreateEgressFirewallRuleParams(networkid string, protocol string) *CreateEgressFirewallRuleParams
+	CreateFirewallRule(p *CreateFirewallRuleParams) (*CreateFirewallRuleResponse, error)
+	NewCreateFirewallRuleParams(ipaddressid string, protocol string) *CreateFirewallRuleParams
+	CreatePortForwardingRule(p *CreatePortForwardingRuleParams) (*CreatePortForwardingRuleResponse, error)
+	NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams
+	DeleteEgressFirewallRule(p *DeleteEgressFirewallRuleParams) (*DeleteEgressFirewallRuleResponse, error)
+	NewDeleteEgressFirewallRuleParams(id string) *DeleteEgressFirewallRuleParams
+	DeleteFirewallRule(p *DeleteFirewallRuleParams) (*DeleteFirewallRuleResponse, error)
+	NewDeleteFirewallRuleParams(id string) *DeleteFirewallRuleParams
+	DeletePaloAltoFirewall(p *DeletePaloAltoFirewallParams) (*DeletePaloAltoFirewallResponse, error)
+	NewDeletePaloAltoFirewallParams(fwdeviceid string) *DeletePaloAltoFirewallParams
+	DeletePortForwardingRule(p *DeletePortForwardingRuleParams) (*DeletePortForwardingRuleResponse, error)
+	NewDeletePortForwardingRuleParams(id string) *DeletePortForwardingRuleParams
+	ListEgressFirewallRules(p *ListEgressFirewallRulesParams) (*ListEgressFirewallRulesResponse, error)
+	NewListEgressFirewallRulesParams() *ListEgressFirewallRulesParams
+	GetEgressFirewallRuleByID(id string, opts ...OptionFunc) (*EgressFirewallRule, int, error)
+	ListFirewallRules(p *ListFirewallRulesParams) (*ListFirewallRulesResponse, error)
+	NewListFirewallRulesParams() *ListFirewallRulesParams
+	GetFirewallRuleByID(id string, opts ...OptionFunc) (*FirewallRule, int, error)
+	ListPaloAltoFirewalls(p *ListPaloAltoFirewallsParams) (*ListPaloAltoFirewallsResponse, error)
+	NewListPaloAltoFirewallsParams() *ListPaloAltoFirewallsParams
+	ListPortForwardingRules(p *ListPortForwardingRulesParams) (*ListPortForwardingRulesResponse, error)
+	NewListPortForwardingRulesParams() *ListPortForwardingRulesParams
+	GetPortForwardingRuleByID(id string, opts ...OptionFunc) (*PortForwardingRule, int, error)
+	UpdateEgressFirewallRule(p *UpdateEgressFirewallRuleParams) (*UpdateEgressFirewallRuleResponse, error)
+	NewUpdateEgressFirewallRuleParams(id string) *UpdateEgressFirewallRuleParams
+	UpdateFirewallRule(p *UpdateFirewallRuleParams) (*UpdateFirewallRuleResponse, error)
+	NewUpdateFirewallRuleParams(id string) *UpdateFirewallRuleParams
+	UpdatePortForwardingRule(p *UpdatePortForwardingRuleParams) (*UpdatePortForwardingRuleResponse, error)
+	NewUpdatePortForwardingRuleParams(id string) *UpdatePortForwardingRuleParams
+}
+
 type AddPaloAltoFirewallParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,39 @@ import (
 	"strings"
 )
 
+type ClusterServiceIface interface {
+	AddCluster(p *AddClusterParams) (*AddClusterResponse, error)
+	NewAddClusterParams(clustername string, clustertype string, hypervisor string, podid string, zoneid string) *AddClusterParams
+	DedicateCluster(p *DedicateClusterParams) (*DedicateClusterResponse, error)
+	NewDedicateClusterParams(clusterid string, domainid string) *DedicateClusterParams
+	DeleteCluster(p *DeleteClusterParams) (*DeleteClusterResponse, error)
+	NewDeleteClusterParams(id string) *DeleteClusterParams
+	DisableOutOfBandManagementForCluster(p *DisableOutOfBandManagementForClusterParams) (*DisableOutOfBandManagementForClusterResponse, error)
+	NewDisableOutOfBandManagementForClusterParams(clusterid string) *DisableOutOfBandManagementForClusterParams
+	EnableOutOfBandManagementForCluster(p *EnableOutOfBandManagementForClusterParams) (*EnableOutOfBandManagementForClusterResponse, error)
+	NewEnableOutOfBandManagementForClusterParams(clusterid string) *EnableOutOfBandManagementForClusterParams
+	EnableHAForCluster(p *EnableHAForClusterParams) (*EnableHAForClusterResponse, error)
+	NewEnableHAForClusterParams(clusterid string) *EnableHAForClusterParams
+	DisableHAForCluster(p *DisableHAForClusterParams) (*DisableHAForClusterResponse, error)
+	NewDisableHAForClusterParams(clusterid string) *DisableHAForClusterParams
+	ListClusters(p *ListClustersParams) (*ListClustersResponse, error)
+	NewListClustersParams() *ListClustersParams
+	GetClusterID(name string, opts ...OptionFunc) (string, int, error)
+	GetClusterByName(name string, opts ...OptionFunc) (*Cluster, int, error)
+	GetClusterByID(id string, opts ...OptionFunc) (*Cluster, int, error)
+	ListClustersMetrics(p *ListClustersMetricsParams) (*ListClustersMetricsResponse, error)
+	NewListClustersMetricsParams() *ListClustersMetricsParams
+	GetClustersMetricID(name string, opts ...OptionFunc) (string, int, error)
+	GetClustersMetricByName(name string, opts ...OptionFunc) (*ClustersMetric, int, error)
+	GetClustersMetricByID(id string, opts ...OptionFunc) (*ClustersMetric, int, error)
+	ListDedicatedClusters(p *ListDedicatedClustersParams) (*ListDedicatedClustersResponse, error)
+	NewListDedicatedClustersParams() *ListDedicatedClustersParams
+	ReleaseDedicatedCluster(p *ReleaseDedicatedClusterParams) (*ReleaseDedicatedClusterResponse, error)
+	NewReleaseDedicatedClusterParams(clusterid string) *ReleaseDedicatedClusterParams
+	UpdateCluster(p *UpdateClusterParams) (*UpdateClusterResponse, error)
+	NewUpdateClusterParams(id string) *UpdateClusterParams
+}
+
 type AddClusterParams struct {
 	p map[string]interface{}
 }

@@ -24,6 +24,11 @@ import (
 	"net/url"
 )
 
+type QuotaServiceIface interface {
+	QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error)
+	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
+}
+
 type QuotaIsEnabledParams struct {
 	p map[string]interface{}
 }

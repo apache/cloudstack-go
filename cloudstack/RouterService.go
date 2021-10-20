@@ -27,6 +27,31 @@ import (
 	"strings"
 )
 
+type RouterServiceIface interface {
+	ChangeServiceForRouter(p *ChangeServiceForRouterParams) (*ChangeServiceForRouterResponse, error)
+	NewChangeServiceForRouterParams(id string, serviceofferingid string) *ChangeServiceForRouterParams
+	ConfigureVirtualRouterElement(p *ConfigureVirtualRouterElementParams) (*VirtualRouterElementResponse, error)
+	NewConfigureVirtualRouterElementParams(enabled bool, id string) *ConfigureVirtualRouterElementParams
+	CreateVirtualRouterElement(p *CreateVirtualRouterElementParams) (*CreateVirtualRouterElementResponse, error)
+	NewCreateVirtualRouterElementParams(nspid string) *CreateVirtualRouterElementParams
+	DestroyRouter(p *DestroyRouterParams) (*DestroyRouterResponse, error)
+	NewDestroyRouterParams(id string) *DestroyRouterParams
+	ListRouters(p *ListRoutersParams) (*ListRoutersResponse, error)
+	NewListRoutersParams() *ListRoutersParams
+	GetRouterID(name string, opts ...OptionFunc) (string, int, error)
+	GetRouterByName(name string, opts ...OptionFunc) (*Router, int, error)
+	GetRouterByID(id string, opts ...OptionFunc) (*Router, int, error)
+	ListVirtualRouterElements(p *ListVirtualRouterElementsParams) (*ListVirtualRouterElementsResponse, error)
+	NewListVirtualRouterElementsParams() *ListVirtualRouterElementsParams
+	GetVirtualRouterElementByID(id string, opts ...OptionFunc) (*VirtualRouterElement, int, error)
+	RebootRouter(p *RebootRouterParams) (*RebootRouterResponse, error)
+	NewRebootRouterParams(id string) *RebootRouterParams
+	StartRouter(p *StartRouterParams) (*StartRouterResponse, error)
+	NewStartRouterParams(id string) *StartRouterParams
+	StopRouter(p *StopRouterParams) (*StopRouterResponse, error)
+	NewStopRouterParams(id string) *StopRouterParams
+}
+
 type ChangeServiceForRouterParams struct {
 	p map[string]interface{}
 }

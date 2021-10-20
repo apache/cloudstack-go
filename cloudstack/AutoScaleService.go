@@ -27,6 +27,56 @@ import (
 	"strings"
 )
 
+type AutoScaleServiceIface interface {
+	CreateAutoScalePolicy(p *CreateAutoScalePolicyParams) (*CreateAutoScalePolicyResponse, error)
+	NewCreateAutoScalePolicyParams(action string, conditionids []string, duration int) *CreateAutoScalePolicyParams
+	CreateAutoScaleVmGroup(p *CreateAutoScaleVmGroupParams) (*CreateAutoScaleVmGroupResponse, error)
+	NewCreateAutoScaleVmGroupParams(lbruleid string, maxmembers int, minmembers int, scaledownpolicyids []string, scaleuppolicyids []string, vmprofileid string) *CreateAutoScaleVmGroupParams
+	CreateAutoScaleVmProfile(p *CreateAutoScaleVmProfileParams) (*CreateAutoScaleVmProfileResponse, error)
+	NewCreateAutoScaleVmProfileParams(serviceofferingid string, templateid string, zoneid string) *CreateAutoScaleVmProfileParams
+	CreateCondition(p *CreateConditionParams) (*CreateConditionResponse, error)
+	NewCreateConditionParams(counterid string, relationaloperator string, threshold int64) *CreateConditionParams
+	CreateCounter(p *CreateCounterParams) (*CreateCounterResponse, error)
+	NewCreateCounterParams(name string, source string, value string) *CreateCounterParams
+	DeleteAutoScalePolicy(p *DeleteAutoScalePolicyParams) (*DeleteAutoScalePolicyResponse, error)
+	NewDeleteAutoScalePolicyParams(id string) *DeleteAutoScalePolicyParams
+	DeleteAutoScaleVmGroup(p *DeleteAutoScaleVmGroupParams) (*DeleteAutoScaleVmGroupResponse, error)
+	NewDeleteAutoScaleVmGroupParams(id string) *DeleteAutoScaleVmGroupParams
+	DeleteAutoScaleVmProfile(p *DeleteAutoScaleVmProfileParams) (*DeleteAutoScaleVmProfileResponse, error)
+	NewDeleteAutoScaleVmProfileParams(id string) *DeleteAutoScaleVmProfileParams
+	DeleteCondition(p *DeleteConditionParams) (*DeleteConditionResponse, error)
+	NewDeleteConditionParams(id string) *DeleteConditionParams
+	DeleteCounter(p *DeleteCounterParams) (*DeleteCounterResponse, error)
+	NewDeleteCounterParams(id string) *DeleteCounterParams
+	DisableAutoScaleVmGroup(p *DisableAutoScaleVmGroupParams) (*DisableAutoScaleVmGroupResponse, error)
+	NewDisableAutoScaleVmGroupParams(id string) *DisableAutoScaleVmGroupParams
+	EnableAutoScaleVmGroup(p *EnableAutoScaleVmGroupParams) (*EnableAutoScaleVmGroupResponse, error)
+	NewEnableAutoScaleVmGroupParams(id string) *EnableAutoScaleVmGroupParams
+	ListAutoScalePolicies(p *ListAutoScalePoliciesParams) (*ListAutoScalePoliciesResponse, error)
+	NewListAutoScalePoliciesParams() *ListAutoScalePoliciesParams
+	GetAutoScalePolicyByID(id string, opts ...OptionFunc) (*AutoScalePolicy, int, error)
+	ListAutoScaleVmGroups(p *ListAutoScaleVmGroupsParams) (*ListAutoScaleVmGroupsResponse, error)
+	NewListAutoScaleVmGroupsParams() *ListAutoScaleVmGroupsParams
+	GetAutoScaleVmGroupByID(id string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error)
+	ListAutoScaleVmProfiles(p *ListAutoScaleVmProfilesParams) (*ListAutoScaleVmProfilesResponse, error)
+	NewListAutoScaleVmProfilesParams() *ListAutoScaleVmProfilesParams
+	GetAutoScaleVmProfileByID(id string, opts ...OptionFunc) (*AutoScaleVmProfile, int, error)
+	ListConditions(p *ListConditionsParams) (*ListConditionsResponse, error)
+	NewListConditionsParams() *ListConditionsParams
+	GetConditionByID(id string, opts ...OptionFunc) (*Condition, int, error)
+	ListCounters(p *ListCountersParams) (*ListCountersResponse, error)
+	NewListCountersParams() *ListCountersParams
+	GetCounterID(name string, opts ...OptionFunc) (string, int, error)
+	GetCounterByName(name string, opts ...OptionFunc) (*Counter, int, error)
+	GetCounterByID(id string, opts ...OptionFunc) (*Counter, int, error)
+	UpdateAutoScalePolicy(p *UpdateAutoScalePolicyParams) (*UpdateAutoScalePolicyResponse, error)
+	NewUpdateAutoScalePolicyParams(id string) *UpdateAutoScalePolicyParams
+	UpdateAutoScaleVmGroup(p *UpdateAutoScaleVmGroupParams) (*UpdateAutoScaleVmGroupResponse, error)
+	NewUpdateAutoScaleVmGroupParams(id string) *UpdateAutoScaleVmGroupParams
+	UpdateAutoScaleVmProfile(p *UpdateAutoScaleVmProfileParams) (*UpdateAutoScaleVmProfileResponse, error)
+	NewUpdateAutoScaleVmProfileParams(id string) *UpdateAutoScaleVmProfileParams
+}
+
 type CreateAutoScalePolicyParams struct {
 	p map[string]interface{}
 }

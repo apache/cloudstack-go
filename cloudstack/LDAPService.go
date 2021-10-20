@@ -26,6 +26,29 @@ import (
 	"strconv"
 )
 
+type LDAPServiceIface interface {
+	AddLdapConfiguration(p *AddLdapConfigurationParams) (*AddLdapConfigurationResponse, error)
+	NewAddLdapConfigurationParams(hostname string, port int) *AddLdapConfigurationParams
+	DeleteLdapConfiguration(p *DeleteLdapConfigurationParams) (*DeleteLdapConfigurationResponse, error)
+	NewDeleteLdapConfigurationParams(hostname string) *DeleteLdapConfigurationParams
+	ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUsersResponse, error)
+	NewImportLdapUsersParams() *ImportLdapUsersParams
+	LdapConfig(p *LdapConfigParams) (*LdapConfigResponse, error)
+	NewLdapConfigParams() *LdapConfigParams
+	LdapCreateAccount(p *LdapCreateAccountParams) (*LdapCreateAccountResponse, error)
+	NewLdapCreateAccountParams(username string) *LdapCreateAccountParams
+	LdapRemove(p *LdapRemoveParams) (*LdapRemoveResponse, error)
+	NewLdapRemoveParams() *LdapRemoveParams
+	LinkDomainToLdap(p *LinkDomainToLdapParams) (*LinkDomainToLdapResponse, error)
+	NewLinkDomainToLdapParams(accounttype int, domainid string, lDAPType string) *LinkDomainToLdapParams
+	ListLdapConfigurations(p *ListLdapConfigurationsParams) (*ListLdapConfigurationsResponse, error)
+	NewListLdapConfigurationsParams() *ListLdapConfigurationsParams
+	ListLdapUsers(p *ListLdapUsersParams) (*ListLdapUsersResponse, error)
+	NewListLdapUsersParams() *ListLdapUsersParams
+	SearchLdap(p *SearchLdapParams) (*SearchLdapResponse, error)
+	NewSearchLdapParams(query string) *SearchLdapParams
+}
+
 type AddLdapConfigurationParams struct {
 	p map[string]interface{}
 }

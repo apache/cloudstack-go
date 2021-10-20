@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type DiskOfferingServiceIface interface {
+	CreateDiskOffering(p *CreateDiskOfferingParams) (*CreateDiskOfferingResponse, error)
+	NewCreateDiskOfferingParams(displaytext string, name string) *CreateDiskOfferingParams
+	DeleteDiskOffering(p *DeleteDiskOfferingParams) (*DeleteDiskOfferingResponse, error)
+	NewDeleteDiskOfferingParams(id string) *DeleteDiskOfferingParams
+	ListDiskOfferings(p *ListDiskOfferingsParams) (*ListDiskOfferingsResponse, error)
+	NewListDiskOfferingsParams() *ListDiskOfferingsParams
+	GetDiskOfferingID(name string, opts ...OptionFunc) (string, int, error)
+	GetDiskOfferingByName(name string, opts ...OptionFunc) (*DiskOffering, int, error)
+	GetDiskOfferingByID(id string, opts ...OptionFunc) (*DiskOffering, int, error)
+	UpdateDiskOffering(p *UpdateDiskOfferingParams) (*UpdateDiskOfferingResponse, error)
+	NewUpdateDiskOfferingParams(id string) *UpdateDiskOfferingParams
+}
+
 type CreateDiskOfferingParams struct {
 	p map[string]interface{}
 }

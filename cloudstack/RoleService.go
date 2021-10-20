@@ -27,6 +27,28 @@ import (
 	"strings"
 )
 
+type RoleServiceIface interface {
+	CreateRole(p *CreateRoleParams) (*CreateRoleResponse, error)
+	NewCreateRoleParams(name string) *CreateRoleParams
+	CreateRolePermission(p *CreateRolePermissionParams) (*CreateRolePermissionResponse, error)
+	NewCreateRolePermissionParams(permission string, roleid string, rule string) *CreateRolePermissionParams
+	DeleteRole(p *DeleteRoleParams) (*DeleteRoleResponse, error)
+	NewDeleteRoleParams(id string) *DeleteRoleParams
+	DeleteRolePermission(p *DeleteRolePermissionParams) (*DeleteRolePermissionResponse, error)
+	NewDeleteRolePermissionParams(id string) *DeleteRolePermissionParams
+	ListRolePermissions(p *ListRolePermissionsParams) (*ListRolePermissionsResponse, error)
+	NewListRolePermissionsParams() *ListRolePermissionsParams
+	ListRoles(p *ListRolesParams) (*ListRolesResponse, error)
+	NewListRolesParams() *ListRolesParams
+	GetRoleID(name string, opts ...OptionFunc) (string, int, error)
+	GetRoleByName(name string, opts ...OptionFunc) (*Role, int, error)
+	GetRoleByID(id string, opts ...OptionFunc) (*Role, int, error)
+	UpdateRole(p *UpdateRoleParams) (*UpdateRoleResponse, error)
+	NewUpdateRoleParams(id string) *UpdateRoleParams
+	UpdateRolePermission(p *UpdateRolePermissionParams) (*UpdateRolePermissionResponse, error)
+	NewUpdateRolePermissionParams(roleid string) *UpdateRolePermissionParams
+}
+
 type CreateRoleParams struct {
 	p map[string]interface{}
 }

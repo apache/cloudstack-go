@@ -27,6 +27,16 @@ import (
 	"strings"
 )
 
+type PortableIPServiceIface interface {
+	CreatePortableIpRange(p *CreatePortableIpRangeParams) (*CreatePortableIpRangeResponse, error)
+	NewCreatePortableIpRangeParams(endip string, gateway string, netmask string, regionid int, startip string) *CreatePortableIpRangeParams
+	DeletePortableIpRange(p *DeletePortableIpRangeParams) (*DeletePortableIpRangeResponse, error)
+	NewDeletePortableIpRangeParams(id string) *DeletePortableIpRangeParams
+	ListPortableIpRanges(p *ListPortableIpRangesParams) (*ListPortableIpRangesResponse, error)
+	NewListPortableIpRangesParams() *ListPortableIpRangesParams
+	GetPortableIpRangeByID(id string, opts ...OptionFunc) (*PortableIpRange, int, error)
+}
+
 type CreatePortableIpRangeParams struct {
 	p map[string]interface{}
 }

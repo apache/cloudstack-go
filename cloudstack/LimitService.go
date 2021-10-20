@@ -25,6 +25,19 @@ import (
 	"strconv"
 )
 
+type LimitServiceIface interface {
+	GetApiLimit(p *GetApiLimitParams) (*GetApiLimitResponse, error)
+	NewGetApiLimitParams() *GetApiLimitParams
+	ListResourceLimits(p *ListResourceLimitsParams) (*ListResourceLimitsResponse, error)
+	NewListResourceLimitsParams() *ListResourceLimitsParams
+	ResetApiLimit(p *ResetApiLimitParams) (*ResetApiLimitResponse, error)
+	NewResetApiLimitParams() *ResetApiLimitParams
+	UpdateResourceCount(p *UpdateResourceCountParams) (*UpdateResourceCountResponse, error)
+	NewUpdateResourceCountParams(domainid string) *UpdateResourceCountParams
+	UpdateResourceLimit(p *UpdateResourceLimitParams) (*UpdateResourceLimitResponse, error)
+	NewUpdateResourceLimitParams(resourcetype int) *UpdateResourceLimitParams
+}
+
 type GetApiLimitParams struct {
 	p map[string]interface{}
 }

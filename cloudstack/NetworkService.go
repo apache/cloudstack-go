@@ -27,6 +27,77 @@ import (
 	"strings"
 )
 
+type NetworkServiceIface interface {
+	AddNetworkServiceProvider(p *AddNetworkServiceProviderParams) (*AddNetworkServiceProviderResponse, error)
+	NewAddNetworkServiceProviderParams(name string, physicalnetworkid string) *AddNetworkServiceProviderParams
+	AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error)
+	NewAddOpenDaylightControllerParams(password string, physicalnetworkid string, url string, username string) *AddOpenDaylightControllerParams
+	CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error)
+	NewCreateNetworkParams(displaytext string, name string, networkofferingid string, zoneid string) *CreateNetworkParams
+	CreatePhysicalNetwork(p *CreatePhysicalNetworkParams) (*CreatePhysicalNetworkResponse, error)
+	NewCreatePhysicalNetworkParams(name string, zoneid string) *CreatePhysicalNetworkParams
+	CreateServiceInstance(p *CreateServiceInstanceParams) (*CreateServiceInstanceResponse, error)
+	NewCreateServiceInstanceParams(leftnetworkid string, name string, rightnetworkid string, serviceofferingid string, templateid string, zoneid string) *CreateServiceInstanceParams
+	CreateStorageNetworkIpRange(p *CreateStorageNetworkIpRangeParams) (*CreateStorageNetworkIpRangeResponse, error)
+	NewCreateStorageNetworkIpRangeParams(gateway string, netmask string, podid string, startip string) *CreateStorageNetworkIpRangeParams
+	DedicatePublicIpRange(p *DedicatePublicIpRangeParams) (*DedicatePublicIpRangeResponse, error)
+	NewDedicatePublicIpRangeParams(domainid string, id string) *DedicatePublicIpRangeParams
+	DeleteNetwork(p *DeleteNetworkParams) (*DeleteNetworkResponse, error)
+	NewDeleteNetworkParams(id string) *DeleteNetworkParams
+	DeleteNetworkServiceProvider(p *DeleteNetworkServiceProviderParams) (*DeleteNetworkServiceProviderResponse, error)
+	NewDeleteNetworkServiceProviderParams(id string) *DeleteNetworkServiceProviderParams
+	DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error)
+	NewDeleteOpenDaylightControllerParams(id string) *DeleteOpenDaylightControllerParams
+	DeletePhysicalNetwork(p *DeletePhysicalNetworkParams) (*DeletePhysicalNetworkResponse, error)
+	NewDeletePhysicalNetworkParams(id string) *DeletePhysicalNetworkParams
+	DeleteStorageNetworkIpRange(p *DeleteStorageNetworkIpRangeParams) (*DeleteStorageNetworkIpRangeResponse, error)
+	NewDeleteStorageNetworkIpRangeParams(id string) *DeleteStorageNetworkIpRangeParams
+	ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadBalancerNetworksParams) (*ListNetscalerLoadBalancerNetworksResponse, error)
+	NewListNetscalerLoadBalancerNetworksParams(lbdeviceid string) *ListNetscalerLoadBalancerNetworksParams
+	GetNetscalerLoadBalancerNetworkID(keyword string, lbdeviceid string, opts ...OptionFunc) (string, int, error)
+	ListNetworkIsolationMethods(p *ListNetworkIsolationMethodsParams) (*ListNetworkIsolationMethodsResponse, error)
+	NewListNetworkIsolationMethodsParams() *ListNetworkIsolationMethodsParams
+	ListNetworkServiceProviders(p *ListNetworkServiceProvidersParams) (*ListNetworkServiceProvidersResponse, error)
+	NewListNetworkServiceProvidersParams() *ListNetworkServiceProvidersParams
+	GetNetworkServiceProviderID(name string, opts ...OptionFunc) (string, int, error)
+	ListNetworks(p *ListNetworksParams) (*ListNetworksResponse, error)
+	NewListNetworksParams() *ListNetworksParams
+	GetNetworkID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetNetworkByName(name string, opts ...OptionFunc) (*Network, int, error)
+	GetNetworkByID(id string, opts ...OptionFunc) (*Network, int, error)
+	ListNiciraNvpDeviceNetworks(p *ListNiciraNvpDeviceNetworksParams) (*ListNiciraNvpDeviceNetworksResponse, error)
+	NewListNiciraNvpDeviceNetworksParams(nvpdeviceid string) *ListNiciraNvpDeviceNetworksParams
+	GetNiciraNvpDeviceNetworkID(keyword string, nvpdeviceid string, opts ...OptionFunc) (string, int, error)
+	ListOpenDaylightControllers(p *ListOpenDaylightControllersParams) (*ListOpenDaylightControllersResponse, error)
+	NewListOpenDaylightControllersParams() *ListOpenDaylightControllersParams
+	GetOpenDaylightControllerByID(id string, opts ...OptionFunc) (*OpenDaylightController, int, error)
+	ListPaloAltoFirewallNetworks(p *ListPaloAltoFirewallNetworksParams) (*ListPaloAltoFirewallNetworksResponse, error)
+	NewListPaloAltoFirewallNetworksParams(lbdeviceid string) *ListPaloAltoFirewallNetworksParams
+	GetPaloAltoFirewallNetworkID(keyword string, lbdeviceid string, opts ...OptionFunc) (string, int, error)
+	ListPhysicalNetworks(p *ListPhysicalNetworksParams) (*ListPhysicalNetworksResponse, error)
+	NewListPhysicalNetworksParams() *ListPhysicalNetworksParams
+	GetPhysicalNetworkID(name string, opts ...OptionFunc) (string, int, error)
+	GetPhysicalNetworkByName(name string, opts ...OptionFunc) (*PhysicalNetwork, int, error)
+	GetPhysicalNetworkByID(id string, opts ...OptionFunc) (*PhysicalNetwork, int, error)
+	ListStorageNetworkIpRange(p *ListStorageNetworkIpRangeParams) (*ListStorageNetworkIpRangeResponse, error)
+	NewListStorageNetworkIpRangeParams() *ListStorageNetworkIpRangeParams
+	GetStorageNetworkIpRangeByID(id string, opts ...OptionFunc) (*StorageNetworkIpRange, int, error)
+	ListSupportedNetworkServices(p *ListSupportedNetworkServicesParams) (*ListSupportedNetworkServicesResponse, error)
+	NewListSupportedNetworkServicesParams() *ListSupportedNetworkServicesParams
+	ReleasePublicIpRange(p *ReleasePublicIpRangeParams) (*ReleasePublicIpRangeResponse, error)
+	NewReleasePublicIpRangeParams(id string) *ReleasePublicIpRangeParams
+	RestartNetwork(p *RestartNetworkParams) (*RestartNetworkResponse, error)
+	NewRestartNetworkParams(id string) *RestartNetworkParams
+	UpdateNetwork(p *UpdateNetworkParams) (*UpdateNetworkResponse, error)
+	NewUpdateNetworkParams(id string) *UpdateNetworkParams
+	UpdateNetworkServiceProvider(p *UpdateNetworkServiceProviderParams) (*UpdateNetworkServiceProviderResponse, error)
+	NewUpdateNetworkServiceProviderParams(id string) *UpdateNetworkServiceProviderParams
+	UpdatePhysicalNetwork(p *UpdatePhysicalNetworkParams) (*UpdatePhysicalNetworkResponse, error)
+	NewUpdatePhysicalNetworkParams(id string) *UpdatePhysicalNetworkParams
+	UpdateStorageNetworkIpRange(p *UpdateStorageNetworkIpRangeParams) (*UpdateStorageNetworkIpRangeResponse, error)
+	NewUpdateStorageNetworkIpRangeParams(id string) *UpdateStorageNetworkIpRangeParams
+}
+
 type AddNetworkServiceProviderParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,24 @@ import (
 	"strings"
 )
 
+type UCSServiceIface interface {
+	AddUcsManager(p *AddUcsManagerParams) (*AddUcsManagerResponse, error)
+	NewAddUcsManagerParams(password string, url string, username string, zoneid string) *AddUcsManagerParams
+	AssociateUcsProfileToBlade(p *AssociateUcsProfileToBladeParams) (*AssociateUcsProfileToBladeResponse, error)
+	NewAssociateUcsProfileToBladeParams(bladeid string, profiledn string, ucsmanagerid string) *AssociateUcsProfileToBladeParams
+	DeleteUcsManager(p *DeleteUcsManagerParams) (*DeleteUcsManagerResponse, error)
+	NewDeleteUcsManagerParams(ucsmanagerid string) *DeleteUcsManagerParams
+	ListUcsBlades(p *ListUcsBladesParams) (*ListUcsBladesResponse, error)
+	NewListUcsBladesParams(ucsmanagerid string) *ListUcsBladesParams
+	ListUcsManagers(p *ListUcsManagersParams) (*ListUcsManagersResponse, error)
+	NewListUcsManagersParams() *ListUcsManagersParams
+	GetUcsManagerID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetUcsManagerByName(name string, opts ...OptionFunc) (*UcsManager, int, error)
+	GetUcsManagerByID(id string, opts ...OptionFunc) (*UcsManager, int, error)
+	ListUcsProfiles(p *ListUcsProfilesParams) (*ListUcsProfilesResponse, error)
+	NewListUcsProfilesParams(ucsmanagerid string) *ListUcsProfilesParams
+}
+
 type AddUcsManagerParams struct {
 	p map[string]interface{}
 }

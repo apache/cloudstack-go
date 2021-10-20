@@ -27,6 +27,20 @@ import (
 	"strings"
 )
 
+type AlertServiceIface interface {
+	ArchiveAlerts(p *ArchiveAlertsParams) (*ArchiveAlertsResponse, error)
+	NewArchiveAlertsParams() *ArchiveAlertsParams
+	DeleteAlerts(p *DeleteAlertsParams) (*DeleteAlertsResponse, error)
+	NewDeleteAlertsParams() *DeleteAlertsParams
+	GenerateAlert(p *GenerateAlertParams) (*GenerateAlertResponse, error)
+	NewGenerateAlertParams(description string, name string, alertType int) *GenerateAlertParams
+	ListAlerts(p *ListAlertsParams) (*ListAlertsResponse, error)
+	NewListAlertsParams() *ListAlertsParams
+	GetAlertID(name string, opts ...OptionFunc) (string, int, error)
+	GetAlertByName(name string, opts ...OptionFunc) (*Alert, int, error)
+	GetAlertByID(id string, opts ...OptionFunc) (*Alert, int, error)
+}
+
 type ArchiveAlertsParams struct {
 	p map[string]interface{}
 }

@@ -27,6 +27,18 @@ import (
 	"strings"
 )
 
+type AddressServiceIface interface {
+	AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error)
+	NewAssociateIpAddressParams() *AssociateIpAddressParams
+	DisassociateIpAddress(p *DisassociateIpAddressParams) (*DisassociateIpAddressResponse, error)
+	NewDisassociateIpAddressParams(id string) *DisassociateIpAddressParams
+	ListPublicIpAddresses(p *ListPublicIpAddressesParams) (*ListPublicIpAddressesResponse, error)
+	NewListPublicIpAddressesParams() *ListPublicIpAddressesParams
+	GetPublicIpAddressByID(id string, opts ...OptionFunc) (*PublicIpAddress, int, error)
+	UpdateIpAddress(p *UpdateIpAddressParams) (*UpdateIpAddressResponse, error)
+	NewUpdateIpAddressParams(id string) *UpdateIpAddressParams
+}
+
 type AssociateIpAddressParams struct {
 	p map[string]interface{}
 }

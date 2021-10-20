@@ -27,6 +27,23 @@ import (
 	"strings"
 )
 
+type VLANServiceIface interface {
+	CreateVlanIpRange(p *CreateVlanIpRangeParams) (*CreateVlanIpRangeResponse, error)
+	NewCreateVlanIpRangeParams() *CreateVlanIpRangeParams
+	DedicateGuestVlanRange(p *DedicateGuestVlanRangeParams) (*DedicateGuestVlanRangeResponse, error)
+	NewDedicateGuestVlanRangeParams(physicalnetworkid string, vlanrange string) *DedicateGuestVlanRangeParams
+	DeleteVlanIpRange(p *DeleteVlanIpRangeParams) (*DeleteVlanIpRangeResponse, error)
+	NewDeleteVlanIpRangeParams(id string) *DeleteVlanIpRangeParams
+	ListDedicatedGuestVlanRanges(p *ListDedicatedGuestVlanRangesParams) (*ListDedicatedGuestVlanRangesResponse, error)
+	NewListDedicatedGuestVlanRangesParams() *ListDedicatedGuestVlanRangesParams
+	GetDedicatedGuestVlanRangeByID(id string, opts ...OptionFunc) (*DedicatedGuestVlanRange, int, error)
+	ListVlanIpRanges(p *ListVlanIpRangesParams) (*ListVlanIpRangesResponse, error)
+	NewListVlanIpRangesParams() *ListVlanIpRangesParams
+	GetVlanIpRangeByID(id string, opts ...OptionFunc) (*VlanIpRange, int, error)
+	ReleaseDedicatedGuestVlanRange(p *ReleaseDedicatedGuestVlanRangeParams) (*ReleaseDedicatedGuestVlanRangeResponse, error)
+	NewReleaseDedicatedGuestVlanRangeParams(id string) *ReleaseDedicatedGuestVlanRangeParams
+}
+
 type CreateVlanIpRangeParams struct {
 	p map[string]interface{}
 }

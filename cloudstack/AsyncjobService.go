@@ -26,6 +26,13 @@ import (
 	"time"
 )
 
+type AsyncjobServiceIface interface {
+	ListAsyncJobs(p *ListAsyncJobsParams) (*ListAsyncJobsResponse, error)
+	NewListAsyncJobsParams() *ListAsyncJobsParams
+	QueryAsyncJobResult(p *QueryAsyncJobResultParams) (*QueryAsyncJobResultResponse, error)
+	NewQueryAsyncJobResultParams(jobid string) *QueryAsyncJobResultParams
+}
+
 type ListAsyncJobsParams struct {
 	p map[string]interface{}
 }

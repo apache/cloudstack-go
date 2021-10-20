@@ -27,6 +27,31 @@ import (
 	"strings"
 )
 
+type ProjectServiceIface interface {
+	ActivateProject(p *ActivateProjectParams) (*ActivateProjectResponse, error)
+	NewActivateProjectParams(id string) *ActivateProjectParams
+	CreateProject(p *CreateProjectParams) (*CreateProjectResponse, error)
+	NewCreateProjectParams(displaytext string, name string) *CreateProjectParams
+	DeleteProject(p *DeleteProjectParams) (*DeleteProjectResponse, error)
+	NewDeleteProjectParams(id string) *DeleteProjectParams
+	DeleteProjectInvitation(p *DeleteProjectInvitationParams) (*DeleteProjectInvitationResponse, error)
+	NewDeleteProjectInvitationParams(id string) *DeleteProjectInvitationParams
+	ListProjectInvitations(p *ListProjectInvitationsParams) (*ListProjectInvitationsResponse, error)
+	NewListProjectInvitationsParams() *ListProjectInvitationsParams
+	GetProjectInvitationByID(id string, opts ...OptionFunc) (*ProjectInvitation, int, error)
+	ListProjects(p *ListProjectsParams) (*ListProjectsResponse, error)
+	NewListProjectsParams() *ListProjectsParams
+	GetProjectID(name string, opts ...OptionFunc) (string, int, error)
+	GetProjectByName(name string, opts ...OptionFunc) (*Project, int, error)
+	GetProjectByID(id string, opts ...OptionFunc) (*Project, int, error)
+	SuspendProject(p *SuspendProjectParams) (*SuspendProjectResponse, error)
+	NewSuspendProjectParams(id string) *SuspendProjectParams
+	UpdateProject(p *UpdateProjectParams) (*UpdateProjectResponse, error)
+	NewUpdateProjectParams(id string) *UpdateProjectParams
+	UpdateProjectInvitation(p *UpdateProjectInvitationParams) (*UpdateProjectInvitationResponse, error)
+	NewUpdateProjectInvitationParams(projectid string) *UpdateProjectInvitationParams
+}
+
 type ActivateProjectParams struct {
 	p map[string]interface{}
 }

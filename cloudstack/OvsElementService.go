@@ -27,6 +27,14 @@ import (
 	"strings"
 )
 
+type OvsElementServiceIface interface {
+	ConfigureOvsElement(p *ConfigureOvsElementParams) (*OvsElementResponse, error)
+	NewConfigureOvsElementParams(enabled bool, id string) *ConfigureOvsElementParams
+	ListOvsElements(p *ListOvsElementsParams) (*ListOvsElementsResponse, error)
+	NewListOvsElementsParams() *ListOvsElementsParams
+	GetOvsElementByID(id string, opts ...OptionFunc) (*OvsElement, int, error)
+}
+
 type ConfigureOvsElementParams struct {
 	p map[string]interface{}
 }

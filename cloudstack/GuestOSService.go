@@ -27,6 +27,32 @@ import (
 	"strings"
 )
 
+type GuestOSServiceIface interface {
+	AddGuestOs(p *AddGuestOsParams) (*AddGuestOsResponse, error)
+	NewAddGuestOsParams(details map[string]string, oscategoryid string, osdisplayname string) *AddGuestOsParams
+	AddGuestOsMapping(p *AddGuestOsMappingParams) (*AddGuestOsMappingResponse, error)
+	NewAddGuestOsMappingParams(hypervisor string, hypervisorversion string, osnameforhypervisor string) *AddGuestOsMappingParams
+	ListGuestOsMapping(p *ListGuestOsMappingParams) (*ListGuestOsMappingResponse, error)
+	NewListGuestOsMappingParams() *ListGuestOsMappingParams
+	GetGuestOsMappingByID(id string, opts ...OptionFunc) (*GuestOsMapping, int, error)
+	ListOsCategories(p *ListOsCategoriesParams) (*ListOsCategoriesResponse, error)
+	NewListOsCategoriesParams() *ListOsCategoriesParams
+	GetOsCategoryID(name string, opts ...OptionFunc) (string, int, error)
+	GetOsCategoryByName(name string, opts ...OptionFunc) (*OsCategory, int, error)
+	GetOsCategoryByID(id string, opts ...OptionFunc) (*OsCategory, int, error)
+	ListOsTypes(p *ListOsTypesParams) (*ListOsTypesResponse, error)
+	NewListOsTypesParams() *ListOsTypesParams
+	GetOsTypeByID(id string, opts ...OptionFunc) (*OsType, int, error)
+	RemoveGuestOs(p *RemoveGuestOsParams) (*RemoveGuestOsResponse, error)
+	NewRemoveGuestOsParams(id string) *RemoveGuestOsParams
+	RemoveGuestOsMapping(p *RemoveGuestOsMappingParams) (*RemoveGuestOsMappingResponse, error)
+	NewRemoveGuestOsMappingParams(id string) *RemoveGuestOsMappingParams
+	UpdateGuestOs(p *UpdateGuestOsParams) (*UpdateGuestOsResponse, error)
+	NewUpdateGuestOsParams(details map[string]string, id string, osdisplayname string) *UpdateGuestOsParams
+	UpdateGuestOsMapping(p *UpdateGuestOsMappingParams) (*UpdateGuestOsMappingResponse, error)
+	NewUpdateGuestOsMappingParams(id string, osnameforhypervisor string) *UpdateGuestOsMappingParams
+}
+
 type AddGuestOsParams struct {
 	p map[string]interface{}
 }

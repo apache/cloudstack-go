@@ -25,6 +25,17 @@ import (
 	"strconv"
 )
 
+type ConfigurationServiceIface interface {
+	ListCapabilities(p *ListCapabilitiesParams) (*ListCapabilitiesResponse, error)
+	NewListCapabilitiesParams() *ListCapabilitiesParams
+	ListConfigurations(p *ListConfigurationsParams) (*ListConfigurationsResponse, error)
+	NewListConfigurationsParams() *ListConfigurationsParams
+	ListDeploymentPlanners(p *ListDeploymentPlannersParams) (*ListDeploymentPlannersResponse, error)
+	NewListDeploymentPlannersParams() *ListDeploymentPlannersParams
+	UpdateConfiguration(p *UpdateConfigurationParams) (*UpdateConfigurationResponse, error)
+	NewUpdateConfigurationParams(name string) *UpdateConfigurationParams
+}
+
 type ListCapabilitiesParams struct {
 	p map[string]interface{}
 }

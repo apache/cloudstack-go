@@ -27,6 +27,25 @@ import (
 	"strings"
 )
 
+type DomainServiceIface interface {
+	CreateDomain(p *CreateDomainParams) (*CreateDomainResponse, error)
+	NewCreateDomainParams(name string) *CreateDomainParams
+	DeleteDomain(p *DeleteDomainParams) (*DeleteDomainResponse, error)
+	NewDeleteDomainParams(id string) *DeleteDomainParams
+	ListDomainChildren(p *ListDomainChildrenParams) (*ListDomainChildrenResponse, error)
+	NewListDomainChildrenParams() *ListDomainChildrenParams
+	GetDomainChildrenID(name string, opts ...OptionFunc) (string, int, error)
+	GetDomainChildrenByName(name string, opts ...OptionFunc) (*DomainChildren, int, error)
+	GetDomainChildrenByID(id string, opts ...OptionFunc) (*DomainChildren, int, error)
+	ListDomains(p *ListDomainsParams) (*ListDomainsResponse, error)
+	NewListDomainsParams() *ListDomainsParams
+	GetDomainID(name string, opts ...OptionFunc) (string, int, error)
+	GetDomainByName(name string, opts ...OptionFunc) (*Domain, int, error)
+	GetDomainByID(id string, opts ...OptionFunc) (*Domain, int, error)
+	UpdateDomain(p *UpdateDomainParams) (*UpdateDomainResponse, error)
+	NewUpdateDomainParams(id string) *UpdateDomainParams
+}
+
 type CreateDomainParams struct {
 	p map[string]interface{}
 }
