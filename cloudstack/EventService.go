@@ -71,11 +71,27 @@ func (p *ArchiveEventsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *ArchiveEventsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
 func (p *ArchiveEventsParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ArchiveEventsParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *ArchiveEventsParams) SetStartdate(v string) {
@@ -85,11 +101,27 @@ func (p *ArchiveEventsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *ArchiveEventsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
 func (p *ArchiveEventsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ArchiveEventsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ArchiveEventsParams instance,
@@ -181,11 +213,27 @@ func (p *DeleteEventsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *DeleteEventsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
 func (p *DeleteEventsParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *DeleteEventsParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *DeleteEventsParams) SetStartdate(v string) {
@@ -195,11 +243,27 @@ func (p *DeleteEventsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *DeleteEventsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
 func (p *DeleteEventsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *DeleteEventsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteEventsParams instance,
@@ -378,11 +442,27 @@ func (p *ListEventsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListEventsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListEventsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetDuration(v int) {
@@ -392,11 +472,27 @@ func (p *ListEventsParams) SetDuration(v int) {
 	p.p["duration"] = v
 }
 
+func (p *ListEventsParams) GetDuration() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["duration"].(int)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetEnddate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["enddate"] = v
+}
+
+func (p *ListEventsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetEntrytime(v int) {
@@ -406,11 +502,27 @@ func (p *ListEventsParams) SetEntrytime(v int) {
 	p.p["entrytime"] = v
 }
 
+func (p *ListEventsParams) GetEntrytime() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["entrytime"].(int)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListEventsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetIsrecursive(v bool) {
@@ -420,11 +532,27 @@ func (p *ListEventsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListEventsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListEventsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetLevel(v string) {
@@ -434,11 +562,27 @@ func (p *ListEventsParams) SetLevel(v string) {
 	p.p["level"] = v
 }
 
+func (p *ListEventsParams) GetLevel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["level"].(string)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListEventsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetPage(v int) {
@@ -448,11 +592,27 @@ func (p *ListEventsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListEventsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListEventsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetProjectid(v string) {
@@ -462,11 +622,27 @@ func (p *ListEventsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListEventsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *ListEventsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
 }
 
 func (p *ListEventsParams) SetStartid(v string) {
@@ -476,11 +652,27 @@ func (p *ListEventsParams) SetStartid(v string) {
 	p.p["startid"] = v
 }
 
+func (p *ListEventsParams) GetStartid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startid"].(string)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListEventsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListEventsParams instance,

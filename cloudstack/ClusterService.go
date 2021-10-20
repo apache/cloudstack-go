@@ -136,11 +136,27 @@ func (p *AddClusterParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *AddClusterParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetClustername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clustername"] = v
+}
+
+func (p *AddClusterParams) GetClustername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustername"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetClustertype(v string) {
@@ -150,11 +166,27 @@ func (p *AddClusterParams) SetClustertype(v string) {
 	p.p["clustertype"] = v
 }
 
+func (p *AddClusterParams) GetClustertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustertype"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetGuestvswitchname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["guestvswitchname"] = v
+}
+
+func (p *AddClusterParams) GetGuestvswitchname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["guestvswitchname"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetGuestvswitchtype(v string) {
@@ -164,11 +196,27 @@ func (p *AddClusterParams) SetGuestvswitchtype(v string) {
 	p.p["guestvswitchtype"] = v
 }
 
+func (p *AddClusterParams) GetGuestvswitchtype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["guestvswitchtype"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *AddClusterParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetOvm3cluster(v string) {
@@ -178,11 +226,27 @@ func (p *AddClusterParams) SetOvm3cluster(v string) {
 	p.p["ovm3cluster"] = v
 }
 
+func (p *AddClusterParams) GetOvm3cluster() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ovm3cluster"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetOvm3pool(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ovm3pool"] = v
+}
+
+func (p *AddClusterParams) GetOvm3pool() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ovm3pool"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetOvm3vip(v string) {
@@ -192,11 +256,27 @@ func (p *AddClusterParams) SetOvm3vip(v string) {
 	p.p["ovm3vip"] = v
 }
 
+func (p *AddClusterParams) GetOvm3vip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ovm3vip"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddClusterParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetPodid(v string) {
@@ -206,11 +286,27 @@ func (p *AddClusterParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *AddClusterParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetPublicvswitchname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["publicvswitchname"] = v
+}
+
+func (p *AddClusterParams) GetPublicvswitchname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicvswitchname"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetPublicvswitchtype(v string) {
@@ -220,11 +316,27 @@ func (p *AddClusterParams) SetPublicvswitchtype(v string) {
 	p.p["publicvswitchtype"] = v
 }
 
+func (p *AddClusterParams) GetPublicvswitchtype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicvswitchtype"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *AddClusterParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetUsername(v string) {
@@ -234,11 +346,27 @@ func (p *AddClusterParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddClusterParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetVsmipaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vsmipaddress"] = v
+}
+
+func (p *AddClusterParams) GetVsmipaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vsmipaddress"].(string)
+	return value, ok
 }
 
 func (p *AddClusterParams) SetVsmpassword(v string) {
@@ -248,6 +376,14 @@ func (p *AddClusterParams) SetVsmpassword(v string) {
 	p.p["vsmpassword"] = v
 }
 
+func (p *AddClusterParams) GetVsmpassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vsmpassword"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetVsmusername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -255,11 +391,27 @@ func (p *AddClusterParams) SetVsmusername(v string) {
 	p.p["vsmusername"] = v
 }
 
+func (p *AddClusterParams) GetVsmusername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vsmusername"].(string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddClusterParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddClusterParams instance,
@@ -353,6 +505,14 @@ func (p *DedicateClusterParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicateClusterParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DedicateClusterParams) SetClusterid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -360,11 +520,27 @@ func (p *DedicateClusterParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *DedicateClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *DedicateClusterParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *DedicateClusterParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DedicateClusterParams instance,
@@ -445,6 +621,14 @@ func (p *DeleteClusterParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteClusterParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteClusterParams instance,
 // as then you are sure you have configured all required params
 func (s *ClusterService) NewDeleteClusterParams(id string) *DeleteClusterParams {
@@ -523,6 +707,14 @@ func (p *DisableOutOfBandManagementForClusterParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *DisableOutOfBandManagementForClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableOutOfBandManagementForClusterParams instance,
@@ -607,6 +799,14 @@ func (p *EnableOutOfBandManagementForClusterParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *EnableOutOfBandManagementForClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new EnableOutOfBandManagementForClusterParams instance,
 // as then you are sure you have configured all required params
 func (s *ClusterService) NewEnableOutOfBandManagementForClusterParams(clusterid string) *EnableOutOfBandManagementForClusterParams {
@@ -689,6 +889,14 @@ func (p *EnableHAForClusterParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *EnableHAForClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new EnableHAForClusterParams instance,
 // as then you are sure you have configured all required params
 func (s *ClusterService) NewEnableHAForClusterParams(clusterid string) *EnableHAForClusterParams {
@@ -755,6 +963,14 @@ func (p *DisableHAForClusterParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *DisableHAForClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableHAForClusterParams instance,
@@ -861,11 +1077,27 @@ func (p *ListClustersParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *ListClustersParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetClustertype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clustertype"] = v
+}
+
+func (p *ListClustersParams) GetClustertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustertype"].(string)
+	return value, ok
 }
 
 func (p *ListClustersParams) SetHypervisor(v string) {
@@ -875,11 +1107,27 @@ func (p *ListClustersParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *ListClustersParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListClustersParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListClustersParams) SetKeyword(v string) {
@@ -889,11 +1137,27 @@ func (p *ListClustersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListClustersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetManagedstate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["managedstate"] = v
+}
+
+func (p *ListClustersParams) GetManagedstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managedstate"].(string)
+	return value, ok
 }
 
 func (p *ListClustersParams) SetName(v string) {
@@ -903,11 +1167,27 @@ func (p *ListClustersParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListClustersParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListClustersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListClustersParams) SetPagesize(v int) {
@@ -917,11 +1197,27 @@ func (p *ListClustersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListClustersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListClustersParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListClustersParams) SetShowcapacities(v bool) {
@@ -931,11 +1227,27 @@ func (p *ListClustersParams) SetShowcapacities(v bool) {
 	p.p["showcapacities"] = v
 }
 
+func (p *ListClustersParams) GetShowcapacities() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showcapacities"].(bool)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListClustersParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListClustersParams instance,
@@ -1142,11 +1454,27 @@ func (p *ListClustersMetricsParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *ListClustersMetricsParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetClustertype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clustertype"] = v
+}
+
+func (p *ListClustersMetricsParams) GetClustertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustertype"].(string)
+	return value, ok
 }
 
 func (p *ListClustersMetricsParams) SetHypervisor(v string) {
@@ -1156,11 +1484,27 @@ func (p *ListClustersMetricsParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *ListClustersMetricsParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListClustersMetricsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListClustersMetricsParams) SetKeyword(v string) {
@@ -1170,11 +1514,27 @@ func (p *ListClustersMetricsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListClustersMetricsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetManagedstate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["managedstate"] = v
+}
+
+func (p *ListClustersMetricsParams) GetManagedstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managedstate"].(string)
+	return value, ok
 }
 
 func (p *ListClustersMetricsParams) SetName(v string) {
@@ -1184,11 +1544,27 @@ func (p *ListClustersMetricsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListClustersMetricsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListClustersMetricsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListClustersMetricsParams) SetPagesize(v int) {
@@ -1198,11 +1574,27 @@ func (p *ListClustersMetricsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListClustersMetricsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListClustersMetricsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListClustersMetricsParams) SetShowcapacities(v bool) {
@@ -1212,11 +1604,27 @@ func (p *ListClustersMetricsParams) SetShowcapacities(v bool) {
 	p.p["showcapacities"] = v
 }
 
+func (p *ListClustersMetricsParams) GetShowcapacities() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showcapacities"].(bool)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListClustersMetricsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListClustersMetricsParams instance,
@@ -1425,11 +1833,27 @@ func (p *ListDedicatedClustersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedClustersParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedClustersParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedClustersParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedClustersParams) SetClusterid(v string) {
@@ -1439,11 +1863,27 @@ func (p *ListDedicatedClustersParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListDedicatedClustersParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedClustersParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListDedicatedClustersParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedClustersParams) SetKeyword(v string) {
@@ -1453,6 +1893,14 @@ func (p *ListDedicatedClustersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDedicatedClustersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedClustersParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1460,11 +1908,27 @@ func (p *ListDedicatedClustersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedClustersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedClustersParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListDedicatedClustersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListDedicatedClustersParams instance,
@@ -1526,6 +1990,14 @@ func (p *ReleaseDedicatedClusterParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *ReleaseDedicatedClusterParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ReleaseDedicatedClusterParams instance,
@@ -1611,11 +2083,27 @@ func (p *UpdateClusterParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdateClusterParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *UpdateClusterParams) SetClustername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clustername"] = v
+}
+
+func (p *UpdateClusterParams) GetClustername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustername"].(string)
+	return value, ok
 }
 
 func (p *UpdateClusterParams) SetClustertype(v string) {
@@ -1625,11 +2113,27 @@ func (p *UpdateClusterParams) SetClustertype(v string) {
 	p.p["clustertype"] = v
 }
 
+func (p *UpdateClusterParams) GetClustertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustertype"].(string)
+	return value, ok
+}
+
 func (p *UpdateClusterParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *UpdateClusterParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *UpdateClusterParams) SetId(v string) {
@@ -1639,11 +2143,27 @@ func (p *UpdateClusterParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateClusterParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *UpdateClusterParams) SetManagedstate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["managedstate"] = v
+}
+
+func (p *UpdateClusterParams) GetManagedstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managedstate"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateClusterParams instance,

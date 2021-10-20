@@ -118,11 +118,27 @@ func (p *CreateZoneParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *CreateZoneParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetDns1(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dns1"] = v
+}
+
+func (p *CreateZoneParams) GetDns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns1"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetDns2(v string) {
@@ -132,11 +148,27 @@ func (p *CreateZoneParams) SetDns2(v string) {
 	p.p["dns2"] = v
 }
 
+func (p *CreateZoneParams) GetDns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns2"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetDomain(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domain"] = v
+}
+
+func (p *CreateZoneParams) GetDomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domain"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetDomainid(v string) {
@@ -146,11 +178,27 @@ func (p *CreateZoneParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateZoneParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetGuestcidraddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["guestcidraddress"] = v
+}
+
+func (p *CreateZoneParams) GetGuestcidraddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["guestcidraddress"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetInternaldns1(v string) {
@@ -160,11 +208,27 @@ func (p *CreateZoneParams) SetInternaldns1(v string) {
 	p.p["internaldns1"] = v
 }
 
+func (p *CreateZoneParams) GetInternaldns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["internaldns1"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetInternaldns2(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["internaldns2"] = v
+}
+
+func (p *CreateZoneParams) GetInternaldns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["internaldns2"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetIp6dns1(v string) {
@@ -174,11 +238,27 @@ func (p *CreateZoneParams) SetIp6dns1(v string) {
 	p.p["ip6dns1"] = v
 }
 
+func (p *CreateZoneParams) GetIp6dns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns1"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetIp6dns2(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ip6dns2"] = v
+}
+
+func (p *CreateZoneParams) GetIp6dns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns2"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetLocalstorageenabled(v bool) {
@@ -188,11 +268,27 @@ func (p *CreateZoneParams) SetLocalstorageenabled(v bool) {
 	p.p["localstorageenabled"] = v
 }
 
+func (p *CreateZoneParams) GetLocalstorageenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["localstorageenabled"].(bool)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateZoneParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *CreateZoneParams) SetNetworktype(v string) {
@@ -202,11 +298,27 @@ func (p *CreateZoneParams) SetNetworktype(v string) {
 	p.p["networktype"] = v
 }
 
+func (p *CreateZoneParams) GetNetworktype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networktype"].(string)
+	return value, ok
+}
+
 func (p *CreateZoneParams) SetSecuritygroupenabled(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupenabled"] = v
+}
+
+func (p *CreateZoneParams) GetSecuritygroupenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupenabled"].(bool)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateZoneParams instance,
@@ -307,6 +419,14 @@ func (p *DedicateZoneParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicateZoneParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DedicateZoneParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -314,11 +434,27 @@ func (p *DedicateZoneParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DedicateZoneParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *DedicateZoneParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *DedicateZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DedicateZoneParams instance,
@@ -399,6 +535,14 @@ func (p *DeleteZoneParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteZoneParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteZoneParams instance,
 // as then you are sure you have configured all required params
 func (s *ZoneService) NewDeleteZoneParams(id string) *DeleteZoneParams {
@@ -477,6 +621,14 @@ func (p *DisableOutOfBandManagementForZoneParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *DisableOutOfBandManagementForZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableOutOfBandManagementForZoneParams instance,
@@ -561,6 +713,14 @@ func (p *EnableOutOfBandManagementForZoneParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *EnableOutOfBandManagementForZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new EnableOutOfBandManagementForZoneParams instance,
 // as then you are sure you have configured all required params
 func (s *ZoneService) NewEnableOutOfBandManagementForZoneParams(zoneid string) *EnableOutOfBandManagementForZoneParams {
@@ -643,6 +803,14 @@ func (p *DisableHAForZoneParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *DisableHAForZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DisableHAForZoneParams instance,
 // as then you are sure you have configured all required params
 func (s *ZoneService) NewDisableHAForZoneParams(zoneid string) *DisableHAForZoneParams {
@@ -709,6 +877,14 @@ func (p *EnableHAForZoneParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *EnableHAForZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new EnableHAForZoneParams instance,
@@ -799,11 +975,27 @@ func (p *ListDedicatedZonesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedZonesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedZonesParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedZonesParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedZonesParams) SetDomainid(v string) {
@@ -813,11 +1005,27 @@ func (p *ListDedicatedZonesParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListDedicatedZonesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedZonesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListDedicatedZonesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedZonesParams) SetPage(v int) {
@@ -827,6 +1035,14 @@ func (p *ListDedicatedZonesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedZonesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedZonesParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -834,11 +1050,27 @@ func (p *ListDedicatedZonesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListDedicatedZonesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedZonesParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListDedicatedZonesParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListDedicatedZonesParams instance,
@@ -937,11 +1169,27 @@ func (p *ListZonesParams) SetAvailable(v bool) {
 	p.p["available"] = v
 }
 
+func (p *ListZonesParams) GetAvailable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["available"].(bool)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListZonesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListZonesParams) SetId(v string) {
@@ -951,11 +1199,27 @@ func (p *ListZonesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListZonesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListZonesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListZonesParams) SetName(v string) {
@@ -965,11 +1229,27 @@ func (p *ListZonesParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListZonesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetNetworktype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networktype"] = v
+}
+
+func (p *ListZonesParams) GetNetworktype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networktype"].(string)
+	return value, ok
 }
 
 func (p *ListZonesParams) SetPage(v int) {
@@ -979,11 +1259,27 @@ func (p *ListZonesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListZonesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListZonesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListZonesParams) SetShowcapacities(v bool) {
@@ -993,11 +1289,27 @@ func (p *ListZonesParams) SetShowcapacities(v bool) {
 	p.p["showcapacities"] = v
 }
 
+func (p *ListZonesParams) GetShowcapacities() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showcapacities"].(bool)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *ListZonesParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListZonesParams instance,
@@ -1176,6 +1488,14 @@ func (p *ReleaseDedicatedZoneParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *ReleaseDedicatedZoneParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ReleaseDedicatedZoneParams instance,
 // as then you are sure you have configured all required params
 func (s *ZoneService) NewReleaseDedicatedZoneParams(zoneid string) *ReleaseDedicatedZoneParams {
@@ -1300,11 +1620,27 @@ func (p *UpdateZoneParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdateZoneParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetDetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *UpdateZoneParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetDhcpprovider(v string) {
@@ -1314,11 +1650,27 @@ func (p *UpdateZoneParams) SetDhcpprovider(v string) {
 	p.p["dhcpprovider"] = v
 }
 
+func (p *UpdateZoneParams) GetDhcpprovider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpprovider"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetDns1(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dns1"] = v
+}
+
+func (p *UpdateZoneParams) GetDns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns1"].(string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetDns2(v string) {
@@ -1328,11 +1680,27 @@ func (p *UpdateZoneParams) SetDns2(v string) {
 	p.p["dns2"] = v
 }
 
+func (p *UpdateZoneParams) GetDns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns2"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetDnssearchorder(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dnssearchorder"] = v
+}
+
+func (p *UpdateZoneParams) GetDnssearchorder() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dnssearchorder"].([]string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetDomain(v string) {
@@ -1342,11 +1710,27 @@ func (p *UpdateZoneParams) SetDomain(v string) {
 	p.p["domain"] = v
 }
 
+func (p *UpdateZoneParams) GetDomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domain"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetGuestcidraddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["guestcidraddress"] = v
+}
+
+func (p *UpdateZoneParams) GetGuestcidraddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["guestcidraddress"].(string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetId(v string) {
@@ -1356,11 +1740,27 @@ func (p *UpdateZoneParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateZoneParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetInternaldns1(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["internaldns1"] = v
+}
+
+func (p *UpdateZoneParams) GetInternaldns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["internaldns1"].(string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetInternaldns2(v string) {
@@ -1370,11 +1770,27 @@ func (p *UpdateZoneParams) SetInternaldns2(v string) {
 	p.p["internaldns2"] = v
 }
 
+func (p *UpdateZoneParams) GetInternaldns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["internaldns2"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetIp6dns1(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ip6dns1"] = v
+}
+
+func (p *UpdateZoneParams) GetIp6dns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns1"].(string)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetIp6dns2(v string) {
@@ -1384,11 +1800,27 @@ func (p *UpdateZoneParams) SetIp6dns2(v string) {
 	p.p["ip6dns2"] = v
 }
 
+func (p *UpdateZoneParams) GetIp6dns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns2"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetIspublic(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ispublic"] = v
+}
+
+func (p *UpdateZoneParams) GetIspublic() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ispublic"].(bool)
+	return value, ok
 }
 
 func (p *UpdateZoneParams) SetLocalstorageenabled(v bool) {
@@ -1398,6 +1830,14 @@ func (p *UpdateZoneParams) SetLocalstorageenabled(v bool) {
 	p.p["localstorageenabled"] = v
 }
 
+func (p *UpdateZoneParams) GetLocalstorageenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["localstorageenabled"].(bool)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1405,11 +1845,27 @@ func (p *UpdateZoneParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateZoneParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateZoneParams) SetSortkey(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sortkey"] = v
+}
+
+func (p *UpdateZoneParams) GetSortkey() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sortkey"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateZoneParams instance,

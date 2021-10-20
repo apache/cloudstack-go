@@ -64,11 +64,27 @@ func (p *LoginParams) SetDomain(v string) {
 	p.p["domain"] = v
 }
 
+func (p *LoginParams) GetDomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domain"].(string)
+	return value, ok
+}
+
 func (p *LoginParams) SetDomainId(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainId"] = v
+}
+
+func (p *LoginParams) GetDomainId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainId"].(int64)
+	return value, ok
 }
 
 func (p *LoginParams) SetPassword(v string) {
@@ -78,11 +94,27 @@ func (p *LoginParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *LoginParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *LoginParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *LoginParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new LoginParams instance,

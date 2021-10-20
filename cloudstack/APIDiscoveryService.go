@@ -51,6 +51,14 @@ func (p *ListApisParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListApisParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListApisParams instance,
 // as then you are sure you have configured all required params
 func (s *APIDiscoveryService) NewListApisParams() *ListApisParams {

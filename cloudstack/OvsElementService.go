@@ -61,11 +61,27 @@ func (p *ConfigureOvsElementParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ConfigureOvsElementParams) GetEnabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enabled"].(bool)
+	return value, ok
+}
+
 func (p *ConfigureOvsElementParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ConfigureOvsElementParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ConfigureOvsElementParams instance,
@@ -166,11 +182,27 @@ func (p *ListOvsElementsParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ListOvsElementsParams) GetEnabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enabled"].(bool)
+	return value, ok
+}
+
 func (p *ListOvsElementsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListOvsElementsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListOvsElementsParams) SetKeyword(v string) {
@@ -180,11 +212,27 @@ func (p *ListOvsElementsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListOvsElementsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListOvsElementsParams) SetNspid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nspid"] = v
+}
+
+func (p *ListOvsElementsParams) GetNspid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nspid"].(string)
+	return value, ok
 }
 
 func (p *ListOvsElementsParams) SetPage(v int) {
@@ -194,11 +242,27 @@ func (p *ListOvsElementsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListOvsElementsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListOvsElementsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListOvsElementsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListOvsElementsParams instance,

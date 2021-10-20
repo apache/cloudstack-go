@@ -80,11 +80,27 @@ func (p *CreateRoleParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateRoleParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
 func (p *CreateRoleParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateRoleParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *CreateRoleParams) SetRoleid(v string) {
@@ -94,11 +110,27 @@ func (p *CreateRoleParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateRoleParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 func (p *CreateRoleParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *CreateRoleParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateRoleParams instance,
@@ -166,11 +198,27 @@ func (p *CreateRolePermissionParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateRolePermissionParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
 func (p *CreateRolePermissionParams) SetPermission(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["permission"] = v
+}
+
+func (p *CreateRolePermissionParams) GetPermission() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["permission"].(string)
+	return value, ok
 }
 
 func (p *CreateRolePermissionParams) SetRoleid(v string) {
@@ -180,11 +228,27 @@ func (p *CreateRolePermissionParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateRolePermissionParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 func (p *CreateRolePermissionParams) SetRule(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["rule"] = v
+}
+
+func (p *CreateRolePermissionParams) GetRule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rule"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateRolePermissionParams instance,
@@ -244,6 +308,14 @@ func (p *DeleteRoleParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteRoleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteRoleParams instance,
@@ -326,6 +398,14 @@ func (p *DeleteRolePermissionParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteRolePermissionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteRolePermissionParams instance,
 // as then you are sure you have configured all required params
 func (s *RoleService) NewDeleteRolePermissionParams(id string) *DeleteRolePermissionParams {
@@ -406,6 +486,14 @@ func (p *ListRolePermissionsParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *ListRolePermissionsParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListRolePermissionsParams instance,
 // as then you are sure you have configured all required params
 func (s *RoleService) NewListRolePermissionsParams() *ListRolePermissionsParams {
@@ -484,11 +572,27 @@ func (p *ListRolesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListRolesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListRolesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRolesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListRolesParams) SetName(v string) {
@@ -498,11 +602,27 @@ func (p *ListRolesParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListRolesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListRolesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListRolesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListRolesParams) SetPagesize(v int) {
@@ -512,11 +632,27 @@ func (p *ListRolesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListRolesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListRolesParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListRolesParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListRolesParams instance,
@@ -674,11 +810,27 @@ func (p *UpdateRoleParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *UpdateRoleParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
 func (p *UpdateRoleParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateRoleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateRoleParams) SetName(v string) {
@@ -688,11 +840,27 @@ func (p *UpdateRoleParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateRoleParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateRoleParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *UpdateRoleParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateRoleParams instance,
@@ -761,11 +929,27 @@ func (p *UpdateRolePermissionParams) SetPermission(v string) {
 	p.p["permission"] = v
 }
 
+func (p *UpdateRolePermissionParams) GetPermission() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["permission"].(string)
+	return value, ok
+}
+
 func (p *UpdateRolePermissionParams) SetRoleid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roleid"] = v
+}
+
+func (p *UpdateRolePermissionParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
 }
 
 func (p *UpdateRolePermissionParams) SetRuleid(v string) {
@@ -775,11 +959,27 @@ func (p *UpdateRolePermissionParams) SetRuleid(v string) {
 	p.p["ruleid"] = v
 }
 
+func (p *UpdateRolePermissionParams) GetRuleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ruleid"].(string)
+	return value, ok
+}
+
 func (p *UpdateRolePermissionParams) SetRuleorder(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ruleorder"] = v
+}
+
+func (p *UpdateRolePermissionParams) GetRuleorder() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ruleorder"].([]string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateRolePermissionParams instance,

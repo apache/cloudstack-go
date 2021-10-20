@@ -90,6 +90,14 @@ func (p *AttachVolumeParams) SetDeviceid(v int64) {
 	p.p["deviceid"] = v
 }
 
+func (p *AttachVolumeParams) GetDeviceid() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["deviceid"].(int64)
+	return value, ok
+}
+
 func (p *AttachVolumeParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -97,11 +105,27 @@ func (p *AttachVolumeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *AttachVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *AttachVolumeParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *AttachVolumeParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AttachVolumeParams instance,
@@ -278,11 +302,27 @@ func (p *CreateVolumeParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateVolumeParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetCustomid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customid"] = v
+}
+
+func (p *CreateVolumeParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
 }
 
 func (p *CreateVolumeParams) SetDiskofferingid(v string) {
@@ -292,11 +332,27 @@ func (p *CreateVolumeParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *CreateVolumeParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetDisplayvolume(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayvolume"] = v
+}
+
+func (p *CreateVolumeParams) GetDisplayvolume() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvolume"].(bool)
+	return value, ok
 }
 
 func (p *CreateVolumeParams) SetDomainid(v string) {
@@ -306,11 +362,27 @@ func (p *CreateVolumeParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateVolumeParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetMaxiops(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxiops"] = v
+}
+
+func (p *CreateVolumeParams) GetMaxiops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["maxiops"].(int64)
+	return value, ok
 }
 
 func (p *CreateVolumeParams) SetMiniops(v int64) {
@@ -320,11 +392,27 @@ func (p *CreateVolumeParams) SetMiniops(v int64) {
 	p.p["miniops"] = v
 }
 
+func (p *CreateVolumeParams) GetMiniops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["miniops"].(int64)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateVolumeParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *CreateVolumeParams) SetProjectid(v string) {
@@ -334,11 +422,27 @@ func (p *CreateVolumeParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *CreateVolumeParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetSize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["size"] = v
+}
+
+func (p *CreateVolumeParams) GetSize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["size"].(int64)
+	return value, ok
 }
 
 func (p *CreateVolumeParams) SetSnapshotid(v string) {
@@ -348,6 +452,14 @@ func (p *CreateVolumeParams) SetSnapshotid(v string) {
 	p.p["snapshotid"] = v
 }
 
+func (p *CreateVolumeParams) GetSnapshotid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["snapshotid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -355,11 +467,27 @@ func (p *CreateVolumeParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *CreateVolumeParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateVolumeParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateVolumeParams instance,
@@ -494,6 +622,14 @@ func (p *DeleteVolumeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteVolumeParams instance,
 // as then you are sure you have configured all required params
 func (s *VolumeService) NewDeleteVolumeParams(id string) *DeleteVolumeParams {
@@ -581,6 +717,14 @@ func (p *DetachVolumeParams) SetDeviceid(v int64) {
 	p.p["deviceid"] = v
 }
 
+func (p *DetachVolumeParams) GetDeviceid() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["deviceid"].(int64)
+	return value, ok
+}
+
 func (p *DetachVolumeParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -588,11 +732,27 @@ func (p *DetachVolumeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DetachVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *DetachVolumeParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *DetachVolumeParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DetachVolumeParams instance,
@@ -736,11 +896,27 @@ func (p *ExtractVolumeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ExtractVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ExtractVolumeParams) SetMode(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["mode"] = v
+}
+
+func (p *ExtractVolumeParams) GetMode() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["mode"].(string)
+	return value, ok
 }
 
 func (p *ExtractVolumeParams) SetUrl(v string) {
@@ -750,11 +926,27 @@ func (p *ExtractVolumeParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *ExtractVolumeParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *ExtractVolumeParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ExtractVolumeParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ExtractVolumeParams instance,
@@ -844,6 +1036,14 @@ func (p *GetPathForVolumeParams) SetVolumeid(v string) {
 	p.p["volumeid"] = v
 }
 
+func (p *GetPathForVolumeParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new GetPathForVolumeParams instance,
 // as then you are sure you have configured all required params
 func (s *VolumeService) NewGetPathForVolumeParams(volumeid string) *GetPathForVolumeParams {
@@ -894,6 +1094,14 @@ func (p *GetSolidFireVolumeSizeParams) SetVolumeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["volumeid"] = v
+}
+
+func (p *GetSolidFireVolumeSizeParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetSolidFireVolumeSizeParams instance,
@@ -972,11 +1180,27 @@ func (p *GetUploadParamsForVolumeParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *GetUploadParamsForVolumeParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *GetUploadParamsForVolumeParams) SetChecksum(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["checksum"] = v
+}
+
+func (p *GetUploadParamsForVolumeParams) GetChecksum() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["checksum"].(string)
+	return value, ok
 }
 
 func (p *GetUploadParamsForVolumeParams) SetDiskofferingid(v string) {
@@ -986,11 +1210,27 @@ func (p *GetUploadParamsForVolumeParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *GetUploadParamsForVolumeParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *GetUploadParamsForVolumeParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *GetUploadParamsForVolumeParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *GetUploadParamsForVolumeParams) SetFormat(v string) {
@@ -1000,11 +1240,27 @@ func (p *GetUploadParamsForVolumeParams) SetFormat(v string) {
 	p.p["format"] = v
 }
 
+func (p *GetUploadParamsForVolumeParams) GetFormat() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["format"].(string)
+	return value, ok
+}
+
 func (p *GetUploadParamsForVolumeParams) SetImagestoreuuid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["imagestoreuuid"] = v
+}
+
+func (p *GetUploadParamsForVolumeParams) GetImagestoreuuid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["imagestoreuuid"].(string)
+	return value, ok
 }
 
 func (p *GetUploadParamsForVolumeParams) SetName(v string) {
@@ -1014,6 +1270,14 @@ func (p *GetUploadParamsForVolumeParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *GetUploadParamsForVolumeParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *GetUploadParamsForVolumeParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1021,11 +1285,27 @@ func (p *GetUploadParamsForVolumeParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *GetUploadParamsForVolumeParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *GetUploadParamsForVolumeParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *GetUploadParamsForVolumeParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetUploadParamsForVolumeParams instance,
@@ -1084,6 +1364,14 @@ func (p *GetVolumeiScsiNameParams) SetVolumeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["volumeid"] = v
+}
+
+func (p *GetVolumeiScsiNameParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetVolumeiScsiNameParams instance,
@@ -1211,11 +1499,27 @@ func (p *ListVolumesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVolumesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetClusterid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *ListVolumesParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetDiskofferingid(v string) {
@@ -1225,11 +1529,27 @@ func (p *ListVolumesParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *ListVolumesParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetDisplayvolume(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayvolume"] = v
+}
+
+func (p *ListVolumesParams) GetDisplayvolume() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvolume"].(bool)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetDomainid(v string) {
@@ -1239,11 +1559,27 @@ func (p *ListVolumesParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListVolumesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetHostid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *ListVolumesParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetId(v string) {
@@ -1253,11 +1589,27 @@ func (p *ListVolumesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVolumesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ListVolumesParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetIsrecursive(v bool) {
@@ -1267,11 +1619,27 @@ func (p *ListVolumesParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVolumesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVolumesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetListall(v bool) {
@@ -1281,11 +1649,27 @@ func (p *ListVolumesParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVolumesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListVolumesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetPage(v int) {
@@ -1295,11 +1679,27 @@ func (p *ListVolumesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVolumesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListVolumesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetPodid(v string) {
@@ -1309,11 +1709,27 @@ func (p *ListVolumesParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *ListVolumesParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVolumesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetState(v string) {
@@ -1323,11 +1739,27 @@ func (p *ListVolumesParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListVolumesParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *ListVolumesParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetTags(v map[string]string) {
@@ -1337,11 +1769,27 @@ func (p *ListVolumesParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListVolumesParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListVolumesParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 func (p *ListVolumesParams) SetVirtualmachineid(v string) {
@@ -1351,11 +1799,27 @@ func (p *ListVolumesParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListVolumesParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
 func (p *ListVolumesParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListVolumesParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVolumesParams instance,
@@ -1568,11 +2032,27 @@ func (p *MigrateVolumeParams) SetLivemigrate(v bool) {
 	p.p["livemigrate"] = v
 }
 
+func (p *MigrateVolumeParams) GetLivemigrate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["livemigrate"].(bool)
+	return value, ok
+}
+
 func (p *MigrateVolumeParams) SetNewdiskofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["newdiskofferingid"] = v
+}
+
+func (p *MigrateVolumeParams) GetNewdiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["newdiskofferingid"].(string)
+	return value, ok
 }
 
 func (p *MigrateVolumeParams) SetStorageid(v string) {
@@ -1582,11 +2062,27 @@ func (p *MigrateVolumeParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *MigrateVolumeParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
 func (p *MigrateVolumeParams) SetVolumeid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["volumeid"] = v
+}
+
+func (p *MigrateVolumeParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new MigrateVolumeParams instance,
@@ -1742,11 +2238,27 @@ func (p *ResizeVolumeParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *ResizeVolumeParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *ResizeVolumeParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ResizeVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ResizeVolumeParams) SetMaxiops(v int64) {
@@ -1756,11 +2268,27 @@ func (p *ResizeVolumeParams) SetMaxiops(v int64) {
 	p.p["maxiops"] = v
 }
 
+func (p *ResizeVolumeParams) GetMaxiops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["maxiops"].(int64)
+	return value, ok
+}
+
 func (p *ResizeVolumeParams) SetMiniops(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["miniops"] = v
+}
+
+func (p *ResizeVolumeParams) GetMiniops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["miniops"].(int64)
+	return value, ok
 }
 
 func (p *ResizeVolumeParams) SetShrinkok(v bool) {
@@ -1770,11 +2298,27 @@ func (p *ResizeVolumeParams) SetShrinkok(v bool) {
 	p.p["shrinkok"] = v
 }
 
+func (p *ResizeVolumeParams) GetShrinkok() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["shrinkok"].(bool)
+	return value, ok
+}
+
 func (p *ResizeVolumeParams) SetSize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["size"] = v
+}
+
+func (p *ResizeVolumeParams) GetSize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["size"].(int64)
+	return value, ok
 }
 
 // You should always use this function to get a new ResizeVolumeParams instance,
@@ -1929,11 +2473,27 @@ func (p *UpdateVolumeParams) SetChaininfo(v string) {
 	p.p["chaininfo"] = v
 }
 
+func (p *UpdateVolumeParams) GetChaininfo() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["chaininfo"].(string)
+	return value, ok
+}
+
 func (p *UpdateVolumeParams) SetCustomid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customid"] = v
+}
+
+func (p *UpdateVolumeParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
 }
 
 func (p *UpdateVolumeParams) SetDisplayvolume(v bool) {
@@ -1943,11 +2503,27 @@ func (p *UpdateVolumeParams) SetDisplayvolume(v bool) {
 	p.p["displayvolume"] = v
 }
 
+func (p *UpdateVolumeParams) GetDisplayvolume() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvolume"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVolumeParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVolumeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateVolumeParams) SetPath(v string) {
@@ -1957,6 +2533,14 @@ func (p *UpdateVolumeParams) SetPath(v string) {
 	p.p["path"] = v
 }
 
+func (p *UpdateVolumeParams) GetPath() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["path"].(string)
+	return value, ok
+}
+
 func (p *UpdateVolumeParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1964,11 +2548,27 @@ func (p *UpdateVolumeParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *UpdateVolumeParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
+}
+
 func (p *UpdateVolumeParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *UpdateVolumeParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVolumeParams instance,
@@ -2130,11 +2730,27 @@ func (p *UploadVolumeParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UploadVolumeParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *UploadVolumeParams) SetChecksum(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["checksum"] = v
+}
+
+func (p *UploadVolumeParams) GetChecksum() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["checksum"].(string)
+	return value, ok
 }
 
 func (p *UploadVolumeParams) SetDiskofferingid(v string) {
@@ -2144,11 +2760,27 @@ func (p *UploadVolumeParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *UploadVolumeParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *UploadVolumeParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UploadVolumeParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *UploadVolumeParams) SetFormat(v string) {
@@ -2158,11 +2790,27 @@ func (p *UploadVolumeParams) SetFormat(v string) {
 	p.p["format"] = v
 }
 
+func (p *UploadVolumeParams) GetFormat() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["format"].(string)
+	return value, ok
+}
+
 func (p *UploadVolumeParams) SetImagestoreuuid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["imagestoreuuid"] = v
+}
+
+func (p *UploadVolumeParams) GetImagestoreuuid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["imagestoreuuid"].(string)
+	return value, ok
 }
 
 func (p *UploadVolumeParams) SetName(v string) {
@@ -2172,11 +2820,27 @@ func (p *UploadVolumeParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UploadVolumeParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UploadVolumeParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *UploadVolumeParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *UploadVolumeParams) SetUrl(v string) {
@@ -2186,11 +2850,27 @@ func (p *UploadVolumeParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *UploadVolumeParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *UploadVolumeParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *UploadVolumeParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UploadVolumeParams instance,

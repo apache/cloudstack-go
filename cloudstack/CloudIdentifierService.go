@@ -51,6 +51,14 @@ func (p *GetCloudIdentifierParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *GetCloudIdentifierParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new GetCloudIdentifierParams instance,
 // as then you are sure you have configured all required params
 func (s *CloudIdentifierService) NewGetCloudIdentifierParams(userid string) *GetCloudIdentifierParams {

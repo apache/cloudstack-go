@@ -65,11 +65,27 @@ func (p *UploadCustomCertificateParams) SetCertificate(v string) {
 	p.p["certificate"] = v
 }
 
+func (p *UploadCustomCertificateParams) GetCertificate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["certificate"].(string)
+	return value, ok
+}
+
 func (p *UploadCustomCertificateParams) SetDomainsuffix(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainsuffix"] = v
+}
+
+func (p *UploadCustomCertificateParams) GetDomainsuffix() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainsuffix"].(string)
+	return value, ok
 }
 
 func (p *UploadCustomCertificateParams) SetId(v int) {
@@ -79,6 +95,14 @@ func (p *UploadCustomCertificateParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *UploadCustomCertificateParams) GetId() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int)
+	return value, ok
+}
+
 func (p *UploadCustomCertificateParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -86,11 +110,27 @@ func (p *UploadCustomCertificateParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UploadCustomCertificateParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UploadCustomCertificateParams) SetPrivatekey(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["privatekey"] = v
+}
+
+func (p *UploadCustomCertificateParams) GetPrivatekey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["privatekey"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UploadCustomCertificateParams instance,

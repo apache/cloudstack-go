@@ -894,6 +894,13 @@ func (s *service) GenerateCode() ([]byte, error) {
 		pn("	}")
 		pn("	p.p[param] = v")
 		pn("}")
+		pn("func (p *CustomServiceParams) GetParam(param string) (interface{}, bool) {")
+		pn("	if p.p == nil {")
+		pn("		p.p = make(map[string]interface{})")
+		pn("	}")
+		pn("	value, ok := p.p[param].(interface{})")
+		pn("	return value, ok")
+		pn("}")
 		pn("")
 		pn("func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result interface{}) error {")
 		pn("	resp, err := s.cs.newRequest(api, p.toURLValues())")
@@ -910,7 +917,7 @@ func (s *service) GenerateCode() ([]byte, error) {
 	for _, a := range s.apis {
 		s.generateParamType(a)
 		s.generateToURLValuesFunc(a)
-		s.generateParamSettersFunc(a)
+		s.generateParamGettersAndSettersFunc(a)
 		s.generateNewParamTypeFunc(a)
 		s.generateHelperFuncs(a)
 		s.generateNewAPICallFunc(a)
@@ -1094,7 +1101,7 @@ func (s *service) parseParamName(name string) string {
 	return uncapitalize(strings.TrimSuffix(s.name, "Service")) + "Type"
 }
 
-func (s *service) generateParamSettersFunc(a *API) {
+func (s *service) generateParamGettersAndSettersFunc(a *API) {
 	pn := s.pn
 	found := make(map[string]bool)
 
@@ -1105,6 +1112,15 @@ func (s *service) generateParamSettersFunc(a *API) {
 			pn("		p.p = make(map[string]interface{})")
 			pn("	}")
 			pn("	p.p[\"%s\"] = v", ap.Name)
+			pn("}")
+			pn("")
+
+			pn("func (p *%s) Get%s() (%s, bool) {", capitalize(a.Name+"Params"), capitalize(ap.Name), mapType(a.Name, ap.Name, ap.Type))
+			pn("	if p.p == nil {")
+			pn("		p.p = make(map[string]interface{})")
+			pn("	}")
+			pn("	value, ok := p.p[\"%s\"].(%s)", ap.Name, mapType(a.Name, ap.Name, ap.Type))
+			pn("	return value, ok")
 			pn("}")
 			pn("")
 

@@ -73,11 +73,27 @@ func (p *AddResourceDetailParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *AddResourceDetailParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *AddResourceDetailParams) SetFordisplay(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *AddResourceDetailParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
 }
 
 func (p *AddResourceDetailParams) SetResourceid(v string) {
@@ -87,11 +103,27 @@ func (p *AddResourceDetailParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *AddResourceDetailParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
 func (p *AddResourceDetailParams) SetResourcetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *AddResourceDetailParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddResourceDetailParams instance,
@@ -162,6 +194,14 @@ func (p *GetVolumeSnapshotDetailsParams) SetSnapshotid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["snapshotid"] = v
+}
+
+func (p *GetVolumeSnapshotDetailsParams) GetSnapshotid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["snapshotid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetVolumeSnapshotDetailsParams instance,
@@ -257,11 +297,27 @@ func (p *ListResourceDetailsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListResourceDetailsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListResourceDetailsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListResourceDetailsParams) SetFordisplay(v bool) {
@@ -271,11 +327,27 @@ func (p *ListResourceDetailsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListResourceDetailsParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListResourceDetailsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListResourceDetailsParams) SetKey(v string) {
@@ -285,11 +357,27 @@ func (p *ListResourceDetailsParams) SetKey(v string) {
 	p.p["key"] = v
 }
 
+func (p *ListResourceDetailsParams) GetKey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["key"].(string)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListResourceDetailsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListResourceDetailsParams) SetListall(v bool) {
@@ -299,11 +387,27 @@ func (p *ListResourceDetailsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListResourceDetailsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListResourceDetailsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListResourceDetailsParams) SetPagesize(v int) {
@@ -313,11 +417,27 @@ func (p *ListResourceDetailsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListResourceDetailsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListResourceDetailsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *ListResourceDetailsParams) SetResourceid(v string) {
@@ -327,6 +447,14 @@ func (p *ListResourceDetailsParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *ListResourceDetailsParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetResourcetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -334,11 +462,27 @@ func (p *ListResourceDetailsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *ListResourceDetailsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *ListResourceDetailsParams) SetValue(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["value"] = v
+}
+
+func (p *ListResourceDetailsParams) GetValue() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["value"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListResourceDetailsParams instance,
@@ -413,6 +557,14 @@ func (p *RemoveResourceDetailParams) SetKey(v string) {
 	p.p["key"] = v
 }
 
+func (p *RemoveResourceDetailParams) GetKey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["key"].(string)
+	return value, ok
+}
+
 func (p *RemoveResourceDetailParams) SetResourceid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -420,11 +572,27 @@ func (p *RemoveResourceDetailParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *RemoveResourceDetailParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
 func (p *RemoveResourceDetailParams) SetResourcetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *RemoveResourceDetailParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RemoveResourceDetailParams instance,

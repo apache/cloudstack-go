@@ -82,11 +82,27 @@ func (p *CreateIpForwardingRuleParams) SetCidrlist(v []string) {
 	p.p["cidrlist"] = v
 }
 
+func (p *CreateIpForwardingRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
+}
+
 func (p *CreateIpForwardingRuleParams) SetEndport(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endport"] = v
+}
+
+func (p *CreateIpForwardingRuleParams) GetEndport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endport"].(int)
+	return value, ok
 }
 
 func (p *CreateIpForwardingRuleParams) SetIpaddressid(v string) {
@@ -96,11 +112,27 @@ func (p *CreateIpForwardingRuleParams) SetIpaddressid(v string) {
 	p.p["ipaddressid"] = v
 }
 
+func (p *CreateIpForwardingRuleParams) GetIpaddressid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddressid"].(string)
+	return value, ok
+}
+
 func (p *CreateIpForwardingRuleParams) SetOpenfirewall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["openfirewall"] = v
+}
+
+func (p *CreateIpForwardingRuleParams) GetOpenfirewall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["openfirewall"].(bool)
+	return value, ok
 }
 
 func (p *CreateIpForwardingRuleParams) SetProtocol(v string) {
@@ -110,11 +142,27 @@ func (p *CreateIpForwardingRuleParams) SetProtocol(v string) {
 	p.p["protocol"] = v
 }
 
+func (p *CreateIpForwardingRuleParams) GetProtocol() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["protocol"].(string)
+	return value, ok
+}
+
 func (p *CreateIpForwardingRuleParams) SetStartport(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startport"] = v
+}
+
+func (p *CreateIpForwardingRuleParams) GetStartport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startport"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateIpForwardingRuleParams instance,
@@ -207,6 +255,14 @@ func (p *DeleteIpForwardingRuleParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteIpForwardingRuleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteIpForwardingRuleParams instance,
 // as then you are sure you have configured all required params
 func (s *NATService) NewDeleteIpForwardingRuleParams(id string) *DeleteIpForwardingRuleParams {
@@ -273,6 +329,14 @@ func (p *DisableStaticNatParams) SetIpaddressid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipaddressid"] = v
+}
+
+func (p *DisableStaticNatParams) GetIpaddressid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddressid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableStaticNatParams instance,
@@ -352,11 +416,27 @@ func (p *EnableStaticNatParams) SetIpaddressid(v string) {
 	p.p["ipaddressid"] = v
 }
 
+func (p *EnableStaticNatParams) GetIpaddressid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddressid"].(string)
+	return value, ok
+}
+
 func (p *EnableStaticNatParams) SetNetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *EnableStaticNatParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
 }
 
 func (p *EnableStaticNatParams) SetVirtualmachineid(v string) {
@@ -366,11 +446,27 @@ func (p *EnableStaticNatParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *EnableStaticNatParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
 func (p *EnableStaticNatParams) SetVmguestip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmguestip"] = v
+}
+
+func (p *EnableStaticNatParams) GetVmguestip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vmguestip"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new EnableStaticNatParams instance,
@@ -488,11 +584,27 @@ func (p *ListIpForwardingRulesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListIpForwardingRulesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListIpForwardingRulesParams) SetId(v string) {
@@ -502,11 +614,27 @@ func (p *ListIpForwardingRulesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetIpaddressid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipaddressid"] = v
+}
+
+func (p *ListIpForwardingRulesParams) GetIpaddressid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddressid"].(string)
+	return value, ok
 }
 
 func (p *ListIpForwardingRulesParams) SetIsrecursive(v bool) {
@@ -516,11 +644,27 @@ func (p *ListIpForwardingRulesParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListIpForwardingRulesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListIpForwardingRulesParams) SetListall(v bool) {
@@ -530,11 +674,27 @@ func (p *ListIpForwardingRulesParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListIpForwardingRulesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListIpForwardingRulesParams) SetPagesize(v int) {
@@ -544,6 +704,14 @@ func (p *ListIpForwardingRulesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -551,11 +719,27 @@ func (p *ListIpForwardingRulesParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListIpForwardingRulesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListIpForwardingRulesParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListIpForwardingRulesParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListIpForwardingRulesParams instance,

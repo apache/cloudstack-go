@@ -134,11 +134,27 @@ func (p *AddBaremetalHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *AddBaremetalHostParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetClusterid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *AddBaremetalHostParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalHostParams) SetClustername(v string) {
@@ -148,11 +164,27 @@ func (p *AddBaremetalHostParams) SetClustername(v string) {
 	p.p["clustername"] = v
 }
 
+func (p *AddBaremetalHostParams) GetClustername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustername"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetHosttags(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hosttags"] = v
+}
+
+func (p *AddBaremetalHostParams) GetHosttags() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hosttags"].([]string)
+	return value, ok
 }
 
 func (p *AddBaremetalHostParams) SetHypervisor(v string) {
@@ -162,11 +194,27 @@ func (p *AddBaremetalHostParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *AddBaremetalHostParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetIpaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipaddress"] = v
+}
+
+func (p *AddBaremetalHostParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalHostParams) SetPassword(v string) {
@@ -176,11 +224,27 @@ func (p *AddBaremetalHostParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBaremetalHostParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *AddBaremetalHostParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalHostParams) SetUrl(v string) {
@@ -190,6 +254,14 @@ func (p *AddBaremetalHostParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddBaremetalHostParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -197,11 +269,27 @@ func (p *AddBaremetalHostParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddBaremetalHostParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalHostParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddBaremetalHostParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddBaremetalHostParams instance,
@@ -343,11 +431,27 @@ func (p *AddGloboDnsHostParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddGloboDnsHostParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddGloboDnsHostParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *AddGloboDnsHostParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 func (p *AddGloboDnsHostParams) SetUrl(v string) {
@@ -357,11 +461,27 @@ func (p *AddGloboDnsHostParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddGloboDnsHostParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddGloboDnsHostParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddGloboDnsHostParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddGloboDnsHostParams instance,
@@ -463,11 +583,27 @@ func (p *AddHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *AddHostParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *AddHostParams) SetClusterid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *AddHostParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 func (p *AddHostParams) SetClustername(v string) {
@@ -477,11 +613,27 @@ func (p *AddHostParams) SetClustername(v string) {
 	p.p["clustername"] = v
 }
 
+func (p *AddHostParams) GetClustername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clustername"].(string)
+	return value, ok
+}
+
 func (p *AddHostParams) SetHosttags(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hosttags"] = v
+}
+
+func (p *AddHostParams) GetHosttags() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hosttags"].([]string)
+	return value, ok
 }
 
 func (p *AddHostParams) SetHypervisor(v string) {
@@ -491,11 +643,27 @@ func (p *AddHostParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *AddHostParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
 func (p *AddHostParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddHostParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *AddHostParams) SetPodid(v string) {
@@ -505,11 +673,27 @@ func (p *AddHostParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *AddHostParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *AddHostParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *AddHostParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
 }
 
 func (p *AddHostParams) SetUsername(v string) {
@@ -519,11 +703,27 @@ func (p *AddHostParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddHostParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *AddHostParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddHostParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddHostParams instance,
@@ -659,11 +859,27 @@ func (p *AddSecondaryStorageParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddSecondaryStorageParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddSecondaryStorageParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddSecondaryStorageParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddSecondaryStorageParams instance,
@@ -726,6 +942,14 @@ func (p *CancelHostMaintenanceParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *CancelHostMaintenanceParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CancelHostMaintenanceParams instance,
@@ -876,11 +1100,27 @@ func (p *ConfigureHAForHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ConfigureHAForHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *ConfigureHAForHostParams) SetProvider(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provider"] = v
+}
+
+func (p *ConfigureHAForHostParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ConfigureHAForHostParams instance,
@@ -958,6 +1198,14 @@ func (p *EnableHAForHostParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *EnableHAForHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new EnableHAForHostParams instance,
@@ -1042,6 +1290,14 @@ func (p *DedicateHostParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicateHostParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DedicateHostParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1049,11 +1305,27 @@ func (p *DedicateHostParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DedicateHostParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *DedicateHostParams) SetHostid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *DedicateHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DedicateHostParams instance,
@@ -1142,6 +1414,14 @@ func (p *DeleteHostParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *DeleteHostParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
 func (p *DeleteHostParams) SetForcedestroylocalstorage(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1149,11 +1429,27 @@ func (p *DeleteHostParams) SetForcedestroylocalstorage(v bool) {
 	p.p["forcedestroylocalstorage"] = v
 }
 
+func (p *DeleteHostParams) GetForcedestroylocalstorage() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcedestroylocalstorage"].(bool)
+	return value, ok
+}
+
 func (p *DeleteHostParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteHostParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteHostParams instance,
@@ -1236,6 +1532,14 @@ func (p *DisableOutOfBandManagementForHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *DisableOutOfBandManagementForHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DisableOutOfBandManagementForHostParams instance,
 // as then you are sure you have configured all required params
 func (s *HostService) NewDisableOutOfBandManagementForHostParams(hostid string) *DisableOutOfBandManagementForHostParams {
@@ -1316,6 +1620,14 @@ func (p *EnableOutOfBandManagementForHostParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *EnableOutOfBandManagementForHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new EnableOutOfBandManagementForHostParams instance,
@@ -1411,11 +1723,27 @@ func (p *FindHostsForMigrationParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *FindHostsForMigrationParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *FindHostsForMigrationParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *FindHostsForMigrationParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *FindHostsForMigrationParams) SetPagesize(v int) {
@@ -1425,11 +1753,27 @@ func (p *FindHostsForMigrationParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *FindHostsForMigrationParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *FindHostsForMigrationParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *FindHostsForMigrationParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new FindHostsForMigrationParams instance,
@@ -1553,11 +1897,27 @@ func (p *ListDedicatedHostsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedHostsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedHostsParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedHostsParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedHostsParams) SetDomainid(v string) {
@@ -1567,11 +1927,27 @@ func (p *ListDedicatedHostsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListDedicatedHostsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedHostsParams) SetHostid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *ListDedicatedHostsParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedHostsParams) SetKeyword(v string) {
@@ -1581,6 +1957,14 @@ func (p *ListDedicatedHostsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDedicatedHostsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedHostsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1588,11 +1972,27 @@ func (p *ListDedicatedHostsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedHostsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedHostsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListDedicatedHostsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListDedicatedHostsParams instance,
@@ -1664,6 +2064,14 @@ func (p *ListHostTagsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListHostTagsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListHostTagsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1671,11 +2079,27 @@ func (p *ListHostTagsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListHostTagsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListHostTagsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListHostTagsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListHostTagsParams instance,
@@ -1825,11 +2249,27 @@ func (p *ListHostsParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListHostsParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetDetails(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListHostsParams) GetDetails() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].([]string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetHahost(v bool) {
@@ -1839,11 +2279,27 @@ func (p *ListHostsParams) SetHahost(v bool) {
 	p.p["hahost"] = v
 }
 
+func (p *ListHostsParams) GetHahost() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hahost"].(bool)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListHostsParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetId(v string) {
@@ -1853,11 +2309,27 @@ func (p *ListHostsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListHostsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListHostsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetName(v string) {
@@ -1867,11 +2339,27 @@ func (p *ListHostsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListHostsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetOutofbandmanagementenabled(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["outofbandmanagementenabled"] = v
+}
+
+func (p *ListHostsParams) GetOutofbandmanagementenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["outofbandmanagementenabled"].(bool)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetOutofbandmanagementpowerstate(v string) {
@@ -1881,11 +2369,27 @@ func (p *ListHostsParams) SetOutofbandmanagementpowerstate(v string) {
 	p.p["outofbandmanagementpowerstate"] = v
 }
 
+func (p *ListHostsParams) GetOutofbandmanagementpowerstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["outofbandmanagementpowerstate"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListHostsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetPagesize(v int) {
@@ -1895,11 +2399,27 @@ func (p *ListHostsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListHostsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListHostsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetResourcestate(v string) {
@@ -1909,11 +2429,27 @@ func (p *ListHostsParams) SetResourcestate(v string) {
 	p.p["resourcestate"] = v
 }
 
+func (p *ListHostsParams) GetResourcestate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcestate"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListHostsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetType(v string) {
@@ -1923,6 +2459,14 @@ func (p *ListHostsParams) SetType(v string) {
 	p.p["type"] = v
 }
 
+func (p *ListHostsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1930,11 +2474,27 @@ func (p *ListHostsParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListHostsParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
 func (p *ListHostsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListHostsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListHostsParams instance,
@@ -2202,11 +2762,27 @@ func (p *ListHostsMetricsParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListHostsMetricsParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetDetails(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListHostsMetricsParams) GetDetails() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].([]string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetHahost(v bool) {
@@ -2216,11 +2792,27 @@ func (p *ListHostsMetricsParams) SetHahost(v bool) {
 	p.p["hahost"] = v
 }
 
+func (p *ListHostsMetricsParams) GetHahost() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hahost"].(bool)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListHostsMetricsParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetId(v string) {
@@ -2230,11 +2822,27 @@ func (p *ListHostsMetricsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListHostsMetricsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListHostsMetricsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetName(v string) {
@@ -2244,11 +2852,27 @@ func (p *ListHostsMetricsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListHostsMetricsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetOutofbandmanagementenabled(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["outofbandmanagementenabled"] = v
+}
+
+func (p *ListHostsMetricsParams) GetOutofbandmanagementenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["outofbandmanagementenabled"].(bool)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetOutofbandmanagementpowerstate(v string) {
@@ -2258,11 +2882,27 @@ func (p *ListHostsMetricsParams) SetOutofbandmanagementpowerstate(v string) {
 	p.p["outofbandmanagementpowerstate"] = v
 }
 
+func (p *ListHostsMetricsParams) GetOutofbandmanagementpowerstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["outofbandmanagementpowerstate"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListHostsMetricsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetPagesize(v int) {
@@ -2272,11 +2912,27 @@ func (p *ListHostsMetricsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListHostsMetricsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListHostsMetricsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetResourcestate(v string) {
@@ -2286,11 +2942,27 @@ func (p *ListHostsMetricsParams) SetResourcestate(v string) {
 	p.p["resourcestate"] = v
 }
 
+func (p *ListHostsMetricsParams) GetResourcestate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcestate"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListHostsMetricsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetType(v string) {
@@ -2300,6 +2972,14 @@ func (p *ListHostsMetricsParams) SetType(v string) {
 	p.p["type"] = v
 }
 
+func (p *ListHostsMetricsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2307,11 +2987,27 @@ func (p *ListHostsMetricsParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListHostsMetricsParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
 func (p *ListHostsMetricsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListHostsMetricsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListHostsMetricsParams instance,
@@ -2544,6 +3240,14 @@ func (p *PrepareHostForMaintenanceParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *PrepareHostForMaintenanceParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new PrepareHostForMaintenanceParams instance,
 // as then you are sure you have configured all required params
 func (s *HostService) NewPrepareHostForMaintenanceParams(id string) *PrepareHostForMaintenanceParams {
@@ -2687,6 +3391,14 @@ func (p *ReconnectHostParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ReconnectHostParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ReconnectHostParams instance,
@@ -2834,6 +3546,14 @@ func (p *ReleaseDedicatedHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ReleaseDedicatedHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ReleaseDedicatedHostParams instance,
 // as then you are sure you have configured all required params
 func (s *HostService) NewReleaseDedicatedHostParams(hostid string) *ReleaseDedicatedHostParams {
@@ -2900,6 +3620,14 @@ func (p *ReleaseHostReservationParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ReleaseHostReservationParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ReleaseHostReservationParams instance,
@@ -2989,11 +3717,27 @@ func (p *UpdateHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdateHostParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *UpdateHostParams) SetAnnotation(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["annotation"] = v
+}
+
+func (p *UpdateHostParams) GetAnnotation() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["annotation"].(string)
+	return value, ok
 }
 
 func (p *UpdateHostParams) SetHosttags(v []string) {
@@ -3003,11 +3747,27 @@ func (p *UpdateHostParams) SetHosttags(v []string) {
 	p.p["hosttags"] = v
 }
 
+func (p *UpdateHostParams) GetHosttags() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hosttags"].([]string)
+	return value, ok
+}
+
 func (p *UpdateHostParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateHostParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateHostParams) SetName(v string) {
@@ -3017,6 +3777,14 @@ func (p *UpdateHostParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateHostParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateHostParams) SetOscategoryid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3024,11 +3792,27 @@ func (p *UpdateHostParams) SetOscategoryid(v string) {
 	p.p["oscategoryid"] = v
 }
 
+func (p *UpdateHostParams) GetOscategoryid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oscategoryid"].(string)
+	return value, ok
+}
+
 func (p *UpdateHostParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *UpdateHostParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateHostParams instance,
@@ -3169,11 +3953,27 @@ func (p *UpdateHostPasswordParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *UpdateHostPasswordParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *UpdateHostPasswordParams) SetHostid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *UpdateHostPasswordParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *UpdateHostPasswordParams) SetPassword(v string) {
@@ -3183,6 +3983,14 @@ func (p *UpdateHostPasswordParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *UpdateHostPasswordParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *UpdateHostPasswordParams) SetUpdate_passwd_on_host(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3190,11 +3998,27 @@ func (p *UpdateHostPasswordParams) SetUpdate_passwd_on_host(v bool) {
 	p.p["update_passwd_on_host"] = v
 }
 
+func (p *UpdateHostPasswordParams) GetUpdate_passwd_on_host() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["update_passwd_on_host"].(bool)
+	return value, ok
+}
+
 func (p *UpdateHostPasswordParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *UpdateHostPasswordParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateHostPasswordParams instance,

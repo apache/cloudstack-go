@@ -73,11 +73,27 @@ func (p *ArchiveAlertsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *ArchiveAlertsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
 func (p *ArchiveAlertsParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ArchiveAlertsParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *ArchiveAlertsParams) SetStartdate(v string) {
@@ -87,11 +103,27 @@ func (p *ArchiveAlertsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *ArchiveAlertsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
 func (p *ArchiveAlertsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ArchiveAlertsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ArchiveAlertsParams instance,
@@ -183,11 +215,27 @@ func (p *DeleteAlertsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *DeleteAlertsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
 func (p *DeleteAlertsParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *DeleteAlertsParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *DeleteAlertsParams) SetStartdate(v string) {
@@ -197,11 +245,27 @@ func (p *DeleteAlertsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *DeleteAlertsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
 func (p *DeleteAlertsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *DeleteAlertsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteAlertsParams instance,
@@ -296,11 +360,27 @@ func (p *GenerateAlertParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *GenerateAlertParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
 func (p *GenerateAlertParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *GenerateAlertParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *GenerateAlertParams) SetPodid(v string) {
@@ -310,6 +390,14 @@ func (p *GenerateAlertParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *GenerateAlertParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *GenerateAlertParams) SetType(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -317,11 +405,27 @@ func (p *GenerateAlertParams) SetType(v int) {
 	p.p["type"] = v
 }
 
+func (p *GenerateAlertParams) GetType() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(int)
+	return value, ok
+}
+
 func (p *GenerateAlertParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *GenerateAlertParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GenerateAlertParams instance,
@@ -411,11 +515,27 @@ func (p *ListAlertsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListAlertsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListAlertsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAlertsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListAlertsParams) SetName(v string) {
@@ -425,11 +545,27 @@ func (p *ListAlertsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAlertsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListAlertsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAlertsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListAlertsParams) SetPagesize(v int) {
@@ -439,11 +575,27 @@ func (p *ListAlertsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAlertsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListAlertsParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListAlertsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListAlertsParams instance,

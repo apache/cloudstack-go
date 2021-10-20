@@ -111,11 +111,27 @@ func (p *AddVpnUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AddVpnUserParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *AddVpnUserParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *AddVpnUserParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *AddVpnUserParams) SetPassword(v string) {
@@ -125,6 +141,14 @@ func (p *AddVpnUserParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddVpnUserParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddVpnUserParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -132,11 +156,27 @@ func (p *AddVpnUserParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AddVpnUserParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *AddVpnUserParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddVpnUserParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddVpnUserParams instance,
@@ -236,11 +276,27 @@ func (p *CreateRemoteAccessVpnParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *CreateRemoteAccessVpnParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *CreateRemoteAccessVpnParams) SetFordisplay(v bool) {
@@ -250,11 +306,27 @@ func (p *CreateRemoteAccessVpnParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *CreateRemoteAccessVpnParams) SetIprange(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iprange"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) GetIprange() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["iprange"].(string)
+	return value, ok
 }
 
 func (p *CreateRemoteAccessVpnParams) SetOpenfirewall(v bool) {
@@ -264,11 +336,27 @@ func (p *CreateRemoteAccessVpnParams) SetOpenfirewall(v bool) {
 	p.p["openfirewall"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) GetOpenfirewall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["openfirewall"].(bool)
+	return value, ok
+}
+
 func (p *CreateRemoteAccessVpnParams) SetPublicipid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["publicipid"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) GetPublicipid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicipid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateRemoteAccessVpnParams instance,
@@ -365,11 +453,27 @@ func (p *CreateVpnConnectionParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateVpnConnectionParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *CreateVpnConnectionParams) SetPassive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["passive"] = v
+}
+
+func (p *CreateVpnConnectionParams) GetPassive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["passive"].(bool)
+	return value, ok
 }
 
 func (p *CreateVpnConnectionParams) SetS2scustomergatewayid(v string) {
@@ -379,11 +483,27 @@ func (p *CreateVpnConnectionParams) SetS2scustomergatewayid(v string) {
 	p.p["s2scustomergatewayid"] = v
 }
 
+func (p *CreateVpnConnectionParams) GetS2scustomergatewayid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["s2scustomergatewayid"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnConnectionParams) SetS2svpngatewayid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["s2svpngatewayid"] = v
+}
+
+func (p *CreateVpnConnectionParams) GetS2svpngatewayid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["s2svpngatewayid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateVpnConnectionParams instance,
@@ -530,11 +650,27 @@ func (p *CreateVpnCustomerGatewayParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetCidrlist(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetCidrlist() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].(string)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetDomainid(v string) {
@@ -544,11 +680,27 @@ func (p *CreateVpnCustomerGatewayParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetDpd(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dpd"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetDpd() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dpd"].(bool)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
@@ -558,11 +710,27 @@ func (p *CreateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
 	p.p["esplifetime"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetEsplifetime() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["esplifetime"].(int64)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetEsppolicy(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["esppolicy"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetEsppolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["esppolicy"].(string)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetForceencap(v bool) {
@@ -572,11 +740,27 @@ func (p *CreateVpnCustomerGatewayParams) SetForceencap(v bool) {
 	p.p["forceencap"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetForceencap() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceencap"].(bool)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetGateway(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["gateway"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetIkelifetime(v int64) {
@@ -586,11 +770,27 @@ func (p *CreateVpnCustomerGatewayParams) SetIkelifetime(v int64) {
 	p.p["ikelifetime"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetIkelifetime() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikelifetime"].(int64)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikepolicy"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetIkepolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikepolicy"].(string)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetIkeversion(v string) {
@@ -600,11 +800,27 @@ func (p *CreateVpnCustomerGatewayParams) SetIkeversion(v string) {
 	p.p["ikeversion"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetIkeversion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikeversion"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipsecpsk"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetIpsecpsk() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipsecpsk"].(string)
+	return value, ok
 }
 
 func (p *CreateVpnCustomerGatewayParams) SetName(v string) {
@@ -614,6 +830,14 @@ func (p *CreateVpnCustomerGatewayParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -621,11 +845,27 @@ func (p *CreateVpnCustomerGatewayParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *CreateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["splitconnections"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) GetSplitconnections() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["splitconnections"].(bool)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateVpnCustomerGatewayParams instance,
@@ -727,11 +967,27 @@ func (p *CreateVpnGatewayParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateVpnGatewayParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *CreateVpnGatewayParams) SetVpcid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *CreateVpnGatewayParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateVpnGatewayParams instance,
@@ -816,6 +1072,14 @@ func (p *DeleteRemoteAccessVpnParams) SetPublicipid(v string) {
 	p.p["publicipid"] = v
 }
 
+func (p *DeleteRemoteAccessVpnParams) GetPublicipid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicipid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteRemoteAccessVpnParams instance,
 // as then you are sure you have configured all required params
 func (s *VPNService) NewDeleteRemoteAccessVpnParams(publicipid string) *DeleteRemoteAccessVpnParams {
@@ -882,6 +1146,14 @@ func (p *DeleteVpnConnectionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteVpnConnectionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteVpnConnectionParams instance,
@@ -952,6 +1224,14 @@ func (p *DeleteVpnCustomerGatewayParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteVpnCustomerGatewayParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteVpnCustomerGatewayParams instance,
 // as then you are sure you have configured all required params
 func (s *VPNService) NewDeleteVpnCustomerGatewayParams(id string) *DeleteVpnCustomerGatewayParams {
@@ -1018,6 +1298,14 @@ func (p *DeleteVpnGatewayParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteVpnGatewayParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteVpnGatewayParams instance,
@@ -1126,11 +1414,27 @@ func (p *ListRemoteAccessVpnsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListRemoteAccessVpnsParams) SetFordisplay(v bool) {
@@ -1140,11 +1444,27 @@ func (p *ListRemoteAccessVpnsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListRemoteAccessVpnsParams) SetIsrecursive(v bool) {
@@ -1154,11 +1474,27 @@ func (p *ListRemoteAccessVpnsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListRemoteAccessVpnsParams) SetListall(v bool) {
@@ -1168,11 +1504,27 @@ func (p *ListRemoteAccessVpnsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetNetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
 }
 
 func (p *ListRemoteAccessVpnsParams) SetPage(v int) {
@@ -1182,11 +1534,27 @@ func (p *ListRemoteAccessVpnsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListRemoteAccessVpnsParams) SetProjectid(v string) {
@@ -1196,11 +1564,27 @@ func (p *ListRemoteAccessVpnsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListRemoteAccessVpnsParams) SetPublicipid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["publicipid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) GetPublicipid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicipid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListRemoteAccessVpnsParams instance,
@@ -1338,11 +1722,27 @@ func (p *ListVpnConnectionsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnConnectionsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListVpnConnectionsParams) SetFordisplay(v bool) {
@@ -1352,11 +1752,27 @@ func (p *ListVpnConnectionsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListVpnConnectionsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListVpnConnectionsParams) SetIsrecursive(v bool) {
@@ -1366,11 +1782,27 @@ func (p *ListVpnConnectionsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVpnConnectionsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListVpnConnectionsParams) SetListall(v bool) {
@@ -1380,11 +1812,27 @@ func (p *ListVpnConnectionsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVpnConnectionsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListVpnConnectionsParams) SetPagesize(v int) {
@@ -1394,6 +1842,14 @@ func (p *ListVpnConnectionsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1401,11 +1857,27 @@ func (p *ListVpnConnectionsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnConnectionsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListVpnConnectionsParams) SetVpcid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *ListVpnConnectionsParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVpnConnectionsParams instance,
@@ -1549,11 +2021,27 @@ func (p *ListVpnCustomerGatewaysParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVpnCustomerGatewaysParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListVpnCustomerGatewaysParams) SetId(v string) {
@@ -1563,11 +2051,27 @@ func (p *ListVpnCustomerGatewaysParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListVpnCustomerGatewaysParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListVpnCustomerGatewaysParams) SetKeyword(v string) {
@@ -1577,11 +2081,27 @@ func (p *ListVpnCustomerGatewaysParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListVpnCustomerGatewaysParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListVpnCustomerGatewaysParams) SetPage(v int) {
@@ -1591,6 +2111,14 @@ func (p *ListVpnCustomerGatewaysParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListVpnCustomerGatewaysParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1598,11 +2126,27 @@ func (p *ListVpnCustomerGatewaysParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListVpnCustomerGatewaysParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVpnCustomerGatewaysParams instance,
@@ -1798,11 +2342,27 @@ func (p *ListVpnGatewaysParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnGatewaysParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListVpnGatewaysParams) SetFordisplay(v bool) {
@@ -1812,11 +2372,27 @@ func (p *ListVpnGatewaysParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListVpnGatewaysParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListVpnGatewaysParams) SetIsrecursive(v bool) {
@@ -1826,11 +2402,27 @@ func (p *ListVpnGatewaysParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVpnGatewaysParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListVpnGatewaysParams) SetListall(v bool) {
@@ -1840,11 +2432,27 @@ func (p *ListVpnGatewaysParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVpnGatewaysParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListVpnGatewaysParams) SetPagesize(v int) {
@@ -1854,6 +2462,14 @@ func (p *ListVpnGatewaysParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1861,11 +2477,27 @@ func (p *ListVpnGatewaysParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnGatewaysParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListVpnGatewaysParams) SetVpcid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *ListVpnGatewaysParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVpnGatewaysParams instance,
@@ -1998,11 +2630,27 @@ func (p *ListVpnUsersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnUsersParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVpnUsersParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnUsersParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListVpnUsersParams) SetId(v string) {
@@ -2012,11 +2660,27 @@ func (p *ListVpnUsersParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVpnUsersParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListVpnUsersParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVpnUsersParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListVpnUsersParams) SetKeyword(v string) {
@@ -2026,11 +2690,27 @@ func (p *ListVpnUsersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListVpnUsersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListVpnUsersParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListVpnUsersParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListVpnUsersParams) SetPage(v int) {
@@ -2040,11 +2720,27 @@ func (p *ListVpnUsersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVpnUsersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListVpnUsersParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListVpnUsersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListVpnUsersParams) SetProjectid(v string) {
@@ -2054,11 +2750,27 @@ func (p *ListVpnUsersParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnUsersParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListVpnUsersParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ListVpnUsersParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVpnUsersParams instance,
@@ -2166,11 +2878,27 @@ func (p *RemoveVpnUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *RemoveVpnUserParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *RemoveVpnUserParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *RemoveVpnUserParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *RemoveVpnUserParams) SetProjectid(v string) {
@@ -2180,11 +2908,27 @@ func (p *RemoveVpnUserParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *RemoveVpnUserParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *RemoveVpnUserParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *RemoveVpnUserParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RemoveVpnUserParams instance,
@@ -2261,6 +3005,14 @@ func (p *ResetVpnConnectionParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ResetVpnConnectionParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ResetVpnConnectionParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2268,11 +3020,27 @@ func (p *ResetVpnConnectionParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ResetVpnConnectionParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ResetVpnConnectionParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ResetVpnConnectionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ResetVpnConnectionParams instance,
@@ -2378,6 +3146,14 @@ func (p *UpdateRemoteAccessVpnParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateRemoteAccessVpnParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
 func (p *UpdateRemoteAccessVpnParams) SetFordisplay(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2385,11 +3161,27 @@ func (p *UpdateRemoteAccessVpnParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateRemoteAccessVpnParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *UpdateRemoteAccessVpnParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateRemoteAccessVpnParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateRemoteAccessVpnParams instance,
@@ -2482,6 +3274,14 @@ func (p *UpdateVpnConnectionParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateVpnConnectionParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnConnectionParams) SetFordisplay(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2489,11 +3289,27 @@ func (p *UpdateVpnConnectionParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateVpnConnectionParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVpnConnectionParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVpnConnectionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVpnConnectionParams instance,
@@ -2639,11 +3455,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetCidrlist(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetCidrlist() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].(string)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetDomainid(v string) {
@@ -2653,11 +3485,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetDpd(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dpd"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetDpd() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dpd"].(bool)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
@@ -2667,11 +3515,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
 	p.p["esplifetime"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetEsplifetime() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["esplifetime"].(int64)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetEsppolicy(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["esppolicy"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetEsppolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["esppolicy"].(string)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetForceencap(v bool) {
@@ -2681,11 +3545,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetForceencap(v bool) {
 	p.p["forceencap"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetForceencap() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceencap"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetGateway(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["gateway"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetId(v string) {
@@ -2695,11 +3575,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetIkelifetime(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikelifetime"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetIkelifetime() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikelifetime"].(int64)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetIkepolicy(v string) {
@@ -2709,11 +3605,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 	p.p["ikepolicy"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetIkepolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikepolicy"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetIkeversion(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikeversion"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetIkeversion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ikeversion"].(string)
+	return value, ok
 }
 
 func (p *UpdateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
@@ -2723,6 +3635,14 @@ func (p *UpdateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 	p.p["ipsecpsk"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetIpsecpsk() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipsecpsk"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2730,11 +3650,27 @@ func (p *UpdateVpnCustomerGatewayParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["splitconnections"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) GetSplitconnections() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["splitconnections"].(bool)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVpnCustomerGatewayParams instance,
@@ -2840,6 +3776,14 @@ func (p *UpdateVpnGatewayParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateVpnGatewayParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
 func (p *UpdateVpnGatewayParams) SetFordisplay(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2847,11 +3791,27 @@ func (p *UpdateVpnGatewayParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateVpnGatewayParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVpnGatewayParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVpnGatewayParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVpnGatewayParams instance,
