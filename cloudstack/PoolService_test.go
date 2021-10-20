@@ -43,7 +43,7 @@ func TestPoolService_CreateStoragePool(t *testing.T) {
 		t.Errorf("Failed to create storage pool due to %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.Name != "testPrimary1" {
 		t.Errorf("Failed to create storage pool")
 	}

@@ -43,7 +43,7 @@ func TestImageStoreService_AddImageStore(t *testing.T) {
 		t.Errorf("Failed to add image store due to: %v", err)
 		return
 	}
-	fmt.Println(resp)
+
 	if resp == nil || resp.Providername != "NFS" {
 		t.Errorf(" Failed to add image store")
 	}

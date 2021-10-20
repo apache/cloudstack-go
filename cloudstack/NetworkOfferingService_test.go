@@ -64,7 +64,7 @@ func TestNetworkOfferingService_UpdateNetworkOffering(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to update network offering state due to: %v", err)
 	}
-	fmt.Println(resp)
+
 	if resp.State != "Enabled" {
 		t.Errorf("Failed to enable network offering")
 	}
