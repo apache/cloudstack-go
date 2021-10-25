@@ -1012,10 +1012,13 @@ func (s *VolumeService) GetUploadParamsForVolume(p *GetUploadParamsForVolumePara
 		return nil, err
 	}
 
-	var r GetUploadParamsForVolumeResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetUploadParamsForVolumeResponse `json:"getuploadparams"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
