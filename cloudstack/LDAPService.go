@@ -26,6 +26,29 @@ import (
 	"strconv"
 )
 
+type LDAPServiceIface interface {
+	AddLdapConfiguration(p *AddLdapConfigurationParams) (*AddLdapConfigurationResponse, error)
+	NewAddLdapConfigurationParams(hostname string, port int) *AddLdapConfigurationParams
+	DeleteLdapConfiguration(p *DeleteLdapConfigurationParams) (*DeleteLdapConfigurationResponse, error)
+	NewDeleteLdapConfigurationParams(hostname string) *DeleteLdapConfigurationParams
+	ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUsersResponse, error)
+	NewImportLdapUsersParams() *ImportLdapUsersParams
+	LdapConfig(p *LdapConfigParams) (*LdapConfigResponse, error)
+	NewLdapConfigParams() *LdapConfigParams
+	LdapCreateAccount(p *LdapCreateAccountParams) (*LdapCreateAccountResponse, error)
+	NewLdapCreateAccountParams(username string) *LdapCreateAccountParams
+	LdapRemove(p *LdapRemoveParams) (*LdapRemoveResponse, error)
+	NewLdapRemoveParams() *LdapRemoveParams
+	LinkDomainToLdap(p *LinkDomainToLdapParams) (*LinkDomainToLdapResponse, error)
+	NewLinkDomainToLdapParams(accounttype int, domainid string, lDAPType string) *LinkDomainToLdapParams
+	ListLdapConfigurations(p *ListLdapConfigurationsParams) (*ListLdapConfigurationsResponse, error)
+	NewListLdapConfigurationsParams() *ListLdapConfigurationsParams
+	ListLdapUsers(p *ListLdapUsersParams) (*ListLdapUsersResponse, error)
+	NewListLdapUsersParams() *ListLdapUsersParams
+	SearchLdap(p *SearchLdapParams) (*SearchLdapResponse, error)
+	NewSearchLdapParams(query string) *SearchLdapParams
+}
+
 type AddLdapConfigurationParams struct {
 	p map[string]interface{}
 }
@@ -55,6 +78,14 @@ func (p *AddLdapConfigurationParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *AddLdapConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *AddLdapConfigurationParams) SetHostname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -62,11 +93,27 @@ func (p *AddLdapConfigurationParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *AddLdapConfigurationParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
 func (p *AddLdapConfigurationParams) SetPort(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["port"] = v
+}
+
+func (p *AddLdapConfigurationParams) GetPort() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["port"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new AddLdapConfigurationParams instance,
@@ -131,6 +178,14 @@ func (p *DeleteLdapConfigurationParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DeleteLdapConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *DeleteLdapConfigurationParams) SetHostname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -138,11 +193,27 @@ func (p *DeleteLdapConfigurationParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *DeleteLdapConfigurationParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
 func (p *DeleteLdapConfigurationParams) SetPort(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["port"] = v
+}
+
+func (p *DeleteLdapConfigurationParams) GetPort() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["port"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteLdapConfigurationParams instance,
@@ -233,11 +304,27 @@ func (p *ImportLdapUsersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ImportLdapUsersParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ImportLdapUsersParams) SetAccountdetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *ImportLdapUsersParams) GetAccountdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountdetails"].(map[string]string)
+	return value, ok
 }
 
 func (p *ImportLdapUsersParams) SetAccounttype(v int) {
@@ -247,11 +334,27 @@ func (p *ImportLdapUsersParams) SetAccounttype(v int) {
 	p.p["accounttype"] = v
 }
 
+func (p *ImportLdapUsersParams) GetAccounttype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int)
+	return value, ok
+}
+
 func (p *ImportLdapUsersParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ImportLdapUsersParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ImportLdapUsersParams) SetGroup(v string) {
@@ -261,11 +364,27 @@ func (p *ImportLdapUsersParams) SetGroup(v string) {
 	p.p["group"] = v
 }
 
+func (p *ImportLdapUsersParams) GetGroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["group"].(string)
+	return value, ok
+}
+
 func (p *ImportLdapUsersParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ImportLdapUsersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ImportLdapUsersParams) SetPage(v int) {
@@ -275,11 +394,27 @@ func (p *ImportLdapUsersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ImportLdapUsersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ImportLdapUsersParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ImportLdapUsersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ImportLdapUsersParams) SetRoleid(v string) {
@@ -289,11 +424,27 @@ func (p *ImportLdapUsersParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *ImportLdapUsersParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 func (p *ImportLdapUsersParams) SetTimezone(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *ImportLdapUsersParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ImportLdapUsersParams instance,
@@ -383,11 +534,27 @@ func (p *LdapConfigParams) SetBinddn(v string) {
 	p.p["binddn"] = v
 }
 
+func (p *LdapConfigParams) GetBinddn() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["binddn"].(string)
+	return value, ok
+}
+
 func (p *LdapConfigParams) SetBindpass(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bindpass"] = v
+}
+
+func (p *LdapConfigParams) GetBindpass() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bindpass"].(string)
+	return value, ok
 }
 
 func (p *LdapConfigParams) SetHostname(v string) {
@@ -397,11 +564,27 @@ func (p *LdapConfigParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *LdapConfigParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
 func (p *LdapConfigParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *LdapConfigParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *LdapConfigParams) SetPort(v int) {
@@ -411,11 +594,27 @@ func (p *LdapConfigParams) SetPort(v int) {
 	p.p["port"] = v
 }
 
+func (p *LdapConfigParams) GetPort() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["port"].(int)
+	return value, ok
+}
+
 func (p *LdapConfigParams) SetQueryfilter(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["queryfilter"] = v
+}
+
+func (p *LdapConfigParams) GetQueryfilter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["queryfilter"].(string)
+	return value, ok
 }
 
 func (p *LdapConfigParams) SetSearchbase(v string) {
@@ -425,11 +624,27 @@ func (p *LdapConfigParams) SetSearchbase(v string) {
 	p.p["searchbase"] = v
 }
 
+func (p *LdapConfigParams) GetSearchbase() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["searchbase"].(string)
+	return value, ok
+}
+
 func (p *LdapConfigParams) SetSsl(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ssl"] = v
+}
+
+func (p *LdapConfigParams) GetSsl() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ssl"].(bool)
+	return value, ok
 }
 
 func (p *LdapConfigParams) SetTruststore(v string) {
@@ -439,11 +654,27 @@ func (p *LdapConfigParams) SetTruststore(v string) {
 	p.p["truststore"] = v
 }
 
+func (p *LdapConfigParams) GetTruststore() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["truststore"].(string)
+	return value, ok
+}
+
 func (p *LdapConfigParams) SetTruststorepass(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["truststorepass"] = v
+}
+
+func (p *LdapConfigParams) GetTruststorepass() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["truststorepass"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new LdapConfigParams instance,
@@ -535,11 +766,27 @@ func (p *LdapCreateAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *LdapCreateAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *LdapCreateAccountParams) SetAccountdetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *LdapCreateAccountParams) GetAccountdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountdetails"].(map[string]string)
+	return value, ok
 }
 
 func (p *LdapCreateAccountParams) SetAccountid(v string) {
@@ -549,11 +796,27 @@ func (p *LdapCreateAccountParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *LdapCreateAccountParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
 func (p *LdapCreateAccountParams) SetAccounttype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *LdapCreateAccountParams) GetAccounttype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int)
+	return value, ok
 }
 
 func (p *LdapCreateAccountParams) SetDomainid(v string) {
@@ -563,11 +826,27 @@ func (p *LdapCreateAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *LdapCreateAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *LdapCreateAccountParams) SetNetworkdomain(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkdomain"] = v
+}
+
+func (p *LdapCreateAccountParams) GetNetworkdomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkdomain"].(string)
+	return value, ok
 }
 
 func (p *LdapCreateAccountParams) SetRoleid(v string) {
@@ -577,11 +856,27 @@ func (p *LdapCreateAccountParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *LdapCreateAccountParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 func (p *LdapCreateAccountParams) SetTimezone(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *LdapCreateAccountParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
 }
 
 func (p *LdapCreateAccountParams) SetUserid(v string) {
@@ -591,11 +886,27 @@ func (p *LdapCreateAccountParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *LdapCreateAccountParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
+}
+
 func (p *LdapCreateAccountParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *LdapCreateAccountParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new LdapCreateAccountParams instance,
@@ -793,11 +1104,27 @@ func (p *LinkDomainToLdapParams) SetAccounttype(v int) {
 	p.p["accounttype"] = v
 }
 
+func (p *LinkDomainToLdapParams) GetAccounttype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int)
+	return value, ok
+}
+
 func (p *LinkDomainToLdapParams) SetAdmin(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["admin"] = v
+}
+
+func (p *LinkDomainToLdapParams) GetAdmin() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["admin"].(string)
+	return value, ok
 }
 
 func (p *LinkDomainToLdapParams) SetDomainid(v string) {
@@ -807,11 +1134,27 @@ func (p *LinkDomainToLdapParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *LinkDomainToLdapParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *LinkDomainToLdapParams) SetLdapdomain(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ldapdomain"] = v
+}
+
+func (p *LinkDomainToLdapParams) GetLdapdomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ldapdomain"].(string)
+	return value, ok
 }
 
 func (p *LinkDomainToLdapParams) SetName(v string) {
@@ -821,11 +1164,27 @@ func (p *LinkDomainToLdapParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *LinkDomainToLdapParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *LinkDomainToLdapParams) SetType(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *LinkDomainToLdapParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new LinkDomainToLdapParams instance,
@@ -909,11 +1268,27 @@ func (p *ListLdapConfigurationsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListLdapConfigurationsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListLdapConfigurationsParams) SetHostname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostname"] = v
+}
+
+func (p *ListLdapConfigurationsParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
 }
 
 func (p *ListLdapConfigurationsParams) SetKeyword(v string) {
@@ -923,11 +1298,27 @@ func (p *ListLdapConfigurationsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListLdapConfigurationsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListLdapConfigurationsParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListLdapConfigurationsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListLdapConfigurationsParams) SetPage(v int) {
@@ -937,6 +1328,14 @@ func (p *ListLdapConfigurationsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListLdapConfigurationsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListLdapConfigurationsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -944,11 +1343,27 @@ func (p *ListLdapConfigurationsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListLdapConfigurationsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListLdapConfigurationsParams) SetPort(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["port"] = v
+}
+
+func (p *ListLdapConfigurationsParams) GetPort() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["port"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListLdapConfigurationsParams instance,
@@ -1026,11 +1441,27 @@ func (p *ListLdapUsersParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListLdapUsersParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListLdapUsersParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListLdapUsersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListLdapUsersParams) SetListtype(v string) {
@@ -1040,11 +1471,27 @@ func (p *ListLdapUsersParams) SetListtype(v string) {
 	p.p["listtype"] = v
 }
 
+func (p *ListLdapUsersParams) GetListtype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listtype"].(string)
+	return value, ok
+}
+
 func (p *ListLdapUsersParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListLdapUsersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListLdapUsersParams) SetPagesize(v int) {
@@ -1054,11 +1501,27 @@ func (p *ListLdapUsersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListLdapUsersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListLdapUsersParams) SetUserfilter(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userfilter"] = v
+}
+
+func (p *ListLdapUsersParams) GetUserfilter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userfilter"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListLdapUsersParams instance,
@@ -1134,11 +1597,27 @@ func (p *SearchLdapParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *SearchLdapParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *SearchLdapParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *SearchLdapParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *SearchLdapParams) SetPagesize(v int) {
@@ -1148,11 +1627,27 @@ func (p *SearchLdapParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *SearchLdapParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *SearchLdapParams) SetQuery(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["query"] = v
+}
+
+func (p *SearchLdapParams) GetQuery() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["query"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new SearchLdapParams instance,

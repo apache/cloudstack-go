@@ -26,6 +26,34 @@ import (
 	"strconv"
 )
 
+type UsageServiceIface interface {
+	AddTrafficMonitor(p *AddTrafficMonitorParams) (*AddTrafficMonitorResponse, error)
+	NewAddTrafficMonitorParams(url string, zoneid string) *AddTrafficMonitorParams
+	AddTrafficType(p *AddTrafficTypeParams) (*AddTrafficTypeResponse, error)
+	NewAddTrafficTypeParams(physicalnetworkid string, traffictype string) *AddTrafficTypeParams
+	DeleteTrafficMonitor(p *DeleteTrafficMonitorParams) (*DeleteTrafficMonitorResponse, error)
+	NewDeleteTrafficMonitorParams(id string) *DeleteTrafficMonitorParams
+	DeleteTrafficType(p *DeleteTrafficTypeParams) (*DeleteTrafficTypeResponse, error)
+	NewDeleteTrafficTypeParams(id string) *DeleteTrafficTypeParams
+	GenerateUsageRecords(p *GenerateUsageRecordsParams) (*GenerateUsageRecordsResponse, error)
+	NewGenerateUsageRecordsParams(enddate string, startdate string) *GenerateUsageRecordsParams
+	ListTrafficMonitors(p *ListTrafficMonitorsParams) (*ListTrafficMonitorsResponse, error)
+	NewListTrafficMonitorsParams(zoneid string) *ListTrafficMonitorsParams
+	ListTrafficTypeImplementors(p *ListTrafficTypeImplementorsParams) (*ListTrafficTypeImplementorsResponse, error)
+	NewListTrafficTypeImplementorsParams() *ListTrafficTypeImplementorsParams
+	ListTrafficTypes(p *ListTrafficTypesParams) (*ListTrafficTypesResponse, error)
+	NewListTrafficTypesParams(physicalnetworkid string) *ListTrafficTypesParams
+	GetTrafficTypeID(keyword string, physicalnetworkid string, opts ...OptionFunc) (string, int, error)
+	ListUsageRecords(p *ListUsageRecordsParams) (*ListUsageRecordsResponse, error)
+	NewListUsageRecordsParams(enddate string, startdate string) *ListUsageRecordsParams
+	ListUsageTypes(p *ListUsageTypesParams) (*ListUsageTypesResponse, error)
+	NewListUsageTypesParams() *ListUsageTypesParams
+	RemoveRawUsageRecords(p *RemoveRawUsageRecordsParams) (*RemoveRawUsageRecordsResponse, error)
+	NewRemoveRawUsageRecordsParams(interval int) *RemoveRawUsageRecordsParams
+	UpdateTrafficType(p *UpdateTrafficTypeParams) (*UpdateTrafficTypeResponse, error)
+	NewUpdateTrafficTypeParams(id string) *UpdateTrafficTypeParams
+}
+
 type AddTrafficMonitorParams struct {
 	p map[string]interface{}
 }
@@ -57,11 +85,27 @@ func (p *AddTrafficMonitorParams) SetExcludezones(v string) {
 	p.p["excludezones"] = v
 }
 
+func (p *AddTrafficMonitorParams) GetExcludezones() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["excludezones"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficMonitorParams) SetIncludezones(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["includezones"] = v
+}
+
+func (p *AddTrafficMonitorParams) GetIncludezones() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["includezones"].(string)
+	return value, ok
 }
 
 func (p *AddTrafficMonitorParams) SetUrl(v string) {
@@ -71,11 +115,27 @@ func (p *AddTrafficMonitorParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddTrafficMonitorParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficMonitorParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddTrafficMonitorParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddTrafficMonitorParams instance,
@@ -159,11 +219,27 @@ func (p *AddTrafficTypeParams) SetHypervnetworklabel(v string) {
 	p.p["hypervnetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) GetHypervnetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervnetworklabel"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficTypeParams) SetIsolationmethod(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isolationmethod"] = v
+}
+
+func (p *AddTrafficTypeParams) GetIsolationmethod() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isolationmethod"].(string)
+	return value, ok
 }
 
 func (p *AddTrafficTypeParams) SetKvmnetworklabel(v string) {
@@ -173,11 +249,27 @@ func (p *AddTrafficTypeParams) SetKvmnetworklabel(v string) {
 	p.p["kvmnetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) GetKvmnetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["kvmnetworklabel"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficTypeParams) SetOvm3networklabel(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ovm3networklabel"] = v
+}
+
+func (p *AddTrafficTypeParams) GetOvm3networklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ovm3networklabel"].(string)
+	return value, ok
 }
 
 func (p *AddTrafficTypeParams) SetPhysicalnetworkid(v string) {
@@ -187,11 +279,27 @@ func (p *AddTrafficTypeParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddTrafficTypeParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficTypeParams) SetTraffictype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *AddTrafficTypeParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
 }
 
 func (p *AddTrafficTypeParams) SetVlan(v string) {
@@ -201,6 +309,14 @@ func (p *AddTrafficTypeParams) SetVlan(v string) {
 	p.p["vlan"] = v
 }
 
+func (p *AddTrafficTypeParams) GetVlan() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vlan"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficTypeParams) SetVmwarenetworklabel(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -208,11 +324,27 @@ func (p *AddTrafficTypeParams) SetVmwarenetworklabel(v string) {
 	p.p["vmwarenetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) GetVmwarenetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vmwarenetworklabel"].(string)
+	return value, ok
+}
+
 func (p *AddTrafficTypeParams) SetXennetworklabel(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["xennetworklabel"] = v
+}
+
+func (p *AddTrafficTypeParams) GetXennetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["xennetworklabel"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddTrafficTypeParams instance,
@@ -295,6 +427,14 @@ func (p *DeleteTrafficMonitorParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteTrafficMonitorParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteTrafficMonitorParams instance,
 // as then you are sure you have configured all required params
 func (s *UsageService) NewDeleteTrafficMonitorParams(id string) *DeleteTrafficMonitorParams {
@@ -375,6 +515,14 @@ func (p *DeleteTrafficTypeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteTrafficTypeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteTrafficTypeParams instance,
 // as then you are sure you have configured all required params
 func (s *UsageService) NewDeleteTrafficTypeParams(id string) *DeleteTrafficTypeParams {
@@ -449,6 +597,14 @@ func (p *GenerateUsageRecordsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *GenerateUsageRecordsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *GenerateUsageRecordsParams) SetEnddate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -456,11 +612,27 @@ func (p *GenerateUsageRecordsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *GenerateUsageRecordsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
 func (p *GenerateUsageRecordsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *GenerateUsageRecordsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GenerateUsageRecordsParams instance,
@@ -555,11 +727,27 @@ func (p *ListTrafficMonitorsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficMonitorsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListTrafficMonitorsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficMonitorsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListTrafficMonitorsParams) SetPagesize(v int) {
@@ -569,11 +757,27 @@ func (p *ListTrafficMonitorsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficMonitorsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListTrafficMonitorsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListTrafficMonitorsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListTrafficMonitorsParams instance,
@@ -648,11 +852,27 @@ func (p *ListTrafficTypeImplementorsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficTypeImplementorsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListTrafficTypeImplementorsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficTypeImplementorsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListTrafficTypeImplementorsParams) SetPagesize(v int) {
@@ -662,11 +882,27 @@ func (p *ListTrafficTypeImplementorsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficTypeImplementorsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListTrafficTypeImplementorsParams) SetTraffictype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *ListTrafficTypeImplementorsParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListTrafficTypeImplementorsParams instance,
@@ -737,11 +973,27 @@ func (p *ListTrafficTypesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficTypesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListTrafficTypesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficTypesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListTrafficTypesParams) SetPagesize(v int) {
@@ -751,11 +1003,27 @@ func (p *ListTrafficTypesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficTypesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListTrafficTypesParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListTrafficTypesParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListTrafficTypesParams instance,
@@ -903,11 +1171,27 @@ func (p *ListUsageRecordsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListUsageRecordsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetAccountid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountid"] = v
+}
+
+func (p *ListUsageRecordsParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetDomainid(v string) {
@@ -917,11 +1201,27 @@ func (p *ListUsageRecordsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListUsageRecordsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetEnddate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["enddate"] = v
+}
+
+func (p *ListUsageRecordsParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetIncludetags(v bool) {
@@ -931,11 +1231,27 @@ func (p *ListUsageRecordsParams) SetIncludetags(v bool) {
 	p.p["includetags"] = v
 }
 
+func (p *ListUsageRecordsParams) GetIncludetags() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["includetags"].(bool)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListUsageRecordsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetKeyword(v string) {
@@ -945,11 +1261,27 @@ func (p *ListUsageRecordsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUsageRecordsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetOldformat(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["oldformat"] = v
+}
+
+func (p *ListUsageRecordsParams) GetOldformat() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oldformat"].(bool)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetPage(v int) {
@@ -959,11 +1291,27 @@ func (p *ListUsageRecordsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListUsageRecordsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListUsageRecordsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetProjectid(v string) {
@@ -973,11 +1321,27 @@ func (p *ListUsageRecordsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListUsageRecordsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *ListUsageRecordsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
 }
 
 func (p *ListUsageRecordsParams) SetType(v int64) {
@@ -987,11 +1351,27 @@ func (p *ListUsageRecordsParams) SetType(v int64) {
 	p.p["type"] = v
 }
 
+func (p *ListUsageRecordsParams) GetType() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(int64)
+	return value, ok
+}
+
 func (p *ListUsageRecordsParams) SetUsageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["usageid"] = v
+}
+
+func (p *ListUsageRecordsParams) GetUsageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usageid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListUsageRecordsParams instance,
@@ -1160,6 +1540,14 @@ func (p *RemoveRawUsageRecordsParams) SetInterval(v int) {
 	p.p["interval"] = v
 }
 
+func (p *RemoveRawUsageRecordsParams) GetInterval() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["interval"].(int)
+	return value, ok
+}
+
 // You should always use this function to get a new RemoveRawUsageRecordsParams instance,
 // as then you are sure you have configured all required params
 func (s *UsageService) NewRemoveRawUsageRecordsParams(interval int) *RemoveRawUsageRecordsParams {
@@ -1255,11 +1643,27 @@ func (p *UpdateTrafficTypeParams) SetHypervnetworklabel(v string) {
 	p.p["hypervnetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) GetHypervnetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervnetworklabel"].(string)
+	return value, ok
+}
+
 func (p *UpdateTrafficTypeParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateTrafficTypeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateTrafficTypeParams) SetKvmnetworklabel(v string) {
@@ -1269,11 +1673,27 @@ func (p *UpdateTrafficTypeParams) SetKvmnetworklabel(v string) {
 	p.p["kvmnetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) GetKvmnetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["kvmnetworklabel"].(string)
+	return value, ok
+}
+
 func (p *UpdateTrafficTypeParams) SetOvm3networklabel(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ovm3networklabel"] = v
+}
+
+func (p *UpdateTrafficTypeParams) GetOvm3networklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ovm3networklabel"].(string)
+	return value, ok
 }
 
 func (p *UpdateTrafficTypeParams) SetVmwarenetworklabel(v string) {
@@ -1283,11 +1703,27 @@ func (p *UpdateTrafficTypeParams) SetVmwarenetworklabel(v string) {
 	p.p["vmwarenetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) GetVmwarenetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vmwarenetworklabel"].(string)
+	return value, ok
+}
+
 func (p *UpdateTrafficTypeParams) SetXennetworklabel(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["xennetworklabel"] = v
+}
+
+func (p *UpdateTrafficTypeParams) GetXennetworklabel() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["xennetworklabel"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateTrafficTypeParams instance,

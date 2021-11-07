@@ -25,6 +25,17 @@ import (
 	"strconv"
 )
 
+type RegionServiceIface interface {
+	AddRegion(p *AddRegionParams) (*AddRegionResponse, error)
+	NewAddRegionParams(endpoint string, id int, name string) *AddRegionParams
+	ListRegions(p *ListRegionsParams) (*ListRegionsResponse, error)
+	NewListRegionsParams() *ListRegionsParams
+	RemoveRegion(p *RemoveRegionParams) (*RemoveRegionResponse, error)
+	NewRemoveRegionParams(id int) *RemoveRegionParams
+	UpdateRegion(p *UpdateRegionParams) (*UpdateRegionResponse, error)
+	NewUpdateRegionParams(id int) *UpdateRegionParams
+}
+
 type AddRegionParams struct {
 	p map[string]interface{}
 }
@@ -54,6 +65,14 @@ func (p *AddRegionParams) SetEndpoint(v string) {
 	p.p["endpoint"] = v
 }
 
+func (p *AddRegionParams) GetEndpoint() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endpoint"].(string)
+	return value, ok
+}
+
 func (p *AddRegionParams) SetId(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -61,11 +80,27 @@ func (p *AddRegionParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *AddRegionParams) GetId() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int)
+	return value, ok
+}
+
 func (p *AddRegionParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *AddRegionParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddRegionParams instance,
@@ -141,11 +176,27 @@ func (p *ListRegionsParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *ListRegionsParams) GetId() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int)
+	return value, ok
+}
+
 func (p *ListRegionsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRegionsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListRegionsParams) SetName(v string) {
@@ -155,6 +206,14 @@ func (p *ListRegionsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListRegionsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListRegionsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -162,11 +221,27 @@ func (p *ListRegionsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListRegionsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListRegionsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListRegionsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListRegionsParams instance,
@@ -228,6 +303,14 @@ func (p *RemoveRegionParams) SetId(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RemoveRegionParams) GetId() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new RemoveRegionParams instance,
@@ -317,6 +400,14 @@ func (p *UpdateRegionParams) SetEndpoint(v string) {
 	p.p["endpoint"] = v
 }
 
+func (p *UpdateRegionParams) GetEndpoint() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endpoint"].(string)
+	return value, ok
+}
+
 func (p *UpdateRegionParams) SetId(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -324,11 +415,27 @@ func (p *UpdateRegionParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *UpdateRegionParams) GetId() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int)
+	return value, ok
+}
+
 func (p *UpdateRegionParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateRegionParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateRegionParams instance,

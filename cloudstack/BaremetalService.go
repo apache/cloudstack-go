@@ -25,6 +25,27 @@ import (
 	"strconv"
 )
 
+type BaremetalServiceIface interface {
+	AddBaremetalDhcp(p *AddBaremetalDhcpParams) (*AddBaremetalDhcpResponse, error)
+	NewAddBaremetalDhcpParams(dhcpservertype string, password string, physicalnetworkid string, url string, username string) *AddBaremetalDhcpParams
+	AddBaremetalPxeKickStartServer(p *AddBaremetalPxeKickStartServerParams) (*AddBaremetalPxeKickStartServerResponse, error)
+	NewAddBaremetalPxeKickStartServerParams(password string, physicalnetworkid string, pxeservertype string, tftpdir string, url string, username string) *AddBaremetalPxeKickStartServerParams
+	AddBaremetalPxePingServer(p *AddBaremetalPxePingServerParams) (*AddBaremetalPxePingServerResponse, error)
+	NewAddBaremetalPxePingServerParams(password string, physicalnetworkid string, pingdir string, pingstorageserverip string, pxeservertype string, tftpdir string, url string, username string) *AddBaremetalPxePingServerParams
+	AddBaremetalRct(p *AddBaremetalRctParams) (*AddBaremetalRctResponse, error)
+	NewAddBaremetalRctParams(baremetalrcturl string) *AddBaremetalRctParams
+	DeleteBaremetalRct(p *DeleteBaremetalRctParams) (*DeleteBaremetalRctResponse, error)
+	NewDeleteBaremetalRctParams(id string) *DeleteBaremetalRctParams
+	ListBaremetalDhcp(p *ListBaremetalDhcpParams) (*ListBaremetalDhcpResponse, error)
+	NewListBaremetalDhcpParams(physicalnetworkid string) *ListBaremetalDhcpParams
+	ListBaremetalPxeServers(p *ListBaremetalPxeServersParams) (*ListBaremetalPxeServersResponse, error)
+	NewListBaremetalPxeServersParams(physicalnetworkid string) *ListBaremetalPxeServersParams
+	ListBaremetalRct(p *ListBaremetalRctParams) (*ListBaremetalRctResponse, error)
+	NewListBaremetalRctParams() *ListBaremetalRctParams
+	NotifyBaremetalProvisionDone(p *NotifyBaremetalProvisionDoneParams) (*NotifyBaremetalProvisionDoneResponse, error)
+	NewNotifyBaremetalProvisionDoneParams(mac string) *NotifyBaremetalProvisionDoneParams
+}
+
 type AddBaremetalDhcpParams struct {
 	p map[string]interface{}
 }
@@ -59,11 +80,27 @@ func (p *AddBaremetalDhcpParams) SetDhcpservertype(v string) {
 	p.p["dhcpservertype"] = v
 }
 
+func (p *AddBaremetalDhcpParams) GetDhcpservertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpservertype"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalDhcpParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddBaremetalDhcpParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalDhcpParams) SetPhysicalnetworkid(v string) {
@@ -73,6 +110,14 @@ func (p *AddBaremetalDhcpParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddBaremetalDhcpParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalDhcpParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -80,11 +125,27 @@ func (p *AddBaremetalDhcpParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddBaremetalDhcpParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalDhcpParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBaremetalDhcpParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddBaremetalDhcpParams instance,
@@ -185,11 +246,27 @@ func (p *AddBaremetalPxeKickStartServerParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBaremetalPxeKickStartServerParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxeKickStartServerParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *AddBaremetalPxeKickStartServerParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxeKickStartServerParams) SetPodid(v string) {
@@ -199,11 +276,27 @@ func (p *AddBaremetalPxeKickStartServerParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *AddBaremetalPxeKickStartServerParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxeKickStartServerParams) SetPxeservertype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pxeservertype"] = v
+}
+
+func (p *AddBaremetalPxeKickStartServerParams) GetPxeservertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pxeservertype"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxeKickStartServerParams) SetTftpdir(v string) {
@@ -213,6 +306,14 @@ func (p *AddBaremetalPxeKickStartServerParams) SetTftpdir(v string) {
 	p.p["tftpdir"] = v
 }
 
+func (p *AddBaremetalPxeKickStartServerParams) GetTftpdir() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tftpdir"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxeKickStartServerParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -220,11 +321,27 @@ func (p *AddBaremetalPxeKickStartServerParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddBaremetalPxeKickStartServerParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxeKickStartServerParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBaremetalPxeKickStartServerParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddBaremetalPxeKickStartServerParams instance,
@@ -338,11 +455,27 @@ func (p *AddBaremetalPxePingServerParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *AddBaremetalPxePingServerParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxePingServerParams) SetPingcifspassword(v string) {
@@ -352,11 +485,27 @@ func (p *AddBaremetalPxePingServerParams) SetPingcifspassword(v string) {
 	p.p["pingcifspassword"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetPingcifspassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pingcifspassword"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetPingcifsusername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pingcifsusername"] = v
+}
+
+func (p *AddBaremetalPxePingServerParams) GetPingcifsusername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pingcifsusername"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxePingServerParams) SetPingdir(v string) {
@@ -366,11 +515,27 @@ func (p *AddBaremetalPxePingServerParams) SetPingdir(v string) {
 	p.p["pingdir"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetPingdir() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pingdir"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetPingstorageserverip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pingstorageserverip"] = v
+}
+
+func (p *AddBaremetalPxePingServerParams) GetPingstorageserverip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pingstorageserverip"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxePingServerParams) SetPodid(v string) {
@@ -380,11 +545,27 @@ func (p *AddBaremetalPxePingServerParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetPxeservertype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pxeservertype"] = v
+}
+
+func (p *AddBaremetalPxePingServerParams) GetPxeservertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pxeservertype"].(string)
+	return value, ok
 }
 
 func (p *AddBaremetalPxePingServerParams) SetTftpdir(v string) {
@@ -394,6 +575,14 @@ func (p *AddBaremetalPxePingServerParams) SetTftpdir(v string) {
 	p.p["tftpdir"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetTftpdir() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tftpdir"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -401,11 +590,27 @@ func (p *AddBaremetalPxePingServerParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddBaremetalPxePingServerParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddBaremetalPxePingServerParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBaremetalPxePingServerParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddBaremetalPxePingServerParams instance,
@@ -493,6 +698,14 @@ func (p *AddBaremetalRctParams) SetBaremetalrcturl(v string) {
 	p.p["baremetalrcturl"] = v
 }
 
+func (p *AddBaremetalRctParams) GetBaremetalrcturl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["baremetalrcturl"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new AddBaremetalRctParams instance,
 // as then you are sure you have configured all required params
 func (s *BaremetalService) NewAddBaremetalRctParams(baremetalrcturl string) *AddBaremetalRctParams {
@@ -564,6 +777,14 @@ func (p *DeleteBaremetalRctParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteBaremetalRctParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteBaremetalRctParams instance,
@@ -652,11 +873,27 @@ func (p *ListBaremetalDhcpParams) SetDhcpservertype(v string) {
 	p.p["dhcpservertype"] = v
 }
 
+func (p *ListBaremetalDhcpParams) GetDhcpservertype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpservertype"].(string)
+	return value, ok
+}
+
 func (p *ListBaremetalDhcpParams) SetId(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListBaremetalDhcpParams) GetId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int64)
+	return value, ok
 }
 
 func (p *ListBaremetalDhcpParams) SetKeyword(v string) {
@@ -666,11 +903,27 @@ func (p *ListBaremetalDhcpParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListBaremetalDhcpParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListBaremetalDhcpParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListBaremetalDhcpParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListBaremetalDhcpParams) SetPagesize(v int) {
@@ -680,11 +933,27 @@ func (p *ListBaremetalDhcpParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBaremetalDhcpParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListBaremetalDhcpParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListBaremetalDhcpParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListBaremetalDhcpParams instance,
@@ -763,11 +1032,27 @@ func (p *ListBaremetalPxeServersParams) SetId(v int64) {
 	p.p["id"] = v
 }
 
+func (p *ListBaremetalPxeServersParams) GetId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int64)
+	return value, ok
+}
+
 func (p *ListBaremetalPxeServersParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListBaremetalPxeServersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListBaremetalPxeServersParams) SetPage(v int) {
@@ -777,6 +1062,14 @@ func (p *ListBaremetalPxeServersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListBaremetalPxeServersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListBaremetalPxeServersParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -784,11 +1077,27 @@ func (p *ListBaremetalPxeServersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBaremetalPxeServersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListBaremetalPxeServersParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListBaremetalPxeServersParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListBaremetalPxeServersParams instance,
@@ -859,6 +1168,14 @@ func (p *ListBaremetalRctParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListBaremetalRctParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListBaremetalRctParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -866,11 +1183,27 @@ func (p *ListBaremetalRctParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListBaremetalRctParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListBaremetalRctParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListBaremetalRctParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListBaremetalRctParams instance,
@@ -928,6 +1261,14 @@ func (p *NotifyBaremetalProvisionDoneParams) SetMac(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["mac"] = v
+}
+
+func (p *NotifyBaremetalProvisionDoneParams) GetMac() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["mac"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new NotifyBaremetalProvisionDoneParams instance,

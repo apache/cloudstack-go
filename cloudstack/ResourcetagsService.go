@@ -27,6 +27,18 @@ import (
 	"strings"
 )
 
+type ResourcetagsServiceIface interface {
+	CreateTags(p *CreateTagsParams) (*CreateTagsResponse, error)
+	NewCreateTagsParams(resourceids []string, resourcetype string, tags map[string]string) *CreateTagsParams
+	DeleteTags(p *DeleteTagsParams) (*DeleteTagsResponse, error)
+	NewDeleteTagsParams(resourceids []string, resourcetype string) *DeleteTagsParams
+	ListStorageTags(p *ListStorageTagsParams) (*ListStorageTagsResponse, error)
+	NewListStorageTagsParams() *ListStorageTagsParams
+	GetStorageTagID(keyword string, opts ...OptionFunc) (string, int, error)
+	ListTags(p *ListTagsParams) (*ListTagsResponse, error)
+	NewListTagsParams() *ListTagsParams
+}
+
 type CreateTagsParams struct {
 	p map[string]interface{}
 }
@@ -63,11 +75,27 @@ func (p *CreateTagsParams) SetCustomer(v string) {
 	p.p["customer"] = v
 }
 
+func (p *CreateTagsParams) GetCustomer() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customer"].(string)
+	return value, ok
+}
+
 func (p *CreateTagsParams) SetResourceids(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourceids"] = v
+}
+
+func (p *CreateTagsParams) GetResourceids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceids"].([]string)
+	return value, ok
 }
 
 func (p *CreateTagsParams) SetResourcetype(v string) {
@@ -77,11 +105,27 @@ func (p *CreateTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *CreateTagsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *CreateTagsParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *CreateTagsParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateTagsParams instance,
@@ -165,6 +209,14 @@ func (p *DeleteTagsParams) SetResourceids(v []string) {
 	p.p["resourceids"] = v
 }
 
+func (p *DeleteTagsParams) GetResourceids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceids"].([]string)
+	return value, ok
+}
+
 func (p *DeleteTagsParams) SetResourcetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -172,11 +224,27 @@ func (p *DeleteTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *DeleteTagsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *DeleteTagsParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *DeleteTagsParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteTagsParams instance,
@@ -256,6 +324,14 @@ func (p *ListStorageTagsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListStorageTagsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListStorageTagsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -263,11 +339,27 @@ func (p *ListStorageTagsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListStorageTagsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListStorageTagsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListStorageTagsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListStorageTagsParams instance,
@@ -404,11 +496,27 @@ func (p *ListTagsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListTagsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetCustomer(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customer"] = v
+}
+
+func (p *ListTagsParams) GetCustomer() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customer"].(string)
+	return value, ok
 }
 
 func (p *ListTagsParams) SetDomainid(v string) {
@@ -418,11 +526,27 @@ func (p *ListTagsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListTagsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListTagsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListTagsParams) SetKey(v string) {
@@ -432,11 +556,27 @@ func (p *ListTagsParams) SetKey(v string) {
 	p.p["key"] = v
 }
 
+func (p *ListTagsParams) GetKey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["key"].(string)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListTagsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListTagsParams) SetListall(v bool) {
@@ -446,11 +586,27 @@ func (p *ListTagsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListTagsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTagsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListTagsParams) SetPagesize(v int) {
@@ -460,11 +616,27 @@ func (p *ListTagsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTagsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListTagsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *ListTagsParams) SetResourceid(v string) {
@@ -474,6 +646,14 @@ func (p *ListTagsParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *ListTagsParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetResourcetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -481,11 +661,27 @@ func (p *ListTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *ListTagsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *ListTagsParams) SetValue(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["value"] = v
+}
+
+func (p *ListTagsParams) GetValue() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["value"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListTagsParams instance,

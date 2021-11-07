@@ -27,6 +27,37 @@ import (
 	"strings"
 )
 
+type AccountServiceIface interface {
+	AddAccountToProject(p *AddAccountToProjectParams) (*AddAccountToProjectResponse, error)
+	NewAddAccountToProjectParams(projectid string) *AddAccountToProjectParams
+	CreateAccount(p *CreateAccountParams) (*CreateAccountResponse, error)
+	NewCreateAccountParams(email string, firstname string, lastname string, password string, username string) *CreateAccountParams
+	DeleteAccount(p *DeleteAccountParams) (*DeleteAccountResponse, error)
+	NewDeleteAccountParams(id string) *DeleteAccountParams
+	DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error)
+	NewDeleteAccountFromProjectParams(account string, projectid string) *DeleteAccountFromProjectParams
+	DisableAccount(p *DisableAccountParams) (*DisableAccountResponse, error)
+	NewDisableAccountParams(lock bool) *DisableAccountParams
+	EnableAccount(p *EnableAccountParams) (*EnableAccountResponse, error)
+	NewEnableAccountParams() *EnableAccountParams
+	GetSolidFireAccountId(p *GetSolidFireAccountIdParams) (*GetSolidFireAccountIdResponse, error)
+	NewGetSolidFireAccountIdParams(accountid string, storageid string) *GetSolidFireAccountIdParams
+	ListAccounts(p *ListAccountsParams) (*ListAccountsResponse, error)
+	NewListAccountsParams() *ListAccountsParams
+	GetAccountID(name string, opts ...OptionFunc) (string, int, error)
+	GetAccountByName(name string, opts ...OptionFunc) (*Account, int, error)
+	GetAccountByID(id string, opts ...OptionFunc) (*Account, int, error)
+	ListProjectAccounts(p *ListProjectAccountsParams) (*ListProjectAccountsResponse, error)
+	NewListProjectAccountsParams(projectid string) *ListProjectAccountsParams
+	GetProjectAccountID(keyword string, projectid string, opts ...OptionFunc) (string, int, error)
+	LockAccount(p *LockAccountParams) (*LockAccountResponse, error)
+	NewLockAccountParams(account string, domainid string) *LockAccountParams
+	MarkDefaultZoneForAccount(p *MarkDefaultZoneForAccountParams) (*MarkDefaultZoneForAccountResponse, error)
+	NewMarkDefaultZoneForAccountParams(account string, domainid string, zoneid string) *MarkDefaultZoneForAccountParams
+	UpdateAccount(p *UpdateAccountParams) (*UpdateAccountResponse, error)
+	NewUpdateAccountParams() *UpdateAccountParams
+}
+
 type AddAccountToProjectParams struct {
 	p map[string]interface{}
 }
@@ -61,11 +92,27 @@ func (p *AddAccountToProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AddAccountToProjectParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *AddAccountToProjectParams) SetEmail(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *AddAccountToProjectParams) GetEmail() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["email"].(string)
+	return value, ok
 }
 
 func (p *AddAccountToProjectParams) SetProjectid(v string) {
@@ -75,6 +122,14 @@ func (p *AddAccountToProjectParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AddAccountToProjectParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *AddAccountToProjectParams) SetProjectroleid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -82,11 +137,27 @@ func (p *AddAccountToProjectParams) SetProjectroleid(v string) {
 	p.p["projectroleid"] = v
 }
 
+func (p *AddAccountToProjectParams) GetProjectroleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectroleid"].(string)
+	return value, ok
+}
+
 func (p *AddAccountToProjectParams) SetRoletype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roletype"] = v
+}
+
+func (p *AddAccountToProjectParams) GetRoletype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roletype"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddAccountToProjectParams instance,
@@ -201,11 +272,27 @@ func (p *CreateAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetAccountdetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *CreateAccountParams) GetAccountdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountdetails"].(map[string]string)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetAccountid(v string) {
@@ -215,11 +302,27 @@ func (p *CreateAccountParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *CreateAccountParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetAccounttype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *CreateAccountParams) GetAccounttype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetDomainid(v string) {
@@ -229,11 +332,27 @@ func (p *CreateAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetEmail(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *CreateAccountParams) GetEmail() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["email"].(string)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetFirstname(v string) {
@@ -243,11 +362,27 @@ func (p *CreateAccountParams) SetFirstname(v string) {
 	p.p["firstname"] = v
 }
 
+func (p *CreateAccountParams) GetFirstname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["firstname"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetLastname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["lastname"] = v
+}
+
+func (p *CreateAccountParams) GetLastname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["lastname"].(string)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetNetworkdomain(v string) {
@@ -257,11 +392,27 @@ func (p *CreateAccountParams) SetNetworkdomain(v string) {
 	p.p["networkdomain"] = v
 }
 
+func (p *CreateAccountParams) GetNetworkdomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkdomain"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *CreateAccountParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetRoleid(v string) {
@@ -271,11 +422,27 @@ func (p *CreateAccountParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateAccountParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetTimezone(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *CreateAccountParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
 }
 
 func (p *CreateAccountParams) SetUserid(v string) {
@@ -285,11 +452,27 @@ func (p *CreateAccountParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *CreateAccountParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
+}
+
 func (p *CreateAccountParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *CreateAccountParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateAccountParams instance,
@@ -432,6 +615,14 @@ func (p *DeleteAccountParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteAccountParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteAccountParams instance,
 // as then you are sure you have configured all required params
 func (s *AccountService) NewDeleteAccountParams(id string) *DeleteAccountParams {
@@ -503,11 +694,27 @@ func (p *DeleteAccountFromProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DeleteAccountFromProjectParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DeleteAccountFromProjectParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeleteAccountFromProjectParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteAccountFromProjectParams instance,
@@ -589,11 +796,27 @@ func (p *DisableAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DisableAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DisableAccountParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *DisableAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *DisableAccountParams) SetId(v string) {
@@ -603,11 +826,27 @@ func (p *DisableAccountParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DisableAccountParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *DisableAccountParams) SetLock(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["lock"] = v
+}
+
+func (p *DisableAccountParams) GetLock() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["lock"].(bool)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableAccountParams instance,
@@ -768,6 +1007,14 @@ func (p *EnableAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *EnableAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *EnableAccountParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -775,11 +1022,27 @@ func (p *EnableAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *EnableAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *EnableAccountParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *EnableAccountParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new EnableAccountParams instance,
@@ -916,11 +1179,27 @@ func (p *GetSolidFireAccountIdParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *GetSolidFireAccountIdParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
 func (p *GetSolidFireAccountIdParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *GetSolidFireAccountIdParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetSolidFireAccountIdParams instance,
@@ -1016,11 +1295,27 @@ func (p *ListAccountsParams) SetAccounttype(v int64) {
 	p.p["accounttype"] = v
 }
 
+func (p *ListAccountsParams) GetAccounttype() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int64)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetDetails(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListAccountsParams) GetDetails() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].([]string)
+	return value, ok
 }
 
 func (p *ListAccountsParams) SetDomainid(v string) {
@@ -1030,11 +1325,27 @@ func (p *ListAccountsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListAccountsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListAccountsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListAccountsParams) SetIscleanuprequired(v bool) {
@@ -1044,11 +1355,27 @@ func (p *ListAccountsParams) SetIscleanuprequired(v bool) {
 	p.p["iscleanuprequired"] = v
 }
 
+func (p *ListAccountsParams) GetIscleanuprequired() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["iscleanuprequired"].(bool)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListAccountsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListAccountsParams) SetKeyword(v string) {
@@ -1058,11 +1385,27 @@ func (p *ListAccountsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListAccountsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListAccountsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListAccountsParams) SetName(v string) {
@@ -1072,11 +1415,27 @@ func (p *ListAccountsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAccountsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAccountsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListAccountsParams) SetPagesize(v int) {
@@ -1086,11 +1445,27 @@ func (p *ListAccountsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAccountsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListAccountsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListAccountsParams instance,
@@ -1335,11 +1710,27 @@ func (p *ListProjectAccountsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListProjectAccountsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListProjectAccountsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListProjectAccountsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListProjectAccountsParams) SetPage(v int) {
@@ -1349,11 +1740,27 @@ func (p *ListProjectAccountsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListProjectAccountsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListProjectAccountsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListProjectAccountsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListProjectAccountsParams) SetProjectid(v string) {
@@ -1363,11 +1770,27 @@ func (p *ListProjectAccountsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListProjectAccountsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListProjectAccountsParams) SetProjectroleid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectroleid"] = v
+}
+
+func (p *ListProjectAccountsParams) GetProjectroleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectroleid"].(string)
+	return value, ok
 }
 
 func (p *ListProjectAccountsParams) SetRole(v string) {
@@ -1377,11 +1800,27 @@ func (p *ListProjectAccountsParams) SetRole(v string) {
 	p.p["role"] = v
 }
 
+func (p *ListProjectAccountsParams) GetRole() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["role"].(string)
+	return value, ok
+}
+
 func (p *ListProjectAccountsParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListProjectAccountsParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListProjectAccountsParams instance,
@@ -1537,11 +1976,27 @@ func (p *LockAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *LockAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *LockAccountParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *LockAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new LockAccountParams instance,
@@ -1683,6 +2138,14 @@ func (p *MarkDefaultZoneForAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *MarkDefaultZoneForAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *MarkDefaultZoneForAccountParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1690,11 +2153,27 @@ func (p *MarkDefaultZoneForAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *MarkDefaultZoneForAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *MarkDefaultZoneForAccountParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *MarkDefaultZoneForAccountParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new MarkDefaultZoneForAccountParams instance,
@@ -1873,11 +2352,27 @@ func (p *UpdateAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateAccountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *UpdateAccountParams) SetAccountdetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *UpdateAccountParams) GetAccountdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountdetails"].(map[string]string)
+	return value, ok
 }
 
 func (p *UpdateAccountParams) SetDomainid(v string) {
@@ -1887,11 +2382,27 @@ func (p *UpdateAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateAccountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *UpdateAccountParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateAccountParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateAccountParams) SetNetworkdomain(v string) {
@@ -1901,6 +2412,14 @@ func (p *UpdateAccountParams) SetNetworkdomain(v string) {
 	p.p["networkdomain"] = v
 }
 
+func (p *UpdateAccountParams) GetNetworkdomain() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkdomain"].(string)
+	return value, ok
+}
+
 func (p *UpdateAccountParams) SetNewname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1908,11 +2427,27 @@ func (p *UpdateAccountParams) SetNewname(v string) {
 	p.p["newname"] = v
 }
 
+func (p *UpdateAccountParams) GetNewname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["newname"].(string)
+	return value, ok
+}
+
 func (p *UpdateAccountParams) SetRoleid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roleid"] = v
+}
+
+func (p *UpdateAccountParams) GetRoleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["roleid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateAccountParams instance,

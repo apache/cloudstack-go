@@ -25,6 +25,11 @@ import (
 	"strconv"
 )
 
+type SystemCapacityServiceIface interface {
+	ListCapacity(p *ListCapacityParams) (*ListCapacityResponse, error)
+	NewListCapacityParams() *ListCapacityParams
+}
+
 type ListCapacityParams struct {
 	p map[string]interface{}
 }
@@ -75,11 +80,27 @@ func (p *ListCapacityParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListCapacityParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetFetchlatest(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fetchlatest"] = v
+}
+
+func (p *ListCapacityParams) GetFetchlatest() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fetchlatest"].(bool)
+	return value, ok
 }
 
 func (p *ListCapacityParams) SetKeyword(v string) {
@@ -89,11 +110,27 @@ func (p *ListCapacityParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListCapacityParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListCapacityParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListCapacityParams) SetPagesize(v int) {
@@ -103,11 +140,27 @@ func (p *ListCapacityParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListCapacityParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListCapacityParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListCapacityParams) SetSortby(v string) {
@@ -117,6 +170,14 @@ func (p *ListCapacityParams) SetSortby(v string) {
 	p.p["sortby"] = v
 }
 
+func (p *ListCapacityParams) GetSortby() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sortby"].(string)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetType(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -124,11 +185,27 @@ func (p *ListCapacityParams) SetType(v int) {
 	p.p["type"] = v
 }
 
+func (p *ListCapacityParams) GetType() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(int)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListCapacityParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListCapacityParams instance,

@@ -24,6 +24,11 @@ import (
 	"net/url"
 )
 
+type APIDiscoveryServiceIface interface {
+	ListApis(p *ListApisParams) (*ListApisResponse, error)
+	NewListApisParams() *ListApisParams
+}
+
 type ListApisParams struct {
 	p map[string]interface{}
 }
@@ -44,6 +49,14 @@ func (p *ListApisParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListApisParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListApisParams instance,

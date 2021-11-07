@@ -24,6 +24,11 @@ import (
 	"net/url"
 )
 
+type CloudIdentifierServiceIface interface {
+	GetCloudIdentifier(p *GetCloudIdentifierParams) (*GetCloudIdentifierResponse, error)
+	NewGetCloudIdentifierParams(userid string) *GetCloudIdentifierParams
+}
+
 type GetCloudIdentifierParams struct {
 	p map[string]interface{}
 }
@@ -44,6 +49,14 @@ func (p *GetCloudIdentifierParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *GetCloudIdentifierParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetCloudIdentifierParams instance,

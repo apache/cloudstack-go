@@ -26,6 +26,13 @@ import (
 	"time"
 )
 
+type AsyncjobServiceIface interface {
+	ListAsyncJobs(p *ListAsyncJobsParams) (*ListAsyncJobsResponse, error)
+	NewListAsyncJobsParams() *ListAsyncJobsParams
+	QueryAsyncJobResult(p *QueryAsyncJobResultParams) (*QueryAsyncJobResultResponse, error)
+	NewQueryAsyncJobResultParams(jobid string) *QueryAsyncJobResultParams
+}
+
 type ListAsyncJobsParams struct {
 	p map[string]interface{}
 }
@@ -73,11 +80,27 @@ func (p *ListAsyncJobsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListAsyncJobsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListAsyncJobsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListAsyncJobsParams) SetIsrecursive(v bool) {
@@ -87,11 +110,27 @@ func (p *ListAsyncJobsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListAsyncJobsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAsyncJobsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListAsyncJobsParams) SetListall(v bool) {
@@ -101,11 +140,27 @@ func (p *ListAsyncJobsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListAsyncJobsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAsyncJobsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListAsyncJobsParams) SetPagesize(v int) {
@@ -115,11 +170,27 @@ func (p *ListAsyncJobsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAsyncJobsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *ListAsyncJobsParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListAsyncJobsParams instance,
@@ -186,6 +257,14 @@ func (p *QueryAsyncJobResultParams) SetJobID(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["jobid"] = v
+}
+
+func (p *QueryAsyncJobResultParams) GetJobID() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["jobid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new QueryAsyncJobResultParams instance,

@@ -27,6 +27,30 @@ import (
 	"strings"
 )
 
+type UserServiceIface interface {
+	CreateUser(p *CreateUserParams) (*CreateUserResponse, error)
+	NewCreateUserParams(account string, email string, firstname string, lastname string, password string, username string) *CreateUserParams
+	DeleteUser(p *DeleteUserParams) (*DeleteUserResponse, error)
+	NewDeleteUserParams(id string) *DeleteUserParams
+	DisableUser(p *DisableUserParams) (*DisableUserResponse, error)
+	NewDisableUserParams(id string) *DisableUserParams
+	EnableUser(p *EnableUserParams) (*EnableUserResponse, error)
+	NewEnableUserParams(id string) *EnableUserParams
+	GetUser(p *GetUserParams) (*GetUserResponse, error)
+	NewGetUserParams(userapikey string) *GetUserParams
+	GetVirtualMachineUserData(p *GetVirtualMachineUserDataParams) (*GetVirtualMachineUserDataResponse, error)
+	NewGetVirtualMachineUserDataParams(virtualmachineid string) *GetVirtualMachineUserDataParams
+	ListUsers(p *ListUsersParams) (*ListUsersResponse, error)
+	NewListUsersParams() *ListUsersParams
+	GetUserByID(id string, opts ...OptionFunc) (*User, int, error)
+	LockUser(p *LockUserParams) (*LockUserResponse, error)
+	NewLockUserParams(id string) *LockUserParams
+	RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUserKeysResponse, error)
+	NewRegisterUserKeysParams(id string) *RegisterUserKeysParams
+	UpdateUser(p *UpdateUserParams) (*UpdateUserResponse, error)
+	NewUpdateUserParams(id string) *UpdateUserParams
+}
+
 type CreateUserParams struct {
 	p map[string]interface{}
 }
@@ -73,11 +97,27 @@ func (p *CreateUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateUserParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *CreateUserParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateUserParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *CreateUserParams) SetEmail(v string) {
@@ -87,11 +127,27 @@ func (p *CreateUserParams) SetEmail(v string) {
 	p.p["email"] = v
 }
 
+func (p *CreateUserParams) GetEmail() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["email"].(string)
+	return value, ok
+}
+
 func (p *CreateUserParams) SetFirstname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["firstname"] = v
+}
+
+func (p *CreateUserParams) GetFirstname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["firstname"].(string)
+	return value, ok
 }
 
 func (p *CreateUserParams) SetLastname(v string) {
@@ -101,11 +157,27 @@ func (p *CreateUserParams) SetLastname(v string) {
 	p.p["lastname"] = v
 }
 
+func (p *CreateUserParams) GetLastname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["lastname"].(string)
+	return value, ok
+}
+
 func (p *CreateUserParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *CreateUserParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *CreateUserParams) SetTimezone(v string) {
@@ -115,6 +187,14 @@ func (p *CreateUserParams) SetTimezone(v string) {
 	p.p["timezone"] = v
 }
 
+func (p *CreateUserParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
+}
+
 func (p *CreateUserParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -122,11 +202,27 @@ func (p *CreateUserParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *CreateUserParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
+}
+
 func (p *CreateUserParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *CreateUserParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreateUserParams instance,
@@ -210,6 +306,14 @@ func (p *DeleteUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteUserParams instance,
 // as then you are sure you have configured all required params
 func (s *UserService) NewDeleteUserParams(id string) *DeleteUserParams {
@@ -288,6 +392,14 @@ func (p *DisableUserParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DisableUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DisableUserParams instance,
@@ -382,6 +494,14 @@ func (p *EnableUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *EnableUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new EnableUserParams instance,
 // as then you are sure you have configured all required params
 func (s *UserService) NewEnableUserParams(id string) *EnableUserParams {
@@ -458,6 +578,14 @@ func (p *GetUserParams) SetUserapikey(v string) {
 	p.p["userapikey"] = v
 }
 
+func (p *GetUserParams) GetUserapikey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userapikey"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new GetUserParams instance,
 // as then you are sure you have configured all required params
 func (s *UserService) NewGetUserParams(userapikey string) *GetUserParams {
@@ -528,6 +656,14 @@ func (p *GetVirtualMachineUserDataParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *GetVirtualMachineUserDataParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetVirtualMachineUserDataParams instance,
@@ -622,11 +758,27 @@ func (p *ListUsersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListUsersParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetAccounttype(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *ListUsersParams) GetAccounttype() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accounttype"].(int64)
+	return value, ok
 }
 
 func (p *ListUsersParams) SetDomainid(v string) {
@@ -636,11 +788,27 @@ func (p *ListUsersParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListUsersParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListUsersParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListUsersParams) SetIsrecursive(v bool) {
@@ -650,11 +818,27 @@ func (p *ListUsersParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListUsersParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListUsersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListUsersParams) SetListall(v bool) {
@@ -664,11 +848,27 @@ func (p *ListUsersParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListUsersParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUsersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListUsersParams) SetPagesize(v int) {
@@ -678,6 +878,14 @@ func (p *ListUsersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUsersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -685,11 +893,27 @@ func (p *ListUsersParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListUsersParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ListUsersParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListUsersParams instance,
@@ -801,6 +1025,14 @@ func (p *LockUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *LockUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new LockUserParams instance,
 // as then you are sure you have configured all required params
 func (s *UserService) NewLockUserParams(id string) *LockUserParams {
@@ -875,6 +1107,14 @@ func (p *RegisterUserKeysParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RegisterUserKeysParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RegisterUserKeysParams instance,
@@ -961,11 +1201,27 @@ func (p *UpdateUserParams) SetCurrentpassword(v string) {
 	p.p["currentpassword"] = v
 }
 
+func (p *UpdateUserParams) GetCurrentpassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["currentpassword"].(string)
+	return value, ok
+}
+
 func (p *UpdateUserParams) SetEmail(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *UpdateUserParams) GetEmail() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["email"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetFirstname(v string) {
@@ -975,11 +1231,27 @@ func (p *UpdateUserParams) SetFirstname(v string) {
 	p.p["firstname"] = v
 }
 
+func (p *UpdateUserParams) GetFirstname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["firstname"].(string)
+	return value, ok
+}
+
 func (p *UpdateUserParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetLastname(v string) {
@@ -989,11 +1261,27 @@ func (p *UpdateUserParams) SetLastname(v string) {
 	p.p["lastname"] = v
 }
 
+func (p *UpdateUserParams) GetLastname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["lastname"].(string)
+	return value, ok
+}
+
 func (p *UpdateUserParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *UpdateUserParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetTimezone(v string) {
@@ -1003,11 +1291,27 @@ func (p *UpdateUserParams) SetTimezone(v string) {
 	p.p["timezone"] = v
 }
 
+func (p *UpdateUserParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
+}
+
 func (p *UpdateUserParams) SetUserapikey(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userapikey"] = v
+}
+
+func (p *UpdateUserParams) GetUserapikey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userapikey"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetUsername(v string) {
@@ -1017,11 +1321,27 @@ func (p *UpdateUserParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *UpdateUserParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *UpdateUserParams) SetUsersecretkey(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["usersecretkey"] = v
+}
+
+func (p *UpdateUserParams) GetUsersecretkey() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usersecretkey"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateUserParams instance,
