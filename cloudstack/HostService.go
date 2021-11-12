@@ -356,7 +356,7 @@ type AddBaremetalHostResponse struct {
 	Jobstatus                        int                                `json:"jobstatus"`
 	Lastannotated                    string                             `json:"lastannotated"`
 	Lastpinged                       string                             `json:"lastpinged"`
-	Managementserverid               string                             `json:"managementserverid"`
+	Managementserverid               CSLong                             `json:"managementserverid"`
 	Memoryallocated                  int64                              `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                              `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                             `json:"memoryallocatedpercentage"`
@@ -789,7 +789,7 @@ type AddHostResponse struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               CSLong                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -1032,7 +1032,7 @@ type CancelHostMaintenanceResponse struct {
 	Jobstatus                        int                                     `json:"jobstatus"`
 	Lastannotated                    string                                  `json:"lastannotated"`
 	Lastpinged                       string                                  `json:"lastpinged"`
-	Managementserverid               string                                  `json:"managementserverid"`
+	Managementserverid               CSLong                                  `json:"managementserverid"`
 	Memoryallocated                  int64                                   `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                   `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                  `json:"memoryallocatedpercentage"`
@@ -1830,7 +1830,7 @@ type FindHostsForMigrationResponse struct {
 	JobID                            string `json:"jobid"`
 	Jobstatus                        int    `json:"jobstatus"`
 	Lastpinged                       string `json:"lastpinged"`
-	Managementserverid               int64  `json:"managementserverid"`
+	Managementserverid               CSLong `json:"managementserverid"`
 	Memoryallocated                  string `json:"memoryallocated"`
 	Memoryallocatedbytes             int64  `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string `json:"memoryallocatedpercentage"`
@@ -2645,7 +2645,7 @@ type Host struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               CSLong                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
@@ -3167,7 +3167,7 @@ type HostsMetric struct {
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
 	Lastpinged                       string                      `json:"lastpinged"`
-	Managementserverid               string                      `json:"managementserverid"`
+	Managementserverid               CSLong                      `json:"managementserverid"`
 	Memoryallocated                  int64                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
 	Memoryallocateddisablethreshold  bool                        `json:"memoryallocateddisablethreshold"`
@@ -3331,7 +3331,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Jobstatus                        int                                         `json:"jobstatus"`
 	Lastannotated                    string                                      `json:"lastannotated"`
 	Lastpinged                       string                                      `json:"lastpinged"`
-	Managementserverid               string                                      `json:"managementserverid"`
+	Managementserverid               CSLong                                      `json:"managementserverid"`
 	Memoryallocated                  int64                                       `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                                       `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                                      `json:"memoryallocatedpercentage"`
@@ -3485,7 +3485,7 @@ type ReconnectHostResponse struct {
 	Jobstatus                        int                             `json:"jobstatus"`
 	Lastannotated                    string                          `json:"lastannotated"`
 	Lastpinged                       string                          `json:"lastpinged"`
-	Managementserverid               string                          `json:"managementserverid"`
+	Managementserverid               CSLong                          `json:"managementserverid"`
 	Memoryallocated                  int64                           `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                           `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                          `json:"memoryallocatedpercentage"`
@@ -3880,7 +3880,7 @@ type UpdateHostResponse struct {
 	Jobstatus                        int                          `json:"jobstatus"`
 	Lastannotated                    string                       `json:"lastannotated"`
 	Lastpinged                       string                       `json:"lastpinged"`
-	Managementserverid               string                       `json:"managementserverid"`
+	Managementserverid               CSLong                       `json:"managementserverid"`
 	Memoryallocated                  int64                        `json:"memoryallocated"`
 	Memoryallocatedbytes             int64                        `json:"memoryallocatedbytes"`
 	Memoryallocatedpercentage        string                       `json:"memoryallocatedpercentage"`
