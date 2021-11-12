@@ -27,6 +27,24 @@ import (
 	"strings"
 )
 
+type UCSServiceIface interface {
+	AddUcsManager(p *AddUcsManagerParams) (*AddUcsManagerResponse, error)
+	NewAddUcsManagerParams(password string, url string, username string, zoneid string) *AddUcsManagerParams
+	AssociateUcsProfileToBlade(p *AssociateUcsProfileToBladeParams) (*AssociateUcsProfileToBladeResponse, error)
+	NewAssociateUcsProfileToBladeParams(bladeid string, profiledn string, ucsmanagerid string) *AssociateUcsProfileToBladeParams
+	DeleteUcsManager(p *DeleteUcsManagerParams) (*DeleteUcsManagerResponse, error)
+	NewDeleteUcsManagerParams(ucsmanagerid string) *DeleteUcsManagerParams
+	ListUcsBlades(p *ListUcsBladesParams) (*ListUcsBladesResponse, error)
+	NewListUcsBladesParams(ucsmanagerid string) *ListUcsBladesParams
+	ListUcsManagers(p *ListUcsManagersParams) (*ListUcsManagersResponse, error)
+	NewListUcsManagersParams() *ListUcsManagersParams
+	GetUcsManagerID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetUcsManagerByName(name string, opts ...OptionFunc) (*UcsManager, int, error)
+	GetUcsManagerByID(id string, opts ...OptionFunc) (*UcsManager, int, error)
+	ListUcsProfiles(p *ListUcsProfilesParams) (*ListUcsProfilesResponse, error)
+	NewListUcsProfilesParams(ucsmanagerid string) *ListUcsProfilesParams
+}
+
 type AddUcsManagerParams struct {
 	p map[string]interface{}
 }
@@ -61,11 +79,27 @@ func (p *AddUcsManagerParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *AddUcsManagerParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *AddUcsManagerParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddUcsManagerParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *AddUcsManagerParams) SetUrl(v string) {
@@ -75,6 +109,14 @@ func (p *AddUcsManagerParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddUcsManagerParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
+}
+
 func (p *AddUcsManagerParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -82,11 +124,27 @@ func (p *AddUcsManagerParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddUcsManagerParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *AddUcsManagerParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddUcsManagerParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddUcsManagerParams instance,
@@ -153,6 +211,14 @@ func (p *AssociateUcsProfileToBladeParams) SetBladeid(v string) {
 	p.p["bladeid"] = v
 }
 
+func (p *AssociateUcsProfileToBladeParams) GetBladeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bladeid"].(string)
+	return value, ok
+}
+
 func (p *AssociateUcsProfileToBladeParams) SetProfiledn(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -160,11 +226,27 @@ func (p *AssociateUcsProfileToBladeParams) SetProfiledn(v string) {
 	p.p["profiledn"] = v
 }
 
+func (p *AssociateUcsProfileToBladeParams) GetProfiledn() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["profiledn"].(string)
+	return value, ok
+}
+
 func (p *AssociateUcsProfileToBladeParams) SetUcsmanagerid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *AssociateUcsProfileToBladeParams) GetUcsmanagerid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ucsmanagerid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AssociateUcsProfileToBladeParams instance,
@@ -243,6 +325,14 @@ func (p *DeleteUcsManagerParams) SetUcsmanagerid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *DeleteUcsManagerParams) GetUcsmanagerid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ucsmanagerid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteUcsManagerParams instance,
@@ -336,11 +426,27 @@ func (p *ListUcsBladesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUcsBladesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListUcsBladesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUcsBladesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListUcsBladesParams) SetPagesize(v int) {
@@ -350,11 +456,27 @@ func (p *ListUcsBladesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsBladesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListUcsBladesParams) SetUcsmanagerid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *ListUcsBladesParams) GetUcsmanagerid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ucsmanagerid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListUcsBladesParams instance,
@@ -432,11 +554,27 @@ func (p *ListUcsManagersParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListUcsManagersParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListUcsManagersParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListUcsManagersParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListUcsManagersParams) SetPage(v int) {
@@ -446,6 +584,14 @@ func (p *ListUcsManagersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListUcsManagersParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListUcsManagersParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -453,11 +599,27 @@ func (p *ListUcsManagersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsManagersParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListUcsManagersParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListUcsManagersParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListUcsManagersParams instance,
@@ -613,11 +775,27 @@ func (p *ListUcsProfilesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUcsProfilesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListUcsProfilesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUcsProfilesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListUcsProfilesParams) SetPagesize(v int) {
@@ -627,11 +805,27 @@ func (p *ListUcsProfilesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsProfilesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListUcsProfilesParams) SetUcsmanagerid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *ListUcsProfilesParams) GetUcsmanagerid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ucsmanagerid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListUcsProfilesParams instance,

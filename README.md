@@ -57,15 +57,11 @@ Last but not the least, there are a lot of helper functions that will try to aut
 ## Developer Guide
 
 The SDK relies on the  `generate.go` script to auto generate the code for all the supported APIs listed in the `listApis.json` file.
-The `listAPIs.json` file holds the output of `listApis` command for a specific release of CloudStack. 
+The `listAPIs.json` file holds the output of `listApis` command for a specific release of CloudStack.
 
 ```
-# Build the generate.go script 
-cd generate/
-go build 
-
-# Run the generator to auto-generate the code 
-./generate -api listApis.json
+# Run it via the Makefile
+make all
 
 ```
 

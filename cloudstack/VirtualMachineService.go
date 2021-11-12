@@ -27,6 +27,59 @@ import (
 	"strings"
 )
 
+type VirtualMachineServiceIface interface {
+	AddNicToVirtualMachine(p *AddNicToVirtualMachineParams) (*AddNicToVirtualMachineResponse, error)
+	NewAddNicToVirtualMachineParams(networkid string, virtualmachineid string) *AddNicToVirtualMachineParams
+	AssignVirtualMachine(p *AssignVirtualMachineParams) (*AssignVirtualMachineResponse, error)
+	NewAssignVirtualMachineParams(virtualmachineid string) *AssignVirtualMachineParams
+	ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error)
+	NewChangeServiceForVirtualMachineParams(id string, serviceofferingid string) *ChangeServiceForVirtualMachineParams
+	CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error)
+	NewCleanVMReservationsParams() *CleanVMReservationsParams
+	DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error)
+	NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams
+	DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error)
+	NewDestroyVirtualMachineParams(id string) *DestroyVirtualMachineParams
+	ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error)
+	NewExpungeVirtualMachineParams(id string) *ExpungeVirtualMachineParams
+	GetVMPassword(p *GetVMPasswordParams) (*GetVMPasswordResponse, error)
+	NewGetVMPasswordParams(id string) *GetVMPasswordParams
+	ListVirtualMachines(p *ListVirtualMachinesParams) (*ListVirtualMachinesResponse, error)
+	NewListVirtualMachinesParams() *ListVirtualMachinesParams
+	GetVirtualMachineID(name string, opts ...OptionFunc) (string, int, error)
+	GetVirtualMachineByName(name string, opts ...OptionFunc) (*VirtualMachine, int, error)
+	GetVirtualMachineByID(id string, opts ...OptionFunc) (*VirtualMachine, int, error)
+	ListVirtualMachinesMetrics(p *ListVirtualMachinesMetricsParams) (*ListVirtualMachinesMetricsResponse, error)
+	NewListVirtualMachinesMetricsParams() *ListVirtualMachinesMetricsParams
+	GetVirtualMachinesMetricID(name string, opts ...OptionFunc) (string, int, error)
+	GetVirtualMachinesMetricByName(name string, opts ...OptionFunc) (*VirtualMachinesMetric, int, error)
+	GetVirtualMachinesMetricByID(id string, opts ...OptionFunc) (*VirtualMachinesMetric, int, error)
+	MigrateVirtualMachine(p *MigrateVirtualMachineParams) (*MigrateVirtualMachineResponse, error)
+	NewMigrateVirtualMachineParams(virtualmachineid string) *MigrateVirtualMachineParams
+	MigrateVirtualMachineWithVolume(p *MigrateVirtualMachineWithVolumeParams) (*MigrateVirtualMachineWithVolumeResponse, error)
+	NewMigrateVirtualMachineWithVolumeParams(hostid string, virtualmachineid string) *MigrateVirtualMachineWithVolumeParams
+	RebootVirtualMachine(p *RebootVirtualMachineParams) (*RebootVirtualMachineResponse, error)
+	NewRebootVirtualMachineParams(id string) *RebootVirtualMachineParams
+	RecoverVirtualMachine(p *RecoverVirtualMachineParams) (*RecoverVirtualMachineResponse, error)
+	NewRecoverVirtualMachineParams(id string) *RecoverVirtualMachineParams
+	RemoveNicFromVirtualMachine(p *RemoveNicFromVirtualMachineParams) (*RemoveNicFromVirtualMachineResponse, error)
+	NewRemoveNicFromVirtualMachineParams(nicid string, virtualmachineid string) *RemoveNicFromVirtualMachineParams
+	ResetPasswordForVirtualMachine(p *ResetPasswordForVirtualMachineParams) (*ResetPasswordForVirtualMachineResponse, error)
+	NewResetPasswordForVirtualMachineParams(id string) *ResetPasswordForVirtualMachineParams
+	RestoreVirtualMachine(p *RestoreVirtualMachineParams) (*RestoreVirtualMachineResponse, error)
+	NewRestoreVirtualMachineParams(virtualmachineid string) *RestoreVirtualMachineParams
+	ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error)
+	NewScaleVirtualMachineParams(id string, serviceofferingid string) *ScaleVirtualMachineParams
+	StartVirtualMachine(p *StartVirtualMachineParams) (*StartVirtualMachineResponse, error)
+	NewStartVirtualMachineParams(id string) *StartVirtualMachineParams
+	StopVirtualMachine(p *StopVirtualMachineParams) (*StopVirtualMachineResponse, error)
+	NewStopVirtualMachineParams(id string) *StopVirtualMachineParams
+	UpdateDefaultNicForVirtualMachine(p *UpdateDefaultNicForVirtualMachineParams) (*UpdateDefaultNicForVirtualMachineResponse, error)
+	NewUpdateDefaultNicForVirtualMachineParams(nicid string, virtualmachineid string) *UpdateDefaultNicForVirtualMachineParams
+	UpdateVirtualMachine(p *UpdateVirtualMachineParams) (*UpdateVirtualMachineResponse, error)
+	NewUpdateVirtualMachineParams(id string) *UpdateVirtualMachineParams
+}
+
 type AddNicToVirtualMachineParams struct {
 	p map[string]interface{}
 }
@@ -65,11 +118,27 @@ func (p *AddNicToVirtualMachineParams) SetDhcpoptions(v map[string]string) {
 	p.p["dhcpoptions"] = v
 }
 
+func (p *AddNicToVirtualMachineParams) GetDhcpoptions() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpoptions"].(map[string]string)
+	return value, ok
+}
+
 func (p *AddNicToVirtualMachineParams) SetIpaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipaddress"] = v
+}
+
+func (p *AddNicToVirtualMachineParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
 }
 
 func (p *AddNicToVirtualMachineParams) SetMacaddress(v string) {
@@ -79,6 +148,14 @@ func (p *AddNicToVirtualMachineParams) SetMacaddress(v string) {
 	p.p["macaddress"] = v
 }
 
+func (p *AddNicToVirtualMachineParams) GetMacaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["macaddress"].(string)
+	return value, ok
+}
+
 func (p *AddNicToVirtualMachineParams) SetNetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -86,11 +163,27 @@ func (p *AddNicToVirtualMachineParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *AddNicToVirtualMachineParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
 func (p *AddNicToVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *AddNicToVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddNicToVirtualMachineParams instance,
@@ -320,11 +413,27 @@ func (p *AssignVirtualMachineParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AssignVirtualMachineParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *AssignVirtualMachineParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *AssignVirtualMachineParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *AssignVirtualMachineParams) SetNetworkids(v []string) {
@@ -334,11 +443,27 @@ func (p *AssignVirtualMachineParams) SetNetworkids(v []string) {
 	p.p["networkids"] = v
 }
 
+func (p *AssignVirtualMachineParams) GetNetworkids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkids"].([]string)
+	return value, ok
+}
+
 func (p *AssignVirtualMachineParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *AssignVirtualMachineParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *AssignVirtualMachineParams) SetSecuritygroupids(v []string) {
@@ -348,11 +473,27 @@ func (p *AssignVirtualMachineParams) SetSecuritygroupids(v []string) {
 	p.p["securitygroupids"] = v
 }
 
+func (p *AssignVirtualMachineParams) GetSecuritygroupids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupids"].([]string)
+	return value, ok
+}
+
 func (p *AssignVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *AssignVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AssignVirtualMachineParams instance,
@@ -553,6 +694,14 @@ func (p *ChangeServiceForVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *ChangeServiceForVirtualMachineParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *ChangeServiceForVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -560,11 +709,27 @@ func (p *ChangeServiceForVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ChangeServiceForVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ChangeServiceForVirtualMachineParams) SetServiceofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingid"] = v
+}
+
+func (p *ChangeServiceForVirtualMachineParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ChangeServiceForVirtualMachineParams instance,
@@ -974,11 +1139,27 @@ func (p *DeployVirtualMachineParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetAffinitygroupids(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupids"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetAffinitygroupids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupids"].([]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetAffinitygroupnames(v []string) {
@@ -988,11 +1169,27 @@ func (p *DeployVirtualMachineParams) SetAffinitygroupnames(v []string) {
 	p.p["affinitygroupnames"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetAffinitygroupnames() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupnames"].([]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetBootintosetup(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bootintosetup"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetBootintosetup() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bootintosetup"].(bool)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetBootmode(v string) {
@@ -1002,11 +1199,27 @@ func (p *DeployVirtualMachineParams) SetBootmode(v string) {
 	p.p["bootmode"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetBootmode() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bootmode"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetBoottype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["boottype"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetBoottype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["boottype"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetClusterid(v string) {
@@ -1016,11 +1229,27 @@ func (p *DeployVirtualMachineParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetCopyimagetags(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["copyimagetags"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetCopyimagetags() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["copyimagetags"].(bool)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetCustomid(v string) {
@@ -1030,11 +1259,27 @@ func (p *DeployVirtualMachineParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDatadiskofferinglist(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["datadiskofferinglist"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetDatadiskofferinglist() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["datadiskofferinglist"].(map[string]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetDeploymentplanner(v string) {
@@ -1044,6 +1289,14 @@ func (p *DeployVirtualMachineParams) SetDeploymentplanner(v string) {
 	p.p["deploymentplanner"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetDeploymentplanner() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["deploymentplanner"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDetails(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1051,11 +1304,27 @@ func (p *DeployVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDhcpoptionsnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dhcpoptionsnetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetDhcpoptionsnetworklist() ([]map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpoptionsnetworklist"].([]map[string]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) AddDhcpoptionsnetworklist(item map[string]string) {
@@ -1079,11 +1348,27 @@ func (p *DeployVirtualMachineParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDisplayname(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayname"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetDisplayname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayname"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetDisplayvm(v bool) {
@@ -1093,11 +1378,27 @@ func (p *DeployVirtualMachineParams) SetDisplayvm(v bool) {
 	p.p["displayvm"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetDisplayvm() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvm"].(bool)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetExtraconfig(v string) {
@@ -1107,11 +1408,27 @@ func (p *DeployVirtualMachineParams) SetExtraconfig(v string) {
 	p.p["extraconfig"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetExtraconfig() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extraconfig"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetGroup(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["group"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetGroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["group"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetHostid(v string) {
@@ -1121,11 +1438,27 @@ func (p *DeployVirtualMachineParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetIp6address(v string) {
@@ -1135,6 +1468,14 @@ func (p *DeployVirtualMachineParams) SetIp6address(v string) {
 	p.p["ip6address"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetIp6address() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6address"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetIpaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1142,11 +1483,27 @@ func (p *DeployVirtualMachineParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetIptonetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iptonetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetIptonetworklist() ([]map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["iptonetworklist"].([]map[string]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) AddIptonetworklist(item map[string]string) {
@@ -1170,11 +1527,27 @@ func (p *DeployVirtualMachineParams) SetKeyboard(v string) {
 	p.p["keyboard"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetKeyboard() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyboard"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetKeypair(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keypair"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetKeypair() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keypair"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetMacaddress(v string) {
@@ -1184,11 +1557,27 @@ func (p *DeployVirtualMachineParams) SetMacaddress(v string) {
 	p.p["macaddress"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetMacaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["macaddress"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetNetworkids(v []string) {
@@ -1198,11 +1587,27 @@ func (p *DeployVirtualMachineParams) SetNetworkids(v []string) {
 	p.p["networkids"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetNetworkids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkids"].([]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetNicnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicnetworklist"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetNicnetworklist() ([]map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicnetworklist"].([]map[string]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) AddNicnetworklist(item map[string]string) {
@@ -1226,11 +1631,27 @@ func (p *DeployVirtualMachineParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetProperties(v map[string]string) {
@@ -1240,11 +1661,27 @@ func (p *DeployVirtualMachineParams) SetProperties(v map[string]string) {
 	p.p["properties"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetProperties() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["properties"].(map[string]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetRootdisksize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["rootdisksize"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetRootdisksize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rootdisksize"].(int64)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetSecuritygroupids(v []string) {
@@ -1254,11 +1691,27 @@ func (p *DeployVirtualMachineParams) SetSecuritygroupids(v []string) {
 	p.p["securitygroupids"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetSecuritygroupids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupids"].([]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetSecuritygroupnames(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupnames"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetSecuritygroupnames() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupnames"].([]string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetServiceofferingid(v string) {
@@ -1268,11 +1721,27 @@ func (p *DeployVirtualMachineParams) SetServiceofferingid(v string) {
 	p.p["serviceofferingid"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetSize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["size"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetSize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["size"].(int64)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetStartvm(v bool) {
@@ -1282,11 +1751,27 @@ func (p *DeployVirtualMachineParams) SetStartvm(v bool) {
 	p.p["startvm"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetStartvm() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startvm"].(bool)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetTemplateid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templateid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetUserdata(v string) {
@@ -1296,11 +1781,27 @@ func (p *DeployVirtualMachineParams) SetUserdata(v string) {
 	p.p["userdata"] = v
 }
 
+func (p *DeployVirtualMachineParams) GetUserdata() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeployVirtualMachineParams instance,
@@ -1522,6 +2023,14 @@ func (p *DestroyVirtualMachineParams) SetExpunge(v bool) {
 	p.p["expunge"] = v
 }
 
+func (p *DestroyVirtualMachineParams) GetExpunge() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["expunge"].(bool)
+	return value, ok
+}
+
 func (p *DestroyVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1529,11 +2038,27 @@ func (p *DestroyVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DestroyVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *DestroyVirtualMachineParams) SetVolumeids(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["volumeids"] = v
+}
+
+func (p *DestroyVirtualMachineParams) GetVolumeids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeids"].([]string)
+	return value, ok
 }
 
 // You should always use this function to get a new DestroyVirtualMachineParams instance,
@@ -1745,6 +2270,14 @@ func (p *ExpungeVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ExpungeVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ExpungeVirtualMachineParams instance,
 // as then you are sure you have configured all required params
 func (s *VirtualMachineService) NewExpungeVirtualMachineParams(id string) *ExpungeVirtualMachineParams {
@@ -1811,6 +2344,14 @@ func (p *GetVMPasswordParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *GetVMPasswordParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new GetVMPasswordParams instance,
@@ -1980,11 +2521,27 @@ func (p *ListVirtualMachinesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetDetails(v []string) {
@@ -1994,11 +2551,27 @@ func (p *ListVirtualMachinesParams) SetDetails(v []string) {
 	p.p["details"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetDetails() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].([]string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetDisplayvm(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayvm"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetDisplayvm() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvm"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetDomainid(v string) {
@@ -2008,11 +2581,27 @@ func (p *ListVirtualMachinesParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetForvirtualnetwork(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forvirtualnetwork"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetForvirtualnetwork() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forvirtualnetwork"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetGroupid(v string) {
@@ -2022,11 +2611,27 @@ func (p *ListVirtualMachinesParams) SetGroupid(v string) {
 	p.p["groupid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetGroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["groupid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetHaenable(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["haenable"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetHaenable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["haenable"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetHostid(v string) {
@@ -2036,11 +2641,27 @@ func (p *ListVirtualMachinesParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetId(v string) {
@@ -2050,11 +2671,27 @@ func (p *ListVirtualMachinesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetIsoid(v string) {
@@ -2064,11 +2701,27 @@ func (p *ListVirtualMachinesParams) SetIsoid(v string) {
 	p.p["isoid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetIsoid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isoid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetKeypair(v string) {
@@ -2078,11 +2731,27 @@ func (p *ListVirtualMachinesParams) SetKeypair(v string) {
 	p.p["keypair"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetKeypair() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keypair"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetListall(v bool) {
@@ -2092,11 +2761,27 @@ func (p *ListVirtualMachinesParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetNetworkid(v string) {
@@ -2106,11 +2791,27 @@ func (p *ListVirtualMachinesParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetPagesize(v int) {
@@ -2120,11 +2821,27 @@ func (p *ListVirtualMachinesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetProjectid(v string) {
@@ -2134,11 +2851,27 @@ func (p *ListVirtualMachinesParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetSecuritygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetSecuritygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetServiceofferingid(v string) {
@@ -2148,11 +2881,27 @@ func (p *ListVirtualMachinesParams) SetServiceofferingid(v string) {
 	p.p["serviceofferingid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetStorageid(v string) {
@@ -2162,11 +2911,27 @@ func (p *ListVirtualMachinesParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetTemplateid(v string) {
@@ -2176,11 +2941,27 @@ func (p *ListVirtualMachinesParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesParams) SetVpcid(v string) {
@@ -2190,11 +2971,27 @@ func (p *ListVirtualMachinesParams) SetVpcid(v string) {
 	p.p["vpcid"] = v
 }
 
+func (p *ListVirtualMachinesParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVirtualMachinesParams instance,
@@ -2579,11 +3376,27 @@ func (p *ListVirtualMachinesMetricsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetDetails(v []string) {
@@ -2593,11 +3406,27 @@ func (p *ListVirtualMachinesMetricsParams) SetDetails(v []string) {
 	p.p["details"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetDetails() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].([]string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetDisplayvm(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayvm"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetDisplayvm() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvm"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetDomainid(v string) {
@@ -2607,11 +3436,27 @@ func (p *ListVirtualMachinesMetricsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetForvirtualnetwork(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forvirtualnetwork"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetForvirtualnetwork() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forvirtualnetwork"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetGroupid(v string) {
@@ -2621,11 +3466,27 @@ func (p *ListVirtualMachinesMetricsParams) SetGroupid(v string) {
 	p.p["groupid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetGroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["groupid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetHaenable(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["haenable"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetHaenable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["haenable"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetHostid(v string) {
@@ -2635,11 +3496,27 @@ func (p *ListVirtualMachinesMetricsParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetId(v string) {
@@ -2649,11 +3526,27 @@ func (p *ListVirtualMachinesMetricsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetIds(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetIsoid(v string) {
@@ -2663,11 +3556,27 @@ func (p *ListVirtualMachinesMetricsParams) SetIsoid(v string) {
 	p.p["isoid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetIsoid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isoid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetKeypair(v string) {
@@ -2677,11 +3586,27 @@ func (p *ListVirtualMachinesMetricsParams) SetKeypair(v string) {
 	p.p["keypair"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetKeypair() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keypair"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetListall(v bool) {
@@ -2691,11 +3616,27 @@ func (p *ListVirtualMachinesMetricsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetNetworkid(v string) {
@@ -2705,11 +3646,27 @@ func (p *ListVirtualMachinesMetricsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetPagesize(v int) {
@@ -2719,11 +3676,27 @@ func (p *ListVirtualMachinesMetricsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetProjectid(v string) {
@@ -2733,11 +3706,27 @@ func (p *ListVirtualMachinesMetricsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetSecuritygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetSecuritygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetServiceofferingid(v string) {
@@ -2747,11 +3736,27 @@ func (p *ListVirtualMachinesMetricsParams) SetServiceofferingid(v string) {
 	p.p["serviceofferingid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetStorageid(v string) {
@@ -2761,11 +3766,27 @@ func (p *ListVirtualMachinesMetricsParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetTemplateid(v string) {
@@ -2775,11 +3796,27 @@ func (p *ListVirtualMachinesMetricsParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
 }
 
 func (p *ListVirtualMachinesMetricsParams) SetVpcid(v string) {
@@ -2789,11 +3826,27 @@ func (p *ListVirtualMachinesMetricsParams) SetVpcid(v string) {
 	p.p["vpcid"] = v
 }
 
+func (p *ListVirtualMachinesMetricsParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListVirtualMachinesMetricsParams instance,
@@ -3086,6 +4139,14 @@ func (p *MigrateVirtualMachineParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *MigrateVirtualMachineParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *MigrateVirtualMachineParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3093,11 +4154,27 @@ func (p *MigrateVirtualMachineParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *MigrateVirtualMachineParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
 func (p *MigrateVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *MigrateVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new MigrateVirtualMachineParams instance,
@@ -3320,11 +4397,27 @@ func (p *MigrateVirtualMachineWithVolumeParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *MigrateVirtualMachineWithVolumeParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
 func (p *MigrateVirtualMachineWithVolumeParams) SetMigrateto(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["migrateto"] = v
+}
+
+func (p *MigrateVirtualMachineWithVolumeParams) GetMigrateto() ([]map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["migrateto"].([]map[string]string)
+	return value, ok
 }
 
 func (p *MigrateVirtualMachineWithVolumeParams) AddMigrateto(item map[string]string) {
@@ -3346,6 +4439,14 @@ func (p *MigrateVirtualMachineWithVolumeParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *MigrateVirtualMachineWithVolumeParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new MigrateVirtualMachineWithVolumeParams instance,
@@ -3562,11 +4663,27 @@ func (p *RebootVirtualMachineParams) SetBootintosetup(v bool) {
 	p.p["bootintosetup"] = v
 }
 
+func (p *RebootVirtualMachineParams) GetBootintosetup() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bootintosetup"].(bool)
+	return value, ok
+}
+
 func (p *RebootVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RebootVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RebootVirtualMachineParams instance,
@@ -3778,6 +4895,14 @@ func (p *RecoverVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RecoverVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new RecoverVirtualMachineParams instance,
 // as then you are sure you have configured all required params
 func (s *VirtualMachineService) NewRecoverVirtualMachineParams(id string) *RecoverVirtualMachineParams {
@@ -3970,11 +5095,27 @@ func (p *RemoveNicFromVirtualMachineParams) SetNicid(v string) {
 	p.p["nicid"] = v
 }
 
+func (p *RemoveNicFromVirtualMachineParams) GetNicid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicid"].(string)
+	return value, ok
+}
+
 func (p *RemoveNicFromVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *RemoveNicFromVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RemoveNicFromVirtualMachineParams instance,
@@ -4185,6 +5326,14 @@ func (p *ResetPasswordForVirtualMachineParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ResetPasswordForVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ResetPasswordForVirtualMachineParams instance,
@@ -4399,11 +5548,27 @@ func (p *RestoreVirtualMachineParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *RestoreVirtualMachineParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
 func (p *RestoreVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *RestoreVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new RestoreVirtualMachineParams instance,
@@ -4624,6 +5789,14 @@ func (p *ScaleVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *ScaleVirtualMachineParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *ScaleVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4631,11 +5804,27 @@ func (p *ScaleVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ScaleVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *ScaleVirtualMachineParams) SetServiceofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingid"] = v
+}
+
+func (p *ScaleVirtualMachineParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ScaleVirtualMachineParams instance,
@@ -4723,11 +5912,27 @@ func (p *StartVirtualMachineParams) SetBootintosetup(v bool) {
 	p.p["bootintosetup"] = v
 }
 
+func (p *StartVirtualMachineParams) GetBootintosetup() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bootintosetup"].(bool)
+	return value, ok
+}
+
 func (p *StartVirtualMachineParams) SetClusterid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *StartVirtualMachineParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
 }
 
 func (p *StartVirtualMachineParams) SetDeploymentplanner(v string) {
@@ -4737,11 +5942,27 @@ func (p *StartVirtualMachineParams) SetDeploymentplanner(v string) {
 	p.p["deploymentplanner"] = v
 }
 
+func (p *StartVirtualMachineParams) GetDeploymentplanner() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["deploymentplanner"].(string)
+	return value, ok
+}
+
 func (p *StartVirtualMachineParams) SetHostid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *StartVirtualMachineParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *StartVirtualMachineParams) SetId(v string) {
@@ -4751,11 +5972,27 @@ func (p *StartVirtualMachineParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *StartVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *StartVirtualMachineParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *StartVirtualMachineParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new StartVirtualMachineParams instance,
@@ -4971,11 +6208,27 @@ func (p *StopVirtualMachineParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *StopVirtualMachineParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
 func (p *StopVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *StopVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new StopVirtualMachineParams instance,
@@ -5190,11 +6443,27 @@ func (p *UpdateDefaultNicForVirtualMachineParams) SetNicid(v string) {
 	p.p["nicid"] = v
 }
 
+func (p *UpdateDefaultNicForVirtualMachineParams) GetNicid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicid"].(string)
+	return value, ok
+}
+
 func (p *UpdateDefaultNicForVirtualMachineParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *UpdateDefaultNicForVirtualMachineParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateDefaultNicForVirtualMachineParams instance,
@@ -5469,11 +6738,27 @@ func (p *UpdateVirtualMachineParams) SetCleanupdetails(v bool) {
 	p.p["cleanupdetails"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetCleanupdetails() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cleanupdetails"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetCustomid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customid"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetDetails(v map[string]string) {
@@ -5483,11 +6768,27 @@ func (p *UpdateVirtualMachineParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetDhcpoptionsnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dhcpoptionsnetworklist"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetDhcpoptionsnetworklist() ([]map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dhcpoptionsnetworklist"].([]map[string]string)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) AddDhcpoptionsnetworklist(item map[string]string) {
@@ -5511,11 +6812,27 @@ func (p *UpdateVirtualMachineParams) SetDisplayname(v string) {
 	p.p["displayname"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetDisplayname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayname"].(string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetDisplayvm(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displayvm"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetDisplayvm() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayvm"].(bool)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetExtraconfig(v string) {
@@ -5525,11 +6842,27 @@ func (p *UpdateVirtualMachineParams) SetExtraconfig(v string) {
 	p.p["extraconfig"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetExtraconfig() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extraconfig"].(string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetGroup(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["group"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetGroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["group"].(string)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetHaenable(v bool) {
@@ -5539,11 +6872,27 @@ func (p *UpdateVirtualMachineParams) SetHaenable(v bool) {
 	p.p["haenable"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetHaenable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["haenable"].(bool)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetInstancename(v string) {
@@ -5553,11 +6902,27 @@ func (p *UpdateVirtualMachineParams) SetInstancename(v string) {
 	p.p["instancename"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetInstancename() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["instancename"].(string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetIsdynamicallyscalable(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isdynamicallyscalable"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetIsdynamicallyscalable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isdynamicallyscalable"].(bool)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetName(v string) {
@@ -5567,11 +6932,27 @@ func (p *UpdateVirtualMachineParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetOstypeid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ostypeid"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetOstypeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ostypeid"].(string)
+	return value, ok
 }
 
 func (p *UpdateVirtualMachineParams) SetSecuritygroupids(v []string) {
@@ -5581,6 +6962,14 @@ func (p *UpdateVirtualMachineParams) SetSecuritygroupids(v []string) {
 	p.p["securitygroupids"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetSecuritygroupids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupids"].([]string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetSecuritygroupnames(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -5588,11 +6977,27 @@ func (p *UpdateVirtualMachineParams) SetSecuritygroupnames(v []string) {
 	p.p["securitygroupnames"] = v
 }
 
+func (p *UpdateVirtualMachineParams) GetSecuritygroupnames() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupnames"].([]string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetUserdata(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userdata"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetUserdata() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVirtualMachineParams instance,

@@ -25,6 +25,13 @@ import (
 	"strconv"
 )
 
+type StratosphereSSPServiceIface interface {
+	AddStratosphereSsp(p *AddStratosphereSspParams) (*AddStratosphereSspResponse, error)
+	NewAddStratosphereSspParams(name string, url string, zoneid string) *AddStratosphereSspParams
+	DeleteStratosphereSsp(p *DeleteStratosphereSspParams) (*DeleteStratosphereSspResponse, error)
+	NewDeleteStratosphereSspParams(hostid string) *DeleteStratosphereSspParams
+}
+
 type AddStratosphereSspParams struct {
 	p map[string]interface{}
 }
@@ -62,11 +69,27 @@ func (p *AddStratosphereSspParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *AddStratosphereSspParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *AddStratosphereSspParams) SetPassword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddStratosphereSspParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
 }
 
 func (p *AddStratosphereSspParams) SetTenantuuid(v string) {
@@ -76,11 +99,27 @@ func (p *AddStratosphereSspParams) SetTenantuuid(v string) {
 	p.p["tenantuuid"] = v
 }
 
+func (p *AddStratosphereSspParams) GetTenantuuid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tenantuuid"].(string)
+	return value, ok
+}
+
 func (p *AddStratosphereSspParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *AddStratosphereSspParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
+	return value, ok
 }
 
 func (p *AddStratosphereSspParams) SetUsername(v string) {
@@ -90,11 +129,27 @@ func (p *AddStratosphereSspParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddStratosphereSspParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
 func (p *AddStratosphereSspParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddStratosphereSspParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddStratosphereSspParams instance,
@@ -152,6 +207,14 @@ func (p *DeleteStratosphereSspParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *DeleteStratosphereSspParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeleteStratosphereSspParams instance,

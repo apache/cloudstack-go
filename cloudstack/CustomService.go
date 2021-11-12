@@ -68,6 +68,13 @@ func (p *CustomServiceParams) SetParam(param string, v interface{}) {
 	}
 	p.p[param] = v
 }
+func (p *CustomServiceParams) GetParam(param string) (interface{}, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p[param].(interface{})
+	return value, ok
+}
 
 func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result interface{}) error {
 	resp, err := s.cs.newRequest(api, p.toURLValues())
@@ -76,4 +83,7 @@ func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result
 	}
 
 	return json.Unmarshal(resp, result)
+}
+
+type CustomServiceIface interface {
 }

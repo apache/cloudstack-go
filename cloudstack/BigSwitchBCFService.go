@@ -25,6 +25,15 @@ import (
 	"strconv"
 )
 
+type BigSwitchBCFServiceIface interface {
+	AddBigSwitchBcfDevice(p *AddBigSwitchBcfDeviceParams) (*AddBigSwitchBcfDeviceResponse, error)
+	NewAddBigSwitchBcfDeviceParams(hostname string, nat bool, password string, physicalnetworkid string, username string) *AddBigSwitchBcfDeviceParams
+	DeleteBigSwitchBcfDevice(p *DeleteBigSwitchBcfDeviceParams) (*DeleteBigSwitchBcfDeviceResponse, error)
+	NewDeleteBigSwitchBcfDeviceParams(bcfdeviceid string) *DeleteBigSwitchBcfDeviceParams
+	ListBigSwitchBcfDevices(p *ListBigSwitchBcfDevicesParams) (*ListBigSwitchBcfDevicesResponse, error)
+	NewListBigSwitchBcfDevicesParams() *ListBigSwitchBcfDevicesParams
+}
+
 type AddBigSwitchBcfDeviceParams struct {
 	p map[string]interface{}
 }
@@ -60,11 +69,27 @@ func (p *AddBigSwitchBcfDeviceParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
 func (p *AddBigSwitchBcfDeviceParams) SetNat(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nat"] = v
+}
+
+func (p *AddBigSwitchBcfDeviceParams) GetNat() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nat"].(bool)
+	return value, ok
 }
 
 func (p *AddBigSwitchBcfDeviceParams) SetPassword(v string) {
@@ -74,6 +99,14 @@ func (p *AddBigSwitchBcfDeviceParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *AddBigSwitchBcfDeviceParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -81,11 +114,27 @@ func (p *AddBigSwitchBcfDeviceParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
+}
+
 func (p *AddBigSwitchBcfDeviceParams) SetUsername(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBigSwitchBcfDeviceParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddBigSwitchBcfDeviceParams instance,
@@ -171,6 +220,14 @@ func (p *DeleteBigSwitchBcfDeviceParams) SetBcfdeviceid(v string) {
 	p.p["bcfdeviceid"] = v
 }
 
+func (p *DeleteBigSwitchBcfDeviceParams) GetBcfdeviceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bcfdeviceid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new DeleteBigSwitchBcfDeviceParams instance,
 // as then you are sure you have configured all required params
 func (s *BigSwitchBCFService) NewDeleteBigSwitchBcfDeviceParams(bcfdeviceid string) *DeleteBigSwitchBcfDeviceParams {
@@ -253,11 +310,27 @@ func (p *ListBigSwitchBcfDevicesParams) SetBcfdeviceid(v string) {
 	p.p["bcfdeviceid"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) GetBcfdeviceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bcfdeviceid"].(string)
+	return value, ok
+}
+
 func (p *ListBigSwitchBcfDevicesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListBigSwitchBcfDevicesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListBigSwitchBcfDevicesParams) SetPage(v int) {
@@ -267,6 +340,14 @@ func (p *ListBigSwitchBcfDevicesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListBigSwitchBcfDevicesParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -274,11 +355,27 @@ func (p *ListBigSwitchBcfDevicesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListBigSwitchBcfDevicesParams) SetPhysicalnetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListBigSwitchBcfDevicesParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListBigSwitchBcfDevicesParams instance,

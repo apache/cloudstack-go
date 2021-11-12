@@ -25,6 +25,19 @@ import (
 	"strconv"
 )
 
+type LimitServiceIface interface {
+	GetApiLimit(p *GetApiLimitParams) (*GetApiLimitResponse, error)
+	NewGetApiLimitParams() *GetApiLimitParams
+	ListResourceLimits(p *ListResourceLimitsParams) (*ListResourceLimitsResponse, error)
+	NewListResourceLimitsParams() *ListResourceLimitsParams
+	ResetApiLimit(p *ResetApiLimitParams) (*ResetApiLimitResponse, error)
+	NewResetApiLimitParams() *ResetApiLimitParams
+	UpdateResourceCount(p *UpdateResourceCountParams) (*UpdateResourceCountResponse, error)
+	NewUpdateResourceCountParams(domainid string) *UpdateResourceCountParams
+	UpdateResourceLimit(p *UpdateResourceLimitParams) (*UpdateResourceLimitResponse, error)
+	NewUpdateResourceLimitParams(resourcetype int) *UpdateResourceLimitParams
+}
+
 type GetApiLimitParams struct {
 	p map[string]interface{}
 }
@@ -128,11 +141,27 @@ func (p *ListResourceLimitsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListResourceLimitsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListResourceLimitsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListResourceLimitsParams) SetId(v int64) {
@@ -142,11 +171,27 @@ func (p *ListResourceLimitsParams) SetId(v int64) {
 	p.p["id"] = v
 }
 
+func (p *ListResourceLimitsParams) GetId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int64)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetIsrecursive(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListResourceLimitsParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
 }
 
 func (p *ListResourceLimitsParams) SetKeyword(v string) {
@@ -156,11 +201,27 @@ func (p *ListResourceLimitsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListResourceLimitsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListResourceLimitsParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
 }
 
 func (p *ListResourceLimitsParams) SetPage(v int) {
@@ -170,11 +231,27 @@ func (p *ListResourceLimitsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListResourceLimitsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListResourceLimitsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListResourceLimitsParams) SetProjectid(v string) {
@@ -184,6 +261,14 @@ func (p *ListResourceLimitsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListResourceLimitsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetResourcetype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -191,11 +276,27 @@ func (p *ListResourceLimitsParams) SetResourcetype(v int) {
 	p.p["resourcetype"] = v
 }
 
+func (p *ListResourceLimitsParams) GetResourcetype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(int)
+	return value, ok
+}
+
 func (p *ListResourceLimitsParams) SetResourcetypename(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetypename"] = v
+}
+
+func (p *ListResourceLimitsParams) GetResourcetypename() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetypename"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListResourceLimitsParams instance,
@@ -259,6 +360,14 @@ func (p *ResetApiLimitParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *ResetApiLimitParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ResetApiLimitParams instance,
@@ -326,11 +435,27 @@ func (p *UpdateResourceCountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateResourceCountParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *UpdateResourceCountParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UpdateResourceCountParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *UpdateResourceCountParams) SetProjectid(v string) {
@@ -340,11 +465,27 @@ func (p *UpdateResourceCountParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *UpdateResourceCountParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *UpdateResourceCountParams) SetResourcetype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *UpdateResourceCountParams) GetResourcetype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateResourceCountParams instance,
@@ -420,11 +561,27 @@ func (p *UpdateResourceLimitParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateResourceLimitParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *UpdateResourceLimitParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UpdateResourceLimitParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *UpdateResourceLimitParams) SetMax(v int64) {
@@ -434,6 +591,14 @@ func (p *UpdateResourceLimitParams) SetMax(v int64) {
 	p.p["max"] = v
 }
 
+func (p *UpdateResourceLimitParams) GetMax() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["max"].(int64)
+	return value, ok
+}
+
 func (p *UpdateResourceLimitParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -441,11 +606,27 @@ func (p *UpdateResourceLimitParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *UpdateResourceLimitParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *UpdateResourceLimitParams) SetResourcetype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *UpdateResourceLimitParams) GetResourcetype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateResourceLimitParams instance,

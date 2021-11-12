@@ -27,6 +27,16 @@ import (
 	"strings"
 )
 
+type HypervisorServiceIface interface {
+	ListHypervisorCapabilities(p *ListHypervisorCapabilitiesParams) (*ListHypervisorCapabilitiesResponse, error)
+	NewListHypervisorCapabilitiesParams() *ListHypervisorCapabilitiesParams
+	GetHypervisorCapabilityByID(id string, opts ...OptionFunc) (*HypervisorCapability, int, error)
+	ListHypervisors(p *ListHypervisorsParams) (*ListHypervisorsResponse, error)
+	NewListHypervisorsParams() *ListHypervisorsParams
+	UpdateHypervisorCapabilities(p *UpdateHypervisorCapabilitiesParams) (*UpdateHypervisorCapabilitiesResponse, error)
+	NewUpdateHypervisorCapabilitiesParams() *UpdateHypervisorCapabilitiesParams
+}
+
 type ListHypervisorCapabilitiesParams struct {
 	p map[string]interface{}
 }
@@ -63,11 +73,27 @@ func (p *ListHypervisorCapabilitiesParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
 func (p *ListHypervisorCapabilitiesParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListHypervisorCapabilitiesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListHypervisorCapabilitiesParams) SetKeyword(v string) {
@@ -77,6 +103,14 @@ func (p *ListHypervisorCapabilitiesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListHypervisorCapabilitiesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -84,11 +118,27 @@ func (p *ListHypervisorCapabilitiesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListHypervisorCapabilitiesParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListHypervisorCapabilitiesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new ListHypervisorCapabilitiesParams instance,
@@ -187,6 +237,14 @@ func (p *ListHypervisorsParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *ListHypervisorsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListHypervisorsParams instance,
 // as then you are sure you have configured all required params
 func (s *HypervisorService) NewListHypervisorsParams() *ListHypervisorsParams {
@@ -251,6 +309,14 @@ func (p *UpdateHypervisorCapabilitiesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) SetMaxguestslimit(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -258,11 +324,27 @@ func (p *UpdateHypervisorCapabilitiesParams) SetMaxguestslimit(v int64) {
 	p.p["maxguestslimit"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) GetMaxguestslimit() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["maxguestslimit"].(int64)
+	return value, ok
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) SetSecuritygroupenabled(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupenabled"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) GetSecuritygroupenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["securitygroupenabled"].(bool)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateHypervisorCapabilitiesParams instance,

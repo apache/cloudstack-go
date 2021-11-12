@@ -27,6 +27,26 @@ import (
 	"strings"
 )
 
+type PodServiceIface interface {
+	CreatePod(p *CreatePodParams) (*CreatePodResponse, error)
+	NewCreatePodParams(gateway string, name string, netmask string, startip string, zoneid string) *CreatePodParams
+	DedicatePod(p *DedicatePodParams) (*DedicatePodResponse, error)
+	NewDedicatePodParams(domainid string, podid string) *DedicatePodParams
+	DeletePod(p *DeletePodParams) (*DeletePodResponse, error)
+	NewDeletePodParams(id string) *DeletePodParams
+	ListDedicatedPods(p *ListDedicatedPodsParams) (*ListDedicatedPodsResponse, error)
+	NewListDedicatedPodsParams() *ListDedicatedPodsParams
+	ListPods(p *ListPodsParams) (*ListPodsResponse, error)
+	NewListPodsParams() *ListPodsParams
+	GetPodID(name string, opts ...OptionFunc) (string, int, error)
+	GetPodByName(name string, opts ...OptionFunc) (*Pod, int, error)
+	GetPodByID(id string, opts ...OptionFunc) (*Pod, int, error)
+	ReleaseDedicatedPod(p *ReleaseDedicatedPodParams) (*ReleaseDedicatedPodResponse, error)
+	NewReleaseDedicatedPodParams(podid string) *ReleaseDedicatedPodParams
+	UpdatePod(p *UpdatePodParams) (*UpdatePodResponse, error)
+	NewUpdatePodParams(id string) *UpdatePodParams
+}
+
 type CreatePodParams struct {
 	p map[string]interface{}
 }
@@ -67,11 +87,27 @@ func (p *CreatePodParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *CreatePodParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *CreatePodParams) SetEndip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endip"] = v
+}
+
+func (p *CreatePodParams) GetEndip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endip"].(string)
+	return value, ok
 }
 
 func (p *CreatePodParams) SetGateway(v string) {
@@ -81,11 +117,27 @@ func (p *CreatePodParams) SetGateway(v string) {
 	p.p["gateway"] = v
 }
 
+func (p *CreatePodParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
+}
+
 func (p *CreatePodParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreatePodParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *CreatePodParams) SetNetmask(v string) {
@@ -95,6 +147,14 @@ func (p *CreatePodParams) SetNetmask(v string) {
 	p.p["netmask"] = v
 }
 
+func (p *CreatePodParams) GetNetmask() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["netmask"].(string)
+	return value, ok
+}
+
 func (p *CreatePodParams) SetStartip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -102,11 +162,27 @@ func (p *CreatePodParams) SetStartip(v string) {
 	p.p["startip"] = v
 }
 
+func (p *CreatePodParams) GetStartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startip"].(string)
+	return value, ok
+}
+
 func (p *CreatePodParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreatePodParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new CreatePodParams instance,
@@ -197,6 +273,14 @@ func (p *DedicatePodParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicatePodParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *DedicatePodParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -204,11 +288,27 @@ func (p *DedicatePodParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DedicatePodParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *DedicatePodParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *DedicatePodParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DedicatePodParams instance,
@@ -287,6 +387,14 @@ func (p *DeletePodParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeletePodParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new DeletePodParams instance,
@@ -389,11 +497,27 @@ func (p *ListDedicatedPodsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedPodsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedPodsParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedPodsParams) GetAffinitygroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedPodsParams) SetDomainid(v string) {
@@ -403,11 +527,27 @@ func (p *ListDedicatedPodsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListDedicatedPodsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
 func (p *ListDedicatedPodsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListDedicatedPodsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListDedicatedPodsParams) SetPage(v int) {
@@ -417,6 +557,14 @@ func (p *ListDedicatedPodsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedPodsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedPodsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -424,11 +572,27 @@ func (p *ListDedicatedPodsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListDedicatedPodsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListDedicatedPodsParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListDedicatedPodsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListDedicatedPodsParams instance,
@@ -516,11 +680,27 @@ func (p *ListPodsParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *ListPodsParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *ListPodsParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListPodsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *ListPodsParams) SetKeyword(v string) {
@@ -530,11 +710,27 @@ func (p *ListPodsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListPodsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
 func (p *ListPodsParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListPodsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
 }
 
 func (p *ListPodsParams) SetPage(v int) {
@@ -544,11 +740,27 @@ func (p *ListPodsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListPodsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListPodsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListPodsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
 }
 
 func (p *ListPodsParams) SetShowcapacities(v bool) {
@@ -558,11 +770,27 @@ func (p *ListPodsParams) SetShowcapacities(v bool) {
 	p.p["showcapacities"] = v
 }
 
+func (p *ListPodsParams) GetShowcapacities() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showcapacities"].(bool)
+	return value, ok
+}
+
 func (p *ListPodsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListPodsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListPodsParams instance,
@@ -730,6 +958,14 @@ func (p *ReleaseDedicatedPodParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *ReleaseDedicatedPodParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ReleaseDedicatedPodParams instance,
 // as then you are sure you have configured all required params
 func (s *PodService) NewReleaseDedicatedPodParams(podid string) *ReleaseDedicatedPodParams {
@@ -816,11 +1052,27 @@ func (p *UpdatePodParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdatePodParams) GetAllocationstate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
 func (p *UpdatePodParams) SetEndip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endip"] = v
+}
+
+func (p *UpdatePodParams) GetEndip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endip"].(string)
+	return value, ok
 }
 
 func (p *UpdatePodParams) SetGateway(v string) {
@@ -830,11 +1082,27 @@ func (p *UpdatePodParams) SetGateway(v string) {
 	p.p["gateway"] = v
 }
 
+func (p *UpdatePodParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
+}
+
 func (p *UpdatePodParams) SetId(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdatePodParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
 }
 
 func (p *UpdatePodParams) SetName(v string) {
@@ -844,6 +1112,14 @@ func (p *UpdatePodParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdatePodParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdatePodParams) SetNetmask(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -851,11 +1127,27 @@ func (p *UpdatePodParams) SetNetmask(v string) {
 	p.p["netmask"] = v
 }
 
+func (p *UpdatePodParams) GetNetmask() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["netmask"].(string)
+	return value, ok
+}
+
 func (p *UpdatePodParams) SetStartip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startip"] = v
+}
+
+func (p *UpdatePodParams) GetStartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startip"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdatePodParams instance,

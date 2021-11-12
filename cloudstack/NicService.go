@@ -25,6 +25,17 @@ import (
 	"strconv"
 )
 
+type NicServiceIface interface {
+	AddIpToNic(p *AddIpToNicParams) (*AddIpToNicResponse, error)
+	NewAddIpToNicParams(nicid string) *AddIpToNicParams
+	ListNics(p *ListNicsParams) (*ListNicsResponse, error)
+	NewListNicsParams(virtualmachineid string) *ListNicsParams
+	RemoveIpFromNic(p *RemoveIpFromNicParams) (*RemoveIpFromNicResponse, error)
+	NewRemoveIpFromNicParams(id string) *RemoveIpFromNicParams
+	UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpResponse, error)
+	NewUpdateVmNicIpParams(nicid string) *UpdateVmNicIpParams
+}
+
 type AddIpToNicParams struct {
 	p map[string]interface{}
 }
@@ -50,11 +61,27 @@ func (p *AddIpToNicParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
+func (p *AddIpToNicParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
+}
+
 func (p *AddIpToNicParams) SetNicid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *AddIpToNicParams) GetNicid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new AddIpToNicParams instance,
@@ -158,11 +185,27 @@ func (p *ListNicsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListNicsParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
 func (p *ListNicsParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListNicsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
 }
 
 func (p *ListNicsParams) SetNetworkid(v string) {
@@ -172,11 +215,27 @@ func (p *ListNicsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListNicsParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
 func (p *ListNicsParams) SetNicid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *ListNicsParams) GetNicid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicid"].(string)
+	return value, ok
 }
 
 func (p *ListNicsParams) SetPage(v int) {
@@ -186,6 +245,14 @@ func (p *ListNicsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListNicsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
 func (p *ListNicsParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -193,11 +260,27 @@ func (p *ListNicsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListNicsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
 func (p *ListNicsParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListNicsParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new ListNicsParams instance,
@@ -285,6 +368,14 @@ func (p *RemoveIpFromNicParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RemoveIpFromNicParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new RemoveIpFromNicParams instance,
 // as then you are sure you have configured all required params
 func (s *NicService) NewRemoveIpFromNicParams(id string) *RemoveIpFromNicParams {
@@ -356,11 +447,27 @@ func (p *UpdateVmNicIpParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
+func (p *UpdateVmNicIpParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
+}
+
 func (p *UpdateVmNicIpParams) SetNicid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *UpdateVmNicIpParams) GetNicid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicid"].(string)
+	return value, ok
 }
 
 // You should always use this function to get a new UpdateVmNicIpParams instance,

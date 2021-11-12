@@ -21,4 +21,7 @@ _testmain.go
 
 *.exe
 *.test
+
 generate/generate
+bin/mockgen
+
