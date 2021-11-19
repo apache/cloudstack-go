@@ -513,11 +513,13 @@ type CreateAccountResponse struct {
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
+	Created                   string                      `json:"created"`
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
+	Icon                      string                      `json:"icon"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`
 	Iplimit                   string                      `json:"iplimit"`
@@ -579,6 +581,7 @@ type CreateAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -899,11 +902,13 @@ type DisableAccountResponse struct {
 	Cpuavailable              string                       `json:"cpuavailable"`
 	Cpulimit                  string                       `json:"cpulimit"`
 	Cputotal                  int64                        `json:"cputotal"`
+	Created                   string                       `json:"created"`
 	Defaultzoneid             string                       `json:"defaultzoneid"`
 	Domain                    string                       `json:"domain"`
 	Domainid                  string                       `json:"domainid"`
 	Domainpath                string                       `json:"domainpath"`
 	Groups                    []string                     `json:"groups"`
+	Icon                      string                       `json:"icon"`
 	Id                        string                       `json:"id"`
 	Ipavailable               string                       `json:"ipavailable"`
 	Iplimit                   string                       `json:"iplimit"`
@@ -965,6 +970,7 @@ type DisableAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -1074,11 +1080,13 @@ type EnableAccountResponse struct {
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
+	Created                   string                      `json:"created"`
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
+	Icon                      string                      `json:"icon"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`
 	Iplimit                   string                      `json:"iplimit"`
@@ -1140,6 +1148,7 @@ type EnableAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -1281,6 +1290,10 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
@@ -1453,6 +1466,21 @@ func (p *ListAccountsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListAccountsParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListAccountsParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListAccountsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1585,11 +1613,13 @@ type Account struct {
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
+	Created                   string            `json:"created"`
 	Defaultzoneid             string            `json:"defaultzoneid"`
 	Domain                    string            `json:"domain"`
 	Domainid                  string            `json:"domainid"`
 	Domainpath                string            `json:"domainpath"`
 	Groups                    []string          `json:"groups"`
+	Icon                      string            `json:"icon"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
 	Iplimit                   string            `json:"iplimit"`
@@ -1651,6 +1681,7 @@ type AccountUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -1893,9 +1924,11 @@ type ProjectAccount struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -2030,11 +2063,13 @@ type LockAccountResponse struct {
 	Cpuavailable              string                    `json:"cpuavailable"`
 	Cpulimit                  string                    `json:"cpulimit"`
 	Cputotal                  int64                     `json:"cputotal"`
+	Created                   string                    `json:"created"`
 	Defaultzoneid             string                    `json:"defaultzoneid"`
 	Domain                    string                    `json:"domain"`
 	Domainid                  string                    `json:"domainid"`
 	Domainpath                string                    `json:"domainpath"`
 	Groups                    []string                  `json:"groups"`
+	Icon                      string                    `json:"icon"`
 	Id                        string                    `json:"id"`
 	Ipavailable               string                    `json:"ipavailable"`
 	Iplimit                   string                    `json:"iplimit"`
@@ -2096,6 +2131,7 @@ type LockAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -2228,11 +2264,13 @@ type MarkDefaultZoneForAccountResponse struct {
 	Cpuavailable              string                                  `json:"cpuavailable"`
 	Cpulimit                  string                                  `json:"cpulimit"`
 	Cputotal                  int64                                   `json:"cputotal"`
+	Created                   string                                  `json:"created"`
 	Defaultzoneid             string                                  `json:"defaultzoneid"`
 	Domain                    string                                  `json:"domain"`
 	Domainid                  string                                  `json:"domainid"`
 	Domainpath                string                                  `json:"domainpath"`
 	Groups                    []string                                `json:"groups"`
+	Icon                      string                                  `json:"icon"`
 	Id                        string                                  `json:"id"`
 	Ipavailable               string                                  `json:"ipavailable"`
 	Iplimit                   string                                  `json:"iplimit"`
@@ -2294,6 +2332,7 @@ type MarkDefaultZoneForAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -2479,11 +2518,13 @@ type UpdateAccountResponse struct {
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
+	Created                   string                      `json:"created"`
 	Defaultzoneid             string                      `json:"defaultzoneid"`
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
 	Groups                    []string                    `json:"groups"`
+	Icon                      string                      `json:"icon"`
 	Id                        string                      `json:"id"`
 	Ipavailable               string                      `json:"ipavailable"`
 	Iplimit                   string                      `json:"iplimit"`
@@ -2545,6 +2586,7 @@ type UpdateAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`

@@ -82,6 +82,27 @@ func (mr *MockSSHServiceIfaceMockRecorder) DeleteSSHKeyPair(p interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSSHKeyPair", reflect.TypeOf((*MockSSHServiceIface)(nil).DeleteSSHKeyPair), p)
 }
 
+// GetSSHKeyPairID mocks base method.
+func (m *MockSSHServiceIface) GetSSHKeyPairID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSSHKeyPairID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSSHKeyPairID indicates an expected call of GetSSHKeyPairID.
+func (mr *MockSSHServiceIfaceMockRecorder) GetSSHKeyPairID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSSHKeyPairID", reflect.TypeOf((*MockSSHServiceIface)(nil).GetSSHKeyPairID), varargs...)
+}
+
 // ListSSHKeyPairs mocks base method.
 func (m *MockSSHServiceIface) ListSSHKeyPairs(p *ListSSHKeyPairsParams) (*ListSSHKeyPairsResponse, error) {
 	m.ctrl.T.Helper()

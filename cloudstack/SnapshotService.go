@@ -284,30 +284,31 @@ func (s *SnapshotService) CreateSnapshot(p *CreateSnapshotParams) (*CreateSnapsh
 }
 
 type CreateSnapshotResponse struct {
-	Account       string `json:"account"`
-	Created       string `json:"created"`
-	Domain        string `json:"domain"`
-	Domainid      string `json:"domainid"`
-	Id            string `json:"id"`
-	Intervaltype  string `json:"intervaltype"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Locationtype  string `json:"locationtype"`
-	Name          string `json:"name"`
-	Osdisplayname string `json:"osdisplayname"`
-	Ostypeid      string `json:"ostypeid"`
-	Physicalsize  int64  `json:"physicalsize"`
-	Project       string `json:"project"`
-	Projectid     string `json:"projectid"`
-	Revertable    bool   `json:"revertable"`
-	Snapshottype  string `json:"snapshottype"`
-	State         string `json:"state"`
-	Tags          []Tags `json:"tags"`
-	Virtualsize   int64  `json:"virtualsize"`
-	Volumeid      string `json:"volumeid"`
-	Volumename    string `json:"volumename"`
-	Volumetype    string `json:"volumetype"`
-	Zoneid        string `json:"zoneid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   string `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Locationtype   string `json:"locationtype"`
+	Name           string `json:"name"`
+	Osdisplayname  string `json:"osdisplayname"`
+	Ostypeid       string `json:"ostypeid"`
+	Physicalsize   int64  `json:"physicalsize"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
+	Revertable     bool   `json:"revertable"`
+	Snapshottype   string `json:"snapshottype"`
+	State          string `json:"state"`
+	Tags           []Tags `json:"tags"`
+	Virtualsize    int64  `json:"virtualsize"`
+	Volumeid       string `json:"volumeid"`
+	Volumename     string `json:"volumename"`
+	Volumetype     string `json:"volumetype"`
+	Zoneid         string `json:"zoneid"`
 }
 
 func (r *CreateSnapshotResponse) UnmarshalJSON(b []byte) error {
@@ -510,16 +511,17 @@ func (s *SnapshotService) CreateSnapshotPolicy(p *CreateSnapshotPolicyParams) (*
 }
 
 type CreateSnapshotPolicyResponse struct {
-	Fordisplay   bool   `json:"fordisplay"`
-	Id           string `json:"id"`
-	Intervaltype int    `json:"intervaltype"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Maxsnaps     int    `json:"maxsnaps"`
-	Schedule     string `json:"schedule"`
-	Tags         []Tags `json:"tags"`
-	Timezone     string `json:"timezone"`
-	Volumeid     string `json:"volumeid"`
+	Fordisplay     bool   `json:"fordisplay"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   int    `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Maxsnaps       int    `json:"maxsnaps"`
+	Schedule       string `json:"schedule"`
+	Tags           []Tags `json:"tags"`
+	Timezone       string `json:"timezone"`
+	Volumeid       string `json:"volumeid"`
 }
 
 type CreateVMSnapshotParams struct {
@@ -678,6 +680,7 @@ type CreateVMSnapshotResponse struct {
 	Displayname        string `json:"displayname"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Hasannotations     bool   `json:"hasannotations"`
 	Hypervisor         string `json:"hypervisor"`
 	Id                 string `json:"id"`
 	JobID              string `json:"jobid"`
@@ -1139,16 +1142,17 @@ type ListSnapshotPoliciesResponse struct {
 }
 
 type SnapshotPolicy struct {
-	Fordisplay   bool   `json:"fordisplay"`
-	Id           string `json:"id"`
-	Intervaltype int    `json:"intervaltype"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Maxsnaps     int    `json:"maxsnaps"`
-	Schedule     string `json:"schedule"`
-	Tags         []Tags `json:"tags"`
-	Timezone     string `json:"timezone"`
-	Volumeid     string `json:"volumeid"`
+	Fordisplay     bool   `json:"fordisplay"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   int    `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Maxsnaps       int    `json:"maxsnaps"`
+	Schedule       string `json:"schedule"`
+	Tags           []Tags `json:"tags"`
+	Timezone       string `json:"timezone"`
+	Volumeid       string `json:"volumeid"`
 }
 
 type ListSnapshotsParams struct {
@@ -1572,30 +1576,31 @@ type ListSnapshotsResponse struct {
 }
 
 type Snapshot struct {
-	Account       string `json:"account"`
-	Created       string `json:"created"`
-	Domain        string `json:"domain"`
-	Domainid      string `json:"domainid"`
-	Id            string `json:"id"`
-	Intervaltype  string `json:"intervaltype"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Locationtype  string `json:"locationtype"`
-	Name          string `json:"name"`
-	Osdisplayname string `json:"osdisplayname"`
-	Ostypeid      string `json:"ostypeid"`
-	Physicalsize  int64  `json:"physicalsize"`
-	Project       string `json:"project"`
-	Projectid     string `json:"projectid"`
-	Revertable    bool   `json:"revertable"`
-	Snapshottype  string `json:"snapshottype"`
-	State         string `json:"state"`
-	Tags          []Tags `json:"tags"`
-	Virtualsize   int64  `json:"virtualsize"`
-	Volumeid      string `json:"volumeid"`
-	Volumename    string `json:"volumename"`
-	Volumetype    string `json:"volumetype"`
-	Zoneid        string `json:"zoneid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   string `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Locationtype   string `json:"locationtype"`
+	Name           string `json:"name"`
+	Osdisplayname  string `json:"osdisplayname"`
+	Ostypeid       string `json:"ostypeid"`
+	Physicalsize   int64  `json:"physicalsize"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
+	Revertable     bool   `json:"revertable"`
+	Snapshottype   string `json:"snapshottype"`
+	State          string `json:"state"`
+	Tags           []Tags `json:"tags"`
+	Virtualsize    int64  `json:"virtualsize"`
+	Volumeid       string `json:"volumeid"`
+	Volumename     string `json:"volumename"`
+	Volumetype     string `json:"volumetype"`
+	Zoneid         string `json:"zoneid"`
 }
 
 func (r *Snapshot) UnmarshalJSON(b []byte) error {
@@ -1970,6 +1975,7 @@ type VMSnapshot struct {
 	Displayname        string `json:"displayname"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Hasannotations     bool   `json:"hasannotations"`
 	Hypervisor         string `json:"hypervisor"`
 	Id                 string `json:"id"`
 	JobID              string `json:"jobid"`
@@ -2063,30 +2069,31 @@ func (s *SnapshotService) RevertSnapshot(p *RevertSnapshotParams) (*RevertSnapsh
 }
 
 type RevertSnapshotResponse struct {
-	Account       string `json:"account"`
-	Created       string `json:"created"`
-	Domain        string `json:"domain"`
-	Domainid      string `json:"domainid"`
-	Id            string `json:"id"`
-	Intervaltype  string `json:"intervaltype"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Locationtype  string `json:"locationtype"`
-	Name          string `json:"name"`
-	Osdisplayname string `json:"osdisplayname"`
-	Ostypeid      string `json:"ostypeid"`
-	Physicalsize  int64  `json:"physicalsize"`
-	Project       string `json:"project"`
-	Projectid     string `json:"projectid"`
-	Revertable    bool   `json:"revertable"`
-	Snapshottype  string `json:"snapshottype"`
-	State         string `json:"state"`
-	Tags          []Tags `json:"tags"`
-	Virtualsize   int64  `json:"virtualsize"`
-	Volumeid      string `json:"volumeid"`
-	Volumename    string `json:"volumename"`
-	Volumetype    string `json:"volumetype"`
-	Zoneid        string `json:"zoneid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   string `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Locationtype   string `json:"locationtype"`
+	Name           string `json:"name"`
+	Osdisplayname  string `json:"osdisplayname"`
+	Ostypeid       string `json:"ostypeid"`
+	Physicalsize   int64  `json:"physicalsize"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
+	Revertable     bool   `json:"revertable"`
+	Snapshottype   string `json:"snapshottype"`
+	State          string `json:"state"`
+	Tags           []Tags `json:"tags"`
+	Virtualsize    int64  `json:"virtualsize"`
+	Volumeid       string `json:"volumeid"`
+	Volumename     string `json:"volumename"`
+	Volumetype     string `json:"volumetype"`
+	Zoneid         string `json:"zoneid"`
 }
 
 func (r *RevertSnapshotResponse) UnmarshalJSON(b []byte) error {
@@ -2217,9 +2224,11 @@ type RevertToVMSnapshotResponse struct {
 	Groupid               string                                    `json:"groupid"`
 	Guestosid             string                                    `json:"guestosid"`
 	Haenable              bool                                      `json:"haenable"`
+	Hasannotations        bool                                      `json:"hasannotations"`
 	Hostid                string                                    `json:"hostid"`
 	Hostname              string                                    `json:"hostname"`
 	Hypervisor            string                                    `json:"hypervisor"`
+	Icon                  string                                    `json:"icon"`
 	Id                    string                                    `json:"id"`
 	Instancename          string                                    `json:"instancename"`
 	Isdynamicallyscalable bool                                      `json:"isdynamicallyscalable"`
@@ -2229,6 +2238,7 @@ type RevertToVMSnapshotResponse struct {
 	JobID                 string                                    `json:"jobid"`
 	Jobstatus             int                                       `json:"jobstatus"`
 	Keypair               string                                    `json:"keypair"`
+	Lastupdated           string                                    `json:"lastupdated"`
 	Memory                int                                       `json:"memory"`
 	Memoryintfreekbs      int64                                     `json:"memoryintfreekbs"`
 	Memorykbs             int64                                     `json:"memorykbs"`
@@ -2241,14 +2251,17 @@ type RevertToVMSnapshotResponse struct {
 	Ostypeid              string                                    `json:"ostypeid"`
 	Password              string                                    `json:"password"`
 	Passwordenabled       bool                                      `json:"passwordenabled"`
+	Pooltype              string                                    `json:"pooltype"`
 	Project               string                                    `json:"project"`
 	Projectid             string                                    `json:"projectid"`
 	Publicip              string                                    `json:"publicip"`
 	Publicipid            string                                    `json:"publicipid"`
-	Readonlyuidetails     string                                    `json:"readonlyuidetails"`
+	Readonlydetails       string                                    `json:"readonlydetails"`
+	Receivedbytes         int64                                     `json:"receivedbytes"`
 	Rootdeviceid          int64                                     `json:"rootdeviceid"`
 	Rootdevicetype        string                                    `json:"rootdevicetype"`
 	Securitygroup         []RevertToVMSnapshotResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                     `json:"sentbytes"`
 	Serviceofferingid     string                                    `json:"serviceofferingid"`
 	Serviceofferingname   string                                    `json:"serviceofferingname"`
 	Servicestate          string                                    `json:"servicestate"`
@@ -2444,14 +2457,15 @@ func (s *SnapshotService) UpdateSnapshotPolicy(p *UpdateSnapshotPolicyParams) (*
 }
 
 type UpdateSnapshotPolicyResponse struct {
-	Fordisplay   bool   `json:"fordisplay"`
-	Id           string `json:"id"`
-	Intervaltype int    `json:"intervaltype"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Maxsnaps     int    `json:"maxsnaps"`
-	Schedule     string `json:"schedule"`
-	Tags         []Tags `json:"tags"`
-	Timezone     string `json:"timezone"`
-	Volumeid     string `json:"volumeid"`
+	Fordisplay     bool   `json:"fordisplay"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	Intervaltype   int    `json:"intervaltype"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Maxsnaps       int    `json:"maxsnaps"`
+	Schedule       string `json:"schedule"`
+	Tags           []Tags `json:"tags"`
+	Timezone       string `json:"timezone"`
+	Volumeid       string `json:"volumeid"`
 }

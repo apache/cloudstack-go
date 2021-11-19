@@ -939,11 +939,13 @@ type LdapCreateAccountResponse struct {
 	Cpuavailable              string                          `json:"cpuavailable"`
 	Cpulimit                  string                          `json:"cpulimit"`
 	Cputotal                  int64                           `json:"cputotal"`
+	Created                   string                          `json:"created"`
 	Defaultzoneid             string                          `json:"defaultzoneid"`
 	Domain                    string                          `json:"domain"`
 	Domainid                  string                          `json:"domainid"`
 	Domainpath                string                          `json:"domainpath"`
 	Groups                    []string                        `json:"groups"`
+	Icon                      string                          `json:"icon"`
 	Id                        string                          `json:"id"`
 	Ipavailable               string                          `json:"ipavailable"`
 	Iplimit                   string                          `json:"iplimit"`
@@ -1005,6 +1007,7 @@ type LdapCreateAccountResponseUser struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`

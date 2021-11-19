@@ -38,9 +38,8 @@ func TestHostService_AddHost(t *testing.T) {
 
 	defer server.Close()
 	client := NewClient(server.URL, "APIKEY", "SECRETKEY", false)
-	params := client.Host.NewAddHostParams("Simulator", "password",
-		"5382edc2-e689-4074-bd67-0e1a236eb2bc", "http://sim/c0/h0",
-		"root", "d4a81f75-5d92-415e-ab59-e85cc2ce56d9")
+	params := client.Host.NewAddHostParams("Simulator", "5382edc2-e689-4074-bd67-0e1a236eb2bc", "http://sim/c0/h0",
+		"d4a81f75-5d92-415e-ab59-e85cc2ce56d9")
 	resp, err := client.Host.AddHost(params)
 	if err != nil {
 		t.Errorf("Failed to add host due to: %v", err)

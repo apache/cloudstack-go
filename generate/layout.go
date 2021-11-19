@@ -355,6 +355,10 @@ var layout = apiInfo{
 		"suspendProject",
 		"updateProject",
 		"updateProjectInvitation",
+		"listProjectRolePermissions",
+		"createProjectRolePermission",
+		"updateProjectRolePermission",
+		"deleteProjectRolePermission",
 	},
 	"PoolService": {
 		"createStoragePool",

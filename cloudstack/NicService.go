@@ -541,9 +541,11 @@ type UpdateVmNicIpResponse struct {
 	Groupid               string                               `json:"groupid"`
 	Guestosid             string                               `json:"guestosid"`
 	Haenable              bool                                 `json:"haenable"`
+	Hasannotations        bool                                 `json:"hasannotations"`
 	Hostid                string                               `json:"hostid"`
 	Hostname              string                               `json:"hostname"`
 	Hypervisor            string                               `json:"hypervisor"`
+	Icon                  string                               `json:"icon"`
 	Id                    string                               `json:"id"`
 	Instancename          string                               `json:"instancename"`
 	Isdynamicallyscalable bool                                 `json:"isdynamicallyscalable"`
@@ -553,6 +555,7 @@ type UpdateVmNicIpResponse struct {
 	JobID                 string                               `json:"jobid"`
 	Jobstatus             int                                  `json:"jobstatus"`
 	Keypair               string                               `json:"keypair"`
+	Lastupdated           string                               `json:"lastupdated"`
 	Memory                int                                  `json:"memory"`
 	Memoryintfreekbs      int64                                `json:"memoryintfreekbs"`
 	Memorykbs             int64                                `json:"memorykbs"`
@@ -565,14 +568,17 @@ type UpdateVmNicIpResponse struct {
 	Ostypeid              string                               `json:"ostypeid"`
 	Password              string                               `json:"password"`
 	Passwordenabled       bool                                 `json:"passwordenabled"`
+	Pooltype              string                               `json:"pooltype"`
 	Project               string                               `json:"project"`
 	Projectid             string                               `json:"projectid"`
 	Publicip              string                               `json:"publicip"`
 	Publicipid            string                               `json:"publicipid"`
-	Readonlyuidetails     string                               `json:"readonlyuidetails"`
+	Readonlydetails       string                               `json:"readonlydetails"`
+	Receivedbytes         int64                                `json:"receivedbytes"`
 	Rootdeviceid          int64                                `json:"rootdeviceid"`
 	Rootdevicetype        string                               `json:"rootdevicetype"`
 	Securitygroup         []UpdateVmNicIpResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                `json:"sentbytes"`
 	Serviceofferingid     string                               `json:"serviceofferingid"`
 	Serviceofferingname   string                               `json:"serviceofferingname"`
 	Servicestate          string                               `json:"servicestate"`

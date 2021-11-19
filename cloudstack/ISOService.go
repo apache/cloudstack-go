@@ -193,9 +193,11 @@ type AttachIsoResponse struct {
 	Groupid               string                           `json:"groupid"`
 	Guestosid             string                           `json:"guestosid"`
 	Haenable              bool                             `json:"haenable"`
+	Hasannotations        bool                             `json:"hasannotations"`
 	Hostid                string                           `json:"hostid"`
 	Hostname              string                           `json:"hostname"`
 	Hypervisor            string                           `json:"hypervisor"`
+	Icon                  string                           `json:"icon"`
 	Id                    string                           `json:"id"`
 	Instancename          string                           `json:"instancename"`
 	Isdynamicallyscalable bool                             `json:"isdynamicallyscalable"`
@@ -205,6 +207,7 @@ type AttachIsoResponse struct {
 	JobID                 string                           `json:"jobid"`
 	Jobstatus             int                              `json:"jobstatus"`
 	Keypair               string                           `json:"keypair"`
+	Lastupdated           string                           `json:"lastupdated"`
 	Memory                int                              `json:"memory"`
 	Memoryintfreekbs      int64                            `json:"memoryintfreekbs"`
 	Memorykbs             int64                            `json:"memorykbs"`
@@ -217,14 +220,17 @@ type AttachIsoResponse struct {
 	Ostypeid              string                           `json:"ostypeid"`
 	Password              string                           `json:"password"`
 	Passwordenabled       bool                             `json:"passwordenabled"`
+	Pooltype              string                           `json:"pooltype"`
 	Project               string                           `json:"project"`
 	Projectid             string                           `json:"projectid"`
 	Publicip              string                           `json:"publicip"`
 	Publicipid            string                           `json:"publicipid"`
-	Readonlyuidetails     string                           `json:"readonlyuidetails"`
+	Readonlydetails       string                           `json:"readonlydetails"`
+	Receivedbytes         int64                            `json:"receivedbytes"`
 	Rootdeviceid          int64                            `json:"rootdeviceid"`
 	Rootdevicetype        string                           `json:"rootdevicetype"`
 	Securitygroup         []AttachIsoResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                            `json:"sentbytes"`
 	Serviceofferingid     string                           `json:"serviceofferingid"`
 	Serviceofferingname   string                           `json:"serviceofferingname"`
 	Servicestate          string                           `json:"servicestate"`
@@ -456,9 +462,11 @@ type CopyIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -730,9 +738,11 @@ type DetachIsoResponse struct {
 	Groupid               string                           `json:"groupid"`
 	Guestosid             string                           `json:"guestosid"`
 	Haenable              bool                             `json:"haenable"`
+	Hasannotations        bool                             `json:"hasannotations"`
 	Hostid                string                           `json:"hostid"`
 	Hostname              string                           `json:"hostname"`
 	Hypervisor            string                           `json:"hypervisor"`
+	Icon                  string                           `json:"icon"`
 	Id                    string                           `json:"id"`
 	Instancename          string                           `json:"instancename"`
 	Isdynamicallyscalable bool                             `json:"isdynamicallyscalable"`
@@ -742,6 +752,7 @@ type DetachIsoResponse struct {
 	JobID                 string                           `json:"jobid"`
 	Jobstatus             int                              `json:"jobstatus"`
 	Keypair               string                           `json:"keypair"`
+	Lastupdated           string                           `json:"lastupdated"`
 	Memory                int                              `json:"memory"`
 	Memoryintfreekbs      int64                            `json:"memoryintfreekbs"`
 	Memorykbs             int64                            `json:"memorykbs"`
@@ -754,14 +765,17 @@ type DetachIsoResponse struct {
 	Ostypeid              string                           `json:"ostypeid"`
 	Password              string                           `json:"password"`
 	Passwordenabled       bool                             `json:"passwordenabled"`
+	Pooltype              string                           `json:"pooltype"`
 	Project               string                           `json:"project"`
 	Projectid             string                           `json:"projectid"`
 	Publicip              string                           `json:"publicip"`
 	Publicipid            string                           `json:"publicipid"`
-	Readonlyuidetails     string                           `json:"readonlyuidetails"`
+	Readonlydetails       string                           `json:"readonlydetails"`
+	Receivedbytes         int64                            `json:"receivedbytes"`
 	Rootdeviceid          int64                            `json:"rootdeviceid"`
 	Rootdevicetype        string                           `json:"rootdevicetype"`
 	Securitygroup         []DetachIsoResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                            `json:"sentbytes"`
 	Serviceofferingid     string                           `json:"serviceofferingid"`
 	Serviceofferingname   string                           `json:"serviceofferingname"`
 	Servicestate          string                           `json:"servicestate"`
@@ -1157,6 +1171,10 @@ func (p *ListIsosParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["showremoved"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showremoved", vv)
@@ -1403,6 +1421,21 @@ func (p *ListIsosParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListIsosParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListIsosParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListIsosParams) SetShowremoved(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1594,9 +1627,11 @@ type Iso struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2024,9 +2059,11 @@ type RegisterIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2401,9 +2438,11 @@ type UpdateIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
+	Icon                  string              `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`

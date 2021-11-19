@@ -513,17 +513,17 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewMigrateVirtualMachinePa
 }
 
 // NewMigrateVirtualMachineWithVolumeParams mocks base method.
-func (m *MockVirtualMachineServiceIface) NewMigrateVirtualMachineWithVolumeParams(hostid, virtualmachineid string) *MigrateVirtualMachineWithVolumeParams {
+func (m *MockVirtualMachineServiceIface) NewMigrateVirtualMachineWithVolumeParams(virtualmachineid string) *MigrateVirtualMachineWithVolumeParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewMigrateVirtualMachineWithVolumeParams", hostid, virtualmachineid)
+	ret := m.ctrl.Call(m, "NewMigrateVirtualMachineWithVolumeParams", virtualmachineid)
 	ret0, _ := ret[0].(*MigrateVirtualMachineWithVolumeParams)
 	return ret0
 }
 
 // NewMigrateVirtualMachineWithVolumeParams indicates an expected call of NewMigrateVirtualMachineWithVolumeParams.
-func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewMigrateVirtualMachineWithVolumeParams(hostid, virtualmachineid interface{}) *gomock.Call {
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewMigrateVirtualMachineWithVolumeParams(virtualmachineid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateVirtualMachineWithVolumeParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewMigrateVirtualMachineWithVolumeParams), hostid, virtualmachineid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateVirtualMachineWithVolumeParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewMigrateVirtualMachineWithVolumeParams), virtualmachineid)
 }
 
 // NewRebootVirtualMachineParams mocks base method.

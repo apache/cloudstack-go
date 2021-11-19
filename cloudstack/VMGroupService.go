@@ -150,16 +150,17 @@ func (s *VMGroupService) CreateInstanceGroup(p *CreateInstanceGroupParams) (*Cre
 }
 
 type CreateInstanceGroupResponse struct {
-	Account   string `json:"account"`
-	Created   string `json:"created"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
 }
 
 type DeleteInstanceGroupParams struct {
@@ -558,16 +559,17 @@ type ListInstanceGroupsResponse struct {
 }
 
 type InstanceGroup struct {
-	Account   string `json:"account"`
-	Created   string `json:"created"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
 }
 
 type UpdateInstanceGroupParams struct {
@@ -643,14 +645,15 @@ func (s *VMGroupService) UpdateInstanceGroup(p *UpdateInstanceGroupParams) (*Upd
 }
 
 type UpdateInstanceGroupResponse struct {
-	Account   string `json:"account"`
-	Created   string `json:"created"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account        string `json:"account"`
+	Created        string `json:"created"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
 }

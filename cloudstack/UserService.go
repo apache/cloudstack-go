@@ -268,6 +268,7 @@ type CreateUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -456,6 +457,7 @@ type DisableUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -540,6 +542,7 @@ type EnableUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -620,6 +623,7 @@ type GetUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -741,6 +745,10 @@ func (p *ListUsersParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
@@ -886,6 +894,21 @@ func (p *ListUsersParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListUsersParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListUsersParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListUsersParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -987,6 +1010,7 @@ type User struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -1071,6 +1095,7 @@ type LockUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`
@@ -1378,6 +1403,7 @@ type UpdateUserResponse struct {
 	Domainid            string `json:"domainid"`
 	Email               string `json:"email"`
 	Firstname           string `json:"firstname"`
+	Icon                string `json:"icon"`
 	Id                  string `json:"id"`
 	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
 	Isdefault           bool   `json:"isdefault"`

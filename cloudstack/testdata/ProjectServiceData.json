@@ -292,5 +292,21 @@
       "jobid": "1330d540-c099-4943-ac22-3fd5846c0e5b"
       }
     }
+  },
+  "listProjectRolePermissions": {
+    "listprojectrolepermissionsresponse": {
+      "count": 1,
+      "projectrolepermission": [
+        {
+          "id": "e68daeca-556f-4fd2-b4ee-378cb994ef76",
+          "projectroleid": "fa089002-d055-46b5-aa0a-18f2eae2b4fc",
+          "projectid": "69646881-8d7f-4800-987d-106698a42608",
+          "projectrolename": "testProjectPerm",
+          "rule": "activateProject",
+          "permission": "deny",
+          "description": ""
+        }
+      ]
+    }
   }
 }

@@ -459,6 +459,12 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["routerip"]; found {
+		u.Set("routerip", v.(string))
+	}
+	if v, found := p.p["routeripv6"]; found {
+		u.Set("routeripv6", v.(string))
+	}
 	if v, found := p.p["startip"]; found {
 		u.Set("startip", v.(string))
 	}
@@ -811,6 +817,36 @@ func (p *CreateNetworkParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetRouterip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["routerip"] = v
+}
+
+func (p *CreateNetworkParams) GetRouterip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["routerip"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetRouteripv6(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["routeripv6"] = v
+}
+
+func (p *CreateNetworkParams) GetRouteripv6() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["routeripv6"].(string)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetStartip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -941,6 +977,7 @@ type CreateNetworkResponse struct {
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
 	Cidr                        string                         `json:"cidr"`
+	Created                     string                         `json:"created"`
 	Details                     map[string]string              `json:"details"`
 	Displaynetwork              bool                           `json:"displaynetwork"`
 	Displaytext                 string                         `json:"displaytext"`
@@ -950,6 +987,8 @@ type CreateNetworkResponse struct {
 	Domainid                    string                         `json:"domainid"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
+	Hasannotations              bool                           `json:"hasannotations"`
+	Icon                        string                         `json:"icon"`
 	Id                          string                         `json:"id"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
@@ -970,10 +1009,12 @@ type CreateNetworkResponse struct {
 	Physicalnetworkid           string                         `json:"physicalnetworkid"`
 	Project                     string                         `json:"project"`
 	Projectid                   string                         `json:"projectid"`
+	Receivedbytes               int64                          `json:"receivedbytes"`
 	Redundantrouter             bool                           `json:"redundantrouter"`
 	Related                     string                         `json:"related"`
 	Reservediprange             string                         `json:"reservediprange"`
 	Restartrequired             bool                           `json:"restartrequired"`
+	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []CreateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
 	State                       string                         `json:"state"`
@@ -2354,6 +2395,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Broadcasturi                string                                `json:"broadcasturi"`
 	Canusefordeploy             bool                                  `json:"canusefordeploy"`
 	Cidr                        string                                `json:"cidr"`
+	Created                     string                                `json:"created"`
 	Details                     map[string]string                     `json:"details"`
 	Displaynetwork              bool                                  `json:"displaynetwork"`
 	Displaytext                 string                                `json:"displaytext"`
@@ -2363,6 +2405,8 @@ type NetscalerLoadBalancerNetwork struct {
 	Domainid                    string                                `json:"domainid"`
 	Externalid                  string                                `json:"externalid"`
 	Gateway                     string                                `json:"gateway"`
+	Hasannotations              bool                                  `json:"hasannotations"`
+	Icon                        string                                `json:"icon"`
 	Id                          string                                `json:"id"`
 	Ip6cidr                     string                                `json:"ip6cidr"`
 	Ip6gateway                  string                                `json:"ip6gateway"`
@@ -2383,10 +2427,12 @@ type NetscalerLoadBalancerNetwork struct {
 	Physicalnetworkid           string                                `json:"physicalnetworkid"`
 	Project                     string                                `json:"project"`
 	Projectid                   string                                `json:"projectid"`
+	Receivedbytes               int64                                 `json:"receivedbytes"`
 	Redundantrouter             bool                                  `json:"redundantrouter"`
 	Related                     string                                `json:"related"`
 	Reservediprange             string                                `json:"reservediprange"`
 	Restartrequired             bool                                  `json:"restartrequired"`
+	Sentbytes                   int64                                 `json:"sentbytes"`
 	Service                     []NetscalerLoadBalancerNetworkService `json:"service"`
 	Specifyipranges             bool                                  `json:"specifyipranges"`
 	State                       string                                `json:"state"`
@@ -2794,6 +2840,10 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("restartrequired", vv)
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["specifyipranges"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("specifyipranges", vv)
@@ -3079,6 +3129,21 @@ func (p *ListNetworksParams) GetRestartrequired() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListNetworksParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListNetworksParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListNetworksParams) SetSpecifyipranges(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3304,6 +3369,7 @@ type Network struct {
 	Broadcasturi                string                   `json:"broadcasturi"`
 	Canusefordeploy             bool                     `json:"canusefordeploy"`
 	Cidr                        string                   `json:"cidr"`
+	Created                     string                   `json:"created"`
 	Details                     map[string]string        `json:"details"`
 	Displaynetwork              bool                     `json:"displaynetwork"`
 	Displaytext                 string                   `json:"displaytext"`
@@ -3313,6 +3379,8 @@ type Network struct {
 	Domainid                    string                   `json:"domainid"`
 	Externalid                  string                   `json:"externalid"`
 	Gateway                     string                   `json:"gateway"`
+	Hasannotations              bool                     `json:"hasannotations"`
+	Icon                        string                   `json:"icon"`
 	Id                          string                   `json:"id"`
 	Ip6cidr                     string                   `json:"ip6cidr"`
 	Ip6gateway                  string                   `json:"ip6gateway"`
@@ -3333,10 +3401,12 @@ type Network struct {
 	Physicalnetworkid           string                   `json:"physicalnetworkid"`
 	Project                     string                   `json:"project"`
 	Projectid                   string                   `json:"projectid"`
+	Receivedbytes               int64                    `json:"receivedbytes"`
 	Redundantrouter             bool                     `json:"redundantrouter"`
 	Related                     string                   `json:"related"`
 	Reservediprange             string                   `json:"reservediprange"`
 	Restartrequired             bool                     `json:"restartrequired"`
+	Sentbytes                   int64                    `json:"sentbytes"`
 	Service                     []NetworkServiceInternal `json:"service"`
 	Specifyipranges             bool                     `json:"specifyipranges"`
 	State                       string                   `json:"state"`
@@ -3536,6 +3606,7 @@ type NiciraNvpDeviceNetwork struct {
 	Broadcasturi                string                          `json:"broadcasturi"`
 	Canusefordeploy             bool                            `json:"canusefordeploy"`
 	Cidr                        string                          `json:"cidr"`
+	Created                     string                          `json:"created"`
 	Details                     map[string]string               `json:"details"`
 	Displaynetwork              bool                            `json:"displaynetwork"`
 	Displaytext                 string                          `json:"displaytext"`
@@ -3545,6 +3616,8 @@ type NiciraNvpDeviceNetwork struct {
 	Domainid                    string                          `json:"domainid"`
 	Externalid                  string                          `json:"externalid"`
 	Gateway                     string                          `json:"gateway"`
+	Hasannotations              bool                            `json:"hasannotations"`
+	Icon                        string                          `json:"icon"`
 	Id                          string                          `json:"id"`
 	Ip6cidr                     string                          `json:"ip6cidr"`
 	Ip6gateway                  string                          `json:"ip6gateway"`
@@ -3565,10 +3638,12 @@ type NiciraNvpDeviceNetwork struct {
 	Physicalnetworkid           string                          `json:"physicalnetworkid"`
 	Project                     string                          `json:"project"`
 	Projectid                   string                          `json:"projectid"`
+	Receivedbytes               int64                           `json:"receivedbytes"`
 	Redundantrouter             bool                            `json:"redundantrouter"`
 	Related                     string                          `json:"related"`
 	Reservediprange             string                          `json:"reservediprange"`
 	Restartrequired             bool                            `json:"restartrequired"`
+	Sentbytes                   int64                           `json:"sentbytes"`
 	Service                     []NiciraNvpDeviceNetworkService `json:"service"`
 	Specifyipranges             bool                            `json:"specifyipranges"`
 	State                       string                          `json:"state"`
@@ -3887,6 +3962,7 @@ type PaloAltoFirewallNetwork struct {
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
 	Cidr                        string                           `json:"cidr"`
+	Created                     string                           `json:"created"`
 	Details                     map[string]string                `json:"details"`
 	Displaynetwork              bool                             `json:"displaynetwork"`
 	Displaytext                 string                           `json:"displaytext"`
@@ -3896,6 +3972,8 @@ type PaloAltoFirewallNetwork struct {
 	Domainid                    string                           `json:"domainid"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
+	Hasannotations              bool                             `json:"hasannotations"`
+	Icon                        string                           `json:"icon"`
 	Id                          string                           `json:"id"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
@@ -3916,10 +3994,12 @@ type PaloAltoFirewallNetwork struct {
 	Physicalnetworkid           string                           `json:"physicalnetworkid"`
 	Project                     string                           `json:"project"`
 	Projectid                   string                           `json:"projectid"`
+	Receivedbytes               int64                            `json:"receivedbytes"`
 	Redundantrouter             bool                             `json:"redundantrouter"`
 	Related                     string                           `json:"related"`
 	Reservediprange             string                           `json:"reservediprange"`
 	Restartrequired             bool                             `json:"restartrequired"`
+	Sentbytes                   int64                            `json:"sentbytes"`
 	Service                     []PaloAltoFirewallNetworkService `json:"service"`
 	Specifyipranges             bool                             `json:"specifyipranges"`
 	State                       string                           `json:"state"`
@@ -4747,11 +4827,6 @@ func (s *NetworkService) RestartNetwork(p *RestartNetworkParams) (*RestartNetwor
 			return nil, err
 		}
 
-		b, err = getRawValue(b)
-		if err != nil {
-			return nil, err
-		}
-
 		if err := json.Unmarshal(b, &r); err != nil {
 			return nil, err
 		}
@@ -4761,40 +4836,10 @@ func (s *NetworkService) RestartNetwork(p *RestartNetworkParams) (*RestartNetwor
 }
 
 type RestartNetworkResponse struct {
-	Account                   string `json:"account"`
-	Allocated                 string `json:"allocated"`
-	Associatednetworkid       string `json:"associatednetworkid"`
-	Associatednetworkname     string `json:"associatednetworkname"`
-	Domain                    string `json:"domain"`
-	Domainid                  string `json:"domainid"`
-	Fordisplay                bool   `json:"fordisplay"`
-	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
-	Id                        string `json:"id"`
-	Ipaddress                 string `json:"ipaddress"`
-	Isportable                bool   `json:"isportable"`
-	Issourcenat               bool   `json:"issourcenat"`
-	Isstaticnat               bool   `json:"isstaticnat"`
-	Issystem                  bool   `json:"issystem"`
-	JobID                     string `json:"jobid"`
-	Jobstatus                 int    `json:"jobstatus"`
-	Networkid                 string `json:"networkid"`
-	Networkname               string `json:"networkname"`
-	Physicalnetworkid         string `json:"physicalnetworkid"`
-	Project                   string `json:"project"`
-	Projectid                 string `json:"projectid"`
-	Purpose                   string `json:"purpose"`
-	State                     string `json:"state"`
-	Tags                      []Tags `json:"tags"`
-	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
-	Virtualmachineid          string `json:"virtualmachineid"`
-	Virtualmachinename        string `json:"virtualmachinename"`
-	Vlanid                    string `json:"vlanid"`
-	Vlanname                  string `json:"vlanname"`
-	Vmipaddress               string `json:"vmipaddress"`
-	Vpcid                     string `json:"vpcid"`
-	Vpcname                   string `json:"vpcname"`
-	Zoneid                    string `json:"zoneid"`
-	Zonename                  string `json:"zonename"`
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }
 
 type UpdateNetworkParams struct {
@@ -5083,6 +5128,7 @@ type UpdateNetworkResponse struct {
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
 	Cidr                        string                         `json:"cidr"`
+	Created                     string                         `json:"created"`
 	Details                     map[string]string              `json:"details"`
 	Displaynetwork              bool                           `json:"displaynetwork"`
 	Displaytext                 string                         `json:"displaytext"`
@@ -5092,6 +5138,8 @@ type UpdateNetworkResponse struct {
 	Domainid                    string                         `json:"domainid"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
+	Hasannotations              bool                           `json:"hasannotations"`
+	Icon                        string                         `json:"icon"`
 	Id                          string                         `json:"id"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
@@ -5112,10 +5160,12 @@ type UpdateNetworkResponse struct {
 	Physicalnetworkid           string                         `json:"physicalnetworkid"`
 	Project                     string                         `json:"project"`
 	Projectid                   string                         `json:"projectid"`
+	Receivedbytes               int64                          `json:"receivedbytes"`
 	Redundantrouter             bool                           `json:"redundantrouter"`
 	Related                     string                         `json:"related"`
 	Reservediprange             string                         `json:"reservediprange"`
 	Restartrequired             bool                           `json:"restartrequired"`
+	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []UpdateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
 	State                       string                         `json:"state"`

@@ -1413,6 +1413,7 @@ type UsageRecord struct {
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
 	Enddate          string `json:"enddate"`
+	Hasannotations   bool   `json:"hasannotations"`
 	Isdefault        bool   `json:"isdefault"`
 	Issourcenat      bool   `json:"issourcenat"`
 	Issystem         bool   `json:"issystem"`

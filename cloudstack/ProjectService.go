@@ -50,6 +50,14 @@ type ProjectServiceIface interface {
 	NewUpdateProjectParams(id string) *UpdateProjectParams
 	UpdateProjectInvitation(p *UpdateProjectInvitationParams) (*UpdateProjectInvitationResponse, error)
 	NewUpdateProjectInvitationParams(projectid string) *UpdateProjectInvitationParams
+	ListProjectRolePermissions(p *ListProjectRolePermissionsParams) (*ListProjectRolePermissionsResponse, error)
+	NewListProjectRolePermissionsParams(projectid string) *ListProjectRolePermissionsParams
+	CreateProjectRolePermission(p *CreateProjectRolePermissionParams) (*CreateProjectRolePermissionResponse, error)
+	NewCreateProjectRolePermissionParams(permission string, projectid string, projectroleid string, rule string) *CreateProjectRolePermissionParams
+	UpdateProjectRolePermission(p *UpdateProjectRolePermissionParams) (*UpdateProjectRolePermissionResponse, error)
+	NewUpdateProjectRolePermissionParams(projectid string, projectroleid string) *UpdateProjectRolePermissionParams
+	DeleteProjectRolePermission(p *DeleteProjectRolePermissionParams) (*DeleteProjectRolePermissionResponse, error)
+	NewDeleteProjectRolePermissionParams(id string, projectid string) *DeleteProjectRolePermissionParams
 }
 
 type ActivateProjectParams struct {
@@ -130,9 +138,11 @@ type ActivateProjectResponse struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -344,9 +354,11 @@ type CreateProjectResponse struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -398,10 +410,29 @@ func (p *DeleteProjectParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cleanup"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("cleanup", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *DeleteProjectParams) SetCleanup(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cleanup"] = v
+}
+
+func (p *DeleteProjectParams) GetCleanup() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cleanup"].(bool)
+	return value, ok
 }
 
 func (p *DeleteProjectParams) SetId(v string) {
@@ -896,6 +927,10 @@ func (p *ListProjectsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
 	}
@@ -1077,6 +1112,21 @@ func (p *ListProjectsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListProjectsParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListProjectsParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
 func (p *ListProjectsParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1237,9 +1287,11 @@ type Project struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -1360,9 +1412,11 @@ type SuspendProjectResponse struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -1574,9 +1628,11 @@ type UpdateProjectResponse struct {
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
+	Created                   string              `json:"created"`
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Icon                      string              `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
 	Iplimit                   string              `json:"iplimit"`
@@ -1766,4 +1822,503 @@ type UpdateProjectInvitationResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+type ListProjectRolePermissionsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListProjectRolePermissionsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["projectroleid"]; found {
+		u.Set("projectroleid", v.(string))
+	}
+	return u
+}
+
+func (p *ListProjectRolePermissionsParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListProjectRolePermissionsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListProjectRolePermissionsParams) SetProjectroleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectroleid"] = v
+}
+
+func (p *ListProjectRolePermissionsParams) GetProjectroleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectroleid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListProjectRolePermissionsParams instance,
+// as then you are sure you have configured all required params
+func (s *ProjectService) NewListProjectRolePermissionsParams(projectid string) *ListProjectRolePermissionsParams {
+	p := &ListProjectRolePermissionsParams{}
+	p.p = make(map[string]interface{})
+	p.p["projectid"] = projectid
+	return p
+}
+
+// Lists a project's project role permissions
+func (s *ProjectService) ListProjectRolePermissions(p *ListProjectRolePermissionsParams) (*ListProjectRolePermissionsResponse, error) {
+	resp, err := s.cs.newRequest("listProjectRolePermissions", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListProjectRolePermissionsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListProjectRolePermissionsResponse struct {
+	Count                  int                      `json:"count"`
+	ProjectRolePermissions []*ProjectRolePermission `json:"projectrolepermission"`
+}
+
+type ProjectRolePermission struct {
+	Description     string `json:"description"`
+	Id              string `json:"id"`
+	JobID           string `json:"jobid"`
+	Jobstatus       int    `json:"jobstatus"`
+	Permission      string `json:"permission"`
+	Projectid       string `json:"projectid"`
+	Projectroleid   string `json:"projectroleid"`
+	Projectrolename string `json:"projectrolename"`
+	Rule            string `json:"rule"`
+}
+
+type CreateProjectRolePermissionParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateProjectRolePermissionParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["permission"]; found {
+		u.Set("permission", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["projectroleid"]; found {
+		u.Set("projectroleid", v.(string))
+	}
+	if v, found := p.p["rule"]; found {
+		u.Set("rule", v.(string))
+	}
+	return u
+}
+
+func (p *CreateProjectRolePermissionParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *CreateProjectRolePermissionParams) SetPermission(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["permission"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) GetPermission() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["permission"].(string)
+	return value, ok
+}
+
+func (p *CreateProjectRolePermissionParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *CreateProjectRolePermissionParams) SetProjectroleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectroleid"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) GetProjectroleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectroleid"].(string)
+	return value, ok
+}
+
+func (p *CreateProjectRolePermissionParams) SetRule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["rule"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) GetRule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rule"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateProjectRolePermissionParams instance,
+// as then you are sure you have configured all required params
+func (s *ProjectService) NewCreateProjectRolePermissionParams(permission string, projectid string, projectroleid string, rule string) *CreateProjectRolePermissionParams {
+	p := &CreateProjectRolePermissionParams{}
+	p.p = make(map[string]interface{})
+	p.p["permission"] = permission
+	p.p["projectid"] = projectid
+	p.p["projectroleid"] = projectroleid
+	p.p["rule"] = rule
+	return p
+}
+
+// Adds API permissions to a project role
+func (s *ProjectService) CreateProjectRolePermission(p *CreateProjectRolePermissionParams) (*CreateProjectRolePermissionResponse, error) {
+	resp, err := s.cs.newRequest("createProjectRolePermission", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateProjectRolePermissionResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type CreateProjectRolePermissionResponse struct {
+	Description     string `json:"description"`
+	Id              string `json:"id"`
+	JobID           string `json:"jobid"`
+	Jobstatus       int    `json:"jobstatus"`
+	Permission      string `json:"permission"`
+	Projectid       string `json:"projectid"`
+	Projectroleid   string `json:"projectroleid"`
+	Projectrolename string `json:"projectrolename"`
+	Rule            string `json:"rule"`
+}
+
+type UpdateProjectRolePermissionParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateProjectRolePermissionParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["permission"]; found {
+		u.Set("permission", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["projectroleid"]; found {
+		u.Set("projectroleid", v.(string))
+	}
+	if v, found := p.p["projectrolepermissionid"]; found {
+		u.Set("projectrolepermissionid", v.(string))
+	}
+	if v, found := p.p["ruleorder"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ruleorder", vv)
+	}
+	return u
+}
+
+func (p *UpdateProjectRolePermissionParams) SetPermission(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["permission"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) GetPermission() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["permission"].(string)
+	return value, ok
+}
+
+func (p *UpdateProjectRolePermissionParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *UpdateProjectRolePermissionParams) SetProjectroleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectroleid"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) GetProjectroleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectroleid"].(string)
+	return value, ok
+}
+
+func (p *UpdateProjectRolePermissionParams) SetProjectrolepermissionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectrolepermissionid"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) GetProjectrolepermissionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectrolepermissionid"].(string)
+	return value, ok
+}
+
+func (p *UpdateProjectRolePermissionParams) SetRuleorder(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ruleorder"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) GetRuleorder() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ruleorder"].([]string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateProjectRolePermissionParams instance,
+// as then you are sure you have configured all required params
+func (s *ProjectService) NewUpdateProjectRolePermissionParams(projectid string, projectroleid string) *UpdateProjectRolePermissionParams {
+	p := &UpdateProjectRolePermissionParams{}
+	p.p = make(map[string]interface{})
+	p.p["projectid"] = projectid
+	p.p["projectroleid"] = projectroleid
+	return p
+}
+
+// Updates a project role permission and/or order
+func (s *ProjectService) UpdateProjectRolePermission(p *UpdateProjectRolePermissionParams) (*UpdateProjectRolePermissionResponse, error) {
+	resp, err := s.cs.newRequest("updateProjectRolePermission", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateProjectRolePermissionResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type UpdateProjectRolePermissionResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *UpdateProjectRolePermissionResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias UpdateProjectRolePermissionResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type DeleteProjectRolePermissionParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteProjectRolePermissionParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteProjectRolePermissionParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteProjectRolePermissionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DeleteProjectRolePermissionParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *DeleteProjectRolePermissionParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteProjectRolePermissionParams instance,
+// as then you are sure you have configured all required params
+func (s *ProjectService) NewDeleteProjectRolePermissionParams(id string, projectid string) *DeleteProjectRolePermissionParams {
+	p := &DeleteProjectRolePermissionParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	p.p["projectid"] = projectid
+	return p
+}
+
+// Deletes a project role permission in the project
+func (s *ProjectService) DeleteProjectRolePermission(p *DeleteProjectRolePermissionParams) (*DeleteProjectRolePermissionResponse, error) {
+	resp, err := s.cs.newRequest("deleteProjectRolePermission", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteProjectRolePermissionResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type DeleteProjectRolePermissionResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *DeleteProjectRolePermissionResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias DeleteProjectRolePermissionResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

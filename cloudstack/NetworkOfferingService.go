@@ -29,7 +29,7 @@ import (
 
 type NetworkOfferingServiceIface interface {
 	CreateNetworkOffering(p *CreateNetworkOfferingParams) (*CreateNetworkOfferingResponse, error)
-	NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, supportedservices []string, traffictype string) *CreateNetworkOfferingParams
+	NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams
 	DeleteNetworkOffering(p *DeleteNetworkOfferingParams) (*DeleteNetworkOfferingResponse, error)
 	NewDeleteNetworkOfferingParams(id string) *DeleteNetworkOfferingParams
 	ListNetworkOfferings(p *ListNetworkOfferingsParams) (*ListNetworkOfferingsResponse, error)
@@ -73,6 +73,10 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["egressdefaultpolicy"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("egressdefaultpolicy", vv)
+	}
+	if v, found := p.p["enable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enable", vv)
 	}
 	if v, found := p.p["forvpc"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -229,6 +233,21 @@ func (p *CreateNetworkOfferingParams) GetEgressdefaultpolicy() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["egressdefaultpolicy"].(bool)
+	return value, ok
+}
+
+func (p *CreateNetworkOfferingParams) SetEnable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enable"] = v
+}
+
+func (p *CreateNetworkOfferingParams) GetEnable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enable"].(bool)
 	return value, ok
 }
 
@@ -474,13 +493,12 @@ func (p *CreateNetworkOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateNetworkOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, supportedservices []string, traffictype string) *CreateNetworkOfferingParams {
+func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams {
 	p := &CreateNetworkOfferingParams{}
 	p.p = make(map[string]interface{})
 	p.p["displaytext"] = displaytext
 	p.p["guestiptype"] = guestiptype
 	p.p["name"] = name
-	p.p["supportedservices"] = supportedservices
 	p.p["traffictype"] = traffictype
 	return p
 }
@@ -515,6 +533,7 @@ type CreateNetworkOfferingResponse struct {
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
+	Hasannotations           bool                                   `json:"hasannotations"`
 	Id                       string                                 `json:"id"`
 	Isdefault                bool                                   `json:"isdefault"`
 	Ispersistent             bool                                   `json:"ispersistent"`
@@ -1167,6 +1186,7 @@ type NetworkOffering struct {
 	Egressdefaultpolicy      bool                             `json:"egressdefaultpolicy"`
 	Forvpc                   bool                             `json:"forvpc"`
 	Guestiptype              string                           `json:"guestiptype"`
+	Hasannotations           bool                             `json:"hasannotations"`
 	Id                       string                           `json:"id"`
 	Isdefault                bool                             `json:"isdefault"`
 	Ispersistent             bool                             `json:"ispersistent"`
@@ -1461,6 +1481,7 @@ type UpdateNetworkOfferingResponse struct {
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
+	Hasannotations           bool                                   `json:"hasannotations"`
 	Id                       string                                 `json:"id"`
 	Isdefault                bool                                   `json:"isdefault"`
 	Ispersistent             bool                                   `json:"ispersistent"`

@@ -394,13 +394,37 @@ func (s *LimitService) ResetApiLimit(p *ResetApiLimitParams) (*ResetApiLimitResp
 }
 
 type ResetApiLimitResponse struct {
-	Account     string `json:"account"`
-	Accountid   string `json:"accountid"`
-	ApiAllowed  int    `json:"apiAllowed"`
-	ApiIssued   int    `json:"apiIssued"`
-	ExpireAfter int64  `json:"expireAfter"`
+	Displaytext string `json:"displaytext"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *ResetApiLimitResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias ResetApiLimitResponse
+	return json.Unmarshal(b, (*alias)(r))
 }
 
 type UpdateResourceCountParams struct {

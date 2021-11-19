@@ -196,6 +196,7 @@ type AttachVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -225,6 +226,7 @@ type AttachVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -556,6 +558,7 @@ type CreateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -585,6 +588,7 @@ type CreateVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -821,6 +825,7 @@ type DetachVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -850,6 +855,7 @@ type DetachVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -1959,6 +1965,7 @@ type Volume struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -1988,6 +1995,7 @@ type Volume struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -2156,6 +2164,7 @@ type MigrateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -2185,6 +2194,7 @@ type MigrateVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -2391,6 +2401,7 @@ type ResizeVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -2420,6 +2431,7 @@ type ResizeVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -2456,6 +2468,9 @@ func (p *UpdateVolumeParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["path"]; found {
 		u.Set("path", v.(string))
@@ -2526,6 +2541,21 @@ func (p *UpdateVolumeParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateVolumeParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateVolumeParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -2640,6 +2670,7 @@ type UpdateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -2669,6 +2700,7 @@ type UpdateVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`
@@ -2946,6 +2978,7 @@ type UploadVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
 	Isextractable              bool   `json:"isextractable"`
@@ -2975,6 +3008,7 @@ type UploadVolumeResponse struct {
 	Storage                    string `json:"storage"`
 	Storageid                  string `json:"storageid"`
 	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
 	Tags                       []Tags `json:"tags"`
 	Templatedisplaytext        string `json:"templatedisplaytext"`
 	Templateid                 string `json:"templateid"`

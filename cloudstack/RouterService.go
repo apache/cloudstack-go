@@ -138,6 +138,7 @@ type ChangeServiceForRouterResponse struct {
 	Guestnetmask        string                                             `json:"guestnetmask"`
 	Guestnetworkid      string                                             `json:"guestnetworkid"`
 	Guestnetworkname    string                                             `json:"guestnetworkname"`
+	Hasannotations      bool                                               `json:"hasannotations"`
 	Healthcheckresults  []ChangeServiceForRouterResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                               `json:"healthchecksfailed"`
 	Hostid              string                                             `json:"hostid"`
@@ -487,6 +488,7 @@ type DestroyRouterResponse struct {
 	Guestnetmask        string                                    `json:"guestnetmask"`
 	Guestnetworkid      string                                    `json:"guestnetworkid"`
 	Guestnetworkname    string                                    `json:"guestnetworkname"`
+	Hasannotations      bool                                      `json:"hasannotations"`
 	Healthcheckresults  []DestroyRouterResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                      `json:"healthchecksfailed"`
 	Hostid              string                                    `json:"hostid"`
@@ -562,6 +564,10 @@ func (p *ListRoutersParams) toURLValues() url.Values {
 	if v, found := p.p["forvpc"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvpc", vv)
+	}
+	if v, found := p.p["healthchecksfailed"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("healthchecksfailed", vv)
 	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
@@ -687,6 +693,21 @@ func (p *ListRoutersParams) GetForvpc() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["forvpc"].(bool)
+	return value, ok
+}
+
+func (p *ListRoutersParams) SetHealthchecksfailed(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["healthchecksfailed"] = v
+}
+
+func (p *ListRoutersParams) GetHealthchecksfailed() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["healthchecksfailed"].(bool)
 	return value, ok
 }
 
@@ -1039,6 +1060,7 @@ type Router struct {
 	Guestnetmask        string                     `json:"guestnetmask"`
 	Guestnetworkid      string                     `json:"guestnetworkid"`
 	Guestnetworkname    string                     `json:"guestnetworkname"`
+	Hasannotations      bool                       `json:"hasannotations"`
 	Healthcheckresults  []RouterHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                       `json:"healthchecksfailed"`
 	Hostid              string                     `json:"hostid"`
@@ -1295,10 +1317,29 @@ func (p *RebootRouterParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *RebootRouterParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *RebootRouterParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
 }
 
 func (p *RebootRouterParams) SetId(v string) {
@@ -1373,6 +1414,7 @@ type RebootRouterResponse struct {
 	Guestnetmask        string                                   `json:"guestnetmask"`
 	Guestnetworkid      string                                   `json:"guestnetworkid"`
 	Guestnetworkname    string                                   `json:"guestnetworkname"`
+	Hasannotations      bool                                     `json:"hasannotations"`
 	Healthcheckresults  []RebootRouterResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                     `json:"healthchecksfailed"`
 	Hostid              string                                   `json:"hostid"`
@@ -1510,6 +1552,7 @@ type StartRouterResponse struct {
 	Guestnetmask        string                                  `json:"guestnetmask"`
 	Guestnetworkid      string                                  `json:"guestnetworkid"`
 	Guestnetworkname    string                                  `json:"guestnetworkname"`
+	Hasannotations      bool                                    `json:"hasannotations"`
 	Healthcheckresults  []StartRouterResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                    `json:"healthchecksfailed"`
 	Hostid              string                                  `json:"hostid"`
@@ -1666,6 +1709,7 @@ type StopRouterResponse struct {
 	Guestnetmask        string                                 `json:"guestnetmask"`
 	Guestnetworkid      string                                 `json:"guestnetworkid"`
 	Guestnetworkname    string                                 `json:"guestnetworkname"`
+	Hasannotations      bool                                   `json:"hasannotations"`
 	Healthcheckresults  []StopRouterResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                   `json:"healthchecksfailed"`
 	Hostid              string                                 `json:"hostid"`

@@ -86,7 +86,6 @@ func TestConfigurationService_UpdateConfigurations(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to update configuration due to: %v", err)
 	}
-
 	if resp.Value != "false" {
 		t.Errorf("Failed to update configuration")
 	}

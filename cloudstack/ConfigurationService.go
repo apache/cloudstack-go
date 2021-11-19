@@ -86,6 +86,7 @@ type Capability struct {
 	Cloudstackversion                            string `json:"cloudstackversion"`
 	Customdiskofferingmaxsize                    int64  `json:"customdiskofferingmaxsize"`
 	Customdiskofferingminsize                    int64  `json:"customdiskofferingminsize"`
+	Defaultuipagesize                            int64  `json:"defaultuipagesize"`
 	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
 	JobID                                        string `json:"jobid"`
 	Jobstatus                                    int    `json:"jobstatus"`

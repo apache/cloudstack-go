@@ -21,6 +21,7 @@ package cloudstack
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -32,6 +33,7 @@ type SSHServiceIface interface {
 	NewDeleteSSHKeyPairParams(name string) *DeleteSSHKeyPairParams
 	ListSSHKeyPairs(p *ListSSHKeyPairsParams) (*ListSSHKeyPairsResponse, error)
 	NewListSSHKeyPairsParams() *ListSSHKeyPairsParams
+	GetSSHKeyPairID(name string, opts ...OptionFunc) (string, int, error)
 	RegisterSSHKeyPair(p *RegisterSSHKeyPairParams) (*RegisterSSHKeyPairResponse, error)
 	NewRegisterSSHKeyPairParams(name string, publickey string) *RegisterSSHKeyPairParams
 	ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachineParams) (*ResetSSHKeyForVirtualMachineResponse, error)
@@ -151,14 +153,16 @@ func (s *SSHService) CreateSSHKeyPair(p *CreateSSHKeyPairParams) (*CreateSSHKeyP
 }
 
 type CreateSSHKeyPairResponse struct {
-	Account     string `json:"account"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Fingerprint string `json:"fingerprint"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Privatekey  string `json:"privatekey"`
+	Account        string `json:"account"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Fingerprint    string `json:"fingerprint"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Privatekey     string `json:"privatekey"`
 }
 
 type DeleteSSHKeyPairParams struct {
@@ -507,6 +511,42 @@ func (s *SSHService) NewListSSHKeyPairsParams() *ListSSHKeyPairsParams {
 	return p
 }
 
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *SSHService) GetSSHKeyPairID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListSSHKeyPairsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListSSHKeyPairs(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.SSHKeyPairs[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.SSHKeyPairs {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
 // List registered keypairs
 func (s *SSHService) ListSSHKeyPairs(p *ListSSHKeyPairsParams) (*ListSSHKeyPairsResponse, error) {
 	resp, err := s.cs.newRequest("listSSHKeyPairs", p.toURLValues())
@@ -528,13 +568,15 @@ type ListSSHKeyPairsResponse struct {
 }
 
 type SSHKeyPair struct {
-	Account     string `json:"account"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Fingerprint string `json:"fingerprint"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
+	Account        string `json:"account"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Fingerprint    string `json:"fingerprint"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
 }
 
 type RegisterSSHKeyPairParams struct {
@@ -669,13 +711,15 @@ func (s *SSHService) RegisterSSHKeyPair(p *RegisterSSHKeyPairParams) (*RegisterS
 }
 
 type RegisterSSHKeyPairResponse struct {
-	Account     string `json:"account"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Fingerprint string `json:"fingerprint"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
+	Account        string `json:"account"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Fingerprint    string `json:"fingerprint"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
 }
 
 type ResetSSHKeyForVirtualMachineParams struct {
@@ -852,9 +896,11 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Groupid               string                                              `json:"groupid"`
 	Guestosid             string                                              `json:"guestosid"`
 	Haenable              bool                                                `json:"haenable"`
+	Hasannotations        bool                                                `json:"hasannotations"`
 	Hostid                string                                              `json:"hostid"`
 	Hostname              string                                              `json:"hostname"`
 	Hypervisor            string                                              `json:"hypervisor"`
+	Icon                  string                                              `json:"icon"`
 	Id                    string                                              `json:"id"`
 	Instancename          string                                              `json:"instancename"`
 	Isdynamicallyscalable bool                                                `json:"isdynamicallyscalable"`
@@ -864,6 +910,7 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	JobID                 string                                              `json:"jobid"`
 	Jobstatus             int                                                 `json:"jobstatus"`
 	Keypair               string                                              `json:"keypair"`
+	Lastupdated           string                                              `json:"lastupdated"`
 	Memory                int                                                 `json:"memory"`
 	Memoryintfreekbs      int64                                               `json:"memoryintfreekbs"`
 	Memorykbs             int64                                               `json:"memorykbs"`
@@ -876,14 +923,17 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Ostypeid              string                                              `json:"ostypeid"`
 	Password              string                                              `json:"password"`
 	Passwordenabled       bool                                                `json:"passwordenabled"`
+	Pooltype              string                                              `json:"pooltype"`
 	Project               string                                              `json:"project"`
 	Projectid             string                                              `json:"projectid"`
 	Publicip              string                                              `json:"publicip"`
 	Publicipid            string                                              `json:"publicipid"`
-	Readonlyuidetails     string                                              `json:"readonlyuidetails"`
+	Readonlydetails       string                                              `json:"readonlydetails"`
+	Receivedbytes         int64                                               `json:"receivedbytes"`
 	Rootdeviceid          int64                                               `json:"rootdeviceid"`
 	Rootdevicetype        string                                              `json:"rootdevicetype"`
 	Securitygroup         []ResetSSHKeyForVirtualMachineResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                               `json:"sentbytes"`
 	Serviceofferingid     string                                              `json:"serviceofferingid"`
 	Serviceofferingname   string                                              `json:"serviceofferingname"`
 	Servicestate          string                                              `json:"servicestate"`

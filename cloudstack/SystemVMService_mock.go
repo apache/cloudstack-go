@@ -218,17 +218,17 @@ func (mr *MockSystemVMServiceIfaceMockRecorder) NewListSystemVmsParams() *gomock
 }
 
 // NewMigrateSystemVmParams mocks base method.
-func (m *MockSystemVMServiceIface) NewMigrateSystemVmParams(hostid, virtualmachineid string) *MigrateSystemVmParams {
+func (m *MockSystemVMServiceIface) NewMigrateSystemVmParams(virtualmachineid string) *MigrateSystemVmParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewMigrateSystemVmParams", hostid, virtualmachineid)
+	ret := m.ctrl.Call(m, "NewMigrateSystemVmParams", virtualmachineid)
 	ret0, _ := ret[0].(*MigrateSystemVmParams)
 	return ret0
 }
 
 // NewMigrateSystemVmParams indicates an expected call of NewMigrateSystemVmParams.
-func (mr *MockSystemVMServiceIfaceMockRecorder) NewMigrateSystemVmParams(hostid, virtualmachineid interface{}) *gomock.Call {
+func (mr *MockSystemVMServiceIfaceMockRecorder) NewMigrateSystemVmParams(virtualmachineid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateSystemVmParams", reflect.TypeOf((*MockSystemVMServiceIface)(nil).NewMigrateSystemVmParams), hostid, virtualmachineid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateSystemVmParams", reflect.TypeOf((*MockSystemVMServiceIface)(nil).NewMigrateSystemVmParams), virtualmachineid)
 }
 
 // NewRebootSystemVmParams mocks base method.

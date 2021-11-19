@@ -103,6 +103,10 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("domainid", vv)
 	}
+	if v, found := p.p["dynamicscalingenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("dynamicscalingenabled", vv)
+	}
 	if v, found := p.p["hosttags"]; found {
 		u.Set("hosttags", v.(string))
 	}
@@ -425,6 +429,21 @@ func (p *CreateServiceOfferingParams) GetDomainid() ([]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].([]string)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetDynamicscalingenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dynamicscalingenabled"] = v
+}
+
+func (p *CreateServiceOfferingParams) GetDynamicscalingenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dynamicscalingenabled"].(bool)
 	return value, ok
 }
 
@@ -914,6 +933,8 @@ type CreateServiceOfferingResponse struct {
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
+	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
 	Id                          string            `json:"id"`
@@ -933,9 +954,9 @@ type CreateServiceOfferingResponse struct {
 	Provisioningtype            string            `json:"provisioningtype"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
-	Tags                        string            `json:"tags"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`
@@ -1452,6 +1473,8 @@ type ServiceOffering struct {
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
+	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
 	Id                          string            `json:"id"`
@@ -1471,9 +1494,9 @@ type ServiceOffering struct {
 	Provisioningtype            string            `json:"provisioningtype"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
-	Tags                        string            `json:"tags"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`
@@ -1494,6 +1517,9 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["hosttags"]; found {
+		u.Set("hosttags", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1503,6 +1529,9 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["sortkey"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("sortkey", vv)
+	}
+	if v, found := p.p["storagetags"]; found {
+		u.Set("storagetags", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -1537,6 +1566,21 @@ func (p *UpdateServiceOfferingParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *UpdateServiceOfferingParams) SetHosttags(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hosttags"] = v
+}
+
+func (p *UpdateServiceOfferingParams) GetHosttags() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hosttags"].(string)
 	return value, ok
 }
 
@@ -1582,6 +1626,21 @@ func (p *UpdateServiceOfferingParams) GetSortkey() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["sortkey"].(int)
+	return value, ok
+}
+
+func (p *UpdateServiceOfferingParams) SetStoragetags(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagetags"] = v
+}
+
+func (p *UpdateServiceOfferingParams) GetStoragetags() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storagetags"].(string)
 	return value, ok
 }
 
@@ -1650,6 +1709,8 @@ type UpdateServiceOfferingResponse struct {
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
+	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
 	Id                          string            `json:"id"`
@@ -1669,9 +1730,9 @@ type UpdateServiceOfferingResponse struct {
 	Provisioningtype            string            `json:"provisioningtype"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
-	Tags                        string            `json:"tags"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`
