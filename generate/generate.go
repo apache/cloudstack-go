@@ -63,6 +63,14 @@ var mapRequireList = map[string]map[string]bool{
 	},
 }
 
+// nestedResponse is a prefilled map with the list of endpoints
+// that responses fields are nested in a parent object. The map value
+// gives the object field name.
+var nestedResponse = map[string]string{
+	"getUploadParamsForTemplate": "getuploadparams",
+	"getUploadParamsForVolume":   "getuploadparams",
+}
+
 // We prefill this one value to make sure it is not
 // created twice, as this is also a top level type.
 var typeNames = map[string]bool{"Nic": true}
@@ -1479,10 +1487,21 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		pn("		}")
 		pn("")
 	}
-	pn("	var r %s", strings.TrimPrefix(n, "Configure")+"Response")
-	pn("	if err := json.Unmarshal(resp, &r); err != nil {")
-	pn("		return nil, err")
-	pn("	}")
+
+	if field, isNested := nestedResponse[a.Name]; isNested {
+		pn("	var nested struct {")
+		pn("			Response %sResponse `json:\"%s\"`", strings.TrimPrefix(n, "Configure"), field)
+		pn("	}")
+		pn("	if err := json.Unmarshal(resp, &nested); err != nil {")
+		pn("		return nil, err")
+		pn("	}")
+		pn("	r := nested.Response")
+	} else {
+		pn("	var r %sResponse", strings.TrimPrefix(n, "Configure"))
+		pn("	if err := json.Unmarshal(resp, &r); err != nil {")
+		pn("		return nil, err")
+		pn("	}")
+	}
 	pn("")
 	if a.Isasync {
 		pn("	// If we have a async client, we need to wait for the async result")

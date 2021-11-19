@@ -1419,10 +1419,13 @@ func (s *TemplateService) GetUploadParamsForTemplate(p *GetUploadParamsForTempla
 		return nil, err
 	}
 
-	var r GetUploadParamsForTemplateResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetUploadParamsForTemplateResponse `json:"getuploadparams"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
