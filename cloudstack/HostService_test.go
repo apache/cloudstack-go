@@ -88,6 +88,7 @@ func TestHostService_PrepareHostForMaintenance(t *testing.T) {
 	resp, err := client.Host.PrepareHostForMaintenance(params)
 	if err != nil {
 		t.Errorf("Failed to prepare host for maintenance due to: %v", err)
+		return
 	}
 	if resp.Resourcestate != "PrepareForMaintenance" {
 		t.Errorf("Failed to prepare host for maintenance")
@@ -109,6 +110,7 @@ func TestHostService_CancelHostForMaintenance(t *testing.T) {
 	resp, err := client.Host.CancelHostMaintenance(params)
 	if err != nil {
 		t.Errorf("Failed to cancel host for maintenance due to: %v", err)
+		return
 	}
 	if resp.Resourcestate != "Enabled" {
 		t.Errorf("Failed to cancel host for maintenance")

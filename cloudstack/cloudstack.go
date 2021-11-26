@@ -76,12 +76,15 @@ func (c CSLong) MarshalJSON() ([]byte, error) {
 
 func (c *CSLong) UnmarshalJSON(data []byte) error {
 	value := strings.Trim(string(data), "\"")
-	iVal, err := strconv.ParseInt(value, 10, 64)
-	if err == nil {
-		*c = CSLong(fmt.Sprintf("%d", iVal))
-	} else {
+	if strings.HasPrefix(string(data), "\"") {
 		*c = CSLong(value)
+		return nil
 	}
+	_, err := strconv.ParseInt(value, 10, 64)
+	if err != nil {
+		return err
+	}
+	*c = CSLong(value)
 	return nil
 }
 
