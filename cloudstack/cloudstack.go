@@ -68,23 +68,23 @@ func (e *CSError) Error() error {
 	return fmt.Errorf("CloudStack API error %d (CSExceptionErrorCode: %d): %s", e.ErrorCode, e.CSErrorCode, e.ErrorText)
 }
 
-type CSLong string
+type UUID string
 
-func (c CSLong) MarshalJSON() ([]byte, error) {
+func (c UUID) MarshalJSON() ([]byte, error) {
 	return json.Marshal(string(c))
 }
 
-func (c *CSLong) UnmarshalJSON(data []byte) error {
+func (c *UUID) UnmarshalJSON(data []byte) error {
 	value := strings.Trim(string(data), "\"")
 	if strings.HasPrefix(string(data), "\"") {
-		*c = CSLong(value)
+		*c = UUID(value)
 		return nil
 	}
 	_, err := strconv.ParseInt(value, 10, 64)
 	if err != nil {
 		return err
 	}
-	*c = CSLong(value)
+	*c = UUID(value)
 	return nil
 }
 
