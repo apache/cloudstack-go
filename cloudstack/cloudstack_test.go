@@ -87,3 +87,35 @@ func TestCreateSyncClient(t *testing.T) {
 		t.Errorf("Failed to create Cloudstack Client")
 	}
 }
+
+type UUIDStruct struct {
+	Value UUID `json:"value"`
+}
+
+func TestUUID(t *testing.T) {
+	valLong := `{"value": 4801878}`
+	valString := `{"value": "994801878"}`
+	valBool := `{"value": false}`
+	res := UUIDStruct{}
+
+	res.Value = ""
+	if err := json.Unmarshal([]byte(valLong), &res); err != nil {
+		t.Errorf("could not unserialize long into UUID: %s", err)
+	}
+	if res.Value != "4801878" {
+		t.Errorf("unepected value '%s', expecting 4801878", res.Value)
+	}
+
+	res.Value = ""
+	if err := json.Unmarshal([]byte(valString), &res); err != nil {
+		t.Errorf("could not unserialize string into UUID: %s", err)
+	}
+	if res.Value != "994801878" {
+		t.Errorf("unepected value '%s', expecting 994801878", res.Value)
+	}
+
+	res.Value = ""
+	if err := json.Unmarshal([]byte(valBool), &res); err == nil {
+		t.Errorf("missing expected error when serializing bool into UUID")
+	}
+}

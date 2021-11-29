@@ -71,6 +71,14 @@ var nestedResponse = map[string]string{
 	"getUploadParamsForVolume":   "getuploadparams",
 }
 
+// longToStringConvertedParams is a prefilled map with the list of
+// response fields that migrated from long to string within
+// the current major baseline. This fields will be parsed from
+// json as string and then fallback on long.
+var longToStringConvertedParams = map[string]bool{
+	"managementserverid": true,
+}
+
 // We prefill this one value to make sure it is not
 // created twice, as this is also a top level type.
 var typeNames = map[string]bool{"Nic": true}
@@ -301,6 +309,27 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("	return fmt.Errorf(\"CloudStack API error %%d (CSExceptionErrorCode: %%d): %%s\", e.ErrorCode, e.CSErrorCode, e.ErrorText)")
 	pn("}")
 	pn("")
+
+	pn("type UUID string")
+	pn("")
+	pn("func (c UUID) MarshalJSON() ([]byte, error) {")
+	pn("	return json.Marshal(string(c))")
+	pn("}")
+	pn("")
+	pn("func (c *UUID) UnmarshalJSON(data []byte) error {")
+	pn("	value := strings.Trim(string(data), \"\\\"\")")
+	pn("	if strings.HasPrefix(string(data), \"\\\"\") {")
+	pn("		*c = UUID(value)")
+	pn("	  return nil")
+	pn("	}")
+	pn("	_, err := strconv.ParseInt(value, 10, 64)")
+	pn("	if err != nil {")
+	pn("		return err")
+	pn("	}")
+	pn("	*c = UUID(value)")
+	pn("	return nil")
+	pn("}")
+
 	pn("type CloudStackClient struct {")
 	pn("	HTTPGETOnly bool // If `true` only use HTTP GET calls")
 	pn("")
@@ -1802,7 +1831,13 @@ func sourceDir() (string, error) {
 }
 
 func mapType(aName string, pName string, pType string) string {
+	if _, ok := longToStringConvertedParams[pName]; ok {
+		pType = "UUID"
+	}
+
 	switch pType {
+	case "UUID":
+		return "UUID"
 	case "boolean":
 		return "bool"
 	case "short", "int", "integer":

@@ -35,6 +35,7 @@ import (
 	"net/url"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -65,6 +66,26 @@ type CSError struct {
 
 func (e *CSError) Error() error {
 	return fmt.Errorf("CloudStack API error %d (CSExceptionErrorCode: %d): %s", e.ErrorCode, e.CSErrorCode, e.ErrorText)
+}
+
+type UUID string
+
+func (c UUID) MarshalJSON() ([]byte, error) {
+	return json.Marshal(string(c))
+}
+
+func (c *UUID) UnmarshalJSON(data []byte) error {
+	value := strings.Trim(string(data), "\"")
+	if strings.HasPrefix(string(data), "\"") {
+		*c = UUID(value)
+		return nil
+	}
+	_, err := strconv.ParseInt(value, 10, 64)
+	if err != nil {
+		return err
+	}
+	*c = UUID(value)
+	return nil
 }
 
 type CloudStackClient struct {
