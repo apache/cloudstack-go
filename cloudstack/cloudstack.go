@@ -125,6 +125,7 @@ type CloudStackClient struct {
 	ISO                 ISOServiceIface
 	ImageStore          ImageStoreServiceIface
 	InternalLB          InternalLBServiceIface
+	Kubernetes          KubernetesServiceIface
 	LDAP                LDAPServiceIface
 	Limit               LimitServiceIface
 	LoadBalancer        LoadBalancerServiceIface
@@ -228,6 +229,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.ISO = NewISOService(cs)
 	cs.ImageStore = NewImageStoreService(cs)
 	cs.InternalLB = NewInternalLBService(cs)
+	cs.Kubernetes = NewKubernetesService(cs)
 	cs.LDAP = NewLDAPService(cs)
 	cs.Limit = NewLimitService(cs)
 	cs.LoadBalancer = NewLoadBalancerService(cs)
@@ -304,6 +306,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.ISO = NewMockISOServiceIface(ctrl)
 	cs.ImageStore = NewMockImageStoreServiceIface(ctrl)
 	cs.InternalLB = NewMockInternalLBServiceIface(ctrl)
+	cs.Kubernetes = NewMockKubernetesServiceIface(ctrl)
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
 	cs.Limit = NewMockLimitServiceIface(ctrl)
 	cs.LoadBalancer = NewMockLoadBalancerServiceIface(ctrl)
@@ -899,6 +902,14 @@ type InternalLBService struct {
 
 func NewInternalLBService(cs *CloudStackClient) InternalLBServiceIface {
 	return &InternalLBService{cs: cs}
+}
+
+type KubernetesService struct {
+	cs *CloudStackClient
+}
+
+func NewKubernetesService(cs *CloudStackClient) KubernetesServiceIface {
+	return &KubernetesService{cs: cs}
 }
 
 type LDAPService struct {
