@@ -39,7 +39,6 @@ func TestVPCService_RestartVPC(t *testing.T) {
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.VPC.NewRestartVPCParams("f9ec95f3-70be-448a-8ba2-cb6388dce55a")
 
-	fmt.Printf(">>>>> 1 params: %v", params)
 	resp, err := client.VPC.RestartVPC(params)
 	if err != nil {
 		t.Errorf("Failed to restart VPC network due to: %v", err)

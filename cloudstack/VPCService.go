@@ -2855,7 +2855,7 @@ type VPC struct {
 	JobID                string               `json:"jobid"`
 	Jobstatus            int                  `json:"jobstatus"`
 	Name                 string               `json:"name"`
-	Network              []string             `json:"network"`
+	Network              []Network            `json:"network"`
 	Networkdomain        string               `json:"networkdomain"`
 	Project              string               `json:"project"`
 	Projectid            string               `json:"projectid"`
