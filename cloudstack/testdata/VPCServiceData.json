@@ -26,7 +26,7 @@
   "listVPCs": {
     "listVPCs": {
       "listvpcresponse": {
-        "count": 1,
+        "count": 2,
         "vpc": [
           {
             "id": "49b5fa29-e98f-4078-b407-7e7928105ec0",
@@ -83,16 +83,7 @@
             "regionlevelvpc": false,
             "redundantvpcrouter": false,
             "hasannotations": false
-          }
-        ]
-      }
-    }
-  },
-  "listVPCs0": {
-    "listVPCs0": {
-      "listvpcresponse": {
-        "count": 1,
-        "vpc": [
+          },
           {
             "id": "78d49100-e4af-4692-9a49-284fa2444eb9",
             "name": "my-vpc",
