@@ -22,5 +22,57 @@
         "jobid": "98272f42-917c-4286-8c05-4e38d85d32e0"
       }
     }
+  },
+  "listVPCs": {
+    "count": 1,
+    "vpc": [
+      {
+        "id": "49b5fa29-e98f-4078-b407-7e7928105ec0",
+        "name": "my-vpc",
+        "displaytext": "my-vpc-text",
+        "state": "Enabled",
+        "zoneid": "7ca6c137-baf5-44a9-b10a-f86f540d3e9c",
+        "zonename": "Sandbox-simulator",
+        "service": [
+          { "name": "Dns", "provider": [{ "name": "VpcVirtualRouter" }] },
+          { "name": "Dhcp", "provider": [{ "name": "VpcVirtualRouter" }] },
+          {
+            "name": "PortForwarding",
+            "provider": [{ "name": "VpcVirtualRouter" }]
+          },
+          { "name": "StaticNat", "provider": [{ "name": "VpcVirtualRouter" }] },
+          { "name": "Vpn", "provider": [{ "name": "VpcVirtualRouter" }] },
+          { "name": "SourceNat", "provider": [{ "name": "VpcVirtualRouter" }] },
+          {
+            "name": "NetworkACL",
+            "provider": [{ "name": "VpcVirtualRouter" }]
+          },
+          { "name": "UserData", "provider": [{ "name": "VpcVirtualRouter" }] },
+          {
+            "name": "Lb",
+            "provider": [
+              { "name": "VpcVirtualRouter" },
+              { "name": "InternalLbVm" }
+            ]
+          }
+        ],
+        "cidr": "10.0.0.0/8",
+        "vpcofferingid": "8142b164-0fa2-40c6-9067-2a90ae526df5",
+        "vpcofferingname": "Default VPC offering",
+        "created": "2021-12-26T22:26:18+0000",
+        "account": "admin",
+        "domainid": "bbae9696-627f-11ec-8fb6-0242ac110002",
+        "domain": "ROOT",
+        "network": [],
+        "restartrequired": false,
+        "networkdomain": "my-domain",
+        "tags": [{ "key": "my-tag", "value": "true" }],
+        "fordisplay": true,
+        "distributedvpcrouter": false,
+        "regionlevelvpc": false,
+        "redundantvpcrouter": false,
+        "hasannotations": false
+      }
+    ]
   }
 }
