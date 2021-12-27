@@ -38,6 +38,8 @@ func TestVPCService_RestartVPC(t *testing.T) {
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.VPC.NewRestartVPCParams("f9ec95f3-70be-448a-8ba2-cb6388dce55a")
+
+	fmt.Printf(">>>>> 1 params: %v", params)
 	resp, err := client.VPC.RestartVPC(params)
 	if err != nil {
 		t.Errorf("Failed to restart VPC network due to: %v", err)
@@ -51,6 +53,7 @@ func TestVPCService_ListVPCs(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		apiName := "listVPCs"
 		response, err := ParseAsyncResponse(apiName, "VPCService", *request)
+		fmt.Printf(">>>>> VPC Resp: %v", response)
 		if err != nil {
 			t.Errorf("Failed to parse response, due to: %v", err)
 		}
@@ -59,7 +62,10 @@ func TestVPCService_ListVPCs(t *testing.T) {
 	defer server.Close()
 	client := NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", false)
 	params := client.VPC.NewListVPCsParams()
+	// params.SetId("78d49100-e4af-4692-9a49-284fa2444eb9")
+	fmt.Printf(">>>>> 1 params: %v", params)
 	resp, err := client.VPC.ListVPCs(params)
+
 	if err != nil {
 		t.Errorf("Failed to list VPCs due to: %v", err)
 	}
