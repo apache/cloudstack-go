@@ -1849,6 +1849,8 @@ func mapType(aName string, pName string, pType string) string {
 	case "list":
 		if pName == "downloaddetails" || pName == "owner" {
 			return "[]map[string]string"
+		} else if pName == "network" {
+			return "[]Network"
 		}
 		return "[]string"
 	case "map":
