@@ -20,6 +20,7 @@ package utils
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
@@ -34,6 +35,11 @@ type TaskResponse struct {
 // CloudstackUtils - utils package for Cloudstack
 type AcsUtils struct {
 	Client *cloudstack.CloudStackClient
+}
+
+// MakeUtils - AcsUtils factory
+func MakeUtils() AcsUtils {
+	return AcsUtils{Client: MakeClient()}
 }
 
 // GetID - gets an ID of CloudStack resource
@@ -83,10 +89,10 @@ func (c AcsUtils) GetID(zone, resourceType, resourceName string) (string, error)
 			id = l.OsTypes[0].Id
 			break
 		}
-		err = fmt.Errorf("could not find ID of OS Type: %s", resourceName)
+		err = fmt.Errorf("could not find ID of OS Type: %s for zone %s", resourceName, zone)
 
 	default:
-		return id, fmt.Errorf("unknown resource type for zone %s: %s", zone, resourceType)
+		return id, fmt.Errorf("unknown resource type: %s for zone %s", resourceType, zone)
 	}
 
 	if err != nil {
@@ -99,6 +105,11 @@ func (c AcsUtils) GetID(zone, resourceType, resourceName string) (string, error)
 // GetIDPar - runs multiple GetID requests in parallel
 // Results are merged into a single output slice
 func (c AcsUtils) GetIDPar(params *[][]string) ([]string, error) {
+
+	if params == nil {
+		return nil, fmt.Errorf("invalid params passed - null pointer for input configuration")
+	}
+
 	len := len(*params)
 
 	in := make(chan TaskResponse, len)
@@ -111,10 +122,12 @@ func (c AcsUtils) GetIDPar(params *[][]string) ([]string, error) {
 
 	// Collect responses
 	for i := 0; i < len; i++ {
+
 		resp := <-in
 		if resp.Err != nil {
 			return nil, resp.Err
 		}
+
 		ids[i] = resp.Resp
 	}
 
@@ -122,12 +135,13 @@ func (c AcsUtils) GetIDPar(params *[][]string) ([]string, error) {
 }
 
 func makeIDRequest(out chan<- TaskResponse, f AsyncCall, keys []string) {
+	var res TaskResponse
 
 	if len(keys) < 3 {
+		res.Err = fmt.Errorf("invalid number of parameters passed. Should be 3")
+		out <- res
 		return
 	}
-
-	var res TaskResponse
 
 	resp, err := f(keys[0], keys[1], keys[2])
 	if err != nil {
@@ -138,4 +152,15 @@ func makeIDRequest(out chan<- TaskResponse, f AsyncCall, keys []string) {
 
 	res.Resp = resp
 	out <- res
+}
+
+// MakeClient - ACS Client factory
+func MakeClient() *cloudstack.CloudStackClient {
+
+	apiURL := os.Getenv("ACS_API_URL")
+	apiKey := os.Getenv("ACS_API_KEY")
+	secretKey := os.Getenv("ACS_SECRET_KEY")
+	cs := cloudstack.NewAsyncClient(apiURL, apiKey, secretKey, false)
+
+	return cs
 }

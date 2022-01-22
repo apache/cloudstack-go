@@ -20,10 +20,8 @@ package utils
 
 import (
 	"fmt"
-	"os"
 	"testing"
 
-	"github.com/apache/cloudstack-go/v2/cloudstack"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -32,18 +30,9 @@ const (
 	myZone            = "my-zone"
 )
 
-func testClient() *cloudstack.CloudStackClient {
-	apiURL := os.Getenv("ACS_API_URL")
-	apiKey := os.Getenv("ACS_API_KEY")
-	secretKey := os.Getenv("ACS_SECRET_KEY")
-	cs := cloudstack.NewAsyncClient(apiURL, apiKey, secretKey, false)
-
-	return cs
-}
-
 func TestUtils_singleID(t *testing.T) {
 
-	utils := AcsUtils{Client: testClient()}
+	utils := MakeUtils()
 
 	id, err := utils.GetID(myZone, "zone", myZone)
 	assert.NoError(t, err)
@@ -55,7 +44,7 @@ func TestUtils_singleID(t *testing.T) {
 func TestUtils_parID(t *testing.T) {
 	testLen := 2
 
-	utils := AcsUtils{Client: testClient()}
+	utils := MakeUtils()
 
 	params := make([][]string, testLen)
 	params[0] = []string{myZone, "zone", myZone}
