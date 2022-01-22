@@ -29,7 +29,7 @@ import (
 
 const (
 	simpleNetOffering = "DefaultIsolatedNetworkOfferingWithSourceNatService"
-	myZone            = "Sandbox-simulator"
+	myZone            = "my-zone"
 )
 
 func testClient() *cloudstack.CloudStackClient {
@@ -47,6 +47,7 @@ func TestUtils_singleID(t *testing.T) {
 
 	id, err := utils.GetID(myZone, "zone", myZone)
 	assert.NoError(t, err)
+	assert.NotEqual(t, id, "")
 
 	fmt.Printf("zone ID: %s", id)
 }
