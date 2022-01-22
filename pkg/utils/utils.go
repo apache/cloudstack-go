@@ -20,18 +20,24 @@ package utils
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
+
+type AsyncCall func(string, string, string) (string, error)
+
+type TaskResponse struct {
+	Err  error
+	Resp string
+}
 
 // CloudstackUtils - utils package for Cloudstack
 type AcsUtils struct {
 	Client *cloudstack.CloudStackClient
 }
 
-// RetrieveID - gets an ID of CloudStack resource
-func (c AcsUtils) RetrieveID(zone, resourceType, resourceName string) (string, error) {
+// GetID - gets an ID of CloudStack resource
+func (c AcsUtils) GetID(zone, resourceType, resourceName string) (string, error) {
 
 	// If the supplied resourceName isn't a ID, try to retrieve the ID ourselves
 	if cloudstack.IsID(resourceName) {
@@ -40,8 +46,6 @@ func (c AcsUtils) RetrieveID(zone, resourceType, resourceName string) (string, e
 
 	var err error
 	var id string
-
-	log.Printf("[DEBUG] Retrieving ID of %s %s: %s", zone, resourceType, resourceName)
 
 	// Ignore counts, since an error is returned if there is no exact match
 	switch resourceType {
@@ -90,4 +94,48 @@ func (c AcsUtils) RetrieveID(zone, resourceType, resourceName string) (string, e
 	}
 
 	return id, nil
+}
+
+// GetIDPar - runs multiple GetID requests in parallel
+// Results are merged into a single output slice
+func (c AcsUtils) GetIDPar(params *[][]string) ([]string, error) {
+	len := len(*params)
+
+	in := make(chan TaskResponse, len)
+	ids := make([]string, len)
+
+	// Run async requests
+	for _, p := range *params {
+		go makeIDRequest(in, c.GetID, p)
+	}
+
+	// Collect responses
+	for i := 0; i < len; i++ {
+		resp := <-in
+		if resp.Err != nil {
+			return nil, resp.Err
+		}
+		ids[i] = resp.Resp
+	}
+
+	return ids, nil
+}
+
+func makeIDRequest(out chan<- TaskResponse, f AsyncCall, keys []string) {
+
+	if len(keys) < 3 {
+		return
+	}
+
+	var res TaskResponse
+
+	resp, err := f(keys[0], keys[1], keys[2])
+	if err != nil {
+		res.Err = err
+		out <- res
+		return
+	}
+
+	res.Resp = resp
+	out <- res
 }
