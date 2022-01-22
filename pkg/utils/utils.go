@@ -1,5 +1,3 @@
-package utils
-
 //
 // Licensed to the Apache Software Foundation (ASF) under one
 // or more contributor license agreements.  See the NOTICE file
@@ -18,6 +16,7 @@ package utils
 // specific language governing permissions and limitations
 // under the License.
 //
+package utils
 
 import (
 	"fmt"
@@ -26,80 +25,51 @@ import (
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-type AcsError struct {
-	zone  string
-	name  string
-	value string
-	err   error
-}
-
-func (e AcsError) Error() error {
-	return fmt.Errorf("Error retrieving ID of %s %s %s: %s", e.zone, e.name, e.value, e.err)
-}
-
-type CloudstackUtils struct {
+// CloudstackUtils - utils package for Cloudstack
+type AcsUtils struct {
 	Client *cloudstack.CloudStackClient
-	Err    AcsError
 }
 
-func (c CloudstackUtils) RetrieveID(keys ...string) (string, AcsError) {
+// RetrieveID - gets an ID of CloudStack resource
+func (c AcsUtils) RetrieveID(zone, resourceType, resourceName string) (string, error) {
 
-	len := len(keys)
-
-	if len < 3 {
-		c.Err.err = fmt.Errorf("invalid number of keys passed to RetrieveID. Should be 3 at least")
-		return "", c.Err
+	// If the supplied resourceName isn't a ID, try to retrieve the ID ourselves
+	if cloudstack.IsID(resourceName) {
+		return resourceName, nil
 	}
-
-	var name, value, zone string
-
-	// There may be more input parameters in future, so reserve more space with switch
-	switch len {
-	default:
-		name, value, zone = keys[0], keys[1], keys[2]
-	}
-
-	// If the supplied value isn't a ID, try to retrieve the ID ourselves
-	if cloudstack.IsID(value) {
-		return value, c.Err
-	}
-
-	c.Err.zone = zone
-	c.Err.name = name
-	c.Err.value = value
 
 	var err error
 	var id string
 
-	log.Printf("[DEBUG] Retrieving ID of %s %s: %s", zone, name, value)
+	log.Printf("[DEBUG] Retrieving ID of %s %s: %s", zone, resourceType, resourceName)
 
 	// Ignore counts, since an error is returned if there is no exact match
-	switch name {
+	switch resourceType {
 
 	case "zone":
-		id, _, err = c.Client.Zone.GetZoneID(value)
+		id, _, err = c.Client.Zone.GetZoneID(resourceName)
 
 	case "network_offering":
-		id, _, err = c.Client.NetworkOffering.GetNetworkOfferingID(value)
+		id, _, err = c.Client.NetworkOffering.GetNetworkOfferingID(resourceName)
 
 	case "vpc_offering":
-		id, _, err = c.Client.VPC.GetVPCOfferingID(value)
+		id, _, err = c.Client.VPC.GetVPCOfferingID(resourceName)
 
 	case "service_offering":
-		id, _, err = c.Client.ServiceOffering.GetServiceOfferingID(value)
+		id, _, err = c.Client.ServiceOffering.GetServiceOfferingID(resourceName)
 
 	case "disk_offering":
-		id, _, err = c.Client.DiskOffering.GetDiskOfferingID(value)
+		id, _, err = c.Client.DiskOffering.GetDiskOfferingID(resourceName)
 
 	case "template_id":
-		id, _, err = c.Client.Template.GetTemplateID(value, "executable", zone)
+		id, _, err = c.Client.Template.GetTemplateID(resourceName, "executable", zone)
 
 	case "project":
-		id, _, err = c.Client.Project.GetProjectID(value)
+		id, _, err = c.Client.Project.GetProjectID(resourceName)
 
 	case "os_type":
 		p := c.Client.GuestOS.NewListOsTypesParams()
-		p.SetDescription(value)
+		p.SetDescription(resourceName)
 		l, e := c.Client.GuestOS.ListOsTypes(p)
 		if e != nil {
 			err = e
@@ -109,17 +79,15 @@ func (c CloudstackUtils) RetrieveID(keys ...string) (string, AcsError) {
 			id = l.OsTypes[0].Id
 			break
 		}
-		err = fmt.Errorf("could not find ID of OS Type: %s", value)
+		err = fmt.Errorf("could not find ID of OS Type: %s", resourceName)
 
 	default:
-		c.Err.err = fmt.Errorf("unknown request: %s", name)
-		return id, c.Err
+		return id, fmt.Errorf("unknown resource type for zone %s: %s", zone, resourceType)
 	}
 
 	if err != nil {
-		c.Err.err = err
-		return id, c.Err
+		return "", err
 	}
 
-	return id, c.Err
+	return id, nil
 }
