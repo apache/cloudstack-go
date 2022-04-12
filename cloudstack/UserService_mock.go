@@ -148,6 +148,21 @@ func (mr *MockUserServiceIfaceMockRecorder) GetUserByID(id interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByID", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserByID), varargs...)
 }
 
+// GetUserKeys mocks base method.
+func (m *MockUserServiceIface) GetUserKeys(p *GetUserKeysParams) (*GetUserKeysResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserKeys", p)
+	ret0, _ := ret[0].(*GetUserKeysResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserKeys indicates an expected call of GetUserKeys.
+func (mr *MockUserServiceIfaceMockRecorder) GetUserKeys(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserKeys", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserKeys), p)
+}
+
 // GetVirtualMachineUserData mocks base method.
 func (m *MockUserServiceIface) GetVirtualMachineUserData(p *GetVirtualMachineUserDataParams) (*GetVirtualMachineUserDataResponse, error) {
 	m.ctrl.T.Helper()
@@ -247,6 +262,20 @@ func (m *MockUserServiceIface) NewEnableUserParams(id string) *EnableUserParams 
 func (mr *MockUserServiceIfaceMockRecorder) NewEnableUserParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewEnableUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewEnableUserParams), id)
+}
+
+// NewGetUserKeysParams mocks base method.
+func (m *MockUserServiceIface) NewGetUserKeysParams(id string) *GetUserKeysParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewGetUserKeysParams", id)
+	ret0, _ := ret[0].(*GetUserKeysParams)
+	return ret0
+}
+
+// NewGetUserKeysParams indicates an expected call of NewGetUserKeysParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewGetUserKeysParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUserKeysParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewGetUserKeysParams), id)
 }
 
 // NewGetUserParams mocks base method.

@@ -1503,7 +1503,8 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		"GetVirtualMachineUserData",
 		"LockUser",
 		"RegisterSSHKeyPair",
-		"RegisterUserKeys":
+		"RegisterUserKeys",
+		"GetUserKeys":
 		pn("	if resp, err = getRawValue(resp); err != nil {")
 		pn("		return nil, err")
 		pn("	}")
