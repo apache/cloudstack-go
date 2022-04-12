@@ -304,6 +304,7 @@ var layout = apiInfo{
 		"disableUser",
 		"enableUser",
 		"getUser",
+		"getUserKeys",
 		"getVirtualMachineUserData",
 		"listUsers",
 		"lockUser",

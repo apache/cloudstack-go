@@ -147,5 +147,13 @@
     "deleteuserresponse": {
       "success": true
     }
+  },
+  "getUserKeys": {
+    "getuserkeysresponse": {
+      "userkeys": {
+        "apikey": "api-key",
+        "secretkey": "secret-key"
+      }
+    }
   }
 }

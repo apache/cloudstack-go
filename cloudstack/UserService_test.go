@@ -164,3 +164,25 @@ func TestUserService_DeleteUser(t *testing.T) {
 		t.Errorf("Failed to delete user")
 	}
 }
+
+func TestGetUserKeys(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		apiName := "getUserKeys"
+		response, err := ReadData(apiName, "UserService")
+		if err != nil {
+			t.Errorf("Failed to read response data due to: %v", err)
+		}
+		fmt.Fprintf(writer, response[apiName])
+	}))
+	defer server.Close()
+	client := NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	params := client.User.NewGetUserKeysParams("random-id")
+	resp, err := client.User.GetUserKeys(params)
+	if err != nil {
+		t.Errorf("Failed to get user keys due to %v", err)
+		return
+	}
+	if resp.Apikey == "" || resp.Secretkey == "" {
+		t.Errorf("Parsing failure")
+	}
+}
