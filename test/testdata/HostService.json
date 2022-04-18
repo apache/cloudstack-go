@@ -106,13 +106,7 @@
     }
   },
   "prepareHostForMaintenance": {
-    "prepareHostForMaintenance": {
-      "preparehostformaintenanceresponse": {
-        "jobid": "0931656b-d30d-474b-aa79-13077d275400"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "preparehostformaintenanceresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.host.PrepareForMaintenanceCmd",
@@ -177,24 +171,17 @@
           "hahost": false,
           "jobid": "0931656b-d30d-474b-aa79-13077d275400",
           "jobstatus": 0
-          }
-        },
+        }
+      },
       "jobinstancetype": "Host",
       "jobinstanceid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
       "created": "2021-10-03T06:52:21+0000",
       "completed": "2021-10-03T06:52:21+0000",
       "jobid": "0931656b-d30d-474b-aa79-13077d275400"
-      }
     }
   },
   "cancelHostForMaintenance": {
-    "cancelHostMaintenance": {
-      "cancelhostmaintenanceresponse": {
-        "jobid": "b40f561d-9d0d-4eae-a376-fbafdff966f1"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "cancelhostmaintenanceresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.host.CancelMaintenanceCmd",
@@ -202,8 +189,8 @@
       "jobprocstatus": 0,
       "jobresultcode": 0,
       "jobresulttype": "object",
-        "jobresult": {
-          "host": {
+      "jobresult": {
+        "host": {
           "id": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
           "name": "SimulatedAgent.4234d24b-37fd-42bf-9184-874889001baf",
           "state": "Up",
@@ -249,42 +236,35 @@
             "haenable": true,
             "hastate": "Disabled",
             "haprovider": "simulatorhaprovider"
-            },
+          },
           "outofbandmanagement": {
             "powerstate": "Disabled",
             "enabled": false
-            },
+          },
           "resourcestate": "Enabled",
           "hypervisorversion": "4.14.0.0-SNAPSHOT",
           "hahost": false,
           "jobid": "b40f561d-9d0d-4eae-a376-fbafdff966f1",
           "jobstatus": 0
-          }
-        },
+        }
+      },
       "jobinstancetype": "Host",
       "jobinstanceid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
       "created": "2021-10-03T06:57:12+0000",
       "completed": "2021-10-03T06:57:12+0000",
       "jobid": "b40f561d-9d0d-4eae-a376-fbafdff966f1"
-      }
     }
   },
   "enableOutOfBandManagementForHost": {
-    "enableOutOfBandManagementForHost": {
-      "enableoutofbandmanagementforhostresponse": {
-        "jobid": "049f5a42-343b-4156-9fb6-683f01433dca"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.EnableOutOfBandManagementForHostCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
+    "enableoutofbandmanagementforhostresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.EnableOutOfBandManagementForHostCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
         "outofbandmanagement": {
           "hostid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
           "enabled": true,
@@ -294,25 +274,18 @@
       "created": "2021-10-03T07:05:08+0000",
       "completed": "2021-10-03T07:05:08+0000",
       "jobid": "1c3022d1-c882-430c-ada7-ebf9d06d3e84"
-      }
     }
   },
   "disableOutOfBandManagementForHost": {
-    "disableOutOfBandManagementForHost": {
-      "disableoutofbandmanagementforhostresponse": {
-        "jobid": "a389b543-ce49-410f-8f9a-831be0480ee5"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.DisableOutOfBandManagementForHostCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
+    "disableoutofbandmanagementforhostresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.DisableOutOfBandManagementForHostCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
         "outofbandmanagement": {
           "hostid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
           "enabled": false,
@@ -322,17 +295,10 @@
       "created": "2021-10-03T07:06:25+0000",
       "completed": "2021-10-03T07:06:25+0000",
       "jobid": "a389b543-ce49-410f-8f9a-831be0480ee5"
-      }
     }
   },
   "enableHAForHost": {
-    "enableHAForHost": {
-      "enablehaforhostresponse": {
-        "jobid": "79da9d4b-6368-4ce5-9054-952295fc2c8a"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "enablehaforhostresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.ha.EnableHAForHostCmd",
@@ -342,18 +308,14 @@
       "jobresulttype": "object",
       "jobresult": {
         "hostha": {
-        "hostid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
-        "haenable": true,
-        "status": true
+          "hostid": "8e8e68e7-19ea-4a78-bbdb-6e79d27729c9",
+          "haenable": true,
+          "status": true
         }
       },
       "created": "2021-10-03T07:10:09+0000",
       "completed": "2021-10-03T07:10:09+0000",
       "jobid": "79da9d4b-6368-4ce5-9054-952295fc2c8a"
-      }
     }
-  },
-  "disableHAForHost": {
-
   }
 }

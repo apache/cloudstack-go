@@ -20,34 +20,55 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestHypervisorService_ListSpecificHypervisorCapabilities(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listHypervisorCapabilities"
-		response, err := ReadData(apiName, "HypervisorService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Hypervisor.NewListHypervisorCapabilitiesParams()
-	params.SetId("1")
-	resp, err := client.Hypervisor.ListHypervisorCapabilities(params)
+func TestHypervisorService(t *testing.T) {
+	service := "HypervisorService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to list hypervisor capabilities due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp.Count != 1 {
-		t.Errorf("Failed list specific hypervisor capability")
+	testlistHypervisorCapabilities := func(t *testing.T) {
+		if _, ok := response["listHypervisorCapabilities"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Hypervisor.NewListHypervisorCapabilitiesParams()
+		_, err := client.Hypervisor.ListHypervisorCapabilities(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ListHypervisorCapabilities", testlistHypervisorCapabilities)
+
+	testlistHypervisors := func(t *testing.T) {
+		if _, ok := response["listHypervisors"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Hypervisor.NewListHypervisorsParams()
+		_, err := client.Hypervisor.ListHypervisors(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListHypervisors", testlistHypervisors)
+
+	testupdateHypervisorCapabilities := func(t *testing.T) {
+		if _, ok := response["updateHypervisorCapabilities"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Hypervisor.NewUpdateHypervisorCapabilitiesParams()
+		_, err := client.Hypervisor.UpdateHypervisorCapabilities(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateHypervisorCapabilities", testupdateHypervisorCapabilities)
+
 }

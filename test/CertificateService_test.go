@@ -20,39 +20,31 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestUploadCustomCertificate(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "uploadCustomCertificate"
-		response, err := ParseAsyncResponse(apiName, "CertificateService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
-
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Certificate.NewUploadCustomCertificateParams("test", "xyz.com")
-	resp, err := client.Certificate.UploadCustomCertificate(params)
-
+func TestCertificateService(t *testing.T) {
+	service := "CertificateService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to upload custom certificate, due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp.Jobstatus == 2 {
-		t.Errorf("Failed to upload custom certificate")
+	testuploadCustomCertificate := func(t *testing.T) {
+		if _, ok := response["uploadCustomCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
+		_, err := client.Certificate.UploadCustomCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-
-	if resp.Jobstatus == 1 {
-		t.Log("Successfully uploaded certificate")
-	}
+	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
 
 }

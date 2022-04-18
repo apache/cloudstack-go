@@ -20,31 +20,127 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestNetworkACLService_UpdateNetworkACLList(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "updateNetworkACLList"
-		response, err := ParseAsyncResponse(apiName, "NetworkACLService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.NetworkACL.NewUpdateNetworkACLListParams("a31e11a0-57fe-41df-be7a-34d359673061")
-	resp, err := client.NetworkACL.UpdateNetworkACLList(params)
+func TestNetworkACLService(t *testing.T) {
+	service := "NetworkACLService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to update Network ACL list due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil {
-		t.Errorf("Failed to update Network ACL list ")
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
+
+	testcreateNetworkACL := func(t *testing.T) {
+		if _, ok := response["createNetworkACL"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewCreateNetworkACLParams("protocol")
+		_, err := client.NetworkACL.CreateNetworkACL(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateNetworkACL", testcreateNetworkACL)
+
+	testcreateNetworkACLList := func(t *testing.T) {
+		if _, ok := response["createNetworkACLList"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewCreateNetworkACLListParams("name", "vpcid")
+		_, err := client.NetworkACL.CreateNetworkACLList(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateNetworkACLList", testcreateNetworkACLList)
+
+	testdeleteNetworkACL := func(t *testing.T) {
+		if _, ok := response["deleteNetworkACL"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewDeleteNetworkACLParams("id")
+		_, err := client.NetworkACL.DeleteNetworkACL(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteNetworkACL", testdeleteNetworkACL)
+
+	testdeleteNetworkACLList := func(t *testing.T) {
+		if _, ok := response["deleteNetworkACLList"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewDeleteNetworkACLListParams("id")
+		_, err := client.NetworkACL.DeleteNetworkACLList(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteNetworkACLList", testdeleteNetworkACLList)
+
+	testlistNetworkACLLists := func(t *testing.T) {
+		if _, ok := response["listNetworkACLLists"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewListNetworkACLListsParams()
+		_, err := client.NetworkACL.ListNetworkACLLists(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkACLLists", testlistNetworkACLLists)
+
+	testlistNetworkACLs := func(t *testing.T) {
+		if _, ok := response["listNetworkACLs"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewListNetworkACLsParams()
+		_, err := client.NetworkACL.ListNetworkACLs(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkACLs", testlistNetworkACLs)
+
+	testreplaceNetworkACLList := func(t *testing.T) {
+		if _, ok := response["replaceNetworkACLList"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewReplaceNetworkACLListParams("aclid")
+		_, err := client.NetworkACL.ReplaceNetworkACLList(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReplaceNetworkACLList", testreplaceNetworkACLList)
+
+	testupdateNetworkACLItem := func(t *testing.T) {
+		if _, ok := response["updateNetworkACLItem"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewUpdateNetworkACLItemParams("id")
+		_, err := client.NetworkACL.UpdateNetworkACLItem(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateNetworkACLItem", testupdateNetworkACLItem)
+
+	testupdateNetworkACLList := func(t *testing.T) {
+		if _, ok := response["updateNetworkACLList"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewUpdateNetworkACLListParams("id")
+		_, err := client.NetworkACL.UpdateNetworkACLList(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateNetworkACLList", testupdateNetworkACLList)
+
 }

@@ -20,222 +20,163 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-var (
-	clusterName    = "TestCluster"
-	clusterType    = "CloudManaged"
-	hypervisorType = "KVM"
-	podId          = "6137ef6f-753f-4e7b-a728-8d46a92358d2"
-	zoneId         = "04ccc336-d730-42fe-8ff6-5ae36e141e81"
-)
-
-func TestClusterService_ListClusters(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listClusters"
-		resp, err := ReadData(apiName, "ClusterService")
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, resp[apiName])
-	}))
+func TestClusterService(t *testing.T) {
+	service := "ClusterService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewListClustersParams()
-	params.SetZoneid(zoneId)
-	clusterResp, err := client.Cluster.ListClusters(params)
-	if err != nil {
-		t.Errorf("Failed to list clusters in zone %s due to: %v", zoneId, err)
-	}
-
-	if clusterResp.Count != 3 {
-		t.Errorf("Failed to list all clusters in the zone")
-	}
-}
-
-func TestClusterService_DisableHAForCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "disableHAForCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddCluster := func(t *testing.T) {
+		if _, ok := response["addCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewDisableHAForClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.DisableHAForCluster(params)
-	if err != nil {
-		t.Errorf("Failed to disable HA for cluster due to %v", err)
-	}
-
-	if !resp.Success {
-		t.Errorf("Failed to disable HA for cluster")
-	}
-}
-
-func TestClusterService_EnableHAForCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "enableHAForCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
+		p := client.Cluster.NewAddClusterParams("clustername", "clustertype", "hypervisor", "podid", "zoneid")
+		_, err := client.Cluster.AddCluster(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewEnableHAForClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.EnableHAForCluster(params)
-	if err != nil {
-		t.Errorf("Failed to enable HA for cluster due to %v", err)
 	}
+	t.Run("AddCluster", testaddCluster)
 
-	if !resp.Success {
-		t.Errorf("Failed to enable HA for cluster")
-	}
-}
-
-func TestClusterService_DisableOutOfBandManagementForCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "disableOutOfBandManagementForCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
+	testdedicateCluster := func(t *testing.T) {
+		if _, ok := response["dedicateCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewDedicateClusterParams("clusterid", "domainid")
+		_, err := client.Cluster.DedicateCluster(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewDisableOutOfBandManagementForClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.DisableOutOfBandManagementForCluster(params)
-	if err != nil {
-		t.Errorf("Failed to disable Out of band management for cluster due to %v", err)
 	}
+	t.Run("DedicateCluster", testdedicateCluster)
 
-	if resp.Enabled {
-		t.Errorf("Failed to disable out of band management for cluster")
-	}
-}
-
-func TestClusterService_EnableOutOfBandManagementForCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "enableOutOfBandManagementForCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
+	testdeleteCluster := func(t *testing.T) {
+		if _, ok := response["deleteCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewDeleteClusterParams("id")
+		_, err := client.Cluster.DeleteCluster(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewEnableOutOfBandManagementForClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.EnableOutOfBandManagementForCluster(params)
-	if err != nil {
-		t.Errorf("Failed to enable Out of band management for cluster due to %v", err)
 	}
+	t.Run("DeleteCluster", testdeleteCluster)
 
-	if !resp.Enabled {
-		t.Errorf("Failed to enable out of band management for cluster")
-	}
-}
-
-func TestClusterService_DedicateCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "dedicateCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
+	testdisableOutOfBandManagementForCluster := func(t *testing.T) {
+		if _, ok := response["disableOutOfBandManagementForCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewDisableOutOfBandManagementForClusterParams("clusterid")
+		_, err := client.Cluster.DisableOutOfBandManagementForCluster(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewDedicateClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15", "e4874e10-5fdf-11ea-9a56-1e006800018c")
-	resp, err := client.Cluster.DedicateCluster(params)
-	if err != nil {
-		t.Errorf("Failed to dedicate cluster to ROOT domain due to %v", err)
 	}
+	t.Run("DisableOutOfBandManagementForCluster", testdisableOutOfBandManagementForCluster)
 
-	if resp.Domainid != "e4874e10-5fdf-11ea-9a56-1e006800018c" {
-		t.Errorf("Failed to dedicate cluster to right domain")
-	}
-}
-
-func TestClusterService_ReleaseDedicatedCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "releaseDedicatedCluster"
-		responses, err := ParseAsyncResponse(apiName, "ClusterService", *request)
+	testenableOutOfBandManagementForCluster := func(t *testing.T) {
+		if _, ok := response["enableOutOfBandManagementForCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewEnableOutOfBandManagementForClusterParams("clusterid")
+		_, err := client.Cluster.EnableOutOfBandManagementForCluster(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewReleaseDedicatedClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.ReleaseDedicatedCluster(params)
-	if err != nil {
-		t.Errorf("Failed to release dedicated cluster to ROOT domain due to %v", err)
 	}
+	t.Run("EnableOutOfBandManagementForCluster", testenableOutOfBandManagementForCluster)
 
-	if !resp.Success {
-		t.Errorf("Failed to release dedicated cluster to right domain")
-	}
-}
-
-func TestClusterService_UpdateCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "updateCluster"
-		response, err := ReadData(apiName, "ClusterService")
+	testenableHAForCluster := func(t *testing.T) {
+		if _, ok := response["enableHAForCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewEnableHAForClusterParams("clusterid")
+		_, err := client.Cluster.EnableHAForCluster(p)
 		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewUpdateClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	params.SetClustername("TestClusterUpdated")
-	params.SetManagedstate("Unmanaged")
-	resp, err := client.Cluster.UpdateCluster(params)
-	if err != nil {
-		t.Errorf("Failed to updated cluster details - name, due to: %v", err)
 	}
+	t.Run("EnableHAForCluster", testenableHAForCluster)
 
-	if resp.Name != "TestClusterUpdated" {
-		t.Errorf("Failed to updated cluster name")
-	}
-}
-
-func TestClusterService_DeleteCluster(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteCluster"
-		response, err := ReadData(apiName, "ClusterService")
+	testdisableHAForCluster := func(t *testing.T) {
+		if _, ok := response["disableHAForCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewDisableHAForClusterParams("clusterid")
+		_, err := client.Cluster.DisableHAForCluster(p)
 		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Cluster.NewDeleteClusterParams("f1f5a259-1b55-431d-ad7e-6d39c28f1b15")
-	resp, err := client.Cluster.DeleteCluster(params)
-	if err != nil {
-		t.Errorf("Failed to delete cluster due to: %v", err)
 	}
+	t.Run("DisableHAForCluster", testdisableHAForCluster)
 
-	if !resp.Success {
-		t.Errorf("Failed to delete cluster")
+	testlistClusters := func(t *testing.T) {
+		if _, ok := response["listClusters"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewListClustersParams()
+		_, err := client.Cluster.ListClusters(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ListClusters", testlistClusters)
+
+	testlistClustersMetrics := func(t *testing.T) {
+		if _, ok := response["listClustersMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewListClustersMetricsParams()
+		_, err := client.Cluster.ListClustersMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListClustersMetrics", testlistClustersMetrics)
+
+	testlistDedicatedClusters := func(t *testing.T) {
+		if _, ok := response["listDedicatedClusters"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewListDedicatedClustersParams()
+		_, err := client.Cluster.ListDedicatedClusters(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDedicatedClusters", testlistDedicatedClusters)
+
+	testreleaseDedicatedCluster := func(t *testing.T) {
+		if _, ok := response["releaseDedicatedCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewReleaseDedicatedClusterParams("clusterid")
+		_, err := client.Cluster.ReleaseDedicatedCluster(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleaseDedicatedCluster", testreleaseDedicatedCluster)
+
+	testupdateCluster := func(t *testing.T) {
+		if _, ok := response["updateCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewUpdateClusterParams("id")
+		_, err := client.Cluster.UpdateCluster(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateCluster", testupdateCluster)
 
 }

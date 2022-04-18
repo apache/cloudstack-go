@@ -20,80 +20,79 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestPoolService_CreateStoragePool(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "createStoragePool"
-		response, err := ReadData(apiName, "PoolService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Pool.NewCreateStoragePoolParams("testPrimary1", "nfs://10.1.1.2/export/primary1", "6ebc7a1c-ff98-425c-ac0d-b6c2e3ae6e33")
-	resp, err := client.Pool.CreateStoragePool(params)
+func TestPoolService(t *testing.T) {
+	service := "PoolService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create storage pool due to %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if resp == nil || resp.Name != "testPrimary1" {
-		t.Errorf("Failed to create storage pool")
-	}
-}
-
-func TestPoolService_ListStoragePools(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "listStoragePools"
-		response, err := ReadData(apiName, "PoolService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Pool.NewListStoragePoolsParams()
-	params.SetId("3fd44942-4881-3fb0-95f1-5d7b7ae64cfb")
-	resp, err := client.Pool.ListStoragePools(params)
-	if err != nil {
-		t.Errorf("Failed to list storage pool details due to %v", err)
-		return
-	}
 
-	if resp == nil || resp.Count != 1 {
-		t.Errorf("Failed to list storage pool")
-	}
-}
-
-func TestPoolService_DeleteStoragePool(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "deleteStoragePool"
-		response, err := ReadData(apiName, "PoolService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateStoragePool := func(t *testing.T) {
+		if _, ok := response["createStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Pool.NewDeleteStoragePoolParams("3fd44942-4881-3fb0-95f1-5d7b7ae64cfb")
-	resp, err := client.Pool.DeleteStoragePool(params)
-	if err != nil {
-		t.Errorf("Failed to delete storage pool details due to %v", err)
-		return
+		p := client.Pool.NewCreateStoragePoolParams("name", "url", "zoneid")
+		_, err := client.Pool.CreateStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateStoragePool", testcreateStoragePool)
 
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete storage pool")
+	testdeleteStoragePool := func(t *testing.T) {
+		if _, ok := response["deleteStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewDeleteStoragePoolParams("id")
+		_, err := client.Pool.DeleteStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteStoragePool", testdeleteStoragePool)
+
+	testfindStoragePoolsForMigration := func(t *testing.T) {
+		if _, ok := response["findStoragePoolsForMigration"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewFindStoragePoolsForMigrationParams("id")
+		_, err := client.Pool.FindStoragePoolsForMigration(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("FindStoragePoolsForMigration", testfindStoragePoolsForMigration)
+
+	testlistStoragePools := func(t *testing.T) {
+		if _, ok := response["listStoragePools"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewListStoragePoolsParams()
+		_, err := client.Pool.ListStoragePools(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStoragePools", testlistStoragePools)
+
+	testupdateStoragePool := func(t *testing.T) {
+		if _, ok := response["updateStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewUpdateStoragePoolParams("id")
+		_, err := client.Pool.UpdateStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateStoragePool", testupdateStoragePool)
+
 }

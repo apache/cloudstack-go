@@ -20,63 +20,43 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestAuthenticationService_Login(t *testing.T) {
-	apiName := "login"
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		loginResponse, err := ReadData(apiName, "AuthenticationService")
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, loginResponse[apiName])
-	}))
+func TestAuthenticationService(t *testing.T) {
+	service := "AuthenticationService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	loginParams := client.Authentication.NewLoginParams("admin", "password")
-	resp, err := client.Authentication.Login(loginParams)
-
-	if err != nil {
-		t.Errorf("Failed to login user 'admin', due to: %v", err)
-	}
-
-	if resp == nil {
-		t.Errorf("Failed to login user 'admin'")
-	}
-
-	if resp.Username != "admin" {
-		t.Errorf("Failed to login user 'admin'")
-	}
-}
-
-func TestAuthenticationService_Logout(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "logout"
-		logoutResponse, err := ReadData(apiName, "AuthenticationService")
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testlogin := func(t *testing.T) {
+		if _, ok := response["login"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, logoutResponse[apiName])
-	}))
-
-	defer server.Close()
-
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	logoutParams := client.Authentication.NewLogoutParams()
-	logoutResp, err := client.Authentication.Logout(logoutParams)
-
-	if err != nil {
-		t.Errorf("Failed to logout user 'admin', due to: %v", err)
+		p := client.Authentication.NewLoginParams("password", "username")
+		_, err := client.Authentication.Login(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("Login", testlogin)
 
-	if logoutResp.Description != "success" {
-		t.Errorf("Failed to logout user 'admin'")
+	testlogout := func(t *testing.T) {
+		if _, ok := response["logout"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Authentication.NewLogoutParams()
+		_, err := client.Authentication.Logout(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("Logout", testlogout)
+
 }

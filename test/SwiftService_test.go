@@ -20,35 +20,43 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestListAsyncJobs(t *testing.T) {
-	apiName := "listAsyncJobs"
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response, err := ReadData(apiName, "AsyncJobService")
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-
+func TestSwiftService(t *testing.T) {
+	service := "SwiftService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Asyncjob.NewListAsyncJobsParams()
-	p.SetListall(true)
-	resp, err := client.Asyncjob.ListAsyncJobs(p)
-	if err != nil {
-		t.Errorf("Failed to fetch listAsyncJobs response, due to: %v", err)
+	testaddSwift := func(t *testing.T) {
+		if _, ok := response["addSwift"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Swift.NewAddSwiftParams("url")
+		_, err := client.Swift.AddSwift(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AddSwift", testaddSwift)
 
-	if resp.Count != 1 {
-		t.Errorf("Failed to fetch listAsyncJobs response")
+	testlistSwifts := func(t *testing.T) {
+		if _, ok := response["listSwifts"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Swift.NewListSwiftsParams()
+		_, err := client.Swift.ListSwifts(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ListSwifts", testlistSwifts)
+
 }

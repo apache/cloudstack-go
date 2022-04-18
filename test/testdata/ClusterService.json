@@ -69,13 +69,7 @@
     }
   },
   "disableHAForCluster": {
-    "disableHAForCluster": {
-      "disablehaforclusterresponse": {
-        "jobid": "c0591985-d022-4a2d-b5b5-1ac209849f66"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "disablehaforclusterresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.ha.DisableHAForClusterCmd",
@@ -84,22 +78,15 @@
       "jobresultcode": 0,
       "jobresulttype": "object",
       "jobresult": {
-      "success": true
+        "success": true
       },
       "created": "2021-10-02T08:59:13+0000",
       "completed": "2021-10-02T08:59:13+0000",
       "jobid": "c0591985-d022-4a2d-b5b5-1ac209849f66"
-      }
     }
   },
   "enableHAForCluster": {
-    "enableHAForCluster": {
-      "enablehaforclusterresponse": {
-        "jobid": "875ead2d-7b78-4bb0-83f5-c40a2a944dde"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "enablehaforclusterresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.ha.EnableHAForClusterCmd",
@@ -109,21 +96,14 @@
       "jobresulttype": "object",
       "jobresult": {
         "success": true
-        },
+      },
       "created": "2021-10-02T09:05:15+0000",
       "completed": "2021-10-02T09:05:15+0000",
       "jobid": "875ead2d-7b78-4bb0-83f5-c40a2a944dde"
-      }
     }
   },
   "disableOutOfBandManagementForCluster": {
-    "disableOutOfBandManagementForCluster": {
-      "disableoutofbandmanagementforclusterresponse": {
-        "jobid": "067b171f-ca63-4d41-bb87-461589e20223"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "disableoutofbandmanagementforclusterresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.DisableOutOfBandManagementForClusterCmd",
@@ -135,49 +115,35 @@
         "outofbandmanagement": {
           "enabled": false,
           "status": true
-          }
-        },
+        }
+      },
       "created": "2021-10-02T09:09:04+0000",
       "completed": "2021-10-02T09:09:04+0000",
       "jobid": "067b171f-ca63-4d41-bb87-461589e20223"
-      }
     }
   },
   "enableOutOfBandManagementForCluster": {
-    "enableOutOfBandManagementForCluster": {
-      "enableoutofbandmanagementforclusterresponse": {
-        "jobid": "16f517a5-247b-4f96-aba4-0e876e1e9720"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.EnableOutOfBandManagementForClusterCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "outofbandmanagement": {
-            "enabled": true,
-            "status": true
-            }
-          },
-        "created": "2021-10-02T09:14:30+0000",
-        "completed": "2021-10-02T09:14:30+0000",
-        "jobid": "16f517a5-247b-4f96-aba4-0e876e1e9720"
+    "enableoutofbandmanagementforclusterresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.admin.outofbandmanagement.EnableOutOfBandManagementForClusterCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "outofbandmanagement": {
+          "enabled": true,
+          "status": true
         }
-      }
+      },
+      "created": "2021-10-02T09:14:30+0000",
+      "completed": "2021-10-02T09:14:30+0000",
+      "jobid": "16f517a5-247b-4f96-aba4-0e876e1e9720"
+    }
   },
   "dedicateCluster": {
-    "dedicateCluster": {
-      "dedicateclusterresponse": {
-        "jobid": "64e777d8-9c72-4639-aa75-057971ecd289"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "dedicateclusterresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.commands.DedicateClusterCmd",
@@ -186,43 +152,35 @@
       "jobresultcode": 0,
       "jobresulttype": "object",
       "jobresult": {
-      "dedicatedcluster": {
-        "id": "60a97ad1-702b-40dd-9ca5-a67954a28fbd",
-        "clusterid": "f1f5a259-1b55-431d-ad7e-6d39c28f1b15",
-        "clustername": "TestCluster",
-        "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "affinitygroupid": "a8725454-1680-4517-85ce-6f8ec08300fb"
+        "dedicatedcluster": {
+          "id": "60a97ad1-702b-40dd-9ca5-a67954a28fbd",
+          "clusterid": "f1f5a259-1b55-431d-ad7e-6d39c28f1b15",
+          "clustername": "TestCluster",
+          "domainid": "e4874e10-5fdf-11ea-9a56-1e006800018c",
+          "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+          "affinitygroupid": "a8725454-1680-4517-85ce-6f8ec08300fb"
         }
       },
       "created": "2021-10-02T09:16:25+0000",
       "completed": "2021-10-02T09:16:25+0000",
       "jobid": "64e777d8-9c72-4639-aa75-057971ecd289"
-      }
     }
   },
   "releaseDedicatedCluster": {
-    "releaseDedicatedCluster": {
-      "releasededicatedclusterresponse": {
-        "jobid": "e7cb7eb7-b77d-4568-9bcf-11bb5fd78938"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.commands.ReleaseDedicatedClusterCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "success": true
-         },
-        "created": "2021-10-02T14:40:30+0000",
-        "completed": "2021-10-02T14:40:30+0000",
-        "jobid": "e7cb7eb7-b77d-4568-9bcf-11bb5fd78938"
-      }
+    "releasededicatedclusterresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.commands.ReleaseDedicatedClusterCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "success": true
+      },
+      "created": "2021-10-02T14:40:30+0000",
+      "completed": "2021-10-02T14:40:30+0000",
+      "jobid": "e7cb7eb7-b77d-4568-9bcf-11bb5fd78938"
     }
   },
   "updateCluster": {

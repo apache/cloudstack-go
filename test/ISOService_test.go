@@ -20,34 +20,139 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestISOService_RegisterIso(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "registerIso"
-		response, err := ReadData(apiName, "ISOService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.ISO.NewRegisterIsoParams("testIso", "testIso",
-		"http://dl.openvm.eu/cloudstack/iso/TinyCore-8.0.iso", "1d8d87d4-1425-459c-8d81-c6f57dca2bd2")
-	resp, err := client.ISO.RegisterIso(params)
+func TestISOService(t *testing.T) {
+	service := "ISOService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to register ISO due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp == nil {
-		t.Errorf("Failed to register template")
+	testattachIso := func(t *testing.T) {
+		if _, ok := response["attachIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewAttachIsoParams("id", "virtualmachineid")
+		_, err := client.ISO.AttachIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AttachIso", testattachIso)
+
+	testcopyIso := func(t *testing.T) {
+		if _, ok := response["copyIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewCopyIsoParams("id")
+		_, err := client.ISO.CopyIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CopyIso", testcopyIso)
+
+	testdeleteIso := func(t *testing.T) {
+		if _, ok := response["deleteIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewDeleteIsoParams("id")
+		_, err := client.ISO.DeleteIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteIso", testdeleteIso)
+
+	testdetachIso := func(t *testing.T) {
+		if _, ok := response["detachIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewDetachIsoParams("virtualmachineid")
+		_, err := client.ISO.DetachIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DetachIso", testdetachIso)
+
+	testextractIso := func(t *testing.T) {
+		if _, ok := response["extractIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewExtractIsoParams("id", "mode")
+		_, err := client.ISO.ExtractIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ExtractIso", testextractIso)
+
+	testlistIsoPermissions := func(t *testing.T) {
+		if _, ok := response["listIsoPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewListIsoPermissionsParams("id")
+		_, err := client.ISO.ListIsoPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListIsoPermissions", testlistIsoPermissions)
+
+	testlistIsos := func(t *testing.T) {
+		if _, ok := response["listIsos"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewListIsosParams()
+		_, err := client.ISO.ListIsos(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListIsos", testlistIsos)
+
+	testregisterIso := func(t *testing.T) {
+		if _, ok := response["registerIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewRegisterIsoParams("displaytext", "name", "url", "zoneid")
+		_, err := client.ISO.RegisterIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RegisterIso", testregisterIso)
+
+	testupdateIso := func(t *testing.T) {
+		if _, ok := response["updateIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewUpdateIsoParams("id")
+		_, err := client.ISO.UpdateIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateIso", testupdateIso)
+
+	testupdateIsoPermissions := func(t *testing.T) {
+		if _, ok := response["updateIsoPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewUpdateIsoPermissionsParams("id")
+		_, err := client.ISO.UpdateIsoPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateIsoPermissions", testupdateIsoPermissions)
+
 }

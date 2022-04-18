@@ -20,153 +20,283 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestVirtualMachineService_DeployVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "deployVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewDeployVirtualMachineParams("498ce071-a077-4237-9492-e55c42553327",
-		"50459b99-5fe0-11ea-9a56-1e006800018c", "1d8d87d4-1425-459c-8d81-c6f57dca2bd2")
-	params.SetName("testDummyVM")
-	params.SetNetworkids([]string{"87503ba2-d59d-4a5e-8f7f-b3f486cedbd8"})
-	resp, err := client.VirtualMachine.DeployVirtualMachine(params)
+func TestVirtualMachineService(t *testing.T) {
+	service := "VirtualMachineService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to deploy VM with given specs due to %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if resp == nil || resp.Name != "testDummyVM" {
-		t.Errorf("Failed to deploy VM with given specs")
-	}
-}
-
-func TestVirtualMachineService_AddNicToVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "addNicToVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewAddNicToVirtualMachineParams("30358053-0f9d-4112-9948-976477896db6",
-		"915653c4-298b-4d74-bdee-4ced282114f1")
-	resp, err := client.VirtualMachine.AddNicToVirtualMachine(params)
-	if err != nil {
-		t.Errorf("Failed to add nic to VM due to %v", err)
-		return
-	}
 
-	if resp == nil || len(resp.Nic) != 2 {
-		t.Errorf("Failed to add nic to VM")
-	}
-}
-
-func TestVirtualMachineService_StopVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "stopVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testaddNicToVirtualMachine := func(t *testing.T) {
+		if _, ok := response["addNicToVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewStopVirtualMachineParams("915653c4-298b-4d74-bdee-4ced282114f1")
-	resp, err := client.VirtualMachine.StopVirtualMachine(params)
-	if err != nil {
-		t.Errorf("Failed to stop VM due to %v", err)
-		return
-	}
-
-	if resp == nil || resp.State != "Stopped" {
-		t.Errorf("Failed to stop VM")
-	}
-}
-
-func TestVirtualMachineService_StartVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "startVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
+		p := client.VirtualMachine.NewAddNicToVirtualMachineParams("networkid", "virtualmachineid")
+		_, err := client.VirtualMachine.AddNicToVirtualMachine(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewStartVirtualMachineParams("915653c4-298b-4d74-bdee-4ced282114f1")
-	resp, err := client.VirtualMachine.StartVirtualMachine(params)
-	if err != nil {
-		t.Errorf("Failed to start VM due to %v", err)
-		return
 	}
+	t.Run("AddNicToVirtualMachine", testaddNicToVirtualMachine)
 
-	if resp == nil || resp.State != "Running" {
-		t.Errorf("Failed to start VM")
-	}
-}
-
-func TestVirtualMachineService_ListVirtualMachines(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "listVirtualMachines"
-		response, err := ReadData(apiName, "VirtualMachineService")
+	testassignVirtualMachine := func(t *testing.T) {
+		if _, ok := response["assignVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewAssignVirtualMachineParams("virtualmachineid")
+		_, err := client.VirtualMachine.AssignVirtualMachine(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewListVirtualMachinesParams()
-	params.SetId("915653c4-298b-4d74-bdee-4ced282114f1")
-	resp, err := client.VirtualMachine.ListVirtualMachines(params)
-	if err != nil {
-		t.Errorf("Failed to list VM due to %v", err)
-		return
 	}
+	t.Run("AssignVirtualMachine", testassignVirtualMachine)
 
-	if resp == nil || resp.Count != 1 {
-		t.Errorf("Failed to list VM")
-	}
-}
-
-func TestVirtualMachineService_ScaleVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "scaleVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "VirtualMachineService", *r)
+	testchangeServiceForVirtualMachine := func(t *testing.T) {
+		if _, ok := response["changeServiceForVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewChangeServiceForVirtualMachineParams("id", "serviceofferingid")
+		_, err := client.VirtualMachine.ChangeServiceForVirtualMachine(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VirtualMachine.NewScaleVirtualMachineParams("88dedd6b-4fc0-44bf-b76f-441a13bc1f99", "57aba75e-5567-44c9-bfcc-c2c14503a5a6")
-	resp, err := client.VirtualMachine.ScaleVirtualMachine(params)
-	if err != nil {
-		t.Errorf("Failed to scale VM due to %v", err)
-		return
 	}
+	t.Run("ChangeServiceForVirtualMachine", testchangeServiceForVirtualMachine)
 
-	if resp == nil {
-		t.Errorf("Failed to list VM")
+	testcleanVMReservations := func(t *testing.T) {
+		if _, ok := response["cleanVMReservations"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewCleanVMReservationsParams()
+		_, err := client.VirtualMachine.CleanVMReservations(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CleanVMReservations", testcleanVMReservations)
+
+	testdeployVirtualMachine := func(t *testing.T) {
+		if _, ok := response["deployVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewDeployVirtualMachineParams("serviceofferingid", "templateid", "zoneid")
+		_, err := client.VirtualMachine.DeployVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeployVirtualMachine", testdeployVirtualMachine)
+
+	testdestroyVirtualMachine := func(t *testing.T) {
+		if _, ok := response["destroyVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewDestroyVirtualMachineParams("id")
+		_, err := client.VirtualMachine.DestroyVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DestroyVirtualMachine", testdestroyVirtualMachine)
+
+	testexpungeVirtualMachine := func(t *testing.T) {
+		if _, ok := response["expungeVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewExpungeVirtualMachineParams("id")
+		_, err := client.VirtualMachine.ExpungeVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ExpungeVirtualMachine", testexpungeVirtualMachine)
+
+	testgetVMPassword := func(t *testing.T) {
+		if _, ok := response["getVMPassword"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewGetVMPasswordParams("id")
+		_, err := client.VirtualMachine.GetVMPassword(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetVMPassword", testgetVMPassword)
+
+	testlistVirtualMachines := func(t *testing.T) {
+		if _, ok := response["listVirtualMachines"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewListVirtualMachinesParams()
+		_, err := client.VirtualMachine.ListVirtualMachines(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVirtualMachines", testlistVirtualMachines)
+
+	testlistVirtualMachinesMetrics := func(t *testing.T) {
+		if _, ok := response["listVirtualMachinesMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewListVirtualMachinesMetricsParams()
+		_, err := client.VirtualMachine.ListVirtualMachinesMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVirtualMachinesMetrics", testlistVirtualMachinesMetrics)
+
+	testmigrateVirtualMachine := func(t *testing.T) {
+		if _, ok := response["migrateVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewMigrateVirtualMachineParams("virtualmachineid")
+		_, err := client.VirtualMachine.MigrateVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MigrateVirtualMachine", testmigrateVirtualMachine)
+
+	testmigrateVirtualMachineWithVolume := func(t *testing.T) {
+		if _, ok := response["migrateVirtualMachineWithVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewMigrateVirtualMachineWithVolumeParams("virtualmachineid")
+		_, err := client.VirtualMachine.MigrateVirtualMachineWithVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MigrateVirtualMachineWithVolume", testmigrateVirtualMachineWithVolume)
+
+	testrebootVirtualMachine := func(t *testing.T) {
+		if _, ok := response["rebootVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewRebootVirtualMachineParams("id")
+		_, err := client.VirtualMachine.RebootVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RebootVirtualMachine", testrebootVirtualMachine)
+
+	testrecoverVirtualMachine := func(t *testing.T) {
+		if _, ok := response["recoverVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewRecoverVirtualMachineParams("id")
+		_, err := client.VirtualMachine.RecoverVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RecoverVirtualMachine", testrecoverVirtualMachine)
+
+	testremoveNicFromVirtualMachine := func(t *testing.T) {
+		if _, ok := response["removeNicFromVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewRemoveNicFromVirtualMachineParams("nicid", "virtualmachineid")
+		_, err := client.VirtualMachine.RemoveNicFromVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RemoveNicFromVirtualMachine", testremoveNicFromVirtualMachine)
+
+	testresetPasswordForVirtualMachine := func(t *testing.T) {
+		if _, ok := response["resetPasswordForVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewResetPasswordForVirtualMachineParams("id")
+		_, err := client.VirtualMachine.ResetPasswordForVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ResetPasswordForVirtualMachine", testresetPasswordForVirtualMachine)
+
+	testrestoreVirtualMachine := func(t *testing.T) {
+		if _, ok := response["restoreVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewRestoreVirtualMachineParams("virtualmachineid")
+		_, err := client.VirtualMachine.RestoreVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RestoreVirtualMachine", testrestoreVirtualMachine)
+
+	testscaleVirtualMachine := func(t *testing.T) {
+		if _, ok := response["scaleVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewScaleVirtualMachineParams("id", "serviceofferingid")
+		_, err := client.VirtualMachine.ScaleVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ScaleVirtualMachine", testscaleVirtualMachine)
+
+	teststartVirtualMachine := func(t *testing.T) {
+		if _, ok := response["startVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewStartVirtualMachineParams("id")
+		_, err := client.VirtualMachine.StartVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("StartVirtualMachine", teststartVirtualMachine)
+
+	teststopVirtualMachine := func(t *testing.T) {
+		if _, ok := response["stopVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewStopVirtualMachineParams("id")
+		_, err := client.VirtualMachine.StopVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("StopVirtualMachine", teststopVirtualMachine)
+
+	testupdateDefaultNicForVirtualMachine := func(t *testing.T) {
+		if _, ok := response["updateDefaultNicForVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewUpdateDefaultNicForVirtualMachineParams("nicid", "virtualmachineid")
+		_, err := client.VirtualMachine.UpdateDefaultNicForVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateDefaultNicForVirtualMachine", testupdateDefaultNicForVirtualMachine)
+
+	testupdateVirtualMachine := func(t *testing.T) {
+		if _, ok := response["updateVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewUpdateVirtualMachineParams("id")
+		_, err := client.VirtualMachine.UpdateVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateVirtualMachine", testupdateVirtualMachine)
+
 }

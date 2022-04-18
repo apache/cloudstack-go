@@ -20,59 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestResourcetagsService_CreateTags(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createTags"
-		response, err := ParseAsyncResponse(apiName, "ResourceTagsService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	tags := make(map[string]string)
-	tags["key"] = "testKey"
-	tags["value"] = "testValue"
-	params := client.Resourcetags.NewCreateTagsParams([]string{"99a842a4-e50f-4265-8ca7-249959506c13"}, "Project", tags)
-	resp, err := client.Resourcetags.CreateTags(params)
+func TestResourcetagsService(t *testing.T) {
+	service := "ResourcetagsService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create tags for project due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to create project tags")
-	}
-}
-
-func TestResourcetagsService_DeleteTags(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteTags"
-		response, err := ParseAsyncResponse(apiName, "ResourceTagsService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Resourcetags.NewDeleteTagsParams([]string{"99a842a4-e50f-4265-8ca7-249959506c13"}, "Project")
-	resp, err := client.Resourcetags.DeleteTags(params)
-	if err != nil {
-		t.Errorf("Failed to delete tags for project due to: %v", err)
-		return
-	}
 
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete project tags")
+	testcreateTags := func(t *testing.T) {
+		if _, ok := response["createTags"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Resourcetags.NewCreateTagsParams([]string{}, "resourcetype", map[string]string{})
+		_, err := client.Resourcetags.CreateTags(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateTags", testcreateTags)
+
+	testdeleteTags := func(t *testing.T) {
+		if _, ok := response["deleteTags"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Resourcetags.NewDeleteTagsParams([]string{}, "resourcetype")
+		_, err := client.Resourcetags.DeleteTags(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteTags", testdeleteTags)
+
+	testlistStorageTags := func(t *testing.T) {
+		if _, ok := response["listStorageTags"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Resourcetags.NewListStorageTagsParams()
+		_, err := client.Resourcetags.ListStorageTags(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStorageTags", testlistStorageTags)
+
+	testlistTags := func(t *testing.T) {
+		if _, ok := response["listTags"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Resourcetags.NewListTagsParams()
+		_, err := client.Resourcetags.ListTags(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListTags", testlistTags)
+
 }

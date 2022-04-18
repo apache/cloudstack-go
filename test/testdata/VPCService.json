@@ -1,26 +1,19 @@
 {
   "restartVPC": {
-    "restartVPC": {
-      "restartvpcresponse": {
-        "jobid": "98272f42-917c-4286-8c05-4e38d85d32e0"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "0644f184-269b-11ec-ad12-1e00bc0003a5",
-        "userid": "06466ac0-269b-11ec-ad12-1e00bc0003a5",
-        "cmd": "org.apache.cloudstack.api.command.user.vpc.RestartVPCCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "success": true
-        },
-        "created": "2021-10-13T04:36:30+0000",
-        "completed": "2021-10-13T04:36:30+0000",
-        "jobid": "98272f42-917c-4286-8c05-4e38d85d32e0"
-      }
+    "restartvpcresponse": {
+      "accountid": "0644f184-269b-11ec-ad12-1e00bc0003a5",
+      "userid": "06466ac0-269b-11ec-ad12-1e00bc0003a5",
+      "cmd": "org.apache.cloudstack.api.command.user.vpc.RestartVPCCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "success": true
+      },
+      "created": "2021-10-13T04:36:30+0000",
+      "completed": "2021-10-13T04:36:30+0000",
+      "jobid": "98272f42-917c-4286-8c05-4e38d85d32e0"
     }
   }
 }

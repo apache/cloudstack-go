@@ -1,21 +1,15 @@
 {
   "cancelStorageMaintenance": {
-    "cancelStorageMaintenance": {
-      "cancelprimarystoragemaintenanceresponse": {
-        "jobid": "7cc3faa4-73c5-45cb-a982-683a13023827"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.admin.storage.CancelPrimaryStorageMaintenanceCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "storagepool": {
+    "cancelprimarystoragemaintenanceresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.admin.storage.CancelPrimaryStorageMaintenanceCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "storagepool": {
           "id": "44ad900d-785b-3eff-addc-a5e6bf4927ef",
           "zoneid": "753941b6-5239-4ab3-b2b3-7522d2a6d1ba",
           "zonename": "DummySG",
@@ -36,24 +30,17 @@
           "provider": "DefaultPrimary",
           "jobid": "7cc3faa4-73c5-45cb-a982-683a13023827",
           "jobstatus": 0
-          }
-         },
-        "jobinstancetype": "StoragePool",
-        "jobinstanceid": "44ad900d-785b-3eff-addc-a5e6bf4927ef",
-        "created": "2021-10-04T08:06:55+0000",
-        "completed": "2021-10-04T08:06:55+0000",
-        "jobid": "7cc3faa4-73c5-45cb-a982-683a13023827"
-      }
+        }
+      },
+      "jobinstancetype": "StoragePool",
+      "jobinstanceid": "44ad900d-785b-3eff-addc-a5e6bf4927ef",
+      "created": "2021-10-04T08:06:55+0000",
+      "completed": "2021-10-04T08:06:55+0000",
+      "jobid": "7cc3faa4-73c5-45cb-a982-683a13023827"
     }
   },
   "enableStorageMaintenance": {
-    "enableStorageMaintenance": {
-      "prepareprimarystorageformaintenanceresponse": {
-        "jobid": "3036df18-12ca-44a0-9c77-19fcf81dad75"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "prepareprimarystorageformaintenanceresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.storage.PreparePrimaryStorageForMaintenanceCmd",
@@ -83,14 +70,13 @@
           "provider": "DefaultPrimary",
           "jobid": "3036df18-12ca-44a0-9c77-19fcf81dad75",
           "jobstatus": 0
-          }
-        },
+        }
+      },
       "jobinstancetype": "StoragePool",
       "jobinstanceid": "44ad900d-785b-3eff-addc-a5e6bf4927ef",
       "created": "2021-10-04T08:13:01+0000",
       "completed": "2021-10-04T08:13:02+0000",
       "jobid": "3036df18-12ca-44a0-9c77-19fcf81dad75"
-      }
     }
   }
 }

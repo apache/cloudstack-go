@@ -20,164 +20,283 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestHostService_AddHost(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "addHost"
-		response, err := ReadData(apiName, "HostService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewAddHostParams("Simulator", "5382edc2-e689-4074-bd67-0e1a236eb2bc", "http://sim/c0/h0",
-		"d4a81f75-5d92-415e-ab59-e85cc2ce56d9")
-	resp, err := client.Host.AddHost(params)
+func TestHostService(t *testing.T) {
+	service := "HostService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to add host due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if resp == nil {
-		t.Errorf("Failed to add host")
-	}
-}
-
-func TestHostService_ListHosts(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listHosts"
-		response, err := ReadData(apiName, "HostService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewListHostsParams()
-	resp, err := client.Host.ListHosts(params)
-	if err != nil {
-		t.Errorf("Failed to add host due to: %v", err)
-		return
-	}
-	if resp.Count != 1 {
-		t.Errorf("Failed to add host")
-	}
-}
 
-func TestHostService_PrepareHostForMaintenance(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "prepareHostForMaintenance"
-		response, err := ParseAsyncResponse(apiName, "HostService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddBaremetalHost := func(t *testing.T) {
+		if _, ok := response["addBaremetalHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewPrepareHostForMaintenanceParams("8e8e68e7-19ea-4a78-bbdb-6e79d27729c9")
-	resp, err := client.Host.PrepareHostForMaintenance(params)
-	if err != nil {
-		t.Errorf("Failed to prepare host for maintenance due to: %v", err)
-		return
+		p := client.Host.NewAddBaremetalHostParams("hypervisor", "podid", "url", "zoneid")
+		_, err := client.Host.AddBaremetalHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp.Resourcestate != "PrepareForMaintenance" {
-		t.Errorf("Failed to prepare host for maintenance")
-	}
-}
+	t.Run("AddBaremetalHost", testaddBaremetalHost)
 
-func TestHostService_CancelHostForMaintenance(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "cancelHostForMaintenance"
-		response, err := ParseAsyncResponse(apiName, "HostService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddGloboDnsHost := func(t *testing.T) {
+		if _, ok := response["addGloboDnsHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewCancelHostMaintenanceParams("8e8e68e7-19ea-4a78-bbdb-6e79d27729c9")
-	resp, err := client.Host.CancelHostMaintenance(params)
-	if err != nil {
-		t.Errorf("Failed to cancel host for maintenance due to: %v", err)
-		return
+		p := client.Host.NewAddGloboDnsHostParams("password", "physicalnetworkid", "url", "username")
+		_, err := client.Host.AddGloboDnsHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp.Resourcestate != "Enabled" {
-		t.Errorf("Failed to cancel host for maintenance")
-	}
-}
+	t.Run("AddGloboDnsHost", testaddGloboDnsHost)
 
-func TestHostService_EnableOutOfBandManagementForHost(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "enableOutOfBandManagementForHost"
-		response, err := ParseAsyncResponse(apiName, "HostService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddHost := func(t *testing.T) {
+		if _, ok := response["addHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewEnableOutOfBandManagementForHostParams("8e8e68e7-19ea-4a78-bbdb-6e79d27729c9")
-	resp, err := client.Host.EnableOutOfBandManagementForHost(params)
-	if err != nil {
-		t.Errorf("Failed to enable out of band management for due to: %v", err)
+		p := client.Host.NewAddHostParams("hypervisor", "podid", "url", "zoneid")
+		_, err := client.Host.AddHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if !resp.Enabled {
-		t.Errorf("Failed to enable out of band management")
-	}
-}
+	t.Run("AddHost", testaddHost)
 
-func TestHostService_DisableOutOfBandManagementForHost(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "disableOutOfBandManagementForHost"
-		response, err := ParseAsyncResponse(apiName, "HostService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddSecondaryStorage := func(t *testing.T) {
+		if _, ok := response["addSecondaryStorage"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewDisableOutOfBandManagementForHostParams("8e8e68e7-19ea-4a78-bbdb-6e79d27729c9")
-	resp, err := client.Host.DisableOutOfBandManagementForHost(params)
-	if err != nil {
-		t.Errorf("Failed to disable out of band management for due to: %v", err)
+		p := client.Host.NewAddSecondaryStorageParams("url")
+		_, err := client.Host.AddSecondaryStorage(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp.Enabled {
-		t.Errorf("Failed to disable out of band management")
-	}
-}
+	t.Run("AddSecondaryStorage", testaddSecondaryStorage)
 
-func TestHostService_EnableHAForHost(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "enableHAForHost"
-		response, err := ParseAsyncResponse(apiName, "HostService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testcancelHostMaintenance := func(t *testing.T) {
+		if _, ok := response["cancelHostMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Host.NewEnableHAForHostParams("8e8e68e7-19ea-4a78-bbdb-6e79d27729c9")
-	resp, err := client.Host.EnableHAForHost(params)
-	if err != nil {
-		t.Errorf("Failed to enable HA for due to: %v", err)
+		p := client.Host.NewCancelHostMaintenanceParams("id")
+		_, err := client.Host.CancelHostMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if !resp.Haenable {
-		t.Errorf("Failed to enable HA for host")
+	t.Run("CancelHostMaintenance", testcancelHostMaintenance)
+
+	testconfigureHAForHost := func(t *testing.T) {
+		if _, ok := response["configureHAForHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewConfigureHAForHostParams("hostid", "provider")
+		_, err := client.Host.ConfigureHAForHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ConfigureHAForHost", testconfigureHAForHost)
+
+	testenableHAForHost := func(t *testing.T) {
+		if _, ok := response["enableHAForHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewEnableHAForHostParams("hostid")
+		_, err := client.Host.EnableHAForHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("EnableHAForHost", testenableHAForHost)
+
+	testdedicateHost := func(t *testing.T) {
+		if _, ok := response["dedicateHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewDedicateHostParams("domainid", "hostid")
+		_, err := client.Host.DedicateHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DedicateHost", testdedicateHost)
+
+	testdeleteHost := func(t *testing.T) {
+		if _, ok := response["deleteHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewDeleteHostParams("id")
+		_, err := client.Host.DeleteHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteHost", testdeleteHost)
+
+	testdisableOutOfBandManagementForHost := func(t *testing.T) {
+		if _, ok := response["disableOutOfBandManagementForHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewDisableOutOfBandManagementForHostParams("hostid")
+		_, err := client.Host.DisableOutOfBandManagementForHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DisableOutOfBandManagementForHost", testdisableOutOfBandManagementForHost)
+
+	testenableOutOfBandManagementForHost := func(t *testing.T) {
+		if _, ok := response["enableOutOfBandManagementForHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewEnableOutOfBandManagementForHostParams("hostid")
+		_, err := client.Host.EnableOutOfBandManagementForHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("EnableOutOfBandManagementForHost", testenableOutOfBandManagementForHost)
+
+	testfindHostsForMigration := func(t *testing.T) {
+		if _, ok := response["findHostsForMigration"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewFindHostsForMigrationParams("virtualmachineid")
+		_, err := client.Host.FindHostsForMigration(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("FindHostsForMigration", testfindHostsForMigration)
+
+	testlistDedicatedHosts := func(t *testing.T) {
+		if _, ok := response["listDedicatedHosts"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewListDedicatedHostsParams()
+		_, err := client.Host.ListDedicatedHosts(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDedicatedHosts", testlistDedicatedHosts)
+
+	testlistHostTags := func(t *testing.T) {
+		if _, ok := response["listHostTags"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewListHostTagsParams()
+		_, err := client.Host.ListHostTags(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListHostTags", testlistHostTags)
+
+	testlistHosts := func(t *testing.T) {
+		if _, ok := response["listHosts"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewListHostsParams()
+		_, err := client.Host.ListHosts(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListHosts", testlistHosts)
+
+	testlistHostsMetrics := func(t *testing.T) {
+		if _, ok := response["listHostsMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewListHostsMetricsParams()
+		_, err := client.Host.ListHostsMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListHostsMetrics", testlistHostsMetrics)
+
+	testprepareHostForMaintenance := func(t *testing.T) {
+		if _, ok := response["prepareHostForMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewPrepareHostForMaintenanceParams("id")
+		_, err := client.Host.PrepareHostForMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("PrepareHostForMaintenance", testprepareHostForMaintenance)
+
+	testreconnectHost := func(t *testing.T) {
+		if _, ok := response["reconnectHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewReconnectHostParams("id")
+		_, err := client.Host.ReconnectHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReconnectHost", testreconnectHost)
+
+	testreleaseDedicatedHost := func(t *testing.T) {
+		if _, ok := response["releaseDedicatedHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewReleaseDedicatedHostParams("hostid")
+		_, err := client.Host.ReleaseDedicatedHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleaseDedicatedHost", testreleaseDedicatedHost)
+
+	testreleaseHostReservation := func(t *testing.T) {
+		if _, ok := response["releaseHostReservation"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewReleaseHostReservationParams("id")
+		_, err := client.Host.ReleaseHostReservation(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleaseHostReservation", testreleaseHostReservation)
+
+	testupdateHost := func(t *testing.T) {
+		if _, ok := response["updateHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewUpdateHostParams("id")
+		_, err := client.Host.UpdateHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateHost", testupdateHost)
+
+	testupdateHostPassword := func(t *testing.T) {
+		if _, ok := response["updateHostPassword"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewUpdateHostPasswordParams("password", "username")
+		_, err := client.Host.UpdateHostPassword(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateHostPassword", testupdateHostPassword)
+
 }

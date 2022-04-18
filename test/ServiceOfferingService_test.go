@@ -20,79 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestServiceOfferingService_CreateServiceOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "createServiceOffering"
-		response, err := ReadData(apiName, "ServiceOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(w, response[apiName])
-	}))
+func TestServiceOfferingService(t *testing.T) {
+	service := "ServiceOfferingService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.ServiceOffering.NewCreateServiceOfferingParams("testServiceOffering", "testServiceOffering")
-	resp, err := client.ServiceOffering.CreateServiceOffering(p)
-	if err != nil {
-		t.Errorf("Failed to create service offering due to %v", err)
-		return
-	}
-	if resp == nil || resp.Name != "testServiceOffering" {
-		t.Errorf("Failed to create service offering")
-	}
-}
-
-func TestServiceOfferingService_UpdateServiceOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "updateServiceOffering"
-		response, err := ReadData(apiName, "ServiceOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateServiceOffering := func(t *testing.T) {
+		if _, ok := response["createServiceOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(w, response[apiName])
-	}))
-	defer server.Close()
-
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.ServiceOffering.NewUpdateServiceOfferingParams("efaeeab0-4b09-4729-8b6f-62645db41b37")
-	p.SetName("testServiceOfferingUpdated")
-	resp, err := client.ServiceOffering.UpdateServiceOffering(p)
-	if err != nil {
-		t.Errorf("Failed to update service offering due to %v", err)
-		return
-	}
-
-	if resp == nil || resp.Name != "testServiceOfferingUpdated" {
-		t.Errorf("Failed to create service offering name")
-	}
-}
-
-func TestServiceOfferingService_DeleteServiceOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "deleteServiceOffering"
-		response, err := ReadData(apiName, "ServiceOfferingService")
+		p := client.ServiceOffering.NewCreateServiceOfferingParams("displaytext", "name")
+		_, err := client.ServiceOffering.CreateServiceOffering(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(w, response[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.ServiceOffering.NewDeleteServiceOfferingParams("efaeeab0-4b09-4729-8b6f-62645db41b37")
-	resp, err := client.ServiceOffering.DeleteServiceOffering(p)
-	if err != nil {
-		t.Errorf("Failed to delete service offering due to %v", err)
-		return
 	}
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete service offering")
+	t.Run("CreateServiceOffering", testcreateServiceOffering)
+
+	testdeleteServiceOffering := func(t *testing.T) {
+		if _, ok := response["deleteServiceOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ServiceOffering.NewDeleteServiceOfferingParams("id")
+		_, err := client.ServiceOffering.DeleteServiceOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteServiceOffering", testdeleteServiceOffering)
+
+	testlistServiceOfferings := func(t *testing.T) {
+		if _, ok := response["listServiceOfferings"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ServiceOffering.NewListServiceOfferingsParams()
+		_, err := client.ServiceOffering.ListServiceOfferings(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListServiceOfferings", testlistServiceOfferings)
+
+	testupdateServiceOffering := func(t *testing.T) {
+		if _, ok := response["updateServiceOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ServiceOffering.NewUpdateServiceOfferingParams("id")
+		_, err := client.ServiceOffering.UpdateServiceOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateServiceOffering", testupdateServiceOffering)
+
 }

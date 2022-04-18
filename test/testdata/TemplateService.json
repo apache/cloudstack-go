@@ -48,14 +48,7 @@
     }
   },
   "createTemplate": {
-    "createTemplate": {
-      "createtemplateresponse": {
-        "id": "b07dd9e4-1720-4122-b840-1e57a79e0dd9",
-        "jobid": "13cc57e2-f388-49d5-95f3-de5ba43835fb"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
+    "createtemplateresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.template.CreateTemplateCmdByAdmin",
@@ -90,9 +83,9 @@
           "details": {},
           "downloaddetails": [
             {
-            "downloadState": "DOWNLOADED",
-            "datastore": "secon",
-            "downloadPercent": "100"
+              "downloadState": "DOWNLOADED",
+              "datastore": "secon",
+              "downloadPercent": "100"
             }
           ],
           "bits": 0,
@@ -102,49 +95,41 @@
           "deployasis": false,
           "requireshvm": false,
           "tags": []
-          }
-        },
+        }
+      },
       "jobinstancetype": "Template",
       "jobinstanceid": "b07dd9e4-1720-4122-b840-1e57a79e0dd9",
       "created": "2021-10-04T08:45:37+0000",
       "completed": "2021-10-04T08:45:37+0000",
       "jobid": "13cc57e2-f388-49d5-95f3-de5ba43835fb"
-      }
     }
   },
   "extractTemplate": {
-    "extractTemplate": {
-      "extracttemplateresponse": {
-        "jobid": "d2c86fca-26ca-436e-b5cf-60754c598da3"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.user.template.ExtractTemplateCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "template": {
-            "id": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
-            "name": "testTemplate",
-            "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-            "state": "DOWNLOAD_URL_CREATED",
-            "zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
-            "zonename": "shouldwork",
-            "extractMode": "HTTP_DOWNLOAD",
-            "url": "http://172.17.1.11/userdata/a7a2ca0e-65c7-4b9e-bc61-3a4ab6adf6c0.vhd"
-            }
-          },
-        "jobinstancetype": "Template",
-        "jobinstanceid": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
-        "created": "2021-10-04T08:50:45+0000",
-        "completed": "2021-10-04T08:50:46+0000",
-        "jobid": "d2c86fca-26ca-436e-b5cf-60754c598da3"
-      }
+    "extracttemplateresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.user.template.ExtractTemplateCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "template": {
+          "id": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
+          "name": "testTemplate",
+          "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+          "state": "DOWNLOAD_URL_CREATED",
+          "zoneid": "1d8d87d4-1425-459c-8d81-c6f57dca2bd2",
+          "zonename": "shouldwork",
+          "extractMode": "HTTP_DOWNLOAD",
+          "url": "http://172.17.1.11/userdata/a7a2ca0e-65c7-4b9e-bc61-3a4ab6adf6c0.vhd"
+        }
+      },
+      "jobinstancetype": "Template",
+      "jobinstanceid": "5ce8f0b1-a910-4631-a8de-1e332bf3a6b7",
+      "created": "2021-10-04T08:50:45+0000",
+      "completed": "2021-10-04T08:50:46+0000",
+      "jobid": "d2c86fca-26ca-436e-b5cf-60754c598da3"
     }
   }
 }

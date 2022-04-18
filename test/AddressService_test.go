@@ -20,57 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestAssociateIpAddress(t *testing.T) {
-	apiName := "associateIpAddress"
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		response, err := ParseAsyncResponse(apiName, "AddressService", *r)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(w, response)
-	}))
-
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Address.NewAssociateIpAddressParams()
-	p.SetZoneid("2e86e486-b472-4f12-a9b2-bb73701241e0")
-	ip, err := client.Address.AssociateIpAddress(p)
+func TestAddressService(t *testing.T) {
+	service := "AddressService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if ip.Ipaddress != "10.70.3.100" {
-		t.Errorf("ipaddress: actual %s, expected 10.70.3.100", ip.Ipaddress)
-	}
-}
-
-func TestDisassociateIpAddress(t *testing.T) {
-	apiName := "disassociateIpAddress"
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		response, err := ParseAsyncResponse(apiName, "AddressService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
-
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Address.NewDisassociateIpAddressParams("a767fbe1-ed7a-4d7c-8221-c7d736ca622d")
-	address, err := client.Address.DisassociateIpAddress(p)
-	if err != nil {
-		t.Errorf("Failed to disassociate IP addres due to: %v", err.Error())
-		return
+
+	testassociateIpAddress := func(t *testing.T) {
+		if _, ok := response["associateIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewAssociateIpAddressParams()
+		_, err := client.Address.AssociateIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if address.Success != true {
-		t.Errorf("Failed to disassociate IP address")
+	t.Run("AssociateIpAddress", testassociateIpAddress)
+
+	testdisassociateIpAddress := func(t *testing.T) {
+		if _, ok := response["disassociateIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewDisassociateIpAddressParams("id")
+		_, err := client.Address.DisassociateIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DisassociateIpAddress", testdisassociateIpAddress)
+
+	testlistPublicIpAddresses := func(t *testing.T) {
+		if _, ok := response["listPublicIpAddresses"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewListPublicIpAddressesParams()
+		_, err := client.Address.ListPublicIpAddresses(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListPublicIpAddresses", testlistPublicIpAddresses)
+
+	testupdateIpAddress := func(t *testing.T) {
+		if _, ok := response["updateIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewUpdateIpAddressParams("id")
+		_, err := client.Address.UpdateIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateIpAddress", testupdateIpAddress)
+
 }

@@ -20,171 +20,151 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestUserService_CreateUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createUser"
-		response, err := ReadData(apiName, "UserService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewCreateUserParams("admin", "user.xyz.com",
-		"firstname", "lastname", "password", "dummyUser")
-	resp, err := client.User.CreateUser(params)
+func TestUserService(t *testing.T) {
+	service := "UserService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create user due to %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil || resp.Username != "dummyUser" {
-		t.Errorf("Failed to create user")
-	}
-}
-
-func TestUserService_EnableUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "enableUser"
-		response, err := ReadData(apiName, "UserService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewEnableUserParams("cd2b5afa-db4d-4532-88ec-1356a273e534")
-	resp, err := client.User.EnableUser(params)
-	if err != nil {
-		t.Errorf("Failed to enable user due to %v", err)
-		return
-	}
 
-	if resp == nil || resp.State != "enabled" {
-		t.Errorf("Failed to enable user")
-	}
-}
-
-func TestUserService_DisableUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "disableUser"
-		response, err := ParseAsyncResponse(apiName, "UserService", *request)
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateUser := func(t *testing.T) {
+		if _, ok := response["createUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewDisableUserParams("cd2b5afa-db4d-4532-88ec-1356a273e534")
-	resp, err := client.User.DisableUser(params)
-	if err != nil {
-		t.Errorf("Failed to disable user due to %v", err)
-		return
-	}
-
-	if resp == nil || resp.State != "disabled" {
-		t.Errorf("Failed to disable user")
-	}
-}
-
-func TestUserService_ListUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listUsers"
-		response, err := ReadData(apiName, "UserService")
+		p := client.User.NewCreateUserParams("account", "email", "firstname", "lastname", "password", "username")
+		_, err := client.User.CreateUser(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewListUsersParams()
-	params.SetId("cd2b5afa-db4d-4532-88ec-1356a273e534")
-	resp, err := client.User.ListUsers(params)
-	if err != nil {
-		t.Errorf("Failed to list user details due to %v", err)
-		return
 	}
+	t.Run("CreateUser", testcreateUser)
 
-	if resp == nil || resp.Count != 1 {
-		t.Errorf("Failed to list user details")
-	}
-}
-
-func TestUserService_LockUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "lockUser"
-		response, err := ReadData(apiName, "UserService")
+	testdeleteUser := func(t *testing.T) {
+		if _, ok := response["deleteUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewDeleteUserParams("id")
+		_, err := client.User.DeleteUser(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewLockUserParams("3b7325b3-849c-4314-ad19-dd3c483b6d1a")
-	resp, err := client.User.LockUser(params)
-	if err != nil {
-		t.Errorf("Failed to lock user due to %v", err)
-		return
 	}
+	t.Run("DeleteUser", testdeleteUser)
 
-	if resp == nil || resp.State != "locked" {
-		t.Errorf("Failed to lock user")
-	}
-}
-
-func TestUserService_DeleteUser(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteUser"
-		response, err := ReadData(apiName, "UserService")
+	testdisableUser := func(t *testing.T) {
+		if _, ok := response["disableUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewDisableUserParams("id")
+		_, err := client.User.DisableUser(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewDeleteUserParams("cd2b5afa-db4d-4532-88ec-1356a273e534")
-	resp, err := client.User.DeleteUser(params)
-	if err != nil {
-		t.Errorf("Failed to delete user due to %v", err)
-		return
 	}
+	t.Run("DisableUser", testdisableUser)
 
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete user")
-	}
-}
-
-func TestGetUserKeys(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "getUserKeys"
-		response, err := ReadData(apiName, "UserService")
+	testenableUser := func(t *testing.T) {
+		if _, ok := response["enableUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewEnableUserParams("id")
+		_, err := client.User.EnableUser(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.User.NewGetUserKeysParams("random-id")
-	resp, err := client.User.GetUserKeys(params)
-	if err != nil {
-		t.Errorf("Failed to get user keys due to %v", err)
-		return
 	}
-	if resp.Apikey == "" || resp.Secretkey == "" {
-		t.Errorf("Parsing failure")
+	t.Run("EnableUser", testenableUser)
+
+	testgetUser := func(t *testing.T) {
+		if _, ok := response["getUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewGetUserParams("userapikey")
+		_, err := client.User.GetUser(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("GetUser", testgetUser)
+
+	testgetUserKeys := func(t *testing.T) {
+		if _, ok := response["getUserKeys"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewGetUserKeysParams("id")
+		_, err := client.User.GetUserKeys(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetUserKeys", testgetUserKeys)
+
+	testgetVirtualMachineUserData := func(t *testing.T) {
+		if _, ok := response["getVirtualMachineUserData"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewGetVirtualMachineUserDataParams("virtualmachineid")
+		_, err := client.User.GetVirtualMachineUserData(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetVirtualMachineUserData", testgetVirtualMachineUserData)
+
+	testlistUsers := func(t *testing.T) {
+		if _, ok := response["listUsers"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewListUsersParams()
+		_, err := client.User.ListUsers(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListUsers", testlistUsers)
+
+	testlockUser := func(t *testing.T) {
+		if _, ok := response["lockUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewLockUserParams("id")
+		_, err := client.User.LockUser(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("LockUser", testlockUser)
+
+	testregisterUserKeys := func(t *testing.T) {
+		if _, ok := response["registerUserKeys"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewRegisterUserKeysParams("id")
+		_, err := client.User.RegisterUserKeys(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RegisterUserKeys", testregisterUserKeys)
+
+	testupdateUser := func(t *testing.T) {
+		if _, ok := response["updateUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewUpdateUserParams("id")
+		_, err := client.User.UpdateUser(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateUser", testupdateUser)
+
 }

@@ -20,99 +20,79 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestSSHService_CreateSSHKeyPair(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "createSSHKeyPair"
-		response, err := ReadData(apiName, "SSHService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.SSH.NewCreateSSHKeyPairParams("testSSHKey")
-	resp, err := client.SSH.CreateSSHKeyPair(params)
+func TestSSHService(t *testing.T) {
+	service := "SSHService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create SSH key pair due to %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil || resp.Name != "testSSHKey" {
-		t.Errorf("Failed to create SSH key pair")
-	}
-}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-func TestSSHService_ListSSHKeyPairs(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "listSSHKeyPairs"
-		response, err := ReadData(apiName, "SSHService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateSSHKeyPair := func(t *testing.T) {
+		if _, ok := response["createSSHKeyPair"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.SSH.NewListSSHKeyPairsParams()
-	params.SetName("testSSHKey")
-	resp, err := client.SSH.ListSSHKeyPairs(params)
-	if err != nil {
-		t.Errorf("Failed to list SSH key pair due to %v", err)
-		return
+		p := client.SSH.NewCreateSSHKeyPairParams("name")
+		_, err := client.SSH.CreateSSHKeyPair(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp == nil || resp.Count != 1 {
-		t.Errorf("Failed to list SSH key pair")
-	}
-}
+	t.Run("CreateSSHKeyPair", testcreateSSHKeyPair)
 
-func TestSSHService_ResetSSHKeyForVirtualMachine(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "resetSSHKeyForVirtualMachine"
-		response, err := ParseAsyncResponse(apiName, "SSHService", *r)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testdeleteSSHKeyPair := func(t *testing.T) {
+		if _, ok := response["deleteSSHKeyPair"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.SSH.NewResetSSHKeyForVirtualMachineParams("8aa29529-b238-45f3-8992-5befadcd8bb0", "testSSHKey")
-	resp, err := client.SSH.ResetSSHKeyForVirtualMachine(params)
-	if err != nil {
-		t.Errorf("Failed to reset SSH key pair for VM due to %v", err)
-		return
+		p := client.SSH.NewDeleteSSHKeyPairParams("name")
+		_, err := client.SSH.DeleteSSHKeyPair(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp == nil || resp.Keypair != "testSSHKey" {
-		t.Errorf("Failed to reset SSH key pair for VM")
-	}
-}
+	t.Run("DeleteSSHKeyPair", testdeleteSSHKeyPair)
 
-func TestSSHService_DeleteSSHKeyPair(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "deleteSSHKeyPair"
-		response, err := ReadData(apiName, "SSHService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testlistSSHKeyPairs := func(t *testing.T) {
+		if _, ok := response["listSSHKeyPairs"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.SSH.NewDeleteSSHKeyPairParams("testSSHKey")
-	resp, err := client.SSH.DeleteSSHKeyPair(params)
-	if err != nil {
-		t.Errorf("Failed to delete SSH key pair due to %v", err)
-		return
+		p := client.SSH.NewListSSHKeyPairsParams()
+		_, err := client.SSH.ListSSHKeyPairs(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete SSH key pair")
+	t.Run("ListSSHKeyPairs", testlistSSHKeyPairs)
+
+	testregisterSSHKeyPair := func(t *testing.T) {
+		if _, ok := response["registerSSHKeyPair"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.SSH.NewRegisterSSHKeyPairParams("name", "publickey")
+		_, err := client.SSH.RegisterSSHKeyPair(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("RegisterSSHKeyPair", testregisterSSHKeyPair)
+
+	testresetSSHKeyForVirtualMachine := func(t *testing.T) {
+		if _, ok := response["resetSSHKeyForVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.SSH.NewResetSSHKeyForVirtualMachineParams("id", "keypair")
+		_, err := client.SSH.ResetSSHKeyForVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ResetSSHKeyForVirtualMachine", testresetSSHKeyForVirtualMachine)
+
 }

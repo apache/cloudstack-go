@@ -20,33 +20,79 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestLimitService_ResetApiLimit(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "resetApiLimit"
-		response, err := ReadData(apiName, "LimitService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Limit.NewResetApiLimitParams()
-	resp, err := client.Limit.ResetApiLimit(params)
+func TestLimitService(t *testing.T) {
+	service := "LimitService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to reset API Params limit due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp == nil {
-		t.Errorf("Failed to register template")
+	testgetApiLimit := func(t *testing.T) {
+		if _, ok := response["getApiLimit"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Limit.NewGetApiLimitParams()
+		_, err := client.Limit.GetApiLimit(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("GetApiLimit", testgetApiLimit)
+
+	testlistResourceLimits := func(t *testing.T) {
+		if _, ok := response["listResourceLimits"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Limit.NewListResourceLimitsParams()
+		_, err := client.Limit.ListResourceLimits(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListResourceLimits", testlistResourceLimits)
+
+	testresetApiLimit := func(t *testing.T) {
+		if _, ok := response["resetApiLimit"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Limit.NewResetApiLimitParams()
+		_, err := client.Limit.ResetApiLimit(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ResetApiLimit", testresetApiLimit)
+
+	testupdateResourceCount := func(t *testing.T) {
+		if _, ok := response["updateResourceCount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Limit.NewUpdateResourceCountParams("domainid")
+		_, err := client.Limit.UpdateResourceCount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateResourceCount", testupdateResourceCount)
+
+	testupdateResourceLimit := func(t *testing.T) {
+		if _, ok := response["updateResourceLimit"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Limit.NewUpdateResourceLimitParams(0)
+		_, err := client.Limit.UpdateResourceLimit(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateResourceLimit", testupdateResourceLimit)
+
 }

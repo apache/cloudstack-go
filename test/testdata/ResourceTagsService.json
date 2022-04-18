@@ -1,50 +1,36 @@
 {
   "createTags": {
-    "createTags": {
-      "createtagsresponse": {
-        "jobid": "fb96bb6b-c192-492d-9671-42cea59a3709"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.user.tag.CreateTagsCmd",
-        "completed": "2021-10-04T06:58:35+0000",
-        "created": "2021-10-04T06:58:35+0000",
-        "jobid": "4901a56e-60aa-4385-8ab6-8f9591ef0469",
-        "jobprocstatus": 0,
-        "jobresult": {
-          "success": true
-         },
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobstatus": 1,
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
-      }
+    "createtagsresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.user.tag.CreateTagsCmd",
+      "completed": "2021-10-04T06:58:35+0000",
+      "created": "2021-10-04T06:58:35+0000",
+      "jobid": "4901a56e-60aa-4385-8ab6-8f9591ef0469",
+      "jobprocstatus": 0,
+      "jobresult": {
+        "success": true
+      },
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobstatus": 1,
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
     }
   },
   "deleteTags": {
-    "deleteTags": {
-      "deletetagsresponse": {
-        "jobid": "494d0f35-057a-4cc7-bf5d-b52d3b803a36"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.user.tag.DeleteTagsCmd",
-        "completed": "2021-10-04T07:07:22+0000",
-        "created": "2021-10-04T07:07:22+0000",
-        "jobid": "494d0f35-057a-4cc7-bf5d-b52d3b803a36",
-        "jobprocstatus": 0,
-        "jobresult": {
-          "success": true
-          },
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobstatus": 1,
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
-      }
+    "deletetagsresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.user.tag.DeleteTagsCmd",
+      "completed": "2021-10-04T07:07:22+0000",
+      "created": "2021-10-04T07:07:22+0000",
+      "jobid": "494d0f35-057a-4cc7-bf5d-b52d3b803a36",
+      "jobprocstatus": 0,
+      "jobresult": {
+        "success": true
+      },
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobstatus": 1,
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
     }
   }
 }

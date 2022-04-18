@@ -20,79 +20,115 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestImageStoreService_AddImageStore(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "addImageStore"
-		response, err := ReadData(apiName, "ImageStoreService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.ImageStore.NewAddImageStoreParams("NFS")
-	resp, err := client.ImageStore.AddImageStore(params)
+func TestImageStoreService(t *testing.T) {
+	service := "ImageStoreService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to add image store due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-
-	if resp == nil || resp.Providername != "NFS" {
-		t.Errorf(" Failed to add image store")
-	}
-}
-
-func TestImageStoreService_ListImageStores(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listImageStores"
-		response, err := ReadData(apiName, "ImageStoreService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.ImageStore.NewListImageStoresParams()
-	resp, err := client.ImageStore.ListImageStores(params)
-	if err != nil {
-		t.Errorf("Failed to list image stores due to: %v", err)
-		return
-	}
 
-	if resp == nil || resp.Count != 1 {
-		t.Errorf(" Failed to list image stores")
-	}
-}
-
-func TestImageStoreService_DeleteImageStore(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteImageStore"
-		response, err := ReadData(apiName, "ImageStoreService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testaddImageStore := func(t *testing.T) {
+		if _, ok := response["addImageStore"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.ImageStore.NewDeleteImageStoreParams("0ac85364-e31a-4840-97a4-a237b4291dfa")
-	resp, err := client.ImageStore.DeleteImageStore(params)
-	if err != nil {
-		t.Errorf("Failed to delete image store due to: %v", err)
-		return
+		p := client.ImageStore.NewAddImageStoreParams("provider")
+		_, err := client.ImageStore.AddImageStore(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AddImageStore", testaddImageStore)
 
-	if resp == nil || !resp.Success {
-		t.Errorf(" Failed to delete image store")
+	testaddImageStoreS3 := func(t *testing.T) {
+		if _, ok := response["addImageStoreS3"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewAddImageStoreS3Params("accesskey", "bucket", "endpoint", "secretkey")
+		_, err := client.ImageStore.AddImageStoreS3(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AddImageStoreS3", testaddImageStoreS3)
+
+	testcreateSecondaryStagingStore := func(t *testing.T) {
+		if _, ok := response["createSecondaryStagingStore"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewCreateSecondaryStagingStoreParams("url")
+		_, err := client.ImageStore.CreateSecondaryStagingStore(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateSecondaryStagingStore", testcreateSecondaryStagingStore)
+
+	testdeleteImageStore := func(t *testing.T) {
+		if _, ok := response["deleteImageStore"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewDeleteImageStoreParams("id")
+		_, err := client.ImageStore.DeleteImageStore(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteImageStore", testdeleteImageStore)
+
+	testdeleteSecondaryStagingStore := func(t *testing.T) {
+		if _, ok := response["deleteSecondaryStagingStore"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewDeleteSecondaryStagingStoreParams("id")
+		_, err := client.ImageStore.DeleteSecondaryStagingStore(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteSecondaryStagingStore", testdeleteSecondaryStagingStore)
+
+	testlistImageStores := func(t *testing.T) {
+		if _, ok := response["listImageStores"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewListImageStoresParams()
+		_, err := client.ImageStore.ListImageStores(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListImageStores", testlistImageStores)
+
+	testlistSecondaryStagingStores := func(t *testing.T) {
+		if _, ok := response["listSecondaryStagingStores"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewListSecondaryStagingStoresParams()
+		_, err := client.ImageStore.ListSecondaryStagingStores(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListSecondaryStagingStores", testlistSecondaryStagingStores)
+
+	testupdateCloudToUseObjectStore := func(t *testing.T) {
+		if _, ok := response["updateCloudToUseObjectStore"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewUpdateCloudToUseObjectStoreParams("provider")
+		_, err := client.ImageStore.UpdateCloudToUseObjectStore(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateCloudToUseObjectStore", testupdateCloudToUseObjectStore)
+
 }

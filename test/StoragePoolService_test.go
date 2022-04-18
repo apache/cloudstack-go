@@ -20,53 +20,55 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestStoragePoolService_CancelStorageMaintenance(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "cancelStorageMaintenance"
-		response, err := ParseAsyncResponse(apiName, "StoragePoolService", *r)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.StoragePool.NewCancelStorageMaintenanceParams("44ad900d-785b-3eff-addc-a5e6bf4927ef")
-	resp, err := client.StoragePool.CancelStorageMaintenance(params)
+func TestStoragePoolService(t *testing.T) {
+	service := "StoragePoolService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to cancel storage maintenance due to %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil || resp.State != "Up" {
-		t.Errorf("Failed to cancel Storage pool maintenance")
-	}
-}
-func TestStoragePoolService_EnableStorageMaintenance(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "enableStorageMaintenance"
-		response, err := ParseAsyncResponse(apiName, "StoragePoolService", *r)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.StoragePool.NewEnableStorageMaintenanceParams("44ad900d-785b-3eff-addc-a5e6bf4927ef")
-	resp, err := client.StoragePool.EnableStorageMaintenance(params)
-	if err != nil {
-		t.Errorf("Failed to enable storage maintenance due to %v", err)
-		return
+
+	testcancelStorageMaintenance := func(t *testing.T) {
+		if _, ok := response["cancelStorageMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewCancelStorageMaintenanceParams("id")
+		_, err := client.StoragePool.CancelStorageMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
-	if resp == nil || resp.State != "Maintenance" {
-		t.Errorf("Failed to enable Storage pool maintenance")
+	t.Run("CancelStorageMaintenance", testcancelStorageMaintenance)
+
+	testenableStorageMaintenance := func(t *testing.T) {
+		if _, ok := response["enableStorageMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewEnableStorageMaintenanceParams("id")
+		_, err := client.StoragePool.EnableStorageMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("EnableStorageMaintenance", testenableStorageMaintenance)
+
+	testlistStorageProviders := func(t *testing.T) {
+		if _, ok := response["listStorageProviders"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewListStorageProvidersParams("type")
+		_, err := client.StoragePool.ListStorageProviders(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStorageProviders", testlistStorageProviders)
+
 }

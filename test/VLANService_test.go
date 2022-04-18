@@ -20,35 +20,91 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestNetworkService_DedicateGuestVLANRange(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "dedicateGuestVlanRange"
-		response, err := ReadData(apiName, "VLANService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.VLAN.NewDedicateGuestVlanRangeParams("8e27a637-7525-49ed-81ce-52bd5e5d9ea2", "100-110")
-	params.SetAccount("admin")
-	params.SetDomainid("e4874e10-5fdf-11ea-9a56-1e006800018c")
-	resp, err := client.VLAN.DedicateGuestVlanRange(params)
+func TestVLANService(t *testing.T) {
+	service := "VLANService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to dedicate guest VLAN range for physical network due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp == nil || resp.Guestvlanrange != "100-110" {
-		t.Errorf("Failed to dedicate guest VLAN range for physical network")
+	testcreateVlanIpRange := func(t *testing.T) {
+		if _, ok := response["createVlanIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewCreateVlanIpRangeParams()
+		_, err := client.VLAN.CreateVlanIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateVlanIpRange", testcreateVlanIpRange)
+
+	testdedicateGuestVlanRange := func(t *testing.T) {
+		if _, ok := response["dedicateGuestVlanRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewDedicateGuestVlanRangeParams("physicalnetworkid", "vlanrange")
+		_, err := client.VLAN.DedicateGuestVlanRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DedicateGuestVlanRange", testdedicateGuestVlanRange)
+
+	testdeleteVlanIpRange := func(t *testing.T) {
+		if _, ok := response["deleteVlanIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewDeleteVlanIpRangeParams("id")
+		_, err := client.VLAN.DeleteVlanIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteVlanIpRange", testdeleteVlanIpRange)
+
+	testlistDedicatedGuestVlanRanges := func(t *testing.T) {
+		if _, ok := response["listDedicatedGuestVlanRanges"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewListDedicatedGuestVlanRangesParams()
+		_, err := client.VLAN.ListDedicatedGuestVlanRanges(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDedicatedGuestVlanRanges", testlistDedicatedGuestVlanRanges)
+
+	testlistVlanIpRanges := func(t *testing.T) {
+		if _, ok := response["listVlanIpRanges"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewListVlanIpRangesParams()
+		_, err := client.VLAN.ListVlanIpRanges(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVlanIpRanges", testlistVlanIpRanges)
+
+	testreleaseDedicatedGuestVlanRange := func(t *testing.T) {
+		if _, ok := response["releaseDedicatedGuestVlanRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewReleaseDedicatedGuestVlanRangeParams("id")
+		_, err := client.VLAN.ReleaseDedicatedGuestVlanRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleaseDedicatedGuestVlanRange", testreleaseDedicatedGuestVlanRange)
+
 }

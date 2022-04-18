@@ -20,99 +20,211 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestFirewallService_CreateFirewallRule(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createFirewallRule"
-		response, err := ParseAsyncResponse(apiName, "FirewallService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Firewall.NewCreateFirewallRuleParams("192.168.2.4", "tcp")
-	resp, err := client.Firewall.CreateFirewallRule(params)
+func TestFirewallService(t *testing.T) {
+	service := "FirewallService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create firewall rule due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp.Ipaddress != "192.168.2.4" {
-		t.Errorf("Failed to create firewall rule")
-	}
-
-	if resp.State != "Active" {
-		t.Errorf("Failed to create firewall rule")
-	}
-}
-
-func TestFirewallService_DeleteFirewallRule(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteFirewallRule"
-		response, err := ParseAsyncResponse(apiName, "FirewallService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, response)
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Firewall.NewDeleteFirewallRuleParams("fb4ad2ee-02c8-433e-a769-6f18afddc750")
-	resp, err := client.Firewall.DeleteFirewallRule(params)
-	if err != nil {
-		t.Errorf("Failed to delete firewall rule due to: %v", err)
-	}
-	if !resp.Success {
-		t.Errorf("Failed to delete firewall rule")
-	}
-}
 
-func TestFirewallService_CreateEgressFirewallRule(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createEgressFirewallRule"
-		response, err := ParseAsyncResponse(apiName, "FirewallService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddPaloAltoFirewall := func(t *testing.T) {
+		if _, ok := response["addPaloAltoFirewall"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Firewall.NewCreateEgressFirewallRuleParams("c4a3303c-376d-4d56-b336-1bd91cb130b6", "tcp")
-	resp, err := client.Firewall.CreateEgressFirewallRule(params)
-	if err != nil {
-		t.Errorf("Failed to create egress firewall rule due to: %v", err)
-	}
-
-	if resp.State != "Active" {
-		t.Errorf("Failed to create egress firewall rule")
-	}
-}
-
-func TestFirewallService_DeleteEgressFirewallRule(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteEgressFirewallRule"
-		response, err := ParseAsyncResponse(apiName, "FirewallService", *request)
+		p := client.Firewall.NewAddPaloAltoFirewallParams("networkdevicetype", "password", "physicalnetworkid", "url", "username")
+		_, err := client.Firewall.AddPaloAltoFirewall(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintln(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Firewall.NewDeleteEgressFirewallRuleParams("fb4ad2ee-02c8-433e-a769-6f18afddc750")
-	resp, err := client.Firewall.DeleteEgressFirewallRule(params)
-	if err != nil {
-		t.Errorf("Failed to delete egress firewall rule due to: %v", err)
 	}
-	if !resp.Success {
-		t.Errorf("Failed to delete egress firewall rule")
+	t.Run("AddPaloAltoFirewall", testaddPaloAltoFirewall)
+
+	testconfigurePaloAltoFirewall := func(t *testing.T) {
+		if _, ok := response["configurePaloAltoFirewall"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewConfigurePaloAltoFirewallParams("fwdeviceid")
+		_, err := client.Firewall.ConfigurePaloAltoFirewall(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ConfigurePaloAltoFirewall", testconfigurePaloAltoFirewall)
+
+	testcreateEgressFirewallRule := func(t *testing.T) {
+		if _, ok := response["createEgressFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewCreateEgressFirewallRuleParams("networkid", "protocol")
+		_, err := client.Firewall.CreateEgressFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateEgressFirewallRule", testcreateEgressFirewallRule)
+
+	testcreateFirewallRule := func(t *testing.T) {
+		if _, ok := response["createFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewCreateFirewallRuleParams("ipaddressid", "protocol")
+		_, err := client.Firewall.CreateFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateFirewallRule", testcreateFirewallRule)
+
+	testcreatePortForwardingRule := func(t *testing.T) {
+		if _, ok := response["createPortForwardingRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewCreatePortForwardingRuleParams("ipaddressid", 0, "protocol", 0, "virtualmachineid")
+		_, err := client.Firewall.CreatePortForwardingRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreatePortForwardingRule", testcreatePortForwardingRule)
+
+	testdeleteEgressFirewallRule := func(t *testing.T) {
+		if _, ok := response["deleteEgressFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeleteEgressFirewallRuleParams("id")
+		_, err := client.Firewall.DeleteEgressFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteEgressFirewallRule", testdeleteEgressFirewallRule)
+
+	testdeleteFirewallRule := func(t *testing.T) {
+		if _, ok := response["deleteFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeleteFirewallRuleParams("id")
+		_, err := client.Firewall.DeleteFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteFirewallRule", testdeleteFirewallRule)
+
+	testdeletePaloAltoFirewall := func(t *testing.T) {
+		if _, ok := response["deletePaloAltoFirewall"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeletePaloAltoFirewallParams("fwdeviceid")
+		_, err := client.Firewall.DeletePaloAltoFirewall(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeletePaloAltoFirewall", testdeletePaloAltoFirewall)
+
+	testdeletePortForwardingRule := func(t *testing.T) {
+		if _, ok := response["deletePortForwardingRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeletePortForwardingRuleParams("id")
+		_, err := client.Firewall.DeletePortForwardingRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeletePortForwardingRule", testdeletePortForwardingRule)
+
+	testlistEgressFirewallRules := func(t *testing.T) {
+		if _, ok := response["listEgressFirewallRules"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListEgressFirewallRulesParams()
+		_, err := client.Firewall.ListEgressFirewallRules(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListEgressFirewallRules", testlistEgressFirewallRules)
+
+	testlistFirewallRules := func(t *testing.T) {
+		if _, ok := response["listFirewallRules"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListFirewallRulesParams()
+		_, err := client.Firewall.ListFirewallRules(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListFirewallRules", testlistFirewallRules)
+
+	testlistPaloAltoFirewalls := func(t *testing.T) {
+		if _, ok := response["listPaloAltoFirewalls"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListPaloAltoFirewallsParams()
+		_, err := client.Firewall.ListPaloAltoFirewalls(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListPaloAltoFirewalls", testlistPaloAltoFirewalls)
+
+	testlistPortForwardingRules := func(t *testing.T) {
+		if _, ok := response["listPortForwardingRules"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListPortForwardingRulesParams()
+		_, err := client.Firewall.ListPortForwardingRules(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListPortForwardingRules", testlistPortForwardingRules)
+
+	testupdateEgressFirewallRule := func(t *testing.T) {
+		if _, ok := response["updateEgressFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewUpdateEgressFirewallRuleParams("id")
+		_, err := client.Firewall.UpdateEgressFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateEgressFirewallRule", testupdateEgressFirewallRule)
+
+	testupdateFirewallRule := func(t *testing.T) {
+		if _, ok := response["updateFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewUpdateFirewallRuleParams("id")
+		_, err := client.Firewall.UpdateFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateFirewallRule", testupdateFirewallRule)
+
+	testupdatePortForwardingRule := func(t *testing.T) {
+		if _, ok := response["updatePortForwardingRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewUpdatePortForwardingRuleParams("id")
+		_, err := client.Firewall.UpdatePortForwardingRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdatePortForwardingRule", testupdatePortForwardingRule)
+
 }

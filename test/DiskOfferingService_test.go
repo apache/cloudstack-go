@@ -20,73 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestDiskOfferingService_CreateDiskOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createDiskOffering"
-		response, err := ReadData(apiName, "DiskOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.DiskOffering.NewCreateDiskOfferingParams("test", "test")
-	resp, err := client.DiskOffering.CreateDiskOffering(params)
+func TestDiskOfferingService(t *testing.T) {
+	service := "DiskOfferingService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create disk offering due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
 
-	if resp == nil {
-		t.Errorf("Failed to create disk offering")
-	}
-}
-
-func TestDiskOfferingService_ListDiskOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listDiskOfferings"
-		response, err := ReadData(apiName, "DiskOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateDiskOffering := func(t *testing.T) {
+		if _, ok := response["createDiskOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.DiskOffering.NewListDiskOfferingsParams()
-	params.SetId("7662b6ae-f00b-4268-973f-f3f87eaf82c5")
-	resp, err := client.DiskOffering.ListDiskOfferings(params)
-	if err != nil {
-		t.Errorf("Failed to list disk offering due to: %v", err)
-	}
-
-	if resp.Count != 1 {
-		t.Errorf("Failed to list disk offering")
-	}
-}
-
-func TestDiskOfferingService_DeleteDiskOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteDiskOffering"
-		response, err := ReadData(apiName, "DiskOfferingService")
+		p := client.DiskOffering.NewCreateDiskOfferingParams("displaytext", "name")
+		_, err := client.DiskOffering.CreateDiskOffering(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.DiskOffering.NewDeleteDiskOfferingParams("7662b6ae-f00b-4268-973f-f3f87eaf82c5")
-	resp, err := client.DiskOffering.DeleteDiskOffering(params)
-	if err != nil {
-		t.Errorf("Failed to delete disk offering due to : %v", err)
 	}
-	if !resp.Success {
-		t.Errorf("Failed to delete disk offering")
+	t.Run("CreateDiskOffering", testcreateDiskOffering)
+
+	testdeleteDiskOffering := func(t *testing.T) {
+		if _, ok := response["deleteDiskOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.DiskOffering.NewDeleteDiskOfferingParams("id")
+		_, err := client.DiskOffering.DeleteDiskOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteDiskOffering", testdeleteDiskOffering)
+
+	testlistDiskOfferings := func(t *testing.T) {
+		if _, ok := response["listDiskOfferings"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.DiskOffering.NewListDiskOfferingsParams()
+		_, err := client.DiskOffering.ListDiskOfferings(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDiskOfferings", testlistDiskOfferings)
+
+	testupdateDiskOffering := func(t *testing.T) {
+		if _, ok := response["updateDiskOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.DiskOffering.NewUpdateDiskOfferingParams("id")
+		_, err := client.DiskOffering.UpdateDiskOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateDiskOffering", testupdateDiskOffering)
+
 }

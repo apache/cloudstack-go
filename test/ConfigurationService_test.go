@@ -20,75 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestConfigurationService_ListCapabilities(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "listCapabilities"
-		resp, err := ReadData(apiName, "ConfigurationService")
-		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
-		}
-		fmt.Fprintf(w, resp[apiName])
-	}))
+func TestConfigurationService(t *testing.T) {
+	service := "ConfigurationService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Configuration.NewListCapabilitiesParams()
-	resp, err := client.Configuration.ListCapabilities(p)
-	if err != nil {
-		t.Errorf("Failed to list capabilities due to: %v", err)
-	}
-
-	if resp == nil {
-		t.Errorf("Failed to list capabilities")
-	}
-}
-
-func TestConfigurationService_ListConfigurations(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "listConfigurations"
-		resp, err := ReadData(apiName, "ConfigurationService")
-		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
+	testlistCapabilities := func(t *testing.T) {
+		if _, ok := response["listCapabilities"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(w, resp[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Configuration.NewListConfigurationsParams()
-	p.SetName("allow.user.create.projects")
-	resp, err := client.Configuration.ListConfigurations(p)
-	if err != nil {
-		t.Errorf("Failed to list configuration details due to: %v", err)
-	}
-	if resp.Count != 1 {
-		t.Errorf("Failed to list configuration details")
-	}
-}
-
-func TestConfigurationService_UpdateConfigurations(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		apiName := "updateConfiguration"
-		resp, err := ReadData(apiName, "ConfigurationService")
+		p := client.Configuration.NewListCapabilitiesParams()
+		_, err := client.Configuration.ListCapabilities(p)
 		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(w, resp[apiName])
-	}))
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Configuration.NewUpdateConfigurationParams("allow.user.create.projects")
-	p.SetValue("false")
-	resp, err := client.Configuration.UpdateConfiguration(p)
-	if err != nil {
-		t.Errorf("Failed to update configuration due to: %v", err)
 	}
-	if resp.Value != "false" {
-		t.Errorf("Failed to update configuration")
+	t.Run("ListCapabilities", testlistCapabilities)
+
+	testlistConfigurations := func(t *testing.T) {
+		if _, ok := response["listConfigurations"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Configuration.NewListConfigurationsParams()
+		_, err := client.Configuration.ListConfigurations(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("ListConfigurations", testlistConfigurations)
+
+	testlistDeploymentPlanners := func(t *testing.T) {
+		if _, ok := response["listDeploymentPlanners"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Configuration.NewListDeploymentPlannersParams()
+		_, err := client.Configuration.ListDeploymentPlanners(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDeploymentPlanners", testlistDeploymentPlanners)
+
+	testupdateConfiguration := func(t *testing.T) {
+		if _, ok := response["updateConfiguration"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Configuration.NewUpdateConfigurationParams("name")
+		_, err := client.Configuration.UpdateConfiguration(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateConfiguration", testupdateConfiguration)
+
 }

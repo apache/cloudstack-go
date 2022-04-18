@@ -20,139 +20,355 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestNetworkService_CreateNetwork(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createNetwork"
-		response, err := ReadData(apiName, "NetworkService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Network.NewCreateNetworkParams("testIsolatedNet", "testIsolatedNet", "69b7f746-208a-47c3-a940-4d3ebb720372", "04ccc336-d730-42fe-8ff6-5ae36e141e81")
-	resp, err := client.Network.CreateNetwork(params)
+func TestNetworkService(t *testing.T) {
+	service := "NetworkService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create network due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil || resp.Name != "testIsolatedNet" {
-		t.Errorf("Failed to create network")
-	}
-}
-
-func TestNetworkService_ListNetworks(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listNetworks"
-		response, err := ReadData(apiName, "NetworkService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Network.NewListNetworksParams()
-	params.SetId("eb9c270d-dd66-443b-9524-ada1eff4442a")
-	resp, err := client.Network.ListNetworks(params)
-	if err != nil {
-		t.Errorf("Failed to list specific network details due to : %v", err)
-	}
-	if resp.Count != 1 {
-		t.Errorf("Failed to list specific network details")
-	}
-	if resp.Networks[0].Id != "eb9c270d-dd66-443b-9524-ada1eff4442a" {
-		t.Errorf("Failed to list specific network details")
-	}
-}
 
-func TestNetworkService_DeleteNetwork(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteNetwork"
-		response, err := ParseAsyncResponse(apiName, "NetworkService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testaddNetworkServiceProvider := func(t *testing.T) {
+		if _, ok := response["addNetworkServiceProvider"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Network.NewDeleteNetworkParams("eb9c270d-dd66-443b-9524-ada1eff4442a")
-	resp, err := client.Network.DeleteNetwork(params)
-	if err != nil {
-		t.Errorf("Failed to delete network due to: %v", err)
-		return
-	}
-	if resp == nil || !resp.Success {
-		t.Errorf("Failed to delete network")
-	}
-}
-
-//func TestNetworkService_RestartNetworkWithCleanUp(t *testing.T) {
-//	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-//		responses := map[string]string{
-//			"restartNetwork": `{
-//				"restartnetworkresponse": {
-//					"jobid": "09b1ab5d-02d0-410f-b373-6520962b98eb"
-//				}
-//			}`,
-//			"queryAsyncJobResult": `{
-//				"queryasyncjobresultresponse": {
-//					"accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-//					"userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-//					"cmd": "org.apache.cloudstack.api.command.user.network.RestartNetworkCmd",
-//					"jobstatus": 1,
-//					"jobprocstatus": 0,
-//					"jobresultcode": 0,
-//					"jobresulttype": "object",
-//					"jobresult": {
-//						"success": true
-//					},
-//					"created": "2021-10-04T05:37:23+0000",
-//					"completed": "2021-10-04T05:37:41+0000",
-//					"jobid": "09b1ab5d-02d0-410f-b373-6520962b98eb"
-//				}
-//			}`,
-//		}
-//		fmt.Fprintf(writer, responses[request.FormValue("command")])
-//	}))
-//	defer server.Close()
-//	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-//	params := client.Network.NewRestartNetworkParams("30358053-0f9d-4112-9948-976477896db6")
-//	params.SetCleanup(true)
-//	_, err := client.Network.RestartNetwork(params)
-//	if err != nil {
-//		t.Errorf("Failed to restart network with cleanup due to: %v", err)
-//		return
-//	}
-//}
-
-func TestNetworkService_CreatePhysicalNetwork(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createPhysicalNetwork"
-		response, err := ParseAsyncResponse(apiName, "NetworkService", *request)
+		p := client.Network.NewAddNetworkServiceProviderParams("name", "physicalnetworkid")
+		_, err := client.Network.AddNetworkServiceProvider(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Network.NewCreatePhysicalNetworkParams("testPhyNet", "d4a81f75-5d92-415e-ab59-e85cc2ce56d9")
-	resp, err := client.Network.CreatePhysicalNetwork(params)
-	if err != nil {
-		t.Errorf("Failed to create physical network due to: %v", err)
-		return
 	}
-	if resp == nil || resp.Name != "testPhyNet" {
-		t.Errorf("Failed to create physical network")
+	t.Run("AddNetworkServiceProvider", testaddNetworkServiceProvider)
+
+	testaddOpenDaylightController := func(t *testing.T) {
+		if _, ok := response["addOpenDaylightController"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewAddOpenDaylightControllerParams("password", "physicalnetworkid", "url", "username")
+		_, err := client.Network.AddOpenDaylightController(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AddOpenDaylightController", testaddOpenDaylightController)
+
+	testcreateNetwork := func(t *testing.T) {
+		if _, ok := response["createNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateNetworkParams("displaytext", "name", "networkofferingid", "zoneid")
+		_, err := client.Network.CreateNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateNetwork", testcreateNetwork)
+
+	testcreatePhysicalNetwork := func(t *testing.T) {
+		if _, ok := response["createPhysicalNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreatePhysicalNetworkParams("name", "zoneid")
+		_, err := client.Network.CreatePhysicalNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreatePhysicalNetwork", testcreatePhysicalNetwork)
+
+	testcreateServiceInstance := func(t *testing.T) {
+		if _, ok := response["createServiceInstance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateServiceInstanceParams("leftnetworkid", "name", "rightnetworkid", "serviceofferingid", "templateid", "zoneid")
+		_, err := client.Network.CreateServiceInstance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateServiceInstance", testcreateServiceInstance)
+
+	testcreateStorageNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["createStorageNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateStorageNetworkIpRangeParams("gateway", "netmask", "podid", "startip")
+		_, err := client.Network.CreateStorageNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateStorageNetworkIpRange", testcreateStorageNetworkIpRange)
+
+	testdedicatePublicIpRange := func(t *testing.T) {
+		if _, ok := response["dedicatePublicIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDedicatePublicIpRangeParams("domainid", "id")
+		_, err := client.Network.DedicatePublicIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DedicatePublicIpRange", testdedicatePublicIpRange)
+
+	testdeleteNetwork := func(t *testing.T) {
+		if _, ok := response["deleteNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteNetworkParams("id")
+		_, err := client.Network.DeleteNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteNetwork", testdeleteNetwork)
+
+	testdeleteNetworkServiceProvider := func(t *testing.T) {
+		if _, ok := response["deleteNetworkServiceProvider"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteNetworkServiceProviderParams("id")
+		_, err := client.Network.DeleteNetworkServiceProvider(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteNetworkServiceProvider", testdeleteNetworkServiceProvider)
+
+	testdeleteOpenDaylightController := func(t *testing.T) {
+		if _, ok := response["deleteOpenDaylightController"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteOpenDaylightControllerParams("id")
+		_, err := client.Network.DeleteOpenDaylightController(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteOpenDaylightController", testdeleteOpenDaylightController)
+
+	testdeletePhysicalNetwork := func(t *testing.T) {
+		if _, ok := response["deletePhysicalNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeletePhysicalNetworkParams("id")
+		_, err := client.Network.DeletePhysicalNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeletePhysicalNetwork", testdeletePhysicalNetwork)
+
+	testdeleteStorageNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["deleteStorageNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteStorageNetworkIpRangeParams("id")
+		_, err := client.Network.DeleteStorageNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteStorageNetworkIpRange", testdeleteStorageNetworkIpRange)
+
+	testlistNetscalerLoadBalancerNetworks := func(t *testing.T) {
+		if _, ok := response["listNetscalerLoadBalancerNetworks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetscalerLoadBalancerNetworksParams("lbdeviceid")
+		_, err := client.Network.ListNetscalerLoadBalancerNetworks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetscalerLoadBalancerNetworks", testlistNetscalerLoadBalancerNetworks)
+
+	testlistNetworkIsolationMethods := func(t *testing.T) {
+		if _, ok := response["listNetworkIsolationMethods"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetworkIsolationMethodsParams()
+		_, err := client.Network.ListNetworkIsolationMethods(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkIsolationMethods", testlistNetworkIsolationMethods)
+
+	testlistNetworkServiceProviders := func(t *testing.T) {
+		if _, ok := response["listNetworkServiceProviders"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetworkServiceProvidersParams()
+		_, err := client.Network.ListNetworkServiceProviders(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkServiceProviders", testlistNetworkServiceProviders)
+
+	testlistNetworks := func(t *testing.T) {
+		if _, ok := response["listNetworks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetworksParams()
+		_, err := client.Network.ListNetworks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworks", testlistNetworks)
+
+	testlistNiciraNvpDeviceNetworks := func(t *testing.T) {
+		if _, ok := response["listNiciraNvpDeviceNetworks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNiciraNvpDeviceNetworksParams("nvpdeviceid")
+		_, err := client.Network.ListNiciraNvpDeviceNetworks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNiciraNvpDeviceNetworks", testlistNiciraNvpDeviceNetworks)
+
+	testlistOpenDaylightControllers := func(t *testing.T) {
+		if _, ok := response["listOpenDaylightControllers"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListOpenDaylightControllersParams()
+		_, err := client.Network.ListOpenDaylightControllers(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListOpenDaylightControllers", testlistOpenDaylightControllers)
+
+	testlistPaloAltoFirewallNetworks := func(t *testing.T) {
+		if _, ok := response["listPaloAltoFirewallNetworks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListPaloAltoFirewallNetworksParams("lbdeviceid")
+		_, err := client.Network.ListPaloAltoFirewallNetworks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListPaloAltoFirewallNetworks", testlistPaloAltoFirewallNetworks)
+
+	testlistPhysicalNetworks := func(t *testing.T) {
+		if _, ok := response["listPhysicalNetworks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListPhysicalNetworksParams()
+		_, err := client.Network.ListPhysicalNetworks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListPhysicalNetworks", testlistPhysicalNetworks)
+
+	testlistStorageNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["listStorageNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListStorageNetworkIpRangeParams()
+		_, err := client.Network.ListStorageNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStorageNetworkIpRange", testlistStorageNetworkIpRange)
+
+	testlistSupportedNetworkServices := func(t *testing.T) {
+		if _, ok := response["listSupportedNetworkServices"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListSupportedNetworkServicesParams()
+		_, err := client.Network.ListSupportedNetworkServices(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListSupportedNetworkServices", testlistSupportedNetworkServices)
+
+	testreleasePublicIpRange := func(t *testing.T) {
+		if _, ok := response["releasePublicIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewReleasePublicIpRangeParams("id")
+		_, err := client.Network.ReleasePublicIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleasePublicIpRange", testreleasePublicIpRange)
+
+	testrestartNetwork := func(t *testing.T) {
+		if _, ok := response["restartNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewRestartNetworkParams("id")
+		_, err := client.Network.RestartNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RestartNetwork", testrestartNetwork)
+
+	testupdateNetwork := func(t *testing.T) {
+		if _, ok := response["updateNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewUpdateNetworkParams("id")
+		_, err := client.Network.UpdateNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateNetwork", testupdateNetwork)
+
+	testupdateNetworkServiceProvider := func(t *testing.T) {
+		if _, ok := response["updateNetworkServiceProvider"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewUpdateNetworkServiceProviderParams("id")
+		_, err := client.Network.UpdateNetworkServiceProvider(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateNetworkServiceProvider", testupdateNetworkServiceProvider)
+
+	testupdatePhysicalNetwork := func(t *testing.T) {
+		if _, ok := response["updatePhysicalNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewUpdatePhysicalNetworkParams("id")
+		_, err := client.Network.UpdatePhysicalNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdatePhysicalNetwork", testupdatePhysicalNetwork)
+
+	testupdateStorageNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["updateStorageNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewUpdateStorageNetworkIpRangeParams("id")
+		_, err := client.Network.UpdateStorageNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateStorageNetworkIpRange", testupdateStorageNetworkIpRange)
+
 }

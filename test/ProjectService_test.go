@@ -20,125 +20,175 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestProjectService_CreateProject(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createProject"
-		response, err := ParseAsyncResponse(apiName, "ProjectService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Project.NewCreateProjectParams("testProject", "testProject")
-	resp, err := client.Project.CreateProject(params)
+func TestProjectService(t *testing.T) {
+	service := "ProjectService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create Project due to: %v", err)
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp == nil || resp.Name != "testProject" {
-		t.Errorf("Failed to create project")
-	}
-}
-
-func TestProjectService_ActivateProject(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "activateProject"
-		response, err := ParseAsyncResponse(apiName, "ProjectService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintf(writer, response)
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Project.NewActivateProjectParams("99a842a4-e50f-4265-8ca7-249959506c13")
-	resp, err := client.Project.ActivateProject(params)
-	if err != nil {
-		t.Errorf("Failed to activate Project due to: %v", err)
-		return
-	}
-	if resp == nil || resp.Id != "99a842a4-e50f-4265-8ca7-249959506c13" || resp.State != "Active" {
-		t.Errorf("Failed to activate project")
-	}
-}
 
-func TestProjectService_SuspendProject(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "suspendProject"
-		response, err := ParseAsyncResponse(apiName, "ProjectService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+	testactivateProject := func(t *testing.T) {
+		if _, ok := response["activateProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Project.NewSuspendProjectParams("99a842a4-e50f-4265-8ca7-249959506c13")
-	resp, err := client.Project.SuspendProject(params)
-	if err != nil {
-		t.Errorf("Failed to suspend Project due to: %v", err)
-		return
-	}
-	if resp == nil || resp.Id != "99a842a4-e50f-4265-8ca7-249959506c13" || resp.State != "Suspended" {
-		t.Errorf("Failed to suspend project")
-	}
-}
-
-func TestProjectService_UpdateProject(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "updateProject"
-		response, err := ParseAsyncResponse(apiName, "ProjectService", *request)
+		p := client.Project.NewActivateProjectParams("id")
+		_, err := client.Project.ActivateProject(p)
 		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Project.NewUpdateProjectParams("99a842a4-e50f-4265-8ca7-249959506c13")
-	params.SetDisplaytext("testProjectUpdated")
-	resp, err := client.Project.UpdateProject(params)
-	if err != nil {
-		t.Errorf("Failed to update Project details due to: %v", err)
-		return
 	}
+	t.Run("ActivateProject", testactivateProject)
 
-	if resp == nil || resp.Id != "69646881-8d7f-4800-987d-106698a42608" || resp.Displaytext != "testProjectUpdate" {
-		t.Errorf("Failed to update project name")
-	}
-}
-
-func TestProjectService_listProjectRolePermissions(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, r *http.Request) {
-		apiName := "listProjectRolePermissions"
-		response, err := ReadData(apiName, "ProjectService")
+	testcreateProject := func(t *testing.T) {
+		if _, ok := response["createProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewCreateProjectParams("displaytext", "name")
+		_, err := client.Project.CreateProject(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintln(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.Project.NewListProjectRolePermissionsParams("69646881-8d7f-4800-987d-106698a42608")
-	params.SetProjectroleid("fa089002-d055-46b5-aa0a-18f2eae2b4fc")
-	resp, err := client.Project.ListProjectRolePermissions(params)
-	if err != nil {
-		t.Errorf("Failed to list project role permissions due to %v", err)
-		return
 	}
+	t.Run("CreateProject", testcreateProject)
 
-	fmt.Println(resp)
-	if resp == nil || resp.Count != 1 {
-		t.Errorf("Failed to list VM")
+	testdeleteProject := func(t *testing.T) {
+		if _, ok := response["deleteProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteProjectParams("id")
+		_, err := client.Project.DeleteProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteProject", testdeleteProject)
+
+	testdeleteProjectInvitation := func(t *testing.T) {
+		if _, ok := response["deleteProjectInvitation"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteProjectInvitationParams("id")
+		_, err := client.Project.DeleteProjectInvitation(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteProjectInvitation", testdeleteProjectInvitation)
+
+	testlistProjectInvitations := func(t *testing.T) {
+		if _, ok := response["listProjectInvitations"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewListProjectInvitationsParams()
+		_, err := client.Project.ListProjectInvitations(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListProjectInvitations", testlistProjectInvitations)
+
+	testlistProjects := func(t *testing.T) {
+		if _, ok := response["listProjects"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewListProjectsParams()
+		_, err := client.Project.ListProjects(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListProjects", testlistProjects)
+
+	testsuspendProject := func(t *testing.T) {
+		if _, ok := response["suspendProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewSuspendProjectParams("id")
+		_, err := client.Project.SuspendProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("SuspendProject", testsuspendProject)
+
+	testupdateProject := func(t *testing.T) {
+		if _, ok := response["updateProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewUpdateProjectParams("id")
+		_, err := client.Project.UpdateProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateProject", testupdateProject)
+
+	testupdateProjectInvitation := func(t *testing.T) {
+		if _, ok := response["updateProjectInvitation"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewUpdateProjectInvitationParams("projectid")
+		_, err := client.Project.UpdateProjectInvitation(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateProjectInvitation", testupdateProjectInvitation)
+
+	testlistProjectRolePermissions := func(t *testing.T) {
+		if _, ok := response["listProjectRolePermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewListProjectRolePermissionsParams("projectid")
+		_, err := client.Project.ListProjectRolePermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListProjectRolePermissions", testlistProjectRolePermissions)
+
+	testcreateProjectRolePermission := func(t *testing.T) {
+		if _, ok := response["createProjectRolePermission"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewCreateProjectRolePermissionParams("permission", "projectid", "projectroleid", "rule")
+		_, err := client.Project.CreateProjectRolePermission(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateProjectRolePermission", testcreateProjectRolePermission)
+
+	testupdateProjectRolePermission := func(t *testing.T) {
+		if _, ok := response["updateProjectRolePermission"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewUpdateProjectRolePermissionParams("projectid", "projectroleid")
+		_, err := client.Project.UpdateProjectRolePermission(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateProjectRolePermission", testupdateProjectRolePermission)
+
+	testdeleteProjectRolePermission := func(t *testing.T) {
+		if _, ok := response["deleteProjectRolePermission"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteProjectRolePermissionParams("id", "projectid")
+		_, err := client.Project.DeleteProjectRolePermission(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteProjectRolePermission", testdeleteProjectRolePermission)
+
 }

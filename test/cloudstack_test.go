@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
@@ -35,45 +36,65 @@ var (
 	CS_SECRET_KEY = "valid-secret-key"
 )
 
-func ReadData(apiName string, testDataFile string) (map[string]string, error) {
-	var data interface{}
-	apis, err := ioutil.ReadFile("testdata/" + testDataFile + ".json")
-	if err != nil {
-		return nil, err
-	}
+func CreateTestServer(t *testing.T, responses map[string]json.RawMessage) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		response := responses[r.FormValue("command")]
+		rawResult, _ := getRawValue(response)
 
-	if err := json.Unmarshal([]byte(apis), &data); err != nil {
-		return nil, err
-	}
+		var result map[string]json.RawMessage
+		err := json.Unmarshal(rawResult, &result)
+		if err != nil {
+			fmt.Fprintln(w, string(response))
+			return
+		}
 
-	jsonBytes, err := json.Marshal(data.(map[string]interface{})[apiName])
+		// Since we're using a sync client, pass the job result as the response
+		val, ok := result["jobresult"]
+		if !ok {
+			fmt.Fprintln(w, string(response))
+			return
+		}
 
-	if err != nil {
-		return nil, err
-	}
-	response := make(map[string]string)
-	response[apiName] = string(jsonBytes)
+		err = json.Unmarshal(val, &result)
+		if err != nil {
+			fmt.Fprintln(w, string(response))
+			return
+		}
 
-	return response, nil
+		// Handle success response separately
+		if _, ok := result["success"]; ok {
+			fmt.Fprintf(w, `{"jobresult":{"success":true}}`)
+			return
+		}
+
+		fmt.Fprintln(w, string(val))
+
+	}))
 }
 
-func ParseAsyncResponse(apiName string, filename string, r http.Request) (string, error) {
-	response, err := ReadData(apiName, filename)
-	if err != nil {
-		fmt.Printf("Failed to read response data, due to: %v", err)
-		return "", err
+func getRawValue(b json.RawMessage) (json.RawMessage, error) {
+	var m map[string]json.RawMessage
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
 	}
-	jsonStr := response[apiName]
-	responses := make(map[string]interface{})
-	err = json.Unmarshal([]byte(jsonStr), &responses)
-	if err != nil {
-		fmt.Printf("Failed to parse the response, due to: %v", err)
-		return "", err
+	for _, v := range m {
+		return v, nil
 	}
-	s, _ := json.Marshal(responses[r.FormValue("command")])
-	// fmt.Println(responses)
-	fmt.Println(string(s))
-	return string(s), nil
+	return nil, fmt.Errorf("Unable to extract the raw value from:\n\n%s\n\n", string(b))
+}
+
+func readData(file string) (map[string]json.RawMessage, error) {
+	var data map[string]json.RawMessage
+	apis, err := ioutil.ReadFile("testdata/" + file + ".json")
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(apis, &data); err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }
 
 func TestCreateAsyncClient(t *testing.T) {

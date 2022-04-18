@@ -1,26 +1,19 @@
 {
   "deleteRemoteAccessVpn": {
-    "deleteRemoteAccessVpn": {
-      "deleteremoteaccessvpnresponse": {
-        "jobid": "3697537c-f796-44f2-b997-0b71ff4f4e07"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "7a2fad8f-2bde-11ec-b173-1e0086000207",
-        "cmd": "org.apache.cloudstack.api.command.user.vpn.DeleteRemoteAccessVpnCmd",
-        "completed": "2021-10-13T07:38:53+0000",
-        "created": "2021-10-13T07:38:51+0000",
-        "jobid": "50bdd6c2-6958-48ba-94fe-3e6ec410dcce",
-        "jobprocstatus": 0,
-        "jobresult": {
-          "success": true
-        },
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobstatus": 1,
-        "userid": "7a309dc2-2bde-11ec-b173-1e0086000207"
-      }
+    "deleteremoteaccessvpnresponse": {
+      "accountid": "7a2fad8f-2bde-11ec-b173-1e0086000207",
+      "cmd": "org.apache.cloudstack.api.command.user.vpn.DeleteRemoteAccessVpnCmd",
+      "completed": "2021-10-13T07:38:53+0000",
+      "created": "2021-10-13T07:38:51+0000",
+      "jobid": "50bdd6c2-6958-48ba-94fe-3e6ec410dcce",
+      "jobprocstatus": 0,
+      "jobresult": {
+        "success": true
+      },
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobstatus": 1,
+      "userid": "7a309dc2-2bde-11ec-b173-1e0086000207"
     }
   }
 }

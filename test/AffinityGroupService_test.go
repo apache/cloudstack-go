@@ -20,32 +20,79 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestCreateAffinityGroup(t *testing.T) {
-	apiName := "createAffinityGroup"
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		responses, err := ParseAsyncResponse(apiName, "AffinityGroupService", *request)
-		if err != nil {
-			t.Errorf("Failed to parse response, due to: %v", err)
-		}
-		fmt.Fprintln(writer, responses)
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.AffinityGroup.NewCreateAffinityGroupParams("testAffinityGroup", "host affinity")
-	ag, err := client.AffinityGroup.CreateAffinityGroup(p)
+func TestAffinityGroupService(t *testing.T) {
+	service := "AffinityGroupService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to disassociate IP addres due to: %v", err.Error())
-		return
+		t.Skipf("Skipping test as %v", err)
 	}
-	if ag.Name != "testAffinityGroup" {
-		t.Errorf("Failed to create affinity group of name: testAffinityGroup")
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
+	defer server.Close()
+
+	testcreateAffinityGroup := func(t *testing.T) {
+		if _, ok := response["createAffinityGroup"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AffinityGroup.NewCreateAffinityGroupParams("name", "type")
+		_, err := client.AffinityGroup.CreateAffinityGroup(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateAffinityGroup", testcreateAffinityGroup)
+
+	testdeleteAffinityGroup := func(t *testing.T) {
+		if _, ok := response["deleteAffinityGroup"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AffinityGroup.NewDeleteAffinityGroupParams()
+		_, err := client.AffinityGroup.DeleteAffinityGroup(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteAffinityGroup", testdeleteAffinityGroup)
+
+	testlistAffinityGroupTypes := func(t *testing.T) {
+		if _, ok := response["listAffinityGroupTypes"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AffinityGroup.NewListAffinityGroupTypesParams()
+		_, err := client.AffinityGroup.ListAffinityGroupTypes(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListAffinityGroupTypes", testlistAffinityGroupTypes)
+
+	testlistAffinityGroups := func(t *testing.T) {
+		if _, ok := response["listAffinityGroups"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AffinityGroup.NewListAffinityGroupsParams()
+		_, err := client.AffinityGroup.ListAffinityGroups(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListAffinityGroups", testlistAffinityGroups)
+
+	testupdateVMAffinityGroup := func(t *testing.T) {
+		if _, ok := response["updateVMAffinityGroup"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AffinityGroup.NewUpdateVMAffinityGroupParams("id")
+		_, err := client.AffinityGroup.UpdateVMAffinityGroup(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateVMAffinityGroup", testupdateVMAffinityGroup)
+
 }

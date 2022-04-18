@@ -98,27 +98,20 @@
     }
   },
   "deleteDomain": {
-    "deleteDomain": {
-      "deletedomainresponse": {
-        "jobid": "318c77c0-8c42-42fb-8c23-363819c85dd3"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
-        "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
-        "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
-        "cmd": "org.apache.cloudstack.api.command.admin.domain.DeleteDomainCmd",
-        "jobstatus": 1,
-        "jobprocstatus": 0,
-        "jobresultcode": 0,
-        "jobresulttype": "object",
-        "jobresult": {
-          "success": true
-       },
+    "deletedomainresponse": {
+      "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
+      "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c",
+      "cmd": "org.apache.cloudstack.api.command.admin.domain.DeleteDomainCmd",
+      "jobstatus": 1,
+      "jobprocstatus": 0,
+      "jobresultcode": 0,
+      "jobresulttype": "object",
+      "jobresult": {
+        "success": true
+      },
       "created": "2021-10-02T17:44:42+0000",
       "completed": "2021-10-02T17:44:42+0000",
       "jobid": "318c77c0-8c42-42fb-8c23-363819c85dd3"
-      }
     }
   }
 }

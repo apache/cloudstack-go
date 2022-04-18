@@ -20,91 +20,163 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestListAccounts(t *testing.T) {
-	apiName := "listAccountsResponse"
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp, err := ReadData(apiName, "AccountService")
-		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
-			return
-		}
-		fmt.Fprintln(w, resp[apiName])
-	}))
+func TestAccountService(t *testing.T) {
+	service := "AccountService"
+	response, err := readData(service)
+	if err != nil {
+		t.Skipf("Skipping test as %v", err)
+	}
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	p := client.Account.NewListAccountsParams()
-	acc, _ := client.Account.ListAccounts(p)
-	accounts := acc.Accounts
-	if len(accounts) != 1 {
-		t.Errorf("length: actual %d, expected 1", len(accounts))
-	}
-
-	if accounts[0].Name != "admin" {
-		t.Errorf("name: actual %s, expected admin", accounts[0].Name)
-	}
-
-	if len(accounts[0].User) != 1 {
-		t.Errorf("length of user: actual %d, expected 1", len(accounts[0].User))
-	}
-
-	if accounts[0].User[0].Username != "admin" {
-		t.Errorf("username: actual %s, expected admin", accounts[0].User[0].Username)
-	}
-
-	if accounts[0].Accountdetails["key0"] != "value0" {
-		t.Errorf("accountdetails[\"key0\"]: actual %s, expected value0", accounts[0].Accountdetails["key0"])
-	}
-}
-
-func TestCreateAccounts(t *testing.T) {
-	apiName := "createAccountsResponse"
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		resp, err := ReadData(apiName, "AccountService")
-		if err != nil {
-			t.Errorf("Failed to read response data, due to: %v", err)
-			return
+	testaddAccountToProject := func(t *testing.T) {
+		if _, ok := response["addAccountToProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintln(w, resp[apiName])
-	}))
-	defer server.Close()
-
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	email := "user01@example.com"
-	firstname := "user01"
-	lastname := "user01"
-	password := "password"
-	username := "user01"
-
-	p := client.Account.NewCreateAccountParams(email, firstname, lastname, password, username)
-	p.SetAccountdetails(map[string]string{"key0": "value0", "key1": "value1"})
-	account, _ := client.Account.CreateAccount(p)
-
-	if account.Name != "user01" {
-		t.Errorf("name: actual %s, expected user01", account.Name)
+		p := client.Account.NewAddAccountToProjectParams("projectid")
+		_, err := client.Account.AddAccountToProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("AddAccountToProject", testaddAccountToProject)
 
-	if len(account.User) != 1 {
-		t.Errorf("length of user: actual %d, expected 1", len(account.User))
+	testcreateAccount := func(t *testing.T) {
+		if _, ok := response["createAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewCreateAccountParams("email", "firstname", "lastname", "password", "username")
+		_, err := client.Account.CreateAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("CreateAccount", testcreateAccount)
 
-	if account.User[0].Username != "user01" {
-		t.Errorf("username: actual %s, expected admin", account.User[0].Username)
+	testdeleteAccount := func(t *testing.T) {
+		if _, ok := response["deleteAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewDeleteAccountParams("id")
+		_, err := client.Account.DeleteAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteAccount", testdeleteAccount)
 
-	if account.Accountdetails["key0"] != "value0" {
-		t.Errorf("accountdetails[\"key0\"]: actual %s, expected value0", account.Accountdetails["key0"])
+	testdeleteAccountFromProject := func(t *testing.T) {
+		if _, ok := response["deleteAccountFromProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewDeleteAccountFromProjectParams("account", "projectid")
+		_, err := client.Account.DeleteAccountFromProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteAccountFromProject", testdeleteAccountFromProject)
 
-	if account.Accountdetails["key1"] != "value1" {
-		t.Errorf("accountdetails[\"key1\"]: actual %s, expected value1", account.Accountdetails["key1"])
+	testdisableAccount := func(t *testing.T) {
+		if _, ok := response["disableAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewDisableAccountParams(true)
+		_, err := client.Account.DisableAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DisableAccount", testdisableAccount)
+
+	testenableAccount := func(t *testing.T) {
+		if _, ok := response["enableAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewEnableAccountParams()
+		_, err := client.Account.EnableAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("EnableAccount", testenableAccount)
+
+	testgetSolidFireAccountId := func(t *testing.T) {
+		if _, ok := response["getSolidFireAccountId"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewGetSolidFireAccountIdParams("accountid", "storageid")
+		_, err := client.Account.GetSolidFireAccountId(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetSolidFireAccountId", testgetSolidFireAccountId)
+
+	testlistAccounts := func(t *testing.T) {
+		if _, ok := response["listAccounts"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewListAccountsParams()
+		_, err := client.Account.ListAccounts(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListAccounts", testlistAccounts)
+
+	testlistProjectAccounts := func(t *testing.T) {
+		if _, ok := response["listProjectAccounts"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewListProjectAccountsParams("projectid")
+		_, err := client.Account.ListProjectAccounts(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListProjectAccounts", testlistProjectAccounts)
+
+	testlockAccount := func(t *testing.T) {
+		if _, ok := response["lockAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewLockAccountParams("account", "domainid")
+		_, err := client.Account.LockAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("LockAccount", testlockAccount)
+
+	testmarkDefaultZoneForAccount := func(t *testing.T) {
+		if _, ok := response["markDefaultZoneForAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewMarkDefaultZoneForAccountParams("account", "domainid", "zoneid")
+		_, err := client.Account.MarkDefaultZoneForAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MarkDefaultZoneForAccount", testmarkDefaultZoneForAccount)
+
+	testupdateAccount := func(t *testing.T) {
+		if _, ok := response["updateAccount"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewUpdateAccountParams()
+		_, err := client.Account.UpdateAccount(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateAccount", testupdateAccount)
+
 }

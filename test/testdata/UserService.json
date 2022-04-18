@@ -48,13 +48,7 @@
     }
   },
   "disableUser": {
-    "disableUser": {
       "disableResponse": {
-        "jobid": "e4eb553f-6188-441c-beb8-09056b0a1e1f"
-      }
-    },
-    "queryAsyncJobResult": {
-      "queryasyncjobresultresponse": {
       "accountid": "27ef5ba2-5fe0-11ea-9a56-1e006800018c",
       "cmd": "org.apache.cloudstack.api.command.admin.user.DisableUserCmd",
       "completed": "2021-10-04T09:06:53+0000",
@@ -88,7 +82,7 @@
       "jobstatus": 1,
       "userid": "27f2484f-5fe0-11ea-9a56-1e006800018c"
       }
-    }
+
   },
   "listUsers": {
     "listusersresponse": {

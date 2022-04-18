@@ -20,99 +20,67 @@
 package test
 
 import (
-	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestNetworkOfferingService_CreateNetworkOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "createNetworkOffering"
-		response, err := ReadData(apiName, "NetworkOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.NetworkOffering.NewCreateNetworkOfferingParams("testNetOffering", "L2", "testNetOffering", "Guest")
-	resp, err := client.NetworkOffering.CreateNetworkOffering(params)
+func TestNetworkOfferingService(t *testing.T) {
+	service := "NetworkOfferingService"
+	response, err := readData(service)
 	if err != nil {
-		t.Errorf("Failed to create network offering due to: %v", err)
+		t.Skipf("Skipping test as %v", err)
 	}
-	if resp.Name != "testNetOffering" {
-		t.Errorf("Failed to create network offering")
-	}
-}
-
-func TestNetworkOfferingService_UpdateNetworkOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "updateNetworkOffering"
-		response, err := ReadData(apiName, "NetworkOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
-		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
+	server := CreateTestServer(t, response)
+	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.NetworkOffering.NewUpdateNetworkOfferingParams()
-	params.SetState("Enabled")
-	resp, err := client.NetworkOffering.UpdateNetworkOffering(params)
-	if err != nil {
-		t.Errorf("Failed to update network offering state due to: %v", err)
-	}
 
-	if resp.State != "Enabled" {
-		t.Errorf("Failed to enable network offering")
-	}
-}
-
-func TestNetworkOfferingService_ListNetworkOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "listNetworkOfferings"
-		response, err := ReadData(apiName, "NetworkOfferingService")
-		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+	testcreateNetworkOffering := func(t *testing.T) {
+		if _, ok := response["createNetworkOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.NetworkOffering.NewListNetworkOfferingsParams()
-	params.SetId("c2000683-68fd-437e-a4cf-f3676e1d18c1")
-	resp, err := client.NetworkOffering.ListNetworkOfferings(params)
-	if err != nil {
-		t.Errorf("Failed to list network offering due to: %v", err)
-	}
-
-	if resp.Count != 1 {
-		t.Errorf("Failed to list network offering")
-	}
-}
-
-func TestNetworkOfferingService_DeleteNetworkOffering(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		apiName := "deleteNetworkOffering"
-		response, err := ReadData(apiName, "NetworkOfferingService")
+		p := client.NetworkOffering.NewCreateNetworkOfferingParams("displaytext", "guestiptype", "name", "traffictype")
+		_, err := client.NetworkOffering.CreateNetworkOffering(p)
 		if err != nil {
-			t.Errorf("Failed to read response data due to: %v", err)
+			t.Errorf(err.Error())
 		}
-		fmt.Fprintf(writer, response[apiName])
-	}))
-	defer server.Close()
-	client := cloudstack.NewAsyncClient(server.URL, "APIKEY", "SECRETKEY", true)
-	params := client.NetworkOffering.NewDeleteNetworkOfferingParams("c2000683-68fd-437e-a4cf-f3676e1d18c1")
-	resp, err := client.NetworkOffering.DeleteNetworkOffering(params)
-	if err != nil {
-		t.Errorf("Failed to delete network offering due to: %v", err)
 	}
+	t.Run("CreateNetworkOffering", testcreateNetworkOffering)
 
-	if !resp.Success {
-		t.Errorf("Failed to list network offering")
+	testdeleteNetworkOffering := func(t *testing.T) {
+		if _, ok := response["deleteNetworkOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkOffering.NewDeleteNetworkOfferingParams("id")
+		_, err := client.NetworkOffering.DeleteNetworkOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
 	}
+	t.Run("DeleteNetworkOffering", testdeleteNetworkOffering)
+
+	testlistNetworkOfferings := func(t *testing.T) {
+		if _, ok := response["listNetworkOfferings"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkOffering.NewListNetworkOfferingsParams()
+		_, err := client.NetworkOffering.ListNetworkOfferings(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkOfferings", testlistNetworkOfferings)
+
+	testupdateNetworkOffering := func(t *testing.T) {
+		if _, ok := response["updateNetworkOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkOffering.NewUpdateNetworkOfferingParams()
+		_, err := client.NetworkOffering.UpdateNetworkOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateNetworkOffering", testupdateNetworkOffering)
+
 }
