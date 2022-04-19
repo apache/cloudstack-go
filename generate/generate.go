@@ -226,6 +226,15 @@ func main() {
 		errors = append(errors, &goimportError{string(out)})
 	}
 
+	testdir, err := testDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	out, err = exec.Command("goimports", "-w", testdir).CombinedOutput()
+	if err != nil {
+		errors = append(errors, &goimportError{string(out)})
+	}
+
 	if len(errors) > 0 {
 		log.Printf("%d API(s) failed to generate:", len(errors))
 		for _, ce := range errors {
@@ -769,6 +778,16 @@ func (s *service) WriteGeneratedCode() error {
 		return err
 	}
 
+	if s.name != "CustomService" {
+		tests, err := s.GenerateTestCode()
+		if err != nil {
+			return err
+		}
+		testdir, err := testDir()
+		file := path.Join(testdir, s.name+"_test.go")
+		ioutil.WriteFile(file, tests, 0644)
+	}
+
 	file := path.Join(outdir, s.name+".go")
 	return ioutil.WriteFile(file, code, 0644)
 }
@@ -972,6 +991,105 @@ func (s *service) GenerateCode() ([]byte, error) {
 		return buf.Bytes(), err
 	}
 	return clean, nil
+}
+
+func (s *service) GenerateTestCode() ([]byte, error) {
+	var buf bytes.Buffer
+	s.p = func(format string, args ...interface{}) {
+		_, err := fmt.Fprintf(&buf, format, args...)
+		if err != nil {
+			panic(err)
+		}
+	}
+	s.pn = func(format string, args ...interface{}) {
+		s.p(format+"\n", args...)
+	}
+	pn := s.pn
+
+	pn("//")
+	pn("// Licensed to the Apache Software Foundation (ASF) under one")
+	pn("// or more contributor license agreements.  See the NOTICE file")
+	pn("// distributed with this work for additional information")
+	pn("// regarding copyright ownership.  The ASF licenses this file")
+	pn("// to you under the Apache License, Version 2.0 (the")
+	pn("// \"License\"); you may not use this file except in compliance")
+	pn("// with the License.  You may obtain a copy of the License at")
+	pn("//")
+	pn("//   http://www.apache.org/licenses/LICENSE-2.0")
+	pn("//")
+	pn("// Unless required by applicable law or agreed to in writing,")
+	pn("// software distributed under the License is distributed on an")
+	pn("// \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY")
+	pn("// KIND, either express or implied.  See the License for the")
+	pn("// specific language governing permissions and limitations")
+	pn("// under the License.")
+	pn("//")
+	pn("")
+	pn("package test")
+	pn("")
+
+	pn("func Test%s(t *testing.T) {", s.name)
+	pn("	service := \"%s\"", s.name)
+	pn("	response, err := readData(service)")
+	pn("	if err != nil {")
+	pn("		t.Skipf(\"Skipping test as %%v\", err)")
+	pn("	}")
+	pn("	server := CreateTestServer(t, response)")
+	pn("	client := cloudstack.NewClient(server.URL, \"APIKEY\", \"SECRETKEY\", true)")
+	pn("	defer server.Close()")
+	pn("")
+
+	for _, a := range s.apis {
+		s.generateAPITest(a)
+	}
+	pn("}")
+
+	clean, err := format.Source(buf.Bytes())
+	if err != nil {
+		buf.WriteTo(os.Stdout)
+		return buf.Bytes(), err
+	}
+	return clean, nil
+}
+
+func (s *service) generateAPITest(a *API) {
+	p, pn := s.p, s.pn
+	tn := capitalize(a.Name + "Params")
+	rp := APIParams{}
+	pn("	test%s := func(t *testing.T) {", a.Name)
+	pn("		if _, ok := response[\"%s\"]; !ok {", a.Name)
+	pn("			t.Skipf(\"Skipping as no json response is provided in testdata\")")
+	pn("		}")
+	p("		p := client.%s.New%s(", strings.TrimSuffix(s.name, "Service"), tn)
+	for _, ap := range a.Params {
+		if ap.Required {
+			rp = append(rp, ap)
+			p("%s, ", getDefaultValueForType(a.Name, ap.Name, ap.Type))
+		}
+	}
+	pn(")")
+	pn("		_, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
+	pn("		if err != nil {")
+	pn("			t.Errorf(err.Error())")
+	pn("		}")
+	pn("	}")
+	pn("    t.Run(\"%s\", test%s)", capitalize(a.Name), a.Name)
+	pn("")
+}
+
+func getDefaultValueForType(aName string, pName string, pType string) string {
+	switch pType {
+	case "boolean":
+		return "true"
+	case "short", "int", "integer", "long", "float", "double":
+		return "0"
+	case "list":
+		return "[]string{}"
+	case "map":
+		return "map[string]string{}"
+	default:
+		return fmt.Sprintf("\"%s\"", pName)
+	}
 }
 
 func (s *service) generateParamType(a *API) {
@@ -1829,6 +1947,20 @@ func sourceDir() (string, error) {
 		return "", fmt.Errorf("Failed to Mkdir %s: %v", outdir, err)
 	}
 	return outdir, nil
+}
+
+func testDir() (string, error) {
+	wd, err := os.Getwd()
+	if err != nil {
+		return "", err
+	}
+	testdir := path.Join(wd, "test")
+
+	if err := os.MkdirAll(testdir, 0755); err != nil {
+		return "", fmt.Errorf("Failed to Mkdir %s: %v", testdir, err)
+	}
+	return testdir, nil
+
 }
 
 func mapType(aName string, pName string, pType string) string {
