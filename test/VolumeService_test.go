@@ -71,6 +71,18 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("DeleteVolume", testdeleteVolume)
 
+	testdestroyVolume := func(t *testing.T) {
+		if _, ok := response["destroyVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewDestroyVolumeParams("id")
+		_, err := client.Volume.DestroyVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DestroyVolume", testdestroyVolume)
+
 	testdetachVolume := func(t *testing.T) {
 		if _, ok := response["detachVolume"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -155,6 +167,18 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("ListVolumes", testlistVolumes)
 
+	testlistVolumesMetrics := func(t *testing.T) {
+		if _, ok := response["listVolumesMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewListVolumesMetricsParams()
+		_, err := client.Volume.ListVolumesMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVolumesMetrics", testlistVolumesMetrics)
+
 	testmigrateVolume := func(t *testing.T) {
 		if _, ok := response["migrateVolume"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -166,6 +190,18 @@ func TestVolumeService(t *testing.T) {
 		}
 	}
 	t.Run("MigrateVolume", testmigrateVolume)
+
+	testrecoverVolume := func(t *testing.T) {
+		if _, ok := response["recoverVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewRecoverVolumeParams("id")
+		_, err := client.Volume.RecoverVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RecoverVolume", testrecoverVolume)
 
 	testresizeVolume := func(t *testing.T) {
 		if _, ok := response["resizeVolume"]; !ok {

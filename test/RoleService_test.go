@@ -83,6 +83,18 @@ func TestRoleService(t *testing.T) {
 	}
 	t.Run("DeleteRolePermission", testdeleteRolePermission)
 
+	testimportRole := func(t *testing.T) {
+		if _, ok := response["importRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Role.NewImportRoleParams("name", map[string]string{})
+		_, err := client.Role.ImportRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ImportRole", testimportRole)
+
 	testlistRolePermissions := func(t *testing.T) {
 		if _, ok := response["listRolePermissions"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

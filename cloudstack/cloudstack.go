@@ -104,6 +104,7 @@ type CloudStackClient struct {
 	Address             AddressServiceIface
 	AffinityGroup       AffinityGroupServiceIface
 	Alert               AlertServiceIface
+	Annotation          AnnotationServiceIface
 	Asyncjob            AsyncjobServiceIface
 	Authentication      AuthenticationServiceIface
 	AutoScale           AutoScaleServiceIface
@@ -125,6 +126,7 @@ type CloudStackClient struct {
 	ISO                 ISOServiceIface
 	ImageStore          ImageStoreServiceIface
 	InternalLB          InternalLBServiceIface
+	Kubernetes          KubernetesServiceIface
 	LDAP                LDAPServiceIface
 	Limit               LimitServiceIface
 	LoadBalancer        LoadBalancerServiceIface
@@ -207,6 +209,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Address = NewAddressService(cs)
 	cs.AffinityGroup = NewAffinityGroupService(cs)
 	cs.Alert = NewAlertService(cs)
+	cs.Annotation = NewAnnotationService(cs)
 	cs.Asyncjob = NewAsyncjobService(cs)
 	cs.Authentication = NewAuthenticationService(cs)
 	cs.AutoScale = NewAutoScaleService(cs)
@@ -228,6 +231,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.ISO = NewISOService(cs)
 	cs.ImageStore = NewImageStoreService(cs)
 	cs.InternalLB = NewInternalLBService(cs)
+	cs.Kubernetes = NewKubernetesService(cs)
 	cs.LDAP = NewLDAPService(cs)
 	cs.Limit = NewLimitService(cs)
 	cs.LoadBalancer = NewLoadBalancerService(cs)
@@ -283,6 +287,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Address = NewMockAddressServiceIface(ctrl)
 	cs.AffinityGroup = NewMockAffinityGroupServiceIface(ctrl)
 	cs.Alert = NewMockAlertServiceIface(ctrl)
+	cs.Annotation = NewMockAnnotationServiceIface(ctrl)
 	cs.Asyncjob = NewMockAsyncjobServiceIface(ctrl)
 	cs.Authentication = NewMockAuthenticationServiceIface(ctrl)
 	cs.AutoScale = NewMockAutoScaleServiceIface(ctrl)
@@ -304,6 +309,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.ISO = NewMockISOServiceIface(ctrl)
 	cs.ImageStore = NewMockImageStoreServiceIface(ctrl)
 	cs.InternalLB = NewMockInternalLBServiceIface(ctrl)
+	cs.Kubernetes = NewMockKubernetesServiceIface(ctrl)
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
 	cs.Limit = NewMockLimitServiceIface(ctrl)
 	cs.LoadBalancer = NewMockLoadBalancerServiceIface(ctrl)
@@ -733,6 +739,14 @@ func NewAlertService(cs *CloudStackClient) AlertServiceIface {
 	return &AlertService{cs: cs}
 }
 
+type AnnotationService struct {
+	cs *CloudStackClient
+}
+
+func NewAnnotationService(cs *CloudStackClient) AnnotationServiceIface {
+	return &AnnotationService{cs: cs}
+}
+
 type AsyncjobService struct {
 	cs *CloudStackClient
 }
@@ -899,6 +913,14 @@ type InternalLBService struct {
 
 func NewInternalLBService(cs *CloudStackClient) InternalLBServiceIface {
 	return &InternalLBService{cs: cs}
+}
+
+type KubernetesService struct {
+	cs *CloudStackClient
+}
+
+func NewKubernetesService(cs *CloudStackClient) KubernetesServiceIface {
+	return &KubernetesService{cs: cs}
 }
 
 type LDAPService struct {

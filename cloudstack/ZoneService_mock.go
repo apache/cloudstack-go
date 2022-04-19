@@ -220,6 +220,69 @@ func (mr *MockZoneServiceIfaceMockRecorder) GetZoneID(name interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZoneID", reflect.TypeOf((*MockZoneServiceIface)(nil).GetZoneID), varargs...)
 }
 
+// GetZonesMetricByID mocks base method.
+func (m *MockZoneServiceIface) GetZonesMetricByID(id string, opts ...OptionFunc) (*ZonesMetric, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZonesMetricByID", varargs...)
+	ret0, _ := ret[0].(*ZonesMetric)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetZonesMetricByID indicates an expected call of GetZonesMetricByID.
+func (mr *MockZoneServiceIfaceMockRecorder) GetZonesMetricByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonesMetricByID", reflect.TypeOf((*MockZoneServiceIface)(nil).GetZonesMetricByID), varargs...)
+}
+
+// GetZonesMetricByName mocks base method.
+func (m *MockZoneServiceIface) GetZonesMetricByName(name string, opts ...OptionFunc) (*ZonesMetric, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZonesMetricByName", varargs...)
+	ret0, _ := ret[0].(*ZonesMetric)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetZonesMetricByName indicates an expected call of GetZonesMetricByName.
+func (mr *MockZoneServiceIfaceMockRecorder) GetZonesMetricByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonesMetricByName", reflect.TypeOf((*MockZoneServiceIface)(nil).GetZonesMetricByName), varargs...)
+}
+
+// GetZonesMetricID mocks base method.
+func (m *MockZoneServiceIface) GetZonesMetricID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetZonesMetricID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetZonesMetricID indicates an expected call of GetZonesMetricID.
+func (mr *MockZoneServiceIfaceMockRecorder) GetZonesMetricID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetZonesMetricID", reflect.TypeOf((*MockZoneServiceIface)(nil).GetZonesMetricID), varargs...)
+}
+
 // ListDedicatedZones mocks base method.
 func (m *MockZoneServiceIface) ListDedicatedZones(p *ListDedicatedZonesParams) (*ListDedicatedZonesResponse, error) {
 	m.ctrl.T.Helper()
@@ -248,6 +311,21 @@ func (m *MockZoneServiceIface) ListZones(p *ListZonesParams) (*ListZonesResponse
 func (mr *MockZoneServiceIfaceMockRecorder) ListZones(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZones", reflect.TypeOf((*MockZoneServiceIface)(nil).ListZones), p)
+}
+
+// ListZonesMetrics mocks base method.
+func (m *MockZoneServiceIface) ListZonesMetrics(p *ListZonesMetricsParams) (*ListZonesMetricsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListZonesMetrics", p)
+	ret0, _ := ret[0].(*ListZonesMetricsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListZonesMetrics indicates an expected call of ListZonesMetrics.
+func (mr *MockZoneServiceIfaceMockRecorder) ListZonesMetrics(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesMetrics", reflect.TypeOf((*MockZoneServiceIface)(nil).ListZonesMetrics), p)
 }
 
 // NewCreateZoneParams mocks base method.
@@ -360,6 +438,20 @@ func (m *MockZoneServiceIface) NewListDedicatedZonesParams() *ListDedicatedZones
 func (mr *MockZoneServiceIfaceMockRecorder) NewListDedicatedZonesParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDedicatedZonesParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewListDedicatedZonesParams))
+}
+
+// NewListZonesMetricsParams mocks base method.
+func (m *MockZoneServiceIface) NewListZonesMetricsParams() *ListZonesMetricsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListZonesMetricsParams")
+	ret0, _ := ret[0].(*ListZonesMetricsParams)
+	return ret0
+}
+
+// NewListZonesMetricsParams indicates an expected call of NewListZonesMetricsParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewListZonesMetricsParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListZonesMetricsParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewListZonesMetricsParams))
 }
 
 // NewListZonesParams mocks base method.

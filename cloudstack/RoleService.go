@@ -36,6 +36,8 @@ type RoleServiceIface interface {
 	NewDeleteRoleParams(id string) *DeleteRoleParams
 	DeleteRolePermission(p *DeleteRolePermissionParams) (*DeleteRolePermissionResponse, error)
 	NewDeleteRolePermissionParams(id string) *DeleteRolePermissionParams
+	ImportRole(p *ImportRoleParams) (*ImportRoleResponse, error)
+	NewImportRoleParams(name string, rules map[string]string) *ImportRoleParams
 	ListRolePermissions(p *ListRolePermissionsParams) (*ListRolePermissionsResponse, error)
 	NewListRolePermissionsParams() *ListRolePermissionsParams
 	ListRoles(p *ListRolesParams) (*ListRolesResponse, error)
@@ -462,6 +464,148 @@ func (r *DeleteRolePermissionResponse) UnmarshalJSON(b []byte) error {
 
 	type alias DeleteRolePermissionResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ImportRoleParams struct {
+	p map[string]interface{}
+}
+
+func (p *ImportRoleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["rules"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("rules[%d].key", i), k)
+			u.Set(fmt.Sprintf("rules[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["type"]; found {
+		u.Set("type", v.(string))
+	}
+	return u
+}
+
+func (p *ImportRoleParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *ImportRoleParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *ImportRoleParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *ImportRoleParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *ImportRoleParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ImportRoleParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ImportRoleParams) SetRules(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["rules"] = v
+}
+
+func (p *ImportRoleParams) GetRules() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rules"].(map[string]string)
+	return value, ok
+}
+
+func (p *ImportRoleParams) SetType(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["type"] = v
+}
+
+func (p *ImportRoleParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ImportRoleParams instance,
+// as then you are sure you have configured all required params
+func (s *RoleService) NewImportRoleParams(name string, rules map[string]string) *ImportRoleParams {
+	p := &ImportRoleParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	p.p["rules"] = rules
+	return p
+}
+
+// Imports a role based on provided map of rule permissions
+func (s *RoleService) ImportRole(p *ImportRoleParams) (*ImportRoleResponse, error) {
+	resp, err := s.cs.newRequest("importRole", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ImportRoleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ImportRoleResponse struct {
+	Description string `json:"description"`
+	Id          string `json:"id"`
+	Isdefault   bool   `json:"isdefault"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
+	Type        string `json:"type"`
 }
 
 type ListRolePermissionsParams struct {

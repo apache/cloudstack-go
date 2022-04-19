@@ -97,6 +97,21 @@ func (mr *MockVolumeServiceIfaceMockRecorder) DeleteVolume(p interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).DeleteVolume), p)
 }
 
+// DestroyVolume mocks base method.
+func (m *MockVolumeServiceIface) DestroyVolume(p *DestroyVolumeParams) (*DestroyVolumeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DestroyVolume", p)
+	ret0, _ := ret[0].(*DestroyVolumeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DestroyVolume indicates an expected call of DestroyVolume.
+func (mr *MockVolumeServiceIfaceMockRecorder) DestroyVolume(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DestroyVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).DestroyVolume), p)
+}
+
 // DetachVolume mocks base method.
 func (m *MockVolumeServiceIface) DetachVolume(p *DetachVolumeParams) (*DetachVolumeResponse, error) {
 	m.ctrl.T.Helper()
@@ -250,6 +265,69 @@ func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumeiScsiName(p interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumeiScsiName", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumeiScsiName), p)
 }
 
+// GetVolumesMetricByID mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesMetricByID(id string, opts ...OptionFunc) (*VolumesMetric, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesMetricByID", varargs...)
+	ret0, _ := ret[0].(*VolumesMetric)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesMetricByID indicates an expected call of GetVolumesMetricByID.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesMetricByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesMetricByID", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesMetricByID), varargs...)
+}
+
+// GetVolumesMetricByName mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesMetricByName(name string, opts ...OptionFunc) (*VolumesMetric, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesMetricByName", varargs...)
+	ret0, _ := ret[0].(*VolumesMetric)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesMetricByName indicates an expected call of GetVolumesMetricByName.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesMetricByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesMetricByName", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesMetricByName), varargs...)
+}
+
+// GetVolumesMetricID mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesMetricID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesMetricID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesMetricID indicates an expected call of GetVolumesMetricID.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesMetricID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesMetricID", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesMetricID), varargs...)
+}
+
 // ListVolumes mocks base method.
 func (m *MockVolumeServiceIface) ListVolumes(p *ListVolumesParams) (*ListVolumesResponse, error) {
 	m.ctrl.T.Helper()
@@ -263,6 +341,21 @@ func (m *MockVolumeServiceIface) ListVolumes(p *ListVolumesParams) (*ListVolumes
 func (mr *MockVolumeServiceIfaceMockRecorder) ListVolumes(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVolumes", reflect.TypeOf((*MockVolumeServiceIface)(nil).ListVolumes), p)
+}
+
+// ListVolumesMetrics mocks base method.
+func (m *MockVolumeServiceIface) ListVolumesMetrics(p *ListVolumesMetricsParams) (*ListVolumesMetricsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListVolumesMetrics", p)
+	ret0, _ := ret[0].(*ListVolumesMetricsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListVolumesMetrics indicates an expected call of ListVolumesMetrics.
+func (mr *MockVolumeServiceIfaceMockRecorder) ListVolumesMetrics(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVolumesMetrics", reflect.TypeOf((*MockVolumeServiceIface)(nil).ListVolumesMetrics), p)
 }
 
 // MigrateVolume mocks base method.
@@ -320,6 +413,20 @@ func (m *MockVolumeServiceIface) NewDeleteVolumeParams(id string) *DeleteVolumeP
 func (mr *MockVolumeServiceIfaceMockRecorder) NewDeleteVolumeParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewDeleteVolumeParams), id)
+}
+
+// NewDestroyVolumeParams mocks base method.
+func (m *MockVolumeServiceIface) NewDestroyVolumeParams(id string) *DestroyVolumeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDestroyVolumeParams", id)
+	ret0, _ := ret[0].(*DestroyVolumeParams)
+	return ret0
+}
+
+// NewDestroyVolumeParams indicates an expected call of NewDestroyVolumeParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewDestroyVolumeParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDestroyVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewDestroyVolumeParams), id)
 }
 
 // NewDetachVolumeParams mocks base method.
@@ -406,6 +513,20 @@ func (mr *MockVolumeServiceIfaceMockRecorder) NewGetVolumeiScsiNameParams(volume
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetVolumeiScsiNameParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewGetVolumeiScsiNameParams), volumeid)
 }
 
+// NewListVolumesMetricsParams mocks base method.
+func (m *MockVolumeServiceIface) NewListVolumesMetricsParams() *ListVolumesMetricsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListVolumesMetricsParams")
+	ret0, _ := ret[0].(*ListVolumesMetricsParams)
+	return ret0
+}
+
+// NewListVolumesMetricsParams indicates an expected call of NewListVolumesMetricsParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewListVolumesMetricsParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVolumesMetricsParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewListVolumesMetricsParams))
+}
+
 // NewListVolumesParams mocks base method.
 func (m *MockVolumeServiceIface) NewListVolumesParams() *ListVolumesParams {
 	m.ctrl.T.Helper()
@@ -432,6 +553,20 @@ func (m *MockVolumeServiceIface) NewMigrateVolumeParams(storageid, volumeid stri
 func (mr *MockVolumeServiceIfaceMockRecorder) NewMigrateVolumeParams(storageid, volumeid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewMigrateVolumeParams), storageid, volumeid)
+}
+
+// NewRecoverVolumeParams mocks base method.
+func (m *MockVolumeServiceIface) NewRecoverVolumeParams(id string) *RecoverVolumeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRecoverVolumeParams", id)
+	ret0, _ := ret[0].(*RecoverVolumeParams)
+	return ret0
+}
+
+// NewRecoverVolumeParams indicates an expected call of NewRecoverVolumeParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewRecoverVolumeParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRecoverVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewRecoverVolumeParams), id)
 }
 
 // NewResizeVolumeParams mocks base method.
@@ -474,6 +609,21 @@ func (m *MockVolumeServiceIface) NewUploadVolumeParams(format, name, url, zoneid
 func (mr *MockVolumeServiceIfaceMockRecorder) NewUploadVolumeParams(format, name, url, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUploadVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewUploadVolumeParams), format, name, url, zoneid)
+}
+
+// RecoverVolume mocks base method.
+func (m *MockVolumeServiceIface) RecoverVolume(p *RecoverVolumeParams) (*RecoverVolumeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RecoverVolume", p)
+	ret0, _ := ret[0].(*RecoverVolumeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RecoverVolume indicates an expected call of RecoverVolume.
+func (mr *MockVolumeServiceIfaceMockRecorder) RecoverVolume(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecoverVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).RecoverVolume), p)
 }
 
 // ResizeVolume mocks base method.

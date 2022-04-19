@@ -82,6 +82,48 @@ func (mr *MockSSHServiceIfaceMockRecorder) DeleteSSHKeyPair(p interface{}) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSSHKeyPair", reflect.TypeOf((*MockSSHServiceIface)(nil).DeleteSSHKeyPair), p)
 }
 
+// GetSSHKeyPairByID mocks base method.
+func (m *MockSSHServiceIface) GetSSHKeyPairByID(id string, opts ...OptionFunc) (*SSHKeyPair, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSSHKeyPairByID", varargs...)
+	ret0, _ := ret[0].(*SSHKeyPair)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSSHKeyPairByID indicates an expected call of GetSSHKeyPairByID.
+func (mr *MockSSHServiceIfaceMockRecorder) GetSSHKeyPairByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSSHKeyPairByID", reflect.TypeOf((*MockSSHServiceIface)(nil).GetSSHKeyPairByID), varargs...)
+}
+
+// GetSSHKeyPairByName mocks base method.
+func (m *MockSSHServiceIface) GetSSHKeyPairByName(name string, opts ...OptionFunc) (*SSHKeyPair, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSSHKeyPairByName", varargs...)
+	ret0, _ := ret[0].(*SSHKeyPair)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSSHKeyPairByName indicates an expected call of GetSSHKeyPairByName.
+func (mr *MockSSHServiceIfaceMockRecorder) GetSSHKeyPairByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSSHKeyPairByName", reflect.TypeOf((*MockSSHServiceIface)(nil).GetSSHKeyPairByName), varargs...)
+}
+
 // GetSSHKeyPairID mocks base method.
 func (m *MockSSHServiceIface) GetSSHKeyPairID(name string, opts ...OptionFunc) (string, int, error) {
 	m.ctrl.T.Helper()

@@ -175,6 +175,21 @@ func (mr *MockRoleServiceIfaceMockRecorder) GetRoleID(name interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRoleID", reflect.TypeOf((*MockRoleServiceIface)(nil).GetRoleID), varargs...)
 }
 
+// ImportRole mocks base method.
+func (m *MockRoleServiceIface) ImportRole(p *ImportRoleParams) (*ImportRoleResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ImportRole", p)
+	ret0, _ := ret[0].(*ImportRoleResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ImportRole indicates an expected call of ImportRole.
+func (mr *MockRoleServiceIfaceMockRecorder) ImportRole(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportRole", reflect.TypeOf((*MockRoleServiceIface)(nil).ImportRole), p)
+}
+
 // ListRolePermissions mocks base method.
 func (m *MockRoleServiceIface) ListRolePermissions(p *ListRolePermissionsParams) (*ListRolePermissionsResponse, error) {
 	m.ctrl.T.Helper()
@@ -259,6 +274,20 @@ func (m *MockRoleServiceIface) NewDeleteRolePermissionParams(id string) *DeleteR
 func (mr *MockRoleServiceIfaceMockRecorder) NewDeleteRolePermissionParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteRolePermissionParams", reflect.TypeOf((*MockRoleServiceIface)(nil).NewDeleteRolePermissionParams), id)
+}
+
+// NewImportRoleParams mocks base method.
+func (m *MockRoleServiceIface) NewImportRoleParams(name string, rules map[string]string) *ImportRoleParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewImportRoleParams", name, rules)
+	ret0, _ := ret[0].(*ImportRoleParams)
+	return ret0
+}
+
+// NewImportRoleParams indicates an expected call of NewImportRoleParams.
+func (mr *MockRoleServiceIfaceMockRecorder) NewImportRoleParams(name, rules interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportRoleParams", reflect.TypeOf((*MockRoleServiceIface)(nil).NewImportRoleParams), name, rules)
 }
 
 // NewListRolePermissionsParams mocks base method.

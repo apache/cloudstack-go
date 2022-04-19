@@ -47,6 +47,30 @@ func TestProjectService(t *testing.T) {
 	}
 	t.Run("ActivateProject", testactivateProject)
 
+	testaddAccountToProject := func(t *testing.T) {
+		if _, ok := response["addAccountToProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewAddAccountToProjectParams("projectid")
+		_, err := client.Project.AddAccountToProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("AddAccountToProject", testaddAccountToProject)
+
+	testaddUserToProject := func(t *testing.T) {
+		if _, ok := response["addUserToProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewAddUserToProjectParams("projectid", "username")
+		_, err := client.Project.AddUserToProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("AddUserToProject", testaddUserToProject)
+
 	testcreateProject := func(t *testing.T) {
 		if _, ok := response["createProject"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -58,6 +82,30 @@ func TestProjectService(t *testing.T) {
 		}
 	}
 	t.Run("CreateProject", testcreateProject)
+
+	testdeleteAccountFromProject := func(t *testing.T) {
+		if _, ok := response["deleteAccountFromProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteAccountFromProjectParams("account", "projectid")
+		_, err := client.Project.DeleteAccountFromProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteAccountFromProject", testdeleteAccountFromProject)
+
+	testdeleteUserFromProject := func(t *testing.T) {
+		if _, ok := response["deleteUserFromProject"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteUserFromProjectParams("projectid", "userid")
+		_, err := client.Project.DeleteUserFromProject(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteUserFromProject", testdeleteUserFromProject)
 
 	testdeleteProject := func(t *testing.T) {
 		if _, ok := response["deleteProject"]; !ok {

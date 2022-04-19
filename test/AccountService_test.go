@@ -35,18 +35,6 @@ func TestAccountService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testaddAccountToProject := func(t *testing.T) {
-		if _, ok := response["addAccountToProject"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Account.NewAddAccountToProjectParams("projectid")
-		_, err := client.Account.AddAccountToProject(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("AddAccountToProject", testaddAccountToProject)
-
 	testcreateAccount := func(t *testing.T) {
 		if _, ok := response["createAccount"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -70,18 +58,6 @@ func TestAccountService(t *testing.T) {
 		}
 	}
 	t.Run("DeleteAccount", testdeleteAccount)
-
-	testdeleteAccountFromProject := func(t *testing.T) {
-		if _, ok := response["deleteAccountFromProject"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Account.NewDeleteAccountFromProjectParams("account", "projectid")
-		_, err := client.Account.DeleteAccountFromProject(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("DeleteAccountFromProject", testdeleteAccountFromProject)
 
 	testdisableAccount := func(t *testing.T) {
 		if _, ok := response["disableAccount"]; !ok {

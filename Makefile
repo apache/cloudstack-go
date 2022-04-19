@@ -11,19 +11,19 @@ endif
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
-all: code mock-gen test
+all: code mocks test
 
 code:
 	go run generate/generate.go generate/layout.go --api=generate/listApis.json
 
 FILES=$(shell for file in `pwd`/cloudstack/*Service.go ;do basename $$file .go ; done)
-mock-gen:
+mocks:
 	@for f in $(FILES); do \
 		$(MOCKGEN) -destination=./cloudstack/$${f}_mock.go -package=cloudstack -copyright_file="header.txt" -source=./cloudstack/$${f}.go ; \
 	done
 
 test:
-	go test -v ./...
+	go test -v github.com/apache/cloudstack-go/v2/test
 
 MOCKGEN := $(shell pwd)/bin/mockgen
 mockgen: ## Download conversion-gen locally if necessary.
