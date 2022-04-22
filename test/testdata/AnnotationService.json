@@ -1,0 +1,72 @@
+{
+    "listAnnotations": {
+      "listannotationsresponse": {
+        "count": 3,
+        "annotation": [
+          {
+            "id": "3857fba8-9ec8-4c6d-9c39-a0cf0b25c065",
+            "entitytype": "SSH_KEYPAIR",
+            "entityid": "7f524874-babb-42bd-8536-2e27abdaf553",
+            "entityname": "key",
+            "annotation": "whatever",
+            "userid": "10e5a3b9-ba1a-11ec-bdce-1e000700021c",
+            "username": "admin",
+            "adminsonly": false,
+            "created": "2022-04-12T05:55:56+0000"
+          },
+          {
+            "id": "29119d47-acc6-4f98-a536-88182c810109",
+            "entitytype": "SSH_KEYPAIR",
+            "entityid": "7f524874-babb-42bd-8536-2e27abdaf553",
+            "entityname": "key",
+            "annotation": "Everyone",
+            "userid": "10e5a3b9-ba1a-11ec-bdce-1e000700021c",
+            "username": "admin",
+            "adminsonly": false,
+            "created": "2022-04-12T05:32:36+0000"
+          },
+          {
+            "id": "30779821-30eb-4567-a129-734564c14174",
+            "entitytype": "SSH_KEYPAIR",
+            "entityid": "7f524874-babb-42bd-8536-2e27abdaf553",
+            "entityname": "key",
+            "annotation": "admin Only",
+            "userid": "10e5a3b9-ba1a-11ec-bdce-1e000700021c",
+            "username": "admin",
+            "adminsonly": true,
+            "created": "2022-04-12T05:32:31+0000"
+          }
+        ]
+      }
+    },
+    "addAnnotation": {
+      "addannotationresponse": {
+        "annotation": {
+          "id": "c1431a73-070c-4fb5-b3a2-937cd6646ab6",
+          "entitytype": "SSH_KEYPAIR",
+          "entityid": "7f524874-babb-42bd-8536-2e27abdaf553",
+          "entityname": "key",
+          "annotation": "new",
+          "userid": "10e5a3b9-ba1a-11ec-bdce-1e000700021c",
+          "username": "admin",
+          "adminsonly": false,
+          "created": "2022-04-18T06:14:54+0000"
+        }
+      }
+    },
+    "removeAnnotation": {
+      "removeannotationresponse": {
+        "annotation": {
+          "id": "c1431a73-070c-4fb5-b3a2-937cd6646ab6",
+          "entitytype": "SSH_KEYPAIR",
+          "entityid": "7f524874-babb-42bd-8536-2e27abdaf553",
+          "entityname": "key",
+          "annotation": "new",
+          "userid": "10e5a3b9-ba1a-11ec-bdce-1e000700021c",
+          "username": "admin",
+          "adminsonly": false,
+          "created": "2022-04-18T06:14:54+0000"
+        }
+      }
+    }
+  }

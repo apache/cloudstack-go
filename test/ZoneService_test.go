@@ -143,6 +143,18 @@ func TestZoneService(t *testing.T) {
 	}
 	t.Run("ListZones", testlistZones)
 
+	testlistZonesMetrics := func(t *testing.T) {
+		if _, ok := response["listZonesMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewListZonesMetricsParams()
+		_, err := client.Zone.ListZonesMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListZonesMetrics", testlistZonesMetrics)
+
 	testreleaseDedicatedZone := func(t *testing.T) {
 		if _, ok := response["releaseDedicatedZone"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

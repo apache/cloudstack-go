@@ -231,6 +231,20 @@ func (mr *MockPoolServiceIfaceMockRecorder) NewListStoragePoolsParams() *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListStoragePoolsParams", reflect.TypeOf((*MockPoolServiceIface)(nil).NewListStoragePoolsParams))
 }
 
+// NewSyncStoragePoolParams mocks base method.
+func (m *MockPoolServiceIface) NewSyncStoragePoolParams(id string) *SyncStoragePoolParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewSyncStoragePoolParams", id)
+	ret0, _ := ret[0].(*SyncStoragePoolParams)
+	return ret0
+}
+
+// NewSyncStoragePoolParams indicates an expected call of NewSyncStoragePoolParams.
+func (mr *MockPoolServiceIfaceMockRecorder) NewSyncStoragePoolParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewSyncStoragePoolParams", reflect.TypeOf((*MockPoolServiceIface)(nil).NewSyncStoragePoolParams), id)
+}
+
 // NewUpdateStoragePoolParams mocks base method.
 func (m *MockPoolServiceIface) NewUpdateStoragePoolParams(id string) *UpdateStoragePoolParams {
 	m.ctrl.T.Helper()
@@ -243,6 +257,21 @@ func (m *MockPoolServiceIface) NewUpdateStoragePoolParams(id string) *UpdateStor
 func (mr *MockPoolServiceIfaceMockRecorder) NewUpdateStoragePoolParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateStoragePoolParams", reflect.TypeOf((*MockPoolServiceIface)(nil).NewUpdateStoragePoolParams), id)
+}
+
+// SyncStoragePool mocks base method.
+func (m *MockPoolServiceIface) SyncStoragePool(p *SyncStoragePoolParams) (*SyncStoragePoolResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SyncStoragePool", p)
+	ret0, _ := ret[0].(*SyncStoragePoolResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SyncStoragePool indicates an expected call of SyncStoragePool.
+func (mr *MockPoolServiceIfaceMockRecorder) SyncStoragePool(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SyncStoragePool", reflect.TypeOf((*MockPoolServiceIface)(nil).SyncStoragePool), p)
 }
 
 // UpdateStoragePool mocks base method.

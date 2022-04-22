@@ -52,21 +52,6 @@ func (m *MockAccountServiceIface) EXPECT() *MockAccountServiceIfaceMockRecorder 
 	return m.recorder
 }
 
-// AddAccountToProject mocks base method.
-func (m *MockAccountServiceIface) AddAccountToProject(p *AddAccountToProjectParams) (*AddAccountToProjectResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddAccountToProject", p)
-	ret0, _ := ret[0].(*AddAccountToProjectResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// AddAccountToProject indicates an expected call of AddAccountToProject.
-func (mr *MockAccountServiceIfaceMockRecorder) AddAccountToProject(p interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddAccountToProject", reflect.TypeOf((*MockAccountServiceIface)(nil).AddAccountToProject), p)
-}
-
 // CreateAccount mocks base method.
 func (m *MockAccountServiceIface) CreateAccount(p *CreateAccountParams) (*CreateAccountResponse, error) {
 	m.ctrl.T.Helper()
@@ -95,21 +80,6 @@ func (m *MockAccountServiceIface) DeleteAccount(p *DeleteAccountParams) (*Delete
 func (mr *MockAccountServiceIfaceMockRecorder) DeleteAccount(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAccount", reflect.TypeOf((*MockAccountServiceIface)(nil).DeleteAccount), p)
-}
-
-// DeleteAccountFromProject mocks base method.
-func (m *MockAccountServiceIface) DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteAccountFromProject", p)
-	ret0, _ := ret[0].(*DeleteAccountFromProjectResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// DeleteAccountFromProject indicates an expected call of DeleteAccountFromProject.
-func (mr *MockAccountServiceIfaceMockRecorder) DeleteAccountFromProject(p interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAccountFromProject", reflect.TypeOf((*MockAccountServiceIface)(nil).DeleteAccountFromProject), p)
 }
 
 // DisableAccount mocks base method.
@@ -301,20 +271,6 @@ func (mr *MockAccountServiceIfaceMockRecorder) MarkDefaultZoneForAccount(p inter
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MarkDefaultZoneForAccount", reflect.TypeOf((*MockAccountServiceIface)(nil).MarkDefaultZoneForAccount), p)
 }
 
-// NewAddAccountToProjectParams mocks base method.
-func (m *MockAccountServiceIface) NewAddAccountToProjectParams(projectid string) *AddAccountToProjectParams {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewAddAccountToProjectParams", projectid)
-	ret0, _ := ret[0].(*AddAccountToProjectParams)
-	return ret0
-}
-
-// NewAddAccountToProjectParams indicates an expected call of NewAddAccountToProjectParams.
-func (mr *MockAccountServiceIfaceMockRecorder) NewAddAccountToProjectParams(projectid interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddAccountToProjectParams", reflect.TypeOf((*MockAccountServiceIface)(nil).NewAddAccountToProjectParams), projectid)
-}
-
 // NewCreateAccountParams mocks base method.
 func (m *MockAccountServiceIface) NewCreateAccountParams(email, firstname, lastname, password, username string) *CreateAccountParams {
 	m.ctrl.T.Helper()
@@ -327,20 +283,6 @@ func (m *MockAccountServiceIface) NewCreateAccountParams(email, firstname, lastn
 func (mr *MockAccountServiceIfaceMockRecorder) NewCreateAccountParams(email, firstname, lastname, password, username interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateAccountParams", reflect.TypeOf((*MockAccountServiceIface)(nil).NewCreateAccountParams), email, firstname, lastname, password, username)
-}
-
-// NewDeleteAccountFromProjectParams mocks base method.
-func (m *MockAccountServiceIface) NewDeleteAccountFromProjectParams(account, projectid string) *DeleteAccountFromProjectParams {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewDeleteAccountFromProjectParams", account, projectid)
-	ret0, _ := ret[0].(*DeleteAccountFromProjectParams)
-	return ret0
-}
-
-// NewDeleteAccountFromProjectParams indicates an expected call of NewDeleteAccountFromProjectParams.
-func (mr *MockAccountServiceIfaceMockRecorder) NewDeleteAccountFromProjectParams(account, projectid interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteAccountFromProjectParams", reflect.TypeOf((*MockAccountServiceIface)(nil).NewDeleteAccountFromProjectParams), account, projectid)
 }
 
 // NewDeleteAccountParams mocks base method.

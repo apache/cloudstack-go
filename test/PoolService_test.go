@@ -83,6 +83,18 @@ func TestPoolService(t *testing.T) {
 	}
 	t.Run("ListStoragePools", testlistStoragePools)
 
+	testsyncStoragePool := func(t *testing.T) {
+		if _, ok := response["syncStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewSyncStoragePoolParams("id")
+		_, err := client.Pool.SyncStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("SyncStoragePool", testsyncStoragePool)
+
 	testupdateStoragePool := func(t *testing.T) {
 		if _, ok := response["updateStoragePool"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

@@ -1752,7 +1752,7 @@ func (s *LoadBalancerService) NewCreateLoadBalancerParams(algorithm string, inst
 	return p
 }
 
-// Creates a load balancer
+// Creates an internal load balancer
 func (s *LoadBalancerService) CreateLoadBalancer(p *CreateLoadBalancerParams) (*CreateLoadBalancerResponse, error) {
 	resp, err := s.cs.newRequest("createLoadBalancer", p.toURLValues())
 	if err != nil {
@@ -2430,7 +2430,7 @@ func (s *LoadBalancerService) NewDeleteLoadBalancerParams(id string) *DeleteLoad
 	return p
 }
 
-// Deletes a load balancer
+// Deletes an internal load balancer
 func (s *LoadBalancerService) DeleteLoadBalancer(p *DeleteLoadBalancerParams) (*DeleteLoadBalancerResponse, error) {
 	resp, err := s.cs.newRequest("deleteLoadBalancer", p.toURLValues())
 	if err != nil {
@@ -4535,7 +4535,7 @@ func (s *LoadBalancerService) GetLoadBalancerByID(id string, opts ...OptionFunc)
 	return nil, l.Count, fmt.Errorf("There is more then one result for LoadBalancer UUID: %s!", id)
 }
 
-// Lists load balancers
+// Lists internal load balancers
 func (s *LoadBalancerService) ListLoadBalancers(p *ListLoadBalancersParams) (*ListLoadBalancersResponse, error) {
 	resp, err := s.cs.newRequest("listLoadBalancers", p.toURLValues())
 	if err != nil {
@@ -5674,7 +5674,7 @@ func (s *LoadBalancerService) NewUpdateLoadBalancerParams(id string) *UpdateLoad
 	return p
 }
 
-// Updates a load balancer
+// Updates an internal load balancer
 func (s *LoadBalancerService) UpdateLoadBalancer(p *UpdateLoadBalancerParams) (*UpdateLoadBalancerResponse, error) {
 	resp, err := s.cs.newRequest("updateLoadBalancer", p.toURLValues())
 	if err != nil {

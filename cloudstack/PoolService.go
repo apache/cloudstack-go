@@ -39,6 +39,8 @@ type PoolServiceIface interface {
 	GetStoragePoolID(name string, opts ...OptionFunc) (string, int, error)
 	GetStoragePoolByName(name string, opts ...OptionFunc) (*StoragePool, int, error)
 	GetStoragePoolByID(id string, opts ...OptionFunc) (*StoragePool, int, error)
+	SyncStoragePool(p *SyncStoragePoolParams) (*SyncStoragePoolResponse, error)
+	NewSyncStoragePoolParams(id string) *SyncStoragePoolParams
 	UpdateStoragePool(p *UpdateStoragePoolParams) (*UpdateStoragePoolResponse, error)
 	NewUpdateStoragePoolParams(id string) *UpdateStoragePoolParams
 }
@@ -928,6 +930,111 @@ type ListStoragePoolsResponse struct {
 }
 
 type StoragePool struct {
+	Allocatediops        int64             `json:"allocatediops"`
+	Capacityiops         int64             `json:"capacityiops"`
+	Clusterid            string            `json:"clusterid"`
+	Clustername          string            `json:"clustername"`
+	Created              string            `json:"created"`
+	Disksizeallocated    int64             `json:"disksizeallocated"`
+	Disksizetotal        int64             `json:"disksizetotal"`
+	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
+	Hypervisor           string            `json:"hypervisor"`
+	Id                   string            `json:"id"`
+	Ipaddress            string            `json:"ipaddress"`
+	JobID                string            `json:"jobid"`
+	Jobstatus            int               `json:"jobstatus"`
+	Name                 string            `json:"name"`
+	Overprovisionfactor  string            `json:"overprovisionfactor"`
+	Path                 string            `json:"path"`
+	Podid                string            `json:"podid"`
+	Podname              string            `json:"podname"`
+	Provider             string            `json:"provider"`
+	Scope                string            `json:"scope"`
+	State                string            `json:"state"`
+	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Suitableformigration bool              `json:"suitableformigration"`
+	Tags                 string            `json:"tags"`
+	Type                 string            `json:"type"`
+	Zoneid               string            `json:"zoneid"`
+	Zonename             string            `json:"zonename"`
+}
+
+type SyncStoragePoolParams struct {
+	p map[string]interface{}
+}
+
+func (p *SyncStoragePoolParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *SyncStoragePoolParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *SyncStoragePoolParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new SyncStoragePoolParams instance,
+// as then you are sure you have configured all required params
+func (s *PoolService) NewSyncStoragePoolParams(id string) *SyncStoragePoolParams {
+	p := &SyncStoragePoolParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Sync storage pool with management server (currently supported for Datastore Cluster in VMware and syncs the datastores in it)
+func (s *PoolService) SyncStoragePool(p *SyncStoragePoolParams) (*SyncStoragePoolResponse, error) {
+	resp, err := s.cs.newRequest("syncStoragePool", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r SyncStoragePoolResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type SyncStoragePoolResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`

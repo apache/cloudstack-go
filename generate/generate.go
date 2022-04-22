@@ -1622,7 +1622,9 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		"LockUser",
 		"RegisterSSHKeyPair",
 		"RegisterUserKeys",
-		"GetUserKeys":
+		"GetUserKeys",
+		"AddAnnotation",
+		"RemoveAnnotation":
 		pn("	if resp, err = getRawValue(resp); err != nil {")
 		pn("		return nil, err")
 		pn("	}")
@@ -1984,6 +1986,9 @@ func mapType(aName string, pName string, pType string) string {
 			return "[]map[string]string"
 		} else if pName == "network" {
 			return "[]*Network"
+		}
+		if pName == "virtualmachines" {
+			return "[]*VirtualMachine"
 		}
 		return "[]string"
 	case "map":

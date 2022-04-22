@@ -49,6 +49,11 @@ type ZoneServiceIface interface {
 	GetZoneID(name string, opts ...OptionFunc) (string, int, error)
 	GetZoneByName(name string, opts ...OptionFunc) (*Zone, int, error)
 	GetZoneByID(id string, opts ...OptionFunc) (*Zone, int, error)
+	ListZonesMetrics(p *ListZonesMetricsParams) (*ListZonesMetricsResponse, error)
+	NewListZonesMetricsParams() *ListZonesMetricsParams
+	GetZonesMetricID(name string, opts ...OptionFunc) (string, int, error)
+	GetZonesMetricByName(name string, opts ...OptionFunc) (*ZonesMetric, int, error)
+	GetZonesMetricByID(id string, opts ...OptionFunc) (*ZonesMetric, int, error)
 	ReleaseDedicatedZone(p *ReleaseDedicatedZoneParams) (*ReleaseDedicatedZoneResponse, error)
 	NewReleaseDedicatedZoneParams(zoneid string) *ReleaseDedicatedZoneParams
 	UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, error)
@@ -1475,6 +1480,399 @@ type Zone struct {
 }
 
 type ZoneCapacity struct {
+	Capacityallocated int64  `json:"capacityallocated"`
+	Capacitytotal     int64  `json:"capacitytotal"`
+	Capacityused      int64  `json:"capacityused"`
+	Clusterid         string `json:"clusterid"`
+	Clustername       string `json:"clustername"`
+	Name              string `json:"name"`
+	Percentused       string `json:"percentused"`
+	Podid             string `json:"podid"`
+	Podname           string `json:"podname"`
+	Type              int    `json:"type"`
+	Zoneid            string `json:"zoneid"`
+	Zonename          string `json:"zonename"`
+}
+
+type ListZonesMetricsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListZonesMetricsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["available"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("available", vv)
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["networktype"]; found {
+		u.Set("networktype", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["showcapacities"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showcapacities", vv)
+	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
+	if v, found := p.p["tags"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tags[%d].key", i), k)
+			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+		}
+	}
+	return u
+}
+
+func (p *ListZonesMetricsParams) SetAvailable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["available"] = v
+}
+
+func (p *ListZonesMetricsParams) GetAvailable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["available"].(bool)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListZonesMetricsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListZonesMetricsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListZonesMetricsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListZonesMetricsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetNetworktype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networktype"] = v
+}
+
+func (p *ListZonesMetricsParams) GetNetworktype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networktype"].(string)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListZonesMetricsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListZonesMetricsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetShowcapacities(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showcapacities"] = v
+}
+
+func (p *ListZonesMetricsParams) GetShowcapacities() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showcapacities"].(bool)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListZonesMetricsParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
+func (p *ListZonesMetricsParams) SetTags(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
+}
+
+func (p *ListZonesMetricsParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListZonesMetricsParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewListZonesMetricsParams() *ListZonesMetricsParams {
+	p := &ListZonesMetricsParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ZoneService) GetZonesMetricID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListZonesMetricsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListZonesMetrics(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.ZonesMetrics[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.ZonesMetrics {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ZoneService) GetZonesMetricByName(name string, opts ...OptionFunc) (*ZonesMetric, int, error) {
+	id, count, err := s.GetZonesMetricID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetZonesMetricByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ZoneService) GetZonesMetricByID(id string, opts ...OptionFunc) (*ZonesMetric, int, error) {
+	p := &ListZonesMetricsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListZonesMetrics(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.ZonesMetrics[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for ZonesMetric UUID: %s!", id)
+}
+
+// Lists zone metrics
+func (s *ZoneService) ListZonesMetrics(p *ListZonesMetricsParams) (*ListZonesMetricsResponse, error) {
+	resp, err := s.cs.newRequest("listZonesMetrics", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListZonesMetricsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListZonesMetricsResponse struct {
+	Count        int            `json:"count"`
+	ZonesMetrics []*ZonesMetric `json:"zonesmetric"`
+}
+
+type ZonesMetric struct {
+	Allocationstate                 string                `json:"allocationstate"`
+	Capacity                        []ZonesMetricCapacity `json:"capacity"`
+	Clusters                        string                `json:"clusters"`
+	Cpuallocated                    string                `json:"cpuallocated"`
+	Cpuallocateddisablethreshold    bool                  `json:"cpuallocateddisablethreshold"`
+	Cpuallocatedthreshold           bool                  `json:"cpuallocatedthreshold"`
+	Cpudisablethreshold             bool                  `json:"cpudisablethreshold"`
+	Cpumaxdeviation                 string                `json:"cpumaxdeviation"`
+	Cputhreshold                    bool                  `json:"cputhreshold"`
+	Cputotal                        string                `json:"cputotal"`
+	Cpuused                         string                `json:"cpuused"`
+	Description                     string                `json:"description"`
+	Dhcpprovider                    string                `json:"dhcpprovider"`
+	Displaytext                     string                `json:"displaytext"`
+	Dns1                            string                `json:"dns1"`
+	Dns2                            string                `json:"dns2"`
+	Domain                          string                `json:"domain"`
+	Domainid                        string                `json:"domainid"`
+	Domainname                      string                `json:"domainname"`
+	Guestcidraddress                string                `json:"guestcidraddress"`
+	Hasannotations                  bool                  `json:"hasannotations"`
+	Icon                            string                `json:"icon"`
+	Id                              string                `json:"id"`
+	Internaldns1                    string                `json:"internaldns1"`
+	Internaldns2                    string                `json:"internaldns2"`
+	Ip6dns1                         string                `json:"ip6dns1"`
+	Ip6dns2                         string                `json:"ip6dns2"`
+	JobID                           string                `json:"jobid"`
+	Jobstatus                       int                   `json:"jobstatus"`
+	Localstorageenabled             bool                  `json:"localstorageenabled"`
+	Memoryallocated                 string                `json:"memoryallocated"`
+	Memoryallocateddisablethreshold bool                  `json:"memoryallocateddisablethreshold"`
+	Memoryallocatedthreshold        bool                  `json:"memoryallocatedthreshold"`
+	Memorydisablethreshold          bool                  `json:"memorydisablethreshold"`
+	Memorymaxdeviation              string                `json:"memorymaxdeviation"`
+	Memorythreshold                 bool                  `json:"memorythreshold"`
+	Memorytotal                     string                `json:"memorytotal"`
+	Memoryused                      string                `json:"memoryused"`
+	Name                            string                `json:"name"`
+	Networktype                     string                `json:"networktype"`
+	Resourcedetails                 map[string]string     `json:"resourcedetails"`
+	Securitygroupsenabled           bool                  `json:"securitygroupsenabled"`
+	State                           string                `json:"state"`
+	Tags                            []Tags                `json:"tags"`
+	Zonetoken                       string                `json:"zonetoken"`
+}
+
+type ZonesMetricCapacity struct {
 	Capacityallocated int64  `json:"capacityallocated"`
 	Capacitytotal     int64  `json:"capacitytotal"`
 	Capacityused      int64  `json:"capacityused"`
