@@ -576,7 +576,7 @@ func (s *DomainService) ListDomainChildren(p *ListDomainChildrenParams) (*ListDo
 
 type ListDomainChildrenResponse struct {
 	Count          int               `json:"count"`
-	DomainChildren []*DomainChildren `json:"domainchildren"`
+	DomainChildren []*DomainChildren `json:"domain"`
 }
 
 type DomainChildren struct {
