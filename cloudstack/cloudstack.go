@@ -21,6 +21,7 @@ package cloudstack
 
 import (
 	"bytes"
+	"context"
 	"crypto/hmac"
 	"crypto/sha1"
 	"crypto/tls"
@@ -497,7 +498,7 @@ func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawM
 		return nil, err
 	}
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		var e CSError
 		if err := json.Unmarshal(b, &e); err != nil {
 			return nil, err
@@ -505,6 +506,38 @@ func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawM
 		return nil, e.Error()
 	}
 	return b, nil
+}
+
+// Execute an async request against a CS API.
+// Return values
+// JSON Raw message if succeeded
+// error for server error
+// error for timeout and cancellation
+func (cs *CloudStackClient) newAsyncRequest(ctx context.Context, api string, params url.Values) (json.RawMessage, error) {
+
+	// response wrapper for cancellable
+	type wrapper struct {
+		res json.RawMessage
+		err error
+	}
+
+	ch := make(chan wrapper, 1)
+
+	// do the long running thing in a separate goroutine
+	go func() {
+		res, err := cs.newRequest(api, params)
+		ch <- wrapper{res, err}
+	}()
+
+	// timed execution
+	select {
+
+	case data := <-ch:
+		return data.res, data.err
+
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
 }
 
 // Custom version of net/url Encode that only URL escapes values
