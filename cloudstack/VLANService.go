@@ -407,6 +407,7 @@ func (s *VLANService) CreateVlanIpRange(p *CreateVlanIpRangeParams) (*CreateVlan
 
 type CreateVlanIpRangeResponse struct {
 	Account           string `json:"account"`
+	Cidr              string `json:"cidr"`
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
@@ -1247,6 +1248,7 @@ type ListVlanIpRangesResponse struct {
 
 type VlanIpRange struct {
 	Account           string `json:"account"`
+	Cidr              string `json:"cidr"`
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`

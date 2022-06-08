@@ -87,7 +87,7 @@ func TestSSHService(t *testing.T) {
 		if _, ok := response["resetSSHKeyForVirtualMachine"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.SSH.NewResetSSHKeyForVirtualMachineParams("id", "keypair")
+		p := client.SSH.NewResetSSHKeyForVirtualMachineParams("id")
 		_, err := client.SSH.ResetSSHKeyForVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())

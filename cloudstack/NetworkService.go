@@ -399,6 +399,9 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["acltype"]; found {
 		u.Set("acltype", v.(string))
 	}
+	if v, found := p.p["associatednetworkid"]; found {
+		u.Set("associatednetworkid", v.(string))
+	}
 	if v, found := p.p["bypassvlanoverlapcheck"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bypassvlanoverlapcheck", vv)
@@ -529,6 +532,21 @@ func (p *CreateNetworkParams) GetAcltype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["acltype"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetAssociatednetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["associatednetworkid"] = v
+}
+
+func (p *CreateNetworkParams) GetAssociatednetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["associatednetworkid"].(string)
 	return value, ok
 }
 
@@ -973,6 +991,8 @@ type CreateNetworkResponse struct {
 	Aclid                       string                         `json:"aclid"`
 	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
+	Associatednetwork           string                         `json:"associatednetwork"`
+	Associatednetworkid         string                         `json:"associatednetworkid"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
@@ -985,13 +1005,17 @@ type CreateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
 	Hasannotations              bool                           `json:"hasannotations"`
 	Icon                        string                         `json:"icon"`
 	Id                          string                         `json:"id"`
+	Internetprotocol            string                         `json:"internetprotocol"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
+	Ip6routes                   []interface{}                  `json:"ip6routes"`
+	Ip6routing                  string                         `json:"ip6routing"`
 	Isdefault                   bool                           `json:"isdefault"`
 	Ispersistent                bool                           `json:"ispersistent"`
 	Issystem                    bool                           `json:"issystem"`
@@ -1801,6 +1825,7 @@ func (s *NetworkService) DedicatePublicIpRange(p *DedicatePublicIpRangeParams) (
 
 type DedicatePublicIpRangeResponse struct {
 	Account           string `json:"account"`
+	Cidr              string `json:"cidr"`
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
@@ -2391,6 +2416,8 @@ type NetscalerLoadBalancerNetwork struct {
 	Aclid                       string                                `json:"aclid"`
 	Aclname                     string                                `json:"aclname"`
 	Acltype                     string                                `json:"acltype"`
+	Associatednetwork           string                                `json:"associatednetwork"`
+	Associatednetworkid         string                                `json:"associatednetworkid"`
 	Broadcastdomaintype         string                                `json:"broadcastdomaintype"`
 	Broadcasturi                string                                `json:"broadcasturi"`
 	Canusefordeploy             bool                                  `json:"canusefordeploy"`
@@ -2403,13 +2430,17 @@ type NetscalerLoadBalancerNetwork struct {
 	Dns2                        string                                `json:"dns2"`
 	Domain                      string                                `json:"domain"`
 	Domainid                    string                                `json:"domainid"`
+	Egressdefaultpolicy         bool                                  `json:"egressdefaultpolicy"`
 	Externalid                  string                                `json:"externalid"`
 	Gateway                     string                                `json:"gateway"`
 	Hasannotations              bool                                  `json:"hasannotations"`
 	Icon                        string                                `json:"icon"`
 	Id                          string                                `json:"id"`
+	Internetprotocol            string                                `json:"internetprotocol"`
 	Ip6cidr                     string                                `json:"ip6cidr"`
 	Ip6gateway                  string                                `json:"ip6gateway"`
+	Ip6routes                   []interface{}                         `json:"ip6routes"`
+	Ip6routing                  string                                `json:"ip6routing"`
 	Isdefault                   bool                                  `json:"isdefault"`
 	Ispersistent                bool                                  `json:"ispersistent"`
 	Issystem                    bool                                  `json:"issystem"`
@@ -2786,6 +2817,9 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 	if v, found := p.p["acltype"]; found {
 		u.Set("acltype", v.(string))
 	}
+	if v, found := p.p["associatednetworkid"]; found {
+		u.Set("associatednetworkid", v.(string))
+	}
 	if v, found := p.p["canusefordeploy"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("canusefordeploy", vv)
@@ -2818,6 +2852,9 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["networkfilter"]; found {
+		u.Set("networkfilter", v.(string))
 	}
 	if v, found := p.p["networkofferingid"]; found {
 		u.Set("networkofferingid", v.(string))
@@ -2865,6 +2902,9 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 	if v, found := p.p["type"]; found {
 		u.Set("type", v.(string))
 	}
+	if v, found := p.p["vlan"]; found {
+		u.Set("vlan", v.(string))
+	}
 	if v, found := p.p["vpcid"]; found {
 		u.Set("vpcid", v.(string))
 	}
@@ -2901,6 +2941,21 @@ func (p *ListNetworksParams) GetAcltype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["acltype"].(string)
+	return value, ok
+}
+
+func (p *ListNetworksParams) SetAssociatednetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["associatednetworkid"] = v
+}
+
+func (p *ListNetworksParams) GetAssociatednetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["associatednetworkid"].(string)
 	return value, ok
 }
 
@@ -3036,6 +3091,21 @@ func (p *ListNetworksParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListNetworksParams) SetNetworkfilter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkfilter"] = v
+}
+
+func (p *ListNetworksParams) GetNetworkfilter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkfilter"].(string)
 	return value, ok
 }
 
@@ -3219,6 +3289,21 @@ func (p *ListNetworksParams) GetType() (string, bool) {
 	return value, ok
 }
 
+func (p *ListNetworksParams) SetVlan(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vlan"] = v
+}
+
+func (p *ListNetworksParams) GetVlan() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vlan"].(string)
+	return value, ok
+}
+
 func (p *ListNetworksParams) SetVpcid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3365,6 +3450,8 @@ type Network struct {
 	Aclid                       string                   `json:"aclid"`
 	Aclname                     string                   `json:"aclname"`
 	Acltype                     string                   `json:"acltype"`
+	Associatednetwork           string                   `json:"associatednetwork"`
+	Associatednetworkid         string                   `json:"associatednetworkid"`
 	Broadcastdomaintype         string                   `json:"broadcastdomaintype"`
 	Broadcasturi                string                   `json:"broadcasturi"`
 	Canusefordeploy             bool                     `json:"canusefordeploy"`
@@ -3377,13 +3464,17 @@ type Network struct {
 	Dns2                        string                   `json:"dns2"`
 	Domain                      string                   `json:"domain"`
 	Domainid                    string                   `json:"domainid"`
+	Egressdefaultpolicy         bool                     `json:"egressdefaultpolicy"`
 	Externalid                  string                   `json:"externalid"`
 	Gateway                     string                   `json:"gateway"`
 	Hasannotations              bool                     `json:"hasannotations"`
 	Icon                        string                   `json:"icon"`
 	Id                          string                   `json:"id"`
+	Internetprotocol            string                   `json:"internetprotocol"`
 	Ip6cidr                     string                   `json:"ip6cidr"`
 	Ip6gateway                  string                   `json:"ip6gateway"`
+	Ip6routes                   []interface{}            `json:"ip6routes"`
+	Ip6routing                  string                   `json:"ip6routing"`
 	Isdefault                   bool                     `json:"isdefault"`
 	Ispersistent                bool                     `json:"ispersistent"`
 	Issystem                    bool                     `json:"issystem"`
@@ -3602,6 +3693,8 @@ type NiciraNvpDeviceNetwork struct {
 	Aclid                       string                          `json:"aclid"`
 	Aclname                     string                          `json:"aclname"`
 	Acltype                     string                          `json:"acltype"`
+	Associatednetwork           string                          `json:"associatednetwork"`
+	Associatednetworkid         string                          `json:"associatednetworkid"`
 	Broadcastdomaintype         string                          `json:"broadcastdomaintype"`
 	Broadcasturi                string                          `json:"broadcasturi"`
 	Canusefordeploy             bool                            `json:"canusefordeploy"`
@@ -3614,13 +3707,17 @@ type NiciraNvpDeviceNetwork struct {
 	Dns2                        string                          `json:"dns2"`
 	Domain                      string                          `json:"domain"`
 	Domainid                    string                          `json:"domainid"`
+	Egressdefaultpolicy         bool                            `json:"egressdefaultpolicy"`
 	Externalid                  string                          `json:"externalid"`
 	Gateway                     string                          `json:"gateway"`
 	Hasannotations              bool                            `json:"hasannotations"`
 	Icon                        string                          `json:"icon"`
 	Id                          string                          `json:"id"`
+	Internetprotocol            string                          `json:"internetprotocol"`
 	Ip6cidr                     string                          `json:"ip6cidr"`
 	Ip6gateway                  string                          `json:"ip6gateway"`
+	Ip6routes                   []interface{}                   `json:"ip6routes"`
+	Ip6routing                  string                          `json:"ip6routing"`
 	Isdefault                   bool                            `json:"isdefault"`
 	Ispersistent                bool                            `json:"ispersistent"`
 	Issystem                    bool                            `json:"issystem"`
@@ -3958,6 +4055,8 @@ type PaloAltoFirewallNetwork struct {
 	Aclid                       string                           `json:"aclid"`
 	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
+	Associatednetwork           string                           `json:"associatednetwork"`
+	Associatednetworkid         string                           `json:"associatednetworkid"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
@@ -3970,13 +4069,17 @@ type PaloAltoFirewallNetwork struct {
 	Dns2                        string                           `json:"dns2"`
 	Domain                      string                           `json:"domain"`
 	Domainid                    string                           `json:"domainid"`
+	Egressdefaultpolicy         bool                             `json:"egressdefaultpolicy"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
 	Hasannotations              bool                             `json:"hasannotations"`
 	Icon                        string                           `json:"icon"`
 	Id                          string                           `json:"id"`
+	Internetprotocol            string                           `json:"internetprotocol"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
+	Ip6routes                   []interface{}                    `json:"ip6routes"`
+	Ip6routing                  string                           `json:"ip6routing"`
 	Isdefault                   bool                             `json:"isdefault"`
 	Ispersistent                bool                             `json:"ispersistent"`
 	Issystem                    bool                             `json:"issystem"`
@@ -4744,6 +4847,10 @@ func (p *RestartNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["livepatch"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("livepatch", vv)
+	}
 	if v, found := p.p["makeredundant"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("makeredundant", vv)
@@ -4778,6 +4885,21 @@ func (p *RestartNetworkParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *RestartNetworkParams) SetLivepatch(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["livepatch"] = v
+}
+
+func (p *RestartNetworkParams) GetLivepatch() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["livepatch"].(bool)
 	return value, ok
 }
 
@@ -5124,6 +5246,8 @@ type UpdateNetworkResponse struct {
 	Aclid                       string                         `json:"aclid"`
 	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
+	Associatednetwork           string                         `json:"associatednetwork"`
+	Associatednetworkid         string                         `json:"associatednetworkid"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
@@ -5136,13 +5260,17 @@ type UpdateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
 	Hasannotations              bool                           `json:"hasannotations"`
 	Icon                        string                         `json:"icon"`
 	Id                          string                         `json:"id"`
+	Internetprotocol            string                         `json:"internetprotocol"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
+	Ip6routes                   []interface{}                  `json:"ip6routes"`
+	Ip6routing                  string                         `json:"ip6routing"`
 	Isdefault                   bool                           `json:"isdefault"`
 	Ispersistent                bool                           `json:"ispersistent"`
 	Issystem                    bool                           `json:"issystem"`
