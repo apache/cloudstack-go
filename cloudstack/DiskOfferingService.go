@@ -95,6 +95,10 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("disksize", vv)
 	}
+	if v, found := p.p["disksizestrictness"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("disksizestrictness", vv)
+	}
 	if v, found := p.p["displayoffering"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("displayoffering", vv)
@@ -326,6 +330,21 @@ func (p *CreateDiskOfferingParams) GetDisksize() (int64, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["disksize"].(int64)
+	return value, ok
+}
+
+func (p *CreateDiskOfferingParams) SetDisksizestrictness(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["disksizestrictness"] = v
+}
+
+func (p *CreateDiskOfferingParams) GetDisksizestrictness() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["disksizestrictness"].(bool)
 	return value, ok
 }
 
@@ -640,6 +659,7 @@ type CreateDiskOfferingResponse struct {
 	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
 	Disksize                    int64  `json:"disksize"`
+	Disksizestrictness          bool   `json:"disksizestrictness"`
 	Displayoffering             bool   `json:"displayoffering"`
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`
@@ -787,6 +807,12 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
+	}
+	if v, found := p.p["volumeid"]; found {
+		u.Set("volumeid", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -910,6 +936,36 @@ func (p *ListDiskOfferingsParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListDiskOfferingsParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+func (p *ListDiskOfferingsParams) SetVolumeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["volumeid"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
 	return value, ok
 }
 
@@ -1055,6 +1111,7 @@ type DiskOffering struct {
 	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
 	Disksize                    int64  `json:"disksize"`
+	Disksizestrictness          bool   `json:"disksizestrictness"`
 	Displayoffering             bool   `json:"displayoffering"`
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`
@@ -1521,6 +1578,7 @@ type UpdateDiskOfferingResponse struct {
 	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
 	Disksize                    int64  `json:"disksize"`
+	Disksizestrictness          bool   `json:"disksizestrictness"`
 	Displayoffering             bool   `json:"displayoffering"`
 	Displaytext                 string `json:"displaytext"`
 	Domain                      string `json:"domain"`

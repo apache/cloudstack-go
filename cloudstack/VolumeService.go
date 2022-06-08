@@ -205,6 +205,7 @@ type AttachVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -567,6 +568,7 @@ type CreateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -817,6 +819,7 @@ type DestroyVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -996,6 +999,7 @@ type DetachVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -2136,6 +2140,7 @@ type Volume struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -2735,6 +2740,7 @@ type VolumesMetric struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -2935,6 +2941,7 @@ type MigrateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -3058,6 +3065,7 @@ type RecoverVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -3295,6 +3303,7 @@ type ResizeVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -3564,6 +3573,7 @@ type UpdateVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`
@@ -3872,6 +3882,7 @@ type UploadVolumeResponse struct {
 	Displayvolume              bool   `json:"displayvolume"`
 	Domain                     string `json:"domain"`
 	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
 	Hasannotations             bool   `json:"hasannotations"`
 	Hypervisor                 string `json:"hypervisor"`
 	Id                         string `json:"id"`

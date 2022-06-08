@@ -233,8 +233,10 @@ type CreatePodResponse struct {
 }
 
 type CreatePodResponseIpranges struct {
+	Cidr         string `json:"cidr"`
 	Endip        string `json:"endip"`
 	Forsystemvms string `json:"forsystemvms"`
+	Gateway      string `json:"gateway"`
 	Startip      string `json:"startip"`
 	Vlanid       string `json:"vlanid"`
 }
@@ -933,8 +935,10 @@ type Pod struct {
 }
 
 type PodIpranges struct {
+	Cidr         string `json:"cidr"`
 	Endip        string `json:"endip"`
 	Forsystemvms string `json:"forsystemvms"`
+	Gateway      string `json:"gateway"`
 	Startip      string `json:"startip"`
 	Vlanid       string `json:"vlanid"`
 }
@@ -1212,8 +1216,10 @@ type UpdatePodResponse struct {
 }
 
 type UpdatePodResponseIpranges struct {
+	Cidr         string `json:"cidr"`
 	Endip        string `json:"endip"`
 	Forsystemvms string `json:"forsystemvms"`
+	Gateway      string `json:"gateway"`
 	Startip      string `json:"startip"`
 	Vlanid       string `json:"vlanid"`
 }

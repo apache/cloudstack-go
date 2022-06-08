@@ -921,6 +921,7 @@ type InternalLoadBalancerVM struct {
 	Scriptsversion      string                                     `json:"scriptsversion"`
 	Serviceofferingid   string                                     `json:"serviceofferingid"`
 	Serviceofferingname string                                     `json:"serviceofferingname"`
+	Softwareversion     string                                     `json:"softwareversion"`
 	State               string                                     `json:"state"`
 	Templateid          string                                     `json:"templateid"`
 	Templatename        string                                     `json:"templatename"`
@@ -1059,6 +1060,7 @@ type StartInternalLoadBalancerVMResponse struct {
 	Scriptsversion      string                                                  `json:"scriptsversion"`
 	Serviceofferingid   string                                                  `json:"serviceofferingid"`
 	Serviceofferingname string                                                  `json:"serviceofferingname"`
+	Softwareversion     string                                                  `json:"softwareversion"`
 	State               string                                                  `json:"state"`
 	Templateid          string                                                  `json:"templateid"`
 	Templatename        string                                                  `json:"templatename"`
@@ -1216,6 +1218,7 @@ type StopInternalLoadBalancerVMResponse struct {
 	Scriptsversion      string                                                 `json:"scriptsversion"`
 	Serviceofferingid   string                                                 `json:"serviceofferingid"`
 	Serviceofferingname string                                                 `json:"serviceofferingname"`
+	Softwareversion     string                                                 `json:"softwareversion"`
 	State               string                                                 `json:"state"`
 	Templateid          string                                                 `json:"templateid"`
 	Templatename        string                                                 `json:"templatename"`

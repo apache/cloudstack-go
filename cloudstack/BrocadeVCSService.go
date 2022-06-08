@@ -412,6 +412,8 @@ type BrocadeVcsDeviceNetwork struct {
 	Aclid                       string                           `json:"aclid"`
 	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
+	Associatednetwork           string                           `json:"associatednetwork"`
+	Associatednetworkid         string                           `json:"associatednetworkid"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
@@ -424,13 +426,17 @@ type BrocadeVcsDeviceNetwork struct {
 	Dns2                        string                           `json:"dns2"`
 	Domain                      string                           `json:"domain"`
 	Domainid                    string                           `json:"domainid"`
+	Egressdefaultpolicy         bool                             `json:"egressdefaultpolicy"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
 	Hasannotations              bool                             `json:"hasannotations"`
 	Icon                        string                           `json:"icon"`
 	Id                          string                           `json:"id"`
+	Internetprotocol            string                           `json:"internetprotocol"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
+	Ip6routes                   []interface{}                    `json:"ip6routes"`
+	Ip6routing                  string                           `json:"ip6routing"`
 	Isdefault                   bool                             `json:"isdefault"`
 	Ispersistent                bool                             `json:"ispersistent"`
 	Issystem                    bool                             `json:"issystem"`

@@ -676,6 +676,7 @@ type CreateEgressFirewallRuleResponse struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type CreateFirewallRuleParams struct {
@@ -925,6 +926,7 @@ type CreateFirewallRuleResponse struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type CreatePortForwardingRuleParams struct {
@@ -1899,6 +1901,7 @@ type EgressFirewallRule struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type ListFirewallRulesParams struct {
@@ -2239,6 +2242,7 @@ type FirewallRule struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type ListPaloAltoFirewallsParams struct {
@@ -2875,6 +2879,7 @@ type UpdateEgressFirewallRuleResponse struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type UpdateFirewallRuleParams struct {
@@ -3010,6 +3015,7 @@ type UpdateFirewallRuleResponse struct {
 	Startport    int    `json:"startport"`
 	State        string `json:"state"`
 	Tags         []Tags `json:"tags"`
+	Traffictype  string `json:"traffictype"`
 }
 
 type UpdatePortForwardingRuleParams struct {

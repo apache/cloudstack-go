@@ -96,6 +96,13 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["deploymentplanner"]; found {
 		u.Set("deploymentplanner", v.(string))
 	}
+	if v, found := p.p["diskofferingid"]; found {
+		u.Set("diskofferingid", v.(string))
+	}
+	if v, found := p.p["diskofferingstrictness"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("diskofferingstrictness", vv)
+	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
@@ -399,6 +406,36 @@ func (p *CreateServiceOfferingParams) GetDeploymentplanner() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["deploymentplanner"].(string)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetDiskofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["diskofferingid"] = v
+}
+
+func (p *CreateServiceOfferingParams) GetDiskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingid"].(string)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetDiskofferingstrictness(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["diskofferingstrictness"] = v
+}
+
+func (p *CreateServiceOfferingParams) GetDiskofferingstrictness() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["diskofferingstrictness"].(bool)
 	return value, ok
 }
 
@@ -930,6 +967,10 @@ type CreateServiceOfferingResponse struct {
 	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
 	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Diskofferingdisplaytext     string            `json:"diskofferingdisplaytext"`
+	Diskofferingid              string            `json:"diskofferingid"`
+	Diskofferingname            string            `json:"diskofferingname"`
+	Diskofferingstrictness      bool              `json:"diskofferingstrictness"`
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
@@ -1470,6 +1511,10 @@ type ServiceOffering struct {
 	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
 	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Diskofferingdisplaytext     string            `json:"diskofferingdisplaytext"`
+	Diskofferingid              string            `json:"diskofferingid"`
+	Diskofferingname            string            `json:"diskofferingname"`
+	Diskofferingstrictness      bool              `json:"diskofferingstrictness"`
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
@@ -1706,6 +1751,10 @@ type UpdateServiceOfferingResponse struct {
 	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
 	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
 	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Diskofferingdisplaytext     string            `json:"diskofferingdisplaytext"`
+	Diskofferingid              string            `json:"diskofferingid"`
+	Diskofferingname            string            `json:"diskofferingname"`
+	Diskofferingstrictness      bool              `json:"diskofferingstrictness"`
 	Displaytext                 string            `json:"displaytext"`
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`

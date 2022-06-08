@@ -217,17 +217,17 @@ func (mr *MockSSHServiceIfaceMockRecorder) NewRegisterSSHKeyPairParams(name, pub
 }
 
 // NewResetSSHKeyForVirtualMachineParams mocks base method.
-func (m *MockSSHServiceIface) NewResetSSHKeyForVirtualMachineParams(id, keypair string) *ResetSSHKeyForVirtualMachineParams {
+func (m *MockSSHServiceIface) NewResetSSHKeyForVirtualMachineParams(id string) *ResetSSHKeyForVirtualMachineParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewResetSSHKeyForVirtualMachineParams", id, keypair)
+	ret := m.ctrl.Call(m, "NewResetSSHKeyForVirtualMachineParams", id)
 	ret0, _ := ret[0].(*ResetSSHKeyForVirtualMachineParams)
 	return ret0
 }
 
 // NewResetSSHKeyForVirtualMachineParams indicates an expected call of NewResetSSHKeyForVirtualMachineParams.
-func (mr *MockSSHServiceIfaceMockRecorder) NewResetSSHKeyForVirtualMachineParams(id, keypair interface{}) *gomock.Call {
+func (mr *MockSSHServiceIfaceMockRecorder) NewResetSSHKeyForVirtualMachineParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewResetSSHKeyForVirtualMachineParams", reflect.TypeOf((*MockSSHServiceIface)(nil).NewResetSSHKeyForVirtualMachineParams), id, keypair)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewResetSSHKeyForVirtualMachineParams", reflect.TypeOf((*MockSSHServiceIface)(nil).NewResetSSHKeyForVirtualMachineParams), id)
 }
 
 // RegisterSSHKeyPair mocks base method.

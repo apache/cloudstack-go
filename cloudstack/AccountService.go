@@ -1005,7 +1005,7 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["accounttype"]; found {
-		vv := strconv.FormatInt(v.(int64), 10)
+		vv := strconv.Itoa(v.(int))
 		u.Set("accounttype", vv)
 	}
 	if v, found := p.p["details"]; found {
@@ -1054,18 +1054,18 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 	return u
 }
 
-func (p *ListAccountsParams) SetAccounttype(v int64) {
+func (p *ListAccountsParams) SetAccounttype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
 }
 
-func (p *ListAccountsParams) GetAccounttype() (int64, bool) {
+func (p *ListAccountsParams) GetAccounttype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["accounttype"].(int64)
+	value, ok := p.p["accounttype"].(int)
 	return value, ok
 }
 

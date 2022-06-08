@@ -85,6 +85,9 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["guestiptype"]; found {
 		u.Set("guestiptype", v.(string))
 	}
+	if v, found := p.p["internetprotocol"]; found {
+		u.Set("internetprotocol", v.(string))
+	}
 	if v, found := p.p["ispersistent"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("ispersistent", vv)
@@ -278,6 +281,21 @@ func (p *CreateNetworkOfferingParams) GetGuestiptype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["guestiptype"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkOfferingParams) SetInternetprotocol(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["internetprotocol"] = v
+}
+
+func (p *CreateNetworkOfferingParams) GetInternetprotocol() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["internetprotocol"].(string)
 	return value, ok
 }
 
@@ -535,6 +553,7 @@ type CreateNetworkOfferingResponse struct {
 	Guestiptype              string                                 `json:"guestiptype"`
 	Hasannotations           bool                                   `json:"hasannotations"`
 	Id                       string                                 `json:"id"`
+	Internetprotocol         string                                 `json:"internetprotocol"`
 	Isdefault                bool                                   `json:"isdefault"`
 	Ispersistent             bool                                   `json:"ispersistent"`
 	JobID                    string                                 `json:"jobid"`
@@ -1188,6 +1207,7 @@ type NetworkOffering struct {
 	Guestiptype              string                           `json:"guestiptype"`
 	Hasannotations           bool                             `json:"hasannotations"`
 	Id                       string                           `json:"id"`
+	Internetprotocol         string                           `json:"internetprotocol"`
 	Isdefault                bool                             `json:"isdefault"`
 	Ispersistent             bool                             `json:"ispersistent"`
 	JobID                    string                           `json:"jobid"`
@@ -1483,6 +1503,7 @@ type UpdateNetworkOfferingResponse struct {
 	Guestiptype              string                                 `json:"guestiptype"`
 	Hasannotations           bool                                   `json:"hasannotations"`
 	Id                       string                                 `json:"id"`
+	Internetprotocol         string                                 `json:"internetprotocol"`
 	Isdefault                bool                                   `json:"isdefault"`
 	Ispersistent             bool                                   `json:"ispersistent"`
 	JobID                    string                                 `json:"jobid"`

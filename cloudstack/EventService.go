@@ -423,6 +423,12 @@ func (p *ListEventsParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["resourceid"]; found {
+		u.Set("resourceid", v.(string))
+	}
+	if v, found := p.p["resourcetype"]; found {
+		u.Set("resourcetype", v.(string))
+	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
@@ -630,6 +636,36 @@ func (p *ListEventsParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListEventsParams) SetResourceid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourceid"] = v
+}
+
+func (p *ListEventsParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
+func (p *ListEventsParams) SetResourcetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourcetype"] = v
+}
+
+func (p *ListEventsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *ListEventsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -737,19 +773,22 @@ type ListEventsResponse struct {
 }
 
 type Event struct {
-	Account     string `json:"account"`
-	Created     string `json:"created"`
-	Description string `json:"description"`
-	Domain      string `json:"domain"`
-	Domainid    string `json:"domainid"`
-	Id          string `json:"id"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Level       string `json:"level"`
-	Parentid    string `json:"parentid"`
-	Project     string `json:"project"`
-	Projectid   string `json:"projectid"`
-	State       string `json:"state"`
-	Type        string `json:"type"`
-	Username    string `json:"username"`
+	Account      string `json:"account"`
+	Created      string `json:"created"`
+	Description  string `json:"description"`
+	Domain       string `json:"domain"`
+	Domainid     string `json:"domainid"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Level        string `json:"level"`
+	Parentid     string `json:"parentid"`
+	Project      string `json:"project"`
+	Projectid    string `json:"projectid"`
+	Resourceid   string `json:"resourceid"`
+	Resourcename string `json:"resourcename"`
+	Resourcetype string `json:"resourcetype"`
+	State        string `json:"state"`
+	Type         string `json:"type"`
+	Username     string `json:"username"`
 }

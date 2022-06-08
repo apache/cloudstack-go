@@ -508,6 +508,7 @@ type CreateNetworkACLListResponse struct {
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
 	Vpcid       string `json:"vpcid"`
+	Vpcname     string `json:"vpcname"`
 }
 
 type DeleteNetworkACLParams struct {
@@ -1032,6 +1033,7 @@ type NetworkACLList struct {
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
 	Vpcid       string `json:"vpcid"`
+	Vpcname     string `json:"vpcname"`
 }
 
 type ListNetworkACLsParams struct {

@@ -40,7 +40,7 @@ type SSHServiceIface interface {
 	RegisterSSHKeyPair(p *RegisterSSHKeyPairParams) (*RegisterSSHKeyPairResponse, error)
 	NewRegisterSSHKeyPairParams(name string, publickey string) *RegisterSSHKeyPairParams
 	ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachineParams) (*ResetSSHKeyForVirtualMachineResponse, error)
-	NewResetSSHKeyForVirtualMachineParams(id string, keypair string) *ResetSSHKeyForVirtualMachineParams
+	NewResetSSHKeyForVirtualMachineParams(id string) *ResetSSHKeyForVirtualMachineParams
 }
 
 type CreateSSHKeyPairParams struct {
@@ -811,6 +811,10 @@ func (p *ResetSSHKeyForVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["keypair"]; found {
 		u.Set("keypair", v.(string))
 	}
+	if v, found := p.p["keypairs"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("keypairs", vv)
+	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
@@ -877,6 +881,21 @@ func (p *ResetSSHKeyForVirtualMachineParams) GetKeypair() (string, bool) {
 	return value, ok
 }
 
+func (p *ResetSSHKeyForVirtualMachineParams) SetKeypairs(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keypairs"] = v
+}
+
+func (p *ResetSSHKeyForVirtualMachineParams) GetKeypairs() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keypairs"].([]string)
+	return value, ok
+}
+
 func (p *ResetSSHKeyForVirtualMachineParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -894,11 +913,10 @@ func (p *ResetSSHKeyForVirtualMachineParams) GetProjectid() (string, bool) {
 
 // You should always use this function to get a new ResetSSHKeyForVirtualMachineParams instance,
 // as then you are sure you have configured all required params
-func (s *SSHService) NewResetSSHKeyForVirtualMachineParams(id string, keypair string) *ResetSSHKeyForVirtualMachineParams {
+func (s *SSHService) NewResetSSHKeyForVirtualMachineParams(id string) *ResetSSHKeyForVirtualMachineParams {
 	p := &ResetSSHKeyForVirtualMachineParams{}
 	p.p = make(map[string]interface{})
 	p.p["id"] = id
-	p.p["keypair"] = keypair
 	return p
 }
 
@@ -977,7 +995,7 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Isoname               string                                              `json:"isoname"`
 	JobID                 string                                              `json:"jobid"`
 	Jobstatus             int                                                 `json:"jobstatus"`
-	Keypair               string                                              `json:"keypair"`
+	Keypairs              string                                              `json:"keypairs"`
 	Lastupdated           string                                              `json:"lastupdated"`
 	Memory                int                                                 `json:"memory"`
 	Memoryintfreekbs      int64                                               `json:"memoryintfreekbs"`
