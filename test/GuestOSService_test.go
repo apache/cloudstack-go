@@ -40,9 +40,12 @@ func TestGuestOSService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.GuestOS.NewAddGuestOsParams(map[string]string{}, "oscategoryid", "osdisplayname")
-		_, err := client.GuestOS.AddGuestOs(p)
+		r, err := client.GuestOS.AddGuestOs(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddGuestOs", testaddGuestOs)
@@ -52,9 +55,12 @@ func TestGuestOSService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.GuestOS.NewAddGuestOsMappingParams("hypervisor", "hypervisorversion", "osnameforhypervisor")
-		_, err := client.GuestOS.AddGuestOsMapping(p)
+		r, err := client.GuestOS.AddGuestOsMapping(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddGuestOsMapping", testaddGuestOsMapping)
@@ -124,9 +130,12 @@ func TestGuestOSService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.GuestOS.NewUpdateGuestOsParams(map[string]string{}, "id", "osdisplayname")
-		_, err := client.GuestOS.UpdateGuestOs(p)
+		r, err := client.GuestOS.UpdateGuestOs(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateGuestOs", testupdateGuestOs)
@@ -136,9 +145,12 @@ func TestGuestOSService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.GuestOS.NewUpdateGuestOsMappingParams("id", "osnameforhypervisor")
-		_, err := client.GuestOS.UpdateGuestOsMapping(p)
+		r, err := client.GuestOS.UpdateGuestOsMapping(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateGuestOsMapping", testupdateGuestOsMapping)

@@ -744,6 +744,10 @@ func (s *HostService) AddHost(p *AddHostParams) (*AddHostResponse, error) {
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r AddHostResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

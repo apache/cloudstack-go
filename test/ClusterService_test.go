@@ -40,9 +40,12 @@ func TestClusterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Cluster.NewAddClusterParams("clustername", "clustertype", "hypervisor", "podid", "zoneid")
-		_, err := client.Cluster.AddCluster(p)
+		r, err := client.Cluster.AddCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddCluster", testaddCluster)
@@ -52,9 +55,12 @@ func TestClusterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Cluster.NewDedicateClusterParams("clusterid", "domainid")
-		_, err := client.Cluster.DedicateCluster(p)
+		r, err := client.Cluster.DedicateCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicateCluster", testdedicateCluster)
@@ -172,9 +178,12 @@ func TestClusterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Cluster.NewUpdateClusterParams("id")
-		_, err := client.Cluster.UpdateCluster(p)
+		r, err := client.Cluster.UpdateCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateCluster", testupdateCluster)

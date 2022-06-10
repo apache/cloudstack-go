@@ -40,9 +40,12 @@ func TestPoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pool.NewCreateStoragePoolParams("name", "url", "zoneid")
-		_, err := client.Pool.CreateStoragePool(p)
+		r, err := client.Pool.CreateStoragePool(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateStoragePool", testcreateStoragePool)
@@ -64,9 +67,12 @@ func TestPoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pool.NewFindStoragePoolsForMigrationParams("id")
-		_, err := client.Pool.FindStoragePoolsForMigration(p)
+		r, err := client.Pool.FindStoragePoolsForMigration(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("FindStoragePoolsForMigration", testfindStoragePoolsForMigration)
@@ -88,9 +94,12 @@ func TestPoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pool.NewSyncStoragePoolParams("id")
-		_, err := client.Pool.SyncStoragePool(p)
+		r, err := client.Pool.SyncStoragePool(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("SyncStoragePool", testsyncStoragePool)
@@ -100,9 +109,12 @@ func TestPoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pool.NewUpdateStoragePoolParams("id")
-		_, err := client.Pool.UpdateStoragePool(p)
+		r, err := client.Pool.UpdateStoragePool(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateStoragePool", testupdateStoragePool)

@@ -40,9 +40,12 @@ func TestNicService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Nic.NewAddIpToNicParams("nicid")
-		_, err := client.Nic.AddIpToNic(p)
+		r, err := client.Nic.AddIpToNic(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddIpToNic", testaddIpToNic)
@@ -76,9 +79,12 @@ func TestNicService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Nic.NewUpdateVmNicIpParams("nicid")
-		_, err := client.Nic.UpdateVmNicIp(p)
+		r, err := client.Nic.UpdateVmNicIp(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVmNicIp", testupdateVmNicIp)

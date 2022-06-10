@@ -40,9 +40,12 @@ func TestVLANService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VLAN.NewCreateVlanIpRangeParams()
-		_, err := client.VLAN.CreateVlanIpRange(p)
+		r, err := client.VLAN.CreateVlanIpRange(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVlanIpRange", testcreateVlanIpRange)
@@ -52,9 +55,12 @@ func TestVLANService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VLAN.NewDedicateGuestVlanRangeParams("physicalnetworkid", "vlanrange")
-		_, err := client.VLAN.DedicateGuestVlanRange(p)
+		r, err := client.VLAN.DedicateGuestVlanRange(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicateGuestVlanRange", testdedicateGuestVlanRange)

@@ -40,9 +40,12 @@ func TestTemplateService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Template.NewCopyTemplateParams("id")
-		_, err := client.Template.CopyTemplate(p)
+		r, err := client.Template.CopyTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CopyTemplate", testcopyTemplate)
@@ -52,9 +55,12 @@ func TestTemplateService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Template.NewCreateTemplateParams("displaytext", "name", "ostypeid")
-		_, err := client.Template.CreateTemplate(p)
+		r, err := client.Template.CreateTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateTemplate", testcreateTemplate)
@@ -76,9 +82,12 @@ func TestTemplateService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Template.NewExtractTemplateParams("id", "mode")
-		_, err := client.Template.ExtractTemplate(p)
+		r, err := client.Template.ExtractTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ExtractTemplate", testextractTemplate)
@@ -124,9 +133,12 @@ func TestTemplateService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Template.NewPrepareTemplateParams("templateid", "zoneid")
-		_, err := client.Template.PrepareTemplate(p)
+		r, err := client.Template.PrepareTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("PrepareTemplate", testprepareTemplate)
@@ -148,9 +160,12 @@ func TestTemplateService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Template.NewUpdateTemplateParams("id")
-		_, err := client.Template.UpdateTemplate(p)
+		r, err := client.Template.UpdateTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateTemplate", testupdateTemplate)

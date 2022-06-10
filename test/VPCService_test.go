@@ -40,9 +40,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewCreatePrivateGatewayParams("gateway", "ipaddress", "netmask", "vlan", "vpcid")
-		_, err := client.VPC.CreatePrivateGateway(p)
+		r, err := client.VPC.CreatePrivateGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreatePrivateGateway", testcreatePrivateGateway)
@@ -52,9 +55,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewCreateStaticRouteParams("cidr", "gatewayid")
-		_, err := client.VPC.CreateStaticRoute(p)
+		r, err := client.VPC.CreateStaticRoute(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateStaticRoute", testcreateStaticRoute)
@@ -64,9 +70,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewCreateVPCParams("cidr", "displaytext", "name", "vpcofferingid", "zoneid")
-		_, err := client.VPC.CreateVPC(p)
+		r, err := client.VPC.CreateVPC(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVPC", testcreateVPC)
@@ -76,9 +85,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewCreateVPCOfferingParams("displaytext", "name", []string{})
-		_, err := client.VPC.CreateVPCOffering(p)
+		r, err := client.VPC.CreateVPCOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVPCOffering", testcreateVPCOffering)
@@ -196,9 +208,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewUpdateVPCParams("id")
-		_, err := client.VPC.UpdateVPC(p)
+		r, err := client.VPC.UpdateVPC(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVPC", testupdateVPC)
@@ -208,9 +223,12 @@ func TestVPCService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPC.NewUpdateVPCOfferingParams("id")
-		_, err := client.VPC.UpdateVPCOffering(p)
+		r, err := client.VPC.UpdateVPCOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVPCOffering", testupdateVPCOffering)

@@ -40,9 +40,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewCreateAccountParams("email", "firstname", "lastname", "password", "username")
-		_, err := client.Account.CreateAccount(p)
+		r, err := client.Account.CreateAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateAccount", testcreateAccount)
@@ -64,9 +67,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewDisableAccountParams(true)
-		_, err := client.Account.DisableAccount(p)
+		r, err := client.Account.DisableAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DisableAccount", testdisableAccount)
@@ -76,9 +82,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewEnableAccountParams()
-		_, err := client.Account.EnableAccount(p)
+		r, err := client.Account.EnableAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("EnableAccount", testenableAccount)
@@ -124,9 +133,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewLockAccountParams("account", "domainid")
-		_, err := client.Account.LockAccount(p)
+		r, err := client.Account.LockAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("LockAccount", testlockAccount)
@@ -136,9 +148,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewMarkDefaultZoneForAccountParams("account", "domainid", "zoneid")
-		_, err := client.Account.MarkDefaultZoneForAccount(p)
+		r, err := client.Account.MarkDefaultZoneForAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("MarkDefaultZoneForAccount", testmarkDefaultZoneForAccount)
@@ -148,9 +163,12 @@ func TestAccountService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Account.NewUpdateAccountParams()
-		_, err := client.Account.UpdateAccount(p)
+		r, err := client.Account.UpdateAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateAccount", testupdateAccount)

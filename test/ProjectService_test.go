@@ -40,9 +40,12 @@ func TestProjectService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Project.NewActivateProjectParams("id")
-		_, err := client.Project.ActivateProject(p)
+		r, err := client.Project.ActivateProject(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ActivateProject", testactivateProject)
@@ -76,9 +79,12 @@ func TestProjectService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Project.NewCreateProjectParams("displaytext", "name")
-		_, err := client.Project.CreateProject(p)
+		r, err := client.Project.CreateProject(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateProject", testcreateProject)
@@ -160,9 +166,12 @@ func TestProjectService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Project.NewSuspendProjectParams("id")
-		_, err := client.Project.SuspendProject(p)
+		r, err := client.Project.SuspendProject(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("SuspendProject", testsuspendProject)
@@ -172,9 +181,12 @@ func TestProjectService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Project.NewUpdateProjectParams("id")
-		_, err := client.Project.UpdateProject(p)
+		r, err := client.Project.UpdateProject(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateProject", testupdateProject)
@@ -208,9 +220,12 @@ func TestProjectService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Project.NewCreateProjectRolePermissionParams("permission", "projectid", "projectroleid", "rule")
-		_, err := client.Project.CreateProjectRolePermission(p)
+		r, err := client.Project.CreateProjectRolePermission(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateProjectRolePermission", testcreateProjectRolePermission)

@@ -40,9 +40,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewChangeServiceForSystemVmParams("id", "serviceofferingid")
-		_, err := client.SystemVM.ChangeServiceForSystemVm(p)
+		r, err := client.SystemVM.ChangeServiceForSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ChangeServiceForSystemVm", testchangeServiceForSystemVm)
@@ -52,9 +55,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewDestroySystemVmParams("id")
-		_, err := client.SystemVM.DestroySystemVm(p)
+		r, err := client.SystemVM.DestroySystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DestroySystemVm", testdestroySystemVm)
@@ -76,9 +82,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewMigrateSystemVmParams("virtualmachineid")
-		_, err := client.SystemVM.MigrateSystemVm(p)
+		r, err := client.SystemVM.MigrateSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("MigrateSystemVm", testmigrateSystemVm)
@@ -88,9 +97,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewRebootSystemVmParams("id")
-		_, err := client.SystemVM.RebootSystemVm(p)
+		r, err := client.SystemVM.RebootSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RebootSystemVm", testrebootSystemVm)
@@ -100,9 +112,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewScaleSystemVmParams("id", "serviceofferingid")
-		_, err := client.SystemVM.ScaleSystemVm(p)
+		r, err := client.SystemVM.ScaleSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ScaleSystemVm", testscaleSystemVm)
@@ -112,9 +127,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewStartSystemVmParams("id")
-		_, err := client.SystemVM.StartSystemVm(p)
+		r, err := client.SystemVM.StartSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StartSystemVm", teststartSystemVm)
@@ -124,9 +142,12 @@ func TestSystemVMService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SystemVM.NewStopSystemVmParams("id")
-		_, err := client.SystemVM.StopSystemVm(p)
+		r, err := client.SystemVM.StopSystemVm(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StopSystemVm", teststopSystemVm)

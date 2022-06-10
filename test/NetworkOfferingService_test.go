@@ -40,9 +40,12 @@ func TestNetworkOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkOffering.NewCreateNetworkOfferingParams("displaytext", "guestiptype", "name", "traffictype")
-		_, err := client.NetworkOffering.CreateNetworkOffering(p)
+		r, err := client.NetworkOffering.CreateNetworkOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateNetworkOffering", testcreateNetworkOffering)
@@ -76,9 +79,12 @@ func TestNetworkOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkOffering.NewUpdateNetworkOfferingParams()
-		_, err := client.NetworkOffering.UpdateNetworkOffering(p)
+		r, err := client.NetworkOffering.UpdateNetworkOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateNetworkOffering", testupdateNetworkOffering)

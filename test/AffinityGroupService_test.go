@@ -40,9 +40,12 @@ func TestAffinityGroupService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AffinityGroup.NewCreateAffinityGroupParams("name", "type")
-		_, err := client.AffinityGroup.CreateAffinityGroup(p)
+		r, err := client.AffinityGroup.CreateAffinityGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateAffinityGroup", testcreateAffinityGroup)
@@ -88,9 +91,12 @@ func TestAffinityGroupService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AffinityGroup.NewUpdateVMAffinityGroupParams("id")
-		_, err := client.AffinityGroup.UpdateVMAffinityGroup(p)
+		r, err := client.AffinityGroup.UpdateVMAffinityGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVMAffinityGroup", testupdateVMAffinityGroup)

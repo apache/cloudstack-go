@@ -40,9 +40,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewAddVpnUserParams("password", "username")
-		_, err := client.VPN.AddVpnUser(p)
+		r, err := client.VPN.AddVpnUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddVpnUser", testaddVpnUser)
@@ -52,9 +55,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewCreateRemoteAccessVpnParams("publicipid")
-		_, err := client.VPN.CreateRemoteAccessVpn(p)
+		r, err := client.VPN.CreateRemoteAccessVpn(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateRemoteAccessVpn", testcreateRemoteAccessVpn)
@@ -64,9 +70,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewCreateVpnConnectionParams("s2scustomergatewayid", "s2svpngatewayid")
-		_, err := client.VPN.CreateVpnConnection(p)
+		r, err := client.VPN.CreateVpnConnection(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVpnConnection", testcreateVpnConnection)
@@ -76,9 +85,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewCreateVpnCustomerGatewayParams("cidrlist", "esppolicy", "gateway", "ikepolicy", "ipsecpsk")
-		_, err := client.VPN.CreateVpnCustomerGateway(p)
+		r, err := client.VPN.CreateVpnCustomerGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVpnCustomerGateway", testcreateVpnCustomerGateway)
@@ -88,9 +100,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewCreateVpnGatewayParams("vpcid")
-		_, err := client.VPN.CreateVpnGateway(p)
+		r, err := client.VPN.CreateVpnGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVpnGateway", testcreateVpnGateway)
@@ -220,9 +235,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewResetVpnConnectionParams("id")
-		_, err := client.VPN.ResetVpnConnection(p)
+		r, err := client.VPN.ResetVpnConnection(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ResetVpnConnection", testresetVpnConnection)
@@ -232,9 +250,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewUpdateRemoteAccessVpnParams("id")
-		_, err := client.VPN.UpdateRemoteAccessVpn(p)
+		r, err := client.VPN.UpdateRemoteAccessVpn(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateRemoteAccessVpn", testupdateRemoteAccessVpn)
@@ -244,9 +265,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewUpdateVpnConnectionParams("id")
-		_, err := client.VPN.UpdateVpnConnection(p)
+		r, err := client.VPN.UpdateVpnConnection(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVpnConnection", testupdateVpnConnection)
@@ -256,9 +280,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewUpdateVpnCustomerGatewayParams("cidrlist", "esppolicy", "gateway", "id", "ikepolicy", "ipsecpsk")
-		_, err := client.VPN.UpdateVpnCustomerGateway(p)
+		r, err := client.VPN.UpdateVpnCustomerGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVpnCustomerGateway", testupdateVpnCustomerGateway)
@@ -268,9 +295,12 @@ func TestVPNService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VPN.NewUpdateVpnGatewayParams("id")
-		_, err := client.VPN.UpdateVpnGateway(p)
+		r, err := client.VPN.UpdateVpnGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVpnGateway", testupdateVpnGateway)

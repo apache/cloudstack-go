@@ -40,9 +40,12 @@ func TestInternalLBService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.InternalLB.NewConfigureInternalLoadBalancerElementParams(true, "id")
-		_, err := client.InternalLB.ConfigureInternalLoadBalancerElement(p)
+		r, err := client.InternalLB.ConfigureInternalLoadBalancerElement(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ConfigureInternalLoadBalancerElement", testconfigureInternalLoadBalancerElement)
@@ -52,9 +55,12 @@ func TestInternalLBService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.InternalLB.NewCreateInternalLoadBalancerElementParams("nspid")
-		_, err := client.InternalLB.CreateInternalLoadBalancerElement(p)
+		r, err := client.InternalLB.CreateInternalLoadBalancerElement(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateInternalLoadBalancerElement", testcreateInternalLoadBalancerElement)
@@ -88,9 +94,12 @@ func TestInternalLBService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.InternalLB.NewStartInternalLoadBalancerVMParams("id")
-		_, err := client.InternalLB.StartInternalLoadBalancerVM(p)
+		r, err := client.InternalLB.StartInternalLoadBalancerVM(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StartInternalLoadBalancerVM", teststartInternalLoadBalancerVM)
@@ -100,9 +109,12 @@ func TestInternalLBService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.InternalLB.NewStopInternalLoadBalancerVMParams("id")
-		_, err := client.InternalLB.StopInternalLoadBalancerVM(p)
+		r, err := client.InternalLB.StopInternalLoadBalancerVM(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StopInternalLoadBalancerVM", teststopInternalLoadBalancerVM)

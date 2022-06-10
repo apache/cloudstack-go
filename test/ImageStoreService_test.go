@@ -40,9 +40,12 @@ func TestImageStoreService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ImageStore.NewAddImageStoreParams("provider")
-		_, err := client.ImageStore.AddImageStore(p)
+		r, err := client.ImageStore.AddImageStore(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddImageStore", testaddImageStore)
@@ -52,9 +55,12 @@ func TestImageStoreService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ImageStore.NewAddImageStoreS3Params("accesskey", "bucket", "endpoint", "secretkey")
-		_, err := client.ImageStore.AddImageStoreS3(p)
+		r, err := client.ImageStore.AddImageStoreS3(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddImageStoreS3", testaddImageStoreS3)
@@ -64,9 +70,12 @@ func TestImageStoreService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ImageStore.NewCreateSecondaryStagingStoreParams("url")
-		_, err := client.ImageStore.CreateSecondaryStagingStore(p)
+		r, err := client.ImageStore.CreateSecondaryStagingStore(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateSecondaryStagingStore", testcreateSecondaryStagingStore)
@@ -124,9 +133,12 @@ func TestImageStoreService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ImageStore.NewUpdateCloudToUseObjectStoreParams("provider")
-		_, err := client.ImageStore.UpdateCloudToUseObjectStore(p)
+		r, err := client.ImageStore.UpdateCloudToUseObjectStore(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateCloudToUseObjectStore", testupdateCloudToUseObjectStore)

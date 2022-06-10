@@ -39,7 +39,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/golang/mock/gomock"
+	gomock "github.com/golang/mock/gomock"
 )
 
 // UnlimitedResourceID is a special ID to define an unlimited resource
@@ -533,14 +533,33 @@ func encodeValues(v url.Values) string {
 	return buf.String()
 }
 
-// Generic function to get the first raw value from a response as json.RawMessage
+// Generic function to get the first non-count raw value from a response as json.RawMessage
 func getRawValue(b json.RawMessage) (json.RawMessage, error) {
 	var m map[string]json.RawMessage
 	if err := json.Unmarshal(b, &m); err != nil {
 		return nil, err
 	}
-	for _, v := range m {
-		return v, nil
+	getArrayResponse := false
+	for k := range m {
+		if k == "count" {
+			getArrayResponse = true
+		}
+	}
+	if getArrayResponse {
+		var resp []json.RawMessage
+		for k, v := range m {
+			if k != "count" {
+				if err := json.Unmarshal(v, &resp); err != nil {
+					return nil, err
+				}
+				return resp[0], nil
+			}
+		}
+
+	} else {
+		for _, v := range m {
+			return v, nil
+		}
 	}
 	return nil, fmt.Errorf("Unable to extract the raw value from:\n\n%s\n\n", string(b))
 }

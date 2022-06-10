@@ -40,9 +40,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewAddKubernetesSupportedVersionParams(0, 0, "semanticversion")
-		_, err := client.Kubernetes.AddKubernetesSupportedVersion(p)
+		r, err := client.Kubernetes.AddKubernetesSupportedVersion(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddKubernetesSupportedVersion", testaddKubernetesSupportedVersion)
@@ -52,9 +55,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewCreateKubernetesClusterParams("description", "kubernetesversionid", "name", "serviceofferingid", 0, "zoneid")
-		_, err := client.Kubernetes.CreateKubernetesCluster(p)
+		r, err := client.Kubernetes.CreateKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateKubernetesCluster", testcreateKubernetesCluster)
@@ -88,9 +94,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewGetKubernetesClusterConfigParams()
-		_, err := client.Kubernetes.GetKubernetesClusterConfig(p)
+		r, err := client.Kubernetes.GetKubernetesClusterConfig(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("GetKubernetesClusterConfig", testgetKubernetesClusterConfig)
@@ -124,9 +133,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewScaleKubernetesClusterParams("id")
-		_, err := client.Kubernetes.ScaleKubernetesCluster(p)
+		r, err := client.Kubernetes.ScaleKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ScaleKubernetesCluster", testscaleKubernetesCluster)
@@ -136,9 +148,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewStartKubernetesClusterParams("id")
-		_, err := client.Kubernetes.StartKubernetesCluster(p)
+		r, err := client.Kubernetes.StartKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StartKubernetesCluster", teststartKubernetesCluster)
@@ -160,9 +175,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewUpdateKubernetesSupportedVersionParams("id", "state")
-		_, err := client.Kubernetes.UpdateKubernetesSupportedVersion(p)
+		r, err := client.Kubernetes.UpdateKubernetesSupportedVersion(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateKubernetesSupportedVersion", testupdateKubernetesSupportedVersion)
@@ -172,9 +190,12 @@ func TestKubernetesService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Kubernetes.NewUpgradeKubernetesClusterParams("id", "kubernetesversionid")
-		_, err := client.Kubernetes.UpgradeKubernetesCluster(p)
+		r, err := client.Kubernetes.UpgradeKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpgradeKubernetesCluster", testupgradeKubernetesCluster)

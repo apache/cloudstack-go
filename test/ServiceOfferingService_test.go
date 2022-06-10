@@ -40,9 +40,12 @@ func TestServiceOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ServiceOffering.NewCreateServiceOfferingParams("displaytext", "name")
-		_, err := client.ServiceOffering.CreateServiceOffering(p)
+		r, err := client.ServiceOffering.CreateServiceOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateServiceOffering", testcreateServiceOffering)
@@ -76,9 +79,12 @@ func TestServiceOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ServiceOffering.NewUpdateServiceOfferingParams("id")
-		_, err := client.ServiceOffering.UpdateServiceOffering(p)
+		r, err := client.ServiceOffering.UpdateServiceOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateServiceOffering", testupdateServiceOffering)
