@@ -88,9 +88,12 @@ func TestLDAPService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LDAP.NewLdapCreateAccountParams("username")
-		_, err := client.LDAP.LdapCreateAccount(p)
+		r, err := client.LDAP.LdapCreateAccount(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("LdapCreateAccount", testldapCreateAccount)

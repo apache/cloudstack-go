@@ -40,9 +40,12 @@ func TestAnnotationService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Annotation.NewAddAnnotationParams()
-		_, err := client.Annotation.AddAnnotation(p)
+		r, err := client.Annotation.AddAnnotation(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddAnnotation", testaddAnnotation)
@@ -64,9 +67,12 @@ func TestAnnotationService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Annotation.NewRemoveAnnotationParams("id")
-		_, err := client.Annotation.RemoveAnnotation(p)
+		r, err := client.Annotation.RemoveAnnotation(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RemoveAnnotation", testremoveAnnotation)
@@ -76,9 +82,12 @@ func TestAnnotationService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Annotation.NewUpdateAnnotationVisibilityParams(true, "id")
-		_, err := client.Annotation.UpdateAnnotationVisibility(p)
+		r, err := client.Annotation.UpdateAnnotationVisibility(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateAnnotationVisibility", testupdateAnnotationVisibility)

@@ -40,9 +40,12 @@ func TestStoragePoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.StoragePool.NewCancelStorageMaintenanceParams("id")
-		_, err := client.StoragePool.CancelStorageMaintenance(p)
+		r, err := client.StoragePool.CancelStorageMaintenance(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CancelStorageMaintenance", testcancelStorageMaintenance)
@@ -52,9 +55,12 @@ func TestStoragePoolService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.StoragePool.NewEnableStorageMaintenanceParams("id")
-		_, err := client.StoragePool.EnableStorageMaintenance(p)
+		r, err := client.StoragePool.EnableStorageMaintenance(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("EnableStorageMaintenance", testenableStorageMaintenance)

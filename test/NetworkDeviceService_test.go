@@ -40,9 +40,12 @@ func TestNetworkDeviceService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkDevice.NewAddNetworkDeviceParams()
-		_, err := client.NetworkDevice.AddNetworkDevice(p)
+		r, err := client.NetworkDevice.AddNetworkDevice(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddNetworkDevice", testaddNetworkDevice)

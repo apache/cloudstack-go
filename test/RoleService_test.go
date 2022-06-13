@@ -40,9 +40,12 @@ func TestRoleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Role.NewCreateRoleParams("name")
-		_, err := client.Role.CreateRole(p)
+		r, err := client.Role.CreateRole(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateRole", testcreateRole)
@@ -52,9 +55,12 @@ func TestRoleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Role.NewCreateRolePermissionParams("permission", "roleid", "rule")
-		_, err := client.Role.CreateRolePermission(p)
+		r, err := client.Role.CreateRolePermission(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateRolePermission", testcreateRolePermission)
@@ -88,9 +94,12 @@ func TestRoleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Role.NewImportRoleParams("name", map[string]string{})
-		_, err := client.Role.ImportRole(p)
+		r, err := client.Role.ImportRole(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ImportRole", testimportRole)
@@ -124,9 +133,12 @@ func TestRoleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Role.NewUpdateRoleParams("id")
-		_, err := client.Role.UpdateRole(p)
+		r, err := client.Role.UpdateRole(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateRole", testupdateRole)

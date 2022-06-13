@@ -40,9 +40,12 @@ func TestUsageService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Usage.NewAddTrafficMonitorParams("url", "zoneid")
-		_, err := client.Usage.AddTrafficMonitor(p)
+		r, err := client.Usage.AddTrafficMonitor(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddTrafficMonitor", testaddTrafficMonitor)
@@ -52,9 +55,12 @@ func TestUsageService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Usage.NewAddTrafficTypeParams("physicalnetworkid", "traffictype")
-		_, err := client.Usage.AddTrafficType(p)
+		r, err := client.Usage.AddTrafficType(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddTrafficType", testaddTrafficType)
@@ -172,9 +178,12 @@ func TestUsageService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Usage.NewUpdateTrafficTypeParams("id")
-		_, err := client.Usage.UpdateTrafficType(p)
+		r, err := client.Usage.UpdateTrafficType(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateTrafficType", testupdateTrafficType)

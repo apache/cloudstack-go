@@ -64,9 +64,12 @@ func TestSecurityGroupService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SecurityGroup.NewCreateSecurityGroupParams("name")
-		_, err := client.SecurityGroup.CreateSecurityGroup(p)
+		r, err := client.SecurityGroup.CreateSecurityGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateSecurityGroup", testcreateSecurityGroup)

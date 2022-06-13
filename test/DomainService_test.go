@@ -40,9 +40,12 @@ func TestDomainService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Domain.NewCreateDomainParams("name")
-		_, err := client.Domain.CreateDomain(p)
+		r, err := client.Domain.CreateDomain(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateDomain", testcreateDomain)
@@ -88,9 +91,12 @@ func TestDomainService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Domain.NewUpdateDomainParams("id")
-		_, err := client.Domain.UpdateDomain(p)
+		r, err := client.Domain.UpdateDomain(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateDomain", testupdateDomain)

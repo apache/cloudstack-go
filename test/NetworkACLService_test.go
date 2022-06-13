@@ -40,9 +40,12 @@ func TestNetworkACLService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkACL.NewCreateNetworkACLParams("protocol")
-		_, err := client.NetworkACL.CreateNetworkACL(p)
+		r, err := client.NetworkACL.CreateNetworkACL(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateNetworkACL", testcreateNetworkACL)
@@ -52,9 +55,12 @@ func TestNetworkACLService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkACL.NewCreateNetworkACLListParams("name", "vpcid")
-		_, err := client.NetworkACL.CreateNetworkACLList(p)
+		r, err := client.NetworkACL.CreateNetworkACLList(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateNetworkACLList", testcreateNetworkACLList)
@@ -124,9 +130,12 @@ func TestNetworkACLService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NetworkACL.NewUpdateNetworkACLItemParams("id")
-		_, err := client.NetworkACL.UpdateNetworkACLItem(p)
+		r, err := client.NetworkACL.UpdateNetworkACLItem(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateNetworkACLItem", testupdateNetworkACLItem)

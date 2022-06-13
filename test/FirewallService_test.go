@@ -64,9 +64,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewCreateEgressFirewallRuleParams("networkid", "protocol")
-		_, err := client.Firewall.CreateEgressFirewallRule(p)
+		r, err := client.Firewall.CreateEgressFirewallRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateEgressFirewallRule", testcreateEgressFirewallRule)
@@ -76,9 +79,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewCreateFirewallRuleParams("ipaddressid", "protocol")
-		_, err := client.Firewall.CreateFirewallRule(p)
+		r, err := client.Firewall.CreateFirewallRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateFirewallRule", testcreateFirewallRule)
@@ -88,9 +94,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewCreatePortForwardingRuleParams("ipaddressid", 0, "protocol", 0, "virtualmachineid")
-		_, err := client.Firewall.CreatePortForwardingRule(p)
+		r, err := client.Firewall.CreatePortForwardingRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreatePortForwardingRule", testcreatePortForwardingRule)
@@ -196,9 +205,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewUpdateEgressFirewallRuleParams("id")
-		_, err := client.Firewall.UpdateEgressFirewallRule(p)
+		r, err := client.Firewall.UpdateEgressFirewallRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateEgressFirewallRule", testupdateEgressFirewallRule)
@@ -208,9 +220,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewUpdateFirewallRuleParams("id")
-		_, err := client.Firewall.UpdateFirewallRule(p)
+		r, err := client.Firewall.UpdateFirewallRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateFirewallRule", testupdateFirewallRule)
@@ -220,9 +235,12 @@ func TestFirewallService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Firewall.NewUpdatePortForwardingRuleParams("id")
-		_, err := client.Firewall.UpdatePortForwardingRule(p)
+		r, err := client.Firewall.UpdatePortForwardingRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdatePortForwardingRule", testupdatePortForwardingRule)

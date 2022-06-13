@@ -100,9 +100,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewCreateGlobalLoadBalancerRuleParams("gslbdomainname", "gslbservicetype", "name", 0)
-		_, err := client.LoadBalancer.CreateGlobalLoadBalancerRule(p)
+		r, err := client.LoadBalancer.CreateGlobalLoadBalancerRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateGlobalLoadBalancerRule", testcreateGlobalLoadBalancerRule)
@@ -136,9 +139,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewCreateLoadBalancerParams("algorithm", 0, "name", "networkid", "scheme", "sourceipaddressnetworkid", 0)
-		_, err := client.LoadBalancer.CreateLoadBalancer(p)
+		r, err := client.LoadBalancer.CreateLoadBalancer(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateLoadBalancer", testcreateLoadBalancer)
@@ -148,9 +154,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewCreateLoadBalancerRuleParams("algorithm", "name", 0, 0)
-		_, err := client.LoadBalancer.CreateLoadBalancerRule(p)
+		r, err := client.LoadBalancer.CreateLoadBalancerRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateLoadBalancerRule", testcreateLoadBalancerRule)
@@ -376,9 +385,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewUpdateGlobalLoadBalancerRuleParams("id")
-		_, err := client.LoadBalancer.UpdateGlobalLoadBalancerRule(p)
+		r, err := client.LoadBalancer.UpdateGlobalLoadBalancerRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateGlobalLoadBalancerRule", testupdateGlobalLoadBalancerRule)
@@ -412,9 +424,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewUpdateLoadBalancerParams("id")
-		_, err := client.LoadBalancer.UpdateLoadBalancer(p)
+		r, err := client.LoadBalancer.UpdateLoadBalancer(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateLoadBalancer", testupdateLoadBalancer)
@@ -424,9 +439,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewUpdateLoadBalancerRuleParams("id")
-		_, err := client.LoadBalancer.UpdateLoadBalancerRule(p)
+		r, err := client.LoadBalancer.UpdateLoadBalancerRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateLoadBalancerRule", testupdateLoadBalancerRule)
@@ -436,9 +454,12 @@ func TestLoadBalancerService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LoadBalancer.NewUploadSslCertParams("certificate", "name", "privatekey")
-		_, err := client.LoadBalancer.UploadSslCert(p)
+		r, err := client.LoadBalancer.UploadSslCert(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UploadSslCert", testuploadSslCert)
