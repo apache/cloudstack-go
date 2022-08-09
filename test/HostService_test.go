@@ -191,8 +191,11 @@ func TestHostService(t *testing.T) {
 		if err != nil {
 			t.Errorf(err.Error())
 		}
-		if r.Id == "" {
-			t.Errorf("Failed to parse response. ID not found")
+		if len(r.Host) != 1 {
+			t.Errorf("Failed to parse response. Host is missing")
+		}
+		if r.Host[0].Id != "6a5b8975-225f-4630-9093-3d55cec439d8" {
+			t.Errorf("Failed to parse response. ID incorrect")
 		}
 	}
 	t.Run("FindHostsForMigration", testfindHostsForMigration)
