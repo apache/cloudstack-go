@@ -25,7 +25,7 @@ mocks:
 test:
 	go test -v github.com/apache/cloudstack-go/v2/test
 
-MOCKGEN := $(shell pwd)/bin/mockgen
+MOCKGEN ?= $(shell pwd)/bin/mockgen
 mockgen: ## Download conversion-gen locally if necessary.
 	$(call go-get-tool,$(MOCKGEN),github.com/golang/mock/mockgen)
 
