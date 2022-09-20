@@ -1854,7 +1854,7 @@ func (s *VirtualMachineService) NewDeployVirtualMachineParams(serviceofferingid 
 
 // Creates and automatically starts a virtual machine based on a service offering, disk offering, and template.
 func (s *VirtualMachineService) DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("deployVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deployVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7225,7 +7225,7 @@ func (s *VirtualMachineService) NewUpdateVirtualMachineParams(id string) *Update
 
 // Updates properties of a virtual machine. The VM has to be stopped and restarted for the new properties to take effect. UpdateVirtualMachine does not first check whether the VM is stopped. Therefore, stop the VM manually before issuing this call.
 func (s *VirtualMachineService) UpdateVirtualMachine(p *UpdateVirtualMachineParams) (*UpdateVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("updateVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
