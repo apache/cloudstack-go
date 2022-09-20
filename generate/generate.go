@@ -1094,7 +1094,7 @@ func (s *service) generateAPITest(a *API) {
 	}
 	pn(")")
 	idPresent := false
-	if !(strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate") {
+	if !(strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration") {
 		for _, ap := range a.Response {
 			if ap.Name == "id" && ap.Type == "string" {
 				pn("		r, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
