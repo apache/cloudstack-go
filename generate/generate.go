@@ -1310,6 +1310,15 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "usersecuritygrouplist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].account\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].group\", i), m[k])", name)
+		case "tags":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
+			if cmd == "deleteTags" {
+				pn("	if m[k] != \"\" {")
+				pn("		u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+				pn("	}")
+			} else {
+				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+			}
 		default:
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
