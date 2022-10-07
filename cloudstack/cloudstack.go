@@ -446,6 +446,20 @@ func (cs *CloudStackClient) GetAsyncJobResult(jobid string, timeout int64) (json
 // no error occured. If the API returns an error the result will be nil and the HTTP error code and CS
 // error details. If a processing (code) error occurs the result will be nil and the generated error
 func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawMessage, error) {
+	return cs.newRawRequest(api, false, params)
+}
+
+// Execute the request against a CS API using POST. Will return the raw JSON data returned by the API and
+// nil if no error occured. If the API returns an error the result will be nil and the HTTP error code
+// and CS error details. If a processing (code) error occurs the result will be nil and the generated error
+func (cs *CloudStackClient) newPostRequest(api string, params url.Values) (json.RawMessage, error) {
+	return cs.newRawRequest(api, true, params)
+}
+
+// Execute a raw request against a CS API. Will return the raw JSON data returned by the API and nil if
+// no error occured. If the API returns an error the result will be nil and the HTTP error code and CS
+// error details. If a processing (code) error occurs the result will be nil and the generated error
+func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Values) (json.RawMessage, error) {
 	params.Set("apiKey", cs.apiKey)
 	params.Set("command", api)
 	params.Set("response", "json")
@@ -465,7 +479,7 @@ func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawM
 
 	var err error
 	var resp *http.Response
-	if !cs.HTTPGETOnly && (api == "deployVirtualMachine" || api == "login" || api == "updateVirtualMachine") {
+	if !cs.HTTPGETOnly && post {
 		// The deployVirtualMachine API should be called using a POST call
 		// so we don't have to worry about the userdata size
 
