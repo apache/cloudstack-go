@@ -1805,6 +1805,11 @@ func (s *HostService) FindHostsForMigration(p *FindHostsForMigrationParams) (*Fi
 }
 
 type FindHostsForMigrationResponse struct {
+	Count int                 `json:"count"`
+	Host  []*HostForMigration `json:"host"`
+}
+
+type HostForMigration struct {
 	Averageload                      int64  `json:"averageload"`
 	Capabilities                     string `json:"capabilities"`
 	Clusterid                        string `json:"clusterid"`

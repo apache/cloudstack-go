@@ -79,6 +79,12 @@ var longToStringConvertedParams = map[string]bool{
 	"managementserverid": true,
 }
 
+// customResponseStructTypes maps the API call to a custom struct name
+// This is to change the struct type name to something other than the API name
+var customResponseStructTypes = map[string]string{
+	"findHostsForMigration": "HostForMigration",
+}
+
 // We prefill this one value to make sure it is not
 // created twice, as this is also a top level type.
 var typeNames = map[string]bool{"Nic": true}
@@ -1088,7 +1094,7 @@ func (s *service) generateAPITest(a *API) {
 	}
 	pn(")")
 	idPresent := false
-	if !(strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate") {
+	if !(strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration") {
 		for _, ap := range a.Response {
 			if ap.Name == "id" && ap.Type == "string" {
 				pn("		r, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
@@ -1766,7 +1772,7 @@ func (s *service) generateResponseType(a *API) {
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1792,6 +1798,9 @@ func (s *service) generateResponseType(a *API) {
 		case "listDomainChildren":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "domain")
+		case "findHostsForMigration":
+			pn(" Count int `json:\"count\"`")
+			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
@@ -1849,6 +1858,10 @@ func (s *service) recusiveGenerateResponseType(aName string, tn string, resp API
 	pn := s.pn
 	customMarshal := false
 	found := make(map[string]bool)
+
+	if val, ok := customResponseStructTypes[aName]; ok {
+		tn = val
+	}
 
 	pn("type %s struct {", tn)
 
