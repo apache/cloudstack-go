@@ -49,6 +49,13 @@ var detailsRequireKeyValue = map[string]bool{
 	"updateZone":                  true,
 }
 
+// detailsRequireZeroIndex is a prefilled map with a list of details
+// that need to be encoded using zero indexing
+var detailsRequireZeroIndex = map[string]bool{
+	"registerTemplate": true,
+	"updateTemplate":   true,
+}
+
 var mapRequireList = map[string]map[string]bool{
 	"deployVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
@@ -1295,14 +1302,23 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		pn("}")
 	case "map[string]string":
 		pn("m := v.(map[string]string)")
-		pn("for i, k := range getSortedKeysFromMap(m) {")
+		zeroIndex := detailsRequireZeroIndex[cmd]
+		if zeroIndex {
+			pn("for _, k := range getSortedKeysFromMap(m) {")
+		} else {
+			pn("for i, k := range getSortedKeysFromMap(m) {")
+		}
 		switch name {
 		case "details":
 			if detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 			} else {
-				pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
+				if zeroIndex {
+					pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
+				} else {
+					pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
+				}
 			}
 		case "serviceproviderlist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].service\", i), k)", name)
