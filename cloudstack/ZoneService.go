@@ -366,7 +366,7 @@ type CreateZoneResponse struct {
 	Domainname            string                       `json:"domainname"`
 	Guestcidraddress      string                       `json:"guestcidraddress"`
 	Hasannotations        bool                         `json:"hasannotations"`
-	Icon                  string                       `json:"icon"`
+	Icon                  interface{}                  `json:"icon"`
 	Id                    string                       `json:"id"`
 	Internaldns1          string                       `json:"internaldns1"`
 	Internaldns2          string                       `json:"internaldns2"`
@@ -1462,7 +1462,7 @@ type Zone struct {
 	Domainname            string            `json:"domainname"`
 	Guestcidraddress      string            `json:"guestcidraddress"`
 	Hasannotations        bool              `json:"hasannotations"`
-	Icon                  string            `json:"icon"`
+	Icon                  interface{}       `json:"icon"`
 	Id                    string            `json:"id"`
 	Internaldns1          string            `json:"internaldns1"`
 	Internaldns2          string            `json:"internaldns2"`
@@ -1846,7 +1846,7 @@ type ZonesMetric struct {
 	Domainname                      string                `json:"domainname"`
 	Guestcidraddress                string                `json:"guestcidraddress"`
 	Hasannotations                  bool                  `json:"hasannotations"`
-	Icon                            string                `json:"icon"`
+	Icon                            interface{}           `json:"icon"`
 	Id                              string                `json:"id"`
 	Internaldns1                    string                `json:"internaldns1"`
 	Internaldns2                    string                `json:"internaldns2"`
@@ -2326,7 +2326,7 @@ type UpdateZoneResponse struct {
 	Domainname            string                       `json:"domainname"`
 	Guestcidraddress      string                       `json:"guestcidraddress"`
 	Hasannotations        bool                         `json:"hasannotations"`
-	Icon                  string                       `json:"icon"`
+	Icon                  interface{}                  `json:"icon"`
 	Id                    string                       `json:"id"`
 	Internaldns1          string                       `json:"internaldns1"`
 	Internaldns2          string                       `json:"internaldns2"`

@@ -237,7 +237,7 @@ func (s *BigSwitchBCFService) NewDeleteBigSwitchBcfDeviceParams(bcfdeviceid stri
 	return p
 }
 
-//  delete a BigSwitch BCF Controller device
+// delete a BigSwitch BCF Controller device
 func (s *BigSwitchBCFService) DeleteBigSwitchBcfDevice(p *DeleteBigSwitchBcfDeviceParams) (*DeleteBigSwitchBcfDeviceResponse, error) {
 	resp, err := s.cs.newRequest("deleteBigSwitchBcfDevice", p.toURLValues())
 	if err != nil {

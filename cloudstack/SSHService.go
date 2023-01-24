@@ -968,7 +968,7 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Hostid                string                                              `json:"hostid"`
 	Hostname              string                                              `json:"hostname"`
 	Hypervisor            string                                              `json:"hypervisor"`
-	Icon                  string                                              `json:"icon"`
+	Icon                  interface{}                                         `json:"icon"`
 	Id                    string                                              `json:"id"`
 	Instancename          string                                              `json:"instancename"`
 	Isdynamicallyscalable bool                                                `json:"isdynamicallyscalable"`

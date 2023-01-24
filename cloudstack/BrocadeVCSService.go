@@ -218,7 +218,7 @@ func (s *BrocadeVCSService) NewDeleteBrocadeVcsDeviceParams(vcsdeviceid string) 
 	return p
 }
 
-//  delete a Brocade VCS Switch
+// delete a Brocade VCS Switch
 func (s *BrocadeVCSService) DeleteBrocadeVcsDevice(p *DeleteBrocadeVcsDeviceParams) (*DeleteBrocadeVcsDeviceResponse, error) {
 	resp, err := s.cs.newRequest("deleteBrocadeVcsDevice", p.toURLValues())
 	if err != nil {
@@ -427,7 +427,7 @@ type BrocadeVcsDeviceNetwork struct {
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
 	Hasannotations              bool                             `json:"hasannotations"`
-	Icon                        string                           `json:"icon"`
+	Icon                        interface{}                      `json:"icon"`
 	Id                          string                           `json:"id"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`

@@ -209,7 +209,7 @@ type CopyTemplateResponse struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -663,7 +663,7 @@ type CreateTemplateResponse struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2068,7 +2068,7 @@ type Template struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2239,7 +2239,7 @@ type PrepareTemplateResponse struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -2829,7 +2829,7 @@ type RegisterTemplate struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
@@ -3226,7 +3226,7 @@ type UpdateTemplateResponse struct {
 	Hostid                string              `json:"hostid"`
 	Hostname              string              `json:"hostname"`
 	Hypervisor            string              `json:"hypervisor"`
-	Icon                  string              `json:"icon"`
+	Icon                  interface{}         `json:"icon"`
 	Id                    string              `json:"id"`
 	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
 	Isextractable         bool                `json:"isextractable"`
