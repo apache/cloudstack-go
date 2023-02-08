@@ -40,9 +40,12 @@ func TestSSHService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SSH.NewCreateSSHKeyPairParams("name")
-		_, err := client.SSH.CreateSSHKeyPair(p)
+		r, err := client.SSH.CreateSSHKeyPair(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateSSHKeyPair", testcreateSSHKeyPair)
@@ -76,9 +79,12 @@ func TestSSHService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.SSH.NewRegisterSSHKeyPairParams("name", "publickey")
-		_, err := client.SSH.RegisterSSHKeyPair(p)
+		r, err := client.SSH.RegisterSSHKeyPair(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RegisterSSHKeyPair", testregisterSSHKeyPair)
@@ -87,10 +93,13 @@ func TestSSHService(t *testing.T) {
 		if _, ok := response["resetSSHKeyForVirtualMachine"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.SSH.NewResetSSHKeyForVirtualMachineParams("id")
-		_, err := client.SSH.ResetSSHKeyForVirtualMachine(p)
+		p := client.SSH.NewResetSSHKeyForVirtualMachineParams("id", "keypair")
+		r, err := client.SSH.ResetSSHKeyForVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ResetSSHKeyForVirtualMachine", testresetSSHKeyForVirtualMachine)

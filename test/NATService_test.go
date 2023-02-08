@@ -40,9 +40,12 @@ func TestNATService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.NAT.NewCreateIpForwardingRuleParams("ipaddressid", "protocol", 0)
-		_, err := client.NAT.CreateIpForwardingRule(p)
+		r, err := client.NAT.CreateIpForwardingRule(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateIpForwardingRule", testcreateIpForwardingRule)

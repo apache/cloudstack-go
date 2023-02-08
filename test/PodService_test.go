@@ -40,9 +40,12 @@ func TestPodService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pod.NewCreatePodParams("gateway", "name", "netmask", "startip", "zoneid")
-		_, err := client.Pod.CreatePod(p)
+		r, err := client.Pod.CreatePod(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreatePod", testcreatePod)
@@ -52,9 +55,12 @@ func TestPodService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pod.NewDedicatePodParams("domainid", "podid")
-		_, err := client.Pod.DedicatePod(p)
+		r, err := client.Pod.DedicatePod(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicatePod", testdedicatePod)
@@ -112,9 +118,12 @@ func TestPodService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Pod.NewUpdatePodParams("id")
-		_, err := client.Pod.UpdatePod(p)
+		r, err := client.Pod.UpdatePod(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdatePod", testupdatePod)

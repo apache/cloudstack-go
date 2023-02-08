@@ -40,9 +40,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewCreateUserParams("account", "email", "firstname", "lastname", "password", "username")
-		_, err := client.User.CreateUser(p)
+		r, err := client.User.CreateUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateUser", testcreateUser)
@@ -64,9 +67,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewDisableUserParams("id")
-		_, err := client.User.DisableUser(p)
+		r, err := client.User.DisableUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DisableUser", testdisableUser)
@@ -76,9 +82,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewEnableUserParams("id")
-		_, err := client.User.EnableUser(p)
+		r, err := client.User.EnableUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("EnableUser", testenableUser)
@@ -88,9 +97,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewGetUserParams("userapikey")
-		_, err := client.User.GetUser(p)
+		r, err := client.User.GetUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("GetUser", testgetUser)
@@ -136,9 +148,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewLockUserParams("id")
-		_, err := client.User.LockUser(p)
+		r, err := client.User.LockUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("LockUser", testlockUser)
@@ -160,9 +175,12 @@ func TestUserService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.User.NewUpdateUserParams("id")
-		_, err := client.User.UpdateUser(p)
+		r, err := client.User.UpdateUser(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateUser", testupdateUser)

@@ -446,6 +446,20 @@ func (cs *CloudStackClient) GetAsyncJobResult(jobid string, timeout int64) (json
 // no error occured. If the API returns an error the result will be nil and the HTTP error code and CS
 // error details. If a processing (code) error occurs the result will be nil and the generated error
 func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawMessage, error) {
+	return cs.newRawRequest(api, false, params)
+}
+
+// Execute the request against a CS API using POST. Will return the raw JSON data returned by the API and
+// nil if no error occured. If the API returns an error the result will be nil and the HTTP error code
+// and CS error details. If a processing (code) error occurs the result will be nil and the generated error
+func (cs *CloudStackClient) newPostRequest(api string, params url.Values) (json.RawMessage, error) {
+	return cs.newRawRequest(api, true, params)
+}
+
+// Execute a raw request against a CS API. Will return the raw JSON data returned by the API and nil if
+// no error occured. If the API returns an error the result will be nil and the HTTP error code and CS
+// error details. If a processing (code) error occurs the result will be nil and the generated error
+func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Values) (json.RawMessage, error) {
 	params.Set("apiKey", cs.apiKey)
 	params.Set("command", api)
 	params.Set("response", "json")
@@ -465,7 +479,7 @@ func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawM
 
 	var err error
 	var resp *http.Response
-	if !cs.HTTPGETOnly && (api == "deployVirtualMachine" || api == "login" || api == "updateVirtualMachine") {
+	if !cs.HTTPGETOnly && post {
 		// The deployVirtualMachine API should be called using a POST call
 		// so we don't have to worry about the userdata size
 
@@ -533,14 +547,33 @@ func encodeValues(v url.Values) string {
 	return buf.String()
 }
 
-// Generic function to get the first raw value from a response as json.RawMessage
+// Generic function to get the first non-count raw value from a response as json.RawMessage
 func getRawValue(b json.RawMessage) (json.RawMessage, error) {
 	var m map[string]json.RawMessage
 	if err := json.Unmarshal(b, &m); err != nil {
 		return nil, err
 	}
-	for _, v := range m {
-		return v, nil
+	getArrayResponse := false
+	for k := range m {
+		if k == "count" {
+			getArrayResponse = true
+		}
+	}
+	if getArrayResponse {
+		var resp []json.RawMessage
+		for k, v := range m {
+			if k != "count" {
+				if err := json.Unmarshal(v, &resp); err != nil {
+					return nil, err
+				}
+				return resp[0], nil
+			}
+		}
+
+	} else {
+		for _, v := range m {
+			return v, nil
+		}
 	}
 	return nil, fmt.Errorf("Unable to extract the raw value from:\n\n%s\n\n", string(b))
 }

@@ -40,9 +40,12 @@ func TestBaremetalService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Baremetal.NewAddBaremetalDhcpParams("dhcpservertype", "password", "physicalnetworkid", "url", "username")
-		_, err := client.Baremetal.AddBaremetalDhcp(p)
+		r, err := client.Baremetal.AddBaremetalDhcp(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddBaremetalDhcp", testaddBaremetalDhcp)
@@ -52,9 +55,12 @@ func TestBaremetalService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Baremetal.NewAddBaremetalPxeKickStartServerParams("password", "physicalnetworkid", "pxeservertype", "tftpdir", "url", "username")
-		_, err := client.Baremetal.AddBaremetalPxeKickStartServer(p)
+		r, err := client.Baremetal.AddBaremetalPxeKickStartServer(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddBaremetalPxeKickStartServer", testaddBaremetalPxeKickStartServer)
@@ -64,9 +70,12 @@ func TestBaremetalService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Baremetal.NewAddBaremetalPxePingServerParams("password", "physicalnetworkid", "pingdir", "pingstorageserverip", "pxeservertype", "tftpdir", "url", "username")
-		_, err := client.Baremetal.AddBaremetalPxePingServer(p)
+		r, err := client.Baremetal.AddBaremetalPxePingServer(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddBaremetalPxePingServer", testaddBaremetalPxePingServer)
@@ -76,9 +85,12 @@ func TestBaremetalService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Baremetal.NewAddBaremetalRctParams("baremetalrcturl")
-		_, err := client.Baremetal.AddBaremetalRct(p)
+		r, err := client.Baremetal.AddBaremetalRct(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddBaremetalRct", testaddBaremetalRct)

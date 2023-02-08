@@ -635,6 +635,10 @@ func (s *DiskOfferingService) CreateDiskOffering(p *CreateDiskOfferingParams) (*
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreateDiskOfferingResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

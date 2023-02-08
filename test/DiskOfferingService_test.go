@@ -40,9 +40,12 @@ func TestDiskOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.DiskOffering.NewCreateDiskOfferingParams("displaytext", "name")
-		_, err := client.DiskOffering.CreateDiskOffering(p)
+		r, err := client.DiskOffering.CreateDiskOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateDiskOffering", testcreateDiskOffering)
@@ -76,9 +79,12 @@ func TestDiskOfferingService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.DiskOffering.NewUpdateDiskOfferingParams("id")
-		_, err := client.DiskOffering.UpdateDiskOffering(p)
+		r, err := client.DiskOffering.UpdateDiskOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateDiskOffering", testupdateDiskOffering)

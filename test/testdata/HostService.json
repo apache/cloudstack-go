@@ -317,5 +317,56 @@
       "completed": "2021-10-03T07:10:09+0000",
       "jobid": "79da9d4b-6368-4ce5-9054-952295fc2c8a"
     }
+  },
+  "findHostsForMigration": {
+    "findhostsformigrationresponse": {
+      "count": 1,
+      "host": [
+        {
+          "capabilities": "hvm",
+          "clusterid": "3bf3ffc6-7f75-487c-a4b0-307b8fc96119",
+          "clustername": "C1",
+          "clustertype": "CloudManaged",
+          "cpuallocated": "0%",
+          "cpuallocatedpercentage": "0%",
+          "cpuallocatedvalue": 0,
+          "cpuallocatedwithoverprovisioning": "0%",
+          "cpunumber": 4,
+          "cpuspeed": 8000,
+          "cpuused": "0%",
+          "cpuwithoverprovisioning": "32000",
+          "created": "2021-12-01T00:15:50+0000",
+          "events": "ShutdownRequested; AgentConnected; AgentDisconnected; PingTimeout; StartAgentRebalance; Remove; Ping; HostDown; ManagementServerDown",
+          "hahost": false,
+          "hypervisor": "Simulator",
+          "hypervisorversion": "4.16.0.0",
+          "id": "6a5b8975-225f-4630-9093-3d55cec439d8",
+          "ipaddress": "172.16.15.16",
+          "islocalstorageactive": false,
+          "jobstatus": 0,
+          "lastpinged": "1970-01-19T18:10:51+0000",
+          "managementserverid": 2886860803,
+          "memoryallocated": "0%",
+          "memoryallocatedbytes": 0,
+          "memoryallocatedpercentage": "0%",
+          "memorytotal": 8589934592,
+          "memoryused": 0,
+          "memorywithoverprovisioning": "8589934592",
+          "name": "SimulatedAgent.c5e22bf2-9444-4de9-a731-f6001a33ef3a",
+          "networkkbsread": 32768,
+          "networkkbswrite": 16384,
+          "podid": "5fe0ee61-581b-425a-afb4-d9301589b11e",
+          "podname": "POD0",
+          "requiresStorageMotion": false,
+          "resourcestate": "Enabled",
+          "state": "Up",
+          "suitableformigration": true,
+          "type": "Routing",
+          "version": "4.16.0.0",
+          "zoneid": "a6166bb3-d997-4093-acfe-a5c51c38a9e3",
+          "zonename": "Sandbox-simulator"
+        }
+      ]
+    }
   }
 }

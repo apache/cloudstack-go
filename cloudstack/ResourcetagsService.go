@@ -196,7 +196,9 @@ func (p *DeleteTagsParams) toURLValues() url.Values {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
 			u.Set(fmt.Sprintf("tags[%d].key", i), k)
-			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+			if m[k] != "" {
+				u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+			}
 		}
 	}
 	return u

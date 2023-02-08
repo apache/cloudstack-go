@@ -2033,6 +2033,10 @@ func (s *ISOService) RegisterIso(p *RegisterIsoParams) (*RegisterIsoResponse, er
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r RegisterIsoResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

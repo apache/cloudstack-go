@@ -40,9 +40,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewChangeServiceForRouterParams("id", "serviceofferingid")
-		_, err := client.Router.ChangeServiceForRouter(p)
+		r, err := client.Router.ChangeServiceForRouter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ChangeServiceForRouter", testchangeServiceForRouter)
@@ -52,9 +55,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewConfigureVirtualRouterElementParams(true, "id")
-		_, err := client.Router.ConfigureVirtualRouterElement(p)
+		r, err := client.Router.ConfigureVirtualRouterElement(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ConfigureVirtualRouterElement", testconfigureVirtualRouterElement)
@@ -64,9 +70,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewCreateVirtualRouterElementParams("nspid")
-		_, err := client.Router.CreateVirtualRouterElement(p)
+		r, err := client.Router.CreateVirtualRouterElement(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVirtualRouterElement", testcreateVirtualRouterElement)
@@ -76,9 +85,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewDestroyRouterParams("id")
-		_, err := client.Router.DestroyRouter(p)
+		r, err := client.Router.DestroyRouter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DestroyRouter", testdestroyRouter)
@@ -112,9 +124,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewRebootRouterParams("id")
-		_, err := client.Router.RebootRouter(p)
+		r, err := client.Router.RebootRouter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RebootRouter", testrebootRouter)
@@ -124,9 +139,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewStartRouterParams("id")
-		_, err := client.Router.StartRouter(p)
+		r, err := client.Router.StartRouter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StartRouter", teststartRouter)
@@ -136,9 +154,12 @@ func TestRouterService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Router.NewStopRouterParams("id")
-		_, err := client.Router.StopRouter(p)
+		r, err := client.Router.StopRouter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StopRouter", teststopRouter)

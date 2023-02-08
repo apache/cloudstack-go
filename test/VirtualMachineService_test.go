@@ -40,9 +40,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewAddNicToVirtualMachineParams("networkid", "virtualmachineid")
-		_, err := client.VirtualMachine.AddNicToVirtualMachine(p)
+		r, err := client.VirtualMachine.AddNicToVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddNicToVirtualMachine", testaddNicToVirtualMachine)
@@ -52,9 +55,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewAssignVirtualMachineParams("virtualmachineid")
-		_, err := client.VirtualMachine.AssignVirtualMachine(p)
+		r, err := client.VirtualMachine.AssignVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AssignVirtualMachine", testassignVirtualMachine)
@@ -64,9 +70,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewChangeServiceForVirtualMachineParams("id", "serviceofferingid")
-		_, err := client.VirtualMachine.ChangeServiceForVirtualMachine(p)
+		r, err := client.VirtualMachine.ChangeServiceForVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ChangeServiceForVirtualMachine", testchangeServiceForVirtualMachine)
@@ -88,9 +97,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewDeployVirtualMachineParams("serviceofferingid", "templateid", "zoneid")
-		_, err := client.VirtualMachine.DeployVirtualMachine(p)
+		r, err := client.VirtualMachine.DeployVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DeployVirtualMachine", testdeployVirtualMachine)
@@ -100,9 +112,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewDestroyVirtualMachineParams("id")
-		_, err := client.VirtualMachine.DestroyVirtualMachine(p)
+		r, err := client.VirtualMachine.DestroyVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DestroyVirtualMachine", testdestroyVirtualMachine)
@@ -160,9 +175,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewMigrateVirtualMachineParams("virtualmachineid")
-		_, err := client.VirtualMachine.MigrateVirtualMachine(p)
+		r, err := client.VirtualMachine.MigrateVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("MigrateVirtualMachine", testmigrateVirtualMachine)
@@ -172,9 +190,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewMigrateVirtualMachineWithVolumeParams("virtualmachineid")
-		_, err := client.VirtualMachine.MigrateVirtualMachineWithVolume(p)
+		r, err := client.VirtualMachine.MigrateVirtualMachineWithVolume(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("MigrateVirtualMachineWithVolume", testmigrateVirtualMachineWithVolume)
@@ -184,9 +205,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewRebootVirtualMachineParams("id")
-		_, err := client.VirtualMachine.RebootVirtualMachine(p)
+		r, err := client.VirtualMachine.RebootVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RebootVirtualMachine", testrebootVirtualMachine)
@@ -196,9 +220,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewRecoverVirtualMachineParams("id")
-		_, err := client.VirtualMachine.RecoverVirtualMachine(p)
+		r, err := client.VirtualMachine.RecoverVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RecoverVirtualMachine", testrecoverVirtualMachine)
@@ -208,9 +235,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewRemoveNicFromVirtualMachineParams("nicid", "virtualmachineid")
-		_, err := client.VirtualMachine.RemoveNicFromVirtualMachine(p)
+		r, err := client.VirtualMachine.RemoveNicFromVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RemoveNicFromVirtualMachine", testremoveNicFromVirtualMachine)
@@ -220,9 +250,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewResetPasswordForVirtualMachineParams("id")
-		_, err := client.VirtualMachine.ResetPasswordForVirtualMachine(p)
+		r, err := client.VirtualMachine.ResetPasswordForVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ResetPasswordForVirtualMachine", testresetPasswordForVirtualMachine)
@@ -232,9 +265,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewRestoreVirtualMachineParams("virtualmachineid")
-		_, err := client.VirtualMachine.RestoreVirtualMachine(p)
+		r, err := client.VirtualMachine.RestoreVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RestoreVirtualMachine", testrestoreVirtualMachine)
@@ -256,9 +292,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewStartVirtualMachineParams("id")
-		_, err := client.VirtualMachine.StartVirtualMachine(p)
+		r, err := client.VirtualMachine.StartVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StartVirtualMachine", teststartVirtualMachine)
@@ -268,9 +307,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewStopVirtualMachineParams("id")
-		_, err := client.VirtualMachine.StopVirtualMachine(p)
+		r, err := client.VirtualMachine.StopVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("StopVirtualMachine", teststopVirtualMachine)
@@ -280,9 +322,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewUpdateDefaultNicForVirtualMachineParams("nicid", "virtualmachineid")
-		_, err := client.VirtualMachine.UpdateDefaultNicForVirtualMachine(p)
+		r, err := client.VirtualMachine.UpdateDefaultNicForVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateDefaultNicForVirtualMachine", testupdateDefaultNicForVirtualMachine)
@@ -292,9 +337,12 @@ func TestVirtualMachineService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.VirtualMachine.NewUpdateVirtualMachineParams("id")
-		_, err := client.VirtualMachine.UpdateVirtualMachine(p)
+		r, err := client.VirtualMachine.UpdateVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateVirtualMachine", testupdateVirtualMachine)

@@ -40,9 +40,12 @@ func TestZoneService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Zone.NewCreateZoneParams("dns1", "internaldns1", "name", "networktype")
-		_, err := client.Zone.CreateZone(p)
+		r, err := client.Zone.CreateZone(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateZone", testcreateZone)
@@ -52,9 +55,12 @@ func TestZoneService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Zone.NewDedicateZoneParams("domainid", "zoneid")
-		_, err := client.Zone.DedicateZone(p)
+		r, err := client.Zone.DedicateZone(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicateZone", testdedicateZone)
@@ -172,9 +178,12 @@ func TestZoneService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Zone.NewUpdateZoneParams("id")
-		_, err := client.Zone.UpdateZone(p)
+		r, err := client.Zone.UpdateZone(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateZone", testupdateZone)

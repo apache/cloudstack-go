@@ -744,6 +744,10 @@ func (s *HostService) AddHost(p *AddHostParams) (*AddHostResponse, error) {
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r AddHostResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
@@ -1801,6 +1805,11 @@ func (s *HostService) FindHostsForMigration(p *FindHostsForMigrationParams) (*Fi
 }
 
 type FindHostsForMigrationResponse struct {
+	Count int                 `json:"count"`
+	Host  []*HostForMigration `json:"host"`
+}
+
+type HostForMigration struct {
 	Averageload                      int64  `json:"averageload"`
 	Capabilities                     string `json:"capabilities"`
 	Clusterid                        string `json:"clusterid"`

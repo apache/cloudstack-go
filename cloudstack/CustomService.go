@@ -84,6 +84,14 @@ func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result
 
 	return json.Unmarshal(resp, result)
 }
+func (s *CustomService) CustomPostRequest(api string, p *CustomServiceParams, result interface{}) error {
+	resp, err := s.cs.newPostRequest(api, p.toURLValues())
+	if err != nil {
+		return err
+	}
+
+	return json.Unmarshal(resp, result)
+}
 
 type CustomServiceIface interface {
 }

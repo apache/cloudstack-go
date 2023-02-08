@@ -40,9 +40,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewAttachIsoParams("id", "virtualmachineid")
-		_, err := client.ISO.AttachIso(p)
+		r, err := client.ISO.AttachIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AttachIso", testattachIso)
@@ -52,9 +55,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewCopyIsoParams("id")
-		_, err := client.ISO.CopyIso(p)
+		r, err := client.ISO.CopyIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CopyIso", testcopyIso)
@@ -76,9 +82,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewDetachIsoParams("virtualmachineid")
-		_, err := client.ISO.DetachIso(p)
+		r, err := client.ISO.DetachIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DetachIso", testdetachIso)
@@ -88,9 +97,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewExtractIsoParams("id", "mode")
-		_, err := client.ISO.ExtractIso(p)
+		r, err := client.ISO.ExtractIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ExtractIso", testextractIso)
@@ -124,9 +136,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewRegisterIsoParams("displaytext", "name", "url", "zoneid")
-		_, err := client.ISO.RegisterIso(p)
+		r, err := client.ISO.RegisterIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RegisterIso", testregisterIso)
@@ -136,9 +151,12 @@ func TestISOService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.ISO.NewUpdateIsoParams("id")
-		_, err := client.ISO.UpdateIso(p)
+		r, err := client.ISO.UpdateIso(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateIso", testupdateIso)

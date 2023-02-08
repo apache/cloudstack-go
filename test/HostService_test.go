@@ -40,9 +40,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewAddBaremetalHostParams("hypervisor", "podid", "url", "zoneid")
-		_, err := client.Host.AddBaremetalHost(p)
+		r, err := client.Host.AddBaremetalHost(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddBaremetalHost", testaddBaremetalHost)
@@ -64,9 +67,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewAddHostParams("hypervisor", "podid", "url", "zoneid")
-		_, err := client.Host.AddHost(p)
+		r, err := client.Host.AddHost(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddHost", testaddHost)
@@ -76,9 +82,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewAddSecondaryStorageParams("url")
-		_, err := client.Host.AddSecondaryStorage(p)
+		r, err := client.Host.AddSecondaryStorage(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddSecondaryStorage", testaddSecondaryStorage)
@@ -88,9 +97,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewCancelHostMaintenanceParams("id")
-		_, err := client.Host.CancelHostMaintenance(p)
+		r, err := client.Host.CancelHostMaintenance(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CancelHostMaintenance", testcancelHostMaintenance)
@@ -124,9 +136,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewDedicateHostParams("domainid", "hostid")
-		_, err := client.Host.DedicateHost(p)
+		r, err := client.Host.DedicateHost(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicateHost", testdedicateHost)
@@ -232,9 +247,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewPrepareHostForMaintenanceParams("id")
-		_, err := client.Host.PrepareHostForMaintenance(p)
+		r, err := client.Host.PrepareHostForMaintenance(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("PrepareHostForMaintenance", testprepareHostForMaintenance)
@@ -244,9 +262,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewReconnectHostParams("id")
-		_, err := client.Host.ReconnectHost(p)
+		r, err := client.Host.ReconnectHost(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("ReconnectHost", testreconnectHost)
@@ -280,9 +301,12 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewUpdateHostParams("id")
-		_, err := client.Host.UpdateHost(p)
+		r, err := client.Host.UpdateHost(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateHost", testupdateHost)

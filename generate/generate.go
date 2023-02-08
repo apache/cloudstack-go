@@ -49,6 +49,13 @@ var detailsRequireKeyValue = map[string]bool{
 	"updateZone":                  true,
 }
 
+// detailsRequireZeroIndex is a prefilled map with a list of details
+// that need to be encoded using zero indexing
+var detailsRequireZeroIndex = map[string]bool{
+	"registerTemplate": true,
+	"updateTemplate":   true,
+}
+
 var mapRequireList = map[string]map[string]bool{
 	"deployVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
@@ -77,6 +84,12 @@ var nestedResponse = map[string]string{
 // json as string and then fallback on long.
 var longToStringConvertedParams = map[string]bool{
 	"managementserverid": true,
+}
+
+// customResponseStructTypes maps the API call to a custom struct name
+// This is to change the struct type name to something other than the API name
+var customResponseStructTypes = map[string]string{
+	"findHostsForMigration": "HostForMigration",
 }
 
 // We prefill this one value to make sure it is not
@@ -497,6 +510,20 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("// no error occured. If the API returns an error the result will be nil and the HTTP error code and CS")
 	pn("// error details. If a processing (code) error occurs the result will be nil and the generated error")
 	pn("func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawMessage, error) {")
+	pn("		return cs.newRawRequest(api, false, params)")
+	pn("}")
+	pn("")
+	pn("// Execute the request against a CS API using POST. Will return the raw JSON data returned by the API and")
+	pn("// nil if no error occured. If the API returns an error the result will be nil and the HTTP error code")
+	pn("// and CS error details. If a processing (code) error occurs the result will be nil and the generated error")
+	pn("func (cs *CloudStackClient) newPostRequest(api string, params url.Values) (json.RawMessage, error) {")
+	pn("		return cs.newRawRequest(api, true, params)")
+	pn("}")
+	pn("")
+	pn("// Execute a raw request against a CS API. Will return the raw JSON data returned by the API and nil if")
+	pn("// no error occured. If the API returns an error the result will be nil and the HTTP error code and CS")
+	pn("// error details. If a processing (code) error occurs the result will be nil and the generated error")
+	pn("func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Values) (json.RawMessage, error) {")
 	pn("	params.Set(\"apiKey\", cs.apiKey)")
 	pn("	params.Set(\"command\", api)")
 	pn("	params.Set(\"response\", \"json\")")
@@ -516,7 +543,7 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("")
 	pn("	var err error")
 	pn("	var resp *http.Response")
-	pn("	if !cs.HTTPGETOnly && (api == \"deployVirtualMachine\" || api == \"login\" || api == \"updateVirtualMachine\") {")
+	pn("	if !cs.HTTPGETOnly && post {")
 	pn("		// The deployVirtualMachine API should be called using a POST call")
 	pn("  	// so we don't have to worry about the userdata size")
 	pn("")
@@ -584,14 +611,33 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("	return buf.String()")
 	pn("}")
 	pn("")
-	pn("// Generic function to get the first raw value from a response as json.RawMessage")
+	pn("// Generic function to get the first non-count raw value from a response as json.RawMessage")
 	pn("func getRawValue(b json.RawMessage) (json.RawMessage, error) {")
 	pn("	var m map[string]json.RawMessage")
 	pn("	if err := json.Unmarshal(b, &m); err != nil {")
 	pn("		return nil, err")
 	pn("	}")
-	pn("	for _, v := range m {")
-	pn("		return v, nil")
+	pn("	getArrayResponse := false")
+	pn("	for k := range m {")
+	pn("		if k == \"count\" {")
+	pn("			getArrayResponse = true")
+	pn("		}")
+	pn("	}")
+	pn("	if getArrayResponse {")
+	pn("		var resp []json.RawMessage")
+	pn("		for k, v := range m {")
+	pn("			if k != \"count\" {")
+	pn("				if err := json.Unmarshal(v, &resp); err != nil {")
+	pn("					return nil, err")
+	pn("				}")
+	pn("				return resp[0], nil")
+	pn("			}")
+	pn("		}")
+	pn("")
+	pn("	} else {")
+	pn("		for _, v := range m {")
+	pn("			return v, nil")
+	pn("		}")
 	pn("	}")
 	pn("	return nil, fmt.Errorf(\"Unable to extract the raw value from:\\n\\n%%s\\n\\n\", string(b))")
 	pn("}")
@@ -971,6 +1017,14 @@ func (s *service) GenerateCode() ([]byte, error) {
 		pn("")
 		pn("	return json.Unmarshal(resp, result)")
 		pn("}")
+		pn("func (s *CustomService) CustomPostRequest(api string, p *CustomServiceParams, result interface{}) error {")
+		pn("	resp, err := s.cs.newPostRequest(api, p.toURLValues())")
+		pn("	if err != nil {")
+		pn("		return err")
+		pn("	}")
+		pn("")
+		pn("	return json.Unmarshal(resp, result)")
+		pn("}")
 	}
 
 	s.generateInterfaceType()
@@ -1068,10 +1122,27 @@ func (s *service) generateAPITest(a *API) {
 		}
 	}
 	pn(")")
-	pn("		_, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
+	idPresent := false
+	if !(strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration") {
+		for _, ap := range a.Response {
+			if ap.Name == "id" && ap.Type == "string" {
+				pn("		r, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
+				idPresent = true
+				break
+			}
+		}
+	}
+	if !idPresent {
+		pn("		_, err := client.%s.%s(p)", strings.TrimSuffix(s.name, "Service"), capitalize(a.Name))
+	}
 	pn("		if err != nil {")
 	pn("			t.Errorf(err.Error())")
 	pn("		}")
+	if idPresent {
+		pn("		if r.Id == \"\" {")
+		pn("			t.Errorf(\"Failed to parse response. ID not found\")")
+		pn("		}")
+	}
 	pn("	}")
 	pn("    t.Run(\"%s\", test%s)", capitalize(a.Name), a.Name)
 	pn("")
@@ -1231,14 +1302,23 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		pn("}")
 	case "map[string]string":
 		pn("m := v.(map[string]string)")
-		pn("for i, k := range getSortedKeysFromMap(m) {")
+		zeroIndex := detailsRequireZeroIndex[cmd]
+		if zeroIndex {
+			pn("for _, k := range getSortedKeysFromMap(m) {")
+		} else {
+			pn("for i, k := range getSortedKeysFromMap(m) {")
+		}
 		switch name {
 		case "details":
 			if detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 			} else {
-				pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
+				if zeroIndex {
+					pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
+				} else {
+					pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
+				}
 			}
 		case "serviceproviderlist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].service\", i), k)", name)
@@ -1246,6 +1326,15 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "usersecuritygrouplist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].account\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].group\", i), m[k])", name)
+		case "tags":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
+			if cmd == "deleteTags" {
+				pn("	if m[k] != \"\" {")
+				pn("		u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+				pn("	}")
+			} else {
+				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+			}
 		default:
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
@@ -1593,7 +1682,11 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		pn("		time.Sleep(500 * time.Millisecond)")
 		pn("	}")
 	} else {
-		pn("	resp, err := s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
+		if a.Name == "deployVirtualMachine" || a.Name == "login" || a.Name == "updateVirtualMachine" {
+			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
+		} else {
+			pn("	resp, err := s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
+		}
 	}
 	pn("	if err != nil {")
 	pn("		return nil, err")
@@ -1624,7 +1717,11 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		"RegisterUserKeys",
 		"GetUserKeys",
 		"AddAnnotation",
-		"RemoveAnnotation":
+		"RemoveAnnotation",
+		"AddKubernetesSupportedVersion",
+		"CreateDiskOffering",
+		"AddHost",
+		"RegisterIso":
 		pn("	if resp, err = getRawValue(resp); err != nil {")
 		pn("		return nil, err")
 		pn("	}")
@@ -1726,7 +1823,7 @@ func (s *service) generateResponseType(a *API) {
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1752,6 +1849,9 @@ func (s *service) generateResponseType(a *API) {
 		case "listDomainChildren":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "domain")
+		case "findHostsForMigration":
+			pn(" Count int `json:\"count\"`")
+			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
@@ -1809,6 +1909,10 @@ func (s *service) recusiveGenerateResponseType(aName string, tn string, resp API
 	pn := s.pn
 	customMarshal := false
 	found := make(map[string]bool)
+
+	if val, ok := customResponseStructTypes[aName]; ok {
+		tn = val
+	}
 
 	pn("type %s struct {", tn)
 

@@ -40,9 +40,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewAddNetworkServiceProviderParams("name", "physicalnetworkid")
-		_, err := client.Network.AddNetworkServiceProvider(p)
+		r, err := client.Network.AddNetworkServiceProvider(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddNetworkServiceProvider", testaddNetworkServiceProvider)
@@ -52,9 +55,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewAddOpenDaylightControllerParams("password", "physicalnetworkid", "url", "username")
-		_, err := client.Network.AddOpenDaylightController(p)
+		r, err := client.Network.AddOpenDaylightController(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddOpenDaylightController", testaddOpenDaylightController)
@@ -64,9 +70,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewCreateNetworkParams("displaytext", "name", "networkofferingid", "zoneid")
-		_, err := client.Network.CreateNetwork(p)
+		r, err := client.Network.CreateNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateNetwork", testcreateNetwork)
@@ -76,9 +85,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewCreatePhysicalNetworkParams("name", "zoneid")
-		_, err := client.Network.CreatePhysicalNetwork(p)
+		r, err := client.Network.CreatePhysicalNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreatePhysicalNetwork", testcreatePhysicalNetwork)
@@ -88,9 +100,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewCreateServiceInstanceParams("leftnetworkid", "name", "rightnetworkid", "serviceofferingid", "templateid", "zoneid")
-		_, err := client.Network.CreateServiceInstance(p)
+		r, err := client.Network.CreateServiceInstance(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateServiceInstance", testcreateServiceInstance)
@@ -100,9 +115,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewCreateStorageNetworkIpRangeParams("gateway", "netmask", "podid", "startip")
-		_, err := client.Network.CreateStorageNetworkIpRange(p)
+		r, err := client.Network.CreateStorageNetworkIpRange(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateStorageNetworkIpRange", testcreateStorageNetworkIpRange)
@@ -112,9 +130,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewDedicatePublicIpRangeParams("domainid", "id")
-		_, err := client.Network.DedicatePublicIpRange(p)
+		r, err := client.Network.DedicatePublicIpRange(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DedicatePublicIpRange", testdedicatePublicIpRange)
@@ -148,9 +169,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewDeleteOpenDaylightControllerParams("id")
-		_, err := client.Network.DeleteOpenDaylightController(p)
+		r, err := client.Network.DeleteOpenDaylightController(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DeleteOpenDaylightController", testdeleteOpenDaylightController)
@@ -328,9 +352,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewUpdateNetworkParams("id")
-		_, err := client.Network.UpdateNetwork(p)
+		r, err := client.Network.UpdateNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateNetwork", testupdateNetwork)
@@ -340,9 +367,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewUpdateNetworkServiceProviderParams("id")
-		_, err := client.Network.UpdateNetworkServiceProvider(p)
+		r, err := client.Network.UpdateNetworkServiceProvider(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateNetworkServiceProvider", testupdateNetworkServiceProvider)
@@ -352,9 +382,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewUpdatePhysicalNetworkParams("id")
-		_, err := client.Network.UpdatePhysicalNetwork(p)
+		r, err := client.Network.UpdatePhysicalNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdatePhysicalNetwork", testupdatePhysicalNetwork)
@@ -364,9 +397,12 @@ func TestNetworkService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Network.NewUpdateStorageNetworkIpRangeParams("id")
-		_, err := client.Network.UpdateStorageNetworkIpRange(p)
+		r, err := client.Network.UpdateStorageNetworkIpRange(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateStorageNetworkIpRange", testupdateStorageNetworkIpRange)

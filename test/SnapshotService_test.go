@@ -40,9 +40,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewCreateSnapshotParams("volumeid")
-		_, err := client.Snapshot.CreateSnapshot(p)
+		r, err := client.Snapshot.CreateSnapshot(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateSnapshot", testcreateSnapshot)
@@ -52,9 +55,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewCreateSnapshotPolicyParams("intervaltype", 0, "schedule", "timezone", "volumeid")
-		_, err := client.Snapshot.CreateSnapshotPolicy(p)
+		r, err := client.Snapshot.CreateSnapshotPolicy(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateSnapshotPolicy", testcreateSnapshotPolicy)
@@ -64,9 +70,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewCreateVMSnapshotParams("virtualmachineid")
-		_, err := client.Snapshot.CreateVMSnapshot(p)
+		r, err := client.Snapshot.CreateVMSnapshot(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateVMSnapshot", testcreateVMSnapshot)
@@ -148,9 +157,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewRevertSnapshotParams("id")
-		_, err := client.Snapshot.RevertSnapshot(p)
+		r, err := client.Snapshot.RevertSnapshot(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RevertSnapshot", testrevertSnapshot)
@@ -160,9 +172,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewRevertToVMSnapshotParams("vmsnapshotid")
-		_, err := client.Snapshot.RevertToVMSnapshot(p)
+		r, err := client.Snapshot.RevertToVMSnapshot(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RevertToVMSnapshot", testrevertToVMSnapshot)
@@ -172,9 +187,12 @@ func TestSnapshotService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Snapshot.NewUpdateSnapshotPolicyParams()
-		_, err := client.Snapshot.UpdateSnapshotPolicy(p)
+		r, err := client.Snapshot.UpdateSnapshotPolicy(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateSnapshotPolicy", testupdateSnapshotPolicy)

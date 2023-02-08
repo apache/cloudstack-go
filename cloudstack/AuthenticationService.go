@@ -129,7 +129,7 @@ func (s *AuthenticationService) NewLoginParams(password string, username string)
 
 // Logs a user into the CloudStack. A successful login attempt will generate a JSESSIONID cookie value that can be passed in subsequent Query command calls until the "logout" command has been issued or the session has expired.
 func (s *AuthenticationService) Login(p *LoginParams) (*LoginResponse, error) {
-	resp, err := s.cs.newRequest("login", p.toURLValues())
+	resp, err := s.cs.newPostRequest("login", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

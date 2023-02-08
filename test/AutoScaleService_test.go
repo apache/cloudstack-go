@@ -40,9 +40,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewCreateAutoScalePolicyParams("action", []string{}, 0)
-		_, err := client.AutoScale.CreateAutoScalePolicy(p)
+		r, err := client.AutoScale.CreateAutoScalePolicy(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateAutoScalePolicy", testcreateAutoScalePolicy)
@@ -52,9 +55,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewCreateAutoScaleVmGroupParams("lbruleid", 0, 0, []string{}, []string{}, "vmprofileid")
-		_, err := client.AutoScale.CreateAutoScaleVmGroup(p)
+		r, err := client.AutoScale.CreateAutoScaleVmGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateAutoScaleVmGroup", testcreateAutoScaleVmGroup)
@@ -64,9 +70,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewCreateAutoScaleVmProfileParams("serviceofferingid", "templateid", "zoneid")
-		_, err := client.AutoScale.CreateAutoScaleVmProfile(p)
+		r, err := client.AutoScale.CreateAutoScaleVmProfile(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateAutoScaleVmProfile", testcreateAutoScaleVmProfile)
@@ -76,9 +85,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewCreateConditionParams("counterid", "relationaloperator", 0)
-		_, err := client.AutoScale.CreateCondition(p)
+		r, err := client.AutoScale.CreateCondition(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateCondition", testcreateCondition)
@@ -88,9 +100,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewCreateCounterParams("name", "source", "value")
-		_, err := client.AutoScale.CreateCounter(p)
+		r, err := client.AutoScale.CreateCounter(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("CreateCounter", testcreateCounter)
@@ -160,9 +175,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewDisableAutoScaleVmGroupParams("id")
-		_, err := client.AutoScale.DisableAutoScaleVmGroup(p)
+		r, err := client.AutoScale.DisableAutoScaleVmGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DisableAutoScaleVmGroup", testdisableAutoScaleVmGroup)
@@ -172,9 +190,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewEnableAutoScaleVmGroupParams("id")
-		_, err := client.AutoScale.EnableAutoScaleVmGroup(p)
+		r, err := client.AutoScale.EnableAutoScaleVmGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("EnableAutoScaleVmGroup", testenableAutoScaleVmGroup)
@@ -244,9 +265,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewUpdateAutoScalePolicyParams("id")
-		_, err := client.AutoScale.UpdateAutoScalePolicy(p)
+		r, err := client.AutoScale.UpdateAutoScalePolicy(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateAutoScalePolicy", testupdateAutoScalePolicy)
@@ -256,9 +280,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewUpdateAutoScaleVmGroupParams("id")
-		_, err := client.AutoScale.UpdateAutoScaleVmGroup(p)
+		r, err := client.AutoScale.UpdateAutoScaleVmGroup(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateAutoScaleVmGroup", testupdateAutoScaleVmGroup)
@@ -268,9 +295,12 @@ func TestAutoScaleService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.AutoScale.NewUpdateAutoScaleVmProfileParams("id")
-		_, err := client.AutoScale.UpdateAutoScaleVmProfile(p)
+		r, err := client.AutoScale.UpdateAutoScaleVmProfile(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("UpdateAutoScaleVmProfile", testupdateAutoScaleVmProfile)
