@@ -218,7 +218,7 @@ func (s *BrocadeVCSService) NewDeleteBrocadeVcsDeviceParams(vcsdeviceid string) 
 	return p
 }
 
-//  delete a Brocade VCS Switch
+// delete a Brocade VCS Switch
 func (s *BrocadeVCSService) DeleteBrocadeVcsDevice(p *DeleteBrocadeVcsDeviceParams) (*DeleteBrocadeVcsDeviceResponse, error) {
 	resp, err := s.cs.newRequest("deleteBrocadeVcsDevice", p.toURLValues())
 	if err != nil {
