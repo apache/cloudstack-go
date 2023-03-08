@@ -468,13 +468,17 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 	// * Serialize parameters, URL encoding only values and sort them by key, done by encodeValues
 	// * Convert the entire argument string to lowercase
 	// * Replace all instances of '+' to '%20'
+	// * Replace encoded asterisk (*) back to literal.  CloudStack’s internal encoder does not encode them; this results in an authentication failure for your API call.
+	//     http://docs.cloudstack.apache.org/projects/archived-cloudstack-getting-started/en/latest/dev.html)
 	// * Calculate HMAC SHA1 of argument string with CloudStack secret
 	// * URL encode the string and convert to base64
 	s := encodeValues(params)
-	s2 := strings.ToLower(s)
-	s3 := strings.Replace(s2, "+", "%20", -1)
+	s = strings.ToLower(s)
+	s = strings.Replace(s, "+", "%20", -1)
+	s = strings.Replace(s, "%2a", "*", -1)
+
 	mac := hmac.New(sha1.New, []byte(cs.secret))
-	mac.Write([]byte(s3))
+	mac.Write([]byte(s))
 	signature := base64.StdEncoding.EncodeToString(mac.Sum(nil))
 
 	var err error
