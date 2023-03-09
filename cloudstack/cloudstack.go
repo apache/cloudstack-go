@@ -464,17 +464,24 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 	params.Set("command", api)
 	params.Set("response", "json")
 
-	// Generate signature for API call
+	// encode parameters
 	// * Serialize parameters, URL encoding only values and sort them by key, done by encodeValues
+	// * Replace encoded asterisk (*) back to literal.
+	//    CloudStack’s internal encoder does not encode them; this results in an authentication failure for your API call.
+	//    http://docs.cloudstack.apache.org/projects/archived-cloudstack-getting-started/en/latest/dev.html
+	// 	  Not documented http://docs.cloudstack.apache.org/en/latest/developersguide/dev.html#the-cloudstack-api
+	encodedParams := encodeValues(params)
+	encodedParams = strings.Replace(encodedParams, "%2A", "*", -1)
+
+	// Generate signature for API call
 	// * Convert the entire argument string to lowercase
 	// * Replace all instances of '+' to '%20'
 	// * Calculate HMAC SHA1 of argument string with CloudStack secret
 	// * URL encode the string and convert to base64
-	s := encodeValues(params)
-	s2 := strings.ToLower(s)
-	s3 := strings.Replace(s2, "+", "%20", -1)
+	sigParams := strings.ToLower(encodedParams)
+	sigParams = strings.Replace(sigParams, "+", "%20", -1)
 	mac := hmac.New(sha1.New, []byte(cs.secret))
-	mac.Write([]byte(s3))
+	mac.Write([]byte(sigParams))
 	signature := base64.StdEncoding.EncodeToString(mac.Sum(nil))
 
 	var err error
@@ -490,7 +497,7 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 		resp, err = cs.client.PostForm(cs.baseURL, params)
 	} else {
 		// Create the final URL before we issue the request
-		url := cs.baseURL + "?" + s + "&signature=" + url.QueryEscape(signature)
+		url := cs.baseURL + "?" + encodedParams + "&signature=" + url.QueryEscape(signature)
 
 		// Make a GET call
 		resp, err = cs.client.Get(url)
