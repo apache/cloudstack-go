@@ -54,6 +54,8 @@ var detailsRequireKeyValue = map[string]bool{
 var detailsRequireZeroIndex = map[string]bool{
 	"registerTemplate": true,
 	"updateTemplate":   true,
+	"createAccount":    true,
+	"updateAccount":    true,
 }
 
 var mapRequireList = map[string]map[string]bool{
@@ -1336,8 +1338,12 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 			}
 		default:
-			pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
-			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+			if zeroIndex && !detailsRequireKeyValue[cmd] {
+				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
+			} else {
+				pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
+				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+			}
 		}
 		pn("}")
 	}

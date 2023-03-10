@@ -68,9 +68,8 @@ func (p *CreateAccountParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["accountdetails"]; found {
 		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("accountdetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("accountdetails[%d].value", i), m[k])
+		for _, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("accountdetails[0].%s", k), m[k])
 		}
 	}
 	if v, found := p.p["accountid"]; found {
@@ -2114,9 +2113,8 @@ func (p *UpdateAccountParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["accountdetails"]; found {
 		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("accountdetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("accountdetails[%d].value", i), m[k])
+		for _, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("accountdetails[0].%s", k), m[k])
 		}
 	}
 	if v, found := p.p["domainid"]; found {

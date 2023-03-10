@@ -1438,7 +1438,7 @@ func (s *FirewallService) NewDeletePaloAltoFirewallParams(fwdeviceid string) *De
 	return p
 }
 
-//  delete a Palo Alto firewall device
+// delete a Palo Alto firewall device
 func (s *FirewallService) DeletePaloAltoFirewall(p *DeletePaloAltoFirewallParams) (*DeletePaloAltoFirewallResponse, error) {
 	resp, err := s.cs.newRequest("deletePaloAltoFirewall", p.toURLValues())
 	if err != nil {
