@@ -123,10 +123,11 @@ func (e *generateError) Error() string {
 
 type goimportError struct {
 	output string
+	error  error
 }
 
 func (e *goimportError) Error() string {
-	return fmt.Sprintf("GoImport failed to format:\n%v", e.output)
+	return fmt.Sprintf("GoImport failed to format:\n%v\n%v", e.output, e.error)
 }
 
 type service struct {
@@ -238,7 +239,7 @@ func main() {
 	}
 	out, err := exec.Command("goimports", "-w", outdir).CombinedOutput()
 	if err != nil {
-		errors = append(errors, &goimportError{string(out)})
+		errors = append(errors, &goimportError{string(out), err})
 	}
 
 	testdir, err := testDir()
@@ -247,7 +248,7 @@ func main() {
 	}
 	out, err = exec.Command("goimports", "-w", testdir).CombinedOutput()
 	if err != nil {
-		errors = append(errors, &goimportError{string(out)})
+		errors = append(errors, &goimportError{string(out), err})
 	}
 
 	if len(errors) > 0 {
