@@ -2582,7 +2582,7 @@ func (s *LoadBalancerService) NewDeleteNetscalerLoadBalancerParams(lbdeviceid st
 	return p
 }
 
-//  delete a netscaler load balancer device
+// delete a netscaler load balancer device
 func (s *LoadBalancerService) DeleteNetscalerLoadBalancer(p *DeleteNetscalerLoadBalancerParams) (*DeleteNetscalerLoadBalancerResponse, error) {
 	resp, err := s.cs.newRequest("deleteNetscalerLoadBalancer", p.toURLValues())
 	if err != nil {

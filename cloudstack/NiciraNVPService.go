@@ -272,7 +272,7 @@ func (s *NiciraNVPService) NewDeleteNiciraNvpDeviceParams(nvpdeviceid string) *D
 	return p
 }
 
-//  delete a nicira nvp device
+// delete a nicira nvp device
 func (s *NiciraNVPService) DeleteNiciraNvpDevice(p *DeleteNiciraNvpDeviceParams) (*DeleteNiciraNvpDeviceResponse, error) {
 	resp, err := s.cs.newRequest("deleteNiciraNvpDevice", p.toURLValues())
 	if err != nil {
