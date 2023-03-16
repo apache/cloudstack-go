@@ -231,6 +231,7 @@ func (s *KubernetesService) AddKubernetesSupportedVersion(p *AddKubernetesSuppor
 }
 
 type AddKubernetesSupportedVersionResponse struct {
+	Created             string `json:"created"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
@@ -644,6 +645,7 @@ type CreateKubernetesClusterResponse struct {
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
 	Cpunumber             string            `json:"cpunumber"`
+	Created               string            `json:"created"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -1220,6 +1222,7 @@ type KubernetesCluster struct {
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
 	Cpunumber             string            `json:"cpunumber"`
+	Created               string            `json:"created"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -1503,6 +1506,7 @@ type ListKubernetesSupportedVersionsResponse struct {
 }
 
 type KubernetesSupportedVersion struct {
+	Created             string `json:"created"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
@@ -1714,6 +1718,7 @@ type ScaleKubernetesClusterResponse struct {
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
 	Cpunumber             string            `json:"cpunumber"`
+	Created               string            `json:"created"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -1826,6 +1831,7 @@ type StartKubernetesClusterResponse struct {
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
 	Cpunumber             string            `json:"cpunumber"`
+	Created               string            `json:"created"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -2007,6 +2013,7 @@ func (s *KubernetesService) UpdateKubernetesSupportedVersion(p *UpdateKubernetes
 }
 
 type UpdateKubernetesSupportedVersionResponse struct {
+	Created             string `json:"created"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
@@ -2124,6 +2131,7 @@ type UpgradeKubernetesClusterResponse struct {
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
 	Cpunumber             string            `json:"cpunumber"`
+	Created               string            `json:"created"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`

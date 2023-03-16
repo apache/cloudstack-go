@@ -3503,6 +3503,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["backupofferingid"]; found {
 		u.Set("backupofferingid", v.(string))
 	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
 	if v, found := p.p["details"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("details", vv)
@@ -3524,6 +3527,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["haenable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("haenable", vv)
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
 	}
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
@@ -3566,6 +3572,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
@@ -3581,6 +3590,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
@@ -3661,6 +3673,21 @@ func (p *ListVirtualMachinesMetricsParams) GetBackupofferingid() (string, bool) 
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["backupofferingid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
 	return value, ok
 }
 
@@ -3751,6 +3778,21 @@ func (p *ListVirtualMachinesMetricsParams) GetHaenable() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["haenable"].(bool)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
 	return value, ok
 }
 
@@ -3934,6 +3976,21 @@ func (p *ListVirtualMachinesMetricsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4006,6 +4063,21 @@ func (p *ListVirtualMachinesMetricsParams) GetState() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["state"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
 	return value, ok
 }
 

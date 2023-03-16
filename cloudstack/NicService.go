@@ -344,6 +344,8 @@ type Nic struct {
 	Type             string `json:"type"`
 	Virtualmachineid string `json:"virtualmachineid"`
 	Vlanid           int    `json:"vlanid"`
+	Vpcid            string `json:"vpcid"`
+	Vpcname          string `json:"vpcname"`
 }
 
 type RemoveIpFromNicParams struct {
