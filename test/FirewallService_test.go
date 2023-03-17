@@ -245,4 +245,58 @@ func TestFirewallService(t *testing.T) {
 	}
 	t.Run("UpdatePortForwardingRule", testupdatePortForwardingRule)
 
+	testlistIpv6FirewallRules := func(t *testing.T) {
+		if _, ok := response["listIpv6FirewallRules"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListIpv6FirewallRulesParams()
+		_, err := client.Firewall.ListIpv6FirewallRules(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListIpv6FirewallRules", testlistIpv6FirewallRules)
+
+	testcreateIpv6FirewallRule := func(t *testing.T) {
+		if _, ok := response["createIpv6FirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewCreateIpv6FirewallRuleParams("networkid", "protocol")
+		r, err := client.Firewall.CreateIpv6FirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateIpv6FirewallRule", testcreateIpv6FirewallRule)
+
+	testupdateIpv6FirewallRule := func(t *testing.T) {
+		if _, ok := response["updateIpv6FirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewUpdateIpv6FirewallRuleParams("id")
+		r, err := client.Firewall.UpdateIpv6FirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateIpv6FirewallRule", testupdateIpv6FirewallRule)
+
+	testdeleteIpv6FirewallRule := func(t *testing.T) {
+		if _, ok := response["deleteIpv6FirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeleteIpv6FirewallRuleParams("id")
+		_, err := client.Firewall.DeleteIpv6FirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteIpv6FirewallRule", testdeleteIpv6FirewallRule)
+
 }

@@ -89,4 +89,16 @@ func TestAddressService(t *testing.T) {
 	}
 	t.Run("UpdateIpAddress", testupdateIpAddress)
 
+	testreleaseIpAddress := func(t *testing.T) {
+		if _, ok := response["releaseIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewReleaseIpAddressParams("id")
+		_, err := client.Address.ReleaseIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleaseIpAddress", testreleaseIpAddress)
+
 }

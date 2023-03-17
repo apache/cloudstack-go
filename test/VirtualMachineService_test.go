@@ -347,4 +347,16 @@ func TestVirtualMachineService(t *testing.T) {
 	}
 	t.Run("UpdateVirtualMachine", testupdateVirtualMachine)
 
+	testlistVirtualMachinesUsageHistory := func(t *testing.T) {
+		if _, ok := response["listVirtualMachinesUsageHistory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewListVirtualMachinesUsageHistoryParams()
+		_, err := client.VirtualMachine.ListVirtualMachinesUsageHistory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVirtualMachinesUsageHistory", testlistVirtualMachinesUsageHistory)
+
 }

@@ -154,6 +154,21 @@ func (mr *MockVLANServiceIfaceMockRecorder) ListDedicatedGuestVlanRanges(p inter
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDedicatedGuestVlanRanges", reflect.TypeOf((*MockVLANServiceIface)(nil).ListDedicatedGuestVlanRanges), p)
 }
 
+// ListGuestVlans mocks base method.
+func (m *MockVLANServiceIface) ListGuestVlans(p *ListGuestVlansParams) (*ListGuestVlansResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListGuestVlans", p)
+	ret0, _ := ret[0].(*ListGuestVlansResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListGuestVlans indicates an expected call of ListGuestVlans.
+func (mr *MockVLANServiceIfaceMockRecorder) ListGuestVlans(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListGuestVlans", reflect.TypeOf((*MockVLANServiceIface)(nil).ListGuestVlans), p)
+}
+
 // ListVlanIpRanges mocks base method.
 func (m *MockVLANServiceIface) ListVlanIpRanges(p *ListVlanIpRangesParams) (*ListVlanIpRangesResponse, error) {
 	m.ctrl.T.Helper()
@@ -223,6 +238,20 @@ func (m *MockVLANServiceIface) NewListDedicatedGuestVlanRangesParams() *ListDedi
 func (mr *MockVLANServiceIfaceMockRecorder) NewListDedicatedGuestVlanRangesParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDedicatedGuestVlanRangesParams", reflect.TypeOf((*MockVLANServiceIface)(nil).NewListDedicatedGuestVlanRangesParams))
+}
+
+// NewListGuestVlansParams mocks base method.
+func (m *MockVLANServiceIface) NewListGuestVlansParams() *ListGuestVlansParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListGuestVlansParams")
+	ret0, _ := ret[0].(*ListGuestVlansParams)
+	return ret0
+}
+
+// NewListGuestVlansParams indicates an expected call of NewListGuestVlansParams.
+func (mr *MockVLANServiceIfaceMockRecorder) NewListGuestVlansParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListGuestVlansParams", reflect.TypeOf((*MockVLANServiceIface)(nil).NewListGuestVlansParams))
 }
 
 // NewListVlanIpRangesParams mocks base method.

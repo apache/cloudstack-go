@@ -67,6 +67,21 @@ func (mr *MockVolumeServiceIfaceMockRecorder) AttachVolume(p interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AttachVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).AttachVolume), p)
 }
 
+// ChangeOfferingForVolume mocks base method.
+func (m *MockVolumeServiceIface) ChangeOfferingForVolume(p *ChangeOfferingForVolumeParams) (*ChangeOfferingForVolumeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ChangeOfferingForVolume", p)
+	ret0, _ := ret[0].(*ChangeOfferingForVolumeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ChangeOfferingForVolume indicates an expected call of ChangeOfferingForVolume.
+func (mr *MockVolumeServiceIfaceMockRecorder) ChangeOfferingForVolume(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeOfferingForVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).ChangeOfferingForVolume), p)
+}
+
 // CreateVolume mocks base method.
 func (m *MockVolumeServiceIface) CreateVolume(p *CreateVolumeParams) (*CreateVolumeResponse, error) {
 	m.ctrl.T.Helper()
@@ -385,6 +400,20 @@ func (m *MockVolumeServiceIface) NewAttachVolumeParams(id, virtualmachineid stri
 func (mr *MockVolumeServiceIfaceMockRecorder) NewAttachVolumeParams(id, virtualmachineid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAttachVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewAttachVolumeParams), id, virtualmachineid)
+}
+
+// NewChangeOfferingForVolumeParams mocks base method.
+func (m *MockVolumeServiceIface) NewChangeOfferingForVolumeParams(diskofferingid, id string) *ChangeOfferingForVolumeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewChangeOfferingForVolumeParams", diskofferingid, id)
+	ret0, _ := ret[0].(*ChangeOfferingForVolumeParams)
+	return ret0
+}
+
+// NewChangeOfferingForVolumeParams indicates an expected call of NewChangeOfferingForVolumeParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewChangeOfferingForVolumeParams(diskofferingid, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewChangeOfferingForVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewChangeOfferingForVolumeParams), diskofferingid, id)
 }
 
 // NewCreateVolumeParams mocks base method.

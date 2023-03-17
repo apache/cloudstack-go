@@ -42,6 +42,8 @@ type VLANServiceIface interface {
 	GetVlanIpRangeByID(id string, opts ...OptionFunc) (*VlanIpRange, int, error)
 	ReleaseDedicatedGuestVlanRange(p *ReleaseDedicatedGuestVlanRangeParams) (*ReleaseDedicatedGuestVlanRangeResponse, error)
 	NewReleaseDedicatedGuestVlanRangeParams(id string) *ReleaseDedicatedGuestVlanRangeParams
+	ListGuestVlans(p *ListGuestVlansParams) (*ListGuestVlansResponse, error)
+	NewListGuestVlansParams() *ListGuestVlansParams
 }
 
 type CreateVlanIpRangeParams struct {
@@ -1349,4 +1351,212 @@ type ReleaseDedicatedGuestVlanRangeResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+type ListGuestVlansParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListGuestVlansParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["allocatedonly"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("allocatedonly", vv)
+	}
+	if v, found := p.p["id"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("id", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["physicalnetworkid"]; found {
+		u.Set("physicalnetworkid", v.(string))
+	}
+	if v, found := p.p["vnet"]; found {
+		u.Set("vnet", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ListGuestVlansParams) SetAllocatedonly(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["allocatedonly"] = v
+}
+
+func (p *ListGuestVlansParams) GetAllocatedonly() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["allocatedonly"].(bool)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetId(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListGuestVlansParams) GetId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int64)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListGuestVlansParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListGuestVlansParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListGuestVlansParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetPhysicalnetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListGuestVlansParams) GetPhysicalnetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["physicalnetworkid"].(string)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetVnet(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vnet"] = v
+}
+
+func (p *ListGuestVlansParams) GetVnet() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vnet"].(string)
+	return value, ok
+}
+
+func (p *ListGuestVlansParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListGuestVlansParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListGuestVlansParams instance,
+// as then you are sure you have configured all required params
+func (s *VLANService) NewListGuestVlansParams() *ListGuestVlansParams {
+	p := &ListGuestVlansParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists all guest vlans
+func (s *VLANService) ListGuestVlans(p *ListGuestVlansParams) (*ListGuestVlansResponse, error) {
+	resp, err := s.cs.newRequest("listGuestVlans", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListGuestVlansResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListGuestVlansResponse struct {
+	Count      int          `json:"count"`
+	GuestVlans []*GuestVlan `json:"guestvlan"`
+}
+
+type GuestVlan struct {
+	Account             string     `json:"account"`
+	Allocationstate     string     `json:"allocationstate"`
+	Domain              string     `json:"domain"`
+	Domainid            string     `json:"domainid"`
+	Id                  int64      `json:"id"`
+	Isdedicated         bool       `json:"isdedicated"`
+	JobID               string     `json:"jobid"`
+	Jobstatus           int        `json:"jobstatus"`
+	Network             []*Network `json:"network"`
+	Physicalnetworkid   string     `json:"physicalnetworkid"`
+	Physicalnetworkname string     `json:"physicalnetworkname"`
+	Project             string     `json:"project"`
+	Projectid           string     `json:"projectid"`
+	Taken               string     `json:"taken"`
+	Vlan                string     `json:"vlan"`
+	Zoneid              string     `json:"zoneid"`
+	Zonename            string     `json:"zonename"`
 }

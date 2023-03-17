@@ -113,4 +113,16 @@ func TestVLANService(t *testing.T) {
 	}
 	t.Run("ReleaseDedicatedGuestVlanRange", testreleaseDedicatedGuestVlanRange)
 
+	testlistGuestVlans := func(t *testing.T) {
+		if _, ok := response["listGuestVlans"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewListGuestVlansParams()
+		_, err := client.VLAN.ListGuestVlans(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListGuestVlans", testlistGuestVlans)
+
 }

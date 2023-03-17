@@ -85,6 +85,13 @@ var layout = apiInfo{
 		"updateNetworkServiceProvider",
 		"updatePhysicalNetwork",
 		"updateStorageNetworkIpRange",
+		"deleteGuestNetworkIpv6Prefix",
+		"createGuestNetworkIpv6Prefix",
+		"listGuestNetworkIpv6Prefixes",
+		"createNetworkPermissions",
+		"resetNetworkPermissions",
+		"listNetworkPermissions",
+		"removeNetworkPermissions",
 	},
 	"VirtualMachineService": {
 		"addNicToVirtualMachine",
@@ -109,6 +116,7 @@ var layout = apiInfo{
 		"stopVirtualMachine",
 		"updateDefaultNicForVirtualMachine",
 		"updateVirtualMachine",
+		"listVirtualMachinesUsageHistory",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -149,6 +157,10 @@ var layout = apiInfo{
 		"updateEgressFirewallRule",
 		"updateFirewallRule",
 		"updatePortForwardingRule",
+		"listIpv6FirewallRules",
+		"createIpv6FirewallRule",
+		"updateIpv6FirewallRule",
+		"deleteIpv6FirewallRule",
 	},
 	"AutoScaleService": {
 		"createAutoScalePolicy",
@@ -214,6 +226,7 @@ var layout = apiInfo{
 		"resizeVolume",
 		"updateVolume",
 		"uploadVolume",
+		"changeOfferingForVolume",
 	},
 	"VPCService": {
 		"createPrivateGateway",
@@ -245,6 +258,8 @@ var layout = apiInfo{
 		"updateTemplate",
 		"updateTemplatePermissions",
 		"upgradeRouterTemplate",
+		"listTemplateDirectDownloadCertificates",
+		"provisionTemplateDirectDownloadCertificate",
 	},
 	"AccountService": {
 		"createAccount",
@@ -285,6 +300,7 @@ var layout = apiInfo{
 		"listUsageTypes",
 		"removeRawUsageRecords",
 		"updateTrafficType",
+		"listUsageServerMetrics",
 	},
 	"SnapshotService": {
 		"createSnapshot",
@@ -431,6 +447,7 @@ var layout = apiInfo{
 		"scaleSystemVm",
 		"startSystemVm",
 		"stopSystemVm",
+		"patchSystemVm",
 	},
 	"RoleService": {
 		"createRole",
@@ -485,6 +502,7 @@ var layout = apiInfo{
 		"listDedicatedGuestVlanRanges",
 		"listVlanIpRanges",
 		"releaseDedicatedGuestVlanRange",
+		"listGuestVlans",
 	},
 	"UCSService": {
 		"addUcsManager",
@@ -596,6 +614,7 @@ var layout = apiInfo{
 		"listConfigurations",
 		"listDeploymentPlanners",
 		"updateConfiguration",
+		"resetConfiguration",
 	},
 	"BrocadeVCSService": {
 		"addBrocadeVcsDevice",
@@ -614,6 +633,7 @@ var layout = apiInfo{
 		"disassociateIpAddress",
 		"listPublicIpAddresses",
 		"updateIpAddress",
+		"releaseIpAddress",
 	},
 	"StoragePoolService": {
 		"cancelStorageMaintenance",
@@ -697,5 +717,9 @@ var layout = apiInfo{
 		"stopKubernetesCluster",
 		"updateKubernetesSupportedVersion",
 		"upgradeKubernetesCluster",
+	},
+	"InfrastructureUsageService": {
+		"listManagementServersMetrics",
+		"listDbMetrics",
 	},
 }

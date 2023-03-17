@@ -231,6 +231,20 @@ func (mr *MockSystemVMServiceIfaceMockRecorder) NewMigrateSystemVmParams(virtual
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateSystemVmParams", reflect.TypeOf((*MockSystemVMServiceIface)(nil).NewMigrateSystemVmParams), virtualmachineid)
 }
 
+// NewPatchSystemVmParams mocks base method.
+func (m *MockSystemVMServiceIface) NewPatchSystemVmParams() *PatchSystemVmParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewPatchSystemVmParams")
+	ret0, _ := ret[0].(*PatchSystemVmParams)
+	return ret0
+}
+
+// NewPatchSystemVmParams indicates an expected call of NewPatchSystemVmParams.
+func (mr *MockSystemVMServiceIfaceMockRecorder) NewPatchSystemVmParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewPatchSystemVmParams", reflect.TypeOf((*MockSystemVMServiceIface)(nil).NewPatchSystemVmParams))
+}
+
 // NewRebootSystemVmParams mocks base method.
 func (m *MockSystemVMServiceIface) NewRebootSystemVmParams(id string) *RebootSystemVmParams {
 	m.ctrl.T.Helper()
@@ -285,6 +299,21 @@ func (m *MockSystemVMServiceIface) NewStopSystemVmParams(id string) *StopSystemV
 func (mr *MockSystemVMServiceIfaceMockRecorder) NewStopSystemVmParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewStopSystemVmParams", reflect.TypeOf((*MockSystemVMServiceIface)(nil).NewStopSystemVmParams), id)
+}
+
+// PatchSystemVm mocks base method.
+func (m *MockSystemVMServiceIface) PatchSystemVm(p *PatchSystemVmParams) (*PatchSystemVmResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PatchSystemVm", p)
+	ret0, _ := ret[0].(*PatchSystemVmResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PatchSystemVm indicates an expected call of PatchSystemVm.
+func (mr *MockSystemVMServiceIfaceMockRecorder) PatchSystemVm(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PatchSystemVm", reflect.TypeOf((*MockSystemVMServiceIface)(nil).PatchSystemVm), p)
 }
 
 // RebootSystemVm mocks base method.

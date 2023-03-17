@@ -160,6 +160,20 @@ func (mr *MockAddressServiceIfaceMockRecorder) NewListPublicIpAddressesParams() 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListPublicIpAddressesParams", reflect.TypeOf((*MockAddressServiceIface)(nil).NewListPublicIpAddressesParams))
 }
 
+// NewReleaseIpAddressParams mocks base method.
+func (m *MockAddressServiceIface) NewReleaseIpAddressParams(id string) *ReleaseIpAddressParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewReleaseIpAddressParams", id)
+	ret0, _ := ret[0].(*ReleaseIpAddressParams)
+	return ret0
+}
+
+// NewReleaseIpAddressParams indicates an expected call of NewReleaseIpAddressParams.
+func (mr *MockAddressServiceIfaceMockRecorder) NewReleaseIpAddressParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleaseIpAddressParams", reflect.TypeOf((*MockAddressServiceIface)(nil).NewReleaseIpAddressParams), id)
+}
+
 // NewUpdateIpAddressParams mocks base method.
 func (m *MockAddressServiceIface) NewUpdateIpAddressParams(id string) *UpdateIpAddressParams {
 	m.ctrl.T.Helper()
@@ -172,6 +186,21 @@ func (m *MockAddressServiceIface) NewUpdateIpAddressParams(id string) *UpdateIpA
 func (mr *MockAddressServiceIfaceMockRecorder) NewUpdateIpAddressParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateIpAddressParams", reflect.TypeOf((*MockAddressServiceIface)(nil).NewUpdateIpAddressParams), id)
+}
+
+// ReleaseIpAddress mocks base method.
+func (m *MockAddressServiceIface) ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReleaseIpAddress", p)
+	ret0, _ := ret[0].(*ReleaseIpAddressResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReleaseIpAddress indicates an expected call of ReleaseIpAddress.
+func (mr *MockAddressServiceIfaceMockRecorder) ReleaseIpAddress(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseIpAddress", reflect.TypeOf((*MockAddressServiceIface)(nil).ReleaseIpAddress), p)
 }
 
 // UpdateIpAddress mocks base method.

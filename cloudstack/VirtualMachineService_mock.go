@@ -298,6 +298,69 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesMetricID
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesMetricID", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesMetricID), varargs...)
 }
 
+// GetVirtualMachinesUsageHistoryByID mocks base method.
+func (m *MockVirtualMachineServiceIface) GetVirtualMachinesUsageHistoryByID(id string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVirtualMachinesUsageHistoryByID", varargs...)
+	ret0, _ := ret[0].(*VirtualMachinesUsageHistory)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVirtualMachinesUsageHistoryByID indicates an expected call of GetVirtualMachinesUsageHistoryByID.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesUsageHistoryByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesUsageHistoryByID", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesUsageHistoryByID), varargs...)
+}
+
+// GetVirtualMachinesUsageHistoryByName mocks base method.
+func (m *MockVirtualMachineServiceIface) GetVirtualMachinesUsageHistoryByName(name string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVirtualMachinesUsageHistoryByName", varargs...)
+	ret0, _ := ret[0].(*VirtualMachinesUsageHistory)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVirtualMachinesUsageHistoryByName indicates an expected call of GetVirtualMachinesUsageHistoryByName.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesUsageHistoryByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesUsageHistoryByName", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesUsageHistoryByName), varargs...)
+}
+
+// GetVirtualMachinesUsageHistoryID mocks base method.
+func (m *MockVirtualMachineServiceIface) GetVirtualMachinesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVirtualMachinesUsageHistoryID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVirtualMachinesUsageHistoryID indicates an expected call of GetVirtualMachinesUsageHistoryID.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesUsageHistoryID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesUsageHistoryID", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesUsageHistoryID), varargs...)
+}
+
 // ListVirtualMachines mocks base method.
 func (m *MockVirtualMachineServiceIface) ListVirtualMachines(p *ListVirtualMachinesParams) (*ListVirtualMachinesResponse, error) {
 	m.ctrl.T.Helper()
@@ -326,6 +389,21 @@ func (m *MockVirtualMachineServiceIface) ListVirtualMachinesMetrics(p *ListVirtu
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) ListVirtualMachinesMetrics(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVirtualMachinesMetrics", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ListVirtualMachinesMetrics), p)
+}
+
+// ListVirtualMachinesUsageHistory mocks base method.
+func (m *MockVirtualMachineServiceIface) ListVirtualMachinesUsageHistory(p *ListVirtualMachinesUsageHistoryParams) (*ListVirtualMachinesUsageHistoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListVirtualMachinesUsageHistory", p)
+	ret0, _ := ret[0].(*ListVirtualMachinesUsageHistoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListVirtualMachinesUsageHistory indicates an expected call of ListVirtualMachinesUsageHistory.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) ListVirtualMachinesUsageHistory(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVirtualMachinesUsageHistory", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ListVirtualMachinesUsageHistory), p)
 }
 
 // MigrateVirtualMachine mocks base method.
@@ -496,6 +574,20 @@ func (m *MockVirtualMachineServiceIface) NewListVirtualMachinesParams() *ListVir
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewListVirtualMachinesParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVirtualMachinesParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewListVirtualMachinesParams))
+}
+
+// NewListVirtualMachinesUsageHistoryParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewListVirtualMachinesUsageHistoryParams() *ListVirtualMachinesUsageHistoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListVirtualMachinesUsageHistoryParams")
+	ret0, _ := ret[0].(*ListVirtualMachinesUsageHistoryParams)
+	return ret0
+}
+
+// NewListVirtualMachinesUsageHistoryParams indicates an expected call of NewListVirtualMachinesUsageHistoryParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewListVirtualMachinesUsageHistoryParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVirtualMachinesUsageHistoryParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewListVirtualMachinesUsageHistoryParams))
 }
 
 // NewMigrateVirtualMachineParams mocks base method.

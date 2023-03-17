@@ -154,6 +154,27 @@ func (mr *MockTemplateServiceIfaceMockRecorder) GetTemplateByName(name, template
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTemplateByName", reflect.TypeOf((*MockTemplateServiceIface)(nil).GetTemplateByName), varargs...)
 }
 
+// GetTemplateDirectDownloadCertificateByID mocks base method.
+func (m *MockTemplateServiceIface) GetTemplateDirectDownloadCertificateByID(id string, opts ...OptionFunc) (*TemplateDirectDownloadCertificate, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetTemplateDirectDownloadCertificateByID", varargs...)
+	ret0, _ := ret[0].(*TemplateDirectDownloadCertificate)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetTemplateDirectDownloadCertificateByID indicates an expected call of GetTemplateDirectDownloadCertificateByID.
+func (mr *MockTemplateServiceIfaceMockRecorder) GetTemplateDirectDownloadCertificateByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTemplateDirectDownloadCertificateByID", reflect.TypeOf((*MockTemplateServiceIface)(nil).GetTemplateDirectDownloadCertificateByID), varargs...)
+}
+
 // GetTemplateID mocks base method.
 func (m *MockTemplateServiceIface) GetTemplateID(name, templatefilter, zoneid string, opts ...OptionFunc) (string, int, error) {
 	m.ctrl.T.Helper()
@@ -209,6 +230,21 @@ func (m *MockTemplateServiceIface) GetUploadParamsForTemplate(p *GetUploadParams
 func (mr *MockTemplateServiceIfaceMockRecorder) GetUploadParamsForTemplate(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUploadParamsForTemplate", reflect.TypeOf((*MockTemplateServiceIface)(nil).GetUploadParamsForTemplate), p)
+}
+
+// ListTemplateDirectDownloadCertificates mocks base method.
+func (m *MockTemplateServiceIface) ListTemplateDirectDownloadCertificates(p *ListTemplateDirectDownloadCertificatesParams) (*ListTemplateDirectDownloadCertificatesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListTemplateDirectDownloadCertificates", p)
+	ret0, _ := ret[0].(*ListTemplateDirectDownloadCertificatesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTemplateDirectDownloadCertificates indicates an expected call of ListTemplateDirectDownloadCertificates.
+func (mr *MockTemplateServiceIfaceMockRecorder) ListTemplateDirectDownloadCertificates(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTemplateDirectDownloadCertificates", reflect.TypeOf((*MockTemplateServiceIface)(nil).ListTemplateDirectDownloadCertificates), p)
 }
 
 // ListTemplatePermissions mocks base method.
@@ -311,6 +347,20 @@ func (mr *MockTemplateServiceIfaceMockRecorder) NewGetUploadParamsForTemplatePar
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUploadParamsForTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewGetUploadParamsForTemplateParams), displaytext, format, hypervisor, name, zoneid)
 }
 
+// NewListTemplateDirectDownloadCertificatesParams mocks base method.
+func (m *MockTemplateServiceIface) NewListTemplateDirectDownloadCertificatesParams() *ListTemplateDirectDownloadCertificatesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListTemplateDirectDownloadCertificatesParams")
+	ret0, _ := ret[0].(*ListTemplateDirectDownloadCertificatesParams)
+	return ret0
+}
+
+// NewListTemplateDirectDownloadCertificatesParams indicates an expected call of NewListTemplateDirectDownloadCertificatesParams.
+func (mr *MockTemplateServiceIfaceMockRecorder) NewListTemplateDirectDownloadCertificatesParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListTemplateDirectDownloadCertificatesParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewListTemplateDirectDownloadCertificatesParams))
+}
+
 // NewListTemplatePermissionsParams mocks base method.
 func (m *MockTemplateServiceIface) NewListTemplatePermissionsParams(id string) *ListTemplatePermissionsParams {
 	m.ctrl.T.Helper()
@@ -351,6 +401,20 @@ func (m *MockTemplateServiceIface) NewPrepareTemplateParams(templateid, zoneid s
 func (mr *MockTemplateServiceIfaceMockRecorder) NewPrepareTemplateParams(templateid, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewPrepareTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewPrepareTemplateParams), templateid, zoneid)
+}
+
+// NewProvisionTemplateDirectDownloadCertificateParams mocks base method.
+func (m *MockTemplateServiceIface) NewProvisionTemplateDirectDownloadCertificateParams(hostid, id string) *ProvisionTemplateDirectDownloadCertificateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewProvisionTemplateDirectDownloadCertificateParams", hostid, id)
+	ret0, _ := ret[0].(*ProvisionTemplateDirectDownloadCertificateParams)
+	return ret0
+}
+
+// NewProvisionTemplateDirectDownloadCertificateParams indicates an expected call of NewProvisionTemplateDirectDownloadCertificateParams.
+func (mr *MockTemplateServiceIfaceMockRecorder) NewProvisionTemplateDirectDownloadCertificateParams(hostid, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewProvisionTemplateDirectDownloadCertificateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewProvisionTemplateDirectDownloadCertificateParams), hostid, id)
 }
 
 // NewRegisterTemplateParams mocks base method.
@@ -422,6 +486,21 @@ func (m *MockTemplateServiceIface) PrepareTemplate(p *PrepareTemplateParams) (*P
 func (mr *MockTemplateServiceIfaceMockRecorder) PrepareTemplate(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PrepareTemplate", reflect.TypeOf((*MockTemplateServiceIface)(nil).PrepareTemplate), p)
+}
+
+// ProvisionTemplateDirectDownloadCertificate mocks base method.
+func (m *MockTemplateServiceIface) ProvisionTemplateDirectDownloadCertificate(p *ProvisionTemplateDirectDownloadCertificateParams) (*ProvisionTemplateDirectDownloadCertificateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ProvisionTemplateDirectDownloadCertificate", p)
+	ret0, _ := ret[0].(*ProvisionTemplateDirectDownloadCertificateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ProvisionTemplateDirectDownloadCertificate indicates an expected call of ProvisionTemplateDirectDownloadCertificate.
+func (mr *MockTemplateServiceIfaceMockRecorder) ProvisionTemplateDirectDownloadCertificate(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProvisionTemplateDirectDownloadCertificate", reflect.TypeOf((*MockTemplateServiceIface)(nil).ProvisionTemplateDirectDownloadCertificate), p)
 }
 
 // RegisterTemplate mocks base method.

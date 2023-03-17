@@ -125,6 +125,7 @@ type CloudStackClient struct {
 	Hypervisor          HypervisorServiceIface
 	ISO                 ISOServiceIface
 	ImageStore          ImageStoreServiceIface
+	InfrastructureUsage InfrastructureUsageServiceIface
 	InternalLB          InternalLBServiceIface
 	Kubernetes          KubernetesServiceIface
 	LDAP                LDAPServiceIface
@@ -230,6 +231,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Hypervisor = NewHypervisorService(cs)
 	cs.ISO = NewISOService(cs)
 	cs.ImageStore = NewImageStoreService(cs)
+	cs.InfrastructureUsage = NewInfrastructureUsageService(cs)
 	cs.InternalLB = NewInternalLBService(cs)
 	cs.Kubernetes = NewKubernetesService(cs)
 	cs.LDAP = NewLDAPService(cs)
@@ -308,6 +310,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Hypervisor = NewMockHypervisorServiceIface(ctrl)
 	cs.ISO = NewMockISOServiceIface(ctrl)
 	cs.ImageStore = NewMockImageStoreServiceIface(ctrl)
+	cs.InfrastructureUsage = NewMockInfrastructureUsageServiceIface(ctrl)
 	cs.InternalLB = NewMockInternalLBServiceIface(ctrl)
 	cs.Kubernetes = NewMockKubernetesServiceIface(ctrl)
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
@@ -938,6 +941,14 @@ type ImageStoreService struct {
 
 func NewImageStoreService(cs *CloudStackClient) ImageStoreServiceIface {
 	return &ImageStoreService{cs: cs}
+}
+
+type InfrastructureUsageService struct {
+	cs *CloudStackClient
+}
+
+func NewInfrastructureUsageService(cs *CloudStackClient) InfrastructureUsageServiceIface {
+	return &InfrastructureUsageService{cs: cs}
 }
 
 type InternalLBService struct {

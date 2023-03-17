@@ -407,4 +407,91 @@ func TestNetworkService(t *testing.T) {
 	}
 	t.Run("UpdateStorageNetworkIpRange", testupdateStorageNetworkIpRange)
 
+	testdeleteGuestNetworkIpv6Prefix := func(t *testing.T) {
+		if _, ok := response["deleteGuestNetworkIpv6Prefix"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteGuestNetworkIpv6PrefixParams("id")
+		_, err := client.Network.DeleteGuestNetworkIpv6Prefix(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteGuestNetworkIpv6Prefix", testdeleteGuestNetworkIpv6Prefix)
+
+	testcreateGuestNetworkIpv6Prefix := func(t *testing.T) {
+		if _, ok := response["createGuestNetworkIpv6Prefix"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateGuestNetworkIpv6PrefixParams("prefix", "zoneid")
+		r, err := client.Network.CreateGuestNetworkIpv6Prefix(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateGuestNetworkIpv6Prefix", testcreateGuestNetworkIpv6Prefix)
+
+	testlistGuestNetworkIpv6Prefixes := func(t *testing.T) {
+		if _, ok := response["listGuestNetworkIpv6Prefixes"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListGuestNetworkIpv6PrefixesParams()
+		_, err := client.Network.ListGuestNetworkIpv6Prefixes(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListGuestNetworkIpv6Prefixes", testlistGuestNetworkIpv6Prefixes)
+
+	testcreateNetworkPermissions := func(t *testing.T) {
+		if _, ok := response["createNetworkPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateNetworkPermissionsParams("networkid")
+		_, err := client.Network.CreateNetworkPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CreateNetworkPermissions", testcreateNetworkPermissions)
+
+	testresetNetworkPermissions := func(t *testing.T) {
+		if _, ok := response["resetNetworkPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewResetNetworkPermissionsParams("networkid")
+		_, err := client.Network.ResetNetworkPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ResetNetworkPermissions", testresetNetworkPermissions)
+
+	testlistNetworkPermissions := func(t *testing.T) {
+		if _, ok := response["listNetworkPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetworkPermissionsParams("networkid")
+		_, err := client.Network.ListNetworkPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkPermissions", testlistNetworkPermissions)
+
+	testremoveNetworkPermissions := func(t *testing.T) {
+		if _, ok := response["removeNetworkPermissions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewRemoveNetworkPermissionsParams("networkid")
+		_, err := client.Network.RemoveNetworkPermissions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RemoveNetworkPermissions", testremoveNetworkPermissions)
+
 }

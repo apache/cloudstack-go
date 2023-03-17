@@ -113,6 +113,15 @@ type FirewallServiceIface interface {
 	NewUpdateFirewallRuleParams(id string) *UpdateFirewallRuleParams
 	UpdatePortForwardingRule(p *UpdatePortForwardingRuleParams) (*UpdatePortForwardingRuleResponse, error)
 	NewUpdatePortForwardingRuleParams(id string) *UpdatePortForwardingRuleParams
+	ListIpv6FirewallRules(p *ListIpv6FirewallRulesParams) (*ListIpv6FirewallRulesResponse, error)
+	NewListIpv6FirewallRulesParams() *ListIpv6FirewallRulesParams
+	GetIpv6FirewallRuleByID(id string, opts ...OptionFunc) (*Ipv6FirewallRule, int, error)
+	CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error)
+	NewCreateIpv6FirewallRuleParams(networkid string, protocol string) *CreateIpv6FirewallRuleParams
+	UpdateIpv6FirewallRule(p *UpdateIpv6FirewallRuleParams) (*UpdateIpv6FirewallRuleResponse, error)
+	NewUpdateIpv6FirewallRuleParams(id string) *UpdateIpv6FirewallRuleParams
+	DeleteIpv6FirewallRule(p *DeleteIpv6FirewallRuleParams) (*DeleteIpv6FirewallRuleResponse, error)
+	NewDeleteIpv6FirewallRuleParams(id string) *DeleteIpv6FirewallRuleParams
 }
 
 type AddPaloAltoFirewallParams struct {
@@ -3228,4 +3237,968 @@ type UpdatePortForwardingRuleResponse struct {
 	Virtualmachineid          string `json:"virtualmachineid"`
 	Virtualmachinename        string `json:"virtualmachinename"`
 	Vmguestip                 string `json:"vmguestip"`
+}
+
+type ListIpv6FirewallRulesParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListIpv6FirewallRulesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["tags"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tags[%d].key", i), k)
+			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["traffictype"]; found {
+		u.Set("traffictype", v.(string))
+	}
+	return u
+}
+
+func (p *ListIpv6FirewallRulesParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetTags(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
+}
+
+func (p *ListIpv6FirewallRulesParams) SetTraffictype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["traffictype"] = v
+}
+
+func (p *ListIpv6FirewallRulesParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListIpv6FirewallRulesParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewListIpv6FirewallRulesParams() *ListIpv6FirewallRulesParams {
+	p := &ListIpv6FirewallRulesParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *FirewallService) GetIpv6FirewallRuleByID(id string, opts ...OptionFunc) (*Ipv6FirewallRule, int, error) {
+	p := &ListIpv6FirewallRulesParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListIpv6FirewallRules(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.Ipv6FirewallRules[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for Ipv6FirewallRule UUID: %s!", id)
+}
+
+// Lists all IPv6 firewall rules
+func (s *FirewallService) ListIpv6FirewallRules(p *ListIpv6FirewallRulesParams) (*ListIpv6FirewallRulesResponse, error) {
+	resp, err := s.cs.newRequest("listIpv6FirewallRules", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err = convertFirewallServiceResponse(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListIpv6FirewallRulesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListIpv6FirewallRulesResponse struct {
+	Count             int                 `json:"count"`
+	Ipv6FirewallRules []*Ipv6FirewallRule `json:"ipv6firewallrule"`
+}
+
+type Ipv6FirewallRule struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
+}
+
+type CreateIpv6FirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateIpv6FirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
+	if v, found := p.p["destcidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("destcidrlist", vv)
+	}
+	if v, found := p.p["endport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("endport", vv)
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["icmpcode"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmpcode", vv)
+	}
+	if v, found := p.p["icmptype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmptype", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	if v, found := p.p["protocol"]; found {
+		u.Set("protocol", v.(string))
+	}
+	if v, found := p.p["startport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("startport", vv)
+	}
+	if v, found := p.p["traffictype"]; found {
+		u.Set("traffictype", v.(string))
+	}
+	return u
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetDestcidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["destcidrlist"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetDestcidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["destcidrlist"].([]string)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetEndport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endport"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetEndport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endport"].(int)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetIcmpcode(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmpcode"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetIcmpcode() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmpcode"].(int)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetIcmptype(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmptype"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetIcmptype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmptype"].(int)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetProtocol(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["protocol"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetProtocol() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["protocol"].(string)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetStartport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startport"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetStartport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startport"].(int)
+	return value, ok
+}
+
+func (p *CreateIpv6FirewallRuleParams) SetTraffictype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["traffictype"] = v
+}
+
+func (p *CreateIpv6FirewallRuleParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateIpv6FirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewCreateIpv6FirewallRuleParams(networkid string, protocol string) *CreateIpv6FirewallRuleParams {
+	p := &CreateIpv6FirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["networkid"] = networkid
+	p.p["protocol"] = protocol
+	return p
+}
+
+// Creates an Ipv6 firewall rule in the given network (the network has to belong to VPC)
+func (s *FirewallService) CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("createIpv6FirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateIpv6FirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type CreateIpv6FirewallRuleResponse struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
+}
+
+type UpdateIpv6FirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateIpv6FirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
+	if v, found := p.p["customid"]; found {
+		u.Set("customid", v.(string))
+	}
+	if v, found := p.p["endport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("endport", vv)
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["icmpcode"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmpcode", vv)
+	}
+	if v, found := p.p["icmptype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmptype", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["protocol"]; found {
+		u.Set("protocol", v.(string))
+	}
+	if v, found := p.p["startport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("startport", vv)
+	}
+	if v, found := p.p["traffictype"]; found {
+		u.Set("traffictype", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetCustomid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["customid"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetEndport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endport"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetEndport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endport"].(int)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetIcmpcode(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmpcode"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetIcmpcode() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmpcode"].(int)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetIcmptype(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmptype"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetIcmptype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmptype"].(int)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetProtocol(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["protocol"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetProtocol() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["protocol"].(string)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetStartport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startport"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetStartport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startport"].(int)
+	return value, ok
+}
+
+func (p *UpdateIpv6FirewallRuleParams) SetTraffictype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["traffictype"] = v
+}
+
+func (p *UpdateIpv6FirewallRuleParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateIpv6FirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewUpdateIpv6FirewallRuleParams(id string) *UpdateIpv6FirewallRuleParams {
+	p := &UpdateIpv6FirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Updates Ipv6 firewall rule with specified ID
+func (s *FirewallService) UpdateIpv6FirewallRule(p *UpdateIpv6FirewallRuleParams) (*UpdateIpv6FirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("updateIpv6FirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateIpv6FirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type UpdateIpv6FirewallRuleResponse struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
+}
+
+type DeleteIpv6FirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteIpv6FirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteIpv6FirewallRuleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteIpv6FirewallRuleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteIpv6FirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewDeleteIpv6FirewallRuleParams(id string) *DeleteIpv6FirewallRuleParams {
+	p := &DeleteIpv6FirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Deletes a IPv6 firewall rule
+func (s *FirewallService) DeleteIpv6FirewallRule(p *DeleteIpv6FirewallRuleParams) (*DeleteIpv6FirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("deleteIpv6FirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteIpv6FirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DeleteIpv6FirewallRuleResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

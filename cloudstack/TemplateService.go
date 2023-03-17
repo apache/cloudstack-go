@@ -56,6 +56,11 @@ type TemplateServiceIface interface {
 	NewUpdateTemplatePermissionsParams(id string) *UpdateTemplatePermissionsParams
 	UpgradeRouterTemplate(p *UpgradeRouterTemplateParams) (*UpgradeRouterTemplateResponse, error)
 	NewUpgradeRouterTemplateParams() *UpgradeRouterTemplateParams
+	ListTemplateDirectDownloadCertificates(p *ListTemplateDirectDownloadCertificatesParams) (*ListTemplateDirectDownloadCertificatesResponse, error)
+	NewListTemplateDirectDownloadCertificatesParams() *ListTemplateDirectDownloadCertificatesParams
+	GetTemplateDirectDownloadCertificateByID(id string, opts ...OptionFunc) (*TemplateDirectDownloadCertificate, int, error)
+	ProvisionTemplateDirectDownloadCertificate(p *ProvisionTemplateDirectDownloadCertificateParams) (*ProvisionTemplateDirectDownloadCertificateResponse, error)
+	NewProvisionTemplateDirectDownloadCertificateParams(hostid string, id string) *ProvisionTemplateDirectDownloadCertificateParams
 }
 
 type CopyTemplateParams struct {
@@ -3631,4 +3636,286 @@ func (s *TemplateService) UpgradeRouterTemplate(p *UpgradeRouterTemplateParams) 
 type UpgradeRouterTemplateResponse struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
+}
+
+type ListTemplateDirectDownloadCertificatesParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listhosts"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listhosts", vv)
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetListhosts(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listhosts"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetListhosts() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listhosts"].(bool)
+	return value, ok
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListTemplateDirectDownloadCertificatesParams instance,
+// as then you are sure you have configured all required params
+func (s *TemplateService) NewListTemplateDirectDownloadCertificatesParams() *ListTemplateDirectDownloadCertificatesParams {
+	p := &ListTemplateDirectDownloadCertificatesParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *TemplateService) GetTemplateDirectDownloadCertificateByID(id string, opts ...OptionFunc) (*TemplateDirectDownloadCertificate, int, error) {
+	p := &ListTemplateDirectDownloadCertificatesParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListTemplateDirectDownloadCertificates(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.TemplateDirectDownloadCertificates[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for TemplateDirectDownloadCertificate UUID: %s!", id)
+}
+
+// List the uploaded certificates for direct download templates
+func (s *TemplateService) ListTemplateDirectDownloadCertificates(p *ListTemplateDirectDownloadCertificatesParams) (*ListTemplateDirectDownloadCertificatesResponse, error) {
+	resp, err := s.cs.newRequest("listTemplateDirectDownloadCertificates", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListTemplateDirectDownloadCertificatesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListTemplateDirectDownloadCertificatesResponse struct {
+	Count                              int                                  `json:"count"`
+	TemplateDirectDownloadCertificates []*TemplateDirectDownloadCertificate `json:"templatedirectdownloadcertificate"`
+}
+
+type TemplateDirectDownloadCertificate struct {
+	Alias      string   `json:"alias"`
+	Hostsmap   []string `json:"hostsmap"`
+	Hypervisor string   `json:"hypervisor"`
+	Id         string   `json:"id"`
+	Issuer     string   `json:"issuer"`
+	JobID      string   `json:"jobid"`
+	Jobstatus  int      `json:"jobstatus"`
+	Serialnum  string   `json:"serialnum"`
+	Subject    string   `json:"subject"`
+	Validity   string   `json:"validity"`
+	Version    string   `json:"version"`
+	Zoneid     string   `json:"zoneid"`
+	Zonename   string   `json:"zonename"`
+}
+
+type ProvisionTemplateDirectDownloadCertificateParams struct {
+	p map[string]interface{}
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ProvisionTemplateDirectDownloadCertificateParams instance,
+// as then you are sure you have configured all required params
+func (s *TemplateService) NewProvisionTemplateDirectDownloadCertificateParams(hostid string, id string) *ProvisionTemplateDirectDownloadCertificateParams {
+	p := &ProvisionTemplateDirectDownloadCertificateParams{}
+	p.p = make(map[string]interface{})
+	p.p["hostid"] = hostid
+	p.p["id"] = id
+	return p
+}
+
+// Provisions a host with a direct download certificate
+func (s *TemplateService) ProvisionTemplateDirectDownloadCertificate(p *ProvisionTemplateDirectDownloadCertificateParams) (*ProvisionTemplateDirectDownloadCertificateResponse, error) {
+	resp, err := s.cs.newRequest("provisionTemplateDirectDownloadCertificate", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ProvisionTemplateDirectDownloadCertificateResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ProvisionTemplateDirectDownloadCertificateResponse struct {
+	Details   string `json:"details"`
+	Hostid    string `json:"hostid"`
+	Hostname  string `json:"hostname"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Status    string `json:"status"`
 }

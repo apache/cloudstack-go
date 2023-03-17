@@ -139,6 +139,20 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) NewListDeploymentPlannersPa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDeploymentPlannersParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewListDeploymentPlannersParams))
 }
 
+// NewResetConfigurationParams mocks base method.
+func (m *MockConfigurationServiceIface) NewResetConfigurationParams(name string) *ResetConfigurationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewResetConfigurationParams", name)
+	ret0, _ := ret[0].(*ResetConfigurationParams)
+	return ret0
+}
+
+// NewResetConfigurationParams indicates an expected call of NewResetConfigurationParams.
+func (mr *MockConfigurationServiceIfaceMockRecorder) NewResetConfigurationParams(name interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewResetConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewResetConfigurationParams), name)
+}
+
 // NewUpdateConfigurationParams mocks base method.
 func (m *MockConfigurationServiceIface) NewUpdateConfigurationParams(name string) *UpdateConfigurationParams {
 	m.ctrl.T.Helper()
@@ -151,6 +165,21 @@ func (m *MockConfigurationServiceIface) NewUpdateConfigurationParams(name string
 func (mr *MockConfigurationServiceIfaceMockRecorder) NewUpdateConfigurationParams(name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewUpdateConfigurationParams), name)
+}
+
+// ResetConfiguration mocks base method.
+func (m *MockConfigurationServiceIface) ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResetConfiguration", p)
+	ret0, _ := ret[0].(*ResetConfigurationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResetConfiguration indicates an expected call of ResetConfiguration.
+func (mr *MockConfigurationServiceIfaceMockRecorder) ResetConfiguration(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetConfiguration", reflect.TypeOf((*MockConfigurationServiceIface)(nil).ResetConfiguration), p)
 }
 
 // UpdateConfiguration mocks base method.
