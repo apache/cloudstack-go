@@ -541,6 +541,13 @@ func encodeValues(v url.Values) string {
 				buf.WriteByte('&')
 			}
 			buf.WriteString(prefix)
+			// There is a requirement for some API values to contain “*” such as `consoleproxy.url.domain`
+			// otherwise an exception is thrown.
+			// If key == "value" do not encode if value contains '*'.
+			if k == "value" && strings.Contains(v, "*") {
+				buf.WriteString(v)
+				continue
+			}
 			buf.WriteString(url.QueryEscape(v))
 		}
 	}
