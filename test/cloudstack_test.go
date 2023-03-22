@@ -25,9 +25,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"testing"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
+
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
 )
 
 var (
@@ -111,6 +115,24 @@ func TestCreateSyncClient(t *testing.T) {
 	if client == nil {
 		t.Errorf("Failed to create Cloudstack Client")
 	}
+}
+
+func TestEncodeValues(t *testing.T) {
+	RegisterFailHandler(Fail)
+
+	DescribeTable("Encoding Values", func(value, expected string) {
+		key := "testvalue"
+		values := url.Values{}
+		values.Set(key, value)
+		Expect(cloudstack.EncodeValues(values)).To(Equal(fmt.Sprintf("%s=%s", key, expected)))
+	},
+		Entry("When asterisk is in value it shouldn't encode asterisk", "*.example.com", "*.example.com"),
+		Entry("When question mark is in value it should encode question mark", "foo?", "foo%3F"),
+		Entry("When question mark and asterisk is in value it should encode only question mark", "*.foo?", "*.foo%3F"),
+		Entry("When a space is involved, should encode to %20 and not a +", "this that", "this%20that"),
+	)
+
+	RunSpecs(t, "Encoding Suite")
 }
 
 type UUIDStruct struct {
