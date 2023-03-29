@@ -83,4 +83,16 @@ func TestConfigurationService(t *testing.T) {
 	}
 	t.Run("UpdateConfiguration", testupdateConfiguration)
 
+	testresetConfiguration := func(t *testing.T) {
+		if _, ok := response["resetConfiguration"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Configuration.NewResetConfigurationParams("name")
+		_, err := client.Configuration.ResetConfiguration(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ResetConfiguration", testresetConfiguration)
+
 }

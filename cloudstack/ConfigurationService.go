@@ -34,6 +34,8 @@ type ConfigurationServiceIface interface {
 	NewListDeploymentPlannersParams() *ListDeploymentPlannersParams
 	UpdateConfiguration(p *UpdateConfigurationParams) (*UpdateConfigurationResponse, error)
 	NewUpdateConfigurationParams(name string) *UpdateConfigurationParams
+	ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error)
+	NewResetConfigurationParams(name string) *ResetConfigurationParams
 }
 
 type ListCapabilitiesParams struct {
@@ -639,6 +641,180 @@ func (s *ConfigurationService) UpdateConfiguration(p *UpdateConfigurationParams)
 }
 
 type UpdateConfigurationResponse struct {
+	Category    string `json:"category"`
+	Description string `json:"description"`
+	Id          int64  `json:"id"`
+	Isdynamic   bool   `json:"isdynamic"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
+	Scope       string `json:"scope"`
+	Value       string `json:"value"`
+}
+
+type ResetConfigurationParams struct {
+	p map[string]interface{}
+}
+
+func (p *ResetConfigurationParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["imagestoreid"]; found {
+		u.Set("imagestoreid", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ResetConfigurationParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *ResetConfigurationParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ResetConfigurationParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ResetConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetImagestoreid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["imagestoreid"] = v
+}
+
+func (p *ResetConfigurationParams) GetImagestoreid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["imagestoreid"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ResetConfigurationParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ResetConfigurationParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+func (p *ResetConfigurationParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ResetConfigurationParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ResetConfigurationParams instance,
+// as then you are sure you have configured all required params
+func (s *ConfigurationService) NewResetConfigurationParams(name string) *ResetConfigurationParams {
+	p := &ResetConfigurationParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	return p
+}
+
+// Resets a configuration. The configuration will be set to default value for global setting, and removed from account_details or domain_details for Account/Domain settings
+func (s *ConfigurationService) ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error) {
+	resp, err := s.cs.newRequest("resetConfiguration", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ResetConfigurationResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ResetConfigurationResponse struct {
 	Category    string `json:"category"`
 	Description string `json:"description"`
 	Id          int64  `json:"id"`

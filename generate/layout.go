@@ -596,6 +596,7 @@ var layout = apiInfo{
 		"listConfigurations",
 		"listDeploymentPlanners",
 		"updateConfiguration",
+		"resetConfiguration",
 	},
 	"BrocadeVCSService": {
 		"addBrocadeVcsDevice",

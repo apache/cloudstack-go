@@ -47,5 +47,16 @@
         "isdynamic": false
       }
     }
+  },
+  "resetConfiguration": {
+    "resetconfigurationresponse":{
+        "configuration":{
+            "category":"Project Defaults",
+            "name":"allow.user.create.projects",
+            "value":"true",
+            "description":"If regular user can create a project; true by default",
+            "isdynamic":false
+          }
+      }
   }
 }
