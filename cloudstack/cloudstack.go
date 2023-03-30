@@ -465,16 +465,15 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 	params.Set("response", "json")
 
 	// Generate signature for API call
-	// * Serialize parameters, URL encoding only values and sort them by key, done by encodeValues
+	// * Serialize parameters, URL encoding only values and sort them by key, done by EncodeValues
 	// * Convert the entire argument string to lowercase
 	// * Replace all instances of '+' to '%20'
 	// * Calculate HMAC SHA1 of argument string with CloudStack secret
 	// * URL encode the string and convert to base64
-	s := encodeValues(params)
+	s := EncodeValues(params)
 	s2 := strings.ToLower(s)
-	s3 := strings.Replace(s2, "+", "%20", -1)
 	mac := hmac.New(sha1.New, []byte(cs.secret))
-	mac.Write([]byte(s3))
+	mac.Write([]byte(s2))
 	signature := base64.StdEncoding.EncodeToString(mac.Sum(nil))
 
 	var err error
@@ -523,7 +522,7 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 
 // Custom version of net/url Encode that only URL escapes values
 // Unmodified portions here remain under BSD license of The Go Authors: https://go.googlesource.com/go/+/master/LICENSE
-func encodeValues(v url.Values) string {
+func EncodeValues(v url.Values) string {
 	if v == nil {
 		return ""
 	}
@@ -541,7 +540,12 @@ func encodeValues(v url.Values) string {
 				buf.WriteByte('&')
 			}
 			buf.WriteString(prefix)
-			buf.WriteString(url.QueryEscape(v))
+			escaped := url.QueryEscape(v)
+			// we need to ensure + (representing a space) is encoded as %20
+			escaped = strings.Replace(escaped, "+", "%20", -1)
+			// we need to ensure * is not escaped
+			escaped = strings.Replace(escaped, "%2A", "*", -1)
+			buf.WriteString(escaped)
 		}
 	}
 	return buf.String()
