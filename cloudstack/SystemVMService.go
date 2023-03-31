@@ -155,6 +155,7 @@ type ChangeServiceForSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -224,7 +225,7 @@ func (s *SystemVMService) NewDestroySystemVmParams(id string) *DestroySystemVmPa
 	return p
 }
 
-// Destroyes a system virtual machine.
+// Destroys a system virtual machine.
 func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySystemVmResponse, error) {
 	resp, err := s.cs.newRequest("destroySystemVm", p.toURLValues())
 	if err != nil {
@@ -269,6 +270,7 @@ type DestroySystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -632,6 +634,7 @@ type SystemVm struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -801,6 +804,7 @@ type MigrateSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -934,6 +938,7 @@ type RebootSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -1088,6 +1093,7 @@ type ScaleSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -1202,6 +1208,7 @@ type StartSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`
@@ -1335,6 +1342,7 @@ type StopSystemVmResponse struct {
 	Gateway               string   `json:"gateway"`
 	Guestvlan             string   `json:"guestvlan"`
 	Hasannotations        bool     `json:"hasannotations"`
+	Hostcontrolstate      string   `json:"hostcontrolstate"`
 	Hostid                string   `json:"hostid"`
 	Hostname              string   `json:"hostname"`
 	Hypervisor            string   `json:"hypervisor"`

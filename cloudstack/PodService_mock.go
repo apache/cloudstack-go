@@ -191,17 +191,17 @@ func (mr *MockPodServiceIfaceMockRecorder) ListPods(p interface{}) *gomock.Call 
 }
 
 // NewCreatePodParams mocks base method.
-func (m *MockPodServiceIface) NewCreatePodParams(gateway, name, netmask, startip, zoneid string) *CreatePodParams {
+func (m *MockPodServiceIface) NewCreatePodParams(name, zoneid string) *CreatePodParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreatePodParams", gateway, name, netmask, startip, zoneid)
+	ret := m.ctrl.Call(m, "NewCreatePodParams", name, zoneid)
 	ret0, _ := ret[0].(*CreatePodParams)
 	return ret0
 }
 
 // NewCreatePodParams indicates an expected call of NewCreatePodParams.
-func (mr *MockPodServiceIfaceMockRecorder) NewCreatePodParams(gateway, name, netmask, startip, zoneid interface{}) *gomock.Call {
+func (mr *MockPodServiceIfaceMockRecorder) NewCreatePodParams(name, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePodParams", reflect.TypeOf((*MockPodServiceIface)(nil).NewCreatePodParams), gateway, name, netmask, startip, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePodParams", reflect.TypeOf((*MockPodServiceIface)(nil).NewCreatePodParams), name, zoneid)
 }
 
 // NewDedicatePodParams mocks base method.

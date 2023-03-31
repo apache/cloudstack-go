@@ -250,6 +250,7 @@ type AttachVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -613,6 +614,7 @@ type CreateVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -864,6 +866,7 @@ type DestroyVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -1044,6 +1047,7 @@ type DetachVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -1636,6 +1640,10 @@ func (p *ListVolumesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["listsystemvms"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listsystemvms", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -1840,6 +1848,21 @@ func (p *ListVolumesParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListVolumesParams) SetListsystemvms(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listsystemvms"] = v
+}
+
+func (p *ListVolumesParams) GetListsystemvms() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listsystemvms"].(bool)
 	return value, ok
 }
 
@@ -2185,6 +2208,7 @@ type Volume struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -2234,6 +2258,10 @@ func (p *ListVolumesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["listsystemvms"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listsystemvms", vv)
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -2439,6 +2467,21 @@ func (p *ListVolumesMetricsParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListVolumesMetricsParams) SetListsystemvms(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listsystemvms"] = v
+}
+
+func (p *ListVolumesMetricsParams) GetListsystemvms() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listsystemvms"].(bool)
 	return value, ok
 }
 
@@ -2786,6 +2829,7 @@ type VolumesMetric struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -2986,6 +3030,7 @@ type MigrateVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -3110,6 +3155,7 @@ type RecoverVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -3348,6 +3394,7 @@ type ResizeVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -3618,6 +3665,7 @@ type UpdateVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -3927,6 +3975,7 @@ type UploadVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }
@@ -4185,6 +4234,7 @@ type ChangeOfferingForVolumeResponse struct {
 	Vmdisplayname              string `json:"vmdisplayname"`
 	Vmname                     string `json:"vmname"`
 	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
 	Zoneid                     string `json:"zoneid"`
 	Zonename                   string `json:"zonename"`
 }

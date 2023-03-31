@@ -891,6 +891,7 @@ type InternalLoadBalancerVM struct {
 	Hasannotations      bool                                       `json:"hasannotations"`
 	Healthcheckresults  []InternalLoadBalancerVMHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                       `json:"healthchecksfailed"`
+	Hostcontrolstate    string                                     `json:"hostcontrolstate"`
 	Hostid              string                                     `json:"hostid"`
 	Hostname            string                                     `json:"hostname"`
 	Hypervisor          string                                     `json:"hypervisor"`
@@ -1030,6 +1031,7 @@ type StartInternalLoadBalancerVMResponse struct {
 	Hasannotations      bool                                                    `json:"hasannotations"`
 	Healthcheckresults  []StartInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                                    `json:"healthchecksfailed"`
+	Hostcontrolstate    string                                                  `json:"hostcontrolstate"`
 	Hostid              string                                                  `json:"hostid"`
 	Hostname            string                                                  `json:"hostname"`
 	Hypervisor          string                                                  `json:"hypervisor"`
@@ -1188,6 +1190,7 @@ type StopInternalLoadBalancerVMResponse struct {
 	Hasannotations      bool                                                   `json:"hasannotations"`
 	Healthcheckresults  []StopInternalLoadBalancerVMResponseHealthcheckresults `json:"healthcheckresults"`
 	Healthchecksfailed  bool                                                   `json:"healthchecksfailed"`
+	Hostcontrolstate    string                                                 `json:"hostcontrolstate"`
 	Hostid              string                                                 `json:"hostid"`
 	Hostname            string                                                 `json:"hostname"`
 	Hypervisor          string                                                 `json:"hypervisor"`

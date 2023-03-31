@@ -33,7 +33,7 @@ type NetworkServiceIface interface {
 	AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error)
 	NewAddOpenDaylightControllerParams(password string, physicalnetworkid string, url string, username string) *AddOpenDaylightControllerParams
 	CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error)
-	NewCreateNetworkParams(displaytext string, name string, networkofferingid string, zoneid string) *CreateNetworkParams
+	NewCreateNetworkParams(name string, networkofferingid string, zoneid string) *CreateNetworkParams
 	CreatePhysicalNetwork(p *CreatePhysicalNetworkParams) (*CreatePhysicalNetworkResponse, error)
 	NewCreatePhysicalNetworkParams(name string, zoneid string) *CreatePhysicalNetworkParams
 	CreateServiceInstance(p *CreateServiceInstanceParams) (*CreateServiceInstanceResponse, error)
@@ -428,6 +428,12 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["dns1"]; found {
+		u.Set("dns1", v.(string))
+	}
+	if v, found := p.p["dns2"]; found {
+		u.Set("dns2", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -449,6 +455,12 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["ip6cidr"]; found {
 		u.Set("ip6cidr", v.(string))
+	}
+	if v, found := p.p["ip6dns1"]; found {
+		u.Set("ip6dns1", v.(string))
+	}
+	if v, found := p.p["ip6dns2"]; found {
+		u.Set("ip6dns2", v.(string))
 	}
 	if v, found := p.p["ip6gateway"]; found {
 		u.Set("ip6gateway", v.(string))
@@ -474,8 +486,16 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["physicalnetworkid"]; found {
 		u.Set("physicalnetworkid", v.(string))
 	}
+	if v, found := p.p["privatemtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("privatemtu", vv)
+	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["publicmtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("publicmtu", vv)
 	}
 	if v, found := p.p["routerip"]; found {
 		u.Set("routerip", v.(string))
@@ -492,6 +512,9 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["subdomainaccess"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("subdomainaccess", vv)
+	}
+	if v, found := p.p["tungstenvirtualrouteruuid"]; found {
+		u.Set("tungstenvirtualrouteruuid", v.(string))
 	}
 	if v, found := p.p["vlan"]; found {
 		u.Set("vlan", v.(string))
@@ -610,6 +633,36 @@ func (p *CreateNetworkParams) GetDisplaytext() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetDns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns1"] = v
+}
+
+func (p *CreateNetworkParams) GetDns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns1"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetDns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns2"] = v
+}
+
+func (p *CreateNetworkParams) GetDns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns2"].(string)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -712,6 +765,36 @@ func (p *CreateNetworkParams) GetIp6cidr() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["ip6cidr"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetIp6dns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns1"] = v
+}
+
+func (p *CreateNetworkParams) GetIp6dns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns1"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetIp6dns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns2"] = v
+}
+
+func (p *CreateNetworkParams) GetIp6dns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns2"].(string)
 	return value, ok
 }
 
@@ -835,6 +918,21 @@ func (p *CreateNetworkParams) GetPhysicalnetworkid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetPrivatemtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["privatemtu"] = v
+}
+
+func (p *CreateNetworkParams) GetPrivatemtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["privatemtu"].(int)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetProjectid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -847,6 +945,21 @@ func (p *CreateNetworkParams) GetProjectid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetPublicmtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["publicmtu"] = v
+}
+
+func (p *CreateNetworkParams) GetPublicmtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicmtu"].(int)
 	return value, ok
 }
 
@@ -925,6 +1038,21 @@ func (p *CreateNetworkParams) GetSubdomainaccess() (bool, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetTungstenvirtualrouteruuid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tungstenvirtualrouteruuid"] = v
+}
+
+func (p *CreateNetworkParams) GetTungstenvirtualrouteruuid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tungstenvirtualrouteruuid"].(string)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetVlan(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -972,10 +1100,9 @@ func (p *CreateNetworkParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateNetworkParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkService) NewCreateNetworkParams(displaytext string, name string, networkofferingid string, zoneid string) *CreateNetworkParams {
+func (s *NetworkService) NewCreateNetworkParams(name string, networkofferingid string, zoneid string) *CreateNetworkParams {
 	p := &CreateNetworkParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["networkofferingid"] = networkofferingid
 	p.p["zoneid"] = zoneid
@@ -1028,6 +1155,8 @@ type CreateNetworkResponse struct {
 	Id                          string                         `json:"id"`
 	Internetprotocol            string                         `json:"internetprotocol"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
+	Ip6dns1                     string                         `json:"ip6dns1"`
+	Ip6dns2                     string                         `json:"ip6dns2"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
 	Ip6routes                   []interface{}                  `json:"ip6routes"`
 	Ip6routing                  string                         `json:"ip6routing"`
@@ -1046,8 +1175,10 @@ type CreateNetworkResponse struct {
 	Networkofferingid           string                         `json:"networkofferingid"`
 	Networkofferingname         string                         `json:"networkofferingname"`
 	Physicalnetworkid           string                         `json:"physicalnetworkid"`
+	Privatemtu                  int                            `json:"privatemtu"`
 	Project                     string                         `json:"project"`
 	Projectid                   string                         `json:"projectid"`
+	Publicmtu                   int                            `json:"publicmtu"`
 	Receivedbytes               int64                          `json:"receivedbytes"`
 	Redundantrouter             bool                           `json:"redundantrouter"`
 	Related                     string                         `json:"related"`
@@ -1059,8 +1190,10 @@ type CreateNetworkResponse struct {
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                           `json:"supportsvmautoscaling"`
 	Tags                        []Tags                         `json:"tags"`
 	Traffictype                 string                         `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                         `json:"tungstenvirtualrouteruuid"`
 	Type                        string                         `json:"type"`
 	Vlan                        string                         `json:"vlan"`
 	Vpcid                       string                         `json:"vpcid"`
@@ -2453,6 +2586,8 @@ type NetscalerLoadBalancerNetwork struct {
 	Id                          string                                `json:"id"`
 	Internetprotocol            string                                `json:"internetprotocol"`
 	Ip6cidr                     string                                `json:"ip6cidr"`
+	Ip6dns1                     string                                `json:"ip6dns1"`
+	Ip6dns2                     string                                `json:"ip6dns2"`
 	Ip6gateway                  string                                `json:"ip6gateway"`
 	Ip6routes                   []interface{}                         `json:"ip6routes"`
 	Ip6routing                  string                                `json:"ip6routing"`
@@ -2471,8 +2606,10 @@ type NetscalerLoadBalancerNetwork struct {
 	Networkofferingid           string                                `json:"networkofferingid"`
 	Networkofferingname         string                                `json:"networkofferingname"`
 	Physicalnetworkid           string                                `json:"physicalnetworkid"`
+	Privatemtu                  int                                   `json:"privatemtu"`
 	Project                     string                                `json:"project"`
 	Projectid                   string                                `json:"projectid"`
+	Publicmtu                   int                                   `json:"publicmtu"`
 	Receivedbytes               int64                                 `json:"receivedbytes"`
 	Redundantrouter             bool                                  `json:"redundantrouter"`
 	Related                     string                                `json:"related"`
@@ -2484,8 +2621,10 @@ type NetscalerLoadBalancerNetwork struct {
 	State                       string                                `json:"state"`
 	Strechedl2subnet            bool                                  `json:"strechedl2subnet"`
 	Subdomainaccess             bool                                  `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                                  `json:"supportsvmautoscaling"`
 	Tags                        []Tags                                `json:"tags"`
 	Traffictype                 string                                `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                                `json:"tungstenvirtualrouteruuid"`
 	Type                        string                                `json:"type"`
 	Vlan                        string                                `json:"vlan"`
 	Vpcid                       string                                `json:"vpcid"`
@@ -3487,6 +3626,8 @@ type Network struct {
 	Id                          string                   `json:"id"`
 	Internetprotocol            string                   `json:"internetprotocol"`
 	Ip6cidr                     string                   `json:"ip6cidr"`
+	Ip6dns1                     string                   `json:"ip6dns1"`
+	Ip6dns2                     string                   `json:"ip6dns2"`
 	Ip6gateway                  string                   `json:"ip6gateway"`
 	Ip6routes                   []interface{}            `json:"ip6routes"`
 	Ip6routing                  string                   `json:"ip6routing"`
@@ -3505,8 +3646,10 @@ type Network struct {
 	Networkofferingid           string                   `json:"networkofferingid"`
 	Networkofferingname         string                   `json:"networkofferingname"`
 	Physicalnetworkid           string                   `json:"physicalnetworkid"`
+	Privatemtu                  int                      `json:"privatemtu"`
 	Project                     string                   `json:"project"`
 	Projectid                   string                   `json:"projectid"`
+	Publicmtu                   int                      `json:"publicmtu"`
 	Receivedbytes               int64                    `json:"receivedbytes"`
 	Redundantrouter             bool                     `json:"redundantrouter"`
 	Related                     string                   `json:"related"`
@@ -3518,8 +3661,10 @@ type Network struct {
 	State                       string                   `json:"state"`
 	Strechedl2subnet            bool                     `json:"strechedl2subnet"`
 	Subdomainaccess             bool                     `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                     `json:"supportsvmautoscaling"`
 	Tags                        []Tags                   `json:"tags"`
 	Traffictype                 string                   `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                   `json:"tungstenvirtualrouteruuid"`
 	Type                        string                   `json:"type"`
 	Vlan                        string                   `json:"vlan"`
 	Vpcid                       string                   `json:"vpcid"`
@@ -3730,6 +3875,8 @@ type NiciraNvpDeviceNetwork struct {
 	Id                          string                          `json:"id"`
 	Internetprotocol            string                          `json:"internetprotocol"`
 	Ip6cidr                     string                          `json:"ip6cidr"`
+	Ip6dns1                     string                          `json:"ip6dns1"`
+	Ip6dns2                     string                          `json:"ip6dns2"`
 	Ip6gateway                  string                          `json:"ip6gateway"`
 	Ip6routes                   []interface{}                   `json:"ip6routes"`
 	Ip6routing                  string                          `json:"ip6routing"`
@@ -3748,8 +3895,10 @@ type NiciraNvpDeviceNetwork struct {
 	Networkofferingid           string                          `json:"networkofferingid"`
 	Networkofferingname         string                          `json:"networkofferingname"`
 	Physicalnetworkid           string                          `json:"physicalnetworkid"`
+	Privatemtu                  int                             `json:"privatemtu"`
 	Project                     string                          `json:"project"`
 	Projectid                   string                          `json:"projectid"`
+	Publicmtu                   int                             `json:"publicmtu"`
 	Receivedbytes               int64                           `json:"receivedbytes"`
 	Redundantrouter             bool                            `json:"redundantrouter"`
 	Related                     string                          `json:"related"`
@@ -3761,8 +3910,10 @@ type NiciraNvpDeviceNetwork struct {
 	State                       string                          `json:"state"`
 	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
 	Subdomainaccess             bool                            `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                            `json:"supportsvmautoscaling"`
 	Tags                        []Tags                          `json:"tags"`
 	Traffictype                 string                          `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                          `json:"tungstenvirtualrouteruuid"`
 	Type                        string                          `json:"type"`
 	Vlan                        string                          `json:"vlan"`
 	Vpcid                       string                          `json:"vpcid"`
@@ -4092,6 +4243,8 @@ type PaloAltoFirewallNetwork struct {
 	Id                          string                           `json:"id"`
 	Internetprotocol            string                           `json:"internetprotocol"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
+	Ip6dns1                     string                           `json:"ip6dns1"`
+	Ip6dns2                     string                           `json:"ip6dns2"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
 	Ip6routes                   []interface{}                    `json:"ip6routes"`
 	Ip6routing                  string                           `json:"ip6routing"`
@@ -4110,8 +4263,10 @@ type PaloAltoFirewallNetwork struct {
 	Networkofferingid           string                           `json:"networkofferingid"`
 	Networkofferingname         string                           `json:"networkofferingname"`
 	Physicalnetworkid           string                           `json:"physicalnetworkid"`
+	Privatemtu                  int                              `json:"privatemtu"`
 	Project                     string                           `json:"project"`
 	Projectid                   string                           `json:"projectid"`
+	Publicmtu                   int                              `json:"publicmtu"`
 	Receivedbytes               int64                            `json:"receivedbytes"`
 	Redundantrouter             bool                             `json:"redundantrouter"`
 	Related                     string                           `json:"related"`
@@ -4123,8 +4278,10 @@ type PaloAltoFirewallNetwork struct {
 	State                       string                           `json:"state"`
 	Strechedl2subnet            bool                             `json:"strechedl2subnet"`
 	Subdomainaccess             bool                             `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                             `json:"supportsvmautoscaling"`
 	Tags                        []Tags                           `json:"tags"`
 	Traffictype                 string                           `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                           `json:"tungstenvirtualrouteruuid"`
 	Type                        string                           `json:"type"`
 	Vlan                        string                           `json:"vlan"`
 	Vpcid                       string                           `json:"vpcid"`
@@ -5002,6 +5159,12 @@ func (p *UpdateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["dns1"]; found {
+		u.Set("dns1", v.(string))
+	}
+	if v, found := p.p["dns2"]; found {
+		u.Set("dns2", v.(string))
+	}
 	if v, found := p.p["forced"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forced", vv)
@@ -5016,6 +5179,12 @@ func (p *UpdateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["ip6dns1"]; found {
+		u.Set("ip6dns1", v.(string))
+	}
+	if v, found := p.p["ip6dns2"]; found {
+		u.Set("ip6dns2", v.(string))
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -5024,6 +5193,14 @@ func (p *UpdateNetworkParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["networkofferingid"]; found {
 		u.Set("networkofferingid", v.(string))
+	}
+	if v, found := p.p["privatemtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("privatemtu", vv)
+	}
+	if v, found := p.p["publicmtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("publicmtu", vv)
 	}
 	if v, found := p.p["updateinsequence"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -5092,6 +5269,36 @@ func (p *UpdateNetworkParams) GetDisplaytext() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateNetworkParams) SetDns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns1"] = v
+}
+
+func (p *UpdateNetworkParams) GetDns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns1"].(string)
+	return value, ok
+}
+
+func (p *UpdateNetworkParams) SetDns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns2"] = v
+}
+
+func (p *UpdateNetworkParams) GetDns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns2"].(string)
+	return value, ok
+}
+
 func (p *UpdateNetworkParams) SetForced(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -5152,6 +5359,36 @@ func (p *UpdateNetworkParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateNetworkParams) SetIp6dns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns1"] = v
+}
+
+func (p *UpdateNetworkParams) GetIp6dns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns1"].(string)
+	return value, ok
+}
+
+func (p *UpdateNetworkParams) SetIp6dns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns2"] = v
+}
+
+func (p *UpdateNetworkParams) GetIp6dns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns2"].(string)
+	return value, ok
+}
+
 func (p *UpdateNetworkParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -5194,6 +5431,36 @@ func (p *UpdateNetworkParams) GetNetworkofferingid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["networkofferingid"].(string)
+	return value, ok
+}
+
+func (p *UpdateNetworkParams) SetPrivatemtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["privatemtu"] = v
+}
+
+func (p *UpdateNetworkParams) GetPrivatemtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["privatemtu"].(int)
+	return value, ok
+}
+
+func (p *UpdateNetworkParams) SetPublicmtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["publicmtu"] = v
+}
+
+func (p *UpdateNetworkParams) GetPublicmtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicmtu"].(int)
 	return value, ok
 }
 
@@ -5283,6 +5550,8 @@ type UpdateNetworkResponse struct {
 	Id                          string                         `json:"id"`
 	Internetprotocol            string                         `json:"internetprotocol"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
+	Ip6dns1                     string                         `json:"ip6dns1"`
+	Ip6dns2                     string                         `json:"ip6dns2"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
 	Ip6routes                   []interface{}                  `json:"ip6routes"`
 	Ip6routing                  string                         `json:"ip6routing"`
@@ -5301,8 +5570,10 @@ type UpdateNetworkResponse struct {
 	Networkofferingid           string                         `json:"networkofferingid"`
 	Networkofferingname         string                         `json:"networkofferingname"`
 	Physicalnetworkid           string                         `json:"physicalnetworkid"`
+	Privatemtu                  int                            `json:"privatemtu"`
 	Project                     string                         `json:"project"`
 	Projectid                   string                         `json:"projectid"`
+	Publicmtu                   int                            `json:"publicmtu"`
 	Receivedbytes               int64                          `json:"receivedbytes"`
 	Redundantrouter             bool                           `json:"redundantrouter"`
 	Related                     string                         `json:"related"`
@@ -5314,8 +5585,10 @@ type UpdateNetworkResponse struct {
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                           `json:"supportsvmautoscaling"`
 	Tags                        []Tags                         `json:"tags"`
 	Traffictype                 string                         `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                         `json:"tungstenvirtualrouteruuid"`
 	Type                        string                         `json:"type"`
 	Vlan                        string                         `json:"vlan"`
 	Vpcid                       string                         `json:"vpcid"`

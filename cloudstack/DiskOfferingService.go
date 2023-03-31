@@ -110,6 +110,10 @@ func (p *CreateDiskOfferingParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("domainid", vv)
 	}
+	if v, found := p.p["encrypt"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("encrypt", vv)
+	}
 	if v, found := p.p["hypervisorsnapshotreserve"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("hypervisorsnapshotreserve", vv)
@@ -393,6 +397,21 @@ func (p *CreateDiskOfferingParams) GetDomainid() ([]string, bool) {
 	return value, ok
 }
 
+func (p *CreateDiskOfferingParams) SetEncrypt(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["encrypt"] = v
+}
+
+func (p *CreateDiskOfferingParams) GetEncrypt() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["encrypt"].(bool)
+	return value, ok
+}
+
 func (p *CreateDiskOfferingParams) SetHypervisorsnapshotreserve(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -648,42 +667,44 @@ func (s *DiskOfferingService) CreateDiskOffering(p *CreateDiskOfferingParams) (*
 }
 
 type CreateDiskOfferingResponse struct {
-	CacheMode                   string `json:"cacheMode"`
-	Created                     string `json:"created"`
-	DiskBytesReadRate           int64  `json:"diskBytesReadRate"`
-	DiskBytesReadRateMax        int64  `json:"diskBytesReadRateMax"`
-	DiskBytesReadRateMaxLength  int64  `json:"diskBytesReadRateMaxLength"`
-	DiskBytesWriteRate          int64  `json:"diskBytesWriteRate"`
-	DiskBytesWriteRateMax       int64  `json:"diskBytesWriteRateMax"`
-	DiskBytesWriteRateMaxLength int64  `json:"diskBytesWriteRateMaxLength"`
-	DiskIopsReadRate            int64  `json:"diskIopsReadRate"`
-	DiskIopsReadRateMax         int64  `json:"diskIopsReadRateMax"`
-	DiskIopsReadRateMaxLength   int64  `json:"diskIopsReadRateMaxLength"`
-	DiskIopsWriteRate           int64  `json:"diskIopsWriteRate"`
-	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
-	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
-	Disksize                    int64  `json:"disksize"`
-	Disksizestrictness          bool   `json:"disksizestrictness"`
-	Displayoffering             bool   `json:"displayoffering"`
-	Displaytext                 string `json:"displaytext"`
-	Domain                      string `json:"domain"`
-	Domainid                    string `json:"domainid"`
-	Hasannotations              bool   `json:"hasannotations"`
-	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
-	Id                          string `json:"id"`
-	Iscustomized                bool   `json:"iscustomized"`
-	Iscustomizediops            bool   `json:"iscustomizediops"`
-	JobID                       string `json:"jobid"`
-	Jobstatus                   int    `json:"jobstatus"`
-	Maxiops                     int64  `json:"maxiops"`
-	Miniops                     int64  `json:"miniops"`
-	Name                        string `json:"name"`
-	Provisioningtype            string `json:"provisioningtype"`
-	Storagetype                 string `json:"storagetype"`
-	Tags                        string `json:"tags"`
-	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
-	Zone                        string `json:"zone"`
-	Zoneid                      string `json:"zoneid"`
+	CacheMode                   string            `json:"cacheMode"`
+	Created                     string            `json:"created"`
+	Details                     map[string]string `json:"details"`
+	DiskBytesReadRate           int64             `json:"diskBytesReadRate"`
+	DiskBytesReadRateMax        int64             `json:"diskBytesReadRateMax"`
+	DiskBytesReadRateMaxLength  int64             `json:"diskBytesReadRateMaxLength"`
+	DiskBytesWriteRate          int64             `json:"diskBytesWriteRate"`
+	DiskBytesWriteRateMax       int64             `json:"diskBytesWriteRateMax"`
+	DiskBytesWriteRateMaxLength int64             `json:"diskBytesWriteRateMaxLength"`
+	DiskIopsReadRate            int64             `json:"diskIopsReadRate"`
+	DiskIopsReadRateMax         int64             `json:"diskIopsReadRateMax"`
+	DiskIopsReadRateMaxLength   int64             `json:"diskIopsReadRateMaxLength"`
+	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
+	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
+	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Disksize                    int64             `json:"disksize"`
+	Disksizestrictness          bool              `json:"disksizestrictness"`
+	Displayoffering             bool              `json:"displayoffering"`
+	Displaytext                 string            `json:"displaytext"`
+	Domain                      string            `json:"domain"`
+	Domainid                    string            `json:"domainid"`
+	Encrypt                     bool              `json:"encrypt"`
+	Hasannotations              bool              `json:"hasannotations"`
+	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
+	Id                          string            `json:"id"`
+	Iscustomized                bool              `json:"iscustomized"`
+	Iscustomizediops            bool              `json:"iscustomizediops"`
+	JobID                       string            `json:"jobid"`
+	Jobstatus                   int               `json:"jobstatus"`
+	Maxiops                     int64             `json:"maxiops"`
+	Miniops                     int64             `json:"miniops"`
+	Name                        string            `json:"name"`
+	Provisioningtype            string            `json:"provisioningtype"`
+	Storagetype                 string            `json:"storagetype"`
+	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }
 
 type DeleteDiskOfferingParams struct {
@@ -786,6 +807,10 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["encrypt"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("encrypt", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -835,6 +860,21 @@ func (p *ListDiskOfferingsParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListDiskOfferingsParams) SetEncrypt(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["encrypt"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetEncrypt() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["encrypt"].(bool)
 	return value, ok
 }
 
@@ -1100,42 +1140,44 @@ type ListDiskOfferingsResponse struct {
 }
 
 type DiskOffering struct {
-	CacheMode                   string `json:"cacheMode"`
-	Created                     string `json:"created"`
-	DiskBytesReadRate           int64  `json:"diskBytesReadRate"`
-	DiskBytesReadRateMax        int64  `json:"diskBytesReadRateMax"`
-	DiskBytesReadRateMaxLength  int64  `json:"diskBytesReadRateMaxLength"`
-	DiskBytesWriteRate          int64  `json:"diskBytesWriteRate"`
-	DiskBytesWriteRateMax       int64  `json:"diskBytesWriteRateMax"`
-	DiskBytesWriteRateMaxLength int64  `json:"diskBytesWriteRateMaxLength"`
-	DiskIopsReadRate            int64  `json:"diskIopsReadRate"`
-	DiskIopsReadRateMax         int64  `json:"diskIopsReadRateMax"`
-	DiskIopsReadRateMaxLength   int64  `json:"diskIopsReadRateMaxLength"`
-	DiskIopsWriteRate           int64  `json:"diskIopsWriteRate"`
-	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
-	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
-	Disksize                    int64  `json:"disksize"`
-	Disksizestrictness          bool   `json:"disksizestrictness"`
-	Displayoffering             bool   `json:"displayoffering"`
-	Displaytext                 string `json:"displaytext"`
-	Domain                      string `json:"domain"`
-	Domainid                    string `json:"domainid"`
-	Hasannotations              bool   `json:"hasannotations"`
-	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
-	Id                          string `json:"id"`
-	Iscustomized                bool   `json:"iscustomized"`
-	Iscustomizediops            bool   `json:"iscustomizediops"`
-	JobID                       string `json:"jobid"`
-	Jobstatus                   int    `json:"jobstatus"`
-	Maxiops                     int64  `json:"maxiops"`
-	Miniops                     int64  `json:"miniops"`
-	Name                        string `json:"name"`
-	Provisioningtype            string `json:"provisioningtype"`
-	Storagetype                 string `json:"storagetype"`
-	Tags                        string `json:"tags"`
-	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
-	Zone                        string `json:"zone"`
-	Zoneid                      string `json:"zoneid"`
+	CacheMode                   string            `json:"cacheMode"`
+	Created                     string            `json:"created"`
+	Details                     map[string]string `json:"details"`
+	DiskBytesReadRate           int64             `json:"diskBytesReadRate"`
+	DiskBytesReadRateMax        int64             `json:"diskBytesReadRateMax"`
+	DiskBytesReadRateMaxLength  int64             `json:"diskBytesReadRateMaxLength"`
+	DiskBytesWriteRate          int64             `json:"diskBytesWriteRate"`
+	DiskBytesWriteRateMax       int64             `json:"diskBytesWriteRateMax"`
+	DiskBytesWriteRateMaxLength int64             `json:"diskBytesWriteRateMaxLength"`
+	DiskIopsReadRate            int64             `json:"diskIopsReadRate"`
+	DiskIopsReadRateMax         int64             `json:"diskIopsReadRateMax"`
+	DiskIopsReadRateMaxLength   int64             `json:"diskIopsReadRateMaxLength"`
+	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
+	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
+	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Disksize                    int64             `json:"disksize"`
+	Disksizestrictness          bool              `json:"disksizestrictness"`
+	Displayoffering             bool              `json:"displayoffering"`
+	Displaytext                 string            `json:"displaytext"`
+	Domain                      string            `json:"domain"`
+	Domainid                    string            `json:"domainid"`
+	Encrypt                     bool              `json:"encrypt"`
+	Hasannotations              bool              `json:"hasannotations"`
+	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
+	Id                          string            `json:"id"`
+	Iscustomized                bool              `json:"iscustomized"`
+	Iscustomizediops            bool              `json:"iscustomizediops"`
+	JobID                       string            `json:"jobid"`
+	Jobstatus                   int               `json:"jobstatus"`
+	Maxiops                     int64             `json:"maxiops"`
+	Miniops                     int64             `json:"miniops"`
+	Name                        string            `json:"name"`
+	Provisioningtype            string            `json:"provisioningtype"`
+	Storagetype                 string            `json:"storagetype"`
+	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }
 
 type UpdateDiskOfferingParams struct {
@@ -1567,40 +1609,42 @@ func (s *DiskOfferingService) UpdateDiskOffering(p *UpdateDiskOfferingParams) (*
 }
 
 type UpdateDiskOfferingResponse struct {
-	CacheMode                   string `json:"cacheMode"`
-	Created                     string `json:"created"`
-	DiskBytesReadRate           int64  `json:"diskBytesReadRate"`
-	DiskBytesReadRateMax        int64  `json:"diskBytesReadRateMax"`
-	DiskBytesReadRateMaxLength  int64  `json:"diskBytesReadRateMaxLength"`
-	DiskBytesWriteRate          int64  `json:"diskBytesWriteRate"`
-	DiskBytesWriteRateMax       int64  `json:"diskBytesWriteRateMax"`
-	DiskBytesWriteRateMaxLength int64  `json:"diskBytesWriteRateMaxLength"`
-	DiskIopsReadRate            int64  `json:"diskIopsReadRate"`
-	DiskIopsReadRateMax         int64  `json:"diskIopsReadRateMax"`
-	DiskIopsReadRateMaxLength   int64  `json:"diskIopsReadRateMaxLength"`
-	DiskIopsWriteRate           int64  `json:"diskIopsWriteRate"`
-	DiskIopsWriteRateMax        int64  `json:"diskIopsWriteRateMax"`
-	DiskIopsWriteRateMaxLength  int64  `json:"diskIopsWriteRateMaxLength"`
-	Disksize                    int64  `json:"disksize"`
-	Disksizestrictness          bool   `json:"disksizestrictness"`
-	Displayoffering             bool   `json:"displayoffering"`
-	Displaytext                 string `json:"displaytext"`
-	Domain                      string `json:"domain"`
-	Domainid                    string `json:"domainid"`
-	Hasannotations              bool   `json:"hasannotations"`
-	Hypervisorsnapshotreserve   int    `json:"hypervisorsnapshotreserve"`
-	Id                          string `json:"id"`
-	Iscustomized                bool   `json:"iscustomized"`
-	Iscustomizediops            bool   `json:"iscustomizediops"`
-	JobID                       string `json:"jobid"`
-	Jobstatus                   int    `json:"jobstatus"`
-	Maxiops                     int64  `json:"maxiops"`
-	Miniops                     int64  `json:"miniops"`
-	Name                        string `json:"name"`
-	Provisioningtype            string `json:"provisioningtype"`
-	Storagetype                 string `json:"storagetype"`
-	Tags                        string `json:"tags"`
-	Vspherestoragepolicy        string `json:"vspherestoragepolicy"`
-	Zone                        string `json:"zone"`
-	Zoneid                      string `json:"zoneid"`
+	CacheMode                   string            `json:"cacheMode"`
+	Created                     string            `json:"created"`
+	Details                     map[string]string `json:"details"`
+	DiskBytesReadRate           int64             `json:"diskBytesReadRate"`
+	DiskBytesReadRateMax        int64             `json:"diskBytesReadRateMax"`
+	DiskBytesReadRateMaxLength  int64             `json:"diskBytesReadRateMaxLength"`
+	DiskBytesWriteRate          int64             `json:"diskBytesWriteRate"`
+	DiskBytesWriteRateMax       int64             `json:"diskBytesWriteRateMax"`
+	DiskBytesWriteRateMaxLength int64             `json:"diskBytesWriteRateMaxLength"`
+	DiskIopsReadRate            int64             `json:"diskIopsReadRate"`
+	DiskIopsReadRateMax         int64             `json:"diskIopsReadRateMax"`
+	DiskIopsReadRateMaxLength   int64             `json:"diskIopsReadRateMaxLength"`
+	DiskIopsWriteRate           int64             `json:"diskIopsWriteRate"`
+	DiskIopsWriteRateMax        int64             `json:"diskIopsWriteRateMax"`
+	DiskIopsWriteRateMaxLength  int64             `json:"diskIopsWriteRateMaxLength"`
+	Disksize                    int64             `json:"disksize"`
+	Disksizestrictness          bool              `json:"disksizestrictness"`
+	Displayoffering             bool              `json:"displayoffering"`
+	Displaytext                 string            `json:"displaytext"`
+	Domain                      string            `json:"domain"`
+	Domainid                    string            `json:"domainid"`
+	Encrypt                     bool              `json:"encrypt"`
+	Hasannotations              bool              `json:"hasannotations"`
+	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
+	Id                          string            `json:"id"`
+	Iscustomized                bool              `json:"iscustomized"`
+	Iscustomizediops            bool              `json:"iscustomizediops"`
+	JobID                       string            `json:"jobid"`
+	Jobstatus                   int               `json:"jobstatus"`
+	Maxiops                     int64             `json:"maxiops"`
+	Miniops                     int64             `json:"miniops"`
+	Name                        string            `json:"name"`
+	Provisioningtype            string            `json:"provisioningtype"`
+	Storagetype                 string            `json:"storagetype"`
+	Tags                        string            `json:"tags"`
+	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
+	Zone                        string            `json:"zone"`
+	Zoneid                      string            `json:"zoneid"`
 }

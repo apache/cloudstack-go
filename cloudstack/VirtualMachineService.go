@@ -239,6 +239,8 @@ func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachine
 type AddNicToVirtualMachineResponse struct {
 	Account               string                                        `json:"account"`
 	Affinitygroup         []AddNicToVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                        `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                        `json:"backupofferingid"`
 	Backupofferingname    string                                        `json:"backupofferingname"`
 	Bootmode              string                                        `json:"bootmode"`
@@ -264,6 +266,7 @@ type AddNicToVirtualMachineResponse struct {
 	Guestosid             string                                        `json:"guestosid"`
 	Haenable              bool                                          `json:"haenable"`
 	Hasannotations        bool                                          `json:"hasannotations"`
+	Hostcontrolstate      string                                        `json:"hostcontrolstate"`
 	Hostid                string                                        `json:"hostid"`
 	Hostname              string                                        `json:"hostname"`
 	Hypervisor            string                                        `json:"hypervisor"`
@@ -309,6 +312,11 @@ type AddNicToVirtualMachineResponse struct {
 	Templatedisplaytext   string                                        `json:"templatedisplaytext"`
 	Templateid            string                                        `json:"templateid"`
 	Templatename          string                                        `json:"templatename"`
+	Userdata              string                                        `json:"userdata"`
+	Userdatadetails       string                                        `json:"userdatadetails"`
+	Userdataid            string                                        `json:"userdataid"`
+	Userdataname          string                                        `json:"userdataname"`
+	Userdatapolicy        string                                        `json:"userdatapolicy"`
 	Userid                string                                        `json:"userid"`
 	Username              string                                        `json:"username"`
 	Vgpu                  string                                        `json:"vgpu"`
@@ -534,6 +542,8 @@ func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachinePara
 type AssignVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []AssignVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
 	Backupofferingname    string                                      `json:"backupofferingname"`
 	Bootmode              string                                      `json:"bootmode"`
@@ -559,6 +569,7 @@ type AssignVirtualMachineResponse struct {
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
 	Hasannotations        bool                                        `json:"hasannotations"`
+	Hostcontrolstate      string                                      `json:"hostcontrolstate"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
@@ -604,6 +615,11 @@ type AssignVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Userdata              string                                      `json:"userdata"`
+	Userdatadetails       string                                      `json:"userdatadetails"`
+	Userdataid            string                                      `json:"userdataid"`
+	Userdataname          string                                      `json:"userdataname"`
+	Userdatapolicy        string                                      `json:"userdatapolicy"`
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
@@ -835,7 +851,7 @@ func (s *VirtualMachineService) NewChangeServiceForVirtualMachineParams(id strin
 	return p
 }
 
-// Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect. Note that it only changes the VM's compute offering and it does not update the root volume offering. If the Service Offering has a root disk size the volume will be resized only if using API command 'scaleVirtualMachine'.
+// (This API is deprecated, use scaleVirtualMachine API)Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect.
 func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error) {
 	resp, err := s.cs.newRequest("changeServiceForVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -853,6 +869,8 @@ func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceF
 type ChangeServiceForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ChangeServiceForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
 	Backupofferingname    string                                                `json:"backupofferingname"`
 	Bootmode              string                                                `json:"bootmode"`
@@ -878,6 +896,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Guestosid             string                                                `json:"guestosid"`
 	Haenable              bool                                                  `json:"haenable"`
 	Hasannotations        bool                                                  `json:"hasannotations"`
+	Hostcontrolstate      string                                                `json:"hostcontrolstate"`
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
@@ -923,6 +942,11 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                `json:"templatedisplaytext"`
 	Templateid            string                                                `json:"templateid"`
 	Templatename          string                                                `json:"templatename"`
+	Userdata              string                                                `json:"userdata"`
+	Userdatadetails       string                                                `json:"userdatadetails"`
+	Userdataid            string                                                `json:"userdataid"`
+	Userdataname          string                                                `json:"userdataname"`
+	Userdatapolicy        string                                                `json:"userdatapolicy"`
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
@@ -1149,6 +1173,13 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
+	if v, found := p.p["iodriverpolicy"]; found {
+		u.Set("iodriverpolicy", v.(string))
+	}
+	if v, found := p.p["iothreadsenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("iothreadsenabled", vv)
+	}
 	if v, found := p.p["ip6address"]; found {
 		u.Set("ip6address", v.(string))
 	}
@@ -1235,6 +1266,16 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["userdata"]; found {
 		u.Set("userdata", v.(string))
+	}
+	if v, found := p.p["userdatadetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -1583,6 +1624,36 @@ func (p *DeployVirtualMachineParams) GetHypervisor() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetIodriverpolicy(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iodriverpolicy"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetIodriverpolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["iodriverpolicy"].(string)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetIothreadsenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["iothreadsenabled"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetIothreadsenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["iothreadsenabled"].(bool)
 	return value, ok
 }
 
@@ -1944,6 +2015,36 @@ func (p *DeployVirtualMachineParams) GetUserdata() (string, bool) {
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetUserdatadetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdatadetails"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetUserdatadetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdatadetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2008,6 +2109,8 @@ func (s *VirtualMachineService) DeployVirtualMachine(p *DeployVirtualMachinePara
 type DeployVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []DeployVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
 	Backupofferingname    string                                      `json:"backupofferingname"`
 	Bootmode              string                                      `json:"bootmode"`
@@ -2033,6 +2136,7 @@ type DeployVirtualMachineResponse struct {
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
 	Hasannotations        bool                                        `json:"hasannotations"`
+	Hostcontrolstate      string                                      `json:"hostcontrolstate"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
@@ -2078,6 +2182,11 @@ type DeployVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Userdata              string                                      `json:"userdata"`
+	Userdatadetails       string                                      `json:"userdatadetails"`
+	Userdataid            string                                      `json:"userdataid"`
+	Userdataname          string                                      `json:"userdataname"`
+	Userdatapolicy        string                                      `json:"userdatapolicy"`
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
@@ -2269,6 +2378,8 @@ func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachinePa
 type DestroyVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []DestroyVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
 	Backupofferingname    string                                       `json:"backupofferingname"`
 	Bootmode              string                                       `json:"bootmode"`
@@ -2294,6 +2405,7 @@ type DestroyVirtualMachineResponse struct {
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
 	Hasannotations        bool                                         `json:"hasannotations"`
+	Hostcontrolstate      string                                       `json:"hostcontrolstate"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
@@ -2339,6 +2451,11 @@ type DestroyVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Userdata              string                                       `json:"userdata"`
+	Userdatadetails       string                                       `json:"userdatadetails"`
+	Userdataid            string                                       `json:"userdataid"`
+	Userdataname          string                                       `json:"userdataname"`
+	Userdatapolicy        string                                       `json:"userdatapolicy"`
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
@@ -2570,6 +2687,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["autoscalevmgroupid"]; found {
+		u.Set("autoscalevmgroupid", v.(string))
+	}
 	if v, found := p.p["backupofferingid"]; found {
 		u.Set("backupofferingid", v.(string))
 	}
@@ -2674,6 +2794,10 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["templateid"]; found {
 		u.Set("templateid", v.(string))
 	}
+	if v, found := p.p["userdata"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("userdata", vv)
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -2728,6 +2852,21 @@ func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetAutoscalevmgroupid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["autoscalevmgroupid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetAutoscalevmgroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["autoscalevmgroupid"].(string)
 	return value, ok
 }
 
@@ -3181,6 +3320,21 @@ func (p *ListVirtualMachinesParams) GetTemplateid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetUserdata(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdata"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetUserdata() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3340,6 +3494,8 @@ type ListVirtualMachinesResponse struct {
 type VirtualMachine struct {
 	Account               string                        `json:"account"`
 	Affinitygroup         []VirtualMachineAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                        `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                        `json:"backupofferingid"`
 	Backupofferingname    string                        `json:"backupofferingname"`
 	Bootmode              string                        `json:"bootmode"`
@@ -3365,6 +3521,7 @@ type VirtualMachine struct {
 	Guestosid             string                        `json:"guestosid"`
 	Haenable              bool                          `json:"haenable"`
 	Hasannotations        bool                          `json:"hasannotations"`
+	Hostcontrolstate      string                        `json:"hostcontrolstate"`
 	Hostid                string                        `json:"hostid"`
 	Hostname              string                        `json:"hostname"`
 	Hypervisor            string                        `json:"hypervisor"`
@@ -3410,6 +3567,11 @@ type VirtualMachine struct {
 	Templatedisplaytext   string                        `json:"templatedisplaytext"`
 	Templateid            string                        `json:"templateid"`
 	Templatename          string                        `json:"templatename"`
+	Userdata              string                        `json:"userdata"`
+	Userdatadetails       string                        `json:"userdatadetails"`
+	Userdataid            string                        `json:"userdataid"`
+	Userdataname          string                        `json:"userdataname"`
+	Userdatapolicy        string                        `json:"userdatapolicy"`
 	Userid                string                        `json:"userid"`
 	Username              string                        `json:"username"`
 	Vgpu                  string                        `json:"vgpu"`
@@ -3504,6 +3666,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
+	}
+	if v, found := p.p["autoscalevmgroupid"]; found {
+		u.Set("autoscalevmgroupid", v.(string))
 	}
 	if v, found := p.p["backupofferingid"]; found {
 		u.Set("backupofferingid", v.(string))
@@ -3609,6 +3774,10 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["templateid"]; found {
 		u.Set("templateid", v.(string))
 	}
+	if v, found := p.p["userdata"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("userdata", vv)
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -3663,6 +3832,21 @@ func (p *ListVirtualMachinesMetricsParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetAutoscalevmgroupid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["autoscalevmgroupid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetAutoscalevmgroupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["autoscalevmgroupid"].(string)
 	return value, ok
 }
 
@@ -4116,6 +4300,21 @@ func (p *ListVirtualMachinesMetricsParams) GetTemplateid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetUserdata(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdata"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetUserdata() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4275,6 +4474,8 @@ type ListVirtualMachinesMetricsResponse struct {
 type VirtualMachinesMetric struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []VirtualMachinesMetricAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`
 	Backupofferingname    string                               `json:"backupofferingname"`
 	Bootmode              string                               `json:"bootmode"`
@@ -4304,6 +4505,7 @@ type VirtualMachinesMetric struct {
 	Guestosid             string                               `json:"guestosid"`
 	Haenable              bool                                 `json:"haenable"`
 	Hasannotations        bool                                 `json:"hasannotations"`
+	Hostcontrolstate      string                               `json:"hostcontrolstate"`
 	Hostid                string                               `json:"hostid"`
 	Hostname              string                               `json:"hostname"`
 	Hypervisor            string                               `json:"hypervisor"`
@@ -4353,6 +4555,11 @@ type VirtualMachinesMetric struct {
 	Templatedisplaytext   string                               `json:"templatedisplaytext"`
 	Templateid            string                               `json:"templateid"`
 	Templatename          string                               `json:"templatename"`
+	Userdata              string                               `json:"userdata"`
+	Userdatadetails       string                               `json:"userdatadetails"`
+	Userdataid            string                               `json:"userdataid"`
+	Userdataname          string                               `json:"userdataname"`
+	Userdatapolicy        string                               `json:"userdatapolicy"`
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`
@@ -4561,6 +4768,8 @@ func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachinePa
 type MigrateVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
 	Backupofferingname    string                                       `json:"backupofferingname"`
 	Bootmode              string                                       `json:"bootmode"`
@@ -4586,6 +4795,7 @@ type MigrateVirtualMachineResponse struct {
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
 	Hasannotations        bool                                         `json:"hasannotations"`
+	Hostcontrolstate      string                                       `json:"hostcontrolstate"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
@@ -4631,6 +4841,11 @@ type MigrateVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Userdata              string                                       `json:"userdata"`
+	Userdatadetails       string                                       `json:"userdatadetails"`
+	Userdataid            string                                       `json:"userdataid"`
+	Userdataname          string                                       `json:"userdataname"`
+	Userdatapolicy        string                                       `json:"userdatapolicy"`
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
@@ -4839,6 +5054,8 @@ func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtua
 type MigrateVirtualMachineWithVolumeResponse struct {
 	Account               string                                                 `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineWithVolumeResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                                 `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                                 `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                 `json:"backupofferingid"`
 	Backupofferingname    string                                                 `json:"backupofferingname"`
 	Bootmode              string                                                 `json:"bootmode"`
@@ -4864,6 +5081,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Guestosid             string                                                 `json:"guestosid"`
 	Haenable              bool                                                   `json:"haenable"`
 	Hasannotations        bool                                                   `json:"hasannotations"`
+	Hostcontrolstate      string                                                 `json:"hostcontrolstate"`
 	Hostid                string                                                 `json:"hostid"`
 	Hostname              string                                                 `json:"hostname"`
 	Hypervisor            string                                                 `json:"hypervisor"`
@@ -4909,6 +5127,11 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Templatedisplaytext   string                                                 `json:"templatedisplaytext"`
 	Templateid            string                                                 `json:"templateid"`
 	Templatename          string                                                 `json:"templatename"`
+	Userdata              string                                                 `json:"userdata"`
+	Userdatadetails       string                                                 `json:"userdatadetails"`
+	Userdataid            string                                                 `json:"userdataid"`
+	Userdataname          string                                                 `json:"userdataname"`
+	Userdatapolicy        string                                                 `json:"userdatapolicy"`
 	Userid                string                                                 `json:"userid"`
 	Username              string                                                 `json:"username"`
 	Vgpu                  string                                                 `json:"vgpu"`
@@ -5100,6 +5323,8 @@ func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachinePara
 type RebootVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []RebootVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
 	Backupofferingname    string                                      `json:"backupofferingname"`
 	Bootmode              string                                      `json:"bootmode"`
@@ -5125,6 +5350,7 @@ type RebootVirtualMachineResponse struct {
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
 	Hasannotations        bool                                        `json:"hasannotations"`
+	Hostcontrolstate      string                                      `json:"hostcontrolstate"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
@@ -5170,6 +5396,11 @@ type RebootVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Userdata              string                                      `json:"userdata"`
+	Userdatadetails       string                                      `json:"userdatadetails"`
+	Userdataid            string                                      `json:"userdataid"`
+	Userdataname          string                                      `json:"userdataname"`
+	Userdatapolicy        string                                      `json:"userdatapolicy"`
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
@@ -5303,6 +5534,8 @@ func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachinePa
 type RecoverVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RecoverVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
 	Backupofferingname    string                                       `json:"backupofferingname"`
 	Bootmode              string                                       `json:"bootmode"`
@@ -5328,6 +5561,7 @@ type RecoverVirtualMachineResponse struct {
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
 	Hasannotations        bool                                         `json:"hasannotations"`
+	Hostcontrolstate      string                                       `json:"hostcontrolstate"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
@@ -5373,6 +5607,11 @@ type RecoverVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Userdata              string                                       `json:"userdata"`
+	Userdatadetails       string                                       `json:"userdatadetails"`
+	Userdataid            string                                       `json:"userdataid"`
+	Userdataname          string                                       `json:"userdataname"`
+	Userdatapolicy        string                                       `json:"userdatapolicy"`
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
@@ -5545,6 +5784,8 @@ func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirt
 type RemoveNicFromVirtualMachineResponse struct {
 	Account               string                                             `json:"account"`
 	Affinitygroup         []RemoveNicFromVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                             `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                             `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                             `json:"backupofferingid"`
 	Backupofferingname    string                                             `json:"backupofferingname"`
 	Bootmode              string                                             `json:"bootmode"`
@@ -5570,6 +5811,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Guestosid             string                                             `json:"guestosid"`
 	Haenable              bool                                               `json:"haenable"`
 	Hasannotations        bool                                               `json:"hasannotations"`
+	Hostcontrolstate      string                                             `json:"hostcontrolstate"`
 	Hostid                string                                             `json:"hostid"`
 	Hostname              string                                             `json:"hostname"`
 	Hypervisor            string                                             `json:"hypervisor"`
@@ -5615,6 +5857,11 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Templatedisplaytext   string                                             `json:"templatedisplaytext"`
 	Templateid            string                                             `json:"templateid"`
 	Templatename          string                                             `json:"templatename"`
+	Userdata              string                                             `json:"userdata"`
+	Userdatadetails       string                                             `json:"userdatadetails"`
+	Userdataid            string                                             `json:"userdataid"`
+	Userdataname          string                                             `json:"userdataname"`
+	Userdatapolicy        string                                             `json:"userdatapolicy"`
 	Userid                string                                             `json:"userid"`
 	Username              string                                             `json:"username"`
 	Vgpu                  string                                             `json:"vgpu"`
@@ -5768,6 +6015,8 @@ func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordF
 type ResetPasswordForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetPasswordForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
 	Backupofferingname    string                                                `json:"backupofferingname"`
 	Bootmode              string                                                `json:"bootmode"`
@@ -5793,6 +6042,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Guestosid             string                                                `json:"guestosid"`
 	Haenable              bool                                                  `json:"haenable"`
 	Hasannotations        bool                                                  `json:"hasannotations"`
+	Hostcontrolstate      string                                                `json:"hostcontrolstate"`
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
@@ -5838,6 +6088,11 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                `json:"templatedisplaytext"`
 	Templateid            string                                                `json:"templateid"`
 	Templatename          string                                                `json:"templatename"`
+	Userdata              string                                                `json:"userdata"`
+	Userdatadetails       string                                                `json:"userdatadetails"`
+	Userdataid            string                                                `json:"userdataid"`
+	Userdataname          string                                                `json:"userdataname"`
+	Userdatapolicy        string                                                `json:"userdatapolicy"`
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
@@ -6009,6 +6264,8 @@ func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachinePa
 type RestoreVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RestoreVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
 	Backupofferingname    string                                       `json:"backupofferingname"`
 	Bootmode              string                                       `json:"bootmode"`
@@ -6034,6 +6291,7 @@ type RestoreVirtualMachineResponse struct {
 	Guestosid             string                                       `json:"guestosid"`
 	Haenable              bool                                         `json:"haenable"`
 	Hasannotations        bool                                         `json:"hasannotations"`
+	Hostcontrolstate      string                                       `json:"hostcontrolstate"`
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
@@ -6079,6 +6337,11 @@ type RestoreVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Userdata              string                                       `json:"userdata"`
+	Userdatadetails       string                                       `json:"userdatadetails"`
+	Userdataid            string                                       `json:"userdataid"`
+	Userdataname          string                                       `json:"userdataname"`
+	Userdatapolicy        string                                       `json:"userdatapolicy"`
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
@@ -6310,7 +6573,7 @@ func (s *VirtualMachineService) NewScaleVirtualMachineParams(id string, serviceo
 	return p
 }
 
-// Scales the virtual machine to a new service offering. This command also takes into account the Volume and it may resize the root disk size according to the service offering.
+// Scales the virtual machine to a new service offering. This command also considers the volume size in the service offering or disk offering linked to the new service offering and apply all characteristics to the root volume.
 func (s *VirtualMachineService) ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error) {
 	resp, err := s.cs.newRequest("scaleVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -6363,6 +6626,10 @@ func (p *StartVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
 	}
+	if v, found := p.p["considerlasthost"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("considerlasthost", vv)
+	}
 	if v, found := p.p["deploymentplanner"]; found {
 		u.Set("deploymentplanner", v.(string))
 	}
@@ -6405,6 +6672,21 @@ func (p *StartVirtualMachineParams) GetClusterid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *StartVirtualMachineParams) SetConsiderlasthost(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["considerlasthost"] = v
+}
+
+func (p *StartVirtualMachineParams) GetConsiderlasthost() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["considerlasthost"].(bool)
 	return value, ok
 }
 
@@ -6515,6 +6797,8 @@ func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams
 type StartVirtualMachineResponse struct {
 	Account               string                                     `json:"account"`
 	Affinitygroup         []StartVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                     `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                     `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                     `json:"backupofferingid"`
 	Backupofferingname    string                                     `json:"backupofferingname"`
 	Bootmode              string                                     `json:"bootmode"`
@@ -6540,6 +6824,7 @@ type StartVirtualMachineResponse struct {
 	Guestosid             string                                     `json:"guestosid"`
 	Haenable              bool                                       `json:"haenable"`
 	Hasannotations        bool                                       `json:"hasannotations"`
+	Hostcontrolstate      string                                     `json:"hostcontrolstate"`
 	Hostid                string                                     `json:"hostid"`
 	Hostname              string                                     `json:"hostname"`
 	Hypervisor            string                                     `json:"hypervisor"`
@@ -6585,6 +6870,11 @@ type StartVirtualMachineResponse struct {
 	Templatedisplaytext   string                                     `json:"templatedisplaytext"`
 	Templateid            string                                     `json:"templateid"`
 	Templatename          string                                     `json:"templatename"`
+	Userdata              string                                     `json:"userdata"`
+	Userdatadetails       string                                     `json:"userdatadetails"`
+	Userdataid            string                                     `json:"userdataid"`
+	Userdataname          string                                     `json:"userdataname"`
+	Userdatapolicy        string                                     `json:"userdatapolicy"`
 	Userid                string                                     `json:"userid"`
 	Username              string                                     `json:"username"`
 	Vgpu                  string                                     `json:"vgpu"`
@@ -6757,6 +7047,8 @@ func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) 
 type StopVirtualMachineResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []StopVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`
 	Backupofferingname    string                                    `json:"backupofferingname"`
 	Bootmode              string                                    `json:"bootmode"`
@@ -6782,6 +7074,7 @@ type StopVirtualMachineResponse struct {
 	Guestosid             string                                    `json:"guestosid"`
 	Haenable              bool                                      `json:"haenable"`
 	Hasannotations        bool                                      `json:"hasannotations"`
+	Hostcontrolstate      string                                    `json:"hostcontrolstate"`
 	Hostid                string                                    `json:"hostid"`
 	Hostname              string                                    `json:"hostname"`
 	Hypervisor            string                                    `json:"hypervisor"`
@@ -6827,6 +7120,11 @@ type StopVirtualMachineResponse struct {
 	Templatedisplaytext   string                                    `json:"templatedisplaytext"`
 	Templateid            string                                    `json:"templateid"`
 	Templatename          string                                    `json:"templatename"`
+	Userdata              string                                    `json:"userdata"`
+	Userdatadetails       string                                    `json:"userdatadetails"`
+	Userdataid            string                                    `json:"userdataid"`
+	Userdataname          string                                    `json:"userdataname"`
+	Userdatapolicy        string                                    `json:"userdatapolicy"`
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
@@ -6999,6 +7297,8 @@ func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefau
 type UpdateDefaultNicForVirtualMachineResponse struct {
 	Account               string                                                   `json:"account"`
 	Affinitygroup         []UpdateDefaultNicForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                                   `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                                   `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                   `json:"backupofferingid"`
 	Backupofferingname    string                                                   `json:"backupofferingname"`
 	Bootmode              string                                                   `json:"bootmode"`
@@ -7024,6 +7324,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Guestosid             string                                                   `json:"guestosid"`
 	Haenable              bool                                                     `json:"haenable"`
 	Hasannotations        bool                                                     `json:"hasannotations"`
+	Hostcontrolstate      string                                                   `json:"hostcontrolstate"`
 	Hostid                string                                                   `json:"hostid"`
 	Hostname              string                                                   `json:"hostname"`
 	Hypervisor            string                                                   `json:"hypervisor"`
@@ -7069,6 +7370,11 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                   `json:"templatedisplaytext"`
 	Templateid            string                                                   `json:"templateid"`
 	Templatename          string                                                   `json:"templatename"`
+	Userdata              string                                                   `json:"userdata"`
+	Userdatadetails       string                                                   `json:"userdatadetails"`
+	Userdataid            string                                                   `json:"userdataid"`
+	Userdataname          string                                                   `json:"userdataname"`
+	Userdatapolicy        string                                                   `json:"userdatapolicy"`
 	Userid                string                                                   `json:"userid"`
 	Username              string                                                   `json:"username"`
 	Vgpu                  string                                                   `json:"vgpu"`
@@ -7218,6 +7524,16 @@ func (p *UpdateVirtualMachineParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["userdata"]; found {
 		u.Set("userdata", v.(string))
+	}
+	if v, found := p.p["userdatadetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
 	}
 	return u
 }
@@ -7491,6 +7807,36 @@ func (p *UpdateVirtualMachineParams) GetUserdata() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateVirtualMachineParams) SetUserdatadetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdatadetails"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetUserdatadetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdatadetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *UpdateVirtualMachineParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *UpdateVirtualMachineParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new UpdateVirtualMachineParams instance,
 // as then you are sure you have configured all required params
 func (s *VirtualMachineService) NewUpdateVirtualMachineParams(id string) *UpdateVirtualMachineParams {
@@ -7518,6 +7864,8 @@ func (s *VirtualMachineService) UpdateVirtualMachine(p *UpdateVirtualMachinePara
 type UpdateVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []UpdateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
 	Backupofferingname    string                                      `json:"backupofferingname"`
 	Bootmode              string                                      `json:"bootmode"`
@@ -7543,6 +7891,7 @@ type UpdateVirtualMachineResponse struct {
 	Guestosid             string                                      `json:"guestosid"`
 	Haenable              bool                                        `json:"haenable"`
 	Hasannotations        bool                                        `json:"hasannotations"`
+	Hostcontrolstate      string                                      `json:"hostcontrolstate"`
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
@@ -7588,6 +7937,11 @@ type UpdateVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Userdata              string                                      `json:"userdata"`
+	Userdatadetails       string                                      `json:"userdatadetails"`
+	Userdataid            string                                      `json:"userdataid"`
+	Userdataname          string                                      `json:"userdataname"`
+	Userdatapolicy        string                                      `json:"userdatapolicy"`
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`

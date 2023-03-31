@@ -37,7 +37,7 @@ type AutoScaleServiceIface interface {
 	CreateCondition(p *CreateConditionParams) (*CreateConditionResponse, error)
 	NewCreateConditionParams(counterid string, relationaloperator string, threshold int64) *CreateConditionParams
 	CreateCounter(p *CreateCounterParams) (*CreateCounterResponse, error)
-	NewCreateCounterParams(name string, source string, value string) *CreateCounterParams
+	NewCreateCounterParams(name string, provider string, source string, value string) *CreateCounterParams
 	DeleteAutoScalePolicy(p *DeleteAutoScalePolicyParams) (*DeleteAutoScalePolicyResponse, error)
 	NewDeleteAutoScalePolicyParams(id string) *DeleteAutoScalePolicyParams
 	DeleteAutoScaleVmGroup(p *DeleteAutoScaleVmGroupParams) (*DeleteAutoScaleVmGroupResponse, error)
@@ -54,9 +54,13 @@ type AutoScaleServiceIface interface {
 	NewEnableAutoScaleVmGroupParams(id string) *EnableAutoScaleVmGroupParams
 	ListAutoScalePolicies(p *ListAutoScalePoliciesParams) (*ListAutoScalePoliciesResponse, error)
 	NewListAutoScalePoliciesParams() *ListAutoScalePoliciesParams
+	GetAutoScalePolicyID(name string, opts ...OptionFunc) (string, int, error)
+	GetAutoScalePolicyByName(name string, opts ...OptionFunc) (*AutoScalePolicy, int, error)
 	GetAutoScalePolicyByID(id string, opts ...OptionFunc) (*AutoScalePolicy, int, error)
 	ListAutoScaleVmGroups(p *ListAutoScaleVmGroupsParams) (*ListAutoScaleVmGroupsResponse, error)
 	NewListAutoScaleVmGroupsParams() *ListAutoScaleVmGroupsParams
+	GetAutoScaleVmGroupID(name string, opts ...OptionFunc) (string, int, error)
+	GetAutoScaleVmGroupByName(name string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error)
 	GetAutoScaleVmGroupByID(id string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error)
 	ListAutoScaleVmProfiles(p *ListAutoScaleVmProfilesParams) (*ListAutoScaleVmProfilesResponse, error)
 	NewListAutoScaleVmProfilesParams() *ListAutoScaleVmProfilesParams
@@ -96,6 +100,9 @@ func (p *CreateAutoScalePolicyParams) toURLValues() url.Values {
 	if v, found := p.p["duration"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("duration", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["quiettime"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -146,6 +153,21 @@ func (p *CreateAutoScalePolicyParams) GetDuration() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["duration"].(int)
+	return value, ok
+}
+
+func (p *CreateAutoScalePolicyParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *CreateAutoScalePolicyParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -220,6 +242,7 @@ type CreateAutoScalePolicyResponse struct {
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
 	Jobstatus  int      `json:"jobstatus"`
+	Name       string   `json:"name"`
 	Project    string   `json:"project"`
 	Projectid  string   `json:"projectid"`
 	Quiettime  int      `json:"quiettime"`
@@ -252,6 +275,9 @@ func (p *CreateAutoScaleVmGroupParams) toURLValues() url.Values {
 	if v, found := p.p["minmembers"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("minmembers", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["scaledownpolicyids"]; found {
 		vv := strings.Join(v.([]string), ",")
@@ -339,6 +365,21 @@ func (p *CreateAutoScaleVmGroupParams) GetMinmembers() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["minmembers"].(int)
+	return value, ok
+}
+
+func (p *CreateAutoScaleVmGroupParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *CreateAutoScaleVmGroupParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -437,23 +478,34 @@ func (s *AutoScaleService) CreateAutoScaleVmGroup(p *CreateAutoScaleVmGroupParam
 }
 
 type CreateAutoScaleVmGroupResponse struct {
-	Account           string   `json:"account"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Fordisplay        bool     `json:"fordisplay"`
-	Id                string   `json:"id"`
-	Interval          int      `json:"interval"`
-	JobID             string   `json:"jobid"`
-	Jobstatus         int      `json:"jobstatus"`
-	Lbruleid          string   `json:"lbruleid"`
-	Maxmembers        int      `json:"maxmembers"`
-	Minmembers        int      `json:"minmembers"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Scaledownpolicies []string `json:"scaledownpolicies"`
-	Scaleuppolicies   []string `json:"scaleuppolicies"`
-	State             string   `json:"state"`
-	Vmprofileid       string   `json:"vmprofileid"`
+	Account                      string   `json:"account"`
+	Associatednetworkid          string   `json:"associatednetworkid"`
+	Associatednetworkname        string   `json:"associatednetworkname"`
+	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
+	Created                      string   `json:"created"`
+	Domain                       string   `json:"domain"`
+	Domainid                     string   `json:"domainid"`
+	Fordisplay                   bool     `json:"fordisplay"`
+	Hasannotations               bool     `json:"hasannotations"`
+	Id                           string   `json:"id"`
+	Interval                     int      `json:"interval"`
+	JobID                        string   `json:"jobid"`
+	Jobstatus                    int      `json:"jobstatus"`
+	Lbprovider                   string   `json:"lbprovider"`
+	Lbruleid                     string   `json:"lbruleid"`
+	Maxmembers                   int      `json:"maxmembers"`
+	Minmembers                   int      `json:"minmembers"`
+	Name                         string   `json:"name"`
+	Privateport                  string   `json:"privateport"`
+	Project                      string   `json:"project"`
+	Projectid                    string   `json:"projectid"`
+	Publicip                     string   `json:"publicip"`
+	Publicipid                   string   `json:"publicipid"`
+	Publicport                   string   `json:"publicport"`
+	Scaledownpolicies            []string `json:"scaledownpolicies"`
+	Scaleuppolicies              []string `json:"scaleuppolicies"`
+	State                        string   `json:"state"`
+	Vmprofileid                  string   `json:"vmprofileid"`
 }
 
 type CreateAutoScaleVmProfileParams struct {
@@ -465,6 +517,9 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
 	if v, found := p.p["autoscaleuserid"]; found {
 		u.Set("autoscaleuserid", v.(string))
 	}
@@ -475,16 +530,26 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("counterparam[%d].value", i), m[k])
 		}
 	}
-	if v, found := p.p["destroyvmgraceperiod"]; found {
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["expungevmgraceperiod"]; found {
 		vv := strconv.Itoa(v.(int))
-		u.Set("destroyvmgraceperiod", vv)
+		u.Set("expungevmgraceperiod", vv)
 	}
 	if v, found := p.p["fordisplay"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("fordisplay", vv)
 	}
 	if v, found := p.p["otherdeployparams"]; found {
-		u.Set("otherdeployparams", v.(string))
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("otherdeployparams[%d].key", i), k)
+			u.Set(fmt.Sprintf("otherdeployparams[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
 	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
@@ -492,10 +557,28 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["templateid"]; found {
 		u.Set("templateid", v.(string))
 	}
+	if v, found := p.p["userdata"]; found {
+		u.Set("userdata", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *CreateAutoScaleVmProfileParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
 }
 
 func (p *CreateAutoScaleVmProfileParams) SetAutoscaleuserid(v string) {
@@ -528,18 +611,33 @@ func (p *CreateAutoScaleVmProfileParams) GetCounterparam() (map[string]string, b
 	return value, ok
 }
 
-func (p *CreateAutoScaleVmProfileParams) SetDestroyvmgraceperiod(v int) {
+func (p *CreateAutoScaleVmProfileParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	p.p["destroyvmgraceperiod"] = v
+	p.p["domainid"] = v
 }
 
-func (p *CreateAutoScaleVmProfileParams) GetDestroyvmgraceperiod() (int, bool) {
+func (p *CreateAutoScaleVmProfileParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["destroyvmgraceperiod"].(int)
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *CreateAutoScaleVmProfileParams) SetExpungevmgraceperiod(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["expungevmgraceperiod"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetExpungevmgraceperiod() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["expungevmgraceperiod"].(int)
 	return value, ok
 }
 
@@ -558,18 +656,33 @@ func (p *CreateAutoScaleVmProfileParams) GetFordisplay() (bool, bool) {
 	return value, ok
 }
 
-func (p *CreateAutoScaleVmProfileParams) SetOtherdeployparams(v string) {
+func (p *CreateAutoScaleVmProfileParams) SetOtherdeployparams(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["otherdeployparams"] = v
 }
 
-func (p *CreateAutoScaleVmProfileParams) GetOtherdeployparams() (string, bool) {
+func (p *CreateAutoScaleVmProfileParams) GetOtherdeployparams() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["otherdeployparams"].(string)
+	value, ok := p.p["otherdeployparams"].(map[string]string)
+	return value, ok
+}
+
+func (p *CreateAutoScaleVmProfileParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
 	return value, ok
 }
 
@@ -600,6 +713,21 @@ func (p *CreateAutoScaleVmProfileParams) GetTemplateid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
+func (p *CreateAutoScaleVmProfileParams) SetUserdata(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdata"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(string)
 	return value, ok
 }
 
@@ -665,21 +793,22 @@ func (s *AutoScaleService) CreateAutoScaleVmProfile(p *CreateAutoScaleVmProfileP
 }
 
 type CreateAutoScaleVmProfileResponse struct {
-	Account              string `json:"account"`
-	Autoscaleuserid      string `json:"autoscaleuserid"`
-	Destroyvmgraceperiod int    `json:"destroyvmgraceperiod"`
-	Domain               string `json:"domain"`
-	Domainid             string `json:"domainid"`
-	Fordisplay           bool   `json:"fordisplay"`
-	Id                   string `json:"id"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Otherdeployparams    string `json:"otherdeployparams"`
-	Project              string `json:"project"`
-	Projectid            string `json:"projectid"`
-	Serviceofferingid    string `json:"serviceofferingid"`
-	Templateid           string `json:"templateid"`
-	Zoneid               string `json:"zoneid"`
+	Account              string            `json:"account"`
+	Autoscaleuserid      string            `json:"autoscaleuserid"`
+	Domain               string            `json:"domain"`
+	Domainid             string            `json:"domainid"`
+	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
+	Fordisplay           bool              `json:"fordisplay"`
+	Id                   string            `json:"id"`
+	JobID                string            `json:"jobid"`
+	Jobstatus            int               `json:"jobstatus"`
+	Otherdeployparams    map[string]string `json:"otherdeployparams"`
+	Project              string            `json:"project"`
+	Projectid            string            `json:"projectid"`
+	Serviceofferingid    string            `json:"serviceofferingid"`
+	Templateid           string            `json:"templateid"`
+	Userdata             string            `json:"userdata"`
+	Zoneid               string            `json:"zoneid"`
 }
 
 type CreateConditionParams struct {
@@ -699,6 +828,9 @@ func (p *CreateConditionParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
 	}
 	if v, found := p.p["relationaloperator"]; found {
 		u.Set("relationaloperator", v.(string))
@@ -755,6 +887,21 @@ func (p *CreateConditionParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateConditionParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *CreateConditionParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *CreateConditionParams) SetRelationaloperator(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -796,7 +943,7 @@ func (s *AutoScaleService) NewCreateConditionParams(counterid string, relational
 	return p
 }
 
-// Creates a condition
+// Creates a condition for VM auto scaling
 func (s *AutoScaleService) CreateCondition(p *CreateConditionParams) (*CreateConditionResponse, error) {
 	resp, err := s.cs.newRequest("createCondition", p.toURLValues())
 	if err != nil {
@@ -832,18 +979,20 @@ func (s *AutoScaleService) CreateCondition(p *CreateConditionParams) (*CreateCon
 }
 
 type CreateConditionResponse struct {
-	Account            string   `json:"account"`
-	Counter            []string `json:"counter"`
-	Domain             string   `json:"domain"`
-	Domainid           string   `json:"domainid"`
-	Id                 string   `json:"id"`
-	JobID              string   `json:"jobid"`
-	Jobstatus          int      `json:"jobstatus"`
-	Project            string   `json:"project"`
-	Projectid          string   `json:"projectid"`
-	Relationaloperator string   `json:"relationaloperator"`
-	Threshold          int64    `json:"threshold"`
-	Zoneid             string   `json:"zoneid"`
+	Account            string `json:"account"`
+	Counter            string `json:"counter"`
+	Counterid          string `json:"counterid"`
+	Countername        string `json:"countername"`
+	Domain             string `json:"domain"`
+	Domainid           string `json:"domainid"`
+	Id                 string `json:"id"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Project            string `json:"project"`
+	Projectid          string `json:"projectid"`
+	Relationaloperator string `json:"relationaloperator"`
+	Threshold          int64  `json:"threshold"`
+	Zoneid             string `json:"zoneid"`
 }
 
 type CreateCounterParams struct {
@@ -857,6 +1006,9 @@ func (p *CreateCounterParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
 	}
 	if v, found := p.p["source"]; found {
 		u.Set("source", v.(string))
@@ -879,6 +1031,21 @@ func (p *CreateCounterParams) GetName() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *CreateCounterParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *CreateCounterParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
 	return value, ok
 }
 
@@ -914,16 +1081,17 @@ func (p *CreateCounterParams) GetValue() (string, bool) {
 
 // You should always use this function to get a new CreateCounterParams instance,
 // as then you are sure you have configured all required params
-func (s *AutoScaleService) NewCreateCounterParams(name string, source string, value string) *CreateCounterParams {
+func (s *AutoScaleService) NewCreateCounterParams(name string, provider string, source string, value string) *CreateCounterParams {
 	p := &CreateCounterParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
+	p.p["provider"] = provider
 	p.p["source"] = source
 	p.p["value"] = value
 	return p
 }
 
-// Adds metric counter
+// Adds metric counter for VM auto scaling
 func (s *AutoScaleService) CreateCounter(p *CreateCounterParams) (*CreateCounterResponse, error) {
 	resp, err := s.cs.newRequest("createCounter", p.toURLValues())
 	if err != nil {
@@ -963,6 +1131,7 @@ type CreateCounterResponse struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Name      string `json:"name"`
+	Provider  string `json:"provider"`
 	Source    string `json:"source"`
 	Value     string `json:"value"`
 	Zoneid    string `json:"zoneid"`
@@ -1053,10 +1222,29 @@ func (p *DeleteAutoScaleVmGroupParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cleanup"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("cleanup", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *DeleteAutoScaleVmGroupParams) SetCleanup(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cleanup"] = v
+}
+
+func (p *DeleteAutoScaleVmGroupParams) GetCleanup() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cleanup"].(bool)
+	return value, ok
 }
 
 func (p *DeleteAutoScaleVmGroupParams) SetId(v string) {
@@ -1235,7 +1423,7 @@ func (s *AutoScaleService) NewDeleteConditionParams(id string) *DeleteConditionP
 	return p
 }
 
-// Removes a condition
+// Removes a condition for VM auto scaling
 func (s *AutoScaleService) DeleteCondition(p *DeleteConditionParams) (*DeleteConditionResponse, error) {
 	resp, err := s.cs.newRequest("deleteCondition", p.toURLValues())
 	if err != nil {
@@ -1311,7 +1499,7 @@ func (s *AutoScaleService) NewDeleteCounterParams(id string) *DeleteCounterParam
 	return p
 }
 
-// Deletes a counter
+// Deletes a counter for VM auto scaling
 func (s *AutoScaleService) DeleteCounter(p *DeleteCounterParams) (*DeleteCounterResponse, error) {
 	resp, err := s.cs.newRequest("deleteCounter", p.toURLValues())
 	if err != nil {
@@ -1423,23 +1611,34 @@ func (s *AutoScaleService) DisableAutoScaleVmGroup(p *DisableAutoScaleVmGroupPar
 }
 
 type DisableAutoScaleVmGroupResponse struct {
-	Account           string   `json:"account"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Fordisplay        bool     `json:"fordisplay"`
-	Id                string   `json:"id"`
-	Interval          int      `json:"interval"`
-	JobID             string   `json:"jobid"`
-	Jobstatus         int      `json:"jobstatus"`
-	Lbruleid          string   `json:"lbruleid"`
-	Maxmembers        int      `json:"maxmembers"`
-	Minmembers        int      `json:"minmembers"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Scaledownpolicies []string `json:"scaledownpolicies"`
-	Scaleuppolicies   []string `json:"scaleuppolicies"`
-	State             string   `json:"state"`
-	Vmprofileid       string   `json:"vmprofileid"`
+	Account                      string   `json:"account"`
+	Associatednetworkid          string   `json:"associatednetworkid"`
+	Associatednetworkname        string   `json:"associatednetworkname"`
+	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
+	Created                      string   `json:"created"`
+	Domain                       string   `json:"domain"`
+	Domainid                     string   `json:"domainid"`
+	Fordisplay                   bool     `json:"fordisplay"`
+	Hasannotations               bool     `json:"hasannotations"`
+	Id                           string   `json:"id"`
+	Interval                     int      `json:"interval"`
+	JobID                        string   `json:"jobid"`
+	Jobstatus                    int      `json:"jobstatus"`
+	Lbprovider                   string   `json:"lbprovider"`
+	Lbruleid                     string   `json:"lbruleid"`
+	Maxmembers                   int      `json:"maxmembers"`
+	Minmembers                   int      `json:"minmembers"`
+	Name                         string   `json:"name"`
+	Privateport                  string   `json:"privateport"`
+	Project                      string   `json:"project"`
+	Projectid                    string   `json:"projectid"`
+	Publicip                     string   `json:"publicip"`
+	Publicipid                   string   `json:"publicipid"`
+	Publicport                   string   `json:"publicport"`
+	Scaledownpolicies            []string `json:"scaledownpolicies"`
+	Scaleuppolicies              []string `json:"scaleuppolicies"`
+	State                        string   `json:"state"`
+	Vmprofileid                  string   `json:"vmprofileid"`
 }
 
 type EnableAutoScaleVmGroupParams struct {
@@ -1517,23 +1716,34 @@ func (s *AutoScaleService) EnableAutoScaleVmGroup(p *EnableAutoScaleVmGroupParam
 }
 
 type EnableAutoScaleVmGroupResponse struct {
-	Account           string   `json:"account"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Fordisplay        bool     `json:"fordisplay"`
-	Id                string   `json:"id"`
-	Interval          int      `json:"interval"`
-	JobID             string   `json:"jobid"`
-	Jobstatus         int      `json:"jobstatus"`
-	Lbruleid          string   `json:"lbruleid"`
-	Maxmembers        int      `json:"maxmembers"`
-	Minmembers        int      `json:"minmembers"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Scaledownpolicies []string `json:"scaledownpolicies"`
-	Scaleuppolicies   []string `json:"scaleuppolicies"`
-	State             string   `json:"state"`
-	Vmprofileid       string   `json:"vmprofileid"`
+	Account                      string   `json:"account"`
+	Associatednetworkid          string   `json:"associatednetworkid"`
+	Associatednetworkname        string   `json:"associatednetworkname"`
+	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
+	Created                      string   `json:"created"`
+	Domain                       string   `json:"domain"`
+	Domainid                     string   `json:"domainid"`
+	Fordisplay                   bool     `json:"fordisplay"`
+	Hasannotations               bool     `json:"hasannotations"`
+	Id                           string   `json:"id"`
+	Interval                     int      `json:"interval"`
+	JobID                        string   `json:"jobid"`
+	Jobstatus                    int      `json:"jobstatus"`
+	Lbprovider                   string   `json:"lbprovider"`
+	Lbruleid                     string   `json:"lbruleid"`
+	Maxmembers                   int      `json:"maxmembers"`
+	Minmembers                   int      `json:"minmembers"`
+	Name                         string   `json:"name"`
+	Privateport                  string   `json:"privateport"`
+	Project                      string   `json:"project"`
+	Projectid                    string   `json:"projectid"`
+	Publicip                     string   `json:"publicip"`
+	Publicipid                   string   `json:"publicipid"`
+	Publicport                   string   `json:"publicport"`
+	Scaledownpolicies            []string `json:"scaledownpolicies"`
+	Scaleuppolicies              []string `json:"scaleuppolicies"`
+	State                        string   `json:"state"`
+	Vmprofileid                  string   `json:"vmprofileid"`
 }
 
 type ListAutoScalePoliciesParams struct {
@@ -1571,6 +1781,9 @@ func (p *ListAutoScalePoliciesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("page", vv)
@@ -1578,6 +1791,9 @@ func (p *ListAutoScalePoliciesParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
 	}
 	if v, found := p.p["vmgroupid"]; found {
 		u.Set("vmgroupid", v.(string))
@@ -1705,6 +1921,21 @@ func (p *ListAutoScalePoliciesParams) GetListall() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListAutoScalePoliciesParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListAutoScalePoliciesParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1735,6 +1966,21 @@ func (p *ListAutoScalePoliciesParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListAutoScalePoliciesParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListAutoScalePoliciesParams) SetVmgroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1756,6 +2002,56 @@ func (s *AutoScaleService) NewListAutoScalePoliciesParams() *ListAutoScalePolici
 	p := &ListAutoScalePoliciesParams{}
 	p.p = make(map[string]interface{})
 	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *AutoScaleService) GetAutoScalePolicyID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListAutoScalePoliciesParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListAutoScalePolicies(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.AutoScalePolicies[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.AutoScalePolicies {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *AutoScaleService) GetAutoScalePolicyByName(name string, opts ...OptionFunc) (*AutoScalePolicy, int, error) {
+	id, count, err := s.GetAutoScalePolicyID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetAutoScalePolicyByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
@@ -1821,6 +2117,7 @@ type AutoScalePolicy struct {
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
 	Jobstatus  int      `json:"jobstatus"`
+	Name       string   `json:"name"`
 	Project    string   `json:"project"`
 	Projectid  string   `json:"projectid"`
 	Quiettime  int      `json:"quiettime"`
@@ -1861,6 +2158,9 @@ func (p *ListAutoScaleVmGroupsParams) toURLValues() url.Values {
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -2005,6 +2305,21 @@ func (p *ListAutoScaleVmGroupsParams) GetListall() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListAutoScaleVmGroupsParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *ListAutoScaleVmGroupsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2104,6 +2419,56 @@ func (s *AutoScaleService) NewListAutoScaleVmGroupsParams() *ListAutoScaleVmGrou
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
+func (s *AutoScaleService) GetAutoScaleVmGroupID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListAutoScaleVmGroupsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListAutoScaleVmGroups(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.AutoScaleVmGroups[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.AutoScaleVmGroups {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *AutoScaleService) GetAutoScaleVmGroupByName(name string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error) {
+	id, count, err := s.GetAutoScaleVmGroupID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetAutoScaleVmGroupByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
 func (s *AutoScaleService) GetAutoScaleVmGroupByID(id string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error) {
 	p := &ListAutoScaleVmGroupsParams{}
 	p.p = make(map[string]interface{})
@@ -2157,23 +2522,34 @@ type ListAutoScaleVmGroupsResponse struct {
 }
 
 type AutoScaleVmGroup struct {
-	Account           string   `json:"account"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Fordisplay        bool     `json:"fordisplay"`
-	Id                string   `json:"id"`
-	Interval          int      `json:"interval"`
-	JobID             string   `json:"jobid"`
-	Jobstatus         int      `json:"jobstatus"`
-	Lbruleid          string   `json:"lbruleid"`
-	Maxmembers        int      `json:"maxmembers"`
-	Minmembers        int      `json:"minmembers"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Scaledownpolicies []string `json:"scaledownpolicies"`
-	Scaleuppolicies   []string `json:"scaleuppolicies"`
-	State             string   `json:"state"`
-	Vmprofileid       string   `json:"vmprofileid"`
+	Account                      string   `json:"account"`
+	Associatednetworkid          string   `json:"associatednetworkid"`
+	Associatednetworkname        string   `json:"associatednetworkname"`
+	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
+	Created                      string   `json:"created"`
+	Domain                       string   `json:"domain"`
+	Domainid                     string   `json:"domainid"`
+	Fordisplay                   bool     `json:"fordisplay"`
+	Hasannotations               bool     `json:"hasannotations"`
+	Id                           string   `json:"id"`
+	Interval                     int      `json:"interval"`
+	JobID                        string   `json:"jobid"`
+	Jobstatus                    int      `json:"jobstatus"`
+	Lbprovider                   string   `json:"lbprovider"`
+	Lbruleid                     string   `json:"lbruleid"`
+	Maxmembers                   int      `json:"maxmembers"`
+	Minmembers                   int      `json:"minmembers"`
+	Name                         string   `json:"name"`
+	Privateport                  string   `json:"privateport"`
+	Project                      string   `json:"project"`
+	Projectid                    string   `json:"projectid"`
+	Publicip                     string   `json:"publicip"`
+	Publicipid                   string   `json:"publicipid"`
+	Publicport                   string   `json:"publicport"`
+	Scaledownpolicies            []string `json:"scaledownpolicies"`
+	Scaleuppolicies              []string `json:"scaleuppolicies"`
+	State                        string   `json:"state"`
+	Vmprofileid                  string   `json:"vmprofileid"`
 }
 
 type ListAutoScaleVmProfilesParams struct {
@@ -2507,21 +2883,22 @@ type ListAutoScaleVmProfilesResponse struct {
 }
 
 type AutoScaleVmProfile struct {
-	Account              string `json:"account"`
-	Autoscaleuserid      string `json:"autoscaleuserid"`
-	Destroyvmgraceperiod int    `json:"destroyvmgraceperiod"`
-	Domain               string `json:"domain"`
-	Domainid             string `json:"domainid"`
-	Fordisplay           bool   `json:"fordisplay"`
-	Id                   string `json:"id"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Otherdeployparams    string `json:"otherdeployparams"`
-	Project              string `json:"project"`
-	Projectid            string `json:"projectid"`
-	Serviceofferingid    string `json:"serviceofferingid"`
-	Templateid           string `json:"templateid"`
-	Zoneid               string `json:"zoneid"`
+	Account              string            `json:"account"`
+	Autoscaleuserid      string            `json:"autoscaleuserid"`
+	Domain               string            `json:"domain"`
+	Domainid             string            `json:"domainid"`
+	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
+	Fordisplay           bool              `json:"fordisplay"`
+	Id                   string            `json:"id"`
+	JobID                string            `json:"jobid"`
+	Jobstatus            int               `json:"jobstatus"`
+	Otherdeployparams    map[string]string `json:"otherdeployparams"`
+	Project              string            `json:"project"`
+	Projectid            string            `json:"projectid"`
+	Serviceofferingid    string            `json:"serviceofferingid"`
+	Templateid           string            `json:"templateid"`
+	Userdata             string            `json:"userdata"`
+	Zoneid               string            `json:"zoneid"`
 }
 
 type ListConditionsParams struct {
@@ -2566,6 +2943,9 @@ func (p *ListConditionsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["policyid"]; found {
 		u.Set("policyid", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
 	}
 	return u
 }
@@ -2720,6 +3100,21 @@ func (p *ListConditionsParams) GetPolicyid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListConditionsParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListConditionsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListConditionsParams instance,
 // as then you are sure you have configured all required params
 func (s *AutoScaleService) NewListConditionsParams() *ListConditionsParams {
@@ -2761,7 +3156,7 @@ func (s *AutoScaleService) GetConditionByID(id string, opts ...OptionFunc) (*Con
 	return nil, l.Count, fmt.Errorf("There is more then one result for Condition UUID: %s!", id)
 }
 
-// List Conditions for the specific user
+// List Conditions for VM auto scaling
 func (s *AutoScaleService) ListConditions(p *ListConditionsParams) (*ListConditionsResponse, error) {
 	resp, err := s.cs.newRequest("listConditions", p.toURLValues())
 	if err != nil {
@@ -2782,18 +3177,20 @@ type ListConditionsResponse struct {
 }
 
 type Condition struct {
-	Account            string   `json:"account"`
-	Counter            []string `json:"counter"`
-	Domain             string   `json:"domain"`
-	Domainid           string   `json:"domainid"`
-	Id                 string   `json:"id"`
-	JobID              string   `json:"jobid"`
-	Jobstatus          int      `json:"jobstatus"`
-	Project            string   `json:"project"`
-	Projectid          string   `json:"projectid"`
-	Relationaloperator string   `json:"relationaloperator"`
-	Threshold          int64    `json:"threshold"`
-	Zoneid             string   `json:"zoneid"`
+	Account            string `json:"account"`
+	Counter            string `json:"counter"`
+	Counterid          string `json:"counterid"`
+	Countername        string `json:"countername"`
+	Domain             string `json:"domain"`
+	Domainid           string `json:"domainid"`
+	Id                 string `json:"id"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Project            string `json:"project"`
+	Projectid          string `json:"projectid"`
+	Relationaloperator string `json:"relationaloperator"`
+	Threshold          int64  `json:"threshold"`
+	Zoneid             string `json:"zoneid"`
 }
 
 type ListCountersParams struct {
@@ -2821,6 +3218,9 @@ func (p *ListCountersParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
 	}
 	if v, found := p.p["source"]; found {
 		u.Set("source", v.(string))
@@ -2900,6 +3300,21 @@ func (p *ListCountersParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListCountersParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *ListCountersParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
 	return value, ok
 }
 
@@ -3009,7 +3424,7 @@ func (s *AutoScaleService) GetCounterByID(id string, opts ...OptionFunc) (*Count
 	return nil, l.Count, fmt.Errorf("There is more then one result for Counter UUID: %s!", id)
 }
 
-// List the counters
+// List the counters for VM auto scaling
 func (s *AutoScaleService) ListCounters(p *ListCountersParams) (*ListCountersResponse, error) {
 	resp, err := s.cs.newRequest("listCounters", p.toURLValues())
 	if err != nil {
@@ -3034,6 +3449,7 @@ type Counter struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Name      string `json:"name"`
+	Provider  string `json:"provider"`
 	Source    string `json:"source"`
 	Value     string `json:"value"`
 	Zoneid    string `json:"zoneid"`
@@ -3058,6 +3474,9 @@ func (p *UpdateAutoScalePolicyParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["quiettime"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -3108,6 +3527,21 @@ func (p *UpdateAutoScalePolicyParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateAutoScalePolicyParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateAutoScalePolicyParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -3180,6 +3614,7 @@ type UpdateAutoScalePolicyResponse struct {
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
 	Jobstatus  int      `json:"jobstatus"`
+	Name       string   `json:"name"`
 	Project    string   `json:"project"`
 	Projectid  string   `json:"projectid"`
 	Quiettime  int      `json:"quiettime"`
@@ -3215,6 +3650,9 @@ func (p *UpdateAutoScaleVmGroupParams) toURLValues() url.Values {
 	if v, found := p.p["minmembers"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("minmembers", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["scaledownpolicyids"]; found {
 		vv := strings.Join(v.([]string), ",")
@@ -3317,6 +3755,21 @@ func (p *UpdateAutoScaleVmGroupParams) GetMinmembers() (int, bool) {
 	return value, ok
 }
 
+func (p *UpdateAutoScaleVmGroupParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateAutoScaleVmGroupParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
 func (p *UpdateAutoScaleVmGroupParams) SetScaledownpolicyids(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3392,23 +3845,34 @@ func (s *AutoScaleService) UpdateAutoScaleVmGroup(p *UpdateAutoScaleVmGroupParam
 }
 
 type UpdateAutoScaleVmGroupResponse struct {
-	Account           string   `json:"account"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Fordisplay        bool     `json:"fordisplay"`
-	Id                string   `json:"id"`
-	Interval          int      `json:"interval"`
-	JobID             string   `json:"jobid"`
-	Jobstatus         int      `json:"jobstatus"`
-	Lbruleid          string   `json:"lbruleid"`
-	Maxmembers        int      `json:"maxmembers"`
-	Minmembers        int      `json:"minmembers"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Scaledownpolicies []string `json:"scaledownpolicies"`
-	Scaleuppolicies   []string `json:"scaleuppolicies"`
-	State             string   `json:"state"`
-	Vmprofileid       string   `json:"vmprofileid"`
+	Account                      string   `json:"account"`
+	Associatednetworkid          string   `json:"associatednetworkid"`
+	Associatednetworkname        string   `json:"associatednetworkname"`
+	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
+	Created                      string   `json:"created"`
+	Domain                       string   `json:"domain"`
+	Domainid                     string   `json:"domainid"`
+	Fordisplay                   bool     `json:"fordisplay"`
+	Hasannotations               bool     `json:"hasannotations"`
+	Id                           string   `json:"id"`
+	Interval                     int      `json:"interval"`
+	JobID                        string   `json:"jobid"`
+	Jobstatus                    int      `json:"jobstatus"`
+	Lbprovider                   string   `json:"lbprovider"`
+	Lbruleid                     string   `json:"lbruleid"`
+	Maxmembers                   int      `json:"maxmembers"`
+	Minmembers                   int      `json:"minmembers"`
+	Name                         string   `json:"name"`
+	Privateport                  string   `json:"privateport"`
+	Project                      string   `json:"project"`
+	Projectid                    string   `json:"projectid"`
+	Publicip                     string   `json:"publicip"`
+	Publicipid                   string   `json:"publicipid"`
+	Publicport                   string   `json:"publicport"`
+	Scaledownpolicies            []string `json:"scaledownpolicies"`
+	Scaleuppolicies              []string `json:"scaleuppolicies"`
+	State                        string   `json:"state"`
+	Vmprofileid                  string   `json:"vmprofileid"`
 }
 
 type UpdateAutoScaleVmProfileParams struct {
@@ -3433,9 +3897,9 @@ func (p *UpdateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["customid"]; found {
 		u.Set("customid", v.(string))
 	}
-	if v, found := p.p["destroyvmgraceperiod"]; found {
+	if v, found := p.p["expungevmgraceperiod"]; found {
 		vv := strconv.Itoa(v.(int))
-		u.Set("destroyvmgraceperiod", vv)
+		u.Set("expungevmgraceperiod", vv)
 	}
 	if v, found := p.p["fordisplay"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -3444,8 +3908,21 @@ func (p *UpdateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["otherdeployparams"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("otherdeployparams[%d].key", i), k)
+			u.Set(fmt.Sprintf("otherdeployparams[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["serviceofferingid"]; found {
+		u.Set("serviceofferingid", v.(string))
+	}
 	if v, found := p.p["templateid"]; found {
 		u.Set("templateid", v.(string))
+	}
+	if v, found := p.p["userdata"]; found {
+		u.Set("userdata", v.(string))
 	}
 	return u
 }
@@ -3495,18 +3972,18 @@ func (p *UpdateAutoScaleVmProfileParams) GetCustomid() (string, bool) {
 	return value, ok
 }
 
-func (p *UpdateAutoScaleVmProfileParams) SetDestroyvmgraceperiod(v int) {
+func (p *UpdateAutoScaleVmProfileParams) SetExpungevmgraceperiod(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	p.p["destroyvmgraceperiod"] = v
+	p.p["expungevmgraceperiod"] = v
 }
 
-func (p *UpdateAutoScaleVmProfileParams) GetDestroyvmgraceperiod() (int, bool) {
+func (p *UpdateAutoScaleVmProfileParams) GetExpungevmgraceperiod() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["destroyvmgraceperiod"].(int)
+	value, ok := p.p["expungevmgraceperiod"].(int)
 	return value, ok
 }
 
@@ -3540,6 +4017,36 @@ func (p *UpdateAutoScaleVmProfileParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateAutoScaleVmProfileParams) SetOtherdeployparams(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["otherdeployparams"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) GetOtherdeployparams() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["otherdeployparams"].(map[string]string)
+	return value, ok
+}
+
+func (p *UpdateAutoScaleVmProfileParams) SetServiceofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["serviceofferingid"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
 func (p *UpdateAutoScaleVmProfileParams) SetTemplateid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3552,6 +4059,21 @@ func (p *UpdateAutoScaleVmProfileParams) GetTemplateid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
+func (p *UpdateAutoScaleVmProfileParams) SetUserdata(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdata"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdata"].(string)
 	return value, ok
 }
 
@@ -3600,19 +4122,20 @@ func (s *AutoScaleService) UpdateAutoScaleVmProfile(p *UpdateAutoScaleVmProfileP
 }
 
 type UpdateAutoScaleVmProfileResponse struct {
-	Account              string `json:"account"`
-	Autoscaleuserid      string `json:"autoscaleuserid"`
-	Destroyvmgraceperiod int    `json:"destroyvmgraceperiod"`
-	Domain               string `json:"domain"`
-	Domainid             string `json:"domainid"`
-	Fordisplay           bool   `json:"fordisplay"`
-	Id                   string `json:"id"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Otherdeployparams    string `json:"otherdeployparams"`
-	Project              string `json:"project"`
-	Projectid            string `json:"projectid"`
-	Serviceofferingid    string `json:"serviceofferingid"`
-	Templateid           string `json:"templateid"`
-	Zoneid               string `json:"zoneid"`
+	Account              string            `json:"account"`
+	Autoscaleuserid      string            `json:"autoscaleuserid"`
+	Domain               string            `json:"domain"`
+	Domainid             string            `json:"domainid"`
+	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
+	Fordisplay           bool              `json:"fordisplay"`
+	Id                   string            `json:"id"`
+	JobID                string            `json:"jobid"`
+	Jobstatus            int               `json:"jobstatus"`
+	Otherdeployparams    map[string]string `json:"otherdeployparams"`
+	Project              string            `json:"project"`
+	Projectid            string            `json:"projectid"`
+	Serviceofferingid    string            `json:"serviceofferingid"`
+	Templateid           string            `json:"templateid"`
+	Userdata             string            `json:"userdata"`
+	Zoneid               string            `json:"zoneid"`
 }

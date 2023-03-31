@@ -1009,6 +1009,8 @@ type LdapCreateAccountResponseUser struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	Lastname            string      `json:"lastname"`

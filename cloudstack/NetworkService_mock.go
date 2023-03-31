@@ -773,17 +773,17 @@ func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateGuestNetworkIpv6PrefixPa
 }
 
 // NewCreateNetworkParams mocks base method.
-func (m *MockNetworkServiceIface) NewCreateNetworkParams(displaytext, name, networkofferingid, zoneid string) *CreateNetworkParams {
+func (m *MockNetworkServiceIface) NewCreateNetworkParams(name, networkofferingid, zoneid string) *CreateNetworkParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateNetworkParams", displaytext, name, networkofferingid, zoneid)
+	ret := m.ctrl.Call(m, "NewCreateNetworkParams", name, networkofferingid, zoneid)
 	ret0, _ := ret[0].(*CreateNetworkParams)
 	return ret0
 }
 
 // NewCreateNetworkParams indicates an expected call of NewCreateNetworkParams.
-func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateNetworkParams(displaytext, name, networkofferingid, zoneid interface{}) *gomock.Call {
+func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateNetworkParams(name, networkofferingid, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewCreateNetworkParams), displaytext, name, networkofferingid, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewCreateNetworkParams), name, networkofferingid, zoneid)
 }
 
 // NewCreateNetworkPermissionsParams mocks base method.

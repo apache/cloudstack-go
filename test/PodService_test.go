@@ -39,7 +39,7 @@ func TestPodService(t *testing.T) {
 		if _, ok := response["createPod"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Pod.NewCreatePodParams("gateway", "name", "netmask", "startip", "zoneid")
+		p := client.Pod.NewCreatePodParams("name", "zoneid")
 		r, err := client.Pod.CreatePod(p)
 		if err != nil {
 			t.Errorf(err.Error())

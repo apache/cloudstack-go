@@ -2200,6 +2200,8 @@ func (s *SnapshotService) RevertToVMSnapshot(p *RevertToVMSnapshotParams) (*Reve
 type RevertToVMSnapshotResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []RevertToVMSnapshotResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`
 	Backupofferingname    string                                    `json:"backupofferingname"`
 	Bootmode              string                                    `json:"bootmode"`
@@ -2225,6 +2227,7 @@ type RevertToVMSnapshotResponse struct {
 	Guestosid             string                                    `json:"guestosid"`
 	Haenable              bool                                      `json:"haenable"`
 	Hasannotations        bool                                      `json:"hasannotations"`
+	Hostcontrolstate      string                                    `json:"hostcontrolstate"`
 	Hostid                string                                    `json:"hostid"`
 	Hostname              string                                    `json:"hostname"`
 	Hypervisor            string                                    `json:"hypervisor"`
@@ -2270,6 +2273,11 @@ type RevertToVMSnapshotResponse struct {
 	Templatedisplaytext   string                                    `json:"templatedisplaytext"`
 	Templateid            string                                    `json:"templateid"`
 	Templatename          string                                    `json:"templatename"`
+	Userdata              string                                    `json:"userdata"`
+	Userdatadetails       string                                    `json:"userdatadetails"`
+	Userdataid            string                                    `json:"userdataid"`
+	Userdataname          string                                    `json:"userdataname"`
+	Userdatapolicy        string                                    `json:"userdatapolicy"`
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`

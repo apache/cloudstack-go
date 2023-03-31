@@ -253,6 +253,48 @@ func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScalePolicyByID(id inter
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScalePolicyByID", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScalePolicyByID), varargs...)
 }
 
+// GetAutoScalePolicyByName mocks base method.
+func (m *MockAutoScaleServiceIface) GetAutoScalePolicyByName(name string, opts ...OptionFunc) (*AutoScalePolicy, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutoScalePolicyByName", varargs...)
+	ret0, _ := ret[0].(*AutoScalePolicy)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutoScalePolicyByName indicates an expected call of GetAutoScalePolicyByName.
+func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScalePolicyByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScalePolicyByName", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScalePolicyByName), varargs...)
+}
+
+// GetAutoScalePolicyID mocks base method.
+func (m *MockAutoScaleServiceIface) GetAutoScalePolicyID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutoScalePolicyID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutoScalePolicyID indicates an expected call of GetAutoScalePolicyID.
+func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScalePolicyID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScalePolicyID", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScalePolicyID), varargs...)
+}
+
 // GetAutoScaleVmGroupByID mocks base method.
 func (m *MockAutoScaleServiceIface) GetAutoScaleVmGroupByID(id string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error) {
 	m.ctrl.T.Helper()
@@ -272,6 +314,48 @@ func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScaleVmGroupByID(id inte
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{id}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScaleVmGroupByID", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScaleVmGroupByID), varargs...)
+}
+
+// GetAutoScaleVmGroupByName mocks base method.
+func (m *MockAutoScaleServiceIface) GetAutoScaleVmGroupByName(name string, opts ...OptionFunc) (*AutoScaleVmGroup, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutoScaleVmGroupByName", varargs...)
+	ret0, _ := ret[0].(*AutoScaleVmGroup)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutoScaleVmGroupByName indicates an expected call of GetAutoScaleVmGroupByName.
+func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScaleVmGroupByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScaleVmGroupByName", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScaleVmGroupByName), varargs...)
+}
+
+// GetAutoScaleVmGroupID mocks base method.
+func (m *MockAutoScaleServiceIface) GetAutoScaleVmGroupID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetAutoScaleVmGroupID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetAutoScaleVmGroupID indicates an expected call of GetAutoScaleVmGroupID.
+func (mr *MockAutoScaleServiceIfaceMockRecorder) GetAutoScaleVmGroupID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAutoScaleVmGroupID", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).GetAutoScaleVmGroupID), varargs...)
 }
 
 // GetAutoScaleVmProfileByID mocks base method.
@@ -511,17 +595,17 @@ func (mr *MockAutoScaleServiceIfaceMockRecorder) NewCreateConditionParams(counte
 }
 
 // NewCreateCounterParams mocks base method.
-func (m *MockAutoScaleServiceIface) NewCreateCounterParams(name, source, value string) *CreateCounterParams {
+func (m *MockAutoScaleServiceIface) NewCreateCounterParams(name, provider, source, value string) *CreateCounterParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateCounterParams", name, source, value)
+	ret := m.ctrl.Call(m, "NewCreateCounterParams", name, provider, source, value)
 	ret0, _ := ret[0].(*CreateCounterParams)
 	return ret0
 }
 
 // NewCreateCounterParams indicates an expected call of NewCreateCounterParams.
-func (mr *MockAutoScaleServiceIfaceMockRecorder) NewCreateCounterParams(name, source, value interface{}) *gomock.Call {
+func (mr *MockAutoScaleServiceIfaceMockRecorder) NewCreateCounterParams(name, provider, source, value interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateCounterParams", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).NewCreateCounterParams), name, source, value)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateCounterParams", reflect.TypeOf((*MockAutoScaleServiceIface)(nil).NewCreateCounterParams), name, provider, source, value)
 }
 
 // NewDeleteAutoScalePolicyParams mocks base method.
