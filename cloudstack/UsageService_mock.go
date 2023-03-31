@@ -208,6 +208,21 @@ func (mr *MockUsageServiceIfaceMockRecorder) ListUsageRecords(p interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUsageRecords", reflect.TypeOf((*MockUsageServiceIface)(nil).ListUsageRecords), p)
 }
 
+// ListUsageServerMetrics mocks base method.
+func (m *MockUsageServiceIface) ListUsageServerMetrics(p *ListUsageServerMetricsParams) (*ListUsageServerMetricsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListUsageServerMetrics", p)
+	ret0, _ := ret[0].(*ListUsageServerMetricsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListUsageServerMetrics indicates an expected call of ListUsageServerMetrics.
+func (mr *MockUsageServiceIfaceMockRecorder) ListUsageServerMetrics(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUsageServerMetrics", reflect.TypeOf((*MockUsageServiceIface)(nil).ListUsageServerMetrics), p)
+}
+
 // ListUsageTypes mocks base method.
 func (m *MockUsageServiceIface) ListUsageTypes(p *ListUsageTypesParams) (*ListUsageTypesResponse, error) {
 	m.ctrl.T.Helper()
@@ -347,6 +362,20 @@ func (m *MockUsageServiceIface) NewListUsageRecordsParams(enddate, startdate str
 func (mr *MockUsageServiceIfaceMockRecorder) NewListUsageRecordsParams(enddate, startdate interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListUsageRecordsParams", reflect.TypeOf((*MockUsageServiceIface)(nil).NewListUsageRecordsParams), enddate, startdate)
+}
+
+// NewListUsageServerMetricsParams mocks base method.
+func (m *MockUsageServiceIface) NewListUsageServerMetricsParams() *ListUsageServerMetricsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListUsageServerMetricsParams")
+	ret0, _ := ret[0].(*ListUsageServerMetricsParams)
+	return ret0
+}
+
+// NewListUsageServerMetricsParams indicates an expected call of NewListUsageServerMetricsParams.
+func (mr *MockUsageServiceIfaceMockRecorder) NewListUsageServerMetricsParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListUsageServerMetricsParams", reflect.TypeOf((*MockUsageServiceIface)(nil).NewListUsageServerMetricsParams))
 }
 
 // NewListUsageTypesParams mocks base method.

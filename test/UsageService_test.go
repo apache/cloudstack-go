@@ -188,4 +188,16 @@ func TestUsageService(t *testing.T) {
 	}
 	t.Run("UpdateTrafficType", testupdateTrafficType)
 
+	testlistUsageServerMetrics := func(t *testing.T) {
+		if _, ok := response["listUsageServerMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Usage.NewListUsageServerMetricsParams()
+		_, err := client.Usage.ListUsageServerMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListUsageServerMetrics", testlistUsageServerMetrics)
+
 }

@@ -152,4 +152,16 @@ func TestSystemVMService(t *testing.T) {
 	}
 	t.Run("StopSystemVm", teststopSystemVm)
 
+	testpatchSystemVm := func(t *testing.T) {
+		if _, ok := response["patchSystemVm"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.SystemVM.NewPatchSystemVmParams()
+		_, err := client.SystemVM.PatchSystemVm(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("PatchSystemVm", testpatchSystemVm)
+
 }

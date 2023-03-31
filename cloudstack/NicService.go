@@ -344,6 +344,8 @@ type Nic struct {
 	Type             string `json:"type"`
 	Virtualmachineid string `json:"virtualmachineid"`
 	Vlanid           int    `json:"vlanid"`
+	Vpcid            string `json:"vpcid"`
+	Vpcname          string `json:"vpcname"`
 }
 
 type RemoveIpFromNicParams struct {
@@ -554,7 +556,7 @@ type UpdateVmNicIpResponse struct {
 	Isoname               string                               `json:"isoname"`
 	JobID                 string                               `json:"jobid"`
 	Jobstatus             int                                  `json:"jobstatus"`
-	Keypair               string                               `json:"keypair"`
+	Keypairs              string                               `json:"keypairs"`
 	Lastupdated           string                               `json:"lastupdated"`
 	Memory                int                                  `json:"memory"`
 	Memoryintfreekbs      int64                                `json:"memoryintfreekbs"`

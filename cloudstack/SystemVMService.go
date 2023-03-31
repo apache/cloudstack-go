@@ -47,6 +47,8 @@ type SystemVMServiceIface interface {
 	NewStartSystemVmParams(id string) *StartSystemVmParams
 	StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResponse, error)
 	NewStopSystemVmParams(id string) *StopSystemVmParams
+	PatchSystemVm(p *PatchSystemVmParams) (*PatchSystemVmResponse, error)
+	NewPatchSystemVmParams() *PatchSystemVmParams
 }
 
 type ChangeServiceForSystemVmParams struct {
@@ -1361,4 +1363,98 @@ type StopSystemVmResponse struct {
 	Version               string   `json:"version"`
 	Zoneid                string   `json:"zoneid"`
 	Zonename              string   `json:"zonename"`
+}
+
+type PatchSystemVmParams struct {
+	p map[string]interface{}
+}
+
+func (p *PatchSystemVmParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *PatchSystemVmParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *PatchSystemVmParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *PatchSystemVmParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *PatchSystemVmParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new PatchSystemVmParams instance,
+// as then you are sure you have configured all required params
+func (s *SystemVMService) NewPatchSystemVmParams() *PatchSystemVmParams {
+	p := &PatchSystemVmParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Attempts to live patch systemVMs - CPVM, SSVM
+func (s *SystemVMService) PatchSystemVm(p *PatchSystemVmParams) (*PatchSystemVmResponse, error) {
+	resp, err := s.cs.newRequest("patchSystemVm", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r PatchSystemVmResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type PatchSystemVmResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

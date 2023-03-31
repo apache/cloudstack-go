@@ -401,17 +401,17 @@ func (mr *MockVPCServiceIfaceMockRecorder) ListVPCs(p interface{}) *gomock.Call 
 }
 
 // NewCreatePrivateGatewayParams mocks base method.
-func (m *MockVPCServiceIface) NewCreatePrivateGatewayParams(gateway, ipaddress, netmask, vlan, vpcid string) *CreatePrivateGatewayParams {
+func (m *MockVPCServiceIface) NewCreatePrivateGatewayParams(gateway, ipaddress, netmask, vpcid string) *CreatePrivateGatewayParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreatePrivateGatewayParams", gateway, ipaddress, netmask, vlan, vpcid)
+	ret := m.ctrl.Call(m, "NewCreatePrivateGatewayParams", gateway, ipaddress, netmask, vpcid)
 	ret0, _ := ret[0].(*CreatePrivateGatewayParams)
 	return ret0
 }
 
 // NewCreatePrivateGatewayParams indicates an expected call of NewCreatePrivateGatewayParams.
-func (mr *MockVPCServiceIfaceMockRecorder) NewCreatePrivateGatewayParams(gateway, ipaddress, netmask, vlan, vpcid interface{}) *gomock.Call {
+func (mr *MockVPCServiceIfaceMockRecorder) NewCreatePrivateGatewayParams(gateway, ipaddress, netmask, vpcid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePrivateGatewayParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreatePrivateGatewayParams), gateway, ipaddress, netmask, vlan, vpcid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePrivateGatewayParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreatePrivateGatewayParams), gateway, ipaddress, netmask, vpcid)
 }
 
 // NewCreateStaticRouteParams mocks base method.

@@ -2,18 +2,54 @@
     "addKubernetesSupportedVersion": {
       "addkubernetessupportedversionresponse": {
         "kubernetessupportedversion": {
-          "id": "14dbb2cd-c8ee-4acd-85a5-c5672bcfe5ed",
-          "name": "v1.22.6",
-          "semanticversion": "1.22.6",
-          "isoid": "4415fb4d-9e47-4df1-a679-523f020480ce",
-          "isoname": "v1.22.6-Kubernetes-Binaries-ISO",
+          "id": "5bf7dd2b-49af-46c6-8a5b-3fc08c274527",
+          "name": "v1.23.3",
+          "semanticversion": "1.23.3",
+          "isoid": "ae158e0f-f65f-4f53-a604-24fe7e0b6764",
+          "isoname": "v1.23.3-Kubernetes-Binaries-ISO",
           "isostate": "Creating",
           "supportsha": true,
           "supportsautoscaling": true,
           "state": "Enabled",
           "mincpunumber": 2,
-          "minmemory": 2048
+          "minmemory": 2048,
+          "created": "2023-03-16T08:11:40+0000"
         }
+      }
+    },
+    "listKubernetesSupportedVersions": {
+      "listkubernetessupportedversionsresponse": {
+        "count": 2,
+        "kubernetessupportedversion": [
+          {
+            "id": "5bf7dd2b-49af-46c6-8a5b-3fc08c274527",
+            "name": "v1.23.3",
+            "semanticversion": "1.23.3",
+            "isoid": "ae158e0f-f65f-4f53-a604-24fe7e0b6764",
+            "isoname": "v1.23.3-Kubernetes-Binaries-ISO",
+            "isostate": "Ready",
+            "supportsha": true,
+            "supportsautoscaling": true,
+            "state": "Enabled",
+            "mincpunumber": 2,
+            "minmemory": 2048,
+            "created": "2023-03-16T08:11:40+0000"
+          },
+          {
+            "id": "e46d9557-9f81-4421-be9d-75d0195a034a",
+            "name": "v1.24.0",
+            "semanticversion": "1.24.0",
+            "isoid": "1724ed6b-8224-49f4-bc63-4ed766c83e3d",
+            "isoname": "v1.24.0-Kubernetes-Binaries-ISO",
+            "isostate": "Creating",
+            "supportsha": true,
+            "supportsautoscaling": true,
+            "state": "Enabled",
+            "mincpunumber": 2,
+            "minmemory": 2048,
+            "created": "2023-03-16T08:14:00+0000"
+          }
+        ]
       }
     },
     "createKubernetesCluster": {

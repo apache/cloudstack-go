@@ -37,6 +37,8 @@ type AddressServiceIface interface {
 	GetPublicIpAddressByID(id string, opts ...OptionFunc) (*PublicIpAddress, int, error)
 	UpdateIpAddress(p *UpdateIpAddressParams) (*UpdateIpAddressResponse, error)
 	NewUpdateIpAddressParams(id string) *UpdateIpAddressParams
+	ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error)
+	NewReleaseIpAddressParams(id string) *ReleaseIpAddressParams
 }
 
 type AssociateIpAddressParams struct {
@@ -1095,4 +1097,92 @@ type UpdateIpAddressResponse struct {
 	Vpcname                   string `json:"vpcname"`
 	Zoneid                    string `json:"zoneid"`
 	Zonename                  string `json:"zonename"`
+}
+
+type ReleaseIpAddressParams struct {
+	p map[string]interface{}
+}
+
+func (p *ReleaseIpAddressParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *ReleaseIpAddressParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ReleaseIpAddressParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ReleaseIpAddressParams instance,
+// as then you are sure you have configured all required params
+func (s *AddressService) NewReleaseIpAddressParams(id string) *ReleaseIpAddressParams {
+	p := &ReleaseIpAddressParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Releases an IP address from the account.
+func (s *AddressService) ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error) {
+	resp, err := s.cs.newRequest("releaseIpAddress", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ReleaseIpAddressResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ReleaseIpAddressResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *ReleaseIpAddressResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias ReleaseIpAddressResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

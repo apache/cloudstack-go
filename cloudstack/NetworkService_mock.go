@@ -82,6 +82,21 @@ func (mr *MockNetworkServiceIfaceMockRecorder) AddOpenDaylightController(p inter
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddOpenDaylightController", reflect.TypeOf((*MockNetworkServiceIface)(nil).AddOpenDaylightController), p)
 }
 
+// CreateGuestNetworkIpv6Prefix mocks base method.
+func (m *MockNetworkServiceIface) CreateGuestNetworkIpv6Prefix(p *CreateGuestNetworkIpv6PrefixParams) (*CreateGuestNetworkIpv6PrefixResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateGuestNetworkIpv6Prefix", p)
+	ret0, _ := ret[0].(*CreateGuestNetworkIpv6PrefixResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateGuestNetworkIpv6Prefix indicates an expected call of CreateGuestNetworkIpv6Prefix.
+func (mr *MockNetworkServiceIfaceMockRecorder) CreateGuestNetworkIpv6Prefix(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateGuestNetworkIpv6Prefix", reflect.TypeOf((*MockNetworkServiceIface)(nil).CreateGuestNetworkIpv6Prefix), p)
+}
+
 // CreateNetwork mocks base method.
 func (m *MockNetworkServiceIface) CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error) {
 	m.ctrl.T.Helper()
@@ -95,6 +110,21 @@ func (m *MockNetworkServiceIface) CreateNetwork(p *CreateNetworkParams) (*Create
 func (mr *MockNetworkServiceIfaceMockRecorder) CreateNetwork(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNetwork", reflect.TypeOf((*MockNetworkServiceIface)(nil).CreateNetwork), p)
+}
+
+// CreateNetworkPermissions mocks base method.
+func (m *MockNetworkServiceIface) CreateNetworkPermissions(p *CreateNetworkPermissionsParams) (*CreateNetworkPermissionsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateNetworkPermissions", p)
+	ret0, _ := ret[0].(*CreateNetworkPermissionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNetworkPermissions indicates an expected call of CreateNetworkPermissions.
+func (mr *MockNetworkServiceIfaceMockRecorder) CreateNetworkPermissions(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNetworkPermissions", reflect.TypeOf((*MockNetworkServiceIface)(nil).CreateNetworkPermissions), p)
 }
 
 // CreatePhysicalNetwork mocks base method.
@@ -155,6 +185,21 @@ func (m *MockNetworkServiceIface) DedicatePublicIpRange(p *DedicatePublicIpRange
 func (mr *MockNetworkServiceIfaceMockRecorder) DedicatePublicIpRange(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DedicatePublicIpRange", reflect.TypeOf((*MockNetworkServiceIface)(nil).DedicatePublicIpRange), p)
+}
+
+// DeleteGuestNetworkIpv6Prefix mocks base method.
+func (m *MockNetworkServiceIface) DeleteGuestNetworkIpv6Prefix(p *DeleteGuestNetworkIpv6PrefixParams) (*DeleteGuestNetworkIpv6PrefixResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteGuestNetworkIpv6Prefix", p)
+	ret0, _ := ret[0].(*DeleteGuestNetworkIpv6PrefixResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteGuestNetworkIpv6Prefix indicates an expected call of DeleteGuestNetworkIpv6Prefix.
+func (mr *MockNetworkServiceIfaceMockRecorder) DeleteGuestNetworkIpv6Prefix(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteGuestNetworkIpv6Prefix", reflect.TypeOf((*MockNetworkServiceIface)(nil).DeleteGuestNetworkIpv6Prefix), p)
 }
 
 // DeleteNetwork mocks base method.
@@ -230,6 +275,27 @@ func (m *MockNetworkServiceIface) DeleteStorageNetworkIpRange(p *DeleteStorageNe
 func (mr *MockNetworkServiceIfaceMockRecorder) DeleteStorageNetworkIpRange(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteStorageNetworkIpRange", reflect.TypeOf((*MockNetworkServiceIface)(nil).DeleteStorageNetworkIpRange), p)
+}
+
+// GetGuestNetworkIpv6PrefixeByID mocks base method.
+func (m *MockNetworkServiceIface) GetGuestNetworkIpv6PrefixeByID(id string, opts ...OptionFunc) (*GuestNetworkIpv6Prefixe, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetGuestNetworkIpv6PrefixeByID", varargs...)
+	ret0, _ := ret[0].(*GuestNetworkIpv6Prefixe)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetGuestNetworkIpv6PrefixeByID indicates an expected call of GetGuestNetworkIpv6PrefixeByID.
+func (mr *MockNetworkServiceIfaceMockRecorder) GetGuestNetworkIpv6PrefixeByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGuestNetworkIpv6PrefixeByID", reflect.TypeOf((*MockNetworkServiceIface)(nil).GetGuestNetworkIpv6PrefixeByID), varargs...)
 }
 
 // GetNetscalerLoadBalancerNetworkID mocks base method.
@@ -484,6 +550,21 @@ func (mr *MockNetworkServiceIfaceMockRecorder) GetStorageNetworkIpRangeByID(id i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStorageNetworkIpRangeByID", reflect.TypeOf((*MockNetworkServiceIface)(nil).GetStorageNetworkIpRangeByID), varargs...)
 }
 
+// ListGuestNetworkIpv6Prefixes mocks base method.
+func (m *MockNetworkServiceIface) ListGuestNetworkIpv6Prefixes(p *ListGuestNetworkIpv6PrefixesParams) (*ListGuestNetworkIpv6PrefixesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListGuestNetworkIpv6Prefixes", p)
+	ret0, _ := ret[0].(*ListGuestNetworkIpv6PrefixesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListGuestNetworkIpv6Prefixes indicates an expected call of ListGuestNetworkIpv6Prefixes.
+func (mr *MockNetworkServiceIfaceMockRecorder) ListGuestNetworkIpv6Prefixes(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListGuestNetworkIpv6Prefixes", reflect.TypeOf((*MockNetworkServiceIface)(nil).ListGuestNetworkIpv6Prefixes), p)
+}
+
 // ListNetscalerLoadBalancerNetworks mocks base method.
 func (m *MockNetworkServiceIface) ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadBalancerNetworksParams) (*ListNetscalerLoadBalancerNetworksResponse, error) {
 	m.ctrl.T.Helper()
@@ -512,6 +593,21 @@ func (m *MockNetworkServiceIface) ListNetworkIsolationMethods(p *ListNetworkIsol
 func (mr *MockNetworkServiceIfaceMockRecorder) ListNetworkIsolationMethods(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListNetworkIsolationMethods", reflect.TypeOf((*MockNetworkServiceIface)(nil).ListNetworkIsolationMethods), p)
+}
+
+// ListNetworkPermissions mocks base method.
+func (m *MockNetworkServiceIface) ListNetworkPermissions(p *ListNetworkPermissionsParams) (*ListNetworkPermissionsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListNetworkPermissions", p)
+	ret0, _ := ret[0].(*ListNetworkPermissionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListNetworkPermissions indicates an expected call of ListNetworkPermissions.
+func (mr *MockNetworkServiceIfaceMockRecorder) ListNetworkPermissions(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListNetworkPermissions", reflect.TypeOf((*MockNetworkServiceIface)(nil).ListNetworkPermissions), p)
 }
 
 // ListNetworkServiceProviders mocks base method.
@@ -662,6 +758,20 @@ func (mr *MockNetworkServiceIfaceMockRecorder) NewAddOpenDaylightControllerParam
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddOpenDaylightControllerParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewAddOpenDaylightControllerParams), password, physicalnetworkid, url, username)
 }
 
+// NewCreateGuestNetworkIpv6PrefixParams mocks base method.
+func (m *MockNetworkServiceIface) NewCreateGuestNetworkIpv6PrefixParams(prefix, zoneid string) *CreateGuestNetworkIpv6PrefixParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCreateGuestNetworkIpv6PrefixParams", prefix, zoneid)
+	ret0, _ := ret[0].(*CreateGuestNetworkIpv6PrefixParams)
+	return ret0
+}
+
+// NewCreateGuestNetworkIpv6PrefixParams indicates an expected call of NewCreateGuestNetworkIpv6PrefixParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateGuestNetworkIpv6PrefixParams(prefix, zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateGuestNetworkIpv6PrefixParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewCreateGuestNetworkIpv6PrefixParams), prefix, zoneid)
+}
+
 // NewCreateNetworkParams mocks base method.
 func (m *MockNetworkServiceIface) NewCreateNetworkParams(displaytext, name, networkofferingid, zoneid string) *CreateNetworkParams {
 	m.ctrl.T.Helper()
@@ -674,6 +784,20 @@ func (m *MockNetworkServiceIface) NewCreateNetworkParams(displaytext, name, netw
 func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateNetworkParams(displaytext, name, networkofferingid, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewCreateNetworkParams), displaytext, name, networkofferingid, zoneid)
+}
+
+// NewCreateNetworkPermissionsParams mocks base method.
+func (m *MockNetworkServiceIface) NewCreateNetworkPermissionsParams(networkid string) *CreateNetworkPermissionsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCreateNetworkPermissionsParams", networkid)
+	ret0, _ := ret[0].(*CreateNetworkPermissionsParams)
+	return ret0
+}
+
+// NewCreateNetworkPermissionsParams indicates an expected call of NewCreateNetworkPermissionsParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewCreateNetworkPermissionsParams(networkid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkPermissionsParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewCreateNetworkPermissionsParams), networkid)
 }
 
 // NewCreatePhysicalNetworkParams mocks base method.
@@ -730,6 +854,20 @@ func (m *MockNetworkServiceIface) NewDedicatePublicIpRangeParams(domainid, id st
 func (mr *MockNetworkServiceIfaceMockRecorder) NewDedicatePublicIpRangeParams(domainid, id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDedicatePublicIpRangeParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewDedicatePublicIpRangeParams), domainid, id)
+}
+
+// NewDeleteGuestNetworkIpv6PrefixParams mocks base method.
+func (m *MockNetworkServiceIface) NewDeleteGuestNetworkIpv6PrefixParams(id string) *DeleteGuestNetworkIpv6PrefixParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteGuestNetworkIpv6PrefixParams", id)
+	ret0, _ := ret[0].(*DeleteGuestNetworkIpv6PrefixParams)
+	return ret0
+}
+
+// NewDeleteGuestNetworkIpv6PrefixParams indicates an expected call of NewDeleteGuestNetworkIpv6PrefixParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewDeleteGuestNetworkIpv6PrefixParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteGuestNetworkIpv6PrefixParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewDeleteGuestNetworkIpv6PrefixParams), id)
 }
 
 // NewDeleteNetworkParams mocks base method.
@@ -802,6 +940,20 @@ func (mr *MockNetworkServiceIfaceMockRecorder) NewDeleteStorageNetworkIpRangePar
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteStorageNetworkIpRangeParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewDeleteStorageNetworkIpRangeParams), id)
 }
 
+// NewListGuestNetworkIpv6PrefixesParams mocks base method.
+func (m *MockNetworkServiceIface) NewListGuestNetworkIpv6PrefixesParams() *ListGuestNetworkIpv6PrefixesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListGuestNetworkIpv6PrefixesParams")
+	ret0, _ := ret[0].(*ListGuestNetworkIpv6PrefixesParams)
+	return ret0
+}
+
+// NewListGuestNetworkIpv6PrefixesParams indicates an expected call of NewListGuestNetworkIpv6PrefixesParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewListGuestNetworkIpv6PrefixesParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListGuestNetworkIpv6PrefixesParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewListGuestNetworkIpv6PrefixesParams))
+}
+
 // NewListNetscalerLoadBalancerNetworksParams mocks base method.
 func (m *MockNetworkServiceIface) NewListNetscalerLoadBalancerNetworksParams(lbdeviceid string) *ListNetscalerLoadBalancerNetworksParams {
 	m.ctrl.T.Helper()
@@ -828,6 +980,20 @@ func (m *MockNetworkServiceIface) NewListNetworkIsolationMethodsParams() *ListNe
 func (mr *MockNetworkServiceIfaceMockRecorder) NewListNetworkIsolationMethodsParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListNetworkIsolationMethodsParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewListNetworkIsolationMethodsParams))
+}
+
+// NewListNetworkPermissionsParams mocks base method.
+func (m *MockNetworkServiceIface) NewListNetworkPermissionsParams(networkid string) *ListNetworkPermissionsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListNetworkPermissionsParams", networkid)
+	ret0, _ := ret[0].(*ListNetworkPermissionsParams)
+	return ret0
+}
+
+// NewListNetworkPermissionsParams indicates an expected call of NewListNetworkPermissionsParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewListNetworkPermissionsParams(networkid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListNetworkPermissionsParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewListNetworkPermissionsParams), networkid)
 }
 
 // NewListNetworkServiceProvidersParams mocks base method.
@@ -956,6 +1122,34 @@ func (mr *MockNetworkServiceIfaceMockRecorder) NewReleasePublicIpRangeParams(id 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleasePublicIpRangeParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewReleasePublicIpRangeParams), id)
 }
 
+// NewRemoveNetworkPermissionsParams mocks base method.
+func (m *MockNetworkServiceIface) NewRemoveNetworkPermissionsParams(networkid string) *RemoveNetworkPermissionsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveNetworkPermissionsParams", networkid)
+	ret0, _ := ret[0].(*RemoveNetworkPermissionsParams)
+	return ret0
+}
+
+// NewRemoveNetworkPermissionsParams indicates an expected call of NewRemoveNetworkPermissionsParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewRemoveNetworkPermissionsParams(networkid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveNetworkPermissionsParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewRemoveNetworkPermissionsParams), networkid)
+}
+
+// NewResetNetworkPermissionsParams mocks base method.
+func (m *MockNetworkServiceIface) NewResetNetworkPermissionsParams(networkid string) *ResetNetworkPermissionsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewResetNetworkPermissionsParams", networkid)
+	ret0, _ := ret[0].(*ResetNetworkPermissionsParams)
+	return ret0
+}
+
+// NewResetNetworkPermissionsParams indicates an expected call of NewResetNetworkPermissionsParams.
+func (mr *MockNetworkServiceIfaceMockRecorder) NewResetNetworkPermissionsParams(networkid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewResetNetworkPermissionsParams", reflect.TypeOf((*MockNetworkServiceIface)(nil).NewResetNetworkPermissionsParams), networkid)
+}
+
 // NewRestartNetworkParams mocks base method.
 func (m *MockNetworkServiceIface) NewRestartNetworkParams(id string) *RestartNetworkParams {
 	m.ctrl.T.Helper()
@@ -1039,6 +1233,36 @@ func (m *MockNetworkServiceIface) ReleasePublicIpRange(p *ReleasePublicIpRangePa
 func (mr *MockNetworkServiceIfaceMockRecorder) ReleasePublicIpRange(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleasePublicIpRange", reflect.TypeOf((*MockNetworkServiceIface)(nil).ReleasePublicIpRange), p)
+}
+
+// RemoveNetworkPermissions mocks base method.
+func (m *MockNetworkServiceIface) RemoveNetworkPermissions(p *RemoveNetworkPermissionsParams) (*RemoveNetworkPermissionsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveNetworkPermissions", p)
+	ret0, _ := ret[0].(*RemoveNetworkPermissionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveNetworkPermissions indicates an expected call of RemoveNetworkPermissions.
+func (mr *MockNetworkServiceIfaceMockRecorder) RemoveNetworkPermissions(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveNetworkPermissions", reflect.TypeOf((*MockNetworkServiceIface)(nil).RemoveNetworkPermissions), p)
+}
+
+// ResetNetworkPermissions mocks base method.
+func (m *MockNetworkServiceIface) ResetNetworkPermissions(p *ResetNetworkPermissionsParams) (*ResetNetworkPermissionsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ResetNetworkPermissions", p)
+	ret0, _ := ret[0].(*ResetNetworkPermissionsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResetNetworkPermissions indicates an expected call of ResetNetworkPermissions.
+func (mr *MockNetworkServiceIfaceMockRecorder) ResetNetworkPermissions(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetNetworkPermissions", reflect.TypeOf((*MockNetworkServiceIface)(nil).ResetNetworkPermissions), p)
 }
 
 // RestartNetwork mocks base method.

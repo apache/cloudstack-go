@@ -171,6 +171,7 @@ type ChangeServiceForRouterResponse struct {
 	Scriptsversion      string                                             `json:"scriptsversion"`
 	Serviceofferingid   string                                             `json:"serviceofferingid"`
 	Serviceofferingname string                                             `json:"serviceofferingname"`
+	Softwareversion     string                                             `json:"softwareversion"`
 	State               string                                             `json:"state"`
 	Templateid          string                                             `json:"templateid"`
 	Templatename        string                                             `json:"templatename"`
@@ -521,6 +522,7 @@ type DestroyRouterResponse struct {
 	Scriptsversion      string                                    `json:"scriptsversion"`
 	Serviceofferingid   string                                    `json:"serviceofferingid"`
 	Serviceofferingname string                                    `json:"serviceofferingname"`
+	Softwareversion     string                                    `json:"softwareversion"`
 	State               string                                    `json:"state"`
 	Templateid          string                                    `json:"templateid"`
 	Templatename        string                                    `json:"templatename"`
@@ -1093,6 +1095,7 @@ type Router struct {
 	Scriptsversion      string                     `json:"scriptsversion"`
 	Serviceofferingid   string                     `json:"serviceofferingid"`
 	Serviceofferingname string                     `json:"serviceofferingname"`
+	Softwareversion     string                     `json:"softwareversion"`
 	State               string                     `json:"state"`
 	Templateid          string                     `json:"templateid"`
 	Templatename        string                     `json:"templatename"`
@@ -1447,6 +1450,7 @@ type RebootRouterResponse struct {
 	Scriptsversion      string                                   `json:"scriptsversion"`
 	Serviceofferingid   string                                   `json:"serviceofferingid"`
 	Serviceofferingname string                                   `json:"serviceofferingname"`
+	Softwareversion     string                                   `json:"softwareversion"`
 	State               string                                   `json:"state"`
 	Templateid          string                                   `json:"templateid"`
 	Templatename        string                                   `json:"templatename"`
@@ -1585,6 +1589,7 @@ type StartRouterResponse struct {
 	Scriptsversion      string                                  `json:"scriptsversion"`
 	Serviceofferingid   string                                  `json:"serviceofferingid"`
 	Serviceofferingname string                                  `json:"serviceofferingname"`
+	Softwareversion     string                                  `json:"softwareversion"`
 	State               string                                  `json:"state"`
 	Templateid          string                                  `json:"templateid"`
 	Templatename        string                                  `json:"templatename"`
@@ -1742,6 +1747,7 @@ type StopRouterResponse struct {
 	Scriptsversion      string                                 `json:"scriptsversion"`
 	Serviceofferingid   string                                 `json:"serviceofferingid"`
 	Serviceofferingname string                                 `json:"serviceofferingname"`
+	Softwareversion     string                                 `json:"softwareversion"`
 	State               string                                 `json:"state"`
 	Templateid          string                                 `json:"templateid"`
 	Templatename        string                                 `json:"templatename"`

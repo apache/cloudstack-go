@@ -78,6 +78,11 @@ type VirtualMachineServiceIface interface {
 	NewUpdateDefaultNicForVirtualMachineParams(nicid string, virtualmachineid string) *UpdateDefaultNicForVirtualMachineParams
 	UpdateVirtualMachine(p *UpdateVirtualMachineParams) (*UpdateVirtualMachineResponse, error)
 	NewUpdateVirtualMachineParams(id string) *UpdateVirtualMachineParams
+	ListVirtualMachinesUsageHistory(p *ListVirtualMachinesUsageHistoryParams) (*ListVirtualMachinesUsageHistoryResponse, error)
+	NewListVirtualMachinesUsageHistoryParams() *ListVirtualMachinesUsageHistoryParams
+	GetVirtualMachinesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error)
+	GetVirtualMachinesUsageHistoryByName(name string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error)
+	GetVirtualMachinesUsageHistoryByID(id string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error)
 }
 
 type AddNicToVirtualMachineParams struct {
@@ -271,7 +276,7 @@ type AddNicToVirtualMachineResponse struct {
 	Isoname               string                                        `json:"isoname"`
 	JobID                 string                                        `json:"jobid"`
 	Jobstatus             int                                           `json:"jobstatus"`
-	Keypair               string                                        `json:"keypair"`
+	Keypairs              string                                        `json:"keypairs"`
 	Lastupdated           string                                        `json:"lastupdated"`
 	Memory                int                                           `json:"memory"`
 	Memoryintfreekbs      int64                                         `json:"memoryintfreekbs"`
@@ -566,7 +571,7 @@ type AssignVirtualMachineResponse struct {
 	Isoname               string                                      `json:"isoname"`
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
-	Keypair               string                                      `json:"keypair"`
+	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
@@ -684,6 +689,10 @@ func (p *ChangeServiceForVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["automigrate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("automigrate", vv)
+	}
 	if v, found := p.p["details"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -693,10 +702,37 @@ func (p *ChangeServiceForVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["maxiops"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("maxiops", vv)
+	}
+	if v, found := p.p["miniops"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("miniops", vv)
+	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
+	if v, found := p.p["shrinkok"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("shrinkok", vv)
+	}
 	return u
+}
+
+func (p *ChangeServiceForVirtualMachineParams) SetAutomigrate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["automigrate"] = v
+}
+
+func (p *ChangeServiceForVirtualMachineParams) GetAutomigrate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["automigrate"].(bool)
+	return value, ok
 }
 
 func (p *ChangeServiceForVirtualMachineParams) SetDetails(v map[string]string) {
@@ -729,6 +765,36 @@ func (p *ChangeServiceForVirtualMachineParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *ChangeServiceForVirtualMachineParams) SetMaxiops(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["maxiops"] = v
+}
+
+func (p *ChangeServiceForVirtualMachineParams) GetMaxiops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["maxiops"].(int64)
+	return value, ok
+}
+
+func (p *ChangeServiceForVirtualMachineParams) SetMiniops(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["miniops"] = v
+}
+
+func (p *ChangeServiceForVirtualMachineParams) GetMiniops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["miniops"].(int64)
+	return value, ok
+}
+
 func (p *ChangeServiceForVirtualMachineParams) SetServiceofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -741,6 +807,21 @@ func (p *ChangeServiceForVirtualMachineParams) GetServiceofferingid() (string, b
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
+func (p *ChangeServiceForVirtualMachineParams) SetShrinkok(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["shrinkok"] = v
+}
+
+func (p *ChangeServiceForVirtualMachineParams) GetShrinkok() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["shrinkok"].(bool)
 	return value, ok
 }
 
@@ -809,7 +890,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Isoname               string                                                `json:"isoname"`
 	JobID                 string                                                `json:"jobid"`
 	Jobstatus             int                                                   `json:"jobstatus"`
-	Keypair               string                                                `json:"keypair"`
+	Keypairs              string                                                `json:"keypairs"`
 	Lastupdated           string                                                `json:"lastupdated"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
@@ -1088,6 +1169,10 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["keypair"]; found {
 		u.Set("keypair", v.(string))
 	}
+	if v, found := p.p["keypairs"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("keypairs", vv)
+	}
 	if v, found := p.p["macaddress"]; found {
 		u.Set("macaddress", v.(string))
 	}
@@ -1105,6 +1190,9 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 				u.Set(fmt.Sprintf("nicnetworklist[%d].%s", i, key), val)
 			}
 		}
+	}
+	if v, found := p.p["overridediskofferingid"]; found {
+		u.Set("overridediskofferingid", v.(string))
 	}
 	if v, found := p.p["podid"]; found {
 		u.Set("podid", v.(string))
@@ -1587,6 +1675,21 @@ func (p *DeployVirtualMachineParams) GetKeypair() (string, bool) {
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetKeypairs(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keypairs"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetKeypairs() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keypairs"].([]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetMacaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1659,6 +1762,21 @@ func (p *DeployVirtualMachineParams) AddNicnetworklist(item map[string]string) {
 	l := val.([]map[string]string)
 	l = append(l, item)
 	p.p["nicnetworklist"] = l
+}
+
+func (p *DeployVirtualMachineParams) SetOverridediskofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["overridediskofferingid"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetOverridediskofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["overridediskofferingid"].(string)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetPodid(v string) {
@@ -1927,7 +2045,7 @@ type DeployVirtualMachineResponse struct {
 	Isoname               string                                      `json:"isoname"`
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
-	Keypair               string                                      `json:"keypair"`
+	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
@@ -2188,7 +2306,7 @@ type DestroyVirtualMachineResponse struct {
 	Isoname               string                                       `json:"isoname"`
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
-	Keypair               string                                       `json:"keypair"`
+	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
@@ -2445,8 +2563,15 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["accumulate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("accumulate", vv)
+	}
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
+	}
+	if v, found := p.p["backupofferingid"]; found {
+		u.Set("backupofferingid", v.(string))
 	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
@@ -2472,9 +2597,6 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["haenable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("haenable", vv)
-	}
-	if v, found := p.p["hostid"]; found {
-		u.Set("hostid", v.(string))
 	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
@@ -2523,9 +2645,6 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["podid"]; found {
 		u.Set("podid", v.(string))
 	}
-	if v, found := p.p["podid"]; found {
-		u.Set("podid", v.(string))
-	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
@@ -2541,9 +2660,6 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
-	}
-	if v, found := p.p["storageid"]; found {
-		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
@@ -2585,6 +2701,21 @@ func (p *ListVirtualMachinesParams) GetAccount() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetAccumulate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accumulate"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetAccumulate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accumulate"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2597,6 +2728,21 @@ func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetBackupofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["backupofferingid"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetBackupofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["backupofferingid"].(string)
 	return value, ok
 }
 
@@ -3231,7 +3377,7 @@ type VirtualMachine struct {
 	Isoname               string                        `json:"isoname"`
 	JobID                 string                        `json:"jobid"`
 	Jobstatus             int                           `json:"jobstatus"`
-	Keypair               string                        `json:"keypair"`
+	Keypairs              string                        `json:"keypairs"`
 	Lastupdated           string                        `json:"lastupdated"`
 	Memory                int                           `json:"memory"`
 	Memoryintfreekbs      int64                         `json:"memoryintfreekbs"`
@@ -3352,8 +3498,18 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["accumulate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("accumulate", vv)
+	}
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
+	}
+	if v, found := p.p["backupofferingid"]; found {
+		u.Set("backupofferingid", v.(string))
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
 	}
 	if v, found := p.p["details"]; found {
 		vv := strings.Join(v.([]string), ",")
@@ -3480,6 +3636,21 @@ func (p *ListVirtualMachinesMetricsParams) GetAccount() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetAccumulate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accumulate"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetAccumulate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accumulate"].(bool)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetAffinitygroupid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3492,6 +3663,36 @@ func (p *ListVirtualMachinesMetricsParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetBackupofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["backupofferingid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetBackupofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["backupofferingid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
 	return value, ok
 }
 
@@ -4116,7 +4317,7 @@ type VirtualMachinesMetric struct {
 	Isoname               string                               `json:"isoname"`
 	JobID                 string                               `json:"jobid"`
 	Jobstatus             int                                  `json:"jobstatus"`
-	Keypair               string                               `json:"keypair"`
+	Keypairs              string                               `json:"keypairs"`
 	Lastupdated           string                               `json:"lastupdated"`
 	Memory                int                                  `json:"memory"`
 	Memoryintfreekbs      int64                                `json:"memoryintfreekbs"`
@@ -4397,7 +4598,7 @@ type MigrateVirtualMachineResponse struct {
 	Isoname               string                                       `json:"isoname"`
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
-	Keypair               string                                       `json:"keypair"`
+	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
@@ -4675,7 +4876,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Isoname               string                                                 `json:"isoname"`
 	JobID                 string                                                 `json:"jobid"`
 	Jobstatus             int                                                    `json:"jobstatus"`
-	Keypair               string                                                 `json:"keypair"`
+	Keypairs              string                                                 `json:"keypairs"`
 	Lastupdated           string                                                 `json:"lastupdated"`
 	Memory                int                                                    `json:"memory"`
 	Memoryintfreekbs      int64                                                  `json:"memoryintfreekbs"`
@@ -4936,7 +5137,7 @@ type RebootVirtualMachineResponse struct {
 	Isoname               string                                      `json:"isoname"`
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
-	Keypair               string                                      `json:"keypair"`
+	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
@@ -5139,7 +5340,7 @@ type RecoverVirtualMachineResponse struct {
 	Isoname               string                                       `json:"isoname"`
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
-	Keypair               string                                       `json:"keypair"`
+	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
@@ -5381,7 +5582,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Isoname               string                                             `json:"isoname"`
 	JobID                 string                                             `json:"jobid"`
 	Jobstatus             int                                                `json:"jobstatus"`
-	Keypair               string                                             `json:"keypair"`
+	Keypairs              string                                             `json:"keypairs"`
 	Lastupdated           string                                             `json:"lastupdated"`
 	Memory                int                                                `json:"memory"`
 	Memoryintfreekbs      int64                                              `json:"memoryintfreekbs"`
@@ -5604,7 +5805,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Isoname               string                                                `json:"isoname"`
 	JobID                 string                                                `json:"jobid"`
 	Jobstatus             int                                                   `json:"jobstatus"`
-	Keypair               string                                                `json:"keypair"`
+	Keypairs              string                                                `json:"keypairs"`
 	Lastupdated           string                                                `json:"lastupdated"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
@@ -5845,7 +6046,7 @@ type RestoreVirtualMachineResponse struct {
 	Isoname               string                                       `json:"isoname"`
 	JobID                 string                                       `json:"jobid"`
 	Jobstatus             int                                          `json:"jobstatus"`
-	Keypair               string                                       `json:"keypair"`
+	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
@@ -5963,6 +6164,10 @@ func (p *ScaleVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["automigrate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("automigrate", vv)
+	}
 	if v, found := p.p["details"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -5972,10 +6177,37 @@ func (p *ScaleVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["maxiops"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("maxiops", vv)
+	}
+	if v, found := p.p["miniops"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("miniops", vv)
+	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
+	if v, found := p.p["shrinkok"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("shrinkok", vv)
+	}
 	return u
+}
+
+func (p *ScaleVirtualMachineParams) SetAutomigrate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["automigrate"] = v
+}
+
+func (p *ScaleVirtualMachineParams) GetAutomigrate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["automigrate"].(bool)
+	return value, ok
 }
 
 func (p *ScaleVirtualMachineParams) SetDetails(v map[string]string) {
@@ -6008,6 +6240,36 @@ func (p *ScaleVirtualMachineParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *ScaleVirtualMachineParams) SetMaxiops(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["maxiops"] = v
+}
+
+func (p *ScaleVirtualMachineParams) GetMaxiops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["maxiops"].(int64)
+	return value, ok
+}
+
+func (p *ScaleVirtualMachineParams) SetMiniops(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["miniops"] = v
+}
+
+func (p *ScaleVirtualMachineParams) GetMiniops() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["miniops"].(int64)
+	return value, ok
+}
+
 func (p *ScaleVirtualMachineParams) SetServiceofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -6020,6 +6282,21 @@ func (p *ScaleVirtualMachineParams) GetServiceofferingid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
+func (p *ScaleVirtualMachineParams) SetShrinkok(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["shrinkok"] = v
+}
+
+func (p *ScaleVirtualMachineParams) GetShrinkok() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["shrinkok"].(bool)
 	return value, ok
 }
 
@@ -6275,7 +6552,7 @@ type StartVirtualMachineResponse struct {
 	Isoname               string                                     `json:"isoname"`
 	JobID                 string                                     `json:"jobid"`
 	Jobstatus             int                                        `json:"jobstatus"`
-	Keypair               string                                     `json:"keypair"`
+	Keypairs              string                                     `json:"keypairs"`
 	Lastupdated           string                                     `json:"lastupdated"`
 	Memory                int                                        `json:"memory"`
 	Memoryintfreekbs      int64                                      `json:"memoryintfreekbs"`
@@ -6517,7 +6794,7 @@ type StopVirtualMachineResponse struct {
 	Isoname               string                                    `json:"isoname"`
 	JobID                 string                                    `json:"jobid"`
 	Jobstatus             int                                       `json:"jobstatus"`
-	Keypair               string                                    `json:"keypair"`
+	Keypairs              string                                    `json:"keypairs"`
 	Lastupdated           string                                    `json:"lastupdated"`
 	Memory                int                                       `json:"memory"`
 	Memoryintfreekbs      int64                                     `json:"memoryintfreekbs"`
@@ -6759,7 +7036,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Isoname               string                                                   `json:"isoname"`
 	JobID                 string                                                   `json:"jobid"`
 	Jobstatus             int                                                      `json:"jobstatus"`
-	Keypair               string                                                   `json:"keypair"`
+	Keypairs              string                                                   `json:"keypairs"`
 	Lastupdated           string                                                   `json:"lastupdated"`
 	Memory                int                                                      `json:"memory"`
 	Memoryintfreekbs      int64                                                    `json:"memoryintfreekbs"`
@@ -7278,7 +7555,7 @@ type UpdateVirtualMachineResponse struct {
 	Isoname               string                                      `json:"isoname"`
 	JobID                 string                                      `json:"jobid"`
 	Jobstatus             int                                         `json:"jobstatus"`
-	Keypair               string                                      `json:"keypair"`
+	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
@@ -7385,4 +7662,283 @@ func (r *UpdateVirtualMachineResponse) UnmarshalJSON(b []byte) error {
 
 	type alias UpdateVirtualMachineResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ListVirtualMachinesUsageHistoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["ids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ids", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	return u
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetIds(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ids"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *ListVirtualMachinesUsageHistoryParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListVirtualMachinesUsageHistoryParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewListVirtualMachinesUsageHistoryParams() *ListVirtualMachinesUsageHistoryParams {
+	p := &ListVirtualMachinesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VirtualMachineService) GetVirtualMachinesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListVirtualMachinesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListVirtualMachinesUsageHistory(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.VirtualMachinesUsageHistory[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.VirtualMachinesUsageHistory {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VirtualMachineService) GetVirtualMachinesUsageHistoryByName(name string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error) {
+	id, count, err := s.GetVirtualMachinesUsageHistoryID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetVirtualMachinesUsageHistoryByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VirtualMachineService) GetVirtualMachinesUsageHistoryByID(id string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error) {
+	p := &ListVirtualMachinesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListVirtualMachinesUsageHistory(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.VirtualMachinesUsageHistory[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for VirtualMachinesUsageHistory UUID: %s!", id)
+}
+
+// Lists VM stats
+func (s *VirtualMachineService) ListVirtualMachinesUsageHistory(p *ListVirtualMachinesUsageHistoryParams) (*ListVirtualMachinesUsageHistoryResponse, error) {
+	resp, err := s.cs.newRequest("listVirtualMachinesUsageHistory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListVirtualMachinesUsageHistoryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListVirtualMachinesUsageHistoryResponse struct {
+	Count                       int                            `json:"count"`
+	VirtualMachinesUsageHistory []*VirtualMachinesUsageHistory `json:"virtualmachinesusagehistory"`
+}
+
+type VirtualMachinesUsageHistory struct {
+	Displayname string   `json:"displayname"`
+	Id          string   `json:"id"`
+	JobID       string   `json:"jobid"`
+	Jobstatus   int      `json:"jobstatus"`
+	Name        string   `json:"name"`
+	Stats       []string `json:"stats"`
 }

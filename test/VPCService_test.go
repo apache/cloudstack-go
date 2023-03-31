@@ -39,7 +39,7 @@ func TestVPCService(t *testing.T) {
 		if _, ok := response["createPrivateGateway"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.VPC.NewCreatePrivateGatewayParams("gateway", "ipaddress", "netmask", "vlan", "vpcid")
+		p := client.VPC.NewCreatePrivateGatewayParams("gateway", "ipaddress", "netmask", "vpcid")
 		r, err := client.VPC.CreatePrivateGateway(p)
 		if err != nil {
 			t.Errorf(err.Error())

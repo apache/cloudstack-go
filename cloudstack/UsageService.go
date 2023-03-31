@@ -52,6 +52,8 @@ type UsageServiceIface interface {
 	NewRemoveRawUsageRecordsParams(interval int) *RemoveRawUsageRecordsParams
 	UpdateTrafficType(p *UpdateTrafficTypeParams) (*UpdateTrafficTypeResponse, error)
 	NewUpdateTrafficTypeParams(id string) *UpdateTrafficTypeParams
+	ListUsageServerMetrics(p *ListUsageServerMetricsParams) (*ListUsageServerMetricsResponse, error)
+	NewListUsageServerMetricsParams() *ListUsageServerMetricsParams
 }
 
 type AddTrafficMonitorParams struct {
@@ -1782,4 +1784,54 @@ type UpdateTrafficTypeResponse struct {
 	Traffictype        string `json:"traffictype"`
 	Vmwarenetworklabel string `json:"vmwarenetworklabel"`
 	Xennetworklabel    string `json:"xennetworklabel"`
+}
+
+type ListUsageServerMetricsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListUsageServerMetricsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	return u
+}
+
+// You should always use this function to get a new ListUsageServerMetricsParams instance,
+// as then you are sure you have configured all required params
+func (s *UsageService) NewListUsageServerMetricsParams() *ListUsageServerMetricsParams {
+	p := &ListUsageServerMetricsParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists Usage Server metrics
+func (s *UsageService) ListUsageServerMetrics(p *ListUsageServerMetricsParams) (*ListUsageServerMetricsResponse, error) {
+	resp, err := s.cs.newRequest("listUsageServerMetrics", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListUsageServerMetricsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListUsageServerMetricsResponse struct {
+	Count              int                  `json:"count"`
+	UsageServerMetrics []*UsageServerMetric `json:"usageservermetric"`
+}
+
+type UsageServerMetric struct {
+	Collectiontime    string `json:"collectiontime"`
+	Hostname          string `json:"hostname"`
+	JobID             string `json:"jobid"`
+	Jobstatus         int    `json:"jobstatus"`
+	Lastheartbeat     string `json:"lastheartbeat"`
+	Lastsuccessfuljob string `json:"lastsuccessfuljob"`
+	State             string `json:"state"`
 }

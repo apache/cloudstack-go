@@ -112,6 +112,21 @@ func (mr *MockFirewallServiceIfaceMockRecorder) CreateFirewallRule(p interface{}
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateFirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).CreateFirewallRule), p)
 }
 
+// CreateIpv6FirewallRule mocks base method.
+func (m *MockFirewallServiceIface) CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateIpv6FirewallRule", p)
+	ret0, _ := ret[0].(*CreateIpv6FirewallRuleResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateIpv6FirewallRule indicates an expected call of CreateIpv6FirewallRule.
+func (mr *MockFirewallServiceIfaceMockRecorder) CreateIpv6FirewallRule(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateIpv6FirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).CreateIpv6FirewallRule), p)
+}
+
 // CreatePortForwardingRule mocks base method.
 func (m *MockFirewallServiceIface) CreatePortForwardingRule(p *CreatePortForwardingRuleParams) (*CreatePortForwardingRuleResponse, error) {
 	m.ctrl.T.Helper()
@@ -155,6 +170,21 @@ func (m *MockFirewallServiceIface) DeleteFirewallRule(p *DeleteFirewallRuleParam
 func (mr *MockFirewallServiceIfaceMockRecorder) DeleteFirewallRule(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteFirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).DeleteFirewallRule), p)
+}
+
+// DeleteIpv6FirewallRule mocks base method.
+func (m *MockFirewallServiceIface) DeleteIpv6FirewallRule(p *DeleteIpv6FirewallRuleParams) (*DeleteIpv6FirewallRuleResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteIpv6FirewallRule", p)
+	ret0, _ := ret[0].(*DeleteIpv6FirewallRuleResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteIpv6FirewallRule indicates an expected call of DeleteIpv6FirewallRule.
+func (mr *MockFirewallServiceIfaceMockRecorder) DeleteIpv6FirewallRule(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteIpv6FirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).DeleteIpv6FirewallRule), p)
 }
 
 // DeletePaloAltoFirewall mocks base method.
@@ -229,6 +259,27 @@ func (mr *MockFirewallServiceIfaceMockRecorder) GetFirewallRuleByID(id interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFirewallRuleByID", reflect.TypeOf((*MockFirewallServiceIface)(nil).GetFirewallRuleByID), varargs...)
 }
 
+// GetIpv6FirewallRuleByID mocks base method.
+func (m *MockFirewallServiceIface) GetIpv6FirewallRuleByID(id string, opts ...OptionFunc) (*Ipv6FirewallRule, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetIpv6FirewallRuleByID", varargs...)
+	ret0, _ := ret[0].(*Ipv6FirewallRule)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetIpv6FirewallRuleByID indicates an expected call of GetIpv6FirewallRuleByID.
+func (mr *MockFirewallServiceIfaceMockRecorder) GetIpv6FirewallRuleByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetIpv6FirewallRuleByID", reflect.TypeOf((*MockFirewallServiceIface)(nil).GetIpv6FirewallRuleByID), varargs...)
+}
+
 // GetPortForwardingRuleByID mocks base method.
 func (m *MockFirewallServiceIface) GetPortForwardingRuleByID(id string, opts ...OptionFunc) (*PortForwardingRule, int, error) {
 	m.ctrl.T.Helper()
@@ -278,6 +329,21 @@ func (m *MockFirewallServiceIface) ListFirewallRules(p *ListFirewallRulesParams)
 func (mr *MockFirewallServiceIfaceMockRecorder) ListFirewallRules(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListFirewallRules", reflect.TypeOf((*MockFirewallServiceIface)(nil).ListFirewallRules), p)
+}
+
+// ListIpv6FirewallRules mocks base method.
+func (m *MockFirewallServiceIface) ListIpv6FirewallRules(p *ListIpv6FirewallRulesParams) (*ListIpv6FirewallRulesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListIpv6FirewallRules", p)
+	ret0, _ := ret[0].(*ListIpv6FirewallRulesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListIpv6FirewallRules indicates an expected call of ListIpv6FirewallRules.
+func (mr *MockFirewallServiceIfaceMockRecorder) ListIpv6FirewallRules(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListIpv6FirewallRules", reflect.TypeOf((*MockFirewallServiceIface)(nil).ListIpv6FirewallRules), p)
 }
 
 // ListPaloAltoFirewalls mocks base method.
@@ -366,6 +432,20 @@ func (mr *MockFirewallServiceIfaceMockRecorder) NewCreateFirewallRuleParams(ipad
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateFirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewCreateFirewallRuleParams), ipaddressid, protocol)
 }
 
+// NewCreateIpv6FirewallRuleParams mocks base method.
+func (m *MockFirewallServiceIface) NewCreateIpv6FirewallRuleParams(networkid, protocol string) *CreateIpv6FirewallRuleParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCreateIpv6FirewallRuleParams", networkid, protocol)
+	ret0, _ := ret[0].(*CreateIpv6FirewallRuleParams)
+	return ret0
+}
+
+// NewCreateIpv6FirewallRuleParams indicates an expected call of NewCreateIpv6FirewallRuleParams.
+func (mr *MockFirewallServiceIfaceMockRecorder) NewCreateIpv6FirewallRuleParams(networkid, protocol interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateIpv6FirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewCreateIpv6FirewallRuleParams), networkid, protocol)
+}
+
 // NewCreatePortForwardingRuleParams mocks base method.
 func (m *MockFirewallServiceIface) NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams {
 	m.ctrl.T.Helper()
@@ -406,6 +486,20 @@ func (m *MockFirewallServiceIface) NewDeleteFirewallRuleParams(id string) *Delet
 func (mr *MockFirewallServiceIfaceMockRecorder) NewDeleteFirewallRuleParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteFirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewDeleteFirewallRuleParams), id)
+}
+
+// NewDeleteIpv6FirewallRuleParams mocks base method.
+func (m *MockFirewallServiceIface) NewDeleteIpv6FirewallRuleParams(id string) *DeleteIpv6FirewallRuleParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteIpv6FirewallRuleParams", id)
+	ret0, _ := ret[0].(*DeleteIpv6FirewallRuleParams)
+	return ret0
+}
+
+// NewDeleteIpv6FirewallRuleParams indicates an expected call of NewDeleteIpv6FirewallRuleParams.
+func (mr *MockFirewallServiceIfaceMockRecorder) NewDeleteIpv6FirewallRuleParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteIpv6FirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewDeleteIpv6FirewallRuleParams), id)
 }
 
 // NewDeletePaloAltoFirewallParams mocks base method.
@@ -464,6 +558,20 @@ func (mr *MockFirewallServiceIfaceMockRecorder) NewListFirewallRulesParams() *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListFirewallRulesParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewListFirewallRulesParams))
 }
 
+// NewListIpv6FirewallRulesParams mocks base method.
+func (m *MockFirewallServiceIface) NewListIpv6FirewallRulesParams() *ListIpv6FirewallRulesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListIpv6FirewallRulesParams")
+	ret0, _ := ret[0].(*ListIpv6FirewallRulesParams)
+	return ret0
+}
+
+// NewListIpv6FirewallRulesParams indicates an expected call of NewListIpv6FirewallRulesParams.
+func (mr *MockFirewallServiceIfaceMockRecorder) NewListIpv6FirewallRulesParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListIpv6FirewallRulesParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewListIpv6FirewallRulesParams))
+}
+
 // NewListPaloAltoFirewallsParams mocks base method.
 func (m *MockFirewallServiceIface) NewListPaloAltoFirewallsParams() *ListPaloAltoFirewallsParams {
 	m.ctrl.T.Helper()
@@ -520,6 +628,20 @@ func (mr *MockFirewallServiceIfaceMockRecorder) NewUpdateFirewallRuleParams(id i
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateFirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewUpdateFirewallRuleParams), id)
 }
 
+// NewUpdateIpv6FirewallRuleParams mocks base method.
+func (m *MockFirewallServiceIface) NewUpdateIpv6FirewallRuleParams(id string) *UpdateIpv6FirewallRuleParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateIpv6FirewallRuleParams", id)
+	ret0, _ := ret[0].(*UpdateIpv6FirewallRuleParams)
+	return ret0
+}
+
+// NewUpdateIpv6FirewallRuleParams indicates an expected call of NewUpdateIpv6FirewallRuleParams.
+func (mr *MockFirewallServiceIfaceMockRecorder) NewUpdateIpv6FirewallRuleParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateIpv6FirewallRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewUpdateIpv6FirewallRuleParams), id)
+}
+
 // NewUpdatePortForwardingRuleParams mocks base method.
 func (m *MockFirewallServiceIface) NewUpdatePortForwardingRuleParams(id string) *UpdatePortForwardingRuleParams {
 	m.ctrl.T.Helper()
@@ -562,6 +684,21 @@ func (m *MockFirewallServiceIface) UpdateFirewallRule(p *UpdateFirewallRuleParam
 func (mr *MockFirewallServiceIfaceMockRecorder) UpdateFirewallRule(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateFirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).UpdateFirewallRule), p)
+}
+
+// UpdateIpv6FirewallRule mocks base method.
+func (m *MockFirewallServiceIface) UpdateIpv6FirewallRule(p *UpdateIpv6FirewallRuleParams) (*UpdateIpv6FirewallRuleResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateIpv6FirewallRule", p)
+	ret0, _ := ret[0].(*UpdateIpv6FirewallRuleResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateIpv6FirewallRule indicates an expected call of UpdateIpv6FirewallRule.
+func (mr *MockFirewallServiceIfaceMockRecorder) UpdateIpv6FirewallRule(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateIpv6FirewallRule", reflect.TypeOf((*MockFirewallServiceIface)(nil).UpdateIpv6FirewallRule), p)
 }
 
 // UpdatePortForwardingRule mocks base method.

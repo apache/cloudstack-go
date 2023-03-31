@@ -785,7 +785,7 @@ func (p *ListUsersParams) toURLValues() url.Values {
 		u.Set("account", v.(string))
 	}
 	if v, found := p.p["accounttype"]; found {
-		vv := strconv.FormatInt(v.(int64), 10)
+		vv := strconv.Itoa(v.(int))
 		u.Set("accounttype", vv)
 	}
 	if v, found := p.p["domainid"]; found {
@@ -841,18 +841,18 @@ func (p *ListUsersParams) GetAccount() (string, bool) {
 	return value, ok
 }
 
-func (p *ListUsersParams) SetAccounttype(v int64) {
+func (p *ListUsersParams) SetAccounttype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
 }
 
-func (p *ListUsersParams) GetAccounttype() (int64, bool) {
+func (p *ListUsersParams) GetAccounttype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["accounttype"].(int64)
+	value, ok := p.p["accounttype"].(int)
 	return value, ok
 }
 
