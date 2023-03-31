@@ -262,7 +262,7 @@ type AddNicToVirtualMachineResponse struct {
 	Hostid                string                                        `json:"hostid"`
 	Hostname              string                                        `json:"hostname"`
 	Hypervisor            string                                        `json:"hypervisor"`
-	Icon                  string                                        `json:"icon"`
+	Icon                  interface{}                                   `json:"icon"`
 	Id                    string                                        `json:"id"`
 	Instancename          string                                        `json:"instancename"`
 	Isdynamicallyscalable bool                                          `json:"isdynamicallyscalable"`
@@ -557,7 +557,7 @@ type AssignVirtualMachineResponse struct {
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
-	Icon                  string                                      `json:"icon"`
+	Icon                  interface{}                                 `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -800,7 +800,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
-	Icon                  string                                                `json:"icon"`
+	Icon                  interface{}                                           `json:"icon"`
 	Id                    string                                                `json:"id"`
 	Instancename          string                                                `json:"instancename"`
 	Isdynamicallyscalable bool                                                  `json:"isdynamicallyscalable"`
@@ -1918,7 +1918,7 @@ type DeployVirtualMachineResponse struct {
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
-	Icon                  string                                      `json:"icon"`
+	Icon                  interface{}                                 `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -2179,7 +2179,7 @@ type DestroyVirtualMachineResponse struct {
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
-	Icon                  string                                       `json:"icon"`
+	Icon                  interface{}                                  `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -3222,7 +3222,7 @@ type VirtualMachine struct {
 	Hostid                string                        `json:"hostid"`
 	Hostname              string                        `json:"hostname"`
 	Hypervisor            string                        `json:"hypervisor"`
-	Icon                  string                        `json:"icon"`
+	Icon                  interface{}                   `json:"icon"`
 	Id                    string                        `json:"id"`
 	Instancename          string                        `json:"instancename"`
 	Isdynamicallyscalable bool                          `json:"isdynamicallyscalable"`
@@ -4106,7 +4106,7 @@ type VirtualMachinesMetric struct {
 	Hostid                string                               `json:"hostid"`
 	Hostname              string                               `json:"hostname"`
 	Hypervisor            string                               `json:"hypervisor"`
-	Icon                  string                               `json:"icon"`
+	Icon                  interface{}                          `json:"icon"`
 	Id                    string                               `json:"id"`
 	Instancename          string                               `json:"instancename"`
 	Ipaddress             string                               `json:"ipaddress"`
@@ -4388,7 +4388,7 @@ type MigrateVirtualMachineResponse struct {
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
-	Icon                  string                                       `json:"icon"`
+	Icon                  interface{}                                  `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -4666,7 +4666,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Hostid                string                                                 `json:"hostid"`
 	Hostname              string                                                 `json:"hostname"`
 	Hypervisor            string                                                 `json:"hypervisor"`
-	Icon                  string                                                 `json:"icon"`
+	Icon                  interface{}                                            `json:"icon"`
 	Id                    string                                                 `json:"id"`
 	Instancename          string                                                 `json:"instancename"`
 	Isdynamicallyscalable bool                                                   `json:"isdynamicallyscalable"`
@@ -4927,7 +4927,7 @@ type RebootVirtualMachineResponse struct {
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
-	Icon                  string                                      `json:"icon"`
+	Icon                  interface{}                                 `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`
@@ -5130,7 +5130,7 @@ type RecoverVirtualMachineResponse struct {
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
-	Icon                  string                                       `json:"icon"`
+	Icon                  interface{}                                  `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -5372,7 +5372,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Hostid                string                                             `json:"hostid"`
 	Hostname              string                                             `json:"hostname"`
 	Hypervisor            string                                             `json:"hypervisor"`
-	Icon                  string                                             `json:"icon"`
+	Icon                  interface{}                                        `json:"icon"`
 	Id                    string                                             `json:"id"`
 	Instancename          string                                             `json:"instancename"`
 	Isdynamicallyscalable bool                                               `json:"isdynamicallyscalable"`
@@ -5595,7 +5595,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Hostid                string                                                `json:"hostid"`
 	Hostname              string                                                `json:"hostname"`
 	Hypervisor            string                                                `json:"hypervisor"`
-	Icon                  string                                                `json:"icon"`
+	Icon                  interface{}                                           `json:"icon"`
 	Id                    string                                                `json:"id"`
 	Instancename          string                                                `json:"instancename"`
 	Isdynamicallyscalable bool                                                  `json:"isdynamicallyscalable"`
@@ -5836,7 +5836,7 @@ type RestoreVirtualMachineResponse struct {
 	Hostid                string                                       `json:"hostid"`
 	Hostname              string                                       `json:"hostname"`
 	Hypervisor            string                                       `json:"hypervisor"`
-	Icon                  string                                       `json:"icon"`
+	Icon                  interface{}                                  `json:"icon"`
 	Id                    string                                       `json:"id"`
 	Instancename          string                                       `json:"instancename"`
 	Isdynamicallyscalable bool                                         `json:"isdynamicallyscalable"`
@@ -6266,7 +6266,7 @@ type StartVirtualMachineResponse struct {
 	Hostid                string                                     `json:"hostid"`
 	Hostname              string                                     `json:"hostname"`
 	Hypervisor            string                                     `json:"hypervisor"`
-	Icon                  string                                     `json:"icon"`
+	Icon                  interface{}                                `json:"icon"`
 	Id                    string                                     `json:"id"`
 	Instancename          string                                     `json:"instancename"`
 	Isdynamicallyscalable bool                                       `json:"isdynamicallyscalable"`
@@ -6508,7 +6508,7 @@ type StopVirtualMachineResponse struct {
 	Hostid                string                                    `json:"hostid"`
 	Hostname              string                                    `json:"hostname"`
 	Hypervisor            string                                    `json:"hypervisor"`
-	Icon                  string                                    `json:"icon"`
+	Icon                  interface{}                               `json:"icon"`
 	Id                    string                                    `json:"id"`
 	Instancename          string                                    `json:"instancename"`
 	Isdynamicallyscalable bool                                      `json:"isdynamicallyscalable"`
@@ -6750,7 +6750,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Hostid                string                                                   `json:"hostid"`
 	Hostname              string                                                   `json:"hostname"`
 	Hypervisor            string                                                   `json:"hypervisor"`
-	Icon                  string                                                   `json:"icon"`
+	Icon                  interface{}                                              `json:"icon"`
 	Id                    string                                                   `json:"id"`
 	Instancename          string                                                   `json:"instancename"`
 	Isdynamicallyscalable bool                                                     `json:"isdynamicallyscalable"`
@@ -7269,7 +7269,7 @@ type UpdateVirtualMachineResponse struct {
 	Hostid                string                                      `json:"hostid"`
 	Hostname              string                                      `json:"hostname"`
 	Hypervisor            string                                      `json:"hypervisor"`
-	Icon                  string                                      `json:"icon"`
+	Icon                  interface{}                                 `json:"icon"`
 	Id                    string                                      `json:"id"`
 	Instancename          string                                      `json:"instancename"`
 	Isdynamicallyscalable bool                                        `json:"isdynamicallyscalable"`

@@ -945,7 +945,7 @@ type LdapCreateAccountResponse struct {
 	Domainid                  string                          `json:"domainid"`
 	Domainpath                string                          `json:"domainpath"`
 	Groups                    []string                        `json:"groups"`
-	Icon                      string                          `json:"icon"`
+	Icon                      interface{}                     `json:"icon"`
 	Id                        string                          `json:"id"`
 	Ipavailable               string                          `json:"ipavailable"`
 	Iplimit                   string                          `json:"iplimit"`
@@ -998,28 +998,28 @@ type LdapCreateAccountResponse struct {
 }
 
 type LdapCreateAccountResponseUser struct {
-	Account             string `json:"account"`
-	Accountid           string `json:"accountid"`
-	Accounttype         int    `json:"accounttype"`
-	Apikey              string `json:"apikey"`
-	Created             string `json:"created"`
-	Domain              string `json:"domain"`
-	Domainid            string `json:"domainid"`
-	Email               string `json:"email"`
-	Firstname           string `json:"firstname"`
-	Icon                string `json:"icon"`
-	Id                  string `json:"id"`
-	Iscallerchilddomain bool   `json:"iscallerchilddomain"`
-	Isdefault           bool   `json:"isdefault"`
-	Lastname            string `json:"lastname"`
-	Roleid              string `json:"roleid"`
-	Rolename            string `json:"rolename"`
-	Roletype            string `json:"roletype"`
-	Secretkey           string `json:"secretkey"`
-	State               string `json:"state"`
-	Timezone            string `json:"timezone"`
-	Username            string `json:"username"`
-	Usersource          string `json:"usersource"`
+	Account             string      `json:"account"`
+	Accountid           string      `json:"accountid"`
+	Accounttype         int         `json:"accounttype"`
+	Apikey              string      `json:"apikey"`
+	Created             string      `json:"created"`
+	Domain              string      `json:"domain"`
+	Domainid            string      `json:"domainid"`
+	Email               string      `json:"email"`
+	Firstname           string      `json:"firstname"`
+	Icon                interface{} `json:"icon"`
+	Id                  string      `json:"id"`
+	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
+	Isdefault           bool        `json:"isdefault"`
+	Lastname            string      `json:"lastname"`
+	Roleid              string      `json:"roleid"`
+	Rolename            string      `json:"rolename"`
+	Roletype            string      `json:"roletype"`
+	Secretkey           string      `json:"secretkey"`
+	State               string      `json:"state"`
+	Timezone            string      `json:"timezone"`
+	Username            string      `json:"username"`
+	Usersource          string      `json:"usersource"`
 }
 
 type LdapRemoveParams struct {

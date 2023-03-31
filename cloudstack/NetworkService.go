@@ -988,7 +988,7 @@ type CreateNetworkResponse struct {
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
 	Hasannotations              bool                           `json:"hasannotations"`
-	Icon                        string                         `json:"icon"`
+	Icon                        interface{}                    `json:"icon"`
 	Id                          string                         `json:"id"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`
@@ -2406,7 +2406,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Externalid                  string                                `json:"externalid"`
 	Gateway                     string                                `json:"gateway"`
 	Hasannotations              bool                                  `json:"hasannotations"`
-	Icon                        string                                `json:"icon"`
+	Icon                        interface{}                           `json:"icon"`
 	Id                          string                                `json:"id"`
 	Ip6cidr                     string                                `json:"ip6cidr"`
 	Ip6gateway                  string                                `json:"ip6gateway"`
@@ -3380,7 +3380,7 @@ type Network struct {
 	Externalid                  string                   `json:"externalid"`
 	Gateway                     string                   `json:"gateway"`
 	Hasannotations              bool                     `json:"hasannotations"`
-	Icon                        string                   `json:"icon"`
+	Icon                        interface{}              `json:"icon"`
 	Id                          string                   `json:"id"`
 	Ip6cidr                     string                   `json:"ip6cidr"`
 	Ip6gateway                  string                   `json:"ip6gateway"`
@@ -3617,7 +3617,7 @@ type NiciraNvpDeviceNetwork struct {
 	Externalid                  string                          `json:"externalid"`
 	Gateway                     string                          `json:"gateway"`
 	Hasannotations              bool                            `json:"hasannotations"`
-	Icon                        string                          `json:"icon"`
+	Icon                        interface{}                     `json:"icon"`
 	Id                          string                          `json:"id"`
 	Ip6cidr                     string                          `json:"ip6cidr"`
 	Ip6gateway                  string                          `json:"ip6gateway"`
@@ -3973,7 +3973,7 @@ type PaloAltoFirewallNetwork struct {
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
 	Hasannotations              bool                             `json:"hasannotations"`
-	Icon                        string                           `json:"icon"`
+	Icon                        interface{}                      `json:"icon"`
 	Id                          string                           `json:"id"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
@@ -5139,7 +5139,7 @@ type UpdateNetworkResponse struct {
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
 	Hasannotations              bool                           `json:"hasannotations"`
-	Icon                        string                         `json:"icon"`
+	Icon                        interface{}                    `json:"icon"`
 	Id                          string                         `json:"id"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6gateway                  string                         `json:"ip6gateway"`

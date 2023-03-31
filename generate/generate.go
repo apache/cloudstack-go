@@ -2116,6 +2116,8 @@ func mapType(aName string, pName string, pType string) string {
 		return "map[string]string"
 	case "set":
 		return "[]interface{}"
+	case "resourceiconresponse":
+		return "interface{}"
 	case "responseobject":
 		return "json.RawMessage"
 	case "uservmresponse":

@@ -166,7 +166,7 @@ type CreateDomainResponse struct {
 	Domaindetails             map[string]string `json:"domaindetails"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
-	Icon                      string            `json:"icon"`
+	Icon                      interface{}       `json:"icon"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
 	Iplimit                   string            `json:"iplimit"`
@@ -587,7 +587,7 @@ type DomainChildren struct {
 	Domaindetails             map[string]string `json:"domaindetails"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
-	Icon                      string            `json:"icon"`
+	Icon                      interface{}       `json:"icon"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
 	Iplimit                   string            `json:"iplimit"`
@@ -932,7 +932,7 @@ type Domain struct {
 	Domaindetails             map[string]string `json:"domaindetails"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
-	Icon                      string            `json:"icon"`
+	Icon                      interface{}       `json:"icon"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
 	Iplimit                   string            `json:"iplimit"`
@@ -1080,7 +1080,7 @@ type UpdateDomainResponse struct {
 	Domaindetails             map[string]string `json:"domaindetails"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
-	Icon                      string            `json:"icon"`
+	Icon                      interface{}       `json:"icon"`
 	Id                        string            `json:"id"`
 	Ipavailable               string            `json:"ipavailable"`
 	Iplimit                   string            `json:"iplimit"`

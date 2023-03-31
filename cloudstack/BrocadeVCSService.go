@@ -427,7 +427,7 @@ type BrocadeVcsDeviceNetwork struct {
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
 	Hasannotations              bool                             `json:"hasannotations"`
-	Icon                        string                           `json:"icon"`
+	Icon                        interface{}                      `json:"icon"`
 	Id                          string                           `json:"id"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6gateway                  string                           `json:"ip6gateway"`

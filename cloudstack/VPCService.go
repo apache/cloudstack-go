@@ -713,7 +713,7 @@ type CreateVPCResponse struct {
 	Domainid             string                     `json:"domainid"`
 	Fordisplay           bool                       `json:"fordisplay"`
 	Hasannotations       bool                       `json:"hasannotations"`
-	Icon                 string                     `json:"icon"`
+	Icon                 interface{}                `json:"icon"`
 	Id                   string                     `json:"id"`
 	JobID                string                     `json:"jobid"`
 	Jobstatus            int                        `json:"jobstatus"`
@@ -2850,7 +2850,7 @@ type VPC struct {
 	Domainid             string               `json:"domainid"`
 	Fordisplay           bool                 `json:"fordisplay"`
 	Hasannotations       bool                 `json:"hasannotations"`
-	Icon                 string               `json:"icon"`
+	Icon                 interface{}          `json:"icon"`
 	Id                   string               `json:"id"`
 	JobID                string               `json:"jobid"`
 	Jobstatus            int                  `json:"jobstatus"`
@@ -3164,7 +3164,7 @@ type UpdateVPCResponse struct {
 	Domainid             string                     `json:"domainid"`
 	Fordisplay           bool                       `json:"fordisplay"`
 	Hasannotations       bool                       `json:"hasannotations"`
-	Icon                 string                     `json:"icon"`
+	Icon                 interface{}                `json:"icon"`
 	Id                   string                     `json:"id"`
 	JobID                string                     `json:"jobid"`
 	Jobstatus            int                        `json:"jobstatus"`
