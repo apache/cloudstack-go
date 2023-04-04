@@ -357,10 +357,10 @@ type DbMetric struct {
 	Hostname       string `json:"hostname"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
-	Queries        int    `json:"queries"`
+	Queries        int64  `json:"queries"`
 	Replicas       string `json:"replicas"`
 	Tlsversions    string `json:"tlsversions"`
-	Uptime         int    `json:"uptime"`
+	Uptime         int64  `json:"uptime"`
 	Version        string `json:"version"`
 	Versioncomment string `json:"versioncomment"`
 }

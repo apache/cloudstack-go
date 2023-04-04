@@ -99,7 +99,7 @@ func TestAutoScaleService(t *testing.T) {
 		if _, ok := response["createCounter"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.AutoScale.NewCreateCounterParams("name", "source", "value")
+		p := client.AutoScale.NewCreateCounterParams("name", "provider", "source", "value")
 		r, err := client.AutoScale.CreateCounter(p)
 		if err != nil {
 			t.Errorf(err.Error())

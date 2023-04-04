@@ -241,6 +241,10 @@ type CopyTemplateResponse struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -695,6 +699,10 @@ type CreateTemplateResponse struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -2100,6 +2108,10 @@ type Template struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -2271,6 +2283,10 @@ type PrepareTemplateResponse struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -2861,6 +2877,10 @@ type RegisterTemplate struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -3258,6 +3278,10 @@ type UpdateTemplateResponse struct {
 	Templatetag           string              `json:"templatetag"`
 	Templatetype          string              `json:"templatetype"`
 	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
 	Zoneid                string              `json:"zoneid"`
 	Zonename              string              `json:"zonename"`
 }
@@ -3441,7 +3465,7 @@ func (s *TemplateService) NewUpdateTemplatePermissionsParams(id string) *UpdateT
 	return p
 }
 
-// Updates a template visibility permissions. A public template is visible to all accounts within the same domain. A private template is visible only to the owner of the template. A priviledged template is a private template with account permissions added. Only accounts specified under the template permissions are visible to them.
+// Updates a template visibility permissions. A public template is visible to all accounts within the same domain. A private template is visible only to the owner of the template. A privileged template is a private template with account permissions added. Only accounts specified under the template permissions are visible to them.
 func (s *TemplateService) UpdateTemplatePermissions(p *UpdateTemplatePermissionsParams) (*UpdateTemplatePermissionsResponse, error) {
 	resp, err := s.cs.newRequest("updateTemplatePermissions", p.toURLValues())
 	if err != nil {

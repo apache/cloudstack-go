@@ -69,7 +69,7 @@ func TestNetworkService(t *testing.T) {
 		if _, ok := response["createNetwork"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Network.NewCreateNetworkParams("displaytext", "name", "networkofferingid", "zoneid")
+		p := client.Network.NewCreateNetworkParams("name", "networkofferingid", "zoneid")
 		r, err := client.Network.CreateNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())

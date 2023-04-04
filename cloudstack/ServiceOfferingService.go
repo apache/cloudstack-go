@@ -114,6 +114,10 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("dynamicscalingenabled", vv)
 	}
+	if v, found := p.p["encryptroot"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("encryptroot", vv)
+	}
 	if v, found := p.p["hosttags"]; found {
 		u.Set("hosttags", v.(string))
 	}
@@ -481,6 +485,21 @@ func (p *CreateServiceOfferingParams) GetDynamicscalingenabled() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["dynamicscalingenabled"].(bool)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetEncryptroot(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["encryptroot"] = v
+}
+
+func (p *CreateServiceOfferingParams) GetEncryptroot() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["encryptroot"].(bool)
 	return value, ok
 }
 
@@ -975,6 +994,7 @@ type CreateServiceOfferingResponse struct {
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Encryptroot                 bool              `json:"encryptroot"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
@@ -1111,6 +1131,10 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["encryptroot"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("encryptroot", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1198,6 +1222,21 @@ func (p *ListServiceOfferingsParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListServiceOfferingsParams) SetEncryptroot(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["encryptroot"] = v
+}
+
+func (p *ListServiceOfferingsParams) GetEncryptroot() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["encryptroot"].(bool)
 	return value, ok
 }
 
@@ -1519,6 +1558,7 @@ type ServiceOffering struct {
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Encryptroot                 bool              `json:"encryptroot"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
@@ -1759,6 +1799,7 @@ type UpdateServiceOfferingResponse struct {
 	Domain                      string            `json:"domain"`
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
+	Encryptroot                 bool              `json:"encryptroot"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`

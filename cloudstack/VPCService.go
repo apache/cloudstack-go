@@ -481,12 +481,24 @@ func (p *CreateVPCParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["dns1"]; found {
+		u.Set("dns1", v.(string))
+	}
+	if v, found := p.p["dns2"]; found {
+		u.Set("dns2", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
 	if v, found := p.p["fordisplay"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["ip6dns1"]; found {
+		u.Set("ip6dns1", v.(string))
+	}
+	if v, found := p.p["ip6dns2"]; found {
+		u.Set("ip6dns2", v.(string))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -496,6 +508,10 @@ func (p *CreateVPCParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["publicmtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("publicmtu", vv)
 	}
 	if v, found := p.p["start"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -555,6 +571,36 @@ func (p *CreateVPCParams) GetDisplaytext() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateVPCParams) SetDns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns1"] = v
+}
+
+func (p *CreateVPCParams) GetDns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns1"].(string)
+	return value, ok
+}
+
+func (p *CreateVPCParams) SetDns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["dns2"] = v
+}
+
+func (p *CreateVPCParams) GetDns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["dns2"].(string)
+	return value, ok
+}
+
 func (p *CreateVPCParams) SetDomainid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -582,6 +628,36 @@ func (p *CreateVPCParams) GetFordisplay() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *CreateVPCParams) SetIp6dns1(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns1"] = v
+}
+
+func (p *CreateVPCParams) GetIp6dns1() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns1"].(string)
+	return value, ok
+}
+
+func (p *CreateVPCParams) SetIp6dns2(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6dns2"] = v
+}
+
+func (p *CreateVPCParams) GetIp6dns2() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6dns2"].(string)
 	return value, ok
 }
 
@@ -627,6 +703,21 @@ func (p *CreateVPCParams) GetProjectid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *CreateVPCParams) SetPublicmtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["publicmtu"] = v
+}
+
+func (p *CreateVPCParams) GetPublicmtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicmtu"].(int)
 	return value, ok
 }
 
@@ -729,12 +820,16 @@ type CreateVPCResponse struct {
 	Created              string                     `json:"created"`
 	Displaytext          string                     `json:"displaytext"`
 	Distributedvpcrouter bool                       `json:"distributedvpcrouter"`
+	Dns1                 string                     `json:"dns1"`
+	Dns2                 string                     `json:"dns2"`
 	Domain               string                     `json:"domain"`
 	Domainid             string                     `json:"domainid"`
 	Fordisplay           bool                       `json:"fordisplay"`
 	Hasannotations       bool                       `json:"hasannotations"`
 	Icon                 interface{}                `json:"icon"`
 	Id                   string                     `json:"id"`
+	Ip6dns1              string                     `json:"ip6dns1"`
+	Ip6dns2              string                     `json:"ip6dns2"`
 	Ip6routes            []interface{}              `json:"ip6routes"`
 	JobID                string                     `json:"jobid"`
 	Jobstatus            int                        `json:"jobstatus"`
@@ -743,6 +838,7 @@ type CreateVPCResponse struct {
 	Networkdomain        string                     `json:"networkdomain"`
 	Project              string                     `json:"project"`
 	Projectid            string                     `json:"projectid"`
+	Publicmtu            int                        `json:"publicmtu"`
 	Redundantvpcrouter   bool                       `json:"redundantvpcrouter"`
 	Regionlevelvpc       bool                       `json:"regionlevelvpc"`
 	Restartrequired      bool                       `json:"restartrequired"`
@@ -2053,6 +2149,9 @@ func (p *ListVPCOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -2099,6 +2198,21 @@ func (p *ListVPCOfferingsParams) GetDisplaytext() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["displaytext"].(string)
+	return value, ok
+}
+
+func (p *ListVPCOfferingsParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListVPCOfferingsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
 	return value, ok
 }
 
@@ -2890,12 +3004,16 @@ type VPC struct {
 	Created              string               `json:"created"`
 	Displaytext          string               `json:"displaytext"`
 	Distributedvpcrouter bool                 `json:"distributedvpcrouter"`
+	Dns1                 string               `json:"dns1"`
+	Dns2                 string               `json:"dns2"`
 	Domain               string               `json:"domain"`
 	Domainid             string               `json:"domainid"`
 	Fordisplay           bool                 `json:"fordisplay"`
 	Hasannotations       bool                 `json:"hasannotations"`
 	Icon                 interface{}          `json:"icon"`
 	Id                   string               `json:"id"`
+	Ip6dns1              string               `json:"ip6dns1"`
+	Ip6dns2              string               `json:"ip6dns2"`
 	Ip6routes            []interface{}        `json:"ip6routes"`
 	JobID                string               `json:"jobid"`
 	Jobstatus            int                  `json:"jobstatus"`
@@ -2904,6 +3022,7 @@ type VPC struct {
 	Networkdomain        string               `json:"networkdomain"`
 	Project              string               `json:"project"`
 	Projectid            string               `json:"projectid"`
+	Publicmtu            int                  `json:"publicmtu"`
 	Redundantvpcrouter   bool                 `json:"redundantvpcrouter"`
 	Regionlevelvpc       bool                 `json:"regionlevelvpc"`
 	Restartrequired      bool                 `json:"restartrequired"`
@@ -3096,6 +3215,10 @@ func (p *UpdateVPCParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["publicmtu"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("publicmtu", vv)
+	}
 	return u
 }
 
@@ -3174,6 +3297,21 @@ func (p *UpdateVPCParams) GetName() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateVPCParams) SetPublicmtu(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["publicmtu"] = v
+}
+
+func (p *UpdateVPCParams) GetPublicmtu() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["publicmtu"].(int)
+	return value, ok
+}
+
 // You should always use this function to get a new UpdateVPCParams instance,
 // as then you are sure you have configured all required params
 func (s *VPCService) NewUpdateVPCParams(id string) *UpdateVPCParams {
@@ -3224,12 +3362,16 @@ type UpdateVPCResponse struct {
 	Created              string                     `json:"created"`
 	Displaytext          string                     `json:"displaytext"`
 	Distributedvpcrouter bool                       `json:"distributedvpcrouter"`
+	Dns1                 string                     `json:"dns1"`
+	Dns2                 string                     `json:"dns2"`
 	Domain               string                     `json:"domain"`
 	Domainid             string                     `json:"domainid"`
 	Fordisplay           bool                       `json:"fordisplay"`
 	Hasannotations       bool                       `json:"hasannotations"`
 	Icon                 interface{}                `json:"icon"`
 	Id                   string                     `json:"id"`
+	Ip6dns1              string                     `json:"ip6dns1"`
+	Ip6dns2              string                     `json:"ip6dns2"`
 	Ip6routes            []interface{}              `json:"ip6routes"`
 	JobID                string                     `json:"jobid"`
 	Jobstatus            int                        `json:"jobstatus"`
@@ -3238,6 +3380,7 @@ type UpdateVPCResponse struct {
 	Networkdomain        string                     `json:"networkdomain"`
 	Project              string                     `json:"project"`
 	Projectid            string                     `json:"projectid"`
+	Publicmtu            int                        `json:"publicmtu"`
 	Redundantvpcrouter   bool                       `json:"redundantvpcrouter"`
 	Regionlevelvpc       bool                       `json:"regionlevelvpc"`
 	Restartrequired      bool                       `json:"restartrequired"`

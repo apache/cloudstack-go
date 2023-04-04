@@ -340,6 +340,7 @@ type AddBaremetalHostResponse struct {
 	Disconnected                     string                             `json:"disconnected"`
 	Disksizeallocated                int64                              `json:"disksizeallocated"`
 	Disksizetotal                    int64                              `json:"disksizetotal"`
+	Encryptionsupported              bool                               `json:"encryptionsupported"`
 	Events                           string                             `json:"events"`
 	Gpugroup                         []AddBaremetalHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                               `json:"hahost"`
@@ -777,6 +778,7 @@ type AddHostResponse struct {
 	Disconnected                     string                      `json:"disconnected"`
 	Disksizeallocated                int64                       `json:"disksizeallocated"`
 	Disksizetotal                    int64                       `json:"disksizetotal"`
+	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
 	Gpugroup                         []AddHostResponseGpugroup   `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
@@ -1020,6 +1022,7 @@ type CancelHostMaintenanceResponse struct {
 	Disconnected                     string                                  `json:"disconnected"`
 	Disksizeallocated                int64                                   `json:"disksizeallocated"`
 	Disksizetotal                    int64                                   `json:"disksizetotal"`
+	Encryptionsupported              bool                                    `json:"encryptionsupported"`
 	Events                           string                                  `json:"events"`
 	Gpugroup                         []CancelHostMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                    `json:"hahost"`
@@ -2638,6 +2641,7 @@ type Host struct {
 	Disconnected                     string                      `json:"disconnected"`
 	Disksizeallocated                int64                       `json:"disksizeallocated"`
 	Disksizetotal                    int64                       `json:"disksizetotal"`
+	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
 	Gpugroup                         []HostGpugroup              `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
@@ -3159,6 +3163,7 @@ type HostsMetric struct {
 	Disconnected                     string                      `json:"disconnected"`
 	Disksizeallocated                int64                       `json:"disksizeallocated"`
 	Disksizetotal                    int64                       `json:"disksizetotal"`
+	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
 	Gpugroup                         []HostsMetricGpugroup       `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
@@ -3324,6 +3329,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Disconnected                     string                                      `json:"disconnected"`
 	Disksizeallocated                int64                                       `json:"disksizeallocated"`
 	Disksizetotal                    int64                                       `json:"disksizetotal"`
+	Encryptionsupported              bool                                        `json:"encryptionsupported"`
 	Events                           string                                      `json:"events"`
 	Gpugroup                         []PrepareHostForMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                        `json:"hahost"`
@@ -3478,6 +3484,7 @@ type ReconnectHostResponse struct {
 	Disconnected                     string                          `json:"disconnected"`
 	Disksizeallocated                int64                           `json:"disksizeallocated"`
 	Disksizetotal                    int64                           `json:"disksizetotal"`
+	Encryptionsupported              bool                            `json:"encryptionsupported"`
 	Events                           string                          `json:"events"`
 	Gpugroup                         []ReconnectHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                            `json:"hahost"`
@@ -3873,6 +3880,7 @@ type UpdateHostResponse struct {
 	Disconnected                     string                       `json:"disconnected"`
 	Disksizeallocated                int64                        `json:"disksizeallocated"`
 	Disksizetotal                    int64                        `json:"disksizetotal"`
+	Encryptionsupported              bool                         `json:"encryptionsupported"`
 	Events                           string                       `json:"events"`
 	Gpugroup                         []UpdateHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                         `json:"hahost"`

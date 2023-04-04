@@ -331,6 +331,7 @@ type Nic struct {
 	JobID                string   `json:"jobid"`
 	Jobstatus            int      `json:"jobstatus"`
 	Macaddress           string   `json:"macaddress"`
+	Mtu                  int      `json:"mtu"`
 	Netmask              string   `json:"netmask"`
 	Networkid            string   `json:"networkid"`
 	Networkname          string   `json:"networkname"`
@@ -519,6 +520,8 @@ func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpRespon
 type UpdateVmNicIpResponse struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []UpdateVmNicIpResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`
 	Backupofferingname    string                               `json:"backupofferingname"`
 	Bootmode              string                               `json:"bootmode"`
@@ -544,6 +547,7 @@ type UpdateVmNicIpResponse struct {
 	Guestosid             string                               `json:"guestosid"`
 	Haenable              bool                                 `json:"haenable"`
 	Hasannotations        bool                                 `json:"hasannotations"`
+	Hostcontrolstate      string                               `json:"hostcontrolstate"`
 	Hostid                string                               `json:"hostid"`
 	Hostname              string                               `json:"hostname"`
 	Hypervisor            string                               `json:"hypervisor"`
@@ -589,6 +593,11 @@ type UpdateVmNicIpResponse struct {
 	Templatedisplaytext   string                               `json:"templatedisplaytext"`
 	Templateid            string                               `json:"templateid"`
 	Templatename          string                               `json:"templatename"`
+	Userdata              string                               `json:"userdata"`
+	Userdatadetails       string                               `json:"userdatadetails"`
+	Userdataid            string                               `json:"userdataid"`
+	Userdataname          string                               `json:"userdataname"`
+	Userdatapolicy        string                               `json:"userdatapolicy"`
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`

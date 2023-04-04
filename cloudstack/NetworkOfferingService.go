@@ -78,6 +78,10 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("enable", vv)
 	}
+	if v, found := p.p["fortungsten"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fortungsten", vv)
+	}
 	if v, found := p.p["forvpc"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvpc", vv)
@@ -251,6 +255,21 @@ func (p *CreateNetworkOfferingParams) GetEnable() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["enable"].(bool)
+	return value, ok
+}
+
+func (p *CreateNetworkOfferingParams) SetFortungsten(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fortungsten"] = v
+}
+
+func (p *CreateNetworkOfferingParams) GetFortungsten() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fortungsten"].(bool)
 	return value, ok
 }
 
@@ -549,6 +568,7 @@ type CreateNetworkOfferingResponse struct {
 	Domain                   string                                 `json:"domain"`
 	Domainid                 string                                 `json:"domainid"`
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
+	Fortungsten              bool                                   `json:"fortungsten"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
 	Hasannotations           bool                                   `json:"hasannotations"`
@@ -1203,6 +1223,7 @@ type NetworkOffering struct {
 	Domain                   string                           `json:"domain"`
 	Domainid                 string                           `json:"domainid"`
 	Egressdefaultpolicy      bool                             `json:"egressdefaultpolicy"`
+	Fortungsten              bool                             `json:"fortungsten"`
 	Forvpc                   bool                             `json:"forvpc"`
 	Guestiptype              string                           `json:"guestiptype"`
 	Hasannotations           bool                             `json:"hasannotations"`
@@ -1499,6 +1520,7 @@ type UpdateNetworkOfferingResponse struct {
 	Domain                   string                                 `json:"domain"`
 	Domainid                 string                                 `json:"domainid"`
 	Egressdefaultpolicy      bool                                   `json:"egressdefaultpolicy"`
+	Fortungsten              bool                                   `json:"fortungsten"`
 	Forvpc                   bool                                   `json:"forvpc"`
 	Guestiptype              string                                 `json:"guestiptype"`
 	Hasannotations           bool                                   `json:"hasannotations"`

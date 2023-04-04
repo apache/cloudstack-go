@@ -90,6 +90,10 @@ type Capability struct {
 	Customdiskofferingminsize                    int64  `json:"customdiskofferingminsize"`
 	Defaultuipagesize                            int64  `json:"defaultuipagesize"`
 	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
+	Instancesdisksstatsretentionenabled          bool   `json:"instancesdisksstatsretentionenabled"`
+	Instancesdisksstatsretentiontime             int    `json:"instancesdisksstatsretentiontime"`
+	Instancesstatsretentiontime                  int    `json:"instancesstatsretentiontime"`
+	Instancesstatsuseronly                       bool   `json:"instancesstatsuseronly"`
 	JobID                                        string `json:"jobid"`
 	Jobstatus                                    int    `json:"jobstatus"`
 	Kubernetesclusterexperimentalfeaturesenabled bool   `json:"kubernetesclusterexperimentalfeaturesenabled"`
@@ -123,6 +127,9 @@ func (p *ListConfigurationsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["group"]; found {
+		u.Set("group", v.(string))
+	}
 	if v, found := p.p["imagestoreuuid"]; found {
 		u.Set("imagestoreuuid", v.(string))
 	}
@@ -140,8 +147,14 @@ func (p *ListConfigurationsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["parent"]; found {
+		u.Set("parent", v.(string))
+	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
+	}
+	if v, found := p.p["subgroup"]; found {
+		u.Set("subgroup", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -206,6 +219,21 @@ func (p *ListConfigurationsParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListConfigurationsParams) SetGroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["group"] = v
+}
+
+func (p *ListConfigurationsParams) GetGroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["group"].(string)
 	return value, ok
 }
 
@@ -284,6 +312,21 @@ func (p *ListConfigurationsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListConfigurationsParams) SetParent(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["parent"] = v
+}
+
+func (p *ListConfigurationsParams) GetParent() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["parent"].(string)
+	return value, ok
+}
+
 func (p *ListConfigurationsParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -296,6 +339,21 @@ func (p *ListConfigurationsParams) GetStorageid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+func (p *ListConfigurationsParams) SetSubgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["subgroup"] = v
+}
+
+func (p *ListConfigurationsParams) GetSubgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["subgroup"].(string)
 	return value, ok
 }
 
@@ -343,15 +401,23 @@ type ListConfigurationsResponse struct {
 }
 
 type Configuration struct {
-	Category    string `json:"category"`
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Isdynamic   bool   `json:"isdynamic"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Scope       string `json:"scope"`
-	Value       string `json:"value"`
+	Category     string `json:"category"`
+	Component    string `json:"component"`
+	Defaultvalue string `json:"defaultvalue"`
+	Description  string `json:"description"`
+	Displaytext  string `json:"displaytext"`
+	Group        string `json:"group"`
+	Id           int64  `json:"id"`
+	Isdynamic    bool   `json:"isdynamic"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Name         string `json:"name"`
+	Options      string `json:"options"`
+	Parent       string `json:"parent"`
+	Scope        string `json:"scope"`
+	Subgroup     string `json:"subgroup"`
+	Type         string `json:"type"`
+	Value        string `json:"value"`
 }
 
 type ListDeploymentPlannersParams struct {
@@ -641,15 +707,23 @@ func (s *ConfigurationService) UpdateConfiguration(p *UpdateConfigurationParams)
 }
 
 type UpdateConfigurationResponse struct {
-	Category    string `json:"category"`
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Isdynamic   bool   `json:"isdynamic"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Scope       string `json:"scope"`
-	Value       string `json:"value"`
+	Category     string `json:"category"`
+	Component    string `json:"component"`
+	Defaultvalue string `json:"defaultvalue"`
+	Description  string `json:"description"`
+	Displaytext  string `json:"displaytext"`
+	Group        string `json:"group"`
+	Id           int64  `json:"id"`
+	Isdynamic    bool   `json:"isdynamic"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Name         string `json:"name"`
+	Options      string `json:"options"`
+	Parent       string `json:"parent"`
+	Scope        string `json:"scope"`
+	Subgroup     string `json:"subgroup"`
+	Type         string `json:"type"`
+	Value        string `json:"value"`
 }
 
 type ResetConfigurationParams struct {
@@ -815,13 +889,21 @@ func (s *ConfigurationService) ResetConfiguration(p *ResetConfigurationParams) (
 }
 
 type ResetConfigurationResponse struct {
-	Category    string `json:"category"`
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Isdynamic   bool   `json:"isdynamic"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Scope       string `json:"scope"`
-	Value       string `json:"value"`
+	Category     string `json:"category"`
+	Component    string `json:"component"`
+	Defaultvalue string `json:"defaultvalue"`
+	Description  string `json:"description"`
+	Displaytext  string `json:"displaytext"`
+	Group        string `json:"group"`
+	Id           int64  `json:"id"`
+	Isdynamic    bool   `json:"isdynamic"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Name         string `json:"name"`
+	Options      string `json:"options"`
+	Parent       string `json:"parent"`
+	Scope        string `json:"scope"`
+	Subgroup     string `json:"subgroup"`
+	Type         string `json:"type"`
+	Value        string `json:"value"`
 }

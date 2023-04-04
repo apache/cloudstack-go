@@ -272,6 +272,8 @@ type CreateUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -461,6 +463,8 @@ type DisableUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -546,6 +550,8 @@ type EnableUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -627,6 +633,8 @@ type GetUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -1079,6 +1087,8 @@ type User struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -1164,6 +1174,8 @@ type LockUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`
@@ -1268,6 +1280,10 @@ func (p *UpdateUserParams) toURLValues() url.Values {
 	if v, found := p.p["lastname"]; found {
 		u.Set("lastname", v.(string))
 	}
+	if v, found := p.p["mandate2fa"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("mandate2fa", vv)
+	}
 	if v, found := p.p["password"]; found {
 		u.Set("password", v.(string))
 	}
@@ -1358,6 +1374,21 @@ func (p *UpdateUserParams) GetLastname() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["lastname"].(string)
+	return value, ok
+}
+
+func (p *UpdateUserParams) SetMandate2fa(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["mandate2fa"] = v
+}
+
+func (p *UpdateUserParams) GetMandate2fa() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["mandate2fa"].(bool)
 	return value, ok
 }
 
@@ -1472,6 +1503,8 @@ type UpdateUserResponse struct {
 	Firstname           string      `json:"firstname"`
 	Icon                interface{} `json:"icon"`
 	Id                  string      `json:"id"`
+	Is2faenabled        bool        `json:"is2faenabled"`
+	Is2famandated       bool        `json:"is2famandated"`
 	Iscallerchilddomain bool        `json:"iscallerchilddomain"`
 	Isdefault           bool        `json:"isdefault"`
 	JobID               string      `json:"jobid"`

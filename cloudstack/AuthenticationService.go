@@ -146,9 +146,13 @@ type LoginResponse struct {
 	Account        string `json:"account"`
 	Domainid       string `json:"domainid"`
 	Firstname      string `json:"firstname"`
+	Is2faenabled   string `json:"is2faenabled"`
+	Is2faverified  string `json:"is2faverified"`
+	Issuerfor2fa   string `json:"issuerfor2fa"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
 	Lastname       string `json:"lastname"`
+	Providerfor2fa string `json:"providerfor2fa"`
 	Registered     string `json:"registered"`
 	Sessionkey     string `json:"sessionkey"`
 	Timeout        int    `json:"timeout"`

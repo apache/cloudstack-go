@@ -434,6 +434,8 @@ type BrocadeVcsDeviceNetwork struct {
 	Id                          string                           `json:"id"`
 	Internetprotocol            string                           `json:"internetprotocol"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
+	Ip6dns1                     string                           `json:"ip6dns1"`
+	Ip6dns2                     string                           `json:"ip6dns2"`
 	Ip6gateway                  string                           `json:"ip6gateway"`
 	Ip6routes                   []interface{}                    `json:"ip6routes"`
 	Ip6routing                  string                           `json:"ip6routing"`
@@ -452,8 +454,10 @@ type BrocadeVcsDeviceNetwork struct {
 	Networkofferingid           string                           `json:"networkofferingid"`
 	Networkofferingname         string                           `json:"networkofferingname"`
 	Physicalnetworkid           string                           `json:"physicalnetworkid"`
+	Privatemtu                  int                              `json:"privatemtu"`
 	Project                     string                           `json:"project"`
 	Projectid                   string                           `json:"projectid"`
+	Publicmtu                   int                              `json:"publicmtu"`
 	Receivedbytes               int64                            `json:"receivedbytes"`
 	Redundantrouter             bool                             `json:"redundantrouter"`
 	Related                     string                           `json:"related"`
@@ -465,8 +469,10 @@ type BrocadeVcsDeviceNetwork struct {
 	State                       string                           `json:"state"`
 	Strechedl2subnet            bool                             `json:"strechedl2subnet"`
 	Subdomainaccess             bool                             `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                             `json:"supportsvmautoscaling"`
 	Tags                        []Tags                           `json:"tags"`
 	Traffictype                 string                           `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                           `json:"tungstenvirtualrouteruuid"`
 	Type                        string                           `json:"type"`
 	Vlan                        string                           `json:"vlan"`
 	Vpcid                       string                           `json:"vpcid"`
