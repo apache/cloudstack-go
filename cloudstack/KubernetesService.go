@@ -883,11 +883,13 @@ func (s *KubernetesService) GetKubernetesClusterConfig(p *GetKubernetesClusterCo
 }
 
 type GetKubernetesClusterConfigResponse struct {
-	Configdata string `json:"configdata"`
-	Id         string `json:"id"`
-	JobID      string `json:"jobid"`
-	Jobstatus  int    `json:"jobstatus"`
-	Name       string `json:"name"`
+	ClusterConfig struct {
+		Configdata string `json:"configdata"`
+		Id         string `json:"id"`
+		JobID      string `json:"jobid"`
+		Jobstatus  int    `json:"jobstatus"`
+		Name       string `json:"name"`
+	} `json:"clusterconfig"`
 }
 
 type ListKubernetesClustersParams struct {

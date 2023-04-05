@@ -98,7 +98,7 @@ func TestKubernetesService(t *testing.T) {
 		if err != nil {
 			t.Errorf(err.Error())
 		}
-		if r.Id == "" {
+		if r.ClusterConfig.Id == "" {
 			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
