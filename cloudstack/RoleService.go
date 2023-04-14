@@ -160,13 +160,7 @@ func (s *RoleService) CreateRole(p *CreateRoleParams) (*CreateRoleResponse, erro
 }
 
 type CreateRoleResponse struct {
-	Description string `json:"description"`
-	Id          string `json:"id"`
-	Isdefault   bool   `json:"isdefault"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Name        string `json:"name"`
-	Type        string `json:"type"`
+	Role Role `json:"role"`
 }
 
 type CreateRolePermissionParams struct {
@@ -280,14 +274,7 @@ func (s *RoleService) CreateRolePermission(p *CreateRolePermissionParams) (*Crea
 }
 
 type CreateRolePermissionResponse struct {
-	Description string `json:"description"`
-	Id          string `json:"id"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Permission  string `json:"permission"`
-	Roleid      string `json:"roleid"`
-	Rolename    string `json:"rolename"`
-	Rule        string `json:"rule"`
+	RolePermission RolePermission `json:"rolepermission"`
 }
 
 type DeleteRoleParams struct {
