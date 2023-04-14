@@ -44,7 +44,7 @@ func TestRoleService(t *testing.T) {
 		if err != nil {
 			t.Errorf(err.Error())
 		}
-		if r.Id == "" {
+		if r.Role.Id == "" {
 			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
@@ -59,7 +59,7 @@ func TestRoleService(t *testing.T) {
 		if err != nil {
 			t.Errorf(err.Error())
 		}
-		if r.Id == "" {
+		if r.RolePermission.Id == "" {
 			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
