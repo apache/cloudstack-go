@@ -152,7 +152,7 @@ func (s *RoleService) CreateRole(p *CreateRoleParams) (*CreateRoleResponse, erro
 	}
 
 	var nested struct {
-		Response CreateRoleResponse `json:"Role"`
+		Response CreateRoleResponse `json:"role"`
 	}
 	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
@@ -275,7 +275,7 @@ func (s *RoleService) CreateRolePermission(p *CreateRolePermissionParams) (*Crea
 	}
 
 	var nested struct {
-		Response CreateRolePermissionResponse `json:"RolePermission"`
+		Response CreateRolePermissionResponse `json:"rolepermission"`
 	}
 	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
