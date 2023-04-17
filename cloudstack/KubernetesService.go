@@ -874,10 +874,13 @@ func (s *KubernetesService) GetKubernetesClusterConfig(p *GetKubernetesClusterCo
 		return nil, err
 	}
 
-	var r GetKubernetesClusterConfigResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetKubernetesClusterConfigResponse `json:"ClusterConfig"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
