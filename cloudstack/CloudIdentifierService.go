@@ -75,10 +75,13 @@ func (s *CloudIdentifierService) GetCloudIdentifier(p *GetCloudIdentifierParams)
 		return nil, err
 	}
 
-	var r GetCloudIdentifierResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetCloudIdentifierResponse `json:"cloudidentifier"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }

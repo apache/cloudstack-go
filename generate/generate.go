@@ -78,6 +78,11 @@ var mapRequireList = map[string]map[string]bool{
 var nestedResponse = map[string]string{
 	"getUploadParamsForTemplate": "getuploadparams",
 	"getUploadParamsForVolume":   "getuploadparams",
+	"createRole":                 "role",
+	"createRolePermission":       "rolepermission",
+	"getCloudIdentifier":         "cloudidentifier",
+	"getKubernetesClusterConfig": "clusterconfig",
+	"getPathForVolume":           "apipathforvolume",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of

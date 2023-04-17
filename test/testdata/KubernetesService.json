@@ -363,5 +363,14 @@
           }
         ]
       }
+    },
+    "getKubernetesClusterConfig": {
+      "getkubernetesclusterconfigresponse": {
+        "clusterconfig": {
+          "id": "0ba3e755-940a-467c-a67f-a3404eb13da8",
+          "name": "sample-name",
+          "configdata": "some config data"
+        }
+      }
     }
   }

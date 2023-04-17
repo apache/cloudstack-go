@@ -1247,10 +1247,13 @@ func (s *VolumeService) GetPathForVolume(p *GetPathForVolumeParams) (*GetPathFor
 		return nil, err
 	}
 
-	var r GetPathForVolumeResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetPathForVolumeResponse `json:"apipathforvolume"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
