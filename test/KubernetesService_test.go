@@ -54,7 +54,7 @@ func TestKubernetesService(t *testing.T) {
 		if _, ok := response["createKubernetesCluster"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Kubernetes.NewCreateKubernetesClusterParams("description", "kubernetesversionid", "name", "serviceofferingid", 0, "zoneid")
+		p := client.Kubernetes.NewCreateKubernetesClusterParams("clustertype", "name", "zoneid")
 		r, err := client.Kubernetes.CreateKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
@@ -199,5 +199,32 @@ func TestKubernetesService(t *testing.T) {
 		}
 	}
 	t.Run("UpgradeKubernetesCluster", testupgradeKubernetesCluster)
+
+	testaddVirtualMachinesToKubernetesCluster := func(t *testing.T) {
+		if _, ok := response["addVirtualMachinesToKubernetesCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Kubernetes.NewAddVirtualMachinesToKubernetesClusterParams("id", []string{})
+		_, err := client.Kubernetes.AddVirtualMachinesToKubernetesCluster(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("AddVirtualMachinesToKubernetesCluster", testaddVirtualMachinesToKubernetesCluster)
+
+	testremoveVirtualMachinesFromKubernetesCluster := func(t *testing.T) {
+		if _, ok := response["removeVirtualMachinesFromKubernetesCluster"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Kubernetes.NewRemoveVirtualMachinesFromKubernetesClusterParams("id", []string{})
+		r, err := client.Kubernetes.RemoveVirtualMachinesFromKubernetesCluster(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("RemoveVirtualMachinesFromKubernetesCluster", testremoveVirtualMachinesFromKubernetesCluster)
 
 }

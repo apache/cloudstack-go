@@ -292,17 +292,17 @@ func (mr *MockTemplateServiceIfaceMockRecorder) NewCopyTemplateParams(id interfa
 }
 
 // NewCreateTemplateParams mocks base method.
-func (m *MockTemplateServiceIface) NewCreateTemplateParams(displaytext, name, ostypeid string) *CreateTemplateParams {
+func (m *MockTemplateServiceIface) NewCreateTemplateParams(name, ostypeid string) *CreateTemplateParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateTemplateParams", displaytext, name, ostypeid)
+	ret := m.ctrl.Call(m, "NewCreateTemplateParams", name, ostypeid)
 	ret0, _ := ret[0].(*CreateTemplateParams)
 	return ret0
 }
 
 // NewCreateTemplateParams indicates an expected call of NewCreateTemplateParams.
-func (mr *MockTemplateServiceIfaceMockRecorder) NewCreateTemplateParams(displaytext, name, ostypeid interface{}) *gomock.Call {
+func (mr *MockTemplateServiceIfaceMockRecorder) NewCreateTemplateParams(name, ostypeid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewCreateTemplateParams), displaytext, name, ostypeid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewCreateTemplateParams), name, ostypeid)
 }
 
 // NewDeleteTemplateParams mocks base method.
@@ -418,17 +418,17 @@ func (mr *MockTemplateServiceIfaceMockRecorder) NewProvisionTemplateDirectDownlo
 }
 
 // NewRegisterTemplateParams mocks base method.
-func (m *MockTemplateServiceIface) NewRegisterTemplateParams(displaytext, format, hypervisor, name, url string) *RegisterTemplateParams {
+func (m *MockTemplateServiceIface) NewRegisterTemplateParams(format, hypervisor, name, url string) *RegisterTemplateParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewRegisterTemplateParams", displaytext, format, hypervisor, name, url)
+	ret := m.ctrl.Call(m, "NewRegisterTemplateParams", format, hypervisor, name, url)
 	ret0, _ := ret[0].(*RegisterTemplateParams)
 	return ret0
 }
 
 // NewRegisterTemplateParams indicates an expected call of NewRegisterTemplateParams.
-func (mr *MockTemplateServiceIfaceMockRecorder) NewRegisterTemplateParams(displaytext, format, hypervisor, name, url interface{}) *gomock.Call {
+func (mr *MockTemplateServiceIfaceMockRecorder) NewRegisterTemplateParams(format, hypervisor, name, url interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewRegisterTemplateParams), displaytext, format, hypervisor, name, url)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewRegisterTemplateParams), format, hypervisor, name, url)
 }
 
 // NewUpdateTemplateParams mocks base method.

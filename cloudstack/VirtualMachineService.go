@@ -1214,6 +1214,10 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("networkids", vv)
 	}
+	if v, found := p.p["nicmultiqueuenumber"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("nicmultiqueuenumber", vv)
+	}
 	if v, found := p.p["nicnetworklist"]; found {
 		l := v.([]map[string]string)
 		for i, m := range l {
@@ -1221,6 +1225,10 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 				u.Set(fmt.Sprintf("nicnetworklist[%d].%s", i, key), val)
 			}
 		}
+	}
+	if v, found := p.p["nicpackedvirtqueuesenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("nicpackedvirtqueuesenabled", vv)
 	}
 	if v, found := p.p["overridediskofferingid"]; found {
 		u.Set("overridediskofferingid", v.(string))
@@ -1806,6 +1814,21 @@ func (p *DeployVirtualMachineParams) GetNetworkids() ([]string, bool) {
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetNicmultiqueuenumber(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nicmultiqueuenumber"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetNicmultiqueuenumber() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicmultiqueuenumber"].(int)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetNicnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1833,6 +1856,21 @@ func (p *DeployVirtualMachineParams) AddNicnetworklist(item map[string]string) {
 	l := val.([]map[string]string)
 	l = append(l, item)
 	p.p["nicnetworklist"] = l
+}
+
+func (p *DeployVirtualMachineParams) SetNicpackedvirtqueuesenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nicpackedvirtqueuesenabled"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetNicpackedvirtqueuesenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicpackedvirtqueuesenabled"].(bool)
+	return value, ok
 }
 
 func (p *DeployVirtualMachineParams) SetOverridediskofferingid(v string) {
@@ -2768,6 +2806,10 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["retrieveonlyresourcecount"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("retrieveonlyresourcecount", vv)
+	}
 	if v, found := p.p["securitygroupid"]; found {
 		u.Set("securitygroupid", v.(string))
 	}
@@ -3212,6 +3254,21 @@ func (p *ListVirtualMachinesParams) GetProjectid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetRetrieveonlyresourcecount(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["retrieveonlyresourcecount"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetRetrieveonlyresourcecount() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["retrieveonlyresourcecount"].(bool)
 	return value, ok
 }
 
@@ -3748,6 +3805,10 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["retrieveonlyresourcecount"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("retrieveonlyresourcecount", vv)
+	}
 	if v, found := p.p["securitygroupid"]; found {
 		u.Set("securitygroupid", v.(string))
 	}
@@ -4192,6 +4253,21 @@ func (p *ListVirtualMachinesMetricsParams) GetProjectid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetRetrieveonlyresourcecount(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["retrieveonlyresourcecount"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetRetrieveonlyresourcecount() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["retrieveonlyresourcecount"].(bool)
 	return value, ok
 }
 
@@ -4931,6 +5007,10 @@ func (p *MigrateVirtualMachineWithVolumeParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["autoselect"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("autoselect", vv)
+	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
 	}
@@ -4946,6 +5026,21 @@ func (p *MigrateVirtualMachineWithVolumeParams) toURLValues() url.Values {
 		u.Set("virtualmachineid", v.(string))
 	}
 	return u
+}
+
+func (p *MigrateVirtualMachineWithVolumeParams) SetAutoselect(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["autoselect"] = v
+}
+
+func (p *MigrateVirtualMachineWithVolumeParams) GetAutoselect() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["autoselect"].(bool)
+	return value, ok
 }
 
 func (p *MigrateVirtualMachineWithVolumeParams) SetHostid(v string) {

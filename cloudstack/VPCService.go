@@ -33,9 +33,9 @@ type VPCServiceIface interface {
 	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
 	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
 	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
-	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
+	NewCreateVPCParams(cidr string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
 	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
-	NewCreateVPCOfferingParams(displaytext string, name string, supportedservices []string) *CreateVPCOfferingParams
+	NewCreateVPCOfferingParams(name string, supportedservices []string) *CreateVPCOfferingParams
 	DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error)
 	NewDeletePrivateGatewayParams(id string) *DeletePrivateGatewayParams
 	DeleteStaticRoute(p *DeleteStaticRouteParams) (*DeleteStaticRouteResponse, error)
@@ -513,6 +513,9 @@ func (p *CreateVPCParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("publicmtu", vv)
 	}
+	if v, found := p.p["sourcenatipaddress"]; found {
+		u.Set("sourcenatipaddress", v.(string))
+	}
 	if v, found := p.p["start"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("start", vv)
@@ -721,6 +724,21 @@ func (p *CreateVPCParams) GetPublicmtu() (int, bool) {
 	return value, ok
 }
 
+func (p *CreateVPCParams) SetSourcenatipaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sourcenatipaddress"] = v
+}
+
+func (p *CreateVPCParams) GetSourcenatipaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sourcenatipaddress"].(string)
+	return value, ok
+}
+
 func (p *CreateVPCParams) SetStart(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -768,11 +786,10 @@ func (p *CreateVPCParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateVPCParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
+func (s *VPCService) NewCreateVPCParams(cidr string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
 	p := &CreateVPCParams{}
 	p.p = make(map[string]interface{})
 	p.p["cidr"] = cidr
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["vpcofferingid"] = vpcofferingid
 	p.p["zoneid"] = zoneid
@@ -1079,10 +1096,9 @@ func (p *CreateVPCOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateVPCOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCOfferingParams(displaytext string, name string, supportedservices []string) *CreateVPCOfferingParams {
+func (s *VPCService) NewCreateVPCOfferingParams(name string, supportedservices []string) *CreateVPCOfferingParams {
 	p := &CreateVPCOfferingParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["supportedservices"] = supportedservices
 	return p
@@ -3219,6 +3235,9 @@ func (p *UpdateVPCParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("publicmtu", vv)
 	}
+	if v, found := p.p["sourcenatipaddress"]; found {
+		u.Set("sourcenatipaddress", v.(string))
+	}
 	return u
 }
 
@@ -3309,6 +3328,21 @@ func (p *UpdateVPCParams) GetPublicmtu() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["publicmtu"].(int)
+	return value, ok
+}
+
+func (p *UpdateVPCParams) SetSourcenatipaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sourcenatipaddress"] = v
+}
+
+func (p *UpdateVPCParams) GetSourcenatipaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sourcenatipaddress"].(string)
 	return value, ok
 }
 

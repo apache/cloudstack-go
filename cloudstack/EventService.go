@@ -381,6 +381,10 @@ func (p *ListEventsParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["archived"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("archived", vv)
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -453,6 +457,21 @@ func (p *ListEventsParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListEventsParams) SetArchived(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["archived"] = v
+}
+
+func (p *ListEventsParams) GetArchived() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["archived"].(bool)
 	return value, ok
 }
 
@@ -774,6 +793,7 @@ type ListEventsResponse struct {
 
 type Event struct {
 	Account      string `json:"account"`
+	Archived     bool   `json:"archived"`
 	Created      string `json:"created"`
 	Description  string `json:"description"`
 	Domain       string `json:"domain"`

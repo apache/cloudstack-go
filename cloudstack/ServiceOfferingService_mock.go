@@ -161,17 +161,17 @@ func (mr *MockServiceOfferingServiceIfaceMockRecorder) ListServiceOfferings(p in
 }
 
 // NewCreateServiceOfferingParams mocks base method.
-func (m *MockServiceOfferingServiceIface) NewCreateServiceOfferingParams(displaytext, name string) *CreateServiceOfferingParams {
+func (m *MockServiceOfferingServiceIface) NewCreateServiceOfferingParams(name string) *CreateServiceOfferingParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateServiceOfferingParams", displaytext, name)
+	ret := m.ctrl.Call(m, "NewCreateServiceOfferingParams", name)
 	ret0, _ := ret[0].(*CreateServiceOfferingParams)
 	return ret0
 }
 
 // NewCreateServiceOfferingParams indicates an expected call of NewCreateServiceOfferingParams.
-func (mr *MockServiceOfferingServiceIfaceMockRecorder) NewCreateServiceOfferingParams(displaytext, name interface{}) *gomock.Call {
+func (mr *MockServiceOfferingServiceIfaceMockRecorder) NewCreateServiceOfferingParams(name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateServiceOfferingParams", reflect.TypeOf((*MockServiceOfferingServiceIface)(nil).NewCreateServiceOfferingParams), displaytext, name)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateServiceOfferingParams", reflect.TypeOf((*MockServiceOfferingServiceIface)(nil).NewCreateServiceOfferingParams), name)
 }
 
 // NewDeleteServiceOfferingParams mocks base method.

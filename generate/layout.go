@@ -717,6 +717,8 @@ var layout = apiInfo{
 		"stopKubernetesCluster",
 		"updateKubernetesSupportedVersion",
 		"upgradeKubernetesCluster",
+		"addVirtualMachinesToKubernetesCluster",
+		"removeVirtualMachinesFromKubernetesCluster",
 	},
 	"InfrastructureUsageService": {
 		"listManagementServersMetrics",

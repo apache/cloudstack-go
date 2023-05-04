@@ -39,7 +39,7 @@ func TestGuestOSService(t *testing.T) {
 		if _, ok := response["addGuestOs"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.GuestOS.NewAddGuestOsParams(map[string]string{}, "oscategoryid", "osdisplayname")
+		p := client.GuestOS.NewAddGuestOsParams("oscategoryid", "osdisplayname")
 		r, err := client.GuestOS.AddGuestOs(p)
 		if err != nil {
 			t.Errorf(err.Error())
@@ -129,7 +129,7 @@ func TestGuestOSService(t *testing.T) {
 		if _, ok := response["updateGuestOs"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.GuestOS.NewUpdateGuestOsParams(map[string]string{}, "id", "osdisplayname")
+		p := client.GuestOS.NewUpdateGuestOsParams("id", "osdisplayname")
 		r, err := client.GuestOS.UpdateGuestOs(p)
 		if err != nil {
 			t.Errorf(err.Error())

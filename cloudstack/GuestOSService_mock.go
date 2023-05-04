@@ -187,6 +187,48 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) GetOsTypeByID(id interface{}, opt
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOsTypeByID", reflect.TypeOf((*MockGuestOSServiceIface)(nil).GetOsTypeByID), varargs...)
 }
 
+// GetOsTypeByName mocks base method.
+func (m *MockGuestOSServiceIface) GetOsTypeByName(name string, opts ...OptionFunc) (*OsType, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetOsTypeByName", varargs...)
+	ret0, _ := ret[0].(*OsType)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOsTypeByName indicates an expected call of GetOsTypeByName.
+func (mr *MockGuestOSServiceIfaceMockRecorder) GetOsTypeByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOsTypeByName", reflect.TypeOf((*MockGuestOSServiceIface)(nil).GetOsTypeByName), varargs...)
+}
+
+// GetOsTypeID mocks base method.
+func (m *MockGuestOSServiceIface) GetOsTypeID(keyword string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{keyword}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetOsTypeID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetOsTypeID indicates an expected call of GetOsTypeID.
+func (mr *MockGuestOSServiceIfaceMockRecorder) GetOsTypeID(keyword interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{keyword}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOsTypeID", reflect.TypeOf((*MockGuestOSServiceIface)(nil).GetOsTypeID), varargs...)
+}
+
 // ListGuestOsMapping mocks base method.
 func (m *MockGuestOSServiceIface) ListGuestOsMapping(p *ListGuestOsMappingParams) (*ListGuestOsMappingResponse, error) {
 	m.ctrl.T.Helper()
@@ -247,17 +289,17 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddGuestOsMappingParams(hyperv
 }
 
 // NewAddGuestOsParams mocks base method.
-func (m *MockGuestOSServiceIface) NewAddGuestOsParams(details map[string]string, oscategoryid, osdisplayname string) *AddGuestOsParams {
+func (m *MockGuestOSServiceIface) NewAddGuestOsParams(oscategoryid, osdisplayname string) *AddGuestOsParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewAddGuestOsParams", details, oscategoryid, osdisplayname)
+	ret := m.ctrl.Call(m, "NewAddGuestOsParams", oscategoryid, osdisplayname)
 	ret0, _ := ret[0].(*AddGuestOsParams)
 	return ret0
 }
 
 // NewAddGuestOsParams indicates an expected call of NewAddGuestOsParams.
-func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddGuestOsParams(details, oscategoryid, osdisplayname interface{}) *gomock.Call {
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddGuestOsParams(oscategoryid, osdisplayname interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewAddGuestOsParams), details, oscategoryid, osdisplayname)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewAddGuestOsParams), oscategoryid, osdisplayname)
 }
 
 // NewListGuestOsMappingParams mocks base method.
@@ -345,17 +387,17 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) NewUpdateGuestOsMappingParams(id,
 }
 
 // NewUpdateGuestOsParams mocks base method.
-func (m *MockGuestOSServiceIface) NewUpdateGuestOsParams(details map[string]string, id, osdisplayname string) *UpdateGuestOsParams {
+func (m *MockGuestOSServiceIface) NewUpdateGuestOsParams(id, osdisplayname string) *UpdateGuestOsParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewUpdateGuestOsParams", details, id, osdisplayname)
+	ret := m.ctrl.Call(m, "NewUpdateGuestOsParams", id, osdisplayname)
 	ret0, _ := ret[0].(*UpdateGuestOsParams)
 	return ret0
 }
 
 // NewUpdateGuestOsParams indicates an expected call of NewUpdateGuestOsParams.
-func (mr *MockGuestOSServiceIfaceMockRecorder) NewUpdateGuestOsParams(details, id, osdisplayname interface{}) *gomock.Call {
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewUpdateGuestOsParams(id, osdisplayname interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewUpdateGuestOsParams), details, id, osdisplayname)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewUpdateGuestOsParams), id, osdisplayname)
 }
 
 // RemoveGuestOs mocks base method.

@@ -35,7 +35,7 @@ type ProjectServiceIface interface {
 	AddUserToProject(p *AddUserToProjectParams) (*AddUserToProjectResponse, error)
 	NewAddUserToProjectParams(projectid string, username string) *AddUserToProjectParams
 	CreateProject(p *CreateProjectParams) (*CreateProjectResponse, error)
-	NewCreateProjectParams(displaytext string, name string) *CreateProjectParams
+	NewCreateProjectParams(name string) *CreateProjectParams
 	DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error)
 	NewDeleteAccountFromProjectParams(account string, projectid string) *DeleteAccountFromProjectParams
 	DeleteUserFromProject(p *DeleteUserFromProjectParams) (*DeleteUserFromProjectResponse, error)
@@ -612,10 +612,9 @@ func (p *CreateProjectParams) GetUserid() (string, bool) {
 
 // You should always use this function to get a new CreateProjectParams instance,
 // as then you are sure you have configured all required params
-func (s *ProjectService) NewCreateProjectParams(displaytext string, name string) *CreateProjectParams {
+func (s *ProjectService) NewCreateProjectParams(name string) *CreateProjectParams {
 	p := &CreateProjectParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	return p
 }
@@ -1972,6 +1971,9 @@ func (p *UpdateProjectParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["roletype"]; found {
 		u.Set("roletype", v.(string))
 	}
@@ -2027,6 +2029,21 @@ func (p *UpdateProjectParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateProjectParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateProjectParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 

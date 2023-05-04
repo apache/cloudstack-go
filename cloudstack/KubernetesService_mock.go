@@ -67,6 +67,21 @@ func (mr *MockKubernetesServiceIfaceMockRecorder) AddKubernetesSupportedVersion(
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddKubernetesSupportedVersion", reflect.TypeOf((*MockKubernetesServiceIface)(nil).AddKubernetesSupportedVersion), p)
 }
 
+// AddVirtualMachinesToKubernetesCluster mocks base method.
+func (m *MockKubernetesServiceIface) AddVirtualMachinesToKubernetesCluster(p *AddVirtualMachinesToKubernetesClusterParams) (*AddVirtualMachinesToKubernetesClusterResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddVirtualMachinesToKubernetesCluster", p)
+	ret0, _ := ret[0].(*AddVirtualMachinesToKubernetesClusterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddVirtualMachinesToKubernetesCluster indicates an expected call of AddVirtualMachinesToKubernetesCluster.
+func (mr *MockKubernetesServiceIfaceMockRecorder) AddVirtualMachinesToKubernetesCluster(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddVirtualMachinesToKubernetesCluster", reflect.TypeOf((*MockKubernetesServiceIface)(nil).AddVirtualMachinesToKubernetesCluster), p)
+}
+
 // CreateKubernetesCluster mocks base method.
 func (m *MockKubernetesServiceIface) CreateKubernetesCluster(p *CreateKubernetesClusterParams) (*CreateKubernetesClusterResponse, error) {
 	m.ctrl.T.Helper()
@@ -297,18 +312,32 @@ func (mr *MockKubernetesServiceIfaceMockRecorder) NewAddKubernetesSupportedVersi
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddKubernetesSupportedVersionParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewAddKubernetesSupportedVersionParams), mincpunumber, minmemory, semanticversion)
 }
 
-// NewCreateKubernetesClusterParams mocks base method.
-func (m *MockKubernetesServiceIface) NewCreateKubernetesClusterParams(description, kubernetesversionid, name, serviceofferingid string, size int64, zoneid string) *CreateKubernetesClusterParams {
+// NewAddVirtualMachinesToKubernetesClusterParams mocks base method.
+func (m *MockKubernetesServiceIface) NewAddVirtualMachinesToKubernetesClusterParams(id string, virtualmachineids []string) *AddVirtualMachinesToKubernetesClusterParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateKubernetesClusterParams", description, kubernetesversionid, name, serviceofferingid, size, zoneid)
+	ret := m.ctrl.Call(m, "NewAddVirtualMachinesToKubernetesClusterParams", id, virtualmachineids)
+	ret0, _ := ret[0].(*AddVirtualMachinesToKubernetesClusterParams)
+	return ret0
+}
+
+// NewAddVirtualMachinesToKubernetesClusterParams indicates an expected call of NewAddVirtualMachinesToKubernetesClusterParams.
+func (mr *MockKubernetesServiceIfaceMockRecorder) NewAddVirtualMachinesToKubernetesClusterParams(id, virtualmachineids interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddVirtualMachinesToKubernetesClusterParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewAddVirtualMachinesToKubernetesClusterParams), id, virtualmachineids)
+}
+
+// NewCreateKubernetesClusterParams mocks base method.
+func (m *MockKubernetesServiceIface) NewCreateKubernetesClusterParams(clustertype, name, zoneid string) *CreateKubernetesClusterParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCreateKubernetesClusterParams", clustertype, name, zoneid)
 	ret0, _ := ret[0].(*CreateKubernetesClusterParams)
 	return ret0
 }
 
 // NewCreateKubernetesClusterParams indicates an expected call of NewCreateKubernetesClusterParams.
-func (mr *MockKubernetesServiceIfaceMockRecorder) NewCreateKubernetesClusterParams(description, kubernetesversionid, name, serviceofferingid, size, zoneid interface{}) *gomock.Call {
+func (mr *MockKubernetesServiceIfaceMockRecorder) NewCreateKubernetesClusterParams(clustertype, name, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateKubernetesClusterParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewCreateKubernetesClusterParams), description, kubernetesversionid, name, serviceofferingid, size, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateKubernetesClusterParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewCreateKubernetesClusterParams), clustertype, name, zoneid)
 }
 
 // NewDeleteKubernetesClusterParams mocks base method.
@@ -381,6 +410,20 @@ func (mr *MockKubernetesServiceIfaceMockRecorder) NewListKubernetesSupportedVers
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListKubernetesSupportedVersionsParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewListKubernetesSupportedVersionsParams))
 }
 
+// NewRemoveVirtualMachinesFromKubernetesClusterParams mocks base method.
+func (m *MockKubernetesServiceIface) NewRemoveVirtualMachinesFromKubernetesClusterParams(id string, virtualmachineids []string) *RemoveVirtualMachinesFromKubernetesClusterParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveVirtualMachinesFromKubernetesClusterParams", id, virtualmachineids)
+	ret0, _ := ret[0].(*RemoveVirtualMachinesFromKubernetesClusterParams)
+	return ret0
+}
+
+// NewRemoveVirtualMachinesFromKubernetesClusterParams indicates an expected call of NewRemoveVirtualMachinesFromKubernetesClusterParams.
+func (mr *MockKubernetesServiceIfaceMockRecorder) NewRemoveVirtualMachinesFromKubernetesClusterParams(id, virtualmachineids interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveVirtualMachinesFromKubernetesClusterParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewRemoveVirtualMachinesFromKubernetesClusterParams), id, virtualmachineids)
+}
+
 // NewScaleKubernetesClusterParams mocks base method.
 func (m *MockKubernetesServiceIface) NewScaleKubernetesClusterParams(id string) *ScaleKubernetesClusterParams {
 	m.ctrl.T.Helper()
@@ -449,6 +492,21 @@ func (m *MockKubernetesServiceIface) NewUpgradeKubernetesClusterParams(id, kuber
 func (mr *MockKubernetesServiceIfaceMockRecorder) NewUpgradeKubernetesClusterParams(id, kubernetesversionid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpgradeKubernetesClusterParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewUpgradeKubernetesClusterParams), id, kubernetesversionid)
+}
+
+// RemoveVirtualMachinesFromKubernetesCluster mocks base method.
+func (m *MockKubernetesServiceIface) RemoveVirtualMachinesFromKubernetesCluster(p *RemoveVirtualMachinesFromKubernetesClusterParams) (*RemoveVirtualMachinesFromKubernetesClusterResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveVirtualMachinesFromKubernetesCluster", p)
+	ret0, _ := ret[0].(*RemoveVirtualMachinesFromKubernetesClusterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveVirtualMachinesFromKubernetesCluster indicates an expected call of RemoveVirtualMachinesFromKubernetesCluster.
+func (mr *MockKubernetesServiceIfaceMockRecorder) RemoveVirtualMachinesFromKubernetesCluster(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveVirtualMachinesFromKubernetesCluster", reflect.TypeOf((*MockKubernetesServiceIface)(nil).RemoveVirtualMachinesFromKubernetesCluster), p)
 }
 
 // ScaleKubernetesCluster mocks base method.

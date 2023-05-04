@@ -39,7 +39,7 @@ func TestDiskOfferingService(t *testing.T) {
 		if _, ok := response["createDiskOffering"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.DiskOffering.NewCreateDiskOfferingParams("displaytext", "name")
+		p := client.DiskOffering.NewCreateDiskOfferingParams("name")
 		r, err := client.DiskOffering.CreateDiskOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())

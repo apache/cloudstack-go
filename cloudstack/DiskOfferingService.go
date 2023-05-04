@@ -29,7 +29,7 @@ import (
 
 type DiskOfferingServiceIface interface {
 	CreateDiskOffering(p *CreateDiskOfferingParams) (*CreateDiskOfferingResponse, error)
-	NewCreateDiskOfferingParams(displaytext string, name string) *CreateDiskOfferingParams
+	NewCreateDiskOfferingParams(name string) *CreateDiskOfferingParams
 	DeleteDiskOffering(p *DeleteDiskOfferingParams) (*DeleteDiskOfferingResponse, error)
 	NewDeleteDiskOfferingParams(id string) *DeleteDiskOfferingParams
 	ListDiskOfferings(p *ListDiskOfferingsParams) (*ListDiskOfferingsResponse, error)
@@ -639,10 +639,9 @@ func (p *CreateDiskOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateDiskOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *DiskOfferingService) NewCreateDiskOfferingParams(displaytext string, name string) *CreateDiskOfferingParams {
+func (s *DiskOfferingService) NewCreateDiskOfferingParams(name string) *CreateDiskOfferingParams {
 	p := &CreateDiskOfferingParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	return p
 }

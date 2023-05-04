@@ -289,6 +289,7 @@ type AssociateIpAddressResponse struct {
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
+	Hasrules                  bool   `json:"hasrules"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`
@@ -308,6 +309,7 @@ type AssociateIpAddressResponse struct {
 	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
 	Virtualmachineid          string `json:"virtualmachineid"`
 	Virtualmachinename        string `json:"virtualmachinename"`
+	Virtualmachinetype        string `json:"virtualmachinetype"`
 	Vlanid                    string `json:"vlanid"`
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
@@ -468,6 +470,10 @@ func (p *ListPublicIpAddressesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["retrieveonlyresourcecount"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("retrieveonlyresourcecount", vv)
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
@@ -776,6 +782,21 @@ func (p *ListPublicIpAddressesParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListPublicIpAddressesParams) SetRetrieveonlyresourcecount(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["retrieveonlyresourcecount"] = v
+}
+
+func (p *ListPublicIpAddressesParams) GetRetrieveonlyresourcecount() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["retrieveonlyresourcecount"].(bool)
+	return value, ok
+}
+
 func (p *ListPublicIpAddressesParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -922,6 +943,7 @@ type PublicIpAddress struct {
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
+	Hasrules                  bool   `json:"hasrules"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`
@@ -941,6 +963,7 @@ type PublicIpAddress struct {
 	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
 	Virtualmachineid          string `json:"virtualmachineid"`
 	Virtualmachinename        string `json:"virtualmachinename"`
+	Virtualmachinetype        string `json:"virtualmachinetype"`
 	Vlanid                    string `json:"vlanid"`
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
@@ -1071,6 +1094,7 @@ type UpdateIpAddressResponse struct {
 	Fordisplay                bool   `json:"fordisplay"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
+	Hasrules                  bool   `json:"hasrules"`
 	Id                        string `json:"id"`
 	Ipaddress                 string `json:"ipaddress"`
 	Isportable                bool   `json:"isportable"`
@@ -1090,6 +1114,7 @@ type UpdateIpAddressResponse struct {
 	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
 	Virtualmachineid          string `json:"virtualmachineid"`
 	Virtualmachinename        string `json:"virtualmachinename"`
+	Virtualmachinetype        string `json:"virtualmachinetype"`
 	Vlanid                    string `json:"vlanid"`
 	Vlanname                  string `json:"vlanname"`
 	Vmipaddress               string `json:"vmipaddress"`
