@@ -39940,7 +39940,7 @@
       ]
     },
     {
-      "description": "Lists OpenDyalight controllers",
+      "description": "Lists OpenDaylight controllers",
       "isasync": false,
       "name": "listOpenDaylightControllers",
       "params": [
@@ -50031,7 +50031,7 @@
       "since": "4.15.0"
     },
     {
-      "description": "Removes an OpenDyalight controler",
+      "description": "Removes an OpenDaylight controller",
       "isasync": true,
       "name": "deleteOpenDaylightController",
       "params": [
@@ -109117,7 +109117,7 @@
       ]
     },
     {
-      "description": "Adds an OpenDyalight controler",
+      "description": "Adds an OpenDaylight controller",
       "isasync": true,
       "name": "addOpenDaylightController",
       "params": [
