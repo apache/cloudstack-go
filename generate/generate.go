@@ -1291,7 +1291,7 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	pn := s.pn
 
 	switch typ {
-	case "string":
+	case "string", "UUID":
 		pn("u.Set(\"%s\", v.(string))", name)
 	case "int":
 		pn("vv := strconv.Itoa(v.(int))")
