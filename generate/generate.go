@@ -2005,6 +2005,22 @@ func getUniqueTypeName(prefix, name string) (string, bool) {
 	return getUniqueTypeName(prefix, name+"Internal")
 }
 
+func logMissingApis(ai map[string]*API, as *allServices) {
+	asMap := make(map[string]*API)
+	for _, svc := range as.services {
+		for _, api := range svc.apis {
+			asMap[api.Name] = api
+		}
+	}
+
+	for apiName, _ := range ai {
+		_, found := asMap[apiName]
+		if !found {
+			log.Printf("Api missing in layout: %s", apiName)
+		}
+	}
+}
+
 func getAllServices(listApis string) (*allServices, []error, error) {
 	// Get a map with all API info
 	ai, err := getAPIInfo(listApis)
@@ -2035,6 +2051,8 @@ func getAllServices(listApis string) (*allServices, []error, error) {
 	// Add an extra field to enable adding a custom service
 	as.services = append(as.services, &service{name: "CustomService"})
 	sort.Sort(as.services)
+
+	logMissingApis(ai, as)
 
 	return as, errors, nil
 }
