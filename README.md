@@ -8,7 +8,7 @@ A CloudStack API client enabling Go programs to interact with CloudStack in a si
 
 This package covers the complete CloudStack API and is well tested. There may be some untested corner cases as there are over 600 API commands, but over all, it's safe to use this package.
 
-To be able to find the API command you want, they are grouped by 'services' which match the grouping you can see/find on the [CloudStack API docs](https://cloudstack.apache.org/api/apidocs-4.15/) website.
+To be able to find the API command you want, they are grouped by 'services' which match the grouping you can see/find on the [CloudStack API docs](https://cloudstack.apache.org/api/apidocs-4.18/) website.
 
 ## Usage
 
