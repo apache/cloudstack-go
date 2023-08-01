@@ -369,7 +369,7 @@ func NewClient(apiurl string, apikey string, secret string, verifyssl bool, opti
 
 // For sync API calls this client behaves exactly the same as a standard client call, but for async API calls
 // this client will wait until the async job is finished or until the configured AsyncTimeout is reached. When the async
-// job finishes successfully it will return actual object received from the API and nil, but when the timout is
+// job finishes successfully it will return actual object received from the API and nil, but when the timeout is
 // reached it will return the initial object containing the async job ID for the running job and a warning.
 func NewAsyncClient(apiurl string, apikey string, secret string, verifyssl bool, options ...ClientOption) *CloudStackClient {
 	cs := newClient(apiurl, apikey, secret, true, verifyssl, options...)
