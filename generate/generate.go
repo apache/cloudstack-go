@@ -1725,6 +1725,7 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		"CreateSecurityGroup",
 		"CreateServiceOffering",
 		"CreateUser",
+		"CreateZone",
 		"DedicateGuestVlanRange",
 		"EnableUser",
 		"GetVirtualMachineUserData",
