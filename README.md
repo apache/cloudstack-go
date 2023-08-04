@@ -12,7 +12,7 @@ To be able to find the API command you want, they are grouped by 'services' whic
 
 ## Usage
 
-The cloudstack package is always generated against the latest stable CloudStack release (currently v4.15.x). As long as the API changes were minimum across subsequent CloudStack releases it was possible to have the generator code handle API changes such that they were backward compatible.
+The cloudstack package is always generated against the latest stable CloudStack release (currently v4.18.x). As long as the API changes were minimum across subsequent CloudStack releases it was possible to have the generator code handle API changes such that they were backward compatible.
 However, over time, with frequent API changes observed across releases of Apache CloudStack(ACS), we will have the SDK releases tagged based on the ACS version.
 
 Please see the package documentation on [go.dev](https://pkg.go.dev/github.com/apache/cloudstack-go/v2/cloudstack).
