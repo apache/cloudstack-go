@@ -364,6 +364,10 @@ func (s *ZoneService) CreateZone(p *CreateZoneParams) (*CreateZoneResponse, erro
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreateZoneResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
