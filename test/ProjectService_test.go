@@ -78,7 +78,7 @@ func TestProjectService(t *testing.T) {
 		if _, ok := response["createProject"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Project.NewCreateProjectParams("displaytext", "name")
+		p := client.Project.NewCreateProjectParams("name")
 		r, err := client.Project.CreateProject(p)
 		if err != nil {
 			t.Errorf(err.Error())

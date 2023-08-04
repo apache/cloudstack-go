@@ -29,7 +29,7 @@ import (
 
 type ServiceOfferingServiceIface interface {
 	CreateServiceOffering(p *CreateServiceOfferingParams) (*CreateServiceOfferingResponse, error)
-	NewCreateServiceOfferingParams(displaytext string, name string) *CreateServiceOfferingParams
+	NewCreateServiceOfferingParams(name string) *CreateServiceOfferingParams
 	DeleteServiceOffering(p *DeleteServiceOfferingParams) (*DeleteServiceOfferingResponse, error)
 	NewDeleteServiceOfferingParams(id string) *DeleteServiceOfferingParams
 	ListServiceOfferings(p *ListServiceOfferingsParams) (*ListServiceOfferingsResponse, error)
@@ -940,10 +940,9 @@ func (p *CreateServiceOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateServiceOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *ServiceOfferingService) NewCreateServiceOfferingParams(displaytext string, name string) *CreateServiceOfferingParams {
+func (s *ServiceOfferingService) NewCreateServiceOfferingParams(name string) *CreateServiceOfferingParams {
 	p := &CreateServiceOfferingParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	return p
 }

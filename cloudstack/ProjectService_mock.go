@@ -374,17 +374,17 @@ func (mr *MockProjectServiceIfaceMockRecorder) NewAddUserToProjectParams(project
 }
 
 // NewCreateProjectParams mocks base method.
-func (m *MockProjectServiceIface) NewCreateProjectParams(displaytext, name string) *CreateProjectParams {
+func (m *MockProjectServiceIface) NewCreateProjectParams(name string) *CreateProjectParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateProjectParams", displaytext, name)
+	ret := m.ctrl.Call(m, "NewCreateProjectParams", name)
 	ret0, _ := ret[0].(*CreateProjectParams)
 	return ret0
 }
 
 // NewCreateProjectParams indicates an expected call of NewCreateProjectParams.
-func (mr *MockProjectServiceIfaceMockRecorder) NewCreateProjectParams(displaytext, name interface{}) *gomock.Call {
+func (mr *MockProjectServiceIfaceMockRecorder) NewCreateProjectParams(name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateProjectParams", reflect.TypeOf((*MockProjectServiceIface)(nil).NewCreateProjectParams), displaytext, name)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateProjectParams", reflect.TypeOf((*MockProjectServiceIface)(nil).NewCreateProjectParams), name)
 }
 
 // NewCreateProjectRolePermissionParams mocks base method.

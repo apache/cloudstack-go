@@ -351,7 +351,7 @@ func (s *NetworkService) NewAddOpenDaylightControllerParams(password string, phy
 	return p
 }
 
-// Adds an OpenDaylight controller
+// Adds an OpenDyalight controler
 func (s *NetworkService) AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("addOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -502,6 +502,9 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["routeripv6"]; found {
 		u.Set("routeripv6", v.(string))
+	}
+	if v, found := p.p["sourcenatipaddress"]; found {
+		u.Set("sourcenatipaddress", v.(string))
 	}
 	if v, found := p.p["startip"]; found {
 		u.Set("startip", v.(string))
@@ -990,6 +993,21 @@ func (p *CreateNetworkParams) GetRouteripv6() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["routeripv6"].(string)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetSourcenatipaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sourcenatipaddress"] = v
+}
+
+func (p *CreateNetworkParams) GetSourcenatipaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sourcenatipaddress"].(string)
 	return value, ok
 }
 
@@ -2210,7 +2228,7 @@ func (s *NetworkService) NewDeleteOpenDaylightControllerParams(id string) *Delet
 	return p
 }
 
-// Removes an OpenDaylight controller
+// Removes an OpenDyalight controler
 func (s *NetworkService) DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("deleteOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -3031,6 +3049,10 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("restartrequired", vv)
 	}
+	if v, found := p.p["retrieveonlyresourcecount"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("retrieveonlyresourcecount", vv)
+	}
 	if v, found := p.p["showicon"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showicon", vv)
@@ -3350,6 +3372,21 @@ func (p *ListNetworksParams) GetRestartrequired() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["restartrequired"].(bool)
+	return value, ok
+}
+
+func (p *ListNetworksParams) SetRetrieveonlyresourcecount(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["retrieveonlyresourcecount"] = v
+}
+
+func (p *ListNetworksParams) GetRetrieveonlyresourcecount() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["retrieveonlyresourcecount"].(bool)
 	return value, ok
 }
 
@@ -4034,7 +4071,7 @@ func (s *NetworkService) GetOpenDaylightControllerByID(id string, opts ...Option
 	return nil, l.Count, fmt.Errorf("There is more then one result for OpenDaylightController UUID: %s!", id)
 }
 
-// Lists OpenDaylight controllers
+// Lists OpenDyalight controllers
 func (s *NetworkService) ListOpenDaylightControllers(p *ListOpenDaylightControllersParams) (*ListOpenDaylightControllersResponse, error) {
 	resp, err := s.cs.newRequest("listOpenDaylightControllers", p.toURLValues())
 	if err != nil {
@@ -5202,6 +5239,9 @@ func (p *UpdateNetworkParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("publicmtu", vv)
 	}
+	if v, found := p.p["sourcenatipaddress"]; found {
+		u.Set("sourcenatipaddress", v.(string))
+	}
 	if v, found := p.p["updateinsequence"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("updateinsequence", vv)
@@ -5461,6 +5501,21 @@ func (p *UpdateNetworkParams) GetPublicmtu() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["publicmtu"].(int)
+	return value, ok
+}
+
+func (p *UpdateNetworkParams) SetSourcenatipaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sourcenatipaddress"] = v
+}
+
+func (p *UpdateNetworkParams) GetSourcenatipaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sourcenatipaddress"].(string)
 	return value, ok
 }
 

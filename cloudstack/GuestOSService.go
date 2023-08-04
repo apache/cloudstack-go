@@ -29,7 +29,7 @@ import (
 
 type GuestOSServiceIface interface {
 	AddGuestOs(p *AddGuestOsParams) (*AddGuestOsResponse, error)
-	NewAddGuestOsParams(details map[string]string, oscategoryid string, osdisplayname string) *AddGuestOsParams
+	NewAddGuestOsParams(oscategoryid string, osdisplayname string) *AddGuestOsParams
 	AddGuestOsMapping(p *AddGuestOsMappingParams) (*AddGuestOsMappingResponse, error)
 	NewAddGuestOsMappingParams(hypervisor string, hypervisorversion string, osnameforhypervisor string) *AddGuestOsMappingParams
 	ListGuestOsMapping(p *ListGuestOsMappingParams) (*ListGuestOsMappingResponse, error)
@@ -42,13 +42,15 @@ type GuestOSServiceIface interface {
 	GetOsCategoryByID(id string, opts ...OptionFunc) (*OsCategory, int, error)
 	ListOsTypes(p *ListOsTypesParams) (*ListOsTypesResponse, error)
 	NewListOsTypesParams() *ListOsTypesParams
+	GetOsTypeID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetOsTypeByName(name string, opts ...OptionFunc) (*OsType, int, error)
 	GetOsTypeByID(id string, opts ...OptionFunc) (*OsType, int, error)
 	RemoveGuestOs(p *RemoveGuestOsParams) (*RemoveGuestOsResponse, error)
 	NewRemoveGuestOsParams(id string) *RemoveGuestOsParams
 	RemoveGuestOsMapping(p *RemoveGuestOsMappingParams) (*RemoveGuestOsMappingResponse, error)
 	NewRemoveGuestOsMappingParams(id string) *RemoveGuestOsMappingParams
 	UpdateGuestOs(p *UpdateGuestOsParams) (*UpdateGuestOsResponse, error)
-	NewUpdateGuestOsParams(details map[string]string, id string, osdisplayname string) *UpdateGuestOsParams
+	NewUpdateGuestOsParams(id string, osdisplayname string) *UpdateGuestOsParams
 	UpdateGuestOsMapping(p *UpdateGuestOsMappingParams) (*UpdateGuestOsMappingResponse, error)
 	NewUpdateGuestOsMappingParams(id string, osnameforhypervisor string) *UpdateGuestOsMappingParams
 }
@@ -143,10 +145,9 @@ func (p *AddGuestOsParams) GetOsdisplayname() (string, bool) {
 
 // You should always use this function to get a new AddGuestOsParams instance,
 // as then you are sure you have configured all required params
-func (s *GuestOSService) NewAddGuestOsParams(details map[string]string, oscategoryid string, osdisplayname string) *AddGuestOsParams {
+func (s *GuestOSService) NewAddGuestOsParams(oscategoryid string, osdisplayname string) *AddGuestOsParams {
 	p := &AddGuestOsParams{}
 	p.p = make(map[string]interface{})
-	p.p["details"] = details
 	p.p["oscategoryid"] = oscategoryid
 	p.p["osdisplayname"] = osdisplayname
 	return p
@@ -188,12 +189,14 @@ func (s *GuestOSService) AddGuestOs(p *AddGuestOsParams) (*AddGuestOsResponse, e
 }
 
 type AddGuestOsResponse struct {
-	Description   string `json:"description"`
-	Id            string `json:"id"`
-	Isuserdefined bool   `json:"isuserdefined"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Oscategoryid  string `json:"oscategoryid"`
+	Description    string `json:"description"`
+	Id             string `json:"id"`
+	Isuserdefined  string `json:"isuserdefined"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Oscategoryid   string `json:"oscategoryid"`
+	Oscategoryname string `json:"oscategoryname"`
 }
 
 type AddGuestOsMappingParams struct {
@@ -205,6 +208,10 @@ func (p *AddGuestOsMappingParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
@@ -214,6 +221,10 @@ func (p *AddGuestOsMappingParams) toURLValues() url.Values {
 	if v, found := p.p["osdisplayname"]; found {
 		u.Set("osdisplayname", v.(string))
 	}
+	if v, found := p.p["osmappingcheckenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("osmappingcheckenabled", vv)
+	}
 	if v, found := p.p["osnameforhypervisor"]; found {
 		u.Set("osnameforhypervisor", v.(string))
 	}
@@ -221,6 +232,21 @@ func (p *AddGuestOsMappingParams) toURLValues() url.Values {
 		u.Set("ostypeid", v.(string))
 	}
 	return u
+}
+
+func (p *AddGuestOsMappingParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *AddGuestOsMappingParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
 }
 
 func (p *AddGuestOsMappingParams) SetHypervisor(v string) {
@@ -265,6 +291,21 @@ func (p *AddGuestOsMappingParams) GetOsdisplayname() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["osdisplayname"].(string)
+	return value, ok
+}
+
+func (p *AddGuestOsMappingParams) SetOsmappingcheckenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["osmappingcheckenabled"] = v
+}
+
+func (p *AddGuestOsMappingParams) GetOsmappingcheckenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["osmappingcheckenabled"].(bool)
 	return value, ok
 }
 
@@ -404,6 +445,12 @@ func (p *ListGuestOsMappingParams) toURLValues() url.Values {
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
+	if v, found := p.p["osdisplayname"]; found {
+		u.Set("osdisplayname", v.(string))
+	}
+	if v, found := p.p["osnameforhypervisor"]; found {
+		u.Set("osnameforhypervisor", v.(string))
+	}
 	if v, found := p.p["ostypeid"]; found {
 		u.Set("ostypeid", v.(string))
 	}
@@ -475,6 +522,36 @@ func (p *ListGuestOsMappingParams) GetKeyword() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListGuestOsMappingParams) SetOsdisplayname(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["osdisplayname"] = v
+}
+
+func (p *ListGuestOsMappingParams) GetOsdisplayname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["osdisplayname"].(string)
+	return value, ok
+}
+
+func (p *ListGuestOsMappingParams) SetOsnameforhypervisor(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["osnameforhypervisor"] = v
+}
+
+func (p *ListGuestOsMappingParams) GetOsnameforhypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["osnameforhypervisor"].(string)
 	return value, ok
 }
 
@@ -976,6 +1053,56 @@ func (s *GuestOSService) NewListOsTypesParams() *ListOsTypesParams {
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
+func (s *GuestOSService) GetOsTypeID(keyword string, opts ...OptionFunc) (string, int, error) {
+	p := &ListOsTypesParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["keyword"] = keyword
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListOsTypes(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+	}
+
+	if l.Count == 1 {
+		return l.OsTypes[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.OsTypes {
+			if v.Name == keyword {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *GuestOSService) GetOsTypeByName(name string, opts ...OptionFunc) (*OsType, int, error) {
+	id, count, err := s.GetOsTypeID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetOsTypeByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
 func (s *GuestOSService) GetOsTypeByID(id string, opts ...OptionFunc) (*OsType, int, error) {
 	p := &ListOsTypesParams{}
 	p.p = make(map[string]interface{})
@@ -1029,12 +1156,14 @@ type ListOsTypesResponse struct {
 }
 
 type OsType struct {
-	Description   string `json:"description"`
-	Id            string `json:"id"`
-	Isuserdefined bool   `json:"isuserdefined"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Oscategoryid  string `json:"oscategoryid"`
+	Description    string `json:"description"`
+	Id             string `json:"id"`
+	Isuserdefined  string `json:"isuserdefined"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Oscategoryid   string `json:"oscategoryid"`
+	Oscategoryname string `json:"oscategoryname"`
 }
 
 type RemoveGuestOsParams struct {
@@ -1261,10 +1390,9 @@ func (p *UpdateGuestOsParams) GetOsdisplayname() (string, bool) {
 
 // You should always use this function to get a new UpdateGuestOsParams instance,
 // as then you are sure you have configured all required params
-func (s *GuestOSService) NewUpdateGuestOsParams(details map[string]string, id string, osdisplayname string) *UpdateGuestOsParams {
+func (s *GuestOSService) NewUpdateGuestOsParams(id string, osdisplayname string) *UpdateGuestOsParams {
 	p := &UpdateGuestOsParams{}
 	p.p = make(map[string]interface{})
-	p.p["details"] = details
 	p.p["id"] = id
 	p.p["osdisplayname"] = osdisplayname
 	return p
@@ -1306,12 +1434,14 @@ func (s *GuestOSService) UpdateGuestOs(p *UpdateGuestOsParams) (*UpdateGuestOsRe
 }
 
 type UpdateGuestOsResponse struct {
-	Description   string `json:"description"`
-	Id            string `json:"id"`
-	Isuserdefined bool   `json:"isuserdefined"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Oscategoryid  string `json:"oscategoryid"`
+	Description    string `json:"description"`
+	Id             string `json:"id"`
+	Isuserdefined  string `json:"isuserdefined"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Oscategoryid   string `json:"oscategoryid"`
+	Oscategoryname string `json:"oscategoryname"`
 }
 
 type UpdateGuestOsMappingParams struct {
@@ -1325,6 +1455,10 @@ func (p *UpdateGuestOsMappingParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["osmappingcheckenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("osmappingcheckenabled", vv)
 	}
 	if v, found := p.p["osnameforhypervisor"]; found {
 		u.Set("osnameforhypervisor", v.(string))
@@ -1344,6 +1478,21 @@ func (p *UpdateGuestOsMappingParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateGuestOsMappingParams) SetOsmappingcheckenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["osmappingcheckenabled"] = v
+}
+
+func (p *UpdateGuestOsMappingParams) GetOsmappingcheckenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["osmappingcheckenabled"].(bool)
 	return value, ok
 }
 

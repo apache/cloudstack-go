@@ -31,7 +31,7 @@ type TemplateServiceIface interface {
 	CopyTemplate(p *CopyTemplateParams) (*CopyTemplateResponse, error)
 	NewCopyTemplateParams(id string) *CopyTemplateParams
 	CreateTemplate(p *CreateTemplateParams) (*CreateTemplateResponse, error)
-	NewCreateTemplateParams(displaytext string, name string, ostypeid string) *CreateTemplateParams
+	NewCreateTemplateParams(name string, ostypeid string) *CreateTemplateParams
 	DeleteTemplate(p *DeleteTemplateParams) (*DeleteTemplateResponse, error)
 	NewDeleteTemplateParams(id string) *DeleteTemplateParams
 	ExtractTemplate(p *ExtractTemplateParams) (*ExtractTemplateResponse, error)
@@ -49,7 +49,7 @@ type TemplateServiceIface interface {
 	PrepareTemplate(p *PrepareTemplateParams) (*PrepareTemplateResponse, error)
 	NewPrepareTemplateParams(templateid string, zoneid string) *PrepareTemplateParams
 	RegisterTemplate(p *RegisterTemplateParams) (*RegisterTemplateResponse, error)
-	NewRegisterTemplateParams(displaytext string, format string, hypervisor string, name string, url string) *RegisterTemplateParams
+	NewRegisterTemplateParams(format string, hypervisor string, name string, url string) *RegisterTemplateParams
 	UpdateTemplate(p *UpdateTemplateParams) (*UpdateTemplateResponse, error)
 	NewUpdateTemplateParams(id string) *UpdateTemplateParams
 	UpdateTemplatePermissions(p *UpdateTemplatePermissionsParams) (*UpdateTemplatePermissionsResponse, error)
@@ -606,10 +606,9 @@ func (p *CreateTemplateParams) GetVolumeid() (string, bool) {
 
 // You should always use this function to get a new CreateTemplateParams instance,
 // as then you are sure you have configured all required params
-func (s *TemplateService) NewCreateTemplateParams(displaytext string, name string, ostypeid string) *CreateTemplateParams {
+func (s *TemplateService) NewCreateTemplateParams(name string, ostypeid string) *CreateTemplateParams {
 	p := &CreateTemplateParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["ostypeid"] = ostypeid
 	return p
@@ -2797,10 +2796,9 @@ func (p *RegisterTemplateParams) GetZoneids() ([]string, bool) {
 
 // You should always use this function to get a new RegisterTemplateParams instance,
 // as then you are sure you have configured all required params
-func (s *TemplateService) NewRegisterTemplateParams(displaytext string, format string, hypervisor string, name string, url string) *RegisterTemplateParams {
+func (s *TemplateService) NewRegisterTemplateParams(format string, hypervisor string, name string, url string) *RegisterTemplateParams {
 	p := &RegisterTemplateParams{}
 	p.p = make(map[string]interface{})
-	p.p["displaytext"] = displaytext
 	p.p["format"] = format
 	p.p["hypervisor"] = hypervisor
 	p.p["name"] = name

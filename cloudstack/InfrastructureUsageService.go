@@ -291,6 +291,7 @@ type ManagementServersMetric struct {
 	Loginfo                 string  `json:"loginfo"`
 	Name                    string  `json:"name"`
 	Osdistribution          string  `json:"osdistribution"`
+	Serviceip               string  `json:"serviceip"`
 	Sessions                int64   `json:"sessions"`
 	State                   string  `json:"state"`
 	Systemcycleusage        string  `json:"systemcycleusage"`

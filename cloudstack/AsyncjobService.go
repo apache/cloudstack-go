@@ -59,6 +59,9 @@ func (p *ListAsyncJobsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("page", vv)
@@ -148,6 +151,21 @@ func (p *ListAsyncJobsParams) GetListall() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListAsyncJobsParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *ListAsyncJobsParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -222,19 +240,23 @@ type ListAsyncJobsResponse struct {
 }
 
 type AsyncJob struct {
-	Accountid       string          `json:"accountid"`
-	Cmd             string          `json:"cmd"`
-	Completed       string          `json:"completed"`
-	Created         string          `json:"created"`
-	JobID           string          `json:"jobid"`
-	Jobinstanceid   string          `json:"jobinstanceid"`
-	Jobinstancetype string          `json:"jobinstancetype"`
-	Jobprocstatus   int             `json:"jobprocstatus"`
-	Jobresult       json.RawMessage `json:"jobresult"`
-	Jobresultcode   int             `json:"jobresultcode"`
-	Jobresulttype   string          `json:"jobresulttype"`
-	Jobstatus       int             `json:"jobstatus"`
-	Userid          string          `json:"userid"`
+	Account            string          `json:"account"`
+	Accountid          string          `json:"accountid"`
+	Cmd                string          `json:"cmd"`
+	Completed          string          `json:"completed"`
+	Created            string          `json:"created"`
+	Domainid           string          `json:"domainid"`
+	Domainpath         string          `json:"domainpath"`
+	JobID              string          `json:"jobid"`
+	Jobinstanceid      string          `json:"jobinstanceid"`
+	Jobinstancetype    string          `json:"jobinstancetype"`
+	Jobprocstatus      int             `json:"jobprocstatus"`
+	Jobresult          json.RawMessage `json:"jobresult"`
+	Jobresultcode      int             `json:"jobresultcode"`
+	Jobresulttype      string          `json:"jobresulttype"`
+	Jobstatus          int             `json:"jobstatus"`
+	Managementserverid UUID            `json:"managementserverid"`
+	Userid             string          `json:"userid"`
 }
 
 type QueryAsyncJobResultParams struct {
@@ -302,17 +324,21 @@ func (s *AsyncjobService) QueryAsyncJobResult(p *QueryAsyncJobResultParams) (*Qu
 }
 
 type QueryAsyncJobResultResponse struct {
-	Accountid       string          `json:"accountid"`
-	Cmd             string          `json:"cmd"`
-	Completed       string          `json:"completed"`
-	Created         string          `json:"created"`
-	JobID           string          `json:"jobid"`
-	Jobinstanceid   string          `json:"jobinstanceid"`
-	Jobinstancetype string          `json:"jobinstancetype"`
-	Jobprocstatus   int             `json:"jobprocstatus"`
-	Jobresult       json.RawMessage `json:"jobresult"`
-	Jobresultcode   int             `json:"jobresultcode"`
-	Jobresulttype   string          `json:"jobresulttype"`
-	Jobstatus       int             `json:"jobstatus"`
-	Userid          string          `json:"userid"`
+	Account            string          `json:"account"`
+	Accountid          string          `json:"accountid"`
+	Cmd                string          `json:"cmd"`
+	Completed          string          `json:"completed"`
+	Created            string          `json:"created"`
+	Domainid           string          `json:"domainid"`
+	Domainpath         string          `json:"domainpath"`
+	JobID              string          `json:"jobid"`
+	Jobinstanceid      string          `json:"jobinstanceid"`
+	Jobinstancetype    string          `json:"jobinstancetype"`
+	Jobprocstatus      int             `json:"jobprocstatus"`
+	Jobresult          json.RawMessage `json:"jobresult"`
+	Jobresultcode      int             `json:"jobresultcode"`
+	Jobresulttype      string          `json:"jobresulttype"`
+	Jobstatus          int             `json:"jobstatus"`
+	Managementserverid UUID            `json:"managementserverid"`
+	Userid             string          `json:"userid"`
 }

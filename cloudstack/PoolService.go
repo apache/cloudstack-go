@@ -647,6 +647,9 @@ func (p *ListStoragePoolsParams) toURLValues() url.Values {
 	if v, found := p.p["scope"]; found {
 		u.Set("scope", v.(string))
 	}
+	if v, found := p.p["status"]; found {
+		u.Set("status", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -800,6 +803,21 @@ func (p *ListStoragePoolsParams) GetScope() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["scope"].(string)
+	return value, ok
+}
+
+func (p *ListStoragePoolsParams) SetStatus(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["status"] = v
+}
+
+func (p *ListStoragePoolsParams) GetStatus() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["status"].(string)
 	return value, ok
 }
 
