@@ -268,47 +268,47 @@ func (s *InfrastructureUsageService) ListManagementServersMetrics(p *ListManagem
 
 type ListManagementServersMetricsResponse struct {
 	Count                    int                        `json:"count"`
-	ManagementServersMetrics []*ManagementServersMetric `json:"managementserversmetric"`
+	ManagementServersMetrics []*ManagementServersMetric `json:"managementserver"`
 }
 
 type ManagementServersMetric struct {
-	Agentcount              int     `json:"agentcount"`
-	Availableprocessors     int     `json:"availableprocessors"`
-	Collectiontime          string  `json:"collectiontime"`
-	Cpuload                 string  `json:"cpuload"`
-	Dbislocal               bool    `json:"dbislocal"`
-	Heapmemorytotal         int64   `json:"heapmemorytotal"`
-	Heapmemoryused          int64   `json:"heapmemoryused"`
-	Id                      string  `json:"id"`
-	Javadistribution        string  `json:"javadistribution"`
-	Javaversion             string  `json:"javaversion"`
-	JobID                   string  `json:"jobid"`
-	Jobstatus               int     `json:"jobstatus"`
-	Kernelversion           string  `json:"kernelversion"`
-	Lastboottime            string  `json:"lastboottime"`
-	Lastserverstart         string  `json:"lastserverstart"`
-	Lastserverstop          string  `json:"lastserverstop"`
-	Loginfo                 string  `json:"loginfo"`
-	Name                    string  `json:"name"`
-	Osdistribution          string  `json:"osdistribution"`
-	Serviceip               string  `json:"serviceip"`
-	Sessions                int64   `json:"sessions"`
-	State                   string  `json:"state"`
-	Systemcycleusage        string  `json:"systemcycleusage"`
-	Systemloadaverages      string  `json:"systemloadaverages"`
-	Systemmemoryfree        string  `json:"systemmemoryfree"`
-	Systemmemorytotal       string  `json:"systemmemorytotal"`
-	Systemmemoryused        string  `json:"systemmemoryused"`
-	Systemmemoryvirtualsize string  `json:"systemmemoryvirtualsize"`
-	Systemtotalcpucycles    float64 `json:"systemtotalcpucycles"`
-	Threadsblockedcount     int     `json:"threadsblockedcount"`
-	Threadsdaemoncount      int     `json:"threadsdaemoncount"`
-	Threadsrunnablecount    int     `json:"threadsrunnablecount"`
-	Threadsteminatedcount   int     `json:"threadsteminatedcount"`
-	Threadstotalcount       int     `json:"threadstotalcount"`
-	Threadswaitingcount     int     `json:"threadswaitingcount"`
-	Usageislocal            bool    `json:"usageislocal"`
-	Version                 string  `json:"version"`
+	Agentcount              int       `json:"agentcount"`
+	Availableprocessors     int       `json:"availableprocessors"`
+	Collectiontime          string    `json:"collectiontime"`
+	Cpuload                 string    `json:"cpuload"`
+	Dbislocal               bool      `json:"dbislocal"`
+	Heapmemorytotal         int64     `json:"heapmemorytotal"`
+	Heapmemoryused          int64     `json:"heapmemoryused"`
+	Id                      string    `json:"id"`
+	Javadistribution        string    `json:"javadistribution"`
+	Javaversion             string    `json:"javaversion"`
+	JobID                   string    `json:"jobid"`
+	Jobstatus               int       `json:"jobstatus"`
+	Kernelversion           string    `json:"kernelversion"`
+	Lastboottime            string    `json:"lastboottime"`
+	Lastserverstart         string    `json:"lastserverstart"`
+	Lastserverstop          string    `json:"lastserverstop"`
+	Loginfo                 string    `json:"loginfo"`
+	Name                    string    `json:"name"`
+	Osdistribution          string    `json:"osdistribution"`
+	Serviceip               string    `json:"serviceip"`
+	Sessions                int64     `json:"sessions"`
+	State                   string    `json:"state"`
+	Systemcycleusage        []int64   `json:"systemcycleusage"`
+	Systemloadaverages      []float64 `json:"systemloadaverages"`
+	Systemmemoryfree        string    `json:"systemmemoryfree"`
+	Systemmemorytotal       string    `json:"systemmemorytotal"`
+	Systemmemoryused        string    `json:"systemmemoryused"`
+	Systemmemoryvirtualsize string    `json:"systemmemoryvirtualsize"`
+	Systemtotalcpucycles    float64   `json:"systemtotalcpucycles"`
+	Threadsblockedcount     int       `json:"threadsblockedcount"`
+	Threadsdaemoncount      int       `json:"threadsdaemoncount"`
+	Threadsrunnablecount    int       `json:"threadsrunnablecount"`
+	Threadsteminatedcount   int       `json:"threadsteminatedcount"`
+	Threadstotalcount       int       `json:"threadstotalcount"`
+	Threadswaitingcount     int       `json:"threadswaitingcount"`
+	Usageislocal            bool      `json:"usageislocal"`
+	Version                 string    `json:"version"`
 }
 
 type ListDbMetricsParams struct {
@@ -347,21 +347,20 @@ func (s *InfrastructureUsageService) ListDbMetrics(p *ListDbMetricsParams) (*Lis
 }
 
 type ListDbMetricsResponse struct {
-	Count     int         `json:"count"`
-	DbMetrics []*DbMetric `json:"dbmetric"`
+	DbMetrics DbMetric `json:"dbMetrics"`
 }
 
 type DbMetric struct {
-	Collectiontime string `json:"collectiontime"`
-	Connections    int    `json:"connections"`
-	Dbloadaverages string `json:"dbloadaverages"`
-	Hostname       string `json:"hostname"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Queries        int64  `json:"queries"`
-	Replicas       string `json:"replicas"`
-	Tlsversions    string `json:"tlsversions"`
-	Uptime         int64  `json:"uptime"`
-	Version        string `json:"version"`
-	Versioncomment string `json:"versioncomment"`
+	Collectiontime string    `json:"collectiontime"`
+	Connections    int       `json:"connections"`
+	Dbloadaverages []float64 `json:"dbloadaverages"`
+	Hostname       string    `json:"hostname"`
+	JobID          string    `json:"jobid"`
+	Jobstatus      int       `json:"jobstatus"`
+	Queries        int64     `json:"queries"`
+	Replicas       []string  `json:"replicas"`
+	Tlsversions    string    `json:"tlsversions"`
+	Uptime         int64     `json:"uptime"`
+	Version        string    `json:"version"`
+	Versioncomment string    `json:"versioncomment"`
 }
