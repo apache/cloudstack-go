@@ -1860,6 +1860,11 @@ func (s *service) generateResponseType(a *API) {
 		case "listVirtualMachinesMetrics":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "virtualmachine")
+		case "listManagementServersMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "managementserver")
+		case "listDbMetrics":
+			pn("	%s %s `json:\"%s\"`", ln, parseSingular(ln), "dbMetrics")
 		case "registerTemplate":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")
@@ -2138,6 +2143,12 @@ func mapType(aName string, pName string, pType string) string {
 			return "[]map[string]string"
 		}
 		return "map[string]string"
+	case "double[]":
+		return "[]float64"
+	case "long[]":
+		return "[]int64"
+	case "string[]":
+		return "[]string"
 	case "set":
 		return "[]interface{}"
 	case "resourceiconresponse":
