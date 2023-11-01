@@ -202,6 +202,10 @@ func (s *PodService) CreatePod(p *CreatePodParams) (*CreatePodResponse, error) {
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreatePodResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
