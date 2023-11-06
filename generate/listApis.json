@@ -2059,7 +2059,7 @@
           "type": "long"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -4102,7 +4102,7 @@
           "type": "string"
         },
         {
-          "description": "the uuid of Tungsten-Fabric nic",
+          "description": "tthe uuid of Tungsten-Fabric nic",
           "length": 255,
           "name": "nicuuid",
           "required": false,
@@ -8472,7 +8472,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -15064,7 +15064,7 @@
           "type": "integer"
         },
         {
-          "description": "port the ldap server is running on",
+          "description": "port teh ldap server is running on",
           "name": "port",
           "type": "int"
         },
@@ -16729,7 +16729,7 @@
           "type": "long"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -20053,7 +20053,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -23675,7 +23675,7 @@
           "type": "string"
         },
         {
-          "description": "synchronization",
+          "description": "syncronization",
           "name": "sync",
           "type": "string"
         },
@@ -24440,7 +24440,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -38098,7 +38098,7 @@
           "type": "integer"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -41151,7 +41151,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -43891,7 +43891,7 @@
       "name": "login",
       "params": [
         {
-          "description": "The id of the domain that the user belongs to. If both domain and domainId are passed in, \"domainId\" parameter takes precedence",
+          "description": "The id of the domain that the user belongs to. If both domain and domainId are passed in, \"domainId\" parameter takes precendence",
           "length": 255,
           "name": "domainId",
           "required": false,
@@ -48373,7 +48373,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -53157,7 +53157,7 @@
           "type": "string"
         },
         {
-          "description": "port the ldap server is running on",
+          "description": "port teh ldap server is running on",
           "name": "port",
           "type": "int"
         }
@@ -55070,7 +55070,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -58105,7 +58105,7 @@
           "type": "long"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -59756,7 +59756,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -61799,7 +61799,7 @@
           "type": "long"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -62835,7 +62835,7 @@
           "type": "string"
         },
         {
-          "description": "type of the name in LDAP which is linked to the domain",
+          "description": "type of the name in LDAP which is linke to the domain",
           "name": "type",
           "type": "string"
         },
@@ -64274,7 +64274,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -68692,7 +68692,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -71030,7 +71030,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -75462,7 +75462,7 @@
         },
         {},
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -76785,7 +76785,7 @@
         },
         {},
         {
-          "description": "synchronization",
+          "description": "syncronization",
           "name": "sync",
           "type": "string"
         },
@@ -78532,7 +78532,7 @@
           "type": "set"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         }
@@ -83266,7 +83266,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -93540,7 +93540,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -93891,7 +93891,7 @@
       "name": "resetApiLimit",
       "params": [
         {
-          "description": "the ID of the account whose limit to be reset",
+          "description": "the ID of the acount whose limit to be reset",
           "length": 255,
           "name": "account",
           "related": "enableAccount,listAccounts,listAccounts",
@@ -94207,7 +94207,7 @@
         },
         {},
         {
-          "description": "port the ldap server is running on",
+          "description": "port teh ldap server is running on",
           "name": "port",
           "type": "int"
         },
@@ -96693,7 +96693,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -98780,7 +98780,7 @@
         },
         {},
         {
-          "description": "type of the name in LDAP which is linked to the domain",
+          "description": "type of the name in LDAP which is linke to the domain",
           "name": "type",
           "type": "string"
         },
@@ -110711,7 +110711,7 @@
       "related": "attachIso,destroyVirtualMachine,scaleVirtualMachine,removeNicFromVirtualMachine,startVirtualMachine,stopVirtualMachine,attachIso,detachIso,updateVMAffinityGroup,addNicToVirtualMachine,removeNicFromVirtualMachine,updateDefaultNicForVirtualMachine,deployVirtualMachine,destroyVirtualMachine,rebootVirtualMachine,resetPasswordForVirtualMachine,resetSSHKeyForVirtualMachine,restoreVirtualMachine,startVirtualMachine,stopVirtualMachine,updateVirtualMachine,changeServiceForVirtualMachine,revertToVMSnapshot,listVirtualMachines",
       "response": [
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -114577,7 +114577,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -119191,7 +119191,7 @@
           "type": "map"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -126558,7 +126558,7 @@
           "type": "resourceiconresponse"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -128294,7 +128294,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
@@ -130551,7 +130551,7 @@
           "type": "string"
         },
         {
-          "description": "the ID of the availability zone for the virtual machine",
+          "description": "the ID of the availablility zone for the virtual machine",
           "name": "zoneid",
           "type": "string"
         },
