@@ -150,7 +150,7 @@ func TestUUID(t *testing.T) {
 		t.Errorf("could not unserialize long into UUID: %s", err)
 	}
 	if res.Value != "4801878" {
-		t.Errorf("unepected value '%s', expecting 4801878", res.Value)
+		t.Errorf("unexpected value '%s', expecting 4801878", res.Value)
 	}
 
 	res.Value = ""
@@ -158,7 +158,7 @@ func TestUUID(t *testing.T) {
 		t.Errorf("could not unserialize string into UUID: %s", err)
 	}
 	if res.Value != "994801878" {
-		t.Errorf("unepected value '%s', expecting 994801878", res.Value)
+		t.Errorf("unexpected value '%s', expecting 994801878", res.Value)
 	}
 
 	res.Value = ""

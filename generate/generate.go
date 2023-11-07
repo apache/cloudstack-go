@@ -438,7 +438,7 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("")
 	pn("// For sync API calls this client behaves exactly the same as a standard client call, but for async API calls")
 	pn("// this client will wait until the async job is finished or until the configured AsyncTimeout is reached. When the async")
-	pn("// job finishes successfully it will return actual object received from the API and nil, but when the timout is")
+	pn("// job finishes successfully it will return actual object received from the API and nil, but when the timeout is")
 	pn("// reached it will return the initial object containing the async job ID for the running job and a warning.")
 	pn("func NewAsyncClient(apiurl string, apikey string, secret string, verifyssl bool, options ...ClientOption) *CloudStackClient {")
 	pn("	cs := newClient(apiurl, apikey, secret, true, verifyssl, options...)")
