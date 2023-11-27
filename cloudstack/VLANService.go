@@ -44,6 +44,8 @@ type VLANServiceIface interface {
 	NewReleaseDedicatedGuestVlanRangeParams(id string) *ReleaseDedicatedGuestVlanRangeParams
 	ListGuestVlans(p *ListGuestVlansParams) (*ListGuestVlansResponse, error)
 	NewListGuestVlansParams() *ListGuestVlansParams
+	UpdateVlanIpRange(p *UpdateVlanIpRangeParams) (*UpdateVlanIpRangeResponse, error)
+	NewUpdateVlanIpRangeParams(id string) *UpdateVlanIpRangeParams
 }
 
 type CreateVlanIpRangeParams struct {
@@ -1559,4 +1561,250 @@ type GuestVlan struct {
 	Vlan                string     `json:"vlan"`
 	Zoneid              string     `json:"zoneid"`
 	Zonename            string     `json:"zonename"`
+}
+
+type UpdateVlanIpRangeParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateVlanIpRangeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["endip"]; found {
+		u.Set("endip", v.(string))
+	}
+	if v, found := p.p["endipv6"]; found {
+		u.Set("endipv6", v.(string))
+	}
+	if v, found := p.p["forsystemvms"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forsystemvms", vv)
+	}
+	if v, found := p.p["gateway"]; found {
+		u.Set("gateway", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["ip6cidr"]; found {
+		u.Set("ip6cidr", v.(string))
+	}
+	if v, found := p.p["ip6gateway"]; found {
+		u.Set("ip6gateway", v.(string))
+	}
+	if v, found := p.p["netmask"]; found {
+		u.Set("netmask", v.(string))
+	}
+	if v, found := p.p["startip"]; found {
+		u.Set("startip", v.(string))
+	}
+	if v, found := p.p["startipv6"]; found {
+		u.Set("startipv6", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateVlanIpRangeParams) SetEndip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endip"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetEndip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endip"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetEndipv6(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endipv6"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetEndipv6() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endipv6"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetForsystemvms(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forsystemvms"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetForsystemvms() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forsystemvms"].(bool)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetGateway(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gateway"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetIp6cidr(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6cidr"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetIp6cidr() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6cidr"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetIp6gateway(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ip6gateway"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetIp6gateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ip6gateway"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetNetmask(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["netmask"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetNetmask() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["netmask"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetStartip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startip"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetStartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startip"].(string)
+	return value, ok
+}
+
+func (p *UpdateVlanIpRangeParams) SetStartipv6(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startipv6"] = v
+}
+
+func (p *UpdateVlanIpRangeParams) GetStartipv6() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startipv6"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateVlanIpRangeParams instance,
+// as then you are sure you have configured all required params
+func (s *VLANService) NewUpdateVlanIpRangeParams(id string) *UpdateVlanIpRangeParams {
+	p := &UpdateVlanIpRangeParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Updates a VLAN IP range.
+func (s *VLANService) UpdateVlanIpRange(p *UpdateVlanIpRangeParams) (*UpdateVlanIpRangeResponse, error) {
+	resp, err := s.cs.newRequest("updateVlanIpRange", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateVlanIpRangeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type UpdateVlanIpRangeResponse struct {
+	Account           string `json:"account"`
+	Cidr              string `json:"cidr"`
+	Description       string `json:"description"`
+	Domain            string `json:"domain"`
+	Domainid          string `json:"domainid"`
+	Endip             string `json:"endip"`
+	Endipv6           string `json:"endipv6"`
+	Forsystemvms      bool   `json:"forsystemvms"`
+	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
+	Gateway           string `json:"gateway"`
+	Id                string `json:"id"`
+	Ip6cidr           string `json:"ip6cidr"`
+	Ip6gateway        string `json:"ip6gateway"`
+	JobID             string `json:"jobid"`
+	Jobstatus         int    `json:"jobstatus"`
+	Netmask           string `json:"netmask"`
+	Networkid         string `json:"networkid"`
+	Physicalnetworkid string `json:"physicalnetworkid"`
+	Podid             string `json:"podid"`
+	Podname           string `json:"podname"`
+	Project           string `json:"project"`
+	Projectid         string `json:"projectid"`
+	Startip           string `json:"startip"`
+	Startipv6         string `json:"startipv6"`
+	Vlan              string `json:"vlan"`
+	Zoneid            string `json:"zoneid"`
 }
