@@ -401,6 +401,10 @@ func (s *VLANService) CreateVlanIpRange(p *CreateVlanIpRangeParams) (*CreateVlan
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r CreateVlanIpRangeResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
@@ -1769,6 +1773,10 @@ func (s *VLANService) NewUpdateVlanIpRangeParams(id string) *UpdateVlanIpRangePa
 func (s *VLANService) UpdateVlanIpRange(p *UpdateVlanIpRangeParams) (*UpdateVlanIpRangeResponse, error) {
 	resp, err := s.cs.newRequest("updateVlanIpRange", p.toURLValues())
 	if err != nil {
+		return nil, err
+	}
+
+	if resp, err = getRawValue(resp); err != nil {
 		return nil, err
 	}
 
