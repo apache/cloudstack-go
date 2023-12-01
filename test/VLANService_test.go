@@ -125,4 +125,19 @@ func TestVLANService(t *testing.T) {
 	}
 	t.Run("ListGuestVlans", testlistGuestVlans)
 
+	testupdateVlanIpRange := func(t *testing.T) {
+		if _, ok := response["updateVlanIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VLAN.NewUpdateVlanIpRangeParams("id")
+		r, err := client.VLAN.UpdateVlanIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateVlanIpRange", testupdateVlanIpRange)
+
 }

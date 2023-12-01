@@ -11,5 +11,67 @@
         "zoneid": 1
       }
     }
+  },
+  "createVlanIpRange": {
+    "createvlaniprangeresponse": {
+      "vlan": {
+          "id": "9772c190-3ad2-4e9c-8cd0-f1b3ebfe81d7",
+          "forvirtualnetwork": true,
+          "zoneid": "5de24f07-6668-4847-bff6-4f84ffc5bd70",
+          "vlan": "vlan://123",
+          "gateway": "10.0.0.1",
+          "netmask": "255.255.255.0",
+          "cidr": "10.0.0.0/24",
+          "startip": "10.0.0.2",
+          "endip": "10.0.0.10",
+          "networkid": "80cb0f82-f488-4092-91c8-ffb2805c26b2",
+          "physicalnetworkid": "2b46a0da-5076-481e-9ecf-d7d7055480c1",
+          "forsystemvms": false
+      }
+    }
+  },
+  "updateVlanIpRange": {
+    "updatevlaniprangeresponse": {
+      "vlan": {
+          "id": "9772c190-3ad2-4e9c-8cd0-f1b3ebfe81d7",
+          "forvirtualnetwork": true,
+          "zoneid": "5de24f07-6668-4847-bff6-4f84ffc5bd70",
+          "vlan": "vlan://123",
+          "gateway": "10.0.0.1",
+          "netmask": "255.255.255.0",
+          "cidr": "10.0.0.0/24",
+          "startip": "10.0.0.2",
+          "endip": "10.0.0.11",
+          "networkid": "80cb0f82-f488-4092-91c8-ffb2805c26b2",
+          "physicalnetworkid": "2b46a0da-5076-481e-9ecf-d7d7055480c1",
+          "forsystemvms": false
+      }
+    }
+  },
+  "listVlanIpRanges": {
+    "listvlaniprangesresponse": {
+      "count": 1,
+      "vlaniprange": [
+          {
+              "id": "9772c190-3ad2-4e9c-8cd0-f1b3ebfe81d7",
+              "forvirtualnetwork": true,
+              "zoneid": "5de24f07-6668-4847-bff6-4f84ffc5bd70",
+              "vlan": "vlan://123",
+              "gateway": "10.0.0.1",
+              "netmask": "255.255.255.0",
+              "cidr": "10.0.0.0/24",
+              "startip": "10.0.0.2",
+              "endip": "10.0.0.11",
+              "networkid": "80cb0f82-f488-4092-91c8-ffb2805c26b2",
+              "physicalnetworkid": "2b46a0da-5076-481e-9ecf-d7d7055480c1",
+              "forsystemvms": false
+          }
+      ]
+    }
+  },
+  "deleteVlanIpRange": {
+    "deletevlaniprangeresponse":{
+      "success":true
+    }
   }
 }

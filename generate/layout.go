@@ -503,6 +503,7 @@ var layout = apiInfo{
 		"listVlanIpRanges",
 		"releaseDedicatedGuestVlanRange",
 		"listGuestVlans",
+		"updateVlanIpRange",
 	},
 	"UCSService": {
 		"addUcsManager",

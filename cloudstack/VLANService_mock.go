@@ -282,6 +282,20 @@ func (mr *MockVLANServiceIfaceMockRecorder) NewReleaseDedicatedGuestVlanRangePar
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleaseDedicatedGuestVlanRangeParams", reflect.TypeOf((*MockVLANServiceIface)(nil).NewReleaseDedicatedGuestVlanRangeParams), id)
 }
 
+// NewUpdateVlanIpRangeParams mocks base method.
+func (m *MockVLANServiceIface) NewUpdateVlanIpRangeParams(id string) *UpdateVlanIpRangeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateVlanIpRangeParams", id)
+	ret0, _ := ret[0].(*UpdateVlanIpRangeParams)
+	return ret0
+}
+
+// NewUpdateVlanIpRangeParams indicates an expected call of NewUpdateVlanIpRangeParams.
+func (mr *MockVLANServiceIfaceMockRecorder) NewUpdateVlanIpRangeParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateVlanIpRangeParams", reflect.TypeOf((*MockVLANServiceIface)(nil).NewUpdateVlanIpRangeParams), id)
+}
+
 // ReleaseDedicatedGuestVlanRange mocks base method.
 func (m *MockVLANServiceIface) ReleaseDedicatedGuestVlanRange(p *ReleaseDedicatedGuestVlanRangeParams) (*ReleaseDedicatedGuestVlanRangeResponse, error) {
 	m.ctrl.T.Helper()
@@ -295,4 +309,19 @@ func (m *MockVLANServiceIface) ReleaseDedicatedGuestVlanRange(p *ReleaseDedicate
 func (mr *MockVLANServiceIfaceMockRecorder) ReleaseDedicatedGuestVlanRange(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseDedicatedGuestVlanRange", reflect.TypeOf((*MockVLANServiceIface)(nil).ReleaseDedicatedGuestVlanRange), p)
+}
+
+// UpdateVlanIpRange mocks base method.
+func (m *MockVLANServiceIface) UpdateVlanIpRange(p *UpdateVlanIpRangeParams) (*UpdateVlanIpRangeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateVlanIpRange", p)
+	ret0, _ := ret[0].(*UpdateVlanIpRangeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateVlanIpRange indicates an expected call of UpdateVlanIpRange.
+func (mr *MockVLANServiceIfaceMockRecorder) UpdateVlanIpRange(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateVlanIpRange", reflect.TypeOf((*MockVLANServiceIface)(nil).UpdateVlanIpRange), p)
 }
