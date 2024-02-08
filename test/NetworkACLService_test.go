@@ -54,7 +54,7 @@ func TestNetworkACLService(t *testing.T) {
 		if _, ok := response["createNetworkACLList"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.NetworkACL.NewCreateNetworkACLListParams("name", "vpcid")
+		p := client.NetworkACL.NewCreateNetworkACLListParams("name")
 		r, err := client.NetworkACL.CreateNetworkACLList(p)
 		if err != nil {
 			t.Errorf(err.Error())

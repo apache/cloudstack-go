@@ -803,6 +803,9 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -835,8 +838,14 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
 	if v, found := p.p["storageid"]; found {
 		u.Set("storageid", v.(string))
+	}
+	if v, found := p.p["storagetype"]; found {
+		u.Set("storagetype", v.(string))
 	}
 	if v, found := p.p["volumeid"]; found {
 		u.Set("volumeid", v.(string))
@@ -845,6 +854,21 @@ func (p *ListDiskOfferingsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListDiskOfferingsParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
 }
 
 func (p *ListDiskOfferingsParams) SetDomainid(v string) {
@@ -982,6 +1006,21 @@ func (p *ListDiskOfferingsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListDiskOfferingsParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
 func (p *ListDiskOfferingsParams) SetStorageid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -994,6 +1033,21 @@ func (p *ListDiskOfferingsParams) GetStorageid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+func (p *ListDiskOfferingsParams) SetStoragetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagetype"] = v
+}
+
+func (p *ListDiskOfferingsParams) GetStoragetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storagetype"].(string)
 	return value, ok
 }
 

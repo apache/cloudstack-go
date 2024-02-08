@@ -242,6 +242,7 @@ type AttachIsoResponse struct {
 	Templatedisplaytext   string                           `json:"templatedisplaytext"`
 	Templateid            string                           `json:"templateid"`
 	Templatename          string                           `json:"templatename"`
+	Templatetype          string                           `json:"templatetype"`
 	Userdata              string                           `json:"userdata"`
 	Userdatadetails       string                           `json:"userdatadetails"`
 	Userdataid            string                           `json:"userdataid"`
@@ -250,6 +251,8 @@ type AttachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vnfdetails            map[string]string                `json:"vnfdetails"`
+	Vnfnics               []string                         `json:"vnfnics"`
 	Zoneid                string                           `json:"zoneid"`
 	Zonename              string                           `json:"zonename"`
 }
@@ -799,6 +802,7 @@ type DetachIsoResponse struct {
 	Templatedisplaytext   string                           `json:"templatedisplaytext"`
 	Templateid            string                           `json:"templateid"`
 	Templatename          string                           `json:"templatename"`
+	Templatetype          string                           `json:"templatetype"`
 	Userdata              string                           `json:"userdata"`
 	Userdatadetails       string                           `json:"userdatadetails"`
 	Userdataid            string                           `json:"userdataid"`
@@ -807,6 +811,8 @@ type DetachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vnfdetails            map[string]string                `json:"vnfdetails"`
+	Vnfnics               []string                         `json:"vnfnics"`
 	Zoneid                string                           `json:"zoneid"`
 	Zonename              string                           `json:"zonename"`
 }
@@ -1155,6 +1161,9 @@ func (p *ListIsosParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["imagestoreid"]; found {
+		u.Set("imagestoreid", v.(string))
+	}
 	if v, found := p.p["isofilter"]; found {
 		u.Set("isofilter", v.(string))
 	}
@@ -1202,6 +1211,9 @@ func (p *ListIsosParams) toURLValues() url.Values {
 	if v, found := p.p["showunique"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showunique", vv)
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
@@ -1288,6 +1300,21 @@ func (p *ListIsosParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListIsosParams) SetImagestoreid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["imagestoreid"] = v
+}
+
+func (p *ListIsosParams) GetImagestoreid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["imagestoreid"].(string)
 	return value, ok
 }
 
@@ -1483,6 +1510,21 @@ func (p *ListIsosParams) GetShowunique() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["showunique"].(bool)
+	return value, ok
+}
+
+func (p *ListIsosParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ListIsosParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
 	return value, ok
 }
 

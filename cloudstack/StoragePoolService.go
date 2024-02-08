@@ -121,6 +121,7 @@ type CancelStorageMaintenanceResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`
@@ -226,6 +227,7 @@ type EnableStorageMaintenanceResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`

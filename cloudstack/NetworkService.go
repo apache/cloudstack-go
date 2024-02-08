@@ -1165,6 +1165,7 @@ type CreateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Domainpath                  string                         `json:"domainpath"`
 	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
@@ -2596,6 +2597,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Dns2                        string                                `json:"dns2"`
 	Domain                      string                                `json:"domain"`
 	Domainid                    string                                `json:"domainid"`
+	Domainpath                  string                                `json:"domainpath"`
 	Egressdefaultpolicy         bool                                  `json:"egressdefaultpolicy"`
 	Externalid                  string                                `json:"externalid"`
 	Gateway                     string                                `json:"gateway"`
@@ -3655,6 +3657,7 @@ type Network struct {
 	Dns2                        string                   `json:"dns2"`
 	Domain                      string                   `json:"domain"`
 	Domainid                    string                   `json:"domainid"`
+	Domainpath                  string                   `json:"domainpath"`
 	Egressdefaultpolicy         bool                     `json:"egressdefaultpolicy"`
 	Externalid                  string                   `json:"externalid"`
 	Gateway                     string                   `json:"gateway"`
@@ -3904,6 +3907,7 @@ type NiciraNvpDeviceNetwork struct {
 	Dns2                        string                          `json:"dns2"`
 	Domain                      string                          `json:"domain"`
 	Domainid                    string                          `json:"domainid"`
+	Domainpath                  string                          `json:"domainpath"`
 	Egressdefaultpolicy         bool                            `json:"egressdefaultpolicy"`
 	Externalid                  string                          `json:"externalid"`
 	Gateway                     string                          `json:"gateway"`
@@ -4272,6 +4276,7 @@ type PaloAltoFirewallNetwork struct {
 	Dns2                        string                           `json:"dns2"`
 	Domain                      string                           `json:"domain"`
 	Domainid                    string                           `json:"domainid"`
+	Domainpath                  string                           `json:"domainpath"`
 	Egressdefaultpolicy         bool                             `json:"egressdefaultpolicy"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
@@ -5597,6 +5602,7 @@ type UpdateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Domainpath                  string                         `json:"domainpath"`
 	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`

@@ -1026,6 +1026,7 @@ type UpdateVMAffinityGroupResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Templatetype          string                                       `json:"templatetype"`
 	Userdata              string                                       `json:"userdata"`
 	Userdatadetails       string                                       `json:"userdatadetails"`
 	Userdataid            string                                       `json:"userdataid"`
@@ -1034,6 +1035,8 @@ type UpdateVMAffinityGroupResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vnfdetails            map[string]string                            `json:"vnfdetails"`
+	Vnfnics               []string                                     `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }

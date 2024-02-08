@@ -101,6 +101,10 @@ func (p *CreateSnapshotParams) toURLValues() url.Values {
 	if v, found := p.p["volumeid"]; found {
 		u.Set("volumeid", v.(string))
 	}
+	if v, found := p.p["zoneids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("zoneids", vv)
+	}
 	return u
 }
 
@@ -239,6 +243,21 @@ func (p *CreateSnapshotParams) GetVolumeid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateSnapshotParams) SetZoneids(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneids"] = v
+}
+
+func (p *CreateSnapshotParams) GetZoneids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneids"].([]string)
+	return value, ok
+}
+
 // You should always use this function to get a new CreateSnapshotParams instance,
 // as then you are sure you have configured all required params
 func (s *SnapshotService) NewCreateSnapshotParams(volumeid string) *CreateSnapshotParams {
@@ -284,31 +303,38 @@ func (s *SnapshotService) CreateSnapshot(p *CreateSnapshotParams) (*CreateSnapsh
 }
 
 type CreateSnapshotResponse struct {
-	Account        string `json:"account"`
-	Created        string `json:"created"`
-	Domain         string `json:"domain"`
-	Domainid       string `json:"domainid"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   string `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Locationtype   string `json:"locationtype"`
-	Name           string `json:"name"`
-	Osdisplayname  string `json:"osdisplayname"`
-	Ostypeid       string `json:"ostypeid"`
-	Physicalsize   int64  `json:"physicalsize"`
-	Project        string `json:"project"`
-	Projectid      string `json:"projectid"`
-	Revertable     bool   `json:"revertable"`
-	Snapshottype   string `json:"snapshottype"`
-	State          string `json:"state"`
-	Tags           []Tags `json:"tags"`
-	Virtualsize    int64  `json:"virtualsize"`
-	Volumeid       string `json:"volumeid"`
-	Volumename     string `json:"volumename"`
-	Volumetype     string `json:"volumetype"`
-	Zoneid         string `json:"zoneid"`
+	Account         string            `json:"account"`
+	Created         string            `json:"created"`
+	Datastoreid     string            `json:"datastoreid"`
+	Datastorename   string            `json:"datastorename"`
+	Datastorestate  string            `json:"datastorestate"`
+	Datastoretype   string            `json:"datastoretype"`
+	Domain          string            `json:"domain"`
+	Domainid        string            `json:"domainid"`
+	Downloaddetails map[string]string `json:"downloaddetails"`
+	Hasannotations  bool              `json:"hasannotations"`
+	Id              string            `json:"id"`
+	Intervaltype    string            `json:"intervaltype"`
+	JobID           string            `json:"jobid"`
+	Jobstatus       int               `json:"jobstatus"`
+	Locationtype    string            `json:"locationtype"`
+	Name            string            `json:"name"`
+	Osdisplayname   string            `json:"osdisplayname"`
+	Ostypeid        string            `json:"ostypeid"`
+	Physicalsize    int64             `json:"physicalsize"`
+	Project         string            `json:"project"`
+	Projectid       string            `json:"projectid"`
+	Revertable      bool              `json:"revertable"`
+	Snapshottype    string            `json:"snapshottype"`
+	State           string            `json:"state"`
+	Status          string            `json:"status"`
+	Tags            []Tags            `json:"tags"`
+	Virtualsize     int64             `json:"virtualsize"`
+	Volumeid        string            `json:"volumeid"`
+	Volumename      string            `json:"volumename"`
+	Volumetype      string            `json:"volumetype"`
+	Zoneid          string            `json:"zoneid"`
+	Zonename        string            `json:"zonename"`
 }
 
 func (r *CreateSnapshotResponse) UnmarshalJSON(b []byte) error {
@@ -373,6 +399,10 @@ func (p *CreateSnapshotPolicyParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["volumeid"]; found {
 		u.Set("volumeid", v.(string))
+	}
+	if v, found := p.p["zoneids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("zoneids", vv)
 	}
 	return u
 }
@@ -482,6 +512,21 @@ func (p *CreateSnapshotPolicyParams) GetVolumeid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateSnapshotPolicyParams) SetZoneids(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneids"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) GetZoneids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneids"].([]string)
+	return value, ok
+}
+
 // You should always use this function to get a new CreateSnapshotPolicyParams instance,
 // as then you are sure you have configured all required params
 func (s *SnapshotService) NewCreateSnapshotPolicyParams(intervaltype string, maxsnaps int, schedule string, timezone string, volumeid string) *CreateSnapshotPolicyParams {
@@ -511,17 +556,18 @@ func (s *SnapshotService) CreateSnapshotPolicy(p *CreateSnapshotPolicyParams) (*
 }
 
 type CreateSnapshotPolicyResponse struct {
-	Fordisplay     bool   `json:"fordisplay"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   int    `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Maxsnaps       int    `json:"maxsnaps"`
-	Schedule       string `json:"schedule"`
-	Tags           []Tags `json:"tags"`
-	Timezone       string `json:"timezone"`
-	Volumeid       string `json:"volumeid"`
+	Fordisplay     bool          `json:"fordisplay"`
+	Hasannotations bool          `json:"hasannotations"`
+	Id             string        `json:"id"`
+	Intervaltype   int           `json:"intervaltype"`
+	JobID          string        `json:"jobid"`
+	Jobstatus      int           `json:"jobstatus"`
+	Maxsnaps       int           `json:"maxsnaps"`
+	Schedule       string        `json:"schedule"`
+	Tags           []Tags        `json:"tags"`
+	Timezone       string        `json:"timezone"`
+	Volumeid       string        `json:"volumeid"`
+	Zone           []interface{} `json:"zone"`
 }
 
 type CreateVMSnapshotParams struct {
@@ -711,6 +757,9 @@ func (p *DeleteSnapshotParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
 }
 
@@ -726,6 +775,21 @@ func (p *DeleteSnapshotParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DeleteSnapshotParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *DeleteSnapshotParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
 	return value, ok
 }
 
@@ -1142,17 +1206,18 @@ type ListSnapshotPoliciesResponse struct {
 }
 
 type SnapshotPolicy struct {
-	Fordisplay     bool   `json:"fordisplay"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   int    `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Maxsnaps       int    `json:"maxsnaps"`
-	Schedule       string `json:"schedule"`
-	Tags           []Tags `json:"tags"`
-	Timezone       string `json:"timezone"`
-	Volumeid       string `json:"volumeid"`
+	Fordisplay     bool          `json:"fordisplay"`
+	Hasannotations bool          `json:"hasannotations"`
+	Id             string        `json:"id"`
+	Intervaltype   int           `json:"intervaltype"`
+	JobID          string        `json:"jobid"`
+	Jobstatus      int           `json:"jobstatus"`
+	Maxsnaps       int           `json:"maxsnaps"`
+	Schedule       string        `json:"schedule"`
+	Tags           []Tags        `json:"tags"`
+	Timezone       string        `json:"timezone"`
+	Volumeid       string        `json:"volumeid"`
+	Zone           []interface{} `json:"zone"`
 }
 
 type ListSnapshotsParams struct {
@@ -1177,6 +1242,9 @@ func (p *ListSnapshotsParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("ids", vv)
 	}
+	if v, found := p.p["imagestoreid"]; found {
+		u.Set("imagestoreid", v.(string))
+	}
 	if v, found := p.p["intervaltype"]; found {
 		u.Set("intervaltype", v.(string))
 	}
@@ -1190,6 +1258,9 @@ func (p *ListSnapshotsParams) toURLValues() url.Values {
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["locationtype"]; found {
+		u.Set("locationtype", v.(string))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -1205,8 +1276,15 @@ func (p *ListSnapshotsParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["showunique"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showunique", vv)
+	}
 	if v, found := p.p["snapshottype"]; found {
 		u.Set("snapshottype", v.(string))
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
@@ -1284,6 +1362,21 @@ func (p *ListSnapshotsParams) GetIds() ([]string, bool) {
 	return value, ok
 }
 
+func (p *ListSnapshotsParams) SetImagestoreid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["imagestoreid"] = v
+}
+
+func (p *ListSnapshotsParams) GetImagestoreid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["imagestoreid"].(string)
+	return value, ok
+}
+
 func (p *ListSnapshotsParams) SetIntervaltype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1341,6 +1434,21 @@ func (p *ListSnapshotsParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListSnapshotsParams) SetLocationtype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["locationtype"] = v
+}
+
+func (p *ListSnapshotsParams) GetLocationtype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["locationtype"].(string)
 	return value, ok
 }
 
@@ -1404,6 +1512,21 @@ func (p *ListSnapshotsParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListSnapshotsParams) SetShowunique(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showunique"] = v
+}
+
+func (p *ListSnapshotsParams) GetShowunique() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showunique"].(bool)
+	return value, ok
+}
+
 func (p *ListSnapshotsParams) SetSnapshottype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1416,6 +1539,21 @@ func (p *ListSnapshotsParams) GetSnapshottype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["snapshottype"].(string)
+	return value, ok
+}
+
+func (p *ListSnapshotsParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ListSnapshotsParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
 	return value, ok
 }
 
@@ -1576,31 +1714,38 @@ type ListSnapshotsResponse struct {
 }
 
 type Snapshot struct {
-	Account        string `json:"account"`
-	Created        string `json:"created"`
-	Domain         string `json:"domain"`
-	Domainid       string `json:"domainid"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   string `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Locationtype   string `json:"locationtype"`
-	Name           string `json:"name"`
-	Osdisplayname  string `json:"osdisplayname"`
-	Ostypeid       string `json:"ostypeid"`
-	Physicalsize   int64  `json:"physicalsize"`
-	Project        string `json:"project"`
-	Projectid      string `json:"projectid"`
-	Revertable     bool   `json:"revertable"`
-	Snapshottype   string `json:"snapshottype"`
-	State          string `json:"state"`
-	Tags           []Tags `json:"tags"`
-	Virtualsize    int64  `json:"virtualsize"`
-	Volumeid       string `json:"volumeid"`
-	Volumename     string `json:"volumename"`
-	Volumetype     string `json:"volumetype"`
-	Zoneid         string `json:"zoneid"`
+	Account         string            `json:"account"`
+	Created         string            `json:"created"`
+	Datastoreid     string            `json:"datastoreid"`
+	Datastorename   string            `json:"datastorename"`
+	Datastorestate  string            `json:"datastorestate"`
+	Datastoretype   string            `json:"datastoretype"`
+	Domain          string            `json:"domain"`
+	Domainid        string            `json:"domainid"`
+	Downloaddetails map[string]string `json:"downloaddetails"`
+	Hasannotations  bool              `json:"hasannotations"`
+	Id              string            `json:"id"`
+	Intervaltype    string            `json:"intervaltype"`
+	JobID           string            `json:"jobid"`
+	Jobstatus       int               `json:"jobstatus"`
+	Locationtype    string            `json:"locationtype"`
+	Name            string            `json:"name"`
+	Osdisplayname   string            `json:"osdisplayname"`
+	Ostypeid        string            `json:"ostypeid"`
+	Physicalsize    int64             `json:"physicalsize"`
+	Project         string            `json:"project"`
+	Projectid       string            `json:"projectid"`
+	Revertable      bool              `json:"revertable"`
+	Snapshottype    string            `json:"snapshottype"`
+	State           string            `json:"state"`
+	Status          string            `json:"status"`
+	Tags            []Tags            `json:"tags"`
+	Virtualsize     int64             `json:"virtualsize"`
+	Volumeid        string            `json:"volumeid"`
+	Volumename      string            `json:"volumename"`
+	Volumetype      string            `json:"volumetype"`
+	Zoneid          string            `json:"zoneid"`
+	Zonename        string            `json:"zonename"`
 }
 
 func (r *Snapshot) UnmarshalJSON(b []byte) error {
@@ -2069,31 +2214,38 @@ func (s *SnapshotService) RevertSnapshot(p *RevertSnapshotParams) (*RevertSnapsh
 }
 
 type RevertSnapshotResponse struct {
-	Account        string `json:"account"`
-	Created        string `json:"created"`
-	Domain         string `json:"domain"`
-	Domainid       string `json:"domainid"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   string `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Locationtype   string `json:"locationtype"`
-	Name           string `json:"name"`
-	Osdisplayname  string `json:"osdisplayname"`
-	Ostypeid       string `json:"ostypeid"`
-	Physicalsize   int64  `json:"physicalsize"`
-	Project        string `json:"project"`
-	Projectid      string `json:"projectid"`
-	Revertable     bool   `json:"revertable"`
-	Snapshottype   string `json:"snapshottype"`
-	State          string `json:"state"`
-	Tags           []Tags `json:"tags"`
-	Virtualsize    int64  `json:"virtualsize"`
-	Volumeid       string `json:"volumeid"`
-	Volumename     string `json:"volumename"`
-	Volumetype     string `json:"volumetype"`
-	Zoneid         string `json:"zoneid"`
+	Account         string            `json:"account"`
+	Created         string            `json:"created"`
+	Datastoreid     string            `json:"datastoreid"`
+	Datastorename   string            `json:"datastorename"`
+	Datastorestate  string            `json:"datastorestate"`
+	Datastoretype   string            `json:"datastoretype"`
+	Domain          string            `json:"domain"`
+	Domainid        string            `json:"domainid"`
+	Downloaddetails map[string]string `json:"downloaddetails"`
+	Hasannotations  bool              `json:"hasannotations"`
+	Id              string            `json:"id"`
+	Intervaltype    string            `json:"intervaltype"`
+	JobID           string            `json:"jobid"`
+	Jobstatus       int               `json:"jobstatus"`
+	Locationtype    string            `json:"locationtype"`
+	Name            string            `json:"name"`
+	Osdisplayname   string            `json:"osdisplayname"`
+	Ostypeid        string            `json:"ostypeid"`
+	Physicalsize    int64             `json:"physicalsize"`
+	Project         string            `json:"project"`
+	Projectid       string            `json:"projectid"`
+	Revertable      bool              `json:"revertable"`
+	Snapshottype    string            `json:"snapshottype"`
+	State           string            `json:"state"`
+	Status          string            `json:"status"`
+	Tags            []Tags            `json:"tags"`
+	Virtualsize     int64             `json:"virtualsize"`
+	Volumeid        string            `json:"volumeid"`
+	Volumename      string            `json:"volumename"`
+	Volumetype      string            `json:"volumetype"`
+	Zoneid          string            `json:"zoneid"`
+	Zonename        string            `json:"zonename"`
 }
 
 func (r *RevertSnapshotResponse) UnmarshalJSON(b []byte) error {
@@ -2273,6 +2425,7 @@ type RevertToVMSnapshotResponse struct {
 	Templatedisplaytext   string                                    `json:"templatedisplaytext"`
 	Templateid            string                                    `json:"templateid"`
 	Templatename          string                                    `json:"templatename"`
+	Templatetype          string                                    `json:"templatetype"`
 	Userdata              string                                    `json:"userdata"`
 	Userdatadetails       string                                    `json:"userdatadetails"`
 	Userdataid            string                                    `json:"userdataid"`
@@ -2281,6 +2434,8 @@ type RevertToVMSnapshotResponse struct {
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
+	Vnfdetails            map[string]string                         `json:"vnfdetails"`
+	Vnfnics               []string                                  `json:"vnfnics"`
 	Zoneid                string                                    `json:"zoneid"`
 	Zonename              string                                    `json:"zonename"`
 }
@@ -2465,15 +2620,16 @@ func (s *SnapshotService) UpdateSnapshotPolicy(p *UpdateSnapshotPolicyParams) (*
 }
 
 type UpdateSnapshotPolicyResponse struct {
-	Fordisplay     bool   `json:"fordisplay"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	Intervaltype   int    `json:"intervaltype"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Maxsnaps       int    `json:"maxsnaps"`
-	Schedule       string `json:"schedule"`
-	Tags           []Tags `json:"tags"`
-	Timezone       string `json:"timezone"`
-	Volumeid       string `json:"volumeid"`
+	Fordisplay     bool          `json:"fordisplay"`
+	Hasannotations bool          `json:"hasannotations"`
+	Id             string        `json:"id"`
+	Intervaltype   int           `json:"intervaltype"`
+	JobID          string        `json:"jobid"`
+	Jobstatus      int           `json:"jobstatus"`
+	Maxsnaps       int           `json:"maxsnaps"`
+	Schedule       string        `json:"schedule"`
+	Tags           []Tags        `json:"tags"`
+	Timezone       string        `json:"timezone"`
+	Volumeid       string        `json:"volumeid"`
+	Zone           []interface{} `json:"zone"`
 }

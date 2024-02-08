@@ -71,6 +71,10 @@ func (p *AddGuestOsParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("details[%d].value", i), m[k])
 		}
 	}
+	if v, found := p.p["forDisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forDisplay", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -95,6 +99,21 @@ func (p *AddGuestOsParams) GetDetails() (map[string]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
+func (p *AddGuestOsParams) SetForDisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forDisplay"] = v
+}
+
+func (p *AddGuestOsParams) GetForDisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forDisplay"].(bool)
 	return value, ok
 }
 
@@ -190,8 +209,9 @@ func (s *GuestOSService) AddGuestOs(p *AddGuestOsParams) (*AddGuestOsResponse, e
 
 type AddGuestOsResponse struct {
 	Description    string `json:"description"`
+	Fordisplay     bool   `json:"fordisplay"`
 	Id             string `json:"id"`
-	Isuserdefined  string `json:"isuserdefined"`
+	Isuserdefined  bool   `json:"isuserdefined"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
 	Name           string `json:"name"`
@@ -934,6 +954,10 @@ func (p *ListOsTypesParams) toURLValues() url.Values {
 	if v, found := p.p["description"]; found {
 		u.Set("description", v.(string))
 	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -966,6 +990,21 @@ func (p *ListOsTypesParams) GetDescription() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *ListOsTypesParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *ListOsTypesParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
 	return value, ok
 }
 
@@ -1157,8 +1196,9 @@ type ListOsTypesResponse struct {
 
 type OsType struct {
 	Description    string `json:"description"`
+	Fordisplay     bool   `json:"fordisplay"`
 	Id             string `json:"id"`
-	Isuserdefined  string `json:"isuserdefined"`
+	Isuserdefined  bool   `json:"isuserdefined"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
 	Name           string `json:"name"`
@@ -1334,6 +1374,10 @@ func (p *UpdateGuestOsParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("details[%d].value", i), m[k])
 		}
 	}
+	if v, found := p.p["forDisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forDisplay", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1355,6 +1399,21 @@ func (p *UpdateGuestOsParams) GetDetails() (map[string]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
+func (p *UpdateGuestOsParams) SetForDisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forDisplay"] = v
+}
+
+func (p *UpdateGuestOsParams) GetForDisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forDisplay"].(bool)
 	return value, ok
 }
 
@@ -1435,8 +1494,9 @@ func (s *GuestOSService) UpdateGuestOs(p *UpdateGuestOsParams) (*UpdateGuestOsRe
 
 type UpdateGuestOsResponse struct {
 	Description    string `json:"description"`
+	Fordisplay     bool   `json:"fordisplay"`
 	Id             string `json:"id"`
-	Isuserdefined  string `json:"isuserdefined"`
+	Isuserdefined  bool   `json:"isuserdefined"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
 	Name           string `json:"name"`

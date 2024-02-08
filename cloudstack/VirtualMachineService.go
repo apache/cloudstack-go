@@ -312,6 +312,7 @@ type AddNicToVirtualMachineResponse struct {
 	Templatedisplaytext   string                                        `json:"templatedisplaytext"`
 	Templateid            string                                        `json:"templateid"`
 	Templatename          string                                        `json:"templatename"`
+	Templatetype          string                                        `json:"templatetype"`
 	Userdata              string                                        `json:"userdata"`
 	Userdatadetails       string                                        `json:"userdatadetails"`
 	Userdataid            string                                        `json:"userdataid"`
@@ -320,6 +321,8 @@ type AddNicToVirtualMachineResponse struct {
 	Userid                string                                        `json:"userid"`
 	Username              string                                        `json:"username"`
 	Vgpu                  string                                        `json:"vgpu"`
+	Vnfdetails            map[string]string                             `json:"vnfdetails"`
+	Vnfnics               []string                                      `json:"vnfnics"`
 	Zoneid                string                                        `json:"zoneid"`
 	Zonename              string                                        `json:"zonename"`
 }
@@ -615,6 +618,7 @@ type AssignVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Templatetype          string                                      `json:"templatetype"`
 	Userdata              string                                      `json:"userdata"`
 	Userdatadetails       string                                      `json:"userdatadetails"`
 	Userdataid            string                                      `json:"userdataid"`
@@ -623,6 +627,8 @@ type AssignVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vnfdetails            map[string]string                           `json:"vnfdetails"`
+	Vnfnics               []string                                    `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -942,6 +948,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                `json:"templatedisplaytext"`
 	Templateid            string                                                `json:"templateid"`
 	Templatename          string                                                `json:"templatename"`
+	Templatetype          string                                                `json:"templatetype"`
 	Userdata              string                                                `json:"userdata"`
 	Userdatadetails       string                                                `json:"userdatadetails"`
 	Userdataid            string                                                `json:"userdataid"`
@@ -950,6 +957,8 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
+	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
+	Vnfnics               []string                                              `json:"vnfnics"`
 	Zoneid                string                                                `json:"zoneid"`
 	Zonename              string                                                `json:"zonename"`
 }
@@ -1232,6 +1241,9 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["overridediskofferingid"]; found {
 		u.Set("overridediskofferingid", v.(string))
+	}
+	if v, found := p.p["password"]; found {
+		u.Set("password", v.(string))
 	}
 	if v, found := p.p["podid"]; found {
 		u.Set("podid", v.(string))
@@ -1888,6 +1900,21 @@ func (p *DeployVirtualMachineParams) GetOverridediskofferingid() (string, bool) 
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetPassword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["password"] = v
+}
+
+func (p *DeployVirtualMachineParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetPodid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2220,6 +2247,7 @@ type DeployVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Templatetype          string                                      `json:"templatetype"`
 	Userdata              string                                      `json:"userdata"`
 	Userdatadetails       string                                      `json:"userdatadetails"`
 	Userdataid            string                                      `json:"userdataid"`
@@ -2228,6 +2256,8 @@ type DeployVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vnfdetails            map[string]string                           `json:"vnfdetails"`
+	Vnfnics               []string                                    `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -2489,6 +2519,7 @@ type DestroyVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Templatetype          string                                       `json:"templatetype"`
 	Userdata              string                                       `json:"userdata"`
 	Userdatadetails       string                                       `json:"userdatadetails"`
 	Userdataid            string                                       `json:"userdataid"`
@@ -2497,6 +2528,8 @@ type DestroyVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vnfdetails            map[string]string                            `json:"vnfdetails"`
+	Vnfnics               []string                                     `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -2775,6 +2808,10 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["isrecursive"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["isvnf"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isvnf", vv)
 	}
 	if v, found := p.p["keypair"]; found {
 		u.Set("keypair", v.(string))
@@ -3119,6 +3156,21 @@ func (p *ListVirtualMachinesParams) GetIsrecursive() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetIsvnf(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isvnf"] = v
+}
+
+func (p *ListVirtualMachinesParams) GetIsvnf() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isvnf"].(bool)
 	return value, ok
 }
 
@@ -3624,6 +3676,7 @@ type VirtualMachine struct {
 	Templatedisplaytext   string                        `json:"templatedisplaytext"`
 	Templateid            string                        `json:"templateid"`
 	Templatename          string                        `json:"templatename"`
+	Templatetype          string                        `json:"templatetype"`
 	Userdata              string                        `json:"userdata"`
 	Userdatadetails       string                        `json:"userdatadetails"`
 	Userdataid            string                        `json:"userdataid"`
@@ -3632,6 +3685,8 @@ type VirtualMachine struct {
 	Userid                string                        `json:"userid"`
 	Username              string                        `json:"username"`
 	Vgpu                  string                        `json:"vgpu"`
+	Vnfdetails            map[string]string             `json:"vnfdetails"`
+	Vnfnics               []string                      `json:"vnfnics"`
 	Zoneid                string                        `json:"zoneid"`
 	Zonename              string                        `json:"zonename"`
 }
@@ -3774,6 +3829,10 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["isrecursive"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["isvnf"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isvnf", vv)
 	}
 	if v, found := p.p["keypair"]; found {
 		u.Set("keypair", v.(string))
@@ -4118,6 +4177,21 @@ func (p *ListVirtualMachinesMetricsParams) GetIsrecursive() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetIsvnf(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isvnf"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetIsvnf() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isvnf"].(bool)
 	return value, ok
 }
 
@@ -4631,6 +4705,7 @@ type VirtualMachinesMetric struct {
 	Templatedisplaytext   string                               `json:"templatedisplaytext"`
 	Templateid            string                               `json:"templateid"`
 	Templatename          string                               `json:"templatename"`
+	Templatetype          string                               `json:"templatetype"`
 	Userdata              string                               `json:"userdata"`
 	Userdatadetails       string                               `json:"userdatadetails"`
 	Userdataid            string                               `json:"userdataid"`
@@ -4639,6 +4714,8 @@ type VirtualMachinesMetric struct {
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`
+	Vnfdetails            map[string]string                    `json:"vnfdetails"`
+	Vnfnics               []string                             `json:"vnfnics"`
 	Zoneid                string                               `json:"zoneid"`
 	Zonename              string                               `json:"zonename"`
 }
@@ -4917,6 +4994,7 @@ type MigrateVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Templatetype          string                                       `json:"templatetype"`
 	Userdata              string                                       `json:"userdata"`
 	Userdatadetails       string                                       `json:"userdatadetails"`
 	Userdataid            string                                       `json:"userdataid"`
@@ -4925,6 +5003,8 @@ type MigrateVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vnfdetails            map[string]string                            `json:"vnfdetails"`
+	Vnfnics               []string                                     `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -5222,6 +5302,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Templatedisplaytext   string                                                 `json:"templatedisplaytext"`
 	Templateid            string                                                 `json:"templateid"`
 	Templatename          string                                                 `json:"templatename"`
+	Templatetype          string                                                 `json:"templatetype"`
 	Userdata              string                                                 `json:"userdata"`
 	Userdatadetails       string                                                 `json:"userdatadetails"`
 	Userdataid            string                                                 `json:"userdataid"`
@@ -5230,6 +5311,8 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Userid                string                                                 `json:"userid"`
 	Username              string                                                 `json:"username"`
 	Vgpu                  string                                                 `json:"vgpu"`
+	Vnfdetails            map[string]string                                      `json:"vnfdetails"`
+	Vnfnics               []string                                               `json:"vnfnics"`
 	Zoneid                string                                                 `json:"zoneid"`
 	Zonename              string                                                 `json:"zonename"`
 }
@@ -5491,6 +5574,7 @@ type RebootVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Templatetype          string                                      `json:"templatetype"`
 	Userdata              string                                      `json:"userdata"`
 	Userdatadetails       string                                      `json:"userdatadetails"`
 	Userdataid            string                                      `json:"userdataid"`
@@ -5499,6 +5583,8 @@ type RebootVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vnfdetails            map[string]string                           `json:"vnfdetails"`
+	Vnfnics               []string                                    `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -5702,6 +5788,7 @@ type RecoverVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Templatetype          string                                       `json:"templatetype"`
 	Userdata              string                                       `json:"userdata"`
 	Userdatadetails       string                                       `json:"userdatadetails"`
 	Userdataid            string                                       `json:"userdataid"`
@@ -5710,6 +5797,8 @@ type RecoverVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vnfdetails            map[string]string                            `json:"vnfdetails"`
+	Vnfnics               []string                                     `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -5952,6 +6041,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Templatedisplaytext   string                                             `json:"templatedisplaytext"`
 	Templateid            string                                             `json:"templateid"`
 	Templatename          string                                             `json:"templatename"`
+	Templatetype          string                                             `json:"templatetype"`
 	Userdata              string                                             `json:"userdata"`
 	Userdatadetails       string                                             `json:"userdatadetails"`
 	Userdataid            string                                             `json:"userdataid"`
@@ -5960,6 +6050,8 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Userid                string                                             `json:"userid"`
 	Username              string                                             `json:"username"`
 	Vgpu                  string                                             `json:"vgpu"`
+	Vnfdetails            map[string]string                                  `json:"vnfdetails"`
+	Vnfnics               []string                                           `json:"vnfnics"`
 	Zoneid                string                                             `json:"zoneid"`
 	Zonename              string                                             `json:"zonename"`
 }
@@ -6045,6 +6137,9 @@ func (p *ResetPasswordForVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["password"]; found {
+		u.Set("password", v.(string))
+	}
 	return u
 }
 
@@ -6060,6 +6155,21 @@ func (p *ResetPasswordForVirtualMachineParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ResetPasswordForVirtualMachineParams) SetPassword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["password"] = v
+}
+
+func (p *ResetPasswordForVirtualMachineParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
 	return value, ok
 }
 
@@ -6183,6 +6293,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                `json:"templatedisplaytext"`
 	Templateid            string                                                `json:"templateid"`
 	Templatename          string                                                `json:"templatename"`
+	Templatetype          string                                                `json:"templatetype"`
 	Userdata              string                                                `json:"userdata"`
 	Userdatadetails       string                                                `json:"userdatadetails"`
 	Userdataid            string                                                `json:"userdataid"`
@@ -6191,6 +6302,8 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
+	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
+	Vnfnics               []string                                              `json:"vnfnics"`
 	Zoneid                string                                                `json:"zoneid"`
 	Zonename              string                                                `json:"zonename"`
 }
@@ -6432,6 +6545,7 @@ type RestoreVirtualMachineResponse struct {
 	Templatedisplaytext   string                                       `json:"templatedisplaytext"`
 	Templateid            string                                       `json:"templateid"`
 	Templatename          string                                       `json:"templatename"`
+	Templatetype          string                                       `json:"templatetype"`
 	Userdata              string                                       `json:"userdata"`
 	Userdatadetails       string                                       `json:"userdatadetails"`
 	Userdataid            string                                       `json:"userdataid"`
@@ -6440,6 +6554,8 @@ type RestoreVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vnfdetails            map[string]string                            `json:"vnfdetails"`
+	Vnfnics               []string                                     `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -6965,6 +7081,7 @@ type StartVirtualMachineResponse struct {
 	Templatedisplaytext   string                                     `json:"templatedisplaytext"`
 	Templateid            string                                     `json:"templateid"`
 	Templatename          string                                     `json:"templatename"`
+	Templatetype          string                                     `json:"templatetype"`
 	Userdata              string                                     `json:"userdata"`
 	Userdatadetails       string                                     `json:"userdatadetails"`
 	Userdataid            string                                     `json:"userdataid"`
@@ -6973,6 +7090,8 @@ type StartVirtualMachineResponse struct {
 	Userid                string                                     `json:"userid"`
 	Username              string                                     `json:"username"`
 	Vgpu                  string                                     `json:"vgpu"`
+	Vnfdetails            map[string]string                          `json:"vnfdetails"`
+	Vnfnics               []string                                   `json:"vnfnics"`
 	Zoneid                string                                     `json:"zoneid"`
 	Zonename              string                                     `json:"zonename"`
 }
@@ -7215,6 +7334,7 @@ type StopVirtualMachineResponse struct {
 	Templatedisplaytext   string                                    `json:"templatedisplaytext"`
 	Templateid            string                                    `json:"templateid"`
 	Templatename          string                                    `json:"templatename"`
+	Templatetype          string                                    `json:"templatetype"`
 	Userdata              string                                    `json:"userdata"`
 	Userdatadetails       string                                    `json:"userdatadetails"`
 	Userdataid            string                                    `json:"userdataid"`
@@ -7223,6 +7343,8 @@ type StopVirtualMachineResponse struct {
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
+	Vnfdetails            map[string]string                         `json:"vnfdetails"`
+	Vnfnics               []string                                  `json:"vnfnics"`
 	Zoneid                string                                    `json:"zoneid"`
 	Zonename              string                                    `json:"zonename"`
 }
@@ -7465,6 +7587,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Templatedisplaytext   string                                                   `json:"templatedisplaytext"`
 	Templateid            string                                                   `json:"templateid"`
 	Templatename          string                                                   `json:"templatename"`
+	Templatetype          string                                                   `json:"templatetype"`
 	Userdata              string                                                   `json:"userdata"`
 	Userdatadetails       string                                                   `json:"userdatadetails"`
 	Userdataid            string                                                   `json:"userdataid"`
@@ -7473,6 +7596,8 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Userid                string                                                   `json:"userid"`
 	Username              string                                                   `json:"username"`
 	Vgpu                  string                                                   `json:"vgpu"`
+	Vnfdetails            map[string]string                                        `json:"vnfdetails"`
+	Vnfnics               []string                                                 `json:"vnfnics"`
 	Zoneid                string                                                   `json:"zoneid"`
 	Zonename              string                                                   `json:"zonename"`
 }
@@ -8032,6 +8157,7 @@ type UpdateVirtualMachineResponse struct {
 	Templatedisplaytext   string                                      `json:"templatedisplaytext"`
 	Templateid            string                                      `json:"templateid"`
 	Templatename          string                                      `json:"templatename"`
+	Templatetype          string                                      `json:"templatetype"`
 	Userdata              string                                      `json:"userdata"`
 	Userdatadetails       string                                      `json:"userdatadetails"`
 	Userdataid            string                                      `json:"userdataid"`
@@ -8040,6 +8166,8 @@ type UpdateVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vnfdetails            map[string]string                           `json:"vnfdetails"`
+	Vnfnics               []string                                    `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
