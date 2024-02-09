@@ -31,7 +31,7 @@ type NetworkACLServiceIface interface {
 	CreateNetworkACL(p *CreateNetworkACLParams) (*CreateNetworkACLResponse, error)
 	NewCreateNetworkACLParams(protocol string) *CreateNetworkACLParams
 	CreateNetworkACLList(p *CreateNetworkACLListParams) (*CreateNetworkACLListResponse, error)
-	NewCreateNetworkACLListParams(name string, vpcid string) *CreateNetworkACLListParams
+	NewCreateNetworkACLListParams(name string) *CreateNetworkACLListParams
 	DeleteNetworkACL(p *DeleteNetworkACLParams) (*DeleteNetworkACLResponse, error)
 	NewDeleteNetworkACLParams(id string) *DeleteNetworkACLParams
 	DeleteNetworkACLList(p *DeleteNetworkACLListParams) (*DeleteNetworkACLListResponse, error)
@@ -457,15 +457,14 @@ func (p *CreateNetworkACLListParams) GetVpcid() (string, bool) {
 
 // You should always use this function to get a new CreateNetworkACLListParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkACLService) NewCreateNetworkACLListParams(name string, vpcid string) *CreateNetworkACLListParams {
+func (s *NetworkACLService) NewCreateNetworkACLListParams(name string) *CreateNetworkACLListParams {
 	p := &CreateNetworkACLListParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
-	p.p["vpcid"] = vpcid
 	return p
 }
 
-// Creates a network ACL for the given VPC
+// Creates a network ACL. If no VPC is given, then it creates a global ACL that can be used by everyone.
 func (s *NetworkACLService) CreateNetworkACLList(p *CreateNetworkACLListParams) (*CreateNetworkACLListResponse, error) {
 	resp, err := s.cs.newRequest("createNetworkACLList", p.toURLValues())
 	if err != nil {

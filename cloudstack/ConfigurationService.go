@@ -88,6 +88,7 @@ type Capability struct {
 	Cloudstackversion                            string `json:"cloudstackversion"`
 	Customdiskofferingmaxsize                    int64  `json:"customdiskofferingmaxsize"`
 	Customdiskofferingminsize                    int64  `json:"customdiskofferingminsize"`
+	Customhypervisordisplayname                  string `json:"customhypervisordisplayname"`
 	Defaultuipagesize                            int64  `json:"defaultuipagesize"`
 	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
 	Instancesdisksstatsretentionenabled          bool   `json:"instancesdisksstatsretentionenabled"`

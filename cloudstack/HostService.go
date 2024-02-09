@@ -353,6 +353,7 @@ type AddBaremetalHostResponse struct {
 	Id                               string                             `json:"id"`
 	Ipaddress                        string                             `json:"ipaddress"`
 	Islocalstorageactive             bool                               `json:"islocalstorageactive"`
+	Istagarule                       bool                               `json:"istagarule"`
 	JobID                            string                             `json:"jobid"`
 	Jobstatus                        int                                `json:"jobstatus"`
 	Lastannotated                    string                             `json:"lastannotated"`
@@ -791,6 +792,7 @@ type AddHostResponse struct {
 	Id                               string                      `json:"id"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
+	Istagarule                       bool                        `json:"istagarule"`
 	JobID                            string                      `json:"jobid"`
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
@@ -1035,6 +1037,7 @@ type CancelHostMaintenanceResponse struct {
 	Id                               string                                  `json:"id"`
 	Ipaddress                        string                                  `json:"ipaddress"`
 	Islocalstorageactive             bool                                    `json:"islocalstorageactive"`
+	Istagarule                       bool                                    `json:"istagarule"`
 	JobID                            string                                  `json:"jobid"`
 	Jobstatus                        int                                     `json:"jobstatus"`
 	Lastannotated                    string                                  `json:"lastannotated"`
@@ -2654,6 +2657,7 @@ type Host struct {
 	Id                               string                      `json:"id"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
+	Istagarule                       bool                        `json:"istagarule"`
 	JobID                            string                      `json:"jobid"`
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
@@ -3177,6 +3181,7 @@ type HostsMetric struct {
 	Instances                        string                      `json:"instances"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
+	Istagarule                       bool                        `json:"istagarule"`
 	JobID                            string                      `json:"jobid"`
 	Jobstatus                        int                         `json:"jobstatus"`
 	Lastannotated                    string                      `json:"lastannotated"`
@@ -3210,6 +3215,7 @@ type HostsMetric struct {
 	Resourcestate                    string                      `json:"resourcestate"`
 	State                            string                      `json:"state"`
 	Suitableformigration             bool                        `json:"suitableformigration"`
+	Systeminstances                  string                      `json:"systeminstances"`
 	Type                             string                      `json:"type"`
 	Ueficapability                   bool                        `json:"ueficapability"`
 	Username                         string                      `json:"username"`
@@ -3342,6 +3348,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Id                               string                                      `json:"id"`
 	Ipaddress                        string                                      `json:"ipaddress"`
 	Islocalstorageactive             bool                                        `json:"islocalstorageactive"`
+	Istagarule                       bool                                        `json:"istagarule"`
 	JobID                            string                                      `json:"jobid"`
 	Jobstatus                        int                                         `json:"jobstatus"`
 	Lastannotated                    string                                      `json:"lastannotated"`
@@ -3497,6 +3504,7 @@ type ReconnectHostResponse struct {
 	Id                               string                          `json:"id"`
 	Ipaddress                        string                          `json:"ipaddress"`
 	Islocalstorageactive             bool                            `json:"islocalstorageactive"`
+	Istagarule                       bool                            `json:"istagarule"`
 	JobID                            string                          `json:"jobid"`
 	Jobstatus                        int                             `json:"jobstatus"`
 	Lastannotated                    string                          `json:"lastannotated"`
@@ -3718,6 +3726,10 @@ func (p *UpdateHostParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["istagarule"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("istagarule", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
@@ -3787,6 +3799,21 @@ func (p *UpdateHostParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateHostParams) SetIstagarule(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["istagarule"] = v
+}
+
+func (p *UpdateHostParams) GetIstagarule() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["istagarule"].(bool)
 	return value, ok
 }
 
@@ -3893,6 +3920,7 @@ type UpdateHostResponse struct {
 	Id                               string                       `json:"id"`
 	Ipaddress                        string                       `json:"ipaddress"`
 	Islocalstorageactive             bool                         `json:"islocalstorageactive"`
+	Istagarule                       bool                         `json:"istagarule"`
 	JobID                            string                       `json:"jobid"`
 	Jobstatus                        int                          `json:"jobstatus"`
 	Lastannotated                    string                       `json:"lastannotated"`
