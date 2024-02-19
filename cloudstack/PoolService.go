@@ -74,6 +74,10 @@ func (p *CreateStoragePoolParams) toURLValues() url.Values {
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
+	if v, found := p.p["istagarule"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("istagarule", vv)
+	}
 	if v, found := p.p["managed"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("managed", vv)
@@ -174,6 +178,21 @@ func (p *CreateStoragePoolParams) GetHypervisor() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
+func (p *CreateStoragePoolParams) SetIstagarule(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["istagarule"] = v
+}
+
+func (p *CreateStoragePoolParams) GetIstagarule() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["istagarule"].(bool)
 	return value, ok
 }
 
@@ -340,6 +359,7 @@ type CreateStoragePoolResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`
@@ -588,6 +608,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`
@@ -617,6 +638,9 @@ func (p *ListStoragePoolsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
 	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
@@ -668,6 +692,21 @@ func (p *ListStoragePoolsParams) GetClusterid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ListStoragePoolsParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ListStoragePoolsParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
 	return value, ok
 }
 
@@ -960,6 +999,7 @@ type StoragePool struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`
@@ -1065,6 +1105,7 @@ type SyncStoragePoolResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`
@@ -1100,6 +1141,12 @@ func (p *UpdateStoragePoolParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("capacityiops", vv)
 	}
+	if v, found := p.p["details"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("details[%d].%s", i, k), m[k])
+		}
+	}
 	if v, found := p.p["enabled"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("enabled", vv)
@@ -1107,12 +1154,19 @@ func (p *UpdateStoragePoolParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["istagarule"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("istagarule", vv)
+	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("tags", vv)
+	}
+	if v, found := p.p["url"]; found {
+		u.Set("url", v.(string))
 	}
 	return u
 }
@@ -1147,6 +1201,21 @@ func (p *UpdateStoragePoolParams) GetCapacityiops() (int64, bool) {
 	return value, ok
 }
 
+func (p *UpdateStoragePoolParams) SetDetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
+}
+
+func (p *UpdateStoragePoolParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
 func (p *UpdateStoragePoolParams) SetEnabled(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1177,6 +1246,21 @@ func (p *UpdateStoragePoolParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateStoragePoolParams) SetIstagarule(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["istagarule"] = v
+}
+
+func (p *UpdateStoragePoolParams) GetIstagarule() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["istagarule"].(bool)
+	return value, ok
+}
+
 func (p *UpdateStoragePoolParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1204,6 +1288,21 @@ func (p *UpdateStoragePoolParams) GetTags() ([]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["tags"].([]string)
+	return value, ok
+}
+
+func (p *UpdateStoragePoolParams) SetUrl(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["url"] = v
+}
+
+func (p *UpdateStoragePoolParams) GetUrl() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["url"].(string)
 	return value, ok
 }
 
@@ -1244,6 +1343,7 @@ type UpdateStoragePoolResponse struct {
 	Hypervisor           string            `json:"hypervisor"`
 	Id                   string            `json:"id"`
 	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
 	Name                 string            `json:"name"`

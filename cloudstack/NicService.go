@@ -337,6 +337,8 @@ type Nic struct {
 	Networkname          string   `json:"networkname"`
 	Nsxlogicalswitch     string   `json:"nsxlogicalswitch"`
 	Nsxlogicalswitchport string   `json:"nsxlogicalswitchport"`
+	Publicip             string   `json:"publicip"`
+	Publicipid           string   `json:"publicipid"`
 	Secondaryip          []struct {
 		Id        string `json:"id"`
 		Ipaddress string `json:"ipaddress"`
@@ -593,6 +595,7 @@ type UpdateVmNicIpResponse struct {
 	Templatedisplaytext   string                               `json:"templatedisplaytext"`
 	Templateid            string                               `json:"templateid"`
 	Templatename          string                               `json:"templatename"`
+	Templatetype          string                               `json:"templatetype"`
 	Userdata              string                               `json:"userdata"`
 	Userdatadetails       string                               `json:"userdatadetails"`
 	Userdataid            string                               `json:"userdataid"`
@@ -601,6 +604,8 @@ type UpdateVmNicIpResponse struct {
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`
+	Vnfdetails            map[string]string                    `json:"vnfdetails"`
+	Vnfnics               []string                             `json:"vnfnics"`
 	Zoneid                string                               `json:"zoneid"`
 	Zonename              string                               `json:"zonename"`
 }

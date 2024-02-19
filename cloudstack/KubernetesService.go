@@ -31,7 +31,7 @@ type KubernetesServiceIface interface {
 	AddKubernetesSupportedVersion(p *AddKubernetesSupportedVersionParams) (*AddKubernetesSupportedVersionResponse, error)
 	NewAddKubernetesSupportedVersionParams(mincpunumber int, minmemory int, semanticversion string) *AddKubernetesSupportedVersionParams
 	CreateKubernetesCluster(p *CreateKubernetesClusterParams) (*CreateKubernetesClusterResponse, error)
-	NewCreateKubernetesClusterParams(clustertype string, name string, zoneid string) *CreateKubernetesClusterParams
+	NewCreateKubernetesClusterParams(name string, zoneid string) *CreateKubernetesClusterParams
 	DeleteKubernetesCluster(p *DeleteKubernetesClusterParams) (*DeleteKubernetesClusterResponse, error)
 	NewDeleteKubernetesClusterParams(id string) *DeleteKubernetesClusterParams
 	DeleteKubernetesSupportedVersion(p *DeleteKubernetesSupportedVersionParams) (*DeleteKubernetesSupportedVersionResponse, error)
@@ -76,6 +76,10 @@ func (p *AddKubernetesSupportedVersionParams) toURLValues() url.Values {
 	if v, found := p.p["checksum"]; found {
 		u.Set("checksum", v.(string))
 	}
+	if v, found := p.p["directdownload"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("directdownload", vv)
+	}
 	if v, found := p.p["mincpunumber"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("mincpunumber", vv)
@@ -111,6 +115,21 @@ func (p *AddKubernetesSupportedVersionParams) GetChecksum() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["checksum"].(string)
+	return value, ok
+}
+
+func (p *AddKubernetesSupportedVersionParams) SetDirectdownload(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["directdownload"] = v
+}
+
+func (p *AddKubernetesSupportedVersionParams) GetDirectdownload() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["directdownload"].(bool)
 	return value, ok
 }
 
@@ -236,6 +255,7 @@ func (s *KubernetesService) AddKubernetesSupportedVersion(p *AddKubernetesSuppor
 
 type AddKubernetesSupportedVersionResponse struct {
 	Created             string `json:"created"`
+	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
@@ -613,10 +633,9 @@ func (p *CreateKubernetesClusterParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateKubernetesClusterParams instance,
 // as then you are sure you have configured all required params
-func (s *KubernetesService) NewCreateKubernetesClusterParams(clustertype string, name string, zoneid string) *CreateKubernetesClusterParams {
+func (s *KubernetesService) NewCreateKubernetesClusterParams(name string, zoneid string) *CreateKubernetesClusterParams {
 	p := &CreateKubernetesClusterParams{}
 	p.p = make(map[string]interface{})
-	p.p["clustertype"] = clustertype
 	p.p["name"] = name
 	p.p["zoneid"] = zoneid
 	return p
@@ -1587,6 +1606,7 @@ type ListKubernetesSupportedVersionsResponse struct {
 
 type KubernetesSupportedVersion struct {
 	Created             string `json:"created"`
+	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
@@ -2096,6 +2116,7 @@ func (s *KubernetesService) UpdateKubernetesSupportedVersion(p *UpdateKubernetes
 
 type UpdateKubernetesSupportedVersionResponse struct {
 	Created             string `json:"created"`
+	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`

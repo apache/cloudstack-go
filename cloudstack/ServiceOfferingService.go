@@ -1119,6 +1119,9 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
 	if v, found := p.p["cpunumber"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("cpunumber", vv)
@@ -1167,6 +1170,12 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["storagetype"]; found {
+		u.Set("storagetype", v.(string))
+	}
 	if v, found := p.p["systemvmtype"]; found {
 		u.Set("systemvmtype", v.(string))
 	}
@@ -1177,6 +1186,21 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListServiceOfferingsParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListServiceOfferingsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
 }
 
 func (p *ListServiceOfferingsParams) SetCpunumber(v int) {
@@ -1371,6 +1395,36 @@ func (p *ListServiceOfferingsParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListServiceOfferingsParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListServiceOfferingsParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListServiceOfferingsParams) SetStoragetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagetype"] = v
+}
+
+func (p *ListServiceOfferingsParams) GetStoragetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storagetype"].(string)
 	return value, ok
 }
 

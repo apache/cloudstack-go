@@ -560,6 +560,16 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["userdata"]; found {
 		u.Set("userdata", v.(string))
 	}
+	if v, found := p.p["userdatadetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -731,6 +741,36 @@ func (p *CreateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateAutoScaleVmProfileParams) SetUserdatadetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdatadetails"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetUserdatadetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdatadetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *CreateAutoScaleVmProfileParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *CreateAutoScaleVmProfileParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -808,6 +848,10 @@ type CreateAutoScaleVmProfileResponse struct {
 	Serviceofferingid    string            `json:"serviceofferingid"`
 	Templateid           string            `json:"templateid"`
 	Userdata             string            `json:"userdata"`
+	Userdatadetails      string            `json:"userdatadetails"`
+	Userdataid           string            `json:"userdataid"`
+	Userdataname         string            `json:"userdataname"`
+	Userdatapolicy       string            `json:"userdatapolicy"`
 	Zoneid               string            `json:"zoneid"`
 }
 
@@ -2898,6 +2942,10 @@ type AutoScaleVmProfile struct {
 	Serviceofferingid    string            `json:"serviceofferingid"`
 	Templateid           string            `json:"templateid"`
 	Userdata             string            `json:"userdata"`
+	Userdatadetails      string            `json:"userdatadetails"`
+	Userdataid           string            `json:"userdataid"`
+	Userdataname         string            `json:"userdataname"`
+	Userdatapolicy       string            `json:"userdatapolicy"`
 	Zoneid               string            `json:"zoneid"`
 }
 
@@ -3924,6 +3972,16 @@ func (p *UpdateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["userdata"]; found {
 		u.Set("userdata", v.(string))
 	}
+	if v, found := p.p["userdatadetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	return u
 }
 
@@ -4077,6 +4135,36 @@ func (p *UpdateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateAutoScaleVmProfileParams) SetUserdatadetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdatadetails"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) GetUserdatadetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdatadetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *UpdateAutoScaleVmProfileParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new UpdateAutoScaleVmProfileParams instance,
 // as then you are sure you have configured all required params
 func (s *AutoScaleService) NewUpdateAutoScaleVmProfileParams(id string) *UpdateAutoScaleVmProfileParams {
@@ -4137,5 +4225,9 @@ type UpdateAutoScaleVmProfileResponse struct {
 	Serviceofferingid    string            `json:"serviceofferingid"`
 	Templateid           string            `json:"templateid"`
 	Userdata             string            `json:"userdata"`
+	Userdatadetails      string            `json:"userdatadetails"`
+	Userdataid           string            `json:"userdataid"`
+	Userdataname         string            `json:"userdataname"`
+	Userdatapolicy       string            `json:"userdatapolicy"`
 	Zoneid               string            `json:"zoneid"`
 }

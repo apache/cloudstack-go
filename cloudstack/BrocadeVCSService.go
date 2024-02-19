@@ -426,6 +426,7 @@ type BrocadeVcsDeviceNetwork struct {
 	Dns2                        string                           `json:"dns2"`
 	Domain                      string                           `json:"domain"`
 	Domainid                    string                           `json:"domainid"`
+	Domainpath                  string                           `json:"domainpath"`
 	Egressdefaultpolicy         bool                             `json:"egressdefaultpolicy"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`

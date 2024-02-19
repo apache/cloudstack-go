@@ -351,7 +351,7 @@ func (s *NetworkService) NewAddOpenDaylightControllerParams(password string, phy
 	return p
 }
 
-// Adds an OpenDyalight controler
+// Adds an OpenDaylight controller
 func (s *NetworkService) AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("addOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -1165,6 +1165,7 @@ type CreateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Domainpath                  string                         `json:"domainpath"`
 	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`
@@ -2228,7 +2229,7 @@ func (s *NetworkService) NewDeleteOpenDaylightControllerParams(id string) *Delet
 	return p
 }
 
-// Removes an OpenDyalight controler
+// Removes an OpenDaylight controller
 func (s *NetworkService) DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("deleteOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -2596,6 +2597,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Dns2                        string                                `json:"dns2"`
 	Domain                      string                                `json:"domain"`
 	Domainid                    string                                `json:"domainid"`
+	Domainpath                  string                                `json:"domainpath"`
 	Egressdefaultpolicy         bool                                  `json:"egressdefaultpolicy"`
 	Externalid                  string                                `json:"externalid"`
 	Gateway                     string                                `json:"gateway"`
@@ -3655,6 +3657,7 @@ type Network struct {
 	Dns2                        string                   `json:"dns2"`
 	Domain                      string                   `json:"domain"`
 	Domainid                    string                   `json:"domainid"`
+	Domainpath                  string                   `json:"domainpath"`
 	Egressdefaultpolicy         bool                     `json:"egressdefaultpolicy"`
 	Externalid                  string                   `json:"externalid"`
 	Gateway                     string                   `json:"gateway"`
@@ -3904,6 +3907,7 @@ type NiciraNvpDeviceNetwork struct {
 	Dns2                        string                          `json:"dns2"`
 	Domain                      string                          `json:"domain"`
 	Domainid                    string                          `json:"domainid"`
+	Domainpath                  string                          `json:"domainpath"`
 	Egressdefaultpolicy         bool                            `json:"egressdefaultpolicy"`
 	Externalid                  string                          `json:"externalid"`
 	Gateway                     string                          `json:"gateway"`
@@ -4071,7 +4075,7 @@ func (s *NetworkService) GetOpenDaylightControllerByID(id string, opts ...Option
 	return nil, l.Count, fmt.Errorf("There is more then one result for OpenDaylightController UUID: %s!", id)
 }
 
-// Lists OpenDyalight controllers
+// Lists OpenDaylight controllers
 func (s *NetworkService) ListOpenDaylightControllers(p *ListOpenDaylightControllersParams) (*ListOpenDaylightControllersResponse, error) {
 	resp, err := s.cs.newRequest("listOpenDaylightControllers", p.toURLValues())
 	if err != nil {
@@ -4272,6 +4276,7 @@ type PaloAltoFirewallNetwork struct {
 	Dns2                        string                           `json:"dns2"`
 	Domain                      string                           `json:"domain"`
 	Domainid                    string                           `json:"domainid"`
+	Domainpath                  string                           `json:"domainpath"`
 	Egressdefaultpolicy         bool                             `json:"egressdefaultpolicy"`
 	Externalid                  string                           `json:"externalid"`
 	Gateway                     string                           `json:"gateway"`
@@ -5597,6 +5602,7 @@ type UpdateNetworkResponse struct {
 	Dns2                        string                         `json:"dns2"`
 	Domain                      string                         `json:"domain"`
 	Domainid                    string                         `json:"domainid"`
+	Domainpath                  string                         `json:"domainpath"`
 	Egressdefaultpolicy         bool                           `json:"egressdefaultpolicy"`
 	Externalid                  string                         `json:"externalid"`
 	Gateway                     string                         `json:"gateway"`

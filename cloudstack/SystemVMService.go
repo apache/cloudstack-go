@@ -177,6 +177,8 @@ type ChangeServiceForSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -292,6 +294,8 @@ type DestroySystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -656,6 +660,8 @@ type SystemVm struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -826,6 +832,8 @@ type MigrateSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -960,6 +968,8 @@ type RebootSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -1115,6 +1125,8 @@ type ScaleSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -1230,6 +1242,8 @@ type StartSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
@@ -1364,6 +1378,8 @@ type StopSystemVmResponse struct {
 	Publicmacaddress      string   `json:"publicmacaddress"`
 	Publicnetmask         string   `json:"publicnetmask"`
 	Publicvlan            []string `json:"publicvlan"`
+	Serviceofferingid     string   `json:"serviceofferingid"`
+	Serviceofferingname   string   `json:"serviceofferingname"`
 	State                 string   `json:"state"`
 	Systemvmtype          string   `json:"systemvmtype"`
 	Templateid            string   `json:"templateid"`
