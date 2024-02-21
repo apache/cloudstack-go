@@ -334,17 +334,17 @@ func (mr *MockTemplateServiceIfaceMockRecorder) NewExtractTemplateParams(id, mod
 }
 
 // NewGetUploadParamsForTemplateParams mocks base method.
-func (m *MockTemplateServiceIface) NewGetUploadParamsForTemplateParams(format, hypervisor, name, zoneid string) *GetUploadParamsForTemplateParams {
+func (m *MockTemplateServiceIface) NewGetUploadParamsForTemplateParams(dispaytext, format, hypervisor, name, zoneid string) *GetUploadParamsForTemplateParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewGetUploadParamsForTemplateParams", format, hypervisor, name, zoneid)
+	ret := m.ctrl.Call(m, "NewGetUploadParamsForTemplateParams", dispaytext, format, hypervisor, name, zoneid)
 	ret0, _ := ret[0].(*GetUploadParamsForTemplateParams)
 	return ret0
 }
 
 // NewGetUploadParamsForTemplateParams indicates an expected call of NewGetUploadParamsForTemplateParams.
-func (mr *MockTemplateServiceIfaceMockRecorder) NewGetUploadParamsForTemplateParams(format, hypervisor, name, zoneid interface{}) *gomock.Call {
+func (mr *MockTemplateServiceIfaceMockRecorder) NewGetUploadParamsForTemplateParams(dispaytext, format, hypervisor, name, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUploadParamsForTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewGetUploadParamsForTemplateParams), format, hypervisor, name, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUploadParamsForTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewGetUploadParamsForTemplateParams), dispaytext, format, hypervisor, name, zoneid)
 }
 
 // NewListTemplateDirectDownloadCertificatesParams mocks base method.

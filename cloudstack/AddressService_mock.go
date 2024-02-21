@@ -133,17 +133,17 @@ func (mr *MockAddressServiceIfaceMockRecorder) NewAssociateIpAddressParams() *go
 }
 
 // NewDisassociateIpAddressParams mocks base method.
-func (m *MockAddressServiceIface) NewDisassociateIpAddressParams() *DisassociateIpAddressParams {
+func (m *MockAddressServiceIface) NewDisassociateIpAddressParams(id string) *DisassociateIpAddressParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewDisassociateIpAddressParams")
+	ret := m.ctrl.Call(m, "NewDisassociateIpAddressParams", id)
 	ret0, _ := ret[0].(*DisassociateIpAddressParams)
 	return ret0
 }
 
 // NewDisassociateIpAddressParams indicates an expected call of NewDisassociateIpAddressParams.
-func (mr *MockAddressServiceIfaceMockRecorder) NewDisassociateIpAddressParams() *gomock.Call {
+func (mr *MockAddressServiceIfaceMockRecorder) NewDisassociateIpAddressParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDisassociateIpAddressParams", reflect.TypeOf((*MockAddressServiceIface)(nil).NewDisassociateIpAddressParams))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDisassociateIpAddressParams", reflect.TypeOf((*MockAddressServiceIface)(nil).NewDisassociateIpAddressParams), id)
 }
 
 // NewListPublicIpAddressesParams mocks base method.

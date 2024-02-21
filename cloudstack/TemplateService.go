@@ -37,7 +37,7 @@ type TemplateServiceIface interface {
 	ExtractTemplate(p *ExtractTemplateParams) (*ExtractTemplateResponse, error)
 	NewExtractTemplateParams(id string, mode string) *ExtractTemplateParams
 	GetUploadParamsForTemplate(p *GetUploadParamsForTemplateParams) (*GetUploadParamsForTemplateResponse, error)
-	NewGetUploadParamsForTemplateParams(format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams
+	NewGetUploadParamsForTemplateParams(displaytext string, format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams
 	ListTemplatePermissions(p *ListTemplatePermissionsParams) (*ListTemplatePermissionsResponse, error)
 	NewListTemplatePermissionsParams(id string) *ListTemplatePermissionsParams
 	GetTemplatePermissionByID(id string, opts ...OptionFunc) (*TemplatePermission, int, error)
@@ -1471,9 +1471,10 @@ func (p *GetUploadParamsForTemplateParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new GetUploadParamsForTemplateParams instance,
 // as then you are sure you have configured all required params
-func (s *TemplateService) NewGetUploadParamsForTemplateParams(format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams {
+func (s *TemplateService) NewGetUploadParamsForTemplateParams(displaytext string, format string, hypervisor string, name string, zoneid string) *GetUploadParamsForTemplateParams {
 	p := &GetUploadParamsForTemplateParams{}
 	p.p = make(map[string]interface{})
+	p.p["displaytext"] = displaytext
 	p.p["format"] = format
 	p.p["hypervisor"] = hypervisor
 	p.p["name"] = name
