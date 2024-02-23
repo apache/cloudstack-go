@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/apache/cloudstack-go/v2/cloudstack"
+	"github.com/sbrueseke/cloudstack-go/v2/cloudstack"
 )
 
 func AddHost() {

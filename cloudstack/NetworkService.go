@@ -351,7 +351,7 @@ func (s *NetworkService) NewAddOpenDaylightControllerParams(password string, phy
 	return p
 }
 
-// Adds an OpenDaylight controller
+// Adds an OpenDyalight controler
 func (s *NetworkService) AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("addOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -2229,7 +2229,7 @@ func (s *NetworkService) NewDeleteOpenDaylightControllerParams(id string) *Delet
 	return p
 }
 
-// Removes an OpenDaylight controller
+// Removes an OpenDyalight controler
 func (s *NetworkService) DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("deleteOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -4075,7 +4075,7 @@ func (s *NetworkService) GetOpenDaylightControllerByID(id string, opts ...Option
 	return nil, l.Count, fmt.Errorf("There is more then one result for OpenDaylightController UUID: %s!", id)
 }
 
-// Lists OpenDaylight controllers
+// Lists OpenDyalight controllers
 func (s *NetworkService) ListOpenDaylightControllers(p *ListOpenDaylightControllersParams) (*ListOpenDaylightControllersResponse, error) {
 	resp, err := s.cs.newRequest("listOpenDaylightControllers", p.toURLValues())
 	if err != nil {

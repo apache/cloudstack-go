@@ -103,12 +103,12 @@ func (s *ConsoleEndpointService) CreateConsoleEndpoint(p *CreateConsoleEndpointP
 }
 
 type CreateConsoleEndpointResponse struct {
-	Details   string `json:"details"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Success   bool   `json:"success"`
-	Url       string `json:"url"`
-	Websocket string `json:"websocket"`
+	Details   string                 `json:"details"`
+	JobID     string                 `json:"jobid"`
+	Jobstatus int                    `json:"jobstatus"`
+	Success   bool                   `json:"success"`
+	Url       string                 `json:"url"`
+	Websocket map[string]interface{} `json:"websocket"`
 }
 
 func (r *CreateConsoleEndpointResponse) UnmarshalJSON(b []byte) error {
