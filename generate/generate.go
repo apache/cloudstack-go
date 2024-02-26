@@ -83,6 +83,7 @@ var nestedResponse = map[string]string{
 	"getCloudIdentifier":         "cloudidentifier",
 	"getKubernetesClusterConfig": "clusterconfig",
 	"getPathForVolume":           "apipathforvolume",
+	"createConsoleEndpoint":      "consoleendpoint",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of

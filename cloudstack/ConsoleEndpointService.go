@@ -94,10 +94,13 @@ func (s *ConsoleEndpointService) CreateConsoleEndpoint(p *CreateConsoleEndpointP
 		return nil, err
 	}
 
-	var r CreateConsoleEndpointResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response CreateConsoleEndpointResponse `json:"consoleendpoint"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
