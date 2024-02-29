@@ -22,7 +22,7 @@ package test
 import (
 	"testing"
 
-	"github.com/sbrueseke/cloudstack-go/v2/cloudstack"
+	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
 func TestAnnotationService(t *testing.T) {
