@@ -22,8 +22,8 @@ package main
 import (
 	"testing"
 
+	"github.com/apache/cloudstack-go/v2/cloudstack"
 	"github.com/golang/mock/gomock"
-	"github.com/sbrueseke/cloudstack-go/v2/cloudstack"
 )
 
 func Test_Mock(t *testing.T) {
