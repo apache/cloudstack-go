@@ -35,7 +35,7 @@ type ProjectServiceIface interface {
 	AddUserToProject(p *AddUserToProjectParams) (*AddUserToProjectResponse, error)
 	NewAddUserToProjectParams(projectid string, username string) *AddUserToProjectParams
 	CreateProject(p *CreateProjectParams) (*CreateProjectResponse, error)
-	NewCreateProjectParams(name string) *CreateProjectParams
+	NewCreateProjectParams(displaytext string, name string) *CreateProjectParams
 	DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error)
 	NewDeleteAccountFromProjectParams(account string, projectid string) *DeleteAccountFromProjectParams
 	DeleteUserFromProject(p *DeleteUserFromProjectParams) (*DeleteUserFromProjectResponse, error)
@@ -612,9 +612,10 @@ func (p *CreateProjectParams) GetUserid() (string, bool) {
 
 // You should always use this function to get a new CreateProjectParams instance,
 // as then you are sure you have configured all required params
-func (s *ProjectService) NewCreateProjectParams(name string) *CreateProjectParams {
+func (s *ProjectService) NewCreateProjectParams(displaytext string, name string) *CreateProjectParams {
 	p := &CreateProjectParams{}
 	p.p = make(map[string]interface{})
+	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	return p
 }

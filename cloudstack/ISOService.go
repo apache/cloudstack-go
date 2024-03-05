@@ -47,7 +47,7 @@ type ISOServiceIface interface {
 	GetIsoByName(name string, isofilter string, zoneid string, opts ...OptionFunc) (*Iso, int, error)
 	GetIsoByID(id string, opts ...OptionFunc) (*Iso, int, error)
 	RegisterIso(p *RegisterIsoParams) (*RegisterIsoResponse, error)
-	NewRegisterIsoParams(name string, url string, zoneid string) *RegisterIsoParams
+	NewRegisterIsoParams(displaytext string, name string, url string, zoneid string) *RegisterIsoParams
 	UpdateIso(p *UpdateIsoParams) (*UpdateIsoResponse, error)
 	NewUpdateIsoParams(id string) *UpdateIsoParams
 	UpdateIsoPermissions(p *UpdateIsoPermissionsParams) (*UpdateIsoPermissionsResponse, error)
@@ -2082,9 +2082,10 @@ func (p *RegisterIsoParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new RegisterIsoParams instance,
 // as then you are sure you have configured all required params
-func (s *ISOService) NewRegisterIsoParams(name string, url string, zoneid string) *RegisterIsoParams {
+func (s *ISOService) NewRegisterIsoParams(displaytext string, name string, url string, zoneid string) *RegisterIsoParams {
 	p := &RegisterIsoParams{}
 	p.p = make(map[string]interface{})
+	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["url"] = url
 	p.p["zoneid"] = zoneid
