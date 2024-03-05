@@ -1128,7 +1128,7 @@ func (s *service) generateAPITest(a *API) {
 	pn("		}")
 	p("		p := client.%s.New%s(", strings.TrimSuffix(s.name, "Service"), tn)
 	for _, ap := range a.Params {
-		if ap.Required {
+		if ap.Required || isRequiredParam(a, ap) {
 			rp = append(rp, ap)
 			p("%s, ", getDefaultValueForType(a.Name, ap.Name, ap.Type))
 		}
@@ -1196,8 +1196,7 @@ func (s *service) generateInterfaceType() {
 		// NewParam funcs
 		p("New%s(", tn)
 		for _, ap := range api.Params {
-			if ap.Required {
-				// rp = append(rp, ap)
+			if ap.Required || isRequiredParam(api, ap) {
 				p("%s %s, ", s.parseParamName(ap.Name), mapType(api.Name, ap.Name, ap.Type))
 			}
 		}
@@ -1219,7 +1218,7 @@ func (s *service) generateInterfaceType() {
 				// Generate the function signature
 				p("Get%sID(%s string, ", parseSingular(ln), v)
 				for _, ap := range api.Params {
-					if ap.Required {
+					if ap.Required || isRequiredParam(api, ap) {
 						p("%s %s, ", s.parseParamName(ap.Name), mapType(api.Name, ap.Name, ap.Type))
 					}
 				}
@@ -1234,7 +1233,7 @@ func (s *service) generateInterfaceType() {
 				if hasIDParamField(api.Name, api.Params) {
 					p("Get%sByName(name string, ", parseSingular(ln))
 					for _, ap := range api.Params {
-						if ap.Required {
+						if ap.Required || isRequiredParam(api, ap) {
 							p("%s %s, ", s.parseParamName(ap.Name), mapType(api.Name, ap.Name, ap.Type))
 						}
 					}
@@ -1420,7 +1419,7 @@ func (s *service) generateNewParamTypeFunc(a *API) {
 	pn("// as then you are sure you have configured all required params")
 	p("func (s *%s) New%s(", s.name, tn)
 	for _, ap := range a.Params {
-		if ap.Required {
+		if ap.Required || isRequiredParam(a, ap) {
 			rp = append(rp, ap)
 			p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 		}
@@ -1458,7 +1457,7 @@ func (s *service) generateHelperFuncs(a *API) {
 			pn("// This is a courtesy helper function, which in some cases may not work as expected!")
 			p("func (s *%s) Get%sID(%s string, ", s.name, parseSingular(ln), v)
 			for _, ap := range a.Params {
-				if ap.Required {
+				if ap.Required || isRequiredParam(a, ap) {
 					p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 				}
 			}
@@ -1476,7 +1475,7 @@ func (s *service) generateHelperFuncs(a *API) {
 			pn("")
 			pn("	p.p[\"%s\"] = %s", v, v)
 			for _, ap := range a.Params {
-				if ap.Required {
+				if ap.Required || isRequiredParam(a, ap) {
 					pn("	p.p[\"%s\"] = %s", ap.Name, s.parseParamName(ap.Name))
 				}
 			}
@@ -1528,7 +1527,7 @@ func (s *service) generateHelperFuncs(a *API) {
 				pn("// This is a courtesy helper function, which in some cases may not work as expected!")
 				p("func (s *%s) Get%sByName(name string, ", s.name, parseSingular(ln))
 				for _, ap := range a.Params {
-					if ap.Required {
+					if ap.Required || isRequiredParam(a, ap) {
 						p("%s %s, ", s.parseParamName(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 					}
 				}
@@ -1543,7 +1542,7 @@ func (s *service) generateHelperFuncs(a *API) {
 				// Generate the function body
 				p("  id, count, err := s.Get%sID(name, ", parseSingular(ln))
 				for _, ap := range a.Params {
-					if ap.Required {
+					if ap.Required || isRequiredParam(a, ap) {
 						p("%s, ", s.parseParamName(ap.Name))
 					}
 				}
@@ -1560,7 +1559,7 @@ func (s *service) generateHelperFuncs(a *API) {
 				pn("")
 				p("  r, count, err := s.Get%sByID(id, ", parseSingular(ln))
 				for _, ap := range a.Params {
-					if ap.Required {
+					if ap.Required || isRequiredParam(a, ap) {
 						p("%s, ", s.parseParamName(ap.Name))
 					}
 				}
@@ -2114,6 +2113,17 @@ func testDir() (string, error) {
 	}
 	return testdir, nil
 
+}
+
+func isRequiredParam(api *API, apiParam *APIParam) bool {
+	if params, ok := requiredParams[api.Name]; ok {
+		for _, param := range params {
+			if param == apiParam.Name {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func mapType(aName string, pName string, pType string) string {
