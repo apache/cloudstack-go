@@ -31,7 +31,7 @@ type AddressServiceIface interface {
 	AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error)
 	NewAssociateIpAddressParams() *AssociateIpAddressParams
 	DisassociateIpAddress(p *DisassociateIpAddressParams) (*DisassociateIpAddressResponse, error)
-	NewDisassociateIpAddressParams() *DisassociateIpAddressParams
+	NewDisassociateIpAddressParams(id string) *DisassociateIpAddressParams
 	ListPublicIpAddresses(p *ListPublicIpAddressesParams) (*ListPublicIpAddressesResponse, error)
 	NewListPublicIpAddressesParams() *ListPublicIpAddressesParams
 	GetPublicIpAddressByID(id string, opts ...OptionFunc) (*PublicIpAddress, int, error)
@@ -369,9 +369,10 @@ func (p *DisassociateIpAddressParams) GetIpaddress() (string, bool) {
 
 // You should always use this function to get a new DisassociateIpAddressParams instance,
 // as then you are sure you have configured all required params
-func (s *AddressService) NewDisassociateIpAddressParams() *DisassociateIpAddressParams {
+func (s *AddressService) NewDisassociateIpAddressParams(id string) *DisassociateIpAddressParams {
 	p := &DisassociateIpAddressParams{}
 	p.p = make(map[string]interface{})
+	p.p["id"] = id
 	return p
 }
 

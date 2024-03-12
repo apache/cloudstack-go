@@ -96,7 +96,7 @@ func TestTemplateService(t *testing.T) {
 		if _, ok := response["getUploadParamsForTemplate"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Template.NewGetUploadParamsForTemplateParams("format", "hypervisor", "name", "zoneid")
+		p := client.Template.NewGetUploadParamsForTemplateParams("displaytext", "format", "hypervisor", "name", "zoneid")
 		_, err := client.Template.GetUploadParamsForTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())

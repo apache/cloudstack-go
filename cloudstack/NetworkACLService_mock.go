@@ -227,17 +227,17 @@ func (mr *MockNetworkACLServiceIfaceMockRecorder) ListNetworkACLs(p interface{})
 }
 
 // NewCreateNetworkACLListParams mocks base method.
-func (m *MockNetworkACLServiceIface) NewCreateNetworkACLListParams(name string) *CreateNetworkACLListParams {
+func (m *MockNetworkACLServiceIface) NewCreateNetworkACLListParams(name, vpcid string) *CreateNetworkACLListParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateNetworkACLListParams", name)
+	ret := m.ctrl.Call(m, "NewCreateNetworkACLListParams", name, vpcid)
 	ret0, _ := ret[0].(*CreateNetworkACLListParams)
 	return ret0
 }
 
 // NewCreateNetworkACLListParams indicates an expected call of NewCreateNetworkACLListParams.
-func (mr *MockNetworkACLServiceIfaceMockRecorder) NewCreateNetworkACLListParams(name interface{}) *gomock.Call {
+func (mr *MockNetworkACLServiceIfaceMockRecorder) NewCreateNetworkACLListParams(name, vpcid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkACLListParams", reflect.TypeOf((*MockNetworkACLServiceIface)(nil).NewCreateNetworkACLListParams), name)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkACLListParams", reflect.TypeOf((*MockNetworkACLServiceIface)(nil).NewCreateNetworkACLListParams), name, vpcid)
 }
 
 // NewCreateNetworkACLParams mocks base method.
