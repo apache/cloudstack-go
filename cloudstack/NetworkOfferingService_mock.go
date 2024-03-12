@@ -161,17 +161,17 @@ func (mr *MockNetworkOfferingServiceIfaceMockRecorder) ListNetworkOfferings(p in
 }
 
 // NewCreateNetworkOfferingParams mocks base method.
-func (m *MockNetworkOfferingServiceIface) NewCreateNetworkOfferingParams(guestiptype, name, traffictype string) *CreateNetworkOfferingParams {
+func (m *MockNetworkOfferingServiceIface) NewCreateNetworkOfferingParams(displaytext, guestiptype, name, traffictype string) *CreateNetworkOfferingParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateNetworkOfferingParams", guestiptype, name, traffictype)
+	ret := m.ctrl.Call(m, "NewCreateNetworkOfferingParams", displaytext, guestiptype, name, traffictype)
 	ret0, _ := ret[0].(*CreateNetworkOfferingParams)
 	return ret0
 }
 
 // NewCreateNetworkOfferingParams indicates an expected call of NewCreateNetworkOfferingParams.
-func (mr *MockNetworkOfferingServiceIfaceMockRecorder) NewCreateNetworkOfferingParams(guestiptype, name, traffictype interface{}) *gomock.Call {
+func (mr *MockNetworkOfferingServiceIfaceMockRecorder) NewCreateNetworkOfferingParams(displaytext, guestiptype, name, traffictype interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkOfferingParams", reflect.TypeOf((*MockNetworkOfferingServiceIface)(nil).NewCreateNetworkOfferingParams), guestiptype, name, traffictype)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateNetworkOfferingParams", reflect.TypeOf((*MockNetworkOfferingServiceIface)(nil).NewCreateNetworkOfferingParams), displaytext, guestiptype, name, traffictype)
 }
 
 // NewDeleteNetworkOfferingParams mocks base method.

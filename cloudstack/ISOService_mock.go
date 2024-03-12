@@ -340,17 +340,17 @@ func (mr *MockISOServiceIfaceMockRecorder) NewListIsosParams() *gomock.Call {
 }
 
 // NewRegisterIsoParams mocks base method.
-func (m *MockISOServiceIface) NewRegisterIsoParams(name, url, zoneid string) *RegisterIsoParams {
+func (m *MockISOServiceIface) NewRegisterIsoParams(displaytext, name, url, zoneid string) *RegisterIsoParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewRegisterIsoParams", name, url, zoneid)
+	ret := m.ctrl.Call(m, "NewRegisterIsoParams", displaytext, name, url, zoneid)
 	ret0, _ := ret[0].(*RegisterIsoParams)
 	return ret0
 }
 
 // NewRegisterIsoParams indicates an expected call of NewRegisterIsoParams.
-func (mr *MockISOServiceIfaceMockRecorder) NewRegisterIsoParams(name, url, zoneid interface{}) *gomock.Call {
+func (mr *MockISOServiceIfaceMockRecorder) NewRegisterIsoParams(displaytext, name, url, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterIsoParams", reflect.TypeOf((*MockISOServiceIface)(nil).NewRegisterIsoParams), name, url, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterIsoParams", reflect.TypeOf((*MockISOServiceIface)(nil).NewRegisterIsoParams), displaytext, name, url, zoneid)
 }
 
 // NewUpdateIsoParams mocks base method.

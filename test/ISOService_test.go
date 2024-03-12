@@ -135,7 +135,7 @@ func TestISOService(t *testing.T) {
 		if _, ok := response["registerIso"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.ISO.NewRegisterIsoParams("name", "url", "zoneid")
+		p := client.ISO.NewRegisterIsoParams("displaytext", "name", "url", "zoneid")
 		r, err := client.ISO.RegisterIso(p)
 		if err != nil {
 			t.Errorf(err.Error())

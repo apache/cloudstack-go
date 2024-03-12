@@ -14,7 +14,7 @@ SHELL = /usr/bin/env bash -o pipefail
 all: code mocks test
 
 code:
-	go run generate/generate.go generate/layout.go --api=generate/listApis.json
+	go run generate/generate.go generate/layout.go generate/requiredParams.go --api=generate/listApis.json
 
 FILES=$(shell for file in `pwd`/cloudstack/*Service.go ;do basename $$file .go ; done)
 mocks:

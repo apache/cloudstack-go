@@ -33,9 +33,9 @@ type VPCServiceIface interface {
 	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
 	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
 	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
-	NewCreateVPCParams(cidr string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
+	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
 	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
-	NewCreateVPCOfferingParams(name string, supportedservices []string) *CreateVPCOfferingParams
+	NewCreateVPCOfferingParams(displaytext string, name string, supportedservices []string) *CreateVPCOfferingParams
 	DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error)
 	NewDeletePrivateGatewayParams(id string) *DeletePrivateGatewayParams
 	DeleteStaticRoute(p *DeleteStaticRouteParams) (*DeleteStaticRouteResponse, error)
@@ -786,10 +786,11 @@ func (p *CreateVPCParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateVPCParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCParams(cidr string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
+func (s *VPCService) NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
 	p := &CreateVPCParams{}
 	p.p = make(map[string]interface{})
 	p.p["cidr"] = cidr
+	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["vpcofferingid"] = vpcofferingid
 	p.p["zoneid"] = zoneid
@@ -1096,9 +1097,10 @@ func (p *CreateVPCOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateVPCOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCOfferingParams(name string, supportedservices []string) *CreateVPCOfferingParams {
+func (s *VPCService) NewCreateVPCOfferingParams(displaytext string, name string, supportedservices []string) *CreateVPCOfferingParams {
 	p := &CreateVPCOfferingParams{}
 	p.p = make(map[string]interface{})
+	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["supportedservices"] = supportedservices
 	return p

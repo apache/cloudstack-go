@@ -29,7 +29,7 @@ import (
 
 type NetworkOfferingServiceIface interface {
 	CreateNetworkOffering(p *CreateNetworkOfferingParams) (*CreateNetworkOfferingResponse, error)
-	NewCreateNetworkOfferingParams(guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams
+	NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams
 	DeleteNetworkOffering(p *DeleteNetworkOfferingParams) (*DeleteNetworkOfferingResponse, error)
 	NewDeleteNetworkOfferingParams(id string) *DeleteNetworkOfferingParams
 	ListNetworkOfferings(p *ListNetworkOfferingsParams) (*ListNetworkOfferingsResponse, error)
@@ -530,9 +530,10 @@ func (p *CreateNetworkOfferingParams) GetZoneid() ([]string, bool) {
 
 // You should always use this function to get a new CreateNetworkOfferingParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams {
+func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(displaytext string, guestiptype string, name string, traffictype string) *CreateNetworkOfferingParams {
 	p := &CreateNetworkOfferingParams{}
 	p.p = make(map[string]interface{})
+	p.p["displaytext"] = displaytext
 	p.p["guestiptype"] = guestiptype
 	p.p["name"] = name
 	p.p["traffictype"] = traffictype

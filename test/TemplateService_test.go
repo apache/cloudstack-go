@@ -54,7 +54,7 @@ func TestTemplateService(t *testing.T) {
 		if _, ok := response["createTemplate"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Template.NewCreateTemplateParams("name", "ostypeid")
+		p := client.Template.NewCreateTemplateParams("displaytext", "name", "ostypeid")
 		r, err := client.Template.CreateTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())
@@ -147,7 +147,7 @@ func TestTemplateService(t *testing.T) {
 		if _, ok := response["registerTemplate"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Template.NewRegisterTemplateParams("format", "hypervisor", "name", "url")
+		p := client.Template.NewRegisterTemplateParams("displaytext", "format", "hypervisor", "name", "url")
 		_, err := client.Template.RegisterTemplate(p)
 		if err != nil {
 			t.Errorf(err.Error())

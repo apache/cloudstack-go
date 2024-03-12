@@ -429,31 +429,31 @@ func (mr *MockVPCServiceIfaceMockRecorder) NewCreateStaticRouteParams(cidr, gate
 }
 
 // NewCreateVPCOfferingParams mocks base method.
-func (m *MockVPCServiceIface) NewCreateVPCOfferingParams(name string, supportedservices []string) *CreateVPCOfferingParams {
+func (m *MockVPCServiceIface) NewCreateVPCOfferingParams(displaytext, name string, supportedservices []string) *CreateVPCOfferingParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateVPCOfferingParams", name, supportedservices)
+	ret := m.ctrl.Call(m, "NewCreateVPCOfferingParams", displaytext, name, supportedservices)
 	ret0, _ := ret[0].(*CreateVPCOfferingParams)
 	return ret0
 }
 
 // NewCreateVPCOfferingParams indicates an expected call of NewCreateVPCOfferingParams.
-func (mr *MockVPCServiceIfaceMockRecorder) NewCreateVPCOfferingParams(name, supportedservices interface{}) *gomock.Call {
+func (mr *MockVPCServiceIfaceMockRecorder) NewCreateVPCOfferingParams(displaytext, name, supportedservices interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateVPCOfferingParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateVPCOfferingParams), name, supportedservices)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateVPCOfferingParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateVPCOfferingParams), displaytext, name, supportedservices)
 }
 
 // NewCreateVPCParams mocks base method.
-func (m *MockVPCServiceIface) NewCreateVPCParams(cidr, name, vpcofferingid, zoneid string) *CreateVPCParams {
+func (m *MockVPCServiceIface) NewCreateVPCParams(cidr, displaytext, name, vpcofferingid, zoneid string) *CreateVPCParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateVPCParams", cidr, name, vpcofferingid, zoneid)
+	ret := m.ctrl.Call(m, "NewCreateVPCParams", cidr, displaytext, name, vpcofferingid, zoneid)
 	ret0, _ := ret[0].(*CreateVPCParams)
 	return ret0
 }
 
 // NewCreateVPCParams indicates an expected call of NewCreateVPCParams.
-func (mr *MockVPCServiceIfaceMockRecorder) NewCreateVPCParams(cidr, name, vpcofferingid, zoneid interface{}) *gomock.Call {
+func (mr *MockVPCServiceIfaceMockRecorder) NewCreateVPCParams(cidr, displaytext, name, vpcofferingid, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateVPCParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateVPCParams), cidr, name, vpcofferingid, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateVPCParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateVPCParams), cidr, displaytext, name, vpcofferingid, zoneid)
 }
 
 // NewDeletePrivateGatewayParams mocks base method.

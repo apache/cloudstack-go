@@ -161,17 +161,17 @@ func (mr *MockDiskOfferingServiceIfaceMockRecorder) ListDiskOfferings(p interfac
 }
 
 // NewCreateDiskOfferingParams mocks base method.
-func (m *MockDiskOfferingServiceIface) NewCreateDiskOfferingParams(name string) *CreateDiskOfferingParams {
+func (m *MockDiskOfferingServiceIface) NewCreateDiskOfferingParams(displaytext, name string) *CreateDiskOfferingParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateDiskOfferingParams", name)
+	ret := m.ctrl.Call(m, "NewCreateDiskOfferingParams", displaytext, name)
 	ret0, _ := ret[0].(*CreateDiskOfferingParams)
 	return ret0
 }
 
 // NewCreateDiskOfferingParams indicates an expected call of NewCreateDiskOfferingParams.
-func (mr *MockDiskOfferingServiceIfaceMockRecorder) NewCreateDiskOfferingParams(name interface{}) *gomock.Call {
+func (mr *MockDiskOfferingServiceIfaceMockRecorder) NewCreateDiskOfferingParams(displaytext, name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateDiskOfferingParams", reflect.TypeOf((*MockDiskOfferingServiceIface)(nil).NewCreateDiskOfferingParams), name)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateDiskOfferingParams", reflect.TypeOf((*MockDiskOfferingServiceIface)(nil).NewCreateDiskOfferingParams), displaytext, name)
 }
 
 // NewDeleteDiskOfferingParams mocks base method.

@@ -39,7 +39,7 @@ func TestServiceOfferingService(t *testing.T) {
 		if _, ok := response["createServiceOffering"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.ServiceOffering.NewCreateServiceOfferingParams("name")
+		p := client.ServiceOffering.NewCreateServiceOfferingParams("displaytext", "name")
 		r, err := client.ServiceOffering.CreateServiceOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
