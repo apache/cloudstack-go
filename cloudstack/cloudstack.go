@@ -115,6 +115,7 @@ type CloudStackClient struct {
 	CloudIdentifier     CloudIdentifierServiceIface
 	Cluster             ClusterServiceIface
 	Configuration       ConfigurationServiceIface
+	ConsoleEndpoint     ConsoleEndpointServiceIface
 	Custom              CustomServiceIface
 	DiskOffering        DiskOfferingServiceIface
 	Domain              DomainServiceIface
@@ -221,6 +222,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.CloudIdentifier = NewCloudIdentifierService(cs)
 	cs.Cluster = NewClusterService(cs)
 	cs.Configuration = NewConfigurationService(cs)
+	cs.ConsoleEndpoint = NewConsoleEndpointService(cs)
 	cs.Custom = NewCustomService(cs)
 	cs.DiskOffering = NewDiskOfferingService(cs)
 	cs.Domain = NewDomainService(cs)
@@ -300,6 +302,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.CloudIdentifier = NewMockCloudIdentifierServiceIface(ctrl)
 	cs.Cluster = NewMockClusterServiceIface(ctrl)
 	cs.Configuration = NewMockConfigurationServiceIface(ctrl)
+	cs.ConsoleEndpoint = NewMockConsoleEndpointServiceIface(ctrl)
 	cs.Custom = NewMockCustomServiceIface(ctrl)
 	cs.DiskOffering = NewMockDiskOfferingServiceIface(ctrl)
 	cs.Domain = NewMockDomainServiceIface(ctrl)
@@ -865,6 +868,14 @@ type ConfigurationService struct {
 
 func NewConfigurationService(cs *CloudStackClient) ConfigurationServiceIface {
 	return &ConfigurationService{cs: cs}
+}
+
+type ConsoleEndpointService struct {
+	cs *CloudStackClient
+}
+
+func NewConsoleEndpointService(cs *CloudStackClient) ConsoleEndpointServiceIface {
+	return &ConsoleEndpointService{cs: cs}
 }
 
 type CustomService struct {

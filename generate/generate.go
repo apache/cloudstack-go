@@ -83,6 +83,7 @@ var nestedResponse = map[string]string{
 	"getCloudIdentifier":         "cloudidentifier",
 	"getKubernetesClusterConfig": "clusterconfig",
 	"getPathForVolume":           "apipathforvolume",
+	"createConsoleEndpoint":      "consoleendpoint",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -2176,6 +2177,8 @@ func mapType(aName string, pName string, pType string) string {
 		return "OutOfBandManagementResponse"
 	case "hostharesponse":
 		return "HAForHostResponse"
+	case "consoleendpointwebsocketresponse":
+		return "map[string]interface{}"
 	default:
 		return "string"
 	}

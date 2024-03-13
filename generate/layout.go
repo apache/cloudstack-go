@@ -725,4 +725,7 @@ var layout = apiInfo{
 		"listManagementServersMetrics",
 		"listDbMetrics",
 	},
+	"ConsoleEndpointService": {
+		"createConsoleEndpoint",
+	},
 }
