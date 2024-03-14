@@ -24,31 +24,46 @@ package main
 // the CloudStack API.
 
 var requiredParams = map[string][]string{
-	"createNetworkOffering": {
-		"displaytext",
-	},
 	"createDiskOffering": {
 		"displaytext",
 	},
-	"createServiceOffering": {
-		"displaytext",
+	"createKubernetesCluster": {
+		"description",
+		"kubernetesversionid",
+		"serviceofferingid",
+		"size",
 	},
-	"createVPCOffering": {
-		"displaytext",
+	"createNetworkACLList": {
+		"vpcid",
 	},
-	"registerIso": {
+	"createNetworkOffering": {
 		"displaytext",
 	},
 	"createProject": {
 		"displaytext",
 	},
+	"createServiceOffering": {
+		"displaytext",
+	},
 	"createTemplate": {
 		"displaytext",
 	},
-	"registerTemplate": {
+	"createVPC": {
 		"displaytext",
 	},
-	"createVPC": {
+	"createVPCOffering": {
+		"displaytext",
+	},
+	"disassociateIpAddress": {
+		"id",
+	},
+	"getUploadParamsForTemplate": {
+		"displaytext",
+	},
+	"registerIso": {
+		"displaytext",
+	},
+	"registerTemplate": {
 		"displaytext",
 	},
 }

@@ -31,7 +31,7 @@ type NetworkACLServiceIface interface {
 	CreateNetworkACL(p *CreateNetworkACLParams) (*CreateNetworkACLResponse, error)
 	NewCreateNetworkACLParams(protocol string) *CreateNetworkACLParams
 	CreateNetworkACLList(p *CreateNetworkACLListParams) (*CreateNetworkACLListResponse, error)
-	NewCreateNetworkACLListParams(name string) *CreateNetworkACLListParams
+	NewCreateNetworkACLListParams(name string, vpcid string) *CreateNetworkACLListParams
 	DeleteNetworkACL(p *DeleteNetworkACLParams) (*DeleteNetworkACLResponse, error)
 	NewDeleteNetworkACLParams(id string) *DeleteNetworkACLParams
 	DeleteNetworkACLList(p *DeleteNetworkACLListParams) (*DeleteNetworkACLListResponse, error)
@@ -457,10 +457,11 @@ func (p *CreateNetworkACLListParams) GetVpcid() (string, bool) {
 
 // You should always use this function to get a new CreateNetworkACLListParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkACLService) NewCreateNetworkACLListParams(name string) *CreateNetworkACLListParams {
+func (s *NetworkACLService) NewCreateNetworkACLListParams(name string, vpcid string) *CreateNetworkACLListParams {
 	p := &CreateNetworkACLListParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
+	p.p["vpcid"] = vpcid
 	return p
 }
 

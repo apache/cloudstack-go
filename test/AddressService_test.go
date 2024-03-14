@@ -54,7 +54,7 @@ func TestAddressService(t *testing.T) {
 		if _, ok := response["disassociateIpAddress"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Address.NewDisassociateIpAddressParams()
+		p := client.Address.NewDisassociateIpAddressParams("id")
 		_, err := client.Address.DisassociateIpAddress(p)
 		if err != nil {
 			t.Errorf(err.Error())

@@ -54,7 +54,7 @@ func TestKubernetesService(t *testing.T) {
 		if _, ok := response["createKubernetesCluster"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Kubernetes.NewCreateKubernetesClusterParams("name", "zoneid")
+		p := client.Kubernetes.NewCreateKubernetesClusterParams("description", "kubernetesversionid", "name", "serviceofferingid", 0, "zoneid")
 		r, err := client.Kubernetes.CreateKubernetesCluster(p)
 		if err != nil {
 			t.Errorf(err.Error())
