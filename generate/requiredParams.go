@@ -27,6 +27,12 @@ var requiredParams = map[string][]string{
 	"createDiskOffering": {
 		"displaytext",
 	},
+	"createKubernetesCluster": {
+		"description",
+		"kubernetesversionid",
+		"serviceofferingid",
+		"size",
+	},
 	"createNetworkACLList": {
 		"vpcid",
 	},

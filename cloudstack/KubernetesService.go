@@ -31,7 +31,7 @@ type KubernetesServiceIface interface {
 	AddKubernetesSupportedVersion(p *AddKubernetesSupportedVersionParams) (*AddKubernetesSupportedVersionResponse, error)
 	NewAddKubernetesSupportedVersionParams(mincpunumber int, minmemory int, semanticversion string) *AddKubernetesSupportedVersionParams
 	CreateKubernetesCluster(p *CreateKubernetesClusterParams) (*CreateKubernetesClusterResponse, error)
-	NewCreateKubernetesClusterParams(name string, zoneid string) *CreateKubernetesClusterParams
+	NewCreateKubernetesClusterParams(description string, kubernetesversionid string, name string, serviceofferingid string, size int64, zoneid string) *CreateKubernetesClusterParams
 	DeleteKubernetesCluster(p *DeleteKubernetesClusterParams) (*DeleteKubernetesClusterResponse, error)
 	NewDeleteKubernetesClusterParams(id string) *DeleteKubernetesClusterParams
 	DeleteKubernetesSupportedVersion(p *DeleteKubernetesSupportedVersionParams) (*DeleteKubernetesSupportedVersionResponse, error)
@@ -633,10 +633,14 @@ func (p *CreateKubernetesClusterParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateKubernetesClusterParams instance,
 // as then you are sure you have configured all required params
-func (s *KubernetesService) NewCreateKubernetesClusterParams(name string, zoneid string) *CreateKubernetesClusterParams {
+func (s *KubernetesService) NewCreateKubernetesClusterParams(description string, kubernetesversionid string, name string, serviceofferingid string, size int64, zoneid string) *CreateKubernetesClusterParams {
 	p := &CreateKubernetesClusterParams{}
 	p.p = make(map[string]interface{})
+	p.p["description"] = description
+	p.p["kubernetesversionid"] = kubernetesversionid
 	p.p["name"] = name
+	p.p["serviceofferingid"] = serviceofferingid
+	p.p["size"] = size
 	p.p["zoneid"] = zoneid
 	return p
 }
