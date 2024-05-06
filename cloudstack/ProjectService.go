@@ -90,6 +90,12 @@ func (p *ActivateProjectParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ActivateProjectParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ActivateProjectParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -227,6 +233,12 @@ func (p *AddAccountToProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AddAccountToProjectParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *AddAccountToProjectParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -240,6 +252,12 @@ func (p *AddAccountToProjectParams) SetEmail(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *AddAccountToProjectParams) ResetEmail() {
+	if p.p != nil && p.p["email"] != nil {
+		delete(p.p, "email")
+	}
 }
 
 func (p *AddAccountToProjectParams) GetEmail() (string, bool) {
@@ -257,6 +275,12 @@ func (p *AddAccountToProjectParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AddAccountToProjectParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *AddAccountToProjectParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -272,6 +296,12 @@ func (p *AddAccountToProjectParams) SetProjectroleid(v string) {
 	p.p["projectroleid"] = v
 }
 
+func (p *AddAccountToProjectParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
+}
+
 func (p *AddAccountToProjectParams) GetProjectroleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -285,6 +315,12 @@ func (p *AddAccountToProjectParams) SetRoletype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roletype"] = v
+}
+
+func (p *AddAccountToProjectParams) ResetRoletype() {
+	if p.p != nil && p.p["roletype"] != nil {
+		delete(p.p, "roletype")
+	}
 }
 
 func (p *AddAccountToProjectParams) GetRoletype() (string, bool) {
@@ -375,6 +411,12 @@ func (p *AddUserToProjectParams) SetEmail(v string) {
 	p.p["email"] = v
 }
 
+func (p *AddUserToProjectParams) ResetEmail() {
+	if p.p != nil && p.p["email"] != nil {
+		delete(p.p, "email")
+	}
+}
+
 func (p *AddUserToProjectParams) GetEmail() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -388,6 +430,12 @@ func (p *AddUserToProjectParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *AddUserToProjectParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *AddUserToProjectParams) GetProjectid() (string, bool) {
@@ -405,6 +453,12 @@ func (p *AddUserToProjectParams) SetProjectroleid(v string) {
 	p.p["projectroleid"] = v
 }
 
+func (p *AddUserToProjectParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
+}
+
 func (p *AddUserToProjectParams) GetProjectroleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -420,6 +474,12 @@ func (p *AddUserToProjectParams) SetRoletype(v string) {
 	p.p["roletype"] = v
 }
 
+func (p *AddUserToProjectParams) ResetRoletype() {
+	if p.p != nil && p.p["roletype"] != nil {
+		delete(p.p, "roletype")
+	}
+}
+
 func (p *AddUserToProjectParams) GetRoletype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -433,6 +493,12 @@ func (p *AddUserToProjectParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddUserToProjectParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddUserToProjectParams) GetUsername() (string, bool) {
@@ -527,6 +593,12 @@ func (p *CreateProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateProjectParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateProjectParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -540,6 +612,12 @@ func (p *CreateProjectParams) SetAccountid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountid"] = v
+}
+
+func (p *CreateProjectParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
 }
 
 func (p *CreateProjectParams) GetAccountid() (string, bool) {
@@ -557,6 +635,12 @@ func (p *CreateProjectParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *CreateProjectParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
 func (p *CreateProjectParams) GetDisplaytext() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -570,6 +654,12 @@ func (p *CreateProjectParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateProjectParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateProjectParams) GetDomainid() (string, bool) {
@@ -587,6 +677,12 @@ func (p *CreateProjectParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateProjectParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateProjectParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -600,6 +696,12 @@ func (p *CreateProjectParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *CreateProjectParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *CreateProjectParams) GetUserid() (string, bool) {
@@ -731,6 +833,12 @@ func (p *DeleteAccountFromProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DeleteAccountFromProjectParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *DeleteAccountFromProjectParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -744,6 +852,12 @@ func (p *DeleteAccountFromProjectParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeleteAccountFromProjectParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *DeleteAccountFromProjectParams) GetProjectid() (string, bool) {
@@ -826,6 +940,12 @@ func (p *DeleteUserFromProjectParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *DeleteUserFromProjectParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *DeleteUserFromProjectParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -839,6 +959,12 @@ func (p *DeleteUserFromProjectParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *DeleteUserFromProjectParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *DeleteUserFromProjectParams) GetUserid() (string, bool) {
@@ -922,6 +1048,12 @@ func (p *DeleteProjectParams) SetCleanup(v bool) {
 	p.p["cleanup"] = v
 }
 
+func (p *DeleteProjectParams) ResetCleanup() {
+	if p.p != nil && p.p["cleanup"] != nil {
+		delete(p.p, "cleanup")
+	}
+}
+
 func (p *DeleteProjectParams) GetCleanup() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -935,6 +1067,12 @@ func (p *DeleteProjectParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteProjectParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteProjectParams) GetId() (string, bool) {
@@ -1011,6 +1149,12 @@ func (p *DeleteProjectInvitationParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteProjectInvitationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteProjectInvitationParams) GetId() (string, bool) {
@@ -1127,6 +1271,12 @@ func (p *ListProjectInvitationsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1140,6 +1290,12 @@ func (p *ListProjectInvitationsParams) SetActiveonly(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["activeonly"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetActiveonly() {
+	if p.p != nil && p.p["activeonly"] != nil {
+		delete(p.p, "activeonly")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetActiveonly() (bool, bool) {
@@ -1157,6 +1313,12 @@ func (p *ListProjectInvitationsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1170,6 +1332,12 @@ func (p *ListProjectInvitationsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetId() (string, bool) {
@@ -1187,6 +1355,12 @@ func (p *ListProjectInvitationsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1200,6 +1374,12 @@ func (p *ListProjectInvitationsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetKeyword() (string, bool) {
@@ -1217,6 +1397,12 @@ func (p *ListProjectInvitationsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1230,6 +1416,12 @@ func (p *ListProjectInvitationsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetPage() (int, bool) {
@@ -1247,6 +1439,12 @@ func (p *ListProjectInvitationsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1260,6 +1458,12 @@ func (p *ListProjectInvitationsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetProjectid() (string, bool) {
@@ -1277,6 +1481,12 @@ func (p *ListProjectInvitationsParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListProjectInvitationsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
 func (p *ListProjectInvitationsParams) GetState() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1290,6 +1500,12 @@ func (p *ListProjectInvitationsParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListProjectInvitationsParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *ListProjectInvitationsParams) GetUserid() (string, bool) {
@@ -1449,6 +1665,12 @@ func (p *ListProjectsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListProjectsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListProjectsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1462,6 +1684,12 @@ func (p *ListProjectsParams) SetDetails(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListProjectsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
 }
 
 func (p *ListProjectsParams) GetDetails() ([]string, bool) {
@@ -1479,6 +1707,12 @@ func (p *ListProjectsParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *ListProjectsParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
 func (p *ListProjectsParams) GetDisplaytext() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1492,6 +1726,12 @@ func (p *ListProjectsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListProjectsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListProjectsParams) GetDomainid() (string, bool) {
@@ -1509,6 +1749,12 @@ func (p *ListProjectsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListProjectsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListProjectsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1522,6 +1768,12 @@ func (p *ListProjectsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListProjectsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListProjectsParams) GetIsrecursive() (bool, bool) {
@@ -1539,6 +1791,12 @@ func (p *ListProjectsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListProjectsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListProjectsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1552,6 +1810,12 @@ func (p *ListProjectsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListProjectsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListProjectsParams) GetListall() (bool, bool) {
@@ -1569,6 +1833,12 @@ func (p *ListProjectsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListProjectsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListProjectsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1582,6 +1852,12 @@ func (p *ListProjectsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListProjectsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListProjectsParams) GetPage() (int, bool) {
@@ -1599,6 +1875,12 @@ func (p *ListProjectsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListProjectsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListProjectsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1612,6 +1894,12 @@ func (p *ListProjectsParams) SetShowicon(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showicon"] = v
+}
+
+func (p *ListProjectsParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
 }
 
 func (p *ListProjectsParams) GetShowicon() (bool, bool) {
@@ -1629,6 +1917,12 @@ func (p *ListProjectsParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListProjectsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
 func (p *ListProjectsParams) GetState() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1644,6 +1938,12 @@ func (p *ListProjectsParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListProjectsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListProjectsParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1657,6 +1957,12 @@ func (p *ListProjectsParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ListProjectsParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *ListProjectsParams) GetUsername() (string, bool) {
@@ -1851,6 +2157,12 @@ func (p *SuspendProjectParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *SuspendProjectParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *SuspendProjectParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1995,6 +2307,12 @@ func (p *UpdateProjectParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateProjectParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpdateProjectParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2008,6 +2326,12 @@ func (p *UpdateProjectParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *UpdateProjectParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *UpdateProjectParams) GetDisplaytext() (string, bool) {
@@ -2025,6 +2349,12 @@ func (p *UpdateProjectParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateProjectParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateProjectParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2038,6 +2368,12 @@ func (p *UpdateProjectParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateProjectParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateProjectParams) GetName() (string, bool) {
@@ -2055,6 +2391,12 @@ func (p *UpdateProjectParams) SetRoletype(v string) {
 	p.p["roletype"] = v
 }
 
+func (p *UpdateProjectParams) ResetRoletype() {
+	if p.p != nil && p.p["roletype"] != nil {
+		delete(p.p, "roletype")
+	}
+}
+
 func (p *UpdateProjectParams) GetRoletype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2070,6 +2412,12 @@ func (p *UpdateProjectParams) SetSwapowner(v bool) {
 	p.p["swapowner"] = v
 }
 
+func (p *UpdateProjectParams) ResetSwapowner() {
+	if p.p != nil && p.p["swapowner"] != nil {
+		delete(p.p, "swapowner")
+	}
+}
+
 func (p *UpdateProjectParams) GetSwapowner() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2083,6 +2431,12 @@ func (p *UpdateProjectParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *UpdateProjectParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *UpdateProjectParams) GetUserid() (string, bool) {
@@ -2223,6 +2577,12 @@ func (p *UpdateProjectInvitationParams) SetAccept(v bool) {
 	p.p["accept"] = v
 }
 
+func (p *UpdateProjectInvitationParams) ResetAccept() {
+	if p.p != nil && p.p["accept"] != nil {
+		delete(p.p, "accept")
+	}
+}
+
 func (p *UpdateProjectInvitationParams) GetAccept() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2236,6 +2596,12 @@ func (p *UpdateProjectInvitationParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *UpdateProjectInvitationParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
 }
 
 func (p *UpdateProjectInvitationParams) GetAccount() (string, bool) {
@@ -2253,6 +2619,12 @@ func (p *UpdateProjectInvitationParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *UpdateProjectInvitationParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *UpdateProjectInvitationParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2268,6 +2640,12 @@ func (p *UpdateProjectInvitationParams) SetToken(v string) {
 	p.p["token"] = v
 }
 
+func (p *UpdateProjectInvitationParams) ResetToken() {
+	if p.p != nil && p.p["token"] != nil {
+		delete(p.p, "token")
+	}
+}
+
 func (p *UpdateProjectInvitationParams) GetToken() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2281,6 +2659,12 @@ func (p *UpdateProjectInvitationParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *UpdateProjectInvitationParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *UpdateProjectInvitationParams) GetUserid() (string, bool) {
@@ -2362,6 +2746,12 @@ func (p *ListProjectRolePermissionsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListProjectRolePermissionsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListProjectRolePermissionsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2375,6 +2765,12 @@ func (p *ListProjectRolePermissionsParams) SetProjectroleid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectroleid"] = v
+}
+
+func (p *ListProjectRolePermissionsParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
 }
 
 func (p *ListProjectRolePermissionsParams) GetProjectroleid() (string, bool) {
@@ -2460,6 +2856,12 @@ func (p *CreateProjectRolePermissionParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateProjectRolePermissionParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *CreateProjectRolePermissionParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2473,6 +2875,12 @@ func (p *CreateProjectRolePermissionParams) SetPermission(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["permission"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) ResetPermission() {
+	if p.p != nil && p.p["permission"] != nil {
+		delete(p.p, "permission")
+	}
 }
 
 func (p *CreateProjectRolePermissionParams) GetPermission() (string, bool) {
@@ -2490,6 +2898,12 @@ func (p *CreateProjectRolePermissionParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *CreateProjectRolePermissionParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *CreateProjectRolePermissionParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2505,6 +2919,12 @@ func (p *CreateProjectRolePermissionParams) SetProjectroleid(v string) {
 	p.p["projectroleid"] = v
 }
 
+func (p *CreateProjectRolePermissionParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
+}
+
 func (p *CreateProjectRolePermissionParams) GetProjectroleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2518,6 +2938,12 @@ func (p *CreateProjectRolePermissionParams) SetRule(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["rule"] = v
+}
+
+func (p *CreateProjectRolePermissionParams) ResetRule() {
+	if p.p != nil && p.p["rule"] != nil {
+		delete(p.p, "rule")
+	}
 }
 
 func (p *CreateProjectRolePermissionParams) GetRule() (string, bool) {
@@ -2602,6 +3028,12 @@ func (p *UpdateProjectRolePermissionParams) SetPermission(v string) {
 	p.p["permission"] = v
 }
 
+func (p *UpdateProjectRolePermissionParams) ResetPermission() {
+	if p.p != nil && p.p["permission"] != nil {
+		delete(p.p, "permission")
+	}
+}
+
 func (p *UpdateProjectRolePermissionParams) GetPermission() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2615,6 +3047,12 @@ func (p *UpdateProjectRolePermissionParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *UpdateProjectRolePermissionParams) GetProjectid() (string, bool) {
@@ -2632,6 +3070,12 @@ func (p *UpdateProjectRolePermissionParams) SetProjectroleid(v string) {
 	p.p["projectroleid"] = v
 }
 
+func (p *UpdateProjectRolePermissionParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
+}
+
 func (p *UpdateProjectRolePermissionParams) GetProjectroleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2647,6 +3091,12 @@ func (p *UpdateProjectRolePermissionParams) SetProjectrolepermissionid(v string)
 	p.p["projectrolepermissionid"] = v
 }
 
+func (p *UpdateProjectRolePermissionParams) ResetProjectrolepermissionid() {
+	if p.p != nil && p.p["projectrolepermissionid"] != nil {
+		delete(p.p, "projectrolepermissionid")
+	}
+}
+
 func (p *UpdateProjectRolePermissionParams) GetProjectrolepermissionid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2660,6 +3110,12 @@ func (p *UpdateProjectRolePermissionParams) SetRuleorder(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ruleorder"] = v
+}
+
+func (p *UpdateProjectRolePermissionParams) ResetRuleorder() {
+	if p.p != nil && p.p["ruleorder"] != nil {
+		delete(p.p, "ruleorder")
+	}
 }
 
 func (p *UpdateProjectRolePermissionParams) GetRuleorder() ([]string, bool) {
@@ -2754,6 +3210,12 @@ func (p *DeleteProjectRolePermissionParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteProjectRolePermissionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteProjectRolePermissionParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2767,6 +3229,12 @@ func (p *DeleteProjectRolePermissionParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeleteProjectRolePermissionParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *DeleteProjectRolePermissionParams) GetProjectid() (string, bool) {

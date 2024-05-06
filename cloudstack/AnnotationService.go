@@ -71,6 +71,12 @@ func (p *AddAnnotationParams) SetAdminsonly(v bool) {
 	p.p["adminsonly"] = v
 }
 
+func (p *AddAnnotationParams) ResetAdminsonly() {
+	if p.p != nil && p.p["adminsonly"] != nil {
+		delete(p.p, "adminsonly")
+	}
+}
+
 func (p *AddAnnotationParams) GetAdminsonly() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -84,6 +90,12 @@ func (p *AddAnnotationParams) SetAnnotation(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["annotation"] = v
+}
+
+func (p *AddAnnotationParams) ResetAnnotation() {
+	if p.p != nil && p.p["annotation"] != nil {
+		delete(p.p, "annotation")
+	}
 }
 
 func (p *AddAnnotationParams) GetAnnotation() (string, bool) {
@@ -101,6 +113,12 @@ func (p *AddAnnotationParams) SetEntityid(v string) {
 	p.p["entityid"] = v
 }
 
+func (p *AddAnnotationParams) ResetEntityid() {
+	if p.p != nil && p.p["entityid"] != nil {
+		delete(p.p, "entityid")
+	}
+}
+
 func (p *AddAnnotationParams) GetEntityid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -114,6 +132,12 @@ func (p *AddAnnotationParams) SetEntitytype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["entitytype"] = v
+}
+
+func (p *AddAnnotationParams) ResetEntitytype() {
+	if p.p != nil && p.p["entitytype"] != nil {
+		delete(p.p, "entitytype")
+	}
 }
 
 func (p *AddAnnotationParams) GetEntitytype() (string, bool) {
@@ -211,6 +235,12 @@ func (p *ListAnnotationsParams) SetAnnotationfilter(v string) {
 	p.p["annotationfilter"] = v
 }
 
+func (p *ListAnnotationsParams) ResetAnnotationfilter() {
+	if p.p != nil && p.p["annotationfilter"] != nil {
+		delete(p.p, "annotationfilter")
+	}
+}
+
 func (p *ListAnnotationsParams) GetAnnotationfilter() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -224,6 +254,12 @@ func (p *ListAnnotationsParams) SetEntityid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["entityid"] = v
+}
+
+func (p *ListAnnotationsParams) ResetEntityid() {
+	if p.p != nil && p.p["entityid"] != nil {
+		delete(p.p, "entityid")
+	}
 }
 
 func (p *ListAnnotationsParams) GetEntityid() (string, bool) {
@@ -241,6 +277,12 @@ func (p *ListAnnotationsParams) SetEntitytype(v string) {
 	p.p["entitytype"] = v
 }
 
+func (p *ListAnnotationsParams) ResetEntitytype() {
+	if p.p != nil && p.p["entitytype"] != nil {
+		delete(p.p, "entitytype")
+	}
+}
+
 func (p *ListAnnotationsParams) GetEntitytype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -254,6 +296,12 @@ func (p *ListAnnotationsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListAnnotationsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListAnnotationsParams) GetId() (string, bool) {
@@ -271,6 +319,12 @@ func (p *ListAnnotationsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListAnnotationsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListAnnotationsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -284,6 +338,12 @@ func (p *ListAnnotationsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAnnotationsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListAnnotationsParams) GetPage() (int, bool) {
@@ -301,6 +361,12 @@ func (p *ListAnnotationsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAnnotationsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAnnotationsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -314,6 +380,12 @@ func (p *ListAnnotationsParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListAnnotationsParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *ListAnnotationsParams) GetUserid() (string, bool) {
@@ -422,6 +494,12 @@ func (p *RemoveAnnotationParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RemoveAnnotationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *RemoveAnnotationParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -499,6 +577,12 @@ func (p *UpdateAnnotationVisibilityParams) SetAdminsonly(v bool) {
 	p.p["adminsonly"] = v
 }
 
+func (p *UpdateAnnotationVisibilityParams) ResetAdminsonly() {
+	if p.p != nil && p.p["adminsonly"] != nil {
+		delete(p.p, "adminsonly")
+	}
+}
+
 func (p *UpdateAnnotationVisibilityParams) GetAdminsonly() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -512,6 +596,12 @@ func (p *UpdateAnnotationVisibilityParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateAnnotationVisibilityParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateAnnotationVisibilityParams) GetId() (string, bool) {

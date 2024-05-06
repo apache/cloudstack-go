@@ -71,6 +71,12 @@ func (p *ArchiveEventsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *ArchiveEventsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *ArchiveEventsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -84,6 +90,12 @@ func (p *ArchiveEventsParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ArchiveEventsParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *ArchiveEventsParams) GetIds() ([]string, bool) {
@@ -101,6 +113,12 @@ func (p *ArchiveEventsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *ArchiveEventsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
 func (p *ArchiveEventsParams) GetStartdate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -114,6 +132,12 @@ func (p *ArchiveEventsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ArchiveEventsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ArchiveEventsParams) GetType() (string, bool) {
@@ -213,6 +237,12 @@ func (p *DeleteEventsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *DeleteEventsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *DeleteEventsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -226,6 +256,12 @@ func (p *DeleteEventsParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *DeleteEventsParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *DeleteEventsParams) GetIds() ([]string, bool) {
@@ -243,6 +279,12 @@ func (p *DeleteEventsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *DeleteEventsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
 func (p *DeleteEventsParams) GetStartdate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -256,6 +298,12 @@ func (p *DeleteEventsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *DeleteEventsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *DeleteEventsParams) GetType() (string, bool) {
@@ -452,6 +500,12 @@ func (p *ListEventsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListEventsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListEventsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -465,6 +519,12 @@ func (p *ListEventsParams) SetArchived(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["archived"] = v
+}
+
+func (p *ListEventsParams) ResetArchived() {
+	if p.p != nil && p.p["archived"] != nil {
+		delete(p.p, "archived")
+	}
 }
 
 func (p *ListEventsParams) GetArchived() (bool, bool) {
@@ -482,6 +542,12 @@ func (p *ListEventsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListEventsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListEventsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -495,6 +561,12 @@ func (p *ListEventsParams) SetDuration(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["duration"] = v
+}
+
+func (p *ListEventsParams) ResetDuration() {
+	if p.p != nil && p.p["duration"] != nil {
+		delete(p.p, "duration")
+	}
 }
 
 func (p *ListEventsParams) GetDuration() (int, bool) {
@@ -512,6 +584,12 @@ func (p *ListEventsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *ListEventsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *ListEventsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -525,6 +603,12 @@ func (p *ListEventsParams) SetEntrytime(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["entrytime"] = v
+}
+
+func (p *ListEventsParams) ResetEntrytime() {
+	if p.p != nil && p.p["entrytime"] != nil {
+		delete(p.p, "entrytime")
+	}
 }
 
 func (p *ListEventsParams) GetEntrytime() (int, bool) {
@@ -542,6 +626,12 @@ func (p *ListEventsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListEventsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListEventsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -555,6 +645,12 @@ func (p *ListEventsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListEventsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListEventsParams) GetIsrecursive() (bool, bool) {
@@ -572,6 +668,12 @@ func (p *ListEventsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListEventsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListEventsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -585,6 +687,12 @@ func (p *ListEventsParams) SetLevel(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["level"] = v
+}
+
+func (p *ListEventsParams) ResetLevel() {
+	if p.p != nil && p.p["level"] != nil {
+		delete(p.p, "level")
+	}
 }
 
 func (p *ListEventsParams) GetLevel() (string, bool) {
@@ -602,6 +710,12 @@ func (p *ListEventsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListEventsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListEventsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -615,6 +729,12 @@ func (p *ListEventsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListEventsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListEventsParams) GetPage() (int, bool) {
@@ -632,6 +752,12 @@ func (p *ListEventsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListEventsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListEventsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -645,6 +771,12 @@ func (p *ListEventsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListEventsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListEventsParams) GetProjectid() (string, bool) {
@@ -662,6 +794,12 @@ func (p *ListEventsParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *ListEventsParams) ResetResourceid() {
+	if p.p != nil && p.p["resourceid"] != nil {
+		delete(p.p, "resourceid")
+	}
+}
+
 func (p *ListEventsParams) GetResourceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -675,6 +813,12 @@ func (p *ListEventsParams) SetResourcetype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *ListEventsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
 }
 
 func (p *ListEventsParams) GetResourcetype() (string, bool) {
@@ -692,6 +836,12 @@ func (p *ListEventsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *ListEventsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
 func (p *ListEventsParams) GetStartdate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -707,6 +857,12 @@ func (p *ListEventsParams) SetStartid(v string) {
 	p.p["startid"] = v
 }
 
+func (p *ListEventsParams) ResetStartid() {
+	if p.p != nil && p.p["startid"] != nil {
+		delete(p.p, "startid")
+	}
+}
+
 func (p *ListEventsParams) GetStartid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -720,6 +876,12 @@ func (p *ListEventsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListEventsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ListEventsParams) GetType() (string, bool) {

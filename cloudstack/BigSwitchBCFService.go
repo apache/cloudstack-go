@@ -69,6 +69,12 @@ func (p *AddBigSwitchBcfDeviceParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) ResetHostname() {
+	if p.p != nil && p.p["hostname"] != nil {
+		delete(p.p, "hostname")
+	}
+}
+
 func (p *AddBigSwitchBcfDeviceParams) GetHostname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -82,6 +88,12 @@ func (p *AddBigSwitchBcfDeviceParams) SetNat(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nat"] = v
+}
+
+func (p *AddBigSwitchBcfDeviceParams) ResetNat() {
+	if p.p != nil && p.p["nat"] != nil {
+		delete(p.p, "nat")
+	}
 }
 
 func (p *AddBigSwitchBcfDeviceParams) GetNat() (bool, bool) {
@@ -99,6 +111,12 @@ func (p *AddBigSwitchBcfDeviceParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *AddBigSwitchBcfDeviceParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -114,6 +132,12 @@ func (p *AddBigSwitchBcfDeviceParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddBigSwitchBcfDeviceParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
+}
+
 func (p *AddBigSwitchBcfDeviceParams) GetPhysicalnetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -127,6 +151,12 @@ func (p *AddBigSwitchBcfDeviceParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBigSwitchBcfDeviceParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddBigSwitchBcfDeviceParams) GetUsername() (string, bool) {
@@ -220,6 +250,12 @@ func (p *DeleteBigSwitchBcfDeviceParams) SetBcfdeviceid(v string) {
 	p.p["bcfdeviceid"] = v
 }
 
+func (p *DeleteBigSwitchBcfDeviceParams) ResetBcfdeviceid() {
+	if p.p != nil && p.p["bcfdeviceid"] != nil {
+		delete(p.p, "bcfdeviceid")
+	}
+}
+
 func (p *DeleteBigSwitchBcfDeviceParams) GetBcfdeviceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -310,6 +346,12 @@ func (p *ListBigSwitchBcfDevicesParams) SetBcfdeviceid(v string) {
 	p.p["bcfdeviceid"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) ResetBcfdeviceid() {
+	if p.p != nil && p.p["bcfdeviceid"] != nil {
+		delete(p.p, "bcfdeviceid")
+	}
+}
+
 func (p *ListBigSwitchBcfDevicesParams) GetBcfdeviceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -323,6 +365,12 @@ func (p *ListBigSwitchBcfDevicesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListBigSwitchBcfDevicesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListBigSwitchBcfDevicesParams) GetKeyword() (string, bool) {
@@ -340,6 +388,12 @@ func (p *ListBigSwitchBcfDevicesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListBigSwitchBcfDevicesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -355,6 +409,12 @@ func (p *ListBigSwitchBcfDevicesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBigSwitchBcfDevicesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListBigSwitchBcfDevicesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -368,6 +428,12 @@ func (p *ListBigSwitchBcfDevicesParams) SetPhysicalnetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListBigSwitchBcfDevicesParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
 }
 
 func (p *ListBigSwitchBcfDevicesParams) GetPhysicalnetworkid() (string, bool) {

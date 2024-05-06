@@ -143,6 +143,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -156,6 +162,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetCidrlist(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetCidrlist() ([]string, bool) {
@@ -173,6 +185,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -186,6 +204,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetEndport(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endport"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetEndport() {
+	if p.p != nil && p.p["endport"] != nil {
+		delete(p.p, "endport")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetEndport() (int, bool) {
@@ -203,6 +227,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetIcmpcode(v int) {
 	p.p["icmpcode"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetIcmpcode() {
+	if p.p != nil && p.p["icmpcode"] != nil {
+		delete(p.p, "icmpcode")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetIcmpcode() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -216,6 +246,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetIcmptype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["icmptype"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetIcmptype() {
+	if p.p != nil && p.p["icmptype"] != nil {
+		delete(p.p, "icmptype")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetIcmptype() (int, bool) {
@@ -233,6 +269,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -246,6 +288,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetProtocol() (string, bool) {
@@ -263,6 +311,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetSecuritygroupid(v string) {
 	p.p["securitygroupid"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetSecuritygroupid() {
+	if p.p != nil && p.p["securitygroupid"] != nil {
+		delete(p.p, "securitygroupid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetSecuritygroupid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -276,6 +330,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetSecuritygroupname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupname"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetSecuritygroupname() {
+	if p.p != nil && p.p["securitygroupname"] != nil {
+		delete(p.p, "securitygroupname")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetSecuritygroupname() (string, bool) {
@@ -293,6 +353,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetStartport(v int) {
 	p.p["startport"] = v
 }
 
+func (p *AuthorizeSecurityGroupEgressParams) ResetStartport() {
+	if p.p != nil && p.p["startport"] != nil {
+		delete(p.p, "startport")
+	}
+}
+
 func (p *AuthorizeSecurityGroupEgressParams) GetStartport() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -306,6 +372,12 @@ func (p *AuthorizeSecurityGroupEgressParams) SetUsersecuritygrouplist(v map[stri
 		p.p = make(map[string]interface{})
 	}
 	p.p["usersecuritygrouplist"] = v
+}
+
+func (p *AuthorizeSecurityGroupEgressParams) ResetUsersecuritygrouplist() {
+	if p.p != nil && p.p["usersecuritygrouplist"] != nil {
+		delete(p.p, "usersecuritygrouplist")
+	}
 }
 
 func (p *AuthorizeSecurityGroupEgressParams) GetUsersecuritygrouplist() (map[string]string, bool) {
@@ -443,6 +515,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -456,6 +534,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetCidrlist(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetCidrlist() ([]string, bool) {
@@ -473,6 +557,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -486,6 +576,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetEndport(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endport"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetEndport() {
+	if p.p != nil && p.p["endport"] != nil {
+		delete(p.p, "endport")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetEndport() (int, bool) {
@@ -503,6 +599,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetIcmpcode(v int) {
 	p.p["icmpcode"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetIcmpcode() {
+	if p.p != nil && p.p["icmpcode"] != nil {
+		delete(p.p, "icmpcode")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetIcmpcode() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -516,6 +618,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetIcmptype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["icmptype"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetIcmptype() {
+	if p.p != nil && p.p["icmptype"] != nil {
+		delete(p.p, "icmptype")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetIcmptype() (int, bool) {
@@ -533,6 +641,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -546,6 +660,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetProtocol() (string, bool) {
@@ -563,6 +683,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetSecuritygroupid(v string) {
 	p.p["securitygroupid"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetSecuritygroupid() {
+	if p.p != nil && p.p["securitygroupid"] != nil {
+		delete(p.p, "securitygroupid")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetSecuritygroupid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -576,6 +702,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetSecuritygroupname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupname"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetSecuritygroupname() {
+	if p.p != nil && p.p["securitygroupname"] != nil {
+		delete(p.p, "securitygroupname")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetSecuritygroupname() (string, bool) {
@@ -593,6 +725,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetStartport(v int) {
 	p.p["startport"] = v
 }
 
+func (p *AuthorizeSecurityGroupIngressParams) ResetStartport() {
+	if p.p != nil && p.p["startport"] != nil {
+		delete(p.p, "startport")
+	}
+}
+
 func (p *AuthorizeSecurityGroupIngressParams) GetStartport() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -606,6 +744,12 @@ func (p *AuthorizeSecurityGroupIngressParams) SetUsersecuritygrouplist(v map[str
 		p.p = make(map[string]interface{})
 	}
 	p.p["usersecuritygrouplist"] = v
+}
+
+func (p *AuthorizeSecurityGroupIngressParams) ResetUsersecuritygrouplist() {
+	if p.p != nil && p.p["usersecuritygrouplist"] != nil {
+		delete(p.p, "usersecuritygrouplist")
+	}
 }
 
 func (p *AuthorizeSecurityGroupIngressParams) GetUsersecuritygrouplist() (map[string]string, bool) {
@@ -713,6 +857,12 @@ func (p *CreateSecurityGroupParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateSecurityGroupParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateSecurityGroupParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -726,6 +876,12 @@ func (p *CreateSecurityGroupParams) SetDescription(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["description"] = v
+}
+
+func (p *CreateSecurityGroupParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
 }
 
 func (p *CreateSecurityGroupParams) GetDescription() (string, bool) {
@@ -743,6 +899,12 @@ func (p *CreateSecurityGroupParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateSecurityGroupParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateSecurityGroupParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -758,6 +920,12 @@ func (p *CreateSecurityGroupParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateSecurityGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateSecurityGroupParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -771,6 +939,12 @@ func (p *CreateSecurityGroupParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateSecurityGroupParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *CreateSecurityGroupParams) GetProjectid() (string, bool) {
@@ -874,6 +1048,12 @@ func (p *DeleteSecurityGroupParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DeleteSecurityGroupParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *DeleteSecurityGroupParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -887,6 +1067,12 @@ func (p *DeleteSecurityGroupParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *DeleteSecurityGroupParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *DeleteSecurityGroupParams) GetDomainid() (string, bool) {
@@ -904,6 +1090,12 @@ func (p *DeleteSecurityGroupParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteSecurityGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteSecurityGroupParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -919,6 +1111,12 @@ func (p *DeleteSecurityGroupParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *DeleteSecurityGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *DeleteSecurityGroupParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -932,6 +1130,12 @@ func (p *DeleteSecurityGroupParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *DeleteSecurityGroupParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *DeleteSecurityGroupParams) GetProjectid() (string, bool) {
@@ -1062,6 +1266,12 @@ func (p *ListSecurityGroupsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1075,6 +1285,12 @@ func (p *ListSecurityGroupsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetDomainid() (string, bool) {
@@ -1092,6 +1308,12 @@ func (p *ListSecurityGroupsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1105,6 +1327,12 @@ func (p *ListSecurityGroupsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetIsrecursive() (bool, bool) {
@@ -1122,6 +1350,12 @@ func (p *ListSecurityGroupsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1135,6 +1369,12 @@ func (p *ListSecurityGroupsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetListall() (bool, bool) {
@@ -1152,6 +1392,12 @@ func (p *ListSecurityGroupsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1165,6 +1411,12 @@ func (p *ListSecurityGroupsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetPagesize() (int, bool) {
@@ -1182,6 +1434,12 @@ func (p *ListSecurityGroupsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1195,6 +1453,12 @@ func (p *ListSecurityGroupsParams) SetSecuritygroupname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["securitygroupname"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetSecuritygroupname() {
+	if p.p != nil && p.p["securitygroupname"] != nil {
+		delete(p.p, "securitygroupname")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetSecuritygroupname() (string, bool) {
@@ -1212,6 +1476,12 @@ func (p *ListSecurityGroupsParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListSecurityGroupsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListSecurityGroupsParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1225,6 +1495,12 @@ func (p *ListSecurityGroupsParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListSecurityGroupsParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *ListSecurityGroupsParams) GetVirtualmachineid() (string, bool) {
@@ -1399,6 +1675,12 @@ func (p *RevokeSecurityGroupEgressParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RevokeSecurityGroupEgressParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *RevokeSecurityGroupEgressParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1473,6 +1755,12 @@ func (p *RevokeSecurityGroupIngressParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RevokeSecurityGroupIngressParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *RevokeSecurityGroupIngressParams) GetId() (string, bool) {

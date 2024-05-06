@@ -90,6 +90,12 @@ func (p *AddImageStoreParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *AddImageStoreParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *AddImageStoreParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -103,6 +109,12 @@ func (p *AddImageStoreParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *AddImageStoreParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *AddImageStoreParams) GetName() (string, bool) {
@@ -120,6 +132,12 @@ func (p *AddImageStoreParams) SetProvider(v string) {
 	p.p["provider"] = v
 }
 
+func (p *AddImageStoreParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
 func (p *AddImageStoreParams) GetProvider() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -135,6 +153,12 @@ func (p *AddImageStoreParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddImageStoreParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddImageStoreParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -148,6 +172,12 @@ func (p *AddImageStoreParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddImageStoreParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddImageStoreParams) GetZoneid() (string, bool) {
@@ -261,6 +291,12 @@ func (p *AddImageStoreS3Params) SetAccesskey(v string) {
 	p.p["accesskey"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetAccesskey() {
+	if p.p != nil && p.p["accesskey"] != nil {
+		delete(p.p, "accesskey")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetAccesskey() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -274,6 +310,12 @@ func (p *AddImageStoreS3Params) SetBucket(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bucket"] = v
+}
+
+func (p *AddImageStoreS3Params) ResetBucket() {
+	if p.p != nil && p.p["bucket"] != nil {
+		delete(p.p, "bucket")
+	}
 }
 
 func (p *AddImageStoreS3Params) GetBucket() (string, bool) {
@@ -291,6 +333,12 @@ func (p *AddImageStoreS3Params) SetConnectiontimeout(v int) {
 	p.p["connectiontimeout"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetConnectiontimeout() {
+	if p.p != nil && p.p["connectiontimeout"] != nil {
+		delete(p.p, "connectiontimeout")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetConnectiontimeout() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -304,6 +352,12 @@ func (p *AddImageStoreS3Params) SetConnectionttl(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["connectionttl"] = v
+}
+
+func (p *AddImageStoreS3Params) ResetConnectionttl() {
+	if p.p != nil && p.p["connectionttl"] != nil {
+		delete(p.p, "connectionttl")
+	}
 }
 
 func (p *AddImageStoreS3Params) GetConnectionttl() (int, bool) {
@@ -321,6 +375,12 @@ func (p *AddImageStoreS3Params) SetEndpoint(v string) {
 	p.p["endpoint"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetEndpoint() {
+	if p.p != nil && p.p["endpoint"] != nil {
+		delete(p.p, "endpoint")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetEndpoint() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -334,6 +394,12 @@ func (p *AddImageStoreS3Params) SetMaxerrorretry(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxerrorretry"] = v
+}
+
+func (p *AddImageStoreS3Params) ResetMaxerrorretry() {
+	if p.p != nil && p.p["maxerrorretry"] != nil {
+		delete(p.p, "maxerrorretry")
+	}
 }
 
 func (p *AddImageStoreS3Params) GetMaxerrorretry() (int, bool) {
@@ -351,6 +417,12 @@ func (p *AddImageStoreS3Params) SetS3signer(v string) {
 	p.p["s3signer"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetS3signer() {
+	if p.p != nil && p.p["s3signer"] != nil {
+		delete(p.p, "s3signer")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetS3signer() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -364,6 +436,12 @@ func (p *AddImageStoreS3Params) SetSecretkey(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["secretkey"] = v
+}
+
+func (p *AddImageStoreS3Params) ResetSecretkey() {
+	if p.p != nil && p.p["secretkey"] != nil {
+		delete(p.p, "secretkey")
+	}
 }
 
 func (p *AddImageStoreS3Params) GetSecretkey() (string, bool) {
@@ -381,6 +459,12 @@ func (p *AddImageStoreS3Params) SetSockettimeout(v int) {
 	p.p["sockettimeout"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetSockettimeout() {
+	if p.p != nil && p.p["sockettimeout"] != nil {
+		delete(p.p, "sockettimeout")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetSockettimeout() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -396,6 +480,12 @@ func (p *AddImageStoreS3Params) SetUsehttps(v bool) {
 	p.p["usehttps"] = v
 }
 
+func (p *AddImageStoreS3Params) ResetUsehttps() {
+	if p.p != nil && p.p["usehttps"] != nil {
+		delete(p.p, "usehttps")
+	}
+}
+
 func (p *AddImageStoreS3Params) GetUsehttps() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -409,6 +499,12 @@ func (p *AddImageStoreS3Params) SetUsetcpkeepalive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["usetcpkeepalive"] = v
+}
+
+func (p *AddImageStoreS3Params) ResetUsetcpkeepalive() {
+	if p.p != nil && p.p["usetcpkeepalive"] != nil {
+		delete(p.p, "usetcpkeepalive")
+	}
 }
 
 func (p *AddImageStoreS3Params) GetUsetcpkeepalive() (bool, bool) {
@@ -501,6 +597,12 @@ func (p *CreateSecondaryStagingStoreParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *CreateSecondaryStagingStoreParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *CreateSecondaryStagingStoreParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -514,6 +616,12 @@ func (p *CreateSecondaryStagingStoreParams) SetProvider(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provider"] = v
+}
+
+func (p *CreateSecondaryStagingStoreParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
 }
 
 func (p *CreateSecondaryStagingStoreParams) GetProvider() (string, bool) {
@@ -531,6 +639,12 @@ func (p *CreateSecondaryStagingStoreParams) SetScope(v string) {
 	p.p["scope"] = v
 }
 
+func (p *CreateSecondaryStagingStoreParams) ResetScope() {
+	if p.p != nil && p.p["scope"] != nil {
+		delete(p.p, "scope")
+	}
+}
+
 func (p *CreateSecondaryStagingStoreParams) GetScope() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -546,6 +660,12 @@ func (p *CreateSecondaryStagingStoreParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *CreateSecondaryStagingStoreParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *CreateSecondaryStagingStoreParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -559,6 +679,12 @@ func (p *CreateSecondaryStagingStoreParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateSecondaryStagingStoreParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreateSecondaryStagingStoreParams) GetZoneid() (string, bool) {
@@ -630,6 +756,12 @@ func (p *DeleteImageStoreParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteImageStoreParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteImageStoreParams) GetId() (string, bool) {
@@ -718,6 +850,12 @@ func (p *DeleteSecondaryStagingStoreParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteSecondaryStagingStoreParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteSecondaryStagingStoreParams) GetId() (string, bool) {
@@ -835,6 +973,12 @@ func (p *ListImageStoresParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListImageStoresParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListImageStoresParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -848,6 +992,12 @@ func (p *ListImageStoresParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListImageStoresParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListImageStoresParams) GetKeyword() (string, bool) {
@@ -865,6 +1015,12 @@ func (p *ListImageStoresParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListImageStoresParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListImageStoresParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -878,6 +1034,12 @@ func (p *ListImageStoresParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListImageStoresParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListImageStoresParams) GetPage() (int, bool) {
@@ -895,6 +1057,12 @@ func (p *ListImageStoresParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListImageStoresParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListImageStoresParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -908,6 +1076,12 @@ func (p *ListImageStoresParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *ListImageStoresParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *ListImageStoresParams) GetProtocol() (string, bool) {
@@ -925,6 +1099,12 @@ func (p *ListImageStoresParams) SetProvider(v string) {
 	p.p["provider"] = v
 }
 
+func (p *ListImageStoresParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
 func (p *ListImageStoresParams) GetProvider() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -940,6 +1120,12 @@ func (p *ListImageStoresParams) SetReadonly(v bool) {
 	p.p["readonly"] = v
 }
 
+func (p *ListImageStoresParams) ResetReadonly() {
+	if p.p != nil && p.p["readonly"] != nil {
+		delete(p.p, "readonly")
+	}
+}
+
 func (p *ListImageStoresParams) GetReadonly() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -953,6 +1139,12 @@ func (p *ListImageStoresParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListImageStoresParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListImageStoresParams) GetZoneid() (string, bool) {
@@ -1136,6 +1328,12 @@ func (p *ListSecondaryStagingStoresParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListSecondaryStagingStoresParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListSecondaryStagingStoresParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1149,6 +1347,12 @@ func (p *ListSecondaryStagingStoresParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListSecondaryStagingStoresParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListSecondaryStagingStoresParams) GetKeyword() (string, bool) {
@@ -1166,6 +1370,12 @@ func (p *ListSecondaryStagingStoresParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListSecondaryStagingStoresParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListSecondaryStagingStoresParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1179,6 +1389,12 @@ func (p *ListSecondaryStagingStoresParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListSecondaryStagingStoresParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListSecondaryStagingStoresParams) GetPage() (int, bool) {
@@ -1196,6 +1412,12 @@ func (p *ListSecondaryStagingStoresParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListSecondaryStagingStoresParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListSecondaryStagingStoresParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1209,6 +1431,12 @@ func (p *ListSecondaryStagingStoresParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *ListSecondaryStagingStoresParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *ListSecondaryStagingStoresParams) GetProtocol() (string, bool) {
@@ -1226,6 +1454,12 @@ func (p *ListSecondaryStagingStoresParams) SetProvider(v string) {
 	p.p["provider"] = v
 }
 
+func (p *ListSecondaryStagingStoresParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
 func (p *ListSecondaryStagingStoresParams) GetProvider() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1239,6 +1473,12 @@ func (p *ListSecondaryStagingStoresParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListSecondaryStagingStoresParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListSecondaryStagingStoresParams) GetZoneid() (string, bool) {
@@ -1412,6 +1652,12 @@ func (p *UpdateCloudToUseObjectStoreParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *UpdateCloudToUseObjectStoreParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *UpdateCloudToUseObjectStoreParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1425,6 +1671,12 @@ func (p *UpdateCloudToUseObjectStoreParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateCloudToUseObjectStoreParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateCloudToUseObjectStoreParams) GetName() (string, bool) {
@@ -1442,6 +1694,12 @@ func (p *UpdateCloudToUseObjectStoreParams) SetProvider(v string) {
 	p.p["provider"] = v
 }
 
+func (p *UpdateCloudToUseObjectStoreParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
 func (p *UpdateCloudToUseObjectStoreParams) GetProvider() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1455,6 +1713,12 @@ func (p *UpdateCloudToUseObjectStoreParams) SetUrl(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *UpdateCloudToUseObjectStoreParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
 }
 
 func (p *UpdateCloudToUseObjectStoreParams) GetUrl() (string, bool) {

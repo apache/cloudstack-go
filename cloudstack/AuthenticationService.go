@@ -64,6 +64,12 @@ func (p *LoginParams) SetDomain(v string) {
 	p.p["domain"] = v
 }
 
+func (p *LoginParams) ResetDomain() {
+	if p.p != nil && p.p["domain"] != nil {
+		delete(p.p, "domain")
+	}
+}
+
 func (p *LoginParams) GetDomain() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -77,6 +83,12 @@ func (p *LoginParams) SetDomainId(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainId"] = v
+}
+
+func (p *LoginParams) ResetDomainId() {
+	if p.p != nil && p.p["domainId"] != nil {
+		delete(p.p, "domainId")
+	}
 }
 
 func (p *LoginParams) GetDomainId() (int64, bool) {
@@ -94,6 +106,12 @@ func (p *LoginParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *LoginParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *LoginParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -107,6 +125,12 @@ func (p *LoginParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *LoginParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *LoginParams) GetUsername() (string, bool) {

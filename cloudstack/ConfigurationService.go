@@ -170,6 +170,12 @@ func (p *ListConfigurationsParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *ListConfigurationsParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
 func (p *ListConfigurationsParams) GetAccountid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -183,6 +189,12 @@ func (p *ListConfigurationsParams) SetCategory(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["category"] = v
+}
+
+func (p *ListConfigurationsParams) ResetCategory() {
+	if p.p != nil && p.p["category"] != nil {
+		delete(p.p, "category")
+	}
 }
 
 func (p *ListConfigurationsParams) GetCategory() (string, bool) {
@@ -200,6 +212,12 @@ func (p *ListConfigurationsParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListConfigurationsParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
 func (p *ListConfigurationsParams) GetClusterid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -213,6 +231,12 @@ func (p *ListConfigurationsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListConfigurationsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListConfigurationsParams) GetDomainid() (string, bool) {
@@ -230,6 +254,12 @@ func (p *ListConfigurationsParams) SetGroup(v string) {
 	p.p["group"] = v
 }
 
+func (p *ListConfigurationsParams) ResetGroup() {
+	if p.p != nil && p.p["group"] != nil {
+		delete(p.p, "group")
+	}
+}
+
 func (p *ListConfigurationsParams) GetGroup() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -243,6 +273,12 @@ func (p *ListConfigurationsParams) SetImagestoreuuid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["imagestoreuuid"] = v
+}
+
+func (p *ListConfigurationsParams) ResetImagestoreuuid() {
+	if p.p != nil && p.p["imagestoreuuid"] != nil {
+		delete(p.p, "imagestoreuuid")
+	}
 }
 
 func (p *ListConfigurationsParams) GetImagestoreuuid() (string, bool) {
@@ -260,6 +296,12 @@ func (p *ListConfigurationsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListConfigurationsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListConfigurationsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -273,6 +315,12 @@ func (p *ListConfigurationsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListConfigurationsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListConfigurationsParams) GetName() (string, bool) {
@@ -290,6 +338,12 @@ func (p *ListConfigurationsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListConfigurationsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListConfigurationsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -303,6 +357,12 @@ func (p *ListConfigurationsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListConfigurationsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListConfigurationsParams) GetPagesize() (int, bool) {
@@ -320,6 +380,12 @@ func (p *ListConfigurationsParams) SetParent(v string) {
 	p.p["parent"] = v
 }
 
+func (p *ListConfigurationsParams) ResetParent() {
+	if p.p != nil && p.p["parent"] != nil {
+		delete(p.p, "parent")
+	}
+}
+
 func (p *ListConfigurationsParams) GetParent() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -333,6 +399,12 @@ func (p *ListConfigurationsParams) SetStorageid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *ListConfigurationsParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
 }
 
 func (p *ListConfigurationsParams) GetStorageid() (string, bool) {
@@ -350,6 +422,12 @@ func (p *ListConfigurationsParams) SetSubgroup(v string) {
 	p.p["subgroup"] = v
 }
 
+func (p *ListConfigurationsParams) ResetSubgroup() {
+	if p.p != nil && p.p["subgroup"] != nil {
+		delete(p.p, "subgroup")
+	}
+}
+
 func (p *ListConfigurationsParams) GetSubgroup() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -363,6 +441,12 @@ func (p *ListConfigurationsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListConfigurationsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListConfigurationsParams) GetZoneid() (string, bool) {
@@ -451,6 +535,12 @@ func (p *ListDeploymentPlannersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDeploymentPlannersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListDeploymentPlannersParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -466,6 +556,12 @@ func (p *ListDeploymentPlannersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDeploymentPlannersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListDeploymentPlannersParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -479,6 +575,12 @@ func (p *ListDeploymentPlannersParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListDeploymentPlannersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListDeploymentPlannersParams) GetPagesize() (int, bool) {
@@ -566,6 +668,12 @@ func (p *UpdateConfigurationParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *UpdateConfigurationParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
 func (p *UpdateConfigurationParams) GetAccountid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -579,6 +687,12 @@ func (p *UpdateConfigurationParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *UpdateConfigurationParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
 }
 
 func (p *UpdateConfigurationParams) GetClusterid() (string, bool) {
@@ -596,6 +710,12 @@ func (p *UpdateConfigurationParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateConfigurationParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *UpdateConfigurationParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -609,6 +729,12 @@ func (p *UpdateConfigurationParams) SetImagestoreuuid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["imagestoreuuid"] = v
+}
+
+func (p *UpdateConfigurationParams) ResetImagestoreuuid() {
+	if p.p != nil && p.p["imagestoreuuid"] != nil {
+		delete(p.p, "imagestoreuuid")
+	}
 }
 
 func (p *UpdateConfigurationParams) GetImagestoreuuid() (string, bool) {
@@ -626,6 +752,12 @@ func (p *UpdateConfigurationParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateConfigurationParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateConfigurationParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -639,6 +771,12 @@ func (p *UpdateConfigurationParams) SetStorageid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *UpdateConfigurationParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
 }
 
 func (p *UpdateConfigurationParams) GetStorageid() (string, bool) {
@@ -656,6 +794,12 @@ func (p *UpdateConfigurationParams) SetValue(v string) {
 	p.p["value"] = v
 }
 
+func (p *UpdateConfigurationParams) ResetValue() {
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
+	}
+}
+
 func (p *UpdateConfigurationParams) GetValue() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -669,6 +813,12 @@ func (p *UpdateConfigurationParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *UpdateConfigurationParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *UpdateConfigurationParams) GetZoneid() (string, bool) {
@@ -767,6 +917,12 @@ func (p *ResetConfigurationParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *ResetConfigurationParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
 func (p *ResetConfigurationParams) GetAccountid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -780,6 +936,12 @@ func (p *ResetConfigurationParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *ResetConfigurationParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
 }
 
 func (p *ResetConfigurationParams) GetClusterid() (string, bool) {
@@ -797,6 +959,12 @@ func (p *ResetConfigurationParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ResetConfigurationParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ResetConfigurationParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -810,6 +978,12 @@ func (p *ResetConfigurationParams) SetImagestoreid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["imagestoreid"] = v
+}
+
+func (p *ResetConfigurationParams) ResetImagestoreid() {
+	if p.p != nil && p.p["imagestoreid"] != nil {
+		delete(p.p, "imagestoreid")
+	}
 }
 
 func (p *ResetConfigurationParams) GetImagestoreid() (string, bool) {
@@ -827,6 +1001,12 @@ func (p *ResetConfigurationParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ResetConfigurationParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ResetConfigurationParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -842,6 +1022,12 @@ func (p *ResetConfigurationParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *ResetConfigurationParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
 func (p *ResetConfigurationParams) GetStorageid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -855,6 +1041,12 @@ func (p *ResetConfigurationParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ResetConfigurationParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ResetConfigurationParams) GetZoneid() (string, bool) {

@@ -69,6 +69,12 @@ func (p *AddBrocadeVcsDeviceParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *AddBrocadeVcsDeviceParams) ResetHostname() {
+	if p.p != nil && p.p["hostname"] != nil {
+		delete(p.p, "hostname")
+	}
+}
+
 func (p *AddBrocadeVcsDeviceParams) GetHostname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -82,6 +88,12 @@ func (p *AddBrocadeVcsDeviceParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddBrocadeVcsDeviceParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *AddBrocadeVcsDeviceParams) GetPassword() (string, bool) {
@@ -99,6 +111,12 @@ func (p *AddBrocadeVcsDeviceParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddBrocadeVcsDeviceParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
+}
+
 func (p *AddBrocadeVcsDeviceParams) GetPhysicalnetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -112,6 +130,12 @@ func (p *AddBrocadeVcsDeviceParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddBrocadeVcsDeviceParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddBrocadeVcsDeviceParams) GetUsername() (string, bool) {
@@ -201,6 +225,12 @@ func (p *DeleteBrocadeVcsDeviceParams) SetVcsdeviceid(v string) {
 	p.p["vcsdeviceid"] = v
 }
 
+func (p *DeleteBrocadeVcsDeviceParams) ResetVcsdeviceid() {
+	if p.p != nil && p.p["vcsdeviceid"] != nil {
+		delete(p.p, "vcsdeviceid")
+	}
+}
+
 func (p *DeleteBrocadeVcsDeviceParams) GetVcsdeviceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -288,6 +318,12 @@ func (p *ListBrocadeVcsDeviceNetworksParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListBrocadeVcsDeviceNetworksParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListBrocadeVcsDeviceNetworksParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -301,6 +337,12 @@ func (p *ListBrocadeVcsDeviceNetworksParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListBrocadeVcsDeviceNetworksParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListBrocadeVcsDeviceNetworksParams) GetPage() (int, bool) {
@@ -318,6 +360,12 @@ func (p *ListBrocadeVcsDeviceNetworksParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBrocadeVcsDeviceNetworksParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListBrocadeVcsDeviceNetworksParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -331,6 +379,12 @@ func (p *ListBrocadeVcsDeviceNetworksParams) SetVcsdeviceid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vcsdeviceid"] = v
+}
+
+func (p *ListBrocadeVcsDeviceNetworksParams) ResetVcsdeviceid() {
+	if p.p != nil && p.p["vcsdeviceid"] != nil {
+		delete(p.p, "vcsdeviceid")
+	}
 }
 
 func (p *ListBrocadeVcsDeviceNetworksParams) GetVcsdeviceid() (string, bool) {
@@ -541,6 +595,12 @@ func (p *ListBrocadeVcsDevicesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListBrocadeVcsDevicesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListBrocadeVcsDevicesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -554,6 +614,12 @@ func (p *ListBrocadeVcsDevicesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListBrocadeVcsDevicesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListBrocadeVcsDevicesParams) GetPage() (int, bool) {
@@ -571,6 +637,12 @@ func (p *ListBrocadeVcsDevicesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListBrocadeVcsDevicesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListBrocadeVcsDevicesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -586,6 +658,12 @@ func (p *ListBrocadeVcsDevicesParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *ListBrocadeVcsDevicesParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
+}
+
 func (p *ListBrocadeVcsDevicesParams) GetPhysicalnetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -599,6 +677,12 @@ func (p *ListBrocadeVcsDevicesParams) SetVcsdeviceid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vcsdeviceid"] = v
+}
+
+func (p *ListBrocadeVcsDevicesParams) ResetVcsdeviceid() {
+	if p.p != nil && p.p["vcsdeviceid"] != nil {
+		delete(p.p, "vcsdeviceid")
+	}
 }
 
 func (p *ListBrocadeVcsDevicesParams) GetVcsdeviceid() (string, bool) {

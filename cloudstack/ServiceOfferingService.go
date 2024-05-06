@@ -240,6 +240,12 @@ func (p *CreateServiceOfferingParams) SetBytesreadrate(v int64) {
 	p.p["bytesreadrate"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetBytesreadrate() {
+	if p.p != nil && p.p["bytesreadrate"] != nil {
+		delete(p.p, "bytesreadrate")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetBytesreadrate() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -253,6 +259,12 @@ func (p *CreateServiceOfferingParams) SetBytesreadratemax(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bytesreadratemax"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetBytesreadratemax() {
+	if p.p != nil && p.p["bytesreadratemax"] != nil {
+		delete(p.p, "bytesreadratemax")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetBytesreadratemax() (int64, bool) {
@@ -270,6 +282,12 @@ func (p *CreateServiceOfferingParams) SetBytesreadratemaxlength(v int64) {
 	p.p["bytesreadratemaxlength"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetBytesreadratemaxlength() {
+	if p.p != nil && p.p["bytesreadratemaxlength"] != nil {
+		delete(p.p, "bytesreadratemaxlength")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetBytesreadratemaxlength() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -283,6 +301,12 @@ func (p *CreateServiceOfferingParams) SetByteswriterate(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["byteswriterate"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetByteswriterate() {
+	if p.p != nil && p.p["byteswriterate"] != nil {
+		delete(p.p, "byteswriterate")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetByteswriterate() (int64, bool) {
@@ -300,6 +324,12 @@ func (p *CreateServiceOfferingParams) SetByteswriteratemax(v int64) {
 	p.p["byteswriteratemax"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetByteswriteratemax() {
+	if p.p != nil && p.p["byteswriteratemax"] != nil {
+		delete(p.p, "byteswriteratemax")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetByteswriteratemax() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -313,6 +343,12 @@ func (p *CreateServiceOfferingParams) SetByteswriteratemaxlength(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["byteswriteratemaxlength"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetByteswriteratemaxlength() {
+	if p.p != nil && p.p["byteswriteratemaxlength"] != nil {
+		delete(p.p, "byteswriteratemaxlength")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetByteswriteratemaxlength() (int64, bool) {
@@ -330,6 +366,12 @@ func (p *CreateServiceOfferingParams) SetCachemode(v string) {
 	p.p["cachemode"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetCachemode() {
+	if p.p != nil && p.p["cachemode"] != nil {
+		delete(p.p, "cachemode")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetCachemode() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -343,6 +385,12 @@ func (p *CreateServiceOfferingParams) SetCpunumber(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cpunumber"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetCpunumber() {
+	if p.p != nil && p.p["cpunumber"] != nil {
+		delete(p.p, "cpunumber")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetCpunumber() (int, bool) {
@@ -360,6 +408,12 @@ func (p *CreateServiceOfferingParams) SetCpuspeed(v int) {
 	p.p["cpuspeed"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetCpuspeed() {
+	if p.p != nil && p.p["cpuspeed"] != nil {
+		delete(p.p, "cpuspeed")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetCpuspeed() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -373,6 +427,12 @@ func (p *CreateServiceOfferingParams) SetCustomized(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customized"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetCustomized() {
+	if p.p != nil && p.p["customized"] != nil {
+		delete(p.p, "customized")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetCustomized() (bool, bool) {
@@ -390,6 +450,12 @@ func (p *CreateServiceOfferingParams) SetCustomizediops(v bool) {
 	p.p["customizediops"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetCustomizediops() {
+	if p.p != nil && p.p["customizediops"] != nil {
+		delete(p.p, "customizediops")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetCustomizediops() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -403,6 +469,12 @@ func (p *CreateServiceOfferingParams) SetDeploymentplanner(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["deploymentplanner"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetDeploymentplanner() {
+	if p.p != nil && p.p["deploymentplanner"] != nil {
+		delete(p.p, "deploymentplanner")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetDeploymentplanner() (string, bool) {
@@ -420,6 +492,12 @@ func (p *CreateServiceOfferingParams) SetDiskofferingid(v string) {
 	p.p["diskofferingid"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetDiskofferingid() {
+	if p.p != nil && p.p["diskofferingid"] != nil {
+		delete(p.p, "diskofferingid")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetDiskofferingid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -433,6 +511,12 @@ func (p *CreateServiceOfferingParams) SetDiskofferingstrictness(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["diskofferingstrictness"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetDiskofferingstrictness() {
+	if p.p != nil && p.p["diskofferingstrictness"] != nil {
+		delete(p.p, "diskofferingstrictness")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetDiskofferingstrictness() (bool, bool) {
@@ -450,6 +534,12 @@ func (p *CreateServiceOfferingParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetDisplaytext() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -463,6 +553,12 @@ func (p *CreateServiceOfferingParams) SetDomainid(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetDomainid() ([]string, bool) {
@@ -480,6 +576,12 @@ func (p *CreateServiceOfferingParams) SetDynamicscalingenabled(v bool) {
 	p.p["dynamicscalingenabled"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetDynamicscalingenabled() {
+	if p.p != nil && p.p["dynamicscalingenabled"] != nil {
+		delete(p.p, "dynamicscalingenabled")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetDynamicscalingenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -493,6 +595,12 @@ func (p *CreateServiceOfferingParams) SetEncryptroot(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["encryptroot"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetEncryptroot() {
+	if p.p != nil && p.p["encryptroot"] != nil {
+		delete(p.p, "encryptroot")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetEncryptroot() (bool, bool) {
@@ -510,6 +618,12 @@ func (p *CreateServiceOfferingParams) SetHosttags(v string) {
 	p.p["hosttags"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetHosttags() {
+	if p.p != nil && p.p["hosttags"] != nil {
+		delete(p.p, "hosttags")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetHosttags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -523,6 +637,12 @@ func (p *CreateServiceOfferingParams) SetHypervisorsnapshotreserve(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisorsnapshotreserve"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetHypervisorsnapshotreserve() {
+	if p.p != nil && p.p["hypervisorsnapshotreserve"] != nil {
+		delete(p.p, "hypervisorsnapshotreserve")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetHypervisorsnapshotreserve() (int, bool) {
@@ -540,6 +660,12 @@ func (p *CreateServiceOfferingParams) SetIopsreadrate(v int64) {
 	p.p["iopsreadrate"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetIopsreadrate() {
+	if p.p != nil && p.p["iopsreadrate"] != nil {
+		delete(p.p, "iopsreadrate")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetIopsreadrate() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -553,6 +679,12 @@ func (p *CreateServiceOfferingParams) SetIopsreadratemax(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iopsreadratemax"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetIopsreadratemax() {
+	if p.p != nil && p.p["iopsreadratemax"] != nil {
+		delete(p.p, "iopsreadratemax")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetIopsreadratemax() (int64, bool) {
@@ -570,6 +702,12 @@ func (p *CreateServiceOfferingParams) SetIopsreadratemaxlength(v int64) {
 	p.p["iopsreadratemaxlength"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetIopsreadratemaxlength() {
+	if p.p != nil && p.p["iopsreadratemaxlength"] != nil {
+		delete(p.p, "iopsreadratemaxlength")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetIopsreadratemaxlength() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -583,6 +721,12 @@ func (p *CreateServiceOfferingParams) SetIopswriterate(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iopswriterate"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetIopswriterate() {
+	if p.p != nil && p.p["iopswriterate"] != nil {
+		delete(p.p, "iopswriterate")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetIopswriterate() (int64, bool) {
@@ -600,6 +744,12 @@ func (p *CreateServiceOfferingParams) SetIopswriteratemax(v int64) {
 	p.p["iopswriteratemax"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetIopswriteratemax() {
+	if p.p != nil && p.p["iopswriteratemax"] != nil {
+		delete(p.p, "iopswriteratemax")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetIopswriteratemax() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -613,6 +763,12 @@ func (p *CreateServiceOfferingParams) SetIopswriteratemaxlength(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iopswriteratemaxlength"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetIopswriteratemaxlength() {
+	if p.p != nil && p.p["iopswriteratemaxlength"] != nil {
+		delete(p.p, "iopswriteratemaxlength")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetIopswriteratemaxlength() (int64, bool) {
@@ -630,6 +786,12 @@ func (p *CreateServiceOfferingParams) SetIssystem(v bool) {
 	p.p["issystem"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetIssystem() {
+	if p.p != nil && p.p["issystem"] != nil {
+		delete(p.p, "issystem")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetIssystem() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -643,6 +805,12 @@ func (p *CreateServiceOfferingParams) SetIsvolatile(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isvolatile"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetIsvolatile() {
+	if p.p != nil && p.p["isvolatile"] != nil {
+		delete(p.p, "isvolatile")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetIsvolatile() (bool, bool) {
@@ -660,6 +828,12 @@ func (p *CreateServiceOfferingParams) SetLimitcpuuse(v bool) {
 	p.p["limitcpuuse"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetLimitcpuuse() {
+	if p.p != nil && p.p["limitcpuuse"] != nil {
+		delete(p.p, "limitcpuuse")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetLimitcpuuse() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -673,6 +847,12 @@ func (p *CreateServiceOfferingParams) SetMaxcpunumber(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxcpunumber"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetMaxcpunumber() {
+	if p.p != nil && p.p["maxcpunumber"] != nil {
+		delete(p.p, "maxcpunumber")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetMaxcpunumber() (int, bool) {
@@ -690,6 +870,12 @@ func (p *CreateServiceOfferingParams) SetMaxiops(v int64) {
 	p.p["maxiops"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetMaxiops() {
+	if p.p != nil && p.p["maxiops"] != nil {
+		delete(p.p, "maxiops")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetMaxiops() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -703,6 +889,12 @@ func (p *CreateServiceOfferingParams) SetMaxmemory(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxmemory"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetMaxmemory() {
+	if p.p != nil && p.p["maxmemory"] != nil {
+		delete(p.p, "maxmemory")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetMaxmemory() (int, bool) {
@@ -720,6 +912,12 @@ func (p *CreateServiceOfferingParams) SetMemory(v int) {
 	p.p["memory"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetMemory() {
+	if p.p != nil && p.p["memory"] != nil {
+		delete(p.p, "memory")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetMemory() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -733,6 +931,12 @@ func (p *CreateServiceOfferingParams) SetMincpunumber(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["mincpunumber"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetMincpunumber() {
+	if p.p != nil && p.p["mincpunumber"] != nil {
+		delete(p.p, "mincpunumber")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetMincpunumber() (int, bool) {
@@ -750,6 +954,12 @@ func (p *CreateServiceOfferingParams) SetMiniops(v int64) {
 	p.p["miniops"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetMiniops() {
+	if p.p != nil && p.p["miniops"] != nil {
+		delete(p.p, "miniops")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetMiniops() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -763,6 +973,12 @@ func (p *CreateServiceOfferingParams) SetMinmemory(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["minmemory"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetMinmemory() {
+	if p.p != nil && p.p["minmemory"] != nil {
+		delete(p.p, "minmemory")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetMinmemory() (int, bool) {
@@ -780,6 +996,12 @@ func (p *CreateServiceOfferingParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -793,6 +1015,12 @@ func (p *CreateServiceOfferingParams) SetNetworkrate(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkrate"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetNetworkrate() {
+	if p.p != nil && p.p["networkrate"] != nil {
+		delete(p.p, "networkrate")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetNetworkrate() (int, bool) {
@@ -810,6 +1038,12 @@ func (p *CreateServiceOfferingParams) SetOfferha(v bool) {
 	p.p["offerha"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetOfferha() {
+	if p.p != nil && p.p["offerha"] != nil {
+		delete(p.p, "offerha")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetOfferha() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -823,6 +1057,12 @@ func (p *CreateServiceOfferingParams) SetProvisioningtype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provisioningtype"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetProvisioningtype() {
+	if p.p != nil && p.p["provisioningtype"] != nil {
+		delete(p.p, "provisioningtype")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetProvisioningtype() (string, bool) {
@@ -840,6 +1080,12 @@ func (p *CreateServiceOfferingParams) SetRootdisksize(v int64) {
 	p.p["rootdisksize"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetRootdisksize() {
+	if p.p != nil && p.p["rootdisksize"] != nil {
+		delete(p.p, "rootdisksize")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetRootdisksize() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -853,6 +1099,12 @@ func (p *CreateServiceOfferingParams) SetServiceofferingdetails(v map[string]str
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingdetails"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetServiceofferingdetails() {
+	if p.p != nil && p.p["serviceofferingdetails"] != nil {
+		delete(p.p, "serviceofferingdetails")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetServiceofferingdetails() (map[string]string, bool) {
@@ -870,6 +1122,12 @@ func (p *CreateServiceOfferingParams) SetStoragepolicy(v string) {
 	p.p["storagepolicy"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetStoragepolicy() {
+	if p.p != nil && p.p["storagepolicy"] != nil {
+		delete(p.p, "storagepolicy")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetStoragepolicy() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -883,6 +1141,12 @@ func (p *CreateServiceOfferingParams) SetStoragetype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storagetype"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetStoragetype() {
+	if p.p != nil && p.p["storagetype"] != nil {
+		delete(p.p, "storagetype")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetStoragetype() (string, bool) {
@@ -900,6 +1164,12 @@ func (p *CreateServiceOfferingParams) SetSystemvmtype(v string) {
 	p.p["systemvmtype"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetSystemvmtype() {
+	if p.p != nil && p.p["systemvmtype"] != nil {
+		delete(p.p, "systemvmtype")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetSystemvmtype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -915,6 +1185,12 @@ func (p *CreateServiceOfferingParams) SetTags(v string) {
 	p.p["tags"] = v
 }
 
+func (p *CreateServiceOfferingParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *CreateServiceOfferingParams) GetTags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -928,6 +1204,12 @@ func (p *CreateServiceOfferingParams) SetZoneid(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreateServiceOfferingParams) GetZoneid() ([]string, bool) {
@@ -1043,6 +1325,12 @@ func (p *DeleteServiceOfferingParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteServiceOfferingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteServiceOfferingParams) GetId() (string, bool) {
@@ -1196,6 +1484,12 @@ func (p *ListServiceOfferingsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1209,6 +1503,12 @@ func (p *ListServiceOfferingsParams) SetCpunumber(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cpunumber"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetCpunumber() {
+	if p.p != nil && p.p["cpunumber"] != nil {
+		delete(p.p, "cpunumber")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetCpunumber() (int, bool) {
@@ -1226,6 +1526,12 @@ func (p *ListServiceOfferingsParams) SetCpuspeed(v int) {
 	p.p["cpuspeed"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetCpuspeed() {
+	if p.p != nil && p.p["cpuspeed"] != nil {
+		delete(p.p, "cpuspeed")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetCpuspeed() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1239,6 +1545,12 @@ func (p *ListServiceOfferingsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetDomainid() (string, bool) {
@@ -1256,6 +1568,12 @@ func (p *ListServiceOfferingsParams) SetEncryptroot(v bool) {
 	p.p["encryptroot"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetEncryptroot() {
+	if p.p != nil && p.p["encryptroot"] != nil {
+		delete(p.p, "encryptroot")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetEncryptroot() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1269,6 +1587,12 @@ func (p *ListServiceOfferingsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetId() (string, bool) {
@@ -1286,6 +1610,12 @@ func (p *ListServiceOfferingsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1299,6 +1629,12 @@ func (p *ListServiceOfferingsParams) SetIssystem(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["issystem"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetIssystem() {
+	if p.p != nil && p.p["issystem"] != nil {
+		delete(p.p, "issystem")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetIssystem() (bool, bool) {
@@ -1316,6 +1652,12 @@ func (p *ListServiceOfferingsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1329,6 +1671,12 @@ func (p *ListServiceOfferingsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetListall() (bool, bool) {
@@ -1346,6 +1694,12 @@ func (p *ListServiceOfferingsParams) SetMemory(v int) {
 	p.p["memory"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetMemory() {
+	if p.p != nil && p.p["memory"] != nil {
+		delete(p.p, "memory")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetMemory() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1359,6 +1713,12 @@ func (p *ListServiceOfferingsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetName() (string, bool) {
@@ -1376,6 +1736,12 @@ func (p *ListServiceOfferingsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1389,6 +1755,12 @@ func (p *ListServiceOfferingsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetPagesize() (int, bool) {
@@ -1406,6 +1778,12 @@ func (p *ListServiceOfferingsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1419,6 +1797,12 @@ func (p *ListServiceOfferingsParams) SetStoragetype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storagetype"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetStoragetype() {
+	if p.p != nil && p.p["storagetype"] != nil {
+		delete(p.p, "storagetype")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetStoragetype() (string, bool) {
@@ -1436,6 +1820,12 @@ func (p *ListServiceOfferingsParams) SetSystemvmtype(v string) {
 	p.p["systemvmtype"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetSystemvmtype() {
+	if p.p != nil && p.p["systemvmtype"] != nil {
+		delete(p.p, "systemvmtype")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetSystemvmtype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1451,6 +1841,12 @@ func (p *ListServiceOfferingsParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListServiceOfferingsParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
 func (p *ListServiceOfferingsParams) GetVirtualmachineid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1464,6 +1860,12 @@ func (p *ListServiceOfferingsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListServiceOfferingsParams) GetZoneid() (string, bool) {
@@ -1685,6 +2087,12 @@ func (p *UpdateServiceOfferingParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *UpdateServiceOfferingParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
 func (p *UpdateServiceOfferingParams) GetDisplaytext() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1698,6 +2106,12 @@ func (p *UpdateServiceOfferingParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *UpdateServiceOfferingParams) GetDomainid() (string, bool) {
@@ -1715,6 +2129,12 @@ func (p *UpdateServiceOfferingParams) SetHosttags(v string) {
 	p.p["hosttags"] = v
 }
 
+func (p *UpdateServiceOfferingParams) ResetHosttags() {
+	if p.p != nil && p.p["hosttags"] != nil {
+		delete(p.p, "hosttags")
+	}
+}
+
 func (p *UpdateServiceOfferingParams) GetHosttags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1728,6 +2148,12 @@ func (p *UpdateServiceOfferingParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateServiceOfferingParams) GetId() (string, bool) {
@@ -1745,6 +2171,12 @@ func (p *UpdateServiceOfferingParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateServiceOfferingParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateServiceOfferingParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1758,6 +2190,12 @@ func (p *UpdateServiceOfferingParams) SetSortkey(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sortkey"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetSortkey() {
+	if p.p != nil && p.p["sortkey"] != nil {
+		delete(p.p, "sortkey")
+	}
 }
 
 func (p *UpdateServiceOfferingParams) GetSortkey() (int, bool) {
@@ -1775,6 +2213,12 @@ func (p *UpdateServiceOfferingParams) SetStoragetags(v string) {
 	p.p["storagetags"] = v
 }
 
+func (p *UpdateServiceOfferingParams) ResetStoragetags() {
+	if p.p != nil && p.p["storagetags"] != nil {
+		delete(p.p, "storagetags")
+	}
+}
+
 func (p *UpdateServiceOfferingParams) GetStoragetags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1788,6 +2232,12 @@ func (p *UpdateServiceOfferingParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *UpdateServiceOfferingParams) GetZoneid() (string, bool) {

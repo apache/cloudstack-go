@@ -160,6 +160,12 @@ func (p *CreateNetworkOfferingParams) SetAvailability(v string) {
 	p.p["availability"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetAvailability() {
+	if p.p != nil && p.p["availability"] != nil {
+		delete(p.p, "availability")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetAvailability() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -173,6 +179,12 @@ func (p *CreateNetworkOfferingParams) SetConservemode(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["conservemode"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetConservemode() {
+	if p.p != nil && p.p["conservemode"] != nil {
+		delete(p.p, "conservemode")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetConservemode() (bool, bool) {
@@ -190,6 +202,12 @@ func (p *CreateNetworkOfferingParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -203,6 +221,12 @@ func (p *CreateNetworkOfferingParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetDisplaytext() (string, bool) {
@@ -220,6 +244,12 @@ func (p *CreateNetworkOfferingParams) SetDomainid(v []string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetDomainid() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -233,6 +263,12 @@ func (p *CreateNetworkOfferingParams) SetEgressdefaultpolicy(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["egressdefaultpolicy"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetEgressdefaultpolicy() {
+	if p.p != nil && p.p["egressdefaultpolicy"] != nil {
+		delete(p.p, "egressdefaultpolicy")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetEgressdefaultpolicy() (bool, bool) {
@@ -250,6 +286,12 @@ func (p *CreateNetworkOfferingParams) SetEnable(v bool) {
 	p.p["enable"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetEnable() {
+	if p.p != nil && p.p["enable"] != nil {
+		delete(p.p, "enable")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetEnable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -263,6 +305,12 @@ func (p *CreateNetworkOfferingParams) SetFortungsten(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fortungsten"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetFortungsten() {
+	if p.p != nil && p.p["fortungsten"] != nil {
+		delete(p.p, "fortungsten")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetFortungsten() (bool, bool) {
@@ -280,6 +328,12 @@ func (p *CreateNetworkOfferingParams) SetForvpc(v bool) {
 	p.p["forvpc"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetForvpc() {
+	if p.p != nil && p.p["forvpc"] != nil {
+		delete(p.p, "forvpc")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetForvpc() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -293,6 +347,12 @@ func (p *CreateNetworkOfferingParams) SetGuestiptype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["guestiptype"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetGuestiptype() {
+	if p.p != nil && p.p["guestiptype"] != nil {
+		delete(p.p, "guestiptype")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetGuestiptype() (string, bool) {
@@ -310,6 +370,12 @@ func (p *CreateNetworkOfferingParams) SetInternetprotocol(v string) {
 	p.p["internetprotocol"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetInternetprotocol() {
+	if p.p != nil && p.p["internetprotocol"] != nil {
+		delete(p.p, "internetprotocol")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetInternetprotocol() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -323,6 +389,12 @@ func (p *CreateNetworkOfferingParams) SetIspersistent(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ispersistent"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetIspersistent() {
+	if p.p != nil && p.p["ispersistent"] != nil {
+		delete(p.p, "ispersistent")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetIspersistent() (bool, bool) {
@@ -340,6 +412,12 @@ func (p *CreateNetworkOfferingParams) SetKeepaliveenabled(v bool) {
 	p.p["keepaliveenabled"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetKeepaliveenabled() {
+	if p.p != nil && p.p["keepaliveenabled"] != nil {
+		delete(p.p, "keepaliveenabled")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetKeepaliveenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -353,6 +431,12 @@ func (p *CreateNetworkOfferingParams) SetMaxconnections(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxconnections"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetMaxconnections() {
+	if p.p != nil && p.p["maxconnections"] != nil {
+		delete(p.p, "maxconnections")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetMaxconnections() (int, bool) {
@@ -370,6 +454,12 @@ func (p *CreateNetworkOfferingParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -383,6 +473,12 @@ func (p *CreateNetworkOfferingParams) SetNetworkrate(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkrate"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetNetworkrate() {
+	if p.p != nil && p.p["networkrate"] != nil {
+		delete(p.p, "networkrate")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetNetworkrate() (int, bool) {
@@ -400,6 +496,12 @@ func (p *CreateNetworkOfferingParams) SetServicecapabilitylist(v map[string]stri
 	p.p["servicecapabilitylist"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetServicecapabilitylist() {
+	if p.p != nil && p.p["servicecapabilitylist"] != nil {
+		delete(p.p, "servicecapabilitylist")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetServicecapabilitylist() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -413,6 +515,12 @@ func (p *CreateNetworkOfferingParams) SetServiceofferingid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingid"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetServiceofferingid() {
+	if p.p != nil && p.p["serviceofferingid"] != nil {
+		delete(p.p, "serviceofferingid")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetServiceofferingid() (string, bool) {
@@ -430,6 +538,12 @@ func (p *CreateNetworkOfferingParams) SetServiceproviderlist(v map[string]string
 	p.p["serviceproviderlist"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetServiceproviderlist() {
+	if p.p != nil && p.p["serviceproviderlist"] != nil {
+		delete(p.p, "serviceproviderlist")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetServiceproviderlist() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -443,6 +557,12 @@ func (p *CreateNetworkOfferingParams) SetSpecifyipranges(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["specifyipranges"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetSpecifyipranges() {
+	if p.p != nil && p.p["specifyipranges"] != nil {
+		delete(p.p, "specifyipranges")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetSpecifyipranges() (bool, bool) {
@@ -460,6 +580,12 @@ func (p *CreateNetworkOfferingParams) SetSpecifyvlan(v bool) {
 	p.p["specifyvlan"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetSpecifyvlan() {
+	if p.p != nil && p.p["specifyvlan"] != nil {
+		delete(p.p, "specifyvlan")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetSpecifyvlan() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -473,6 +599,12 @@ func (p *CreateNetworkOfferingParams) SetSupportedservices(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["supportedservices"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetSupportedservices() {
+	if p.p != nil && p.p["supportedservices"] != nil {
+		delete(p.p, "supportedservices")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetSupportedservices() ([]string, bool) {
@@ -490,6 +622,12 @@ func (p *CreateNetworkOfferingParams) SetTags(v string) {
 	p.p["tags"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetTags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -505,6 +643,12 @@ func (p *CreateNetworkOfferingParams) SetTraffictype(v string) {
 	p.p["traffictype"] = v
 }
 
+func (p *CreateNetworkOfferingParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
+}
+
 func (p *CreateNetworkOfferingParams) GetTraffictype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -518,6 +662,12 @@ func (p *CreateNetworkOfferingParams) SetZoneid(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreateNetworkOfferingParams) GetZoneid() ([]string, bool) {
@@ -636,6 +786,12 @@ func (p *DeleteNetworkOfferingParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteNetworkOfferingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteNetworkOfferingParams) GetId() (string, bool) {
@@ -795,6 +951,12 @@ func (p *ListNetworkOfferingsParams) SetAvailability(v string) {
 	p.p["availability"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetAvailability() {
+	if p.p != nil && p.p["availability"] != nil {
+		delete(p.p, "availability")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetAvailability() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -808,6 +970,12 @@ func (p *ListNetworkOfferingsParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetDisplaytext() (string, bool) {
@@ -825,6 +993,12 @@ func (p *ListNetworkOfferingsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -838,6 +1012,12 @@ func (p *ListNetworkOfferingsParams) SetForvpc(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forvpc"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetForvpc() {
+	if p.p != nil && p.p["forvpc"] != nil {
+		delete(p.p, "forvpc")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetForvpc() (bool, bool) {
@@ -855,6 +1035,12 @@ func (p *ListNetworkOfferingsParams) SetGuestiptype(v string) {
 	p.p["guestiptype"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetGuestiptype() {
+	if p.p != nil && p.p["guestiptype"] != nil {
+		delete(p.p, "guestiptype")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetGuestiptype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -868,6 +1054,12 @@ func (p *ListNetworkOfferingsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetId() (string, bool) {
@@ -885,6 +1077,12 @@ func (p *ListNetworkOfferingsParams) SetIsdefault(v bool) {
 	p.p["isdefault"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetIsdefault() {
+	if p.p != nil && p.p["isdefault"] != nil {
+		delete(p.p, "isdefault")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetIsdefault() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -898,6 +1096,12 @@ func (p *ListNetworkOfferingsParams) SetIstagged(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["istagged"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetIstagged() {
+	if p.p != nil && p.p["istagged"] != nil {
+		delete(p.p, "istagged")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetIstagged() (bool, bool) {
@@ -915,6 +1119,12 @@ func (p *ListNetworkOfferingsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -928,6 +1138,12 @@ func (p *ListNetworkOfferingsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetName() (string, bool) {
@@ -945,6 +1161,12 @@ func (p *ListNetworkOfferingsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetNetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -958,6 +1180,12 @@ func (p *ListNetworkOfferingsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetPage() (int, bool) {
@@ -975,6 +1203,12 @@ func (p *ListNetworkOfferingsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -988,6 +1222,12 @@ func (p *ListNetworkOfferingsParams) SetSourcenatsupported(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sourcenatsupported"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetSourcenatsupported() {
+	if p.p != nil && p.p["sourcenatsupported"] != nil {
+		delete(p.p, "sourcenatsupported")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetSourcenatsupported() (bool, bool) {
@@ -1005,6 +1245,12 @@ func (p *ListNetworkOfferingsParams) SetSpecifyipranges(v bool) {
 	p.p["specifyipranges"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetSpecifyipranges() {
+	if p.p != nil && p.p["specifyipranges"] != nil {
+		delete(p.p, "specifyipranges")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetSpecifyipranges() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1018,6 +1264,12 @@ func (p *ListNetworkOfferingsParams) SetSpecifyvlan(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["specifyvlan"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetSpecifyvlan() {
+	if p.p != nil && p.p["specifyvlan"] != nil {
+		delete(p.p, "specifyvlan")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetSpecifyvlan() (bool, bool) {
@@ -1035,6 +1287,12 @@ func (p *ListNetworkOfferingsParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetState() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1048,6 +1306,12 @@ func (p *ListNetworkOfferingsParams) SetSupportedservices(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["supportedservices"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetSupportedservices() {
+	if p.p != nil && p.p["supportedservices"] != nil {
+		delete(p.p, "supportedservices")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetSupportedservices() ([]string, bool) {
@@ -1065,6 +1329,12 @@ func (p *ListNetworkOfferingsParams) SetTags(v string) {
 	p.p["tags"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetTags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1080,6 +1350,12 @@ func (p *ListNetworkOfferingsParams) SetTraffictype(v string) {
 	p.p["traffictype"] = v
 }
 
+func (p *ListNetworkOfferingsParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
+}
+
 func (p *ListNetworkOfferingsParams) GetTraffictype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1093,6 +1369,12 @@ func (p *ListNetworkOfferingsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListNetworkOfferingsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListNetworkOfferingsParams) GetZoneid() (string, bool) {
@@ -1326,6 +1608,12 @@ func (p *UpdateNetworkOfferingParams) SetAvailability(v string) {
 	p.p["availability"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetAvailability() {
+	if p.p != nil && p.p["availability"] != nil {
+		delete(p.p, "availability")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetAvailability() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1339,6 +1627,12 @@ func (p *UpdateNetworkOfferingParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *UpdateNetworkOfferingParams) GetDisplaytext() (string, bool) {
@@ -1356,6 +1650,12 @@ func (p *UpdateNetworkOfferingParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1369,6 +1669,12 @@ func (p *UpdateNetworkOfferingParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateNetworkOfferingParams) GetId() (string, bool) {
@@ -1386,6 +1692,12 @@ func (p *UpdateNetworkOfferingParams) SetKeepaliveenabled(v bool) {
 	p.p["keepaliveenabled"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetKeepaliveenabled() {
+	if p.p != nil && p.p["keepaliveenabled"] != nil {
+		delete(p.p, "keepaliveenabled")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetKeepaliveenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1399,6 +1711,12 @@ func (p *UpdateNetworkOfferingParams) SetMaxconnections(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxconnections"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) ResetMaxconnections() {
+	if p.p != nil && p.p["maxconnections"] != nil {
+		delete(p.p, "maxconnections")
+	}
 }
 
 func (p *UpdateNetworkOfferingParams) GetMaxconnections() (int, bool) {
@@ -1416,6 +1734,12 @@ func (p *UpdateNetworkOfferingParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1429,6 +1753,12 @@ func (p *UpdateNetworkOfferingParams) SetSortkey(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sortkey"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) ResetSortkey() {
+	if p.p != nil && p.p["sortkey"] != nil {
+		delete(p.p, "sortkey")
+	}
 }
 
 func (p *UpdateNetworkOfferingParams) GetSortkey() (int, bool) {
@@ -1446,6 +1776,12 @@ func (p *UpdateNetworkOfferingParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetState() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1461,6 +1797,12 @@ func (p *UpdateNetworkOfferingParams) SetTags(v string) {
 	p.p["tags"] = v
 }
 
+func (p *UpdateNetworkOfferingParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *UpdateNetworkOfferingParams) GetTags() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1474,6 +1816,12 @@ func (p *UpdateNetworkOfferingParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *UpdateNetworkOfferingParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *UpdateNetworkOfferingParams) GetZoneid() (string, bool) {

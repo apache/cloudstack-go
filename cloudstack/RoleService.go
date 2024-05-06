@@ -86,6 +86,12 @@ func (p *CreateRoleParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateRoleParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *CreateRoleParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -99,6 +105,12 @@ func (p *CreateRoleParams) SetIspublic(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ispublic"] = v
+}
+
+func (p *CreateRoleParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
 }
 
 func (p *CreateRoleParams) GetIspublic() (bool, bool) {
@@ -116,6 +128,12 @@ func (p *CreateRoleParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateRoleParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateRoleParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -131,6 +149,12 @@ func (p *CreateRoleParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateRoleParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
+}
+
 func (p *CreateRoleParams) GetRoleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -144,6 +168,12 @@ func (p *CreateRoleParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *CreateRoleParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *CreateRoleParams) GetType() (string, bool) {
@@ -223,6 +253,12 @@ func (p *CreateRolePermissionParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateRolePermissionParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *CreateRolePermissionParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -236,6 +272,12 @@ func (p *CreateRolePermissionParams) SetPermission(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["permission"] = v
+}
+
+func (p *CreateRolePermissionParams) ResetPermission() {
+	if p.p != nil && p.p["permission"] != nil {
+		delete(p.p, "permission")
+	}
 }
 
 func (p *CreateRolePermissionParams) GetPermission() (string, bool) {
@@ -253,6 +295,12 @@ func (p *CreateRolePermissionParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateRolePermissionParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
+}
+
 func (p *CreateRolePermissionParams) GetRoleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -266,6 +314,12 @@ func (p *CreateRolePermissionParams) SetRule(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["rule"] = v
+}
+
+func (p *CreateRolePermissionParams) ResetRule() {
+	if p.p != nil && p.p["rule"] != nil {
+		delete(p.p, "rule")
+	}
 }
 
 func (p *CreateRolePermissionParams) GetRule() (string, bool) {
@@ -336,6 +390,12 @@ func (p *DeleteRoleParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteRoleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteRoleParams) GetId() (string, bool) {
@@ -424,6 +484,12 @@ func (p *DeleteRolePermissionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteRolePermissionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteRolePermissionParams) GetId() (string, bool) {
@@ -535,6 +601,12 @@ func (p *ImportRoleParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *ImportRoleParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *ImportRoleParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -548,6 +620,12 @@ func (p *ImportRoleParams) SetForced(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forced"] = v
+}
+
+func (p *ImportRoleParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
 }
 
 func (p *ImportRoleParams) GetForced() (bool, bool) {
@@ -565,6 +643,12 @@ func (p *ImportRoleParams) SetIspublic(v bool) {
 	p.p["ispublic"] = v
 }
 
+func (p *ImportRoleParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
+}
+
 func (p *ImportRoleParams) GetIspublic() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -578,6 +662,12 @@ func (p *ImportRoleParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ImportRoleParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ImportRoleParams) GetName() (string, bool) {
@@ -595,6 +685,12 @@ func (p *ImportRoleParams) SetRules(v map[string]string) {
 	p.p["rules"] = v
 }
 
+func (p *ImportRoleParams) ResetRules() {
+	if p.p != nil && p.p["rules"] != nil {
+		delete(p.p, "rules")
+	}
+}
+
 func (p *ImportRoleParams) GetRules() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -608,6 +704,12 @@ func (p *ImportRoleParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ImportRoleParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ImportRoleParams) GetType() (string, bool) {
@@ -674,6 +776,12 @@ func (p *ListRolePermissionsParams) SetRoleid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roleid"] = v
+}
+
+func (p *ListRolePermissionsParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
 }
 
 func (p *ListRolePermissionsParams) GetRoleid() (string, bool) {
@@ -762,6 +870,12 @@ func (p *ListRolesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListRolesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListRolesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -775,6 +889,12 @@ func (p *ListRolesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRolesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListRolesParams) GetKeyword() (string, bool) {
@@ -792,6 +912,12 @@ func (p *ListRolesParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListRolesParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListRolesParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -805,6 +931,12 @@ func (p *ListRolesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListRolesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListRolesParams) GetPage() (int, bool) {
@@ -822,6 +954,12 @@ func (p *ListRolesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListRolesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListRolesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -835,6 +973,12 @@ func (p *ListRolesParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListRolesParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ListRolesParams) GetType() (string, bool) {
@@ -1005,6 +1149,12 @@ func (p *UpdateRoleParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *UpdateRoleParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *UpdateRoleParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1018,6 +1168,12 @@ func (p *UpdateRoleParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateRoleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateRoleParams) GetId() (string, bool) {
@@ -1035,6 +1191,12 @@ func (p *UpdateRoleParams) SetIspublic(v bool) {
 	p.p["ispublic"] = v
 }
 
+func (p *UpdateRoleParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
+}
+
 func (p *UpdateRoleParams) GetIspublic() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1050,6 +1212,12 @@ func (p *UpdateRoleParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateRoleParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateRoleParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1063,6 +1231,12 @@ func (p *UpdateRoleParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *UpdateRoleParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *UpdateRoleParams) GetType() (string, bool) {
@@ -1140,6 +1314,12 @@ func (p *UpdateRolePermissionParams) SetPermission(v string) {
 	p.p["permission"] = v
 }
 
+func (p *UpdateRolePermissionParams) ResetPermission() {
+	if p.p != nil && p.p["permission"] != nil {
+		delete(p.p, "permission")
+	}
+}
+
 func (p *UpdateRolePermissionParams) GetPermission() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1153,6 +1333,12 @@ func (p *UpdateRolePermissionParams) SetRoleid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roleid"] = v
+}
+
+func (p *UpdateRolePermissionParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
 }
 
 func (p *UpdateRolePermissionParams) GetRoleid() (string, bool) {
@@ -1170,6 +1356,12 @@ func (p *UpdateRolePermissionParams) SetRuleid(v string) {
 	p.p["ruleid"] = v
 }
 
+func (p *UpdateRolePermissionParams) ResetRuleid() {
+	if p.p != nil && p.p["ruleid"] != nil {
+		delete(p.p, "ruleid")
+	}
+}
+
 func (p *UpdateRolePermissionParams) GetRuleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1183,6 +1375,12 @@ func (p *UpdateRolePermissionParams) SetRuleorder(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ruleorder"] = v
+}
+
+func (p *UpdateRolePermissionParams) ResetRuleorder() {
+	if p.p != nil && p.p["ruleorder"] != nil {
+		delete(p.p, "ruleorder")
+	}
 }
 
 func (p *UpdateRolePermissionParams) GetRuleorder() ([]string, bool) {

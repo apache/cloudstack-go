@@ -118,6 +118,12 @@ func (p *CreateAutoScalePolicyParams) SetAction(v string) {
 	p.p["action"] = v
 }
 
+func (p *CreateAutoScalePolicyParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
 func (p *CreateAutoScalePolicyParams) GetAction() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -131,6 +137,12 @@ func (p *CreateAutoScalePolicyParams) SetConditionids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["conditionids"] = v
+}
+
+func (p *CreateAutoScalePolicyParams) ResetConditionids() {
+	if p.p != nil && p.p["conditionids"] != nil {
+		delete(p.p, "conditionids")
+	}
 }
 
 func (p *CreateAutoScalePolicyParams) GetConditionids() ([]string, bool) {
@@ -148,6 +160,12 @@ func (p *CreateAutoScalePolicyParams) SetDuration(v int) {
 	p.p["duration"] = v
 }
 
+func (p *CreateAutoScalePolicyParams) ResetDuration() {
+	if p.p != nil && p.p["duration"] != nil {
+		delete(p.p, "duration")
+	}
+}
+
 func (p *CreateAutoScalePolicyParams) GetDuration() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -163,6 +181,12 @@ func (p *CreateAutoScalePolicyParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateAutoScalePolicyParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateAutoScalePolicyParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -176,6 +200,12 @@ func (p *CreateAutoScalePolicyParams) SetQuiettime(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["quiettime"] = v
+}
+
+func (p *CreateAutoScalePolicyParams) ResetQuiettime() {
+	if p.p != nil && p.p["quiettime"] != nil {
+		delete(p.p, "quiettime")
+	}
 }
 
 func (p *CreateAutoScalePolicyParams) GetQuiettime() (int, bool) {
@@ -300,6 +330,12 @@ func (p *CreateAutoScaleVmGroupParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateAutoScaleVmGroupParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateAutoScaleVmGroupParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -313,6 +349,12 @@ func (p *CreateAutoScaleVmGroupParams) SetInterval(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["interval"] = v
+}
+
+func (p *CreateAutoScaleVmGroupParams) ResetInterval() {
+	if p.p != nil && p.p["interval"] != nil {
+		delete(p.p, "interval")
+	}
 }
 
 func (p *CreateAutoScaleVmGroupParams) GetInterval() (int, bool) {
@@ -330,6 +372,12 @@ func (p *CreateAutoScaleVmGroupParams) SetLbruleid(v string) {
 	p.p["lbruleid"] = v
 }
 
+func (p *CreateAutoScaleVmGroupParams) ResetLbruleid() {
+	if p.p != nil && p.p["lbruleid"] != nil {
+		delete(p.p, "lbruleid")
+	}
+}
+
 func (p *CreateAutoScaleVmGroupParams) GetLbruleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -343,6 +391,12 @@ func (p *CreateAutoScaleVmGroupParams) SetMaxmembers(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxmembers"] = v
+}
+
+func (p *CreateAutoScaleVmGroupParams) ResetMaxmembers() {
+	if p.p != nil && p.p["maxmembers"] != nil {
+		delete(p.p, "maxmembers")
+	}
 }
 
 func (p *CreateAutoScaleVmGroupParams) GetMaxmembers() (int, bool) {
@@ -360,6 +414,12 @@ func (p *CreateAutoScaleVmGroupParams) SetMinmembers(v int) {
 	p.p["minmembers"] = v
 }
 
+func (p *CreateAutoScaleVmGroupParams) ResetMinmembers() {
+	if p.p != nil && p.p["minmembers"] != nil {
+		delete(p.p, "minmembers")
+	}
+}
+
 func (p *CreateAutoScaleVmGroupParams) GetMinmembers() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -373,6 +433,12 @@ func (p *CreateAutoScaleVmGroupParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateAutoScaleVmGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *CreateAutoScaleVmGroupParams) GetName() (string, bool) {
@@ -390,6 +456,12 @@ func (p *CreateAutoScaleVmGroupParams) SetScaledownpolicyids(v []string) {
 	p.p["scaledownpolicyids"] = v
 }
 
+func (p *CreateAutoScaleVmGroupParams) ResetScaledownpolicyids() {
+	if p.p != nil && p.p["scaledownpolicyids"] != nil {
+		delete(p.p, "scaledownpolicyids")
+	}
+}
+
 func (p *CreateAutoScaleVmGroupParams) GetScaledownpolicyids() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -405,6 +477,12 @@ func (p *CreateAutoScaleVmGroupParams) SetScaleuppolicyids(v []string) {
 	p.p["scaleuppolicyids"] = v
 }
 
+func (p *CreateAutoScaleVmGroupParams) ResetScaleuppolicyids() {
+	if p.p != nil && p.p["scaleuppolicyids"] != nil {
+		delete(p.p, "scaleuppolicyids")
+	}
+}
+
 func (p *CreateAutoScaleVmGroupParams) GetScaleuppolicyids() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -418,6 +496,12 @@ func (p *CreateAutoScaleVmGroupParams) SetVmprofileid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmprofileid"] = v
+}
+
+func (p *CreateAutoScaleVmGroupParams) ResetVmprofileid() {
+	if p.p != nil && p.p["vmprofileid"] != nil {
+		delete(p.p, "vmprofileid")
+	}
 }
 
 func (p *CreateAutoScaleVmGroupParams) GetVmprofileid() (string, bool) {
@@ -583,6 +667,12 @@ func (p *CreateAutoScaleVmProfileParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -596,6 +686,12 @@ func (p *CreateAutoScaleVmProfileParams) SetAutoscaleuserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["autoscaleuserid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetAutoscaleuserid() {
+	if p.p != nil && p.p["autoscaleuserid"] != nil {
+		delete(p.p, "autoscaleuserid")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetAutoscaleuserid() (string, bool) {
@@ -613,6 +709,12 @@ func (p *CreateAutoScaleVmProfileParams) SetCounterparam(v map[string]string) {
 	p.p["counterparam"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetCounterparam() {
+	if p.p != nil && p.p["counterparam"] != nil {
+		delete(p.p, "counterparam")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetCounterparam() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -626,6 +728,12 @@ func (p *CreateAutoScaleVmProfileParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetDomainid() (string, bool) {
@@ -643,6 +751,12 @@ func (p *CreateAutoScaleVmProfileParams) SetExpungevmgraceperiod(v int) {
 	p.p["expungevmgraceperiod"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetExpungevmgraceperiod() {
+	if p.p != nil && p.p["expungevmgraceperiod"] != nil {
+		delete(p.p, "expungevmgraceperiod")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetExpungevmgraceperiod() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -656,6 +770,12 @@ func (p *CreateAutoScaleVmProfileParams) SetFordisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetFordisplay() (bool, bool) {
@@ -673,6 +793,12 @@ func (p *CreateAutoScaleVmProfileParams) SetOtherdeployparams(v map[string]strin
 	p.p["otherdeployparams"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetOtherdeployparams() {
+	if p.p != nil && p.p["otherdeployparams"] != nil {
+		delete(p.p, "otherdeployparams")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetOtherdeployparams() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -686,6 +812,12 @@ func (p *CreateAutoScaleVmProfileParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetProjectid() (string, bool) {
@@ -703,6 +835,12 @@ func (p *CreateAutoScaleVmProfileParams) SetServiceofferingid(v string) {
 	p.p["serviceofferingid"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetServiceofferingid() {
+	if p.p != nil && p.p["serviceofferingid"] != nil {
+		delete(p.p, "serviceofferingid")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetServiceofferingid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -716,6 +854,12 @@ func (p *CreateAutoScaleVmProfileParams) SetTemplateid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templateid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetTemplateid() (string, bool) {
@@ -733,6 +877,12 @@ func (p *CreateAutoScaleVmProfileParams) SetUserdata(v string) {
 	p.p["userdata"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetUserdata() {
+	if p.p != nil && p.p["userdata"] != nil {
+		delete(p.p, "userdata")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -746,6 +896,12 @@ func (p *CreateAutoScaleVmProfileParams) SetUserdatadetails(v map[string]string)
 		p.p = make(map[string]interface{})
 	}
 	p.p["userdatadetails"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetUserdatadetails() {
+	if p.p != nil && p.p["userdatadetails"] != nil {
+		delete(p.p, "userdatadetails")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetUserdatadetails() (map[string]string, bool) {
@@ -763,6 +919,12 @@ func (p *CreateAutoScaleVmProfileParams) SetUserdataid(v string) {
 	p.p["userdataid"] = v
 }
 
+func (p *CreateAutoScaleVmProfileParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
 func (p *CreateAutoScaleVmProfileParams) GetUserdataid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -776,6 +938,12 @@ func (p *CreateAutoScaleVmProfileParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateAutoScaleVmProfileParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreateAutoScaleVmProfileParams) GetZoneid() (string, bool) {
@@ -893,6 +1061,12 @@ func (p *CreateConditionParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateConditionParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateConditionParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -906,6 +1080,12 @@ func (p *CreateConditionParams) SetCounterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["counterid"] = v
+}
+
+func (p *CreateConditionParams) ResetCounterid() {
+	if p.p != nil && p.p["counterid"] != nil {
+		delete(p.p, "counterid")
+	}
 }
 
 func (p *CreateConditionParams) GetCounterid() (string, bool) {
@@ -923,6 +1103,12 @@ func (p *CreateConditionParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateConditionParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateConditionParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -936,6 +1122,12 @@ func (p *CreateConditionParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateConditionParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *CreateConditionParams) GetProjectid() (string, bool) {
@@ -953,6 +1145,12 @@ func (p *CreateConditionParams) SetRelationaloperator(v string) {
 	p.p["relationaloperator"] = v
 }
 
+func (p *CreateConditionParams) ResetRelationaloperator() {
+	if p.p != nil && p.p["relationaloperator"] != nil {
+		delete(p.p, "relationaloperator")
+	}
+}
+
 func (p *CreateConditionParams) GetRelationaloperator() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -966,6 +1164,12 @@ func (p *CreateConditionParams) SetThreshold(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["threshold"] = v
+}
+
+func (p *CreateConditionParams) ResetThreshold() {
+	if p.p != nil && p.p["threshold"] != nil {
+		delete(p.p, "threshold")
+	}
 }
 
 func (p *CreateConditionParams) GetThreshold() (int64, bool) {
@@ -1070,6 +1274,12 @@ func (p *CreateCounterParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateCounterParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateCounterParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1083,6 +1293,12 @@ func (p *CreateCounterParams) SetProvider(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provider"] = v
+}
+
+func (p *CreateCounterParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
 }
 
 func (p *CreateCounterParams) GetProvider() (string, bool) {
@@ -1100,6 +1316,12 @@ func (p *CreateCounterParams) SetSource(v string) {
 	p.p["source"] = v
 }
 
+func (p *CreateCounterParams) ResetSource() {
+	if p.p != nil && p.p["source"] != nil {
+		delete(p.p, "source")
+	}
+}
+
 func (p *CreateCounterParams) GetSource() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1113,6 +1335,12 @@ func (p *CreateCounterParams) SetValue(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["value"] = v
+}
+
+func (p *CreateCounterParams) ResetValue() {
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
+	}
 }
 
 func (p *CreateCounterParams) GetValue() (string, bool) {
@@ -1203,6 +1431,12 @@ func (p *DeleteAutoScalePolicyParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteAutoScalePolicyParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteAutoScalePolicyParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1283,6 +1517,12 @@ func (p *DeleteAutoScaleVmGroupParams) SetCleanup(v bool) {
 	p.p["cleanup"] = v
 }
 
+func (p *DeleteAutoScaleVmGroupParams) ResetCleanup() {
+	if p.p != nil && p.p["cleanup"] != nil {
+		delete(p.p, "cleanup")
+	}
+}
+
 func (p *DeleteAutoScaleVmGroupParams) GetCleanup() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1296,6 +1536,12 @@ func (p *DeleteAutoScaleVmGroupParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteAutoScaleVmGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteAutoScaleVmGroupParams) GetId() (string, bool) {
@@ -1374,6 +1620,12 @@ func (p *DeleteAutoScaleVmProfileParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteAutoScaleVmProfileParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteAutoScaleVmProfileParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1448,6 +1700,12 @@ func (p *DeleteConditionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteConditionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteConditionParams) GetId() (string, bool) {
@@ -1526,6 +1784,12 @@ func (p *DeleteCounterParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteCounterParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteCounterParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1600,6 +1864,12 @@ func (p *DisableAutoScaleVmGroupParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DisableAutoScaleVmGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DisableAutoScaleVmGroupParams) GetId() (string, bool) {
@@ -1705,6 +1975,12 @@ func (p *EnableAutoScaleVmGroupParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *EnableAutoScaleVmGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *EnableAutoScaleVmGroupParams) GetId() (string, bool) {
@@ -1852,6 +2128,12 @@ func (p *ListAutoScalePoliciesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1865,6 +2147,12 @@ func (p *ListAutoScalePoliciesParams) SetAction(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["action"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetAction() (string, bool) {
@@ -1882,6 +2170,12 @@ func (p *ListAutoScalePoliciesParams) SetConditionid(v string) {
 	p.p["conditionid"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetConditionid() {
+	if p.p != nil && p.p["conditionid"] != nil {
+		delete(p.p, "conditionid")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetConditionid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1895,6 +2189,12 @@ func (p *ListAutoScalePoliciesParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetDomainid() (string, bool) {
@@ -1912,6 +2212,12 @@ func (p *ListAutoScalePoliciesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1925,6 +2231,12 @@ func (p *ListAutoScalePoliciesParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetIsrecursive() (bool, bool) {
@@ -1942,6 +2254,12 @@ func (p *ListAutoScalePoliciesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1955,6 +2273,12 @@ func (p *ListAutoScalePoliciesParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetListall() (bool, bool) {
@@ -1972,6 +2296,12 @@ func (p *ListAutoScalePoliciesParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1985,6 +2315,12 @@ func (p *ListAutoScalePoliciesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetPage() (int, bool) {
@@ -2002,6 +2338,12 @@ func (p *ListAutoScalePoliciesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2017,6 +2359,12 @@ func (p *ListAutoScalePoliciesParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListAutoScalePoliciesParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListAutoScalePoliciesParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2030,6 +2378,12 @@ func (p *ListAutoScalePoliciesParams) SetVmgroupid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmgroupid"] = v
+}
+
+func (p *ListAutoScalePoliciesParams) ResetVmgroupid() {
+	if p.p != nil && p.p["vmgroupid"] != nil {
+		delete(p.p, "vmgroupid")
+	}
 }
 
 func (p *ListAutoScalePoliciesParams) GetVmgroupid() (string, bool) {
@@ -2236,6 +2590,12 @@ func (p *ListAutoScaleVmGroupsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2249,6 +2609,12 @@ func (p *ListAutoScaleVmGroupsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetDomainid() (string, bool) {
@@ -2266,6 +2632,12 @@ func (p *ListAutoScaleVmGroupsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2279,6 +2651,12 @@ func (p *ListAutoScaleVmGroupsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetId() (string, bool) {
@@ -2296,6 +2674,12 @@ func (p *ListAutoScaleVmGroupsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2309,6 +2693,12 @@ func (p *ListAutoScaleVmGroupsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetKeyword() (string, bool) {
@@ -2326,6 +2716,12 @@ func (p *ListAutoScaleVmGroupsParams) SetLbruleid(v string) {
 	p.p["lbruleid"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetLbruleid() {
+	if p.p != nil && p.p["lbruleid"] != nil {
+		delete(p.p, "lbruleid")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetLbruleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2339,6 +2735,12 @@ func (p *ListAutoScaleVmGroupsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetListall() (bool, bool) {
@@ -2356,6 +2758,12 @@ func (p *ListAutoScaleVmGroupsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2369,6 +2777,12 @@ func (p *ListAutoScaleVmGroupsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetPage() (int, bool) {
@@ -2386,6 +2800,12 @@ func (p *ListAutoScaleVmGroupsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2399,6 +2819,12 @@ func (p *ListAutoScaleVmGroupsParams) SetPolicyid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["policyid"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetPolicyid() {
+	if p.p != nil && p.p["policyid"] != nil {
+		delete(p.p, "policyid")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetPolicyid() (string, bool) {
@@ -2416,6 +2842,12 @@ func (p *ListAutoScaleVmGroupsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2431,6 +2863,12 @@ func (p *ListAutoScaleVmGroupsParams) SetVmprofileid(v string) {
 	p.p["vmprofileid"] = v
 }
 
+func (p *ListAutoScaleVmGroupsParams) ResetVmprofileid() {
+	if p.p != nil && p.p["vmprofileid"] != nil {
+		delete(p.p, "vmprofileid")
+	}
+}
+
 func (p *ListAutoScaleVmGroupsParams) GetVmprofileid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2444,6 +2882,12 @@ func (p *ListAutoScaleVmGroupsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListAutoScaleVmGroupsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListAutoScaleVmGroupsParams) GetZoneid() (string, bool) {
@@ -2662,6 +3106,12 @@ func (p *ListAutoScaleVmProfilesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2675,6 +3125,12 @@ func (p *ListAutoScaleVmProfilesParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetDomainid() (string, bool) {
@@ -2692,6 +3148,12 @@ func (p *ListAutoScaleVmProfilesParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2705,6 +3167,12 @@ func (p *ListAutoScaleVmProfilesParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetId() (string, bool) {
@@ -2722,6 +3190,12 @@ func (p *ListAutoScaleVmProfilesParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2735,6 +3209,12 @@ func (p *ListAutoScaleVmProfilesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetKeyword() (string, bool) {
@@ -2752,6 +3232,12 @@ func (p *ListAutoScaleVmProfilesParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2765,6 +3251,12 @@ func (p *ListAutoScaleVmProfilesParams) SetOtherdeployparams(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["otherdeployparams"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetOtherdeployparams() {
+	if p.p != nil && p.p["otherdeployparams"] != nil {
+		delete(p.p, "otherdeployparams")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetOtherdeployparams() (string, bool) {
@@ -2782,6 +3274,12 @@ func (p *ListAutoScaleVmProfilesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2795,6 +3293,12 @@ func (p *ListAutoScaleVmProfilesParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetPagesize() (int, bool) {
@@ -2812,6 +3316,12 @@ func (p *ListAutoScaleVmProfilesParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2825,6 +3335,12 @@ func (p *ListAutoScaleVmProfilesParams) SetServiceofferingid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingid"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetServiceofferingid() {
+	if p.p != nil && p.p["serviceofferingid"] != nil {
+		delete(p.p, "serviceofferingid")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetServiceofferingid() (string, bool) {
@@ -2842,6 +3358,12 @@ func (p *ListAutoScaleVmProfilesParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *ListAutoScaleVmProfilesParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
 func (p *ListAutoScaleVmProfilesParams) GetTemplateid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2855,6 +3377,12 @@ func (p *ListAutoScaleVmProfilesParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListAutoScaleVmProfilesParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListAutoScaleVmProfilesParams) GetZoneid() (string, bool) {
@@ -3005,6 +3533,12 @@ func (p *ListConditionsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListConditionsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListConditionsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3018,6 +3552,12 @@ func (p *ListConditionsParams) SetCounterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["counterid"] = v
+}
+
+func (p *ListConditionsParams) ResetCounterid() {
+	if p.p != nil && p.p["counterid"] != nil {
+		delete(p.p, "counterid")
+	}
 }
 
 func (p *ListConditionsParams) GetCounterid() (string, bool) {
@@ -3035,6 +3575,12 @@ func (p *ListConditionsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListConditionsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListConditionsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3048,6 +3594,12 @@ func (p *ListConditionsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListConditionsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListConditionsParams) GetId() (string, bool) {
@@ -3065,6 +3617,12 @@ func (p *ListConditionsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListConditionsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListConditionsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3078,6 +3636,12 @@ func (p *ListConditionsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListConditionsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListConditionsParams) GetKeyword() (string, bool) {
@@ -3095,6 +3659,12 @@ func (p *ListConditionsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListConditionsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListConditionsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3108,6 +3678,12 @@ func (p *ListConditionsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListConditionsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListConditionsParams) GetPage() (int, bool) {
@@ -3125,6 +3701,12 @@ func (p *ListConditionsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListConditionsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListConditionsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3140,6 +3722,12 @@ func (p *ListConditionsParams) SetPolicyid(v string) {
 	p.p["policyid"] = v
 }
 
+func (p *ListConditionsParams) ResetPolicyid() {
+	if p.p != nil && p.p["policyid"] != nil {
+		delete(p.p, "policyid")
+	}
+}
+
 func (p *ListConditionsParams) GetPolicyid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3153,6 +3741,12 @@ func (p *ListConditionsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListConditionsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListConditionsParams) GetProjectid() (string, bool) {
@@ -3283,6 +3877,12 @@ func (p *ListCountersParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListCountersParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListCountersParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3296,6 +3896,12 @@ func (p *ListCountersParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListCountersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListCountersParams) GetKeyword() (string, bool) {
@@ -3313,6 +3919,12 @@ func (p *ListCountersParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListCountersParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListCountersParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3326,6 +3938,12 @@ func (p *ListCountersParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListCountersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListCountersParams) GetPage() (int, bool) {
@@ -3343,6 +3961,12 @@ func (p *ListCountersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListCountersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListCountersParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3358,6 +3982,12 @@ func (p *ListCountersParams) SetProvider(v string) {
 	p.p["provider"] = v
 }
 
+func (p *ListCountersParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
 func (p *ListCountersParams) GetProvider() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3371,6 +4001,12 @@ func (p *ListCountersParams) SetSource(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["source"] = v
+}
+
+func (p *ListCountersParams) ResetSource() {
+	if p.p != nil && p.p["source"] != nil {
+		delete(p.p, "source")
+	}
 }
 
 func (p *ListCountersParams) GetSource() (string, bool) {
@@ -3540,6 +4176,12 @@ func (p *UpdateAutoScalePolicyParams) SetConditionids(v []string) {
 	p.p["conditionids"] = v
 }
 
+func (p *UpdateAutoScalePolicyParams) ResetConditionids() {
+	if p.p != nil && p.p["conditionids"] != nil {
+		delete(p.p, "conditionids")
+	}
+}
+
 func (p *UpdateAutoScalePolicyParams) GetConditionids() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3553,6 +4195,12 @@ func (p *UpdateAutoScalePolicyParams) SetDuration(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["duration"] = v
+}
+
+func (p *UpdateAutoScalePolicyParams) ResetDuration() {
+	if p.p != nil && p.p["duration"] != nil {
+		delete(p.p, "duration")
+	}
 }
 
 func (p *UpdateAutoScalePolicyParams) GetDuration() (int, bool) {
@@ -3570,6 +4218,12 @@ func (p *UpdateAutoScalePolicyParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateAutoScalePolicyParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateAutoScalePolicyParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3585,6 +4239,12 @@ func (p *UpdateAutoScalePolicyParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateAutoScalePolicyParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateAutoScalePolicyParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3598,6 +4258,12 @@ func (p *UpdateAutoScalePolicyParams) SetQuiettime(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["quiettime"] = v
+}
+
+func (p *UpdateAutoScalePolicyParams) ResetQuiettime() {
+	if p.p != nil && p.p["quiettime"] != nil {
+		delete(p.p, "quiettime")
+	}
 }
 
 func (p *UpdateAutoScalePolicyParams) GetQuiettime() (int, bool) {
@@ -3720,6 +4386,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateAutoScaleVmGroupParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateAutoScaleVmGroupParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3733,6 +4405,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetFordisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *UpdateAutoScaleVmGroupParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
 }
 
 func (p *UpdateAutoScaleVmGroupParams) GetFordisplay() (bool, bool) {
@@ -3750,6 +4428,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateAutoScaleVmGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateAutoScaleVmGroupParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3763,6 +4447,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetInterval(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["interval"] = v
+}
+
+func (p *UpdateAutoScaleVmGroupParams) ResetInterval() {
+	if p.p != nil && p.p["interval"] != nil {
+		delete(p.p, "interval")
+	}
 }
 
 func (p *UpdateAutoScaleVmGroupParams) GetInterval() (int, bool) {
@@ -3780,6 +4470,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetMaxmembers(v int) {
 	p.p["maxmembers"] = v
 }
 
+func (p *UpdateAutoScaleVmGroupParams) ResetMaxmembers() {
+	if p.p != nil && p.p["maxmembers"] != nil {
+		delete(p.p, "maxmembers")
+	}
+}
+
 func (p *UpdateAutoScaleVmGroupParams) GetMaxmembers() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3793,6 +4489,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetMinmembers(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["minmembers"] = v
+}
+
+func (p *UpdateAutoScaleVmGroupParams) ResetMinmembers() {
+	if p.p != nil && p.p["minmembers"] != nil {
+		delete(p.p, "minmembers")
+	}
 }
 
 func (p *UpdateAutoScaleVmGroupParams) GetMinmembers() (int, bool) {
@@ -3810,6 +4512,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateAutoScaleVmGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateAutoScaleVmGroupParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3825,6 +4533,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetScaledownpolicyids(v []string) {
 	p.p["scaledownpolicyids"] = v
 }
 
+func (p *UpdateAutoScaleVmGroupParams) ResetScaledownpolicyids() {
+	if p.p != nil && p.p["scaledownpolicyids"] != nil {
+		delete(p.p, "scaledownpolicyids")
+	}
+}
+
 func (p *UpdateAutoScaleVmGroupParams) GetScaledownpolicyids() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3838,6 +4552,12 @@ func (p *UpdateAutoScaleVmGroupParams) SetScaleuppolicyids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["scaleuppolicyids"] = v
+}
+
+func (p *UpdateAutoScaleVmGroupParams) ResetScaleuppolicyids() {
+	if p.p != nil && p.p["scaleuppolicyids"] != nil {
+		delete(p.p, "scaleuppolicyids")
+	}
 }
 
 func (p *UpdateAutoScaleVmGroupParams) GetScaleuppolicyids() ([]string, bool) {
@@ -3992,6 +4712,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetAutoscaleuserid(v string) {
 	p.p["autoscaleuserid"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetAutoscaleuserid() {
+	if p.p != nil && p.p["autoscaleuserid"] != nil {
+		delete(p.p, "autoscaleuserid")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetAutoscaleuserid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4005,6 +4731,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetCounterparam(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["counterparam"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetCounterparam() {
+	if p.p != nil && p.p["counterparam"] != nil {
+		delete(p.p, "counterparam")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetCounterparam() (map[string]string, bool) {
@@ -4022,6 +4754,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4035,6 +4773,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetExpungevmgraceperiod(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["expungevmgraceperiod"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetExpungevmgraceperiod() {
+	if p.p != nil && p.p["expungevmgraceperiod"] != nil {
+		delete(p.p, "expungevmgraceperiod")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetExpungevmgraceperiod() (int, bool) {
@@ -4052,6 +4796,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4065,6 +4815,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetId() (string, bool) {
@@ -4082,6 +4838,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetOtherdeployparams(v map[string]strin
 	p.p["otherdeployparams"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetOtherdeployparams() {
+	if p.p != nil && p.p["otherdeployparams"] != nil {
+		delete(p.p, "otherdeployparams")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetOtherdeployparams() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4095,6 +4857,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetServiceofferingid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["serviceofferingid"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetServiceofferingid() {
+	if p.p != nil && p.p["serviceofferingid"] != nil {
+		delete(p.p, "serviceofferingid")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetServiceofferingid() (string, bool) {
@@ -4112,6 +4880,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetTemplateid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4125,6 +4899,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetUserdata(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userdata"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetUserdata() {
+	if p.p != nil && p.p["userdata"] != nil {
+		delete(p.p, "userdata")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetUserdata() (string, bool) {
@@ -4142,6 +4922,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetUserdatadetails(v map[string]string)
 	p.p["userdatadetails"] = v
 }
 
+func (p *UpdateAutoScaleVmProfileParams) ResetUserdatadetails() {
+	if p.p != nil && p.p["userdatadetails"] != nil {
+		delete(p.p, "userdatadetails")
+	}
+}
+
 func (p *UpdateAutoScaleVmProfileParams) GetUserdatadetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4155,6 +4941,12 @@ func (p *UpdateAutoScaleVmProfileParams) SetUserdataid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userdataid"] = v
+}
+
+func (p *UpdateAutoScaleVmProfileParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
 }
 
 func (p *UpdateAutoScaleVmProfileParams) GetUserdataid() (string, bool) {

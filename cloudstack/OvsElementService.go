@@ -61,6 +61,12 @@ func (p *ConfigureOvsElementParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ConfigureOvsElementParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
 func (p *ConfigureOvsElementParams) GetEnabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -74,6 +80,12 @@ func (p *ConfigureOvsElementParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ConfigureOvsElementParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ConfigureOvsElementParams) GetId() (string, bool) {
@@ -182,6 +194,12 @@ func (p *ListOvsElementsParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ListOvsElementsParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
 func (p *ListOvsElementsParams) GetEnabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -195,6 +213,12 @@ func (p *ListOvsElementsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListOvsElementsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListOvsElementsParams) GetId() (string, bool) {
@@ -212,6 +236,12 @@ func (p *ListOvsElementsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListOvsElementsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListOvsElementsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -225,6 +255,12 @@ func (p *ListOvsElementsParams) SetNspid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nspid"] = v
+}
+
+func (p *ListOvsElementsParams) ResetNspid() {
+	if p.p != nil && p.p["nspid"] != nil {
+		delete(p.p, "nspid")
+	}
 }
 
 func (p *ListOvsElementsParams) GetNspid() (string, bool) {
@@ -242,6 +278,12 @@ func (p *ListOvsElementsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListOvsElementsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListOvsElementsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -255,6 +297,12 @@ func (p *ListOvsElementsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListOvsElementsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListOvsElementsParams) GetPagesize() (int, bool) {

@@ -1380,6 +1380,13 @@ func (s *service) generateParamGettersAndSettersFunc(a *API) {
 			pn("}")
 			pn("")
 
+			pn("func (p *%s) Reset%s() {", capitalize(a.Name+"Params"), capitalize(ap.Name))
+			pn("	if p.p != nil && p.p[\"%s\"] != nil {", ap.Name)
+			pn("		delete(p.p, \"%s\")", ap.Name)
+			pn("	}")
+			pn("}")
+			pn("")
+
 			pn("func (p *%s) Get%s() (%s, bool) {", capitalize(a.Name+"Params"), capitalize(ap.Name), mapType(a.Name, ap.Name, ap.Type))
 			pn("	if p.p == nil {")
 			pn("		p.p = make(map[string]interface{})")

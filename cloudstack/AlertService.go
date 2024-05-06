@@ -73,6 +73,12 @@ func (p *ArchiveAlertsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *ArchiveAlertsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *ArchiveAlertsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -86,6 +92,12 @@ func (p *ArchiveAlertsParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ArchiveAlertsParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *ArchiveAlertsParams) GetIds() ([]string, bool) {
@@ -103,6 +115,12 @@ func (p *ArchiveAlertsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *ArchiveAlertsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
 func (p *ArchiveAlertsParams) GetStartdate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -116,6 +134,12 @@ func (p *ArchiveAlertsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ArchiveAlertsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ArchiveAlertsParams) GetType() (string, bool) {
@@ -215,6 +239,12 @@ func (p *DeleteAlertsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *DeleteAlertsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *DeleteAlertsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -228,6 +258,12 @@ func (p *DeleteAlertsParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *DeleteAlertsParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *DeleteAlertsParams) GetIds() ([]string, bool) {
@@ -245,6 +281,12 @@ func (p *DeleteAlertsParams) SetStartdate(v string) {
 	p.p["startdate"] = v
 }
 
+func (p *DeleteAlertsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
 func (p *DeleteAlertsParams) GetStartdate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -258,6 +300,12 @@ func (p *DeleteAlertsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *DeleteAlertsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *DeleteAlertsParams) GetType() (string, bool) {
@@ -360,6 +408,12 @@ func (p *GenerateAlertParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *GenerateAlertParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *GenerateAlertParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -373,6 +427,12 @@ func (p *GenerateAlertParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *GenerateAlertParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *GenerateAlertParams) GetName() (string, bool) {
@@ -390,6 +450,12 @@ func (p *GenerateAlertParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *GenerateAlertParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
 func (p *GenerateAlertParams) GetPodid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -405,6 +471,12 @@ func (p *GenerateAlertParams) SetType(v int) {
 	p.p["type"] = v
 }
 
+func (p *GenerateAlertParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
 func (p *GenerateAlertParams) GetType() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -418,6 +490,12 @@ func (p *GenerateAlertParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *GenerateAlertParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *GenerateAlertParams) GetZoneid() (string, bool) {
@@ -515,6 +593,12 @@ func (p *ListAlertsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListAlertsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListAlertsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -528,6 +612,12 @@ func (p *ListAlertsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAlertsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListAlertsParams) GetKeyword() (string, bool) {
@@ -545,6 +635,12 @@ func (p *ListAlertsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAlertsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListAlertsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -558,6 +654,12 @@ func (p *ListAlertsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAlertsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListAlertsParams) GetPage() (int, bool) {
@@ -575,6 +677,12 @@ func (p *ListAlertsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAlertsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAlertsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -588,6 +696,12 @@ func (p *ListAlertsParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListAlertsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ListAlertsParams) GetType() (string, bool) {

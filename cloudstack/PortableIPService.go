@@ -75,6 +75,12 @@ func (p *CreatePortableIpRangeParams) SetEndip(v string) {
 	p.p["endip"] = v
 }
 
+func (p *CreatePortableIpRangeParams) ResetEndip() {
+	if p.p != nil && p.p["endip"] != nil {
+		delete(p.p, "endip")
+	}
+}
+
 func (p *CreatePortableIpRangeParams) GetEndip() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -88,6 +94,12 @@ func (p *CreatePortableIpRangeParams) SetGateway(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["gateway"] = v
+}
+
+func (p *CreatePortableIpRangeParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
 }
 
 func (p *CreatePortableIpRangeParams) GetGateway() (string, bool) {
@@ -105,6 +117,12 @@ func (p *CreatePortableIpRangeParams) SetNetmask(v string) {
 	p.p["netmask"] = v
 }
 
+func (p *CreatePortableIpRangeParams) ResetNetmask() {
+	if p.p != nil && p.p["netmask"] != nil {
+		delete(p.p, "netmask")
+	}
+}
+
 func (p *CreatePortableIpRangeParams) GetNetmask() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -118,6 +136,12 @@ func (p *CreatePortableIpRangeParams) SetRegionid(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["regionid"] = v
+}
+
+func (p *CreatePortableIpRangeParams) ResetRegionid() {
+	if p.p != nil && p.p["regionid"] != nil {
+		delete(p.p, "regionid")
+	}
 }
 
 func (p *CreatePortableIpRangeParams) GetRegionid() (int, bool) {
@@ -135,6 +159,12 @@ func (p *CreatePortableIpRangeParams) SetStartip(v string) {
 	p.p["startip"] = v
 }
 
+func (p *CreatePortableIpRangeParams) ResetStartip() {
+	if p.p != nil && p.p["startip"] != nil {
+		delete(p.p, "startip")
+	}
+}
+
 func (p *CreatePortableIpRangeParams) GetStartip() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -148,6 +178,12 @@ func (p *CreatePortableIpRangeParams) SetVlan(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vlan"] = v
+}
+
+func (p *CreatePortableIpRangeParams) ResetVlan() {
+	if p.p != nil && p.p["vlan"] != nil {
+		delete(p.p, "vlan")
+	}
 }
 
 func (p *CreatePortableIpRangeParams) GetVlan() (string, bool) {
@@ -254,6 +290,12 @@ func (p *DeletePortableIpRangeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeletePortableIpRangeParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeletePortableIpRangeParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -345,6 +387,12 @@ func (p *ListPortableIpRangesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListPortableIpRangesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListPortableIpRangesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -358,6 +406,12 @@ func (p *ListPortableIpRangesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListPortableIpRangesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListPortableIpRangesParams) GetKeyword() (string, bool) {
@@ -375,6 +429,12 @@ func (p *ListPortableIpRangesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListPortableIpRangesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListPortableIpRangesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -390,6 +450,12 @@ func (p *ListPortableIpRangesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListPortableIpRangesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListPortableIpRangesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -403,6 +469,12 @@ func (p *ListPortableIpRangesParams) SetRegionid(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["regionid"] = v
+}
+
+func (p *ListPortableIpRangesParams) ResetRegionid() {
+	if p.p != nil && p.p["regionid"] != nil {
+		delete(p.p, "regionid")
+	}
 }
 
 func (p *ListPortableIpRangesParams) GetRegionid() (int, bool) {

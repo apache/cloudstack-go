@@ -75,6 +75,12 @@ func (p *CreateTagsParams) SetCustomer(v string) {
 	p.p["customer"] = v
 }
 
+func (p *CreateTagsParams) ResetCustomer() {
+	if p.p != nil && p.p["customer"] != nil {
+		delete(p.p, "customer")
+	}
+}
+
 func (p *CreateTagsParams) GetCustomer() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -88,6 +94,12 @@ func (p *CreateTagsParams) SetResourceids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourceids"] = v
+}
+
+func (p *CreateTagsParams) ResetResourceids() {
+	if p.p != nil && p.p["resourceids"] != nil {
+		delete(p.p, "resourceids")
+	}
 }
 
 func (p *CreateTagsParams) GetResourceids() ([]string, bool) {
@@ -105,6 +117,12 @@ func (p *CreateTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *CreateTagsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
 func (p *CreateTagsParams) GetResourcetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -118,6 +136,12 @@ func (p *CreateTagsParams) SetTags(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *CreateTagsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
 }
 
 func (p *CreateTagsParams) GetTags() (map[string]string, bool) {
@@ -211,6 +235,12 @@ func (p *DeleteTagsParams) SetResourceids(v []string) {
 	p.p["resourceids"] = v
 }
 
+func (p *DeleteTagsParams) ResetResourceids() {
+	if p.p != nil && p.p["resourceids"] != nil {
+		delete(p.p, "resourceids")
+	}
+}
+
 func (p *DeleteTagsParams) GetResourceids() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -226,6 +256,12 @@ func (p *DeleteTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *DeleteTagsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
 func (p *DeleteTagsParams) GetResourcetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -239,6 +275,12 @@ func (p *DeleteTagsParams) SetTags(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *DeleteTagsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
 }
 
 func (p *DeleteTagsParams) GetTags() (map[string]string, bool) {
@@ -326,6 +368,12 @@ func (p *ListStorageTagsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListStorageTagsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListStorageTagsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -341,6 +389,12 @@ func (p *ListStorageTagsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListStorageTagsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListStorageTagsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -354,6 +408,12 @@ func (p *ListStorageTagsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListStorageTagsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListStorageTagsParams) GetPagesize() (int, bool) {
@@ -498,6 +558,12 @@ func (p *ListTagsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListTagsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListTagsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -511,6 +577,12 @@ func (p *ListTagsParams) SetCustomer(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["customer"] = v
+}
+
+func (p *ListTagsParams) ResetCustomer() {
+	if p.p != nil && p.p["customer"] != nil {
+		delete(p.p, "customer")
+	}
 }
 
 func (p *ListTagsParams) GetCustomer() (string, bool) {
@@ -528,6 +600,12 @@ func (p *ListTagsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListTagsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListTagsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -541,6 +619,12 @@ func (p *ListTagsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListTagsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListTagsParams) GetIsrecursive() (bool, bool) {
@@ -558,6 +642,12 @@ func (p *ListTagsParams) SetKey(v string) {
 	p.p["key"] = v
 }
 
+func (p *ListTagsParams) ResetKey() {
+	if p.p != nil && p.p["key"] != nil {
+		delete(p.p, "key")
+	}
+}
+
 func (p *ListTagsParams) GetKey() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -571,6 +661,12 @@ func (p *ListTagsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListTagsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListTagsParams) GetKeyword() (string, bool) {
@@ -588,6 +684,12 @@ func (p *ListTagsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListTagsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListTagsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -601,6 +703,12 @@ func (p *ListTagsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTagsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListTagsParams) GetPage() (int, bool) {
@@ -618,6 +726,12 @@ func (p *ListTagsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTagsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListTagsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -631,6 +745,12 @@ func (p *ListTagsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListTagsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListTagsParams) GetProjectid() (string, bool) {
@@ -648,6 +768,12 @@ func (p *ListTagsParams) SetResourceid(v string) {
 	p.p["resourceid"] = v
 }
 
+func (p *ListTagsParams) ResetResourceid() {
+	if p.p != nil && p.p["resourceid"] != nil {
+		delete(p.p, "resourceid")
+	}
+}
+
 func (p *ListTagsParams) GetResourceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -663,6 +789,12 @@ func (p *ListTagsParams) SetResourcetype(v string) {
 	p.p["resourcetype"] = v
 }
 
+func (p *ListTagsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
 func (p *ListTagsParams) GetResourcetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -676,6 +808,12 @@ func (p *ListTagsParams) SetValue(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["value"] = v
+}
+
+func (p *ListTagsParams) ResetValue() {
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
+	}
 }
 
 func (p *ListTagsParams) GetValue() (string, bool) {

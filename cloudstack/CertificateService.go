@@ -65,6 +65,12 @@ func (p *UploadCustomCertificateParams) SetCertificate(v string) {
 	p.p["certificate"] = v
 }
 
+func (p *UploadCustomCertificateParams) ResetCertificate() {
+	if p.p != nil && p.p["certificate"] != nil {
+		delete(p.p, "certificate")
+	}
+}
+
 func (p *UploadCustomCertificateParams) GetCertificate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -78,6 +84,12 @@ func (p *UploadCustomCertificateParams) SetDomainsuffix(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainsuffix"] = v
+}
+
+func (p *UploadCustomCertificateParams) ResetDomainsuffix() {
+	if p.p != nil && p.p["domainsuffix"] != nil {
+		delete(p.p, "domainsuffix")
+	}
 }
 
 func (p *UploadCustomCertificateParams) GetDomainsuffix() (string, bool) {
@@ -95,6 +107,12 @@ func (p *UploadCustomCertificateParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *UploadCustomCertificateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UploadCustomCertificateParams) GetId() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -110,6 +128,12 @@ func (p *UploadCustomCertificateParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UploadCustomCertificateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UploadCustomCertificateParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -123,6 +147,12 @@ func (p *UploadCustomCertificateParams) SetPrivatekey(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["privatekey"] = v
+}
+
+func (p *UploadCustomCertificateParams) ResetPrivatekey() {
+	if p.p != nil && p.p["privatekey"] != nil {
+		delete(p.p, "privatekey")
+	}
 }
 
 func (p *UploadCustomCertificateParams) GetPrivatekey() (string, bool) {

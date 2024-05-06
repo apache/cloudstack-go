@@ -95,6 +95,12 @@ func (p *CopyTemplateParams) SetDestzoneid(v string) {
 	p.p["destzoneid"] = v
 }
 
+func (p *CopyTemplateParams) ResetDestzoneid() {
+	if p.p != nil && p.p["destzoneid"] != nil {
+		delete(p.p, "destzoneid")
+	}
+}
+
 func (p *CopyTemplateParams) GetDestzoneid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -108,6 +114,12 @@ func (p *CopyTemplateParams) SetDestzoneids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["destzoneids"] = v
+}
+
+func (p *CopyTemplateParams) ResetDestzoneids() {
+	if p.p != nil && p.p["destzoneids"] != nil {
+		delete(p.p, "destzoneids")
+	}
 }
 
 func (p *CopyTemplateParams) GetDestzoneids() ([]string, bool) {
@@ -125,6 +137,12 @@ func (p *CopyTemplateParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *CopyTemplateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *CopyTemplateParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -138,6 +156,12 @@ func (p *CopyTemplateParams) SetSourcezoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sourcezoneid"] = v
+}
+
+func (p *CopyTemplateParams) ResetSourcezoneid() {
+	if p.p != nil && p.p["sourcezoneid"] != nil {
+		delete(p.p, "sourcezoneid")
+	}
 }
 
 func (p *CopyTemplateParams) GetSourcezoneid() (string, bool) {
@@ -365,6 +389,12 @@ func (p *CreateTemplateParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateTemplateParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateTemplateParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -378,6 +408,12 @@ func (p *CreateTemplateParams) SetBits(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bits"] = v
+}
+
+func (p *CreateTemplateParams) ResetBits() {
+	if p.p != nil && p.p["bits"] != nil {
+		delete(p.p, "bits")
+	}
 }
 
 func (p *CreateTemplateParams) GetBits() (int, bool) {
@@ -395,6 +431,12 @@ func (p *CreateTemplateParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *CreateTemplateParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *CreateTemplateParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -408,6 +450,12 @@ func (p *CreateTemplateParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *CreateTemplateParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *CreateTemplateParams) GetDisplaytext() (string, bool) {
@@ -425,6 +473,12 @@ func (p *CreateTemplateParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateTemplateParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateTemplateParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -438,6 +492,12 @@ func (p *CreateTemplateParams) SetIsdynamicallyscalable(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isdynamicallyscalable"] = v
+}
+
+func (p *CreateTemplateParams) ResetIsdynamicallyscalable() {
+	if p.p != nil && p.p["isdynamicallyscalable"] != nil {
+		delete(p.p, "isdynamicallyscalable")
+	}
 }
 
 func (p *CreateTemplateParams) GetIsdynamicallyscalable() (bool, bool) {
@@ -455,6 +515,12 @@ func (p *CreateTemplateParams) SetIsfeatured(v bool) {
 	p.p["isfeatured"] = v
 }
 
+func (p *CreateTemplateParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
 func (p *CreateTemplateParams) GetIsfeatured() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -468,6 +534,12 @@ func (p *CreateTemplateParams) SetIspublic(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ispublic"] = v
+}
+
+func (p *CreateTemplateParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
 }
 
 func (p *CreateTemplateParams) GetIspublic() (bool, bool) {
@@ -485,6 +557,12 @@ func (p *CreateTemplateParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateTemplateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateTemplateParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -498,6 +576,12 @@ func (p *CreateTemplateParams) SetOstypeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ostypeid"] = v
+}
+
+func (p *CreateTemplateParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
 }
 
 func (p *CreateTemplateParams) GetOstypeid() (string, bool) {
@@ -515,6 +599,12 @@ func (p *CreateTemplateParams) SetPasswordenabled(v bool) {
 	p.p["passwordenabled"] = v
 }
 
+func (p *CreateTemplateParams) ResetPasswordenabled() {
+	if p.p != nil && p.p["passwordenabled"] != nil {
+		delete(p.p, "passwordenabled")
+	}
+}
+
 func (p *CreateTemplateParams) GetPasswordenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -528,6 +618,12 @@ func (p *CreateTemplateParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateTemplateParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *CreateTemplateParams) GetProjectid() (string, bool) {
@@ -545,6 +641,12 @@ func (p *CreateTemplateParams) SetRequireshvm(v bool) {
 	p.p["requireshvm"] = v
 }
 
+func (p *CreateTemplateParams) ResetRequireshvm() {
+	if p.p != nil && p.p["requireshvm"] != nil {
+		delete(p.p, "requireshvm")
+	}
+}
+
 func (p *CreateTemplateParams) GetRequireshvm() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -558,6 +660,12 @@ func (p *CreateTemplateParams) SetSnapshotid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["snapshotid"] = v
+}
+
+func (p *CreateTemplateParams) ResetSnapshotid() {
+	if p.p != nil && p.p["snapshotid"] != nil {
+		delete(p.p, "snapshotid")
+	}
 }
 
 func (p *CreateTemplateParams) GetSnapshotid() (string, bool) {
@@ -575,6 +683,12 @@ func (p *CreateTemplateParams) SetSshkeyenabled(v bool) {
 	p.p["sshkeyenabled"] = v
 }
 
+func (p *CreateTemplateParams) ResetSshkeyenabled() {
+	if p.p != nil && p.p["sshkeyenabled"] != nil {
+		delete(p.p, "sshkeyenabled")
+	}
+}
+
 func (p *CreateTemplateParams) GetSshkeyenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -588,6 +702,12 @@ func (p *CreateTemplateParams) SetTemplatetag(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templatetag"] = v
+}
+
+func (p *CreateTemplateParams) ResetTemplatetag() {
+	if p.p != nil && p.p["templatetag"] != nil {
+		delete(p.p, "templatetag")
+	}
 }
 
 func (p *CreateTemplateParams) GetTemplatetag() (string, bool) {
@@ -605,6 +725,12 @@ func (p *CreateTemplateParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *CreateTemplateParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *CreateTemplateParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -618,6 +744,12 @@ func (p *CreateTemplateParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *CreateTemplateParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *CreateTemplateParams) GetVirtualmachineid() (string, bool) {
@@ -635,6 +767,12 @@ func (p *CreateTemplateParams) SetVolumeid(v string) {
 	p.p["volumeid"] = v
 }
 
+func (p *CreateTemplateParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
 func (p *CreateTemplateParams) GetVolumeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -648,6 +786,12 @@ func (p *CreateTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreateTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreateTemplateParams) GetZoneid() (string, bool) {
@@ -817,6 +961,12 @@ func (p *DeleteTemplateParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *DeleteTemplateParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
 func (p *DeleteTemplateParams) GetForced() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -832,6 +982,12 @@ func (p *DeleteTemplateParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteTemplateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteTemplateParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -845,6 +1001,12 @@ func (p *DeleteTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *DeleteTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *DeleteTemplateParams) GetZoneid() (string, bool) {
@@ -932,6 +1094,12 @@ func (p *ExtractTemplateParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ExtractTemplateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ExtractTemplateParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -945,6 +1113,12 @@ func (p *ExtractTemplateParams) SetMode(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["mode"] = v
+}
+
+func (p *ExtractTemplateParams) ResetMode() {
+	if p.p != nil && p.p["mode"] != nil {
+		delete(p.p, "mode")
+	}
 }
 
 func (p *ExtractTemplateParams) GetMode() (string, bool) {
@@ -962,6 +1136,12 @@ func (p *ExtractTemplateParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *ExtractTemplateParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *ExtractTemplateParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -975,6 +1155,12 @@ func (p *ExtractTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ExtractTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ExtractTemplateParams) GetZoneid() (string, bool) {
@@ -1147,6 +1333,12 @@ func (p *GetUploadParamsForTemplateParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1160,6 +1352,12 @@ func (p *GetUploadParamsForTemplateParams) SetBits(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bits"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetBits() {
+	if p.p != nil && p.p["bits"] != nil {
+		delete(p.p, "bits")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetBits() (int, bool) {
@@ -1177,6 +1375,12 @@ func (p *GetUploadParamsForTemplateParams) SetChecksum(v string) {
 	p.p["checksum"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetChecksum() {
+	if p.p != nil && p.p["checksum"] != nil {
+		delete(p.p, "checksum")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetChecksum() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1190,6 +1394,12 @@ func (p *GetUploadParamsForTemplateParams) SetDeployasis(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["deployasis"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetDeployasis() {
+	if p.p != nil && p.p["deployasis"] != nil {
+		delete(p.p, "deployasis")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetDeployasis() (bool, bool) {
@@ -1207,6 +1417,12 @@ func (p *GetUploadParamsForTemplateParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1220,6 +1436,12 @@ func (p *GetUploadParamsForTemplateParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetDisplaytext() (string, bool) {
@@ -1237,6 +1459,12 @@ func (p *GetUploadParamsForTemplateParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1250,6 +1478,12 @@ func (p *GetUploadParamsForTemplateParams) SetFormat(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["format"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetFormat() {
+	if p.p != nil && p.p["format"] != nil {
+		delete(p.p, "format")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetFormat() (string, bool) {
@@ -1267,6 +1501,12 @@ func (p *GetUploadParamsForTemplateParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetHypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1280,6 +1520,12 @@ func (p *GetUploadParamsForTemplateParams) SetIsdynamicallyscalable(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isdynamicallyscalable"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetIsdynamicallyscalable() {
+	if p.p != nil && p.p["isdynamicallyscalable"] != nil {
+		delete(p.p, "isdynamicallyscalable")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetIsdynamicallyscalable() (bool, bool) {
@@ -1297,6 +1543,12 @@ func (p *GetUploadParamsForTemplateParams) SetIsextractable(v bool) {
 	p.p["isextractable"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetIsextractable() {
+	if p.p != nil && p.p["isextractable"] != nil {
+		delete(p.p, "isextractable")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetIsextractable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1310,6 +1562,12 @@ func (p *GetUploadParamsForTemplateParams) SetIsfeatured(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isfeatured"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetIsfeatured() (bool, bool) {
@@ -1327,6 +1585,12 @@ func (p *GetUploadParamsForTemplateParams) SetIspublic(v bool) {
 	p.p["ispublic"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetIspublic() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1340,6 +1604,12 @@ func (p *GetUploadParamsForTemplateParams) SetIsrouting(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrouting"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetIsrouting() {
+	if p.p != nil && p.p["isrouting"] != nil {
+		delete(p.p, "isrouting")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetIsrouting() (bool, bool) {
@@ -1357,6 +1627,12 @@ func (p *GetUploadParamsForTemplateParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1370,6 +1646,12 @@ func (p *GetUploadParamsForTemplateParams) SetOstypeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ostypeid"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetOstypeid() (string, bool) {
@@ -1387,6 +1669,12 @@ func (p *GetUploadParamsForTemplateParams) SetPasswordenabled(v bool) {
 	p.p["passwordenabled"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetPasswordenabled() {
+	if p.p != nil && p.p["passwordenabled"] != nil {
+		delete(p.p, "passwordenabled")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetPasswordenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1400,6 +1688,12 @@ func (p *GetUploadParamsForTemplateParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetProjectid() (string, bool) {
@@ -1417,6 +1711,12 @@ func (p *GetUploadParamsForTemplateParams) SetRequireshvm(v bool) {
 	p.p["requireshvm"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetRequireshvm() {
+	if p.p != nil && p.p["requireshvm"] != nil {
+		delete(p.p, "requireshvm")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetRequireshvm() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1430,6 +1730,12 @@ func (p *GetUploadParamsForTemplateParams) SetSshkeyenabled(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["sshkeyenabled"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetSshkeyenabled() {
+	if p.p != nil && p.p["sshkeyenabled"] != nil {
+		delete(p.p, "sshkeyenabled")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetSshkeyenabled() (bool, bool) {
@@ -1447,6 +1753,12 @@ func (p *GetUploadParamsForTemplateParams) SetTemplatetag(v string) {
 	p.p["templatetag"] = v
 }
 
+func (p *GetUploadParamsForTemplateParams) ResetTemplatetag() {
+	if p.p != nil && p.p["templatetag"] != nil {
+		delete(p.p, "templatetag")
+	}
+}
+
 func (p *GetUploadParamsForTemplateParams) GetTemplatetag() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1460,6 +1772,12 @@ func (p *GetUploadParamsForTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *GetUploadParamsForTemplateParams) GetZoneid() (string, bool) {
@@ -1531,6 +1849,12 @@ func (p *ListTemplatePermissionsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListTemplatePermissionsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListTemplatePermissionsParams) GetId() (string, bool) {
@@ -1718,6 +2042,12 @@ func (p *ListTemplatesParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListTemplatesParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListTemplatesParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1731,6 +2061,12 @@ func (p *ListTemplatesParams) SetDetails(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListTemplatesParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
 }
 
 func (p *ListTemplatesParams) GetDetails() ([]string, bool) {
@@ -1748,6 +2084,12 @@ func (p *ListTemplatesParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListTemplatesParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListTemplatesParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1761,6 +2103,12 @@ func (p *ListTemplatesParams) SetHypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListTemplatesParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
 }
 
 func (p *ListTemplatesParams) GetHypervisor() (string, bool) {
@@ -1778,6 +2126,12 @@ func (p *ListTemplatesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListTemplatesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListTemplatesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1791,6 +2145,12 @@ func (p *ListTemplatesParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ListTemplatesParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *ListTemplatesParams) GetIds() ([]string, bool) {
@@ -1808,6 +2168,12 @@ func (p *ListTemplatesParams) SetImagestoreid(v string) {
 	p.p["imagestoreid"] = v
 }
 
+func (p *ListTemplatesParams) ResetImagestoreid() {
+	if p.p != nil && p.p["imagestoreid"] != nil {
+		delete(p.p, "imagestoreid")
+	}
+}
+
 func (p *ListTemplatesParams) GetImagestoreid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1821,6 +2187,12 @@ func (p *ListTemplatesParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListTemplatesParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListTemplatesParams) GetIsrecursive() (bool, bool) {
@@ -1838,6 +2210,12 @@ func (p *ListTemplatesParams) SetIsvnf(v bool) {
 	p.p["isvnf"] = v
 }
 
+func (p *ListTemplatesParams) ResetIsvnf() {
+	if p.p != nil && p.p["isvnf"] != nil {
+		delete(p.p, "isvnf")
+	}
+}
+
 func (p *ListTemplatesParams) GetIsvnf() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1851,6 +2229,12 @@ func (p *ListTemplatesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListTemplatesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListTemplatesParams) GetKeyword() (string, bool) {
@@ -1868,6 +2252,12 @@ func (p *ListTemplatesParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListTemplatesParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListTemplatesParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1881,6 +2271,12 @@ func (p *ListTemplatesParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListTemplatesParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListTemplatesParams) GetName() (string, bool) {
@@ -1898,6 +2294,12 @@ func (p *ListTemplatesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListTemplatesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListTemplatesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1911,6 +2313,12 @@ func (p *ListTemplatesParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListTemplatesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListTemplatesParams) GetPagesize() (int, bool) {
@@ -1928,6 +2336,12 @@ func (p *ListTemplatesParams) SetParenttemplateid(v string) {
 	p.p["parenttemplateid"] = v
 }
 
+func (p *ListTemplatesParams) ResetParenttemplateid() {
+	if p.p != nil && p.p["parenttemplateid"] != nil {
+		delete(p.p, "parenttemplateid")
+	}
+}
+
 func (p *ListTemplatesParams) GetParenttemplateid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1941,6 +2355,12 @@ func (p *ListTemplatesParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListTemplatesParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListTemplatesParams) GetProjectid() (string, bool) {
@@ -1958,6 +2378,12 @@ func (p *ListTemplatesParams) SetShowicon(v bool) {
 	p.p["showicon"] = v
 }
 
+func (p *ListTemplatesParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
+}
+
 func (p *ListTemplatesParams) GetShowicon() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1971,6 +2397,12 @@ func (p *ListTemplatesParams) SetShowremoved(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showremoved"] = v
+}
+
+func (p *ListTemplatesParams) ResetShowremoved() {
+	if p.p != nil && p.p["showremoved"] != nil {
+		delete(p.p, "showremoved")
+	}
 }
 
 func (p *ListTemplatesParams) GetShowremoved() (bool, bool) {
@@ -1988,6 +2420,12 @@ func (p *ListTemplatesParams) SetShowunique(v bool) {
 	p.p["showunique"] = v
 }
 
+func (p *ListTemplatesParams) ResetShowunique() {
+	if p.p != nil && p.p["showunique"] != nil {
+		delete(p.p, "showunique")
+	}
+}
+
 func (p *ListTemplatesParams) GetShowunique() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2001,6 +2439,12 @@ func (p *ListTemplatesParams) SetStorageid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *ListTemplatesParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
 }
 
 func (p *ListTemplatesParams) GetStorageid() (string, bool) {
@@ -2018,6 +2462,12 @@ func (p *ListTemplatesParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListTemplatesParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListTemplatesParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2031,6 +2481,12 @@ func (p *ListTemplatesParams) SetTemplatefilter(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templatefilter"] = v
+}
+
+func (p *ListTemplatesParams) ResetTemplatefilter() {
+	if p.p != nil && p.p["templatefilter"] != nil {
+		delete(p.p, "templatefilter")
+	}
 }
 
 func (p *ListTemplatesParams) GetTemplatefilter() (string, bool) {
@@ -2048,6 +2504,12 @@ func (p *ListTemplatesParams) SetTemplatetype(v string) {
 	p.p["templatetype"] = v
 }
 
+func (p *ListTemplatesParams) ResetTemplatetype() {
+	if p.p != nil && p.p["templatetype"] != nil {
+		delete(p.p, "templatetype")
+	}
+}
+
 func (p *ListTemplatesParams) GetTemplatetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2061,6 +2523,12 @@ func (p *ListTemplatesParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListTemplatesParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListTemplatesParams) GetZoneid() (string, bool) {
@@ -2298,6 +2766,12 @@ func (p *PrepareTemplateParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *PrepareTemplateParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
 func (p *PrepareTemplateParams) GetStorageid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2313,6 +2787,12 @@ func (p *PrepareTemplateParams) SetTemplateid(v string) {
 	p.p["templateid"] = v
 }
 
+func (p *PrepareTemplateParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
 func (p *PrepareTemplateParams) GetTemplateid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2326,6 +2806,12 @@ func (p *PrepareTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *PrepareTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *PrepareTemplateParams) GetZoneid() (string, bool) {
@@ -2557,6 +3043,12 @@ func (p *RegisterTemplateParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *RegisterTemplateParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *RegisterTemplateParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2570,6 +3062,12 @@ func (p *RegisterTemplateParams) SetBits(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["bits"] = v
+}
+
+func (p *RegisterTemplateParams) ResetBits() {
+	if p.p != nil && p.p["bits"] != nil {
+		delete(p.p, "bits")
+	}
 }
 
 func (p *RegisterTemplateParams) GetBits() (int, bool) {
@@ -2587,6 +3085,12 @@ func (p *RegisterTemplateParams) SetChecksum(v string) {
 	p.p["checksum"] = v
 }
 
+func (p *RegisterTemplateParams) ResetChecksum() {
+	if p.p != nil && p.p["checksum"] != nil {
+		delete(p.p, "checksum")
+	}
+}
+
 func (p *RegisterTemplateParams) GetChecksum() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2600,6 +3104,12 @@ func (p *RegisterTemplateParams) SetDeployasis(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["deployasis"] = v
+}
+
+func (p *RegisterTemplateParams) ResetDeployasis() {
+	if p.p != nil && p.p["deployasis"] != nil {
+		delete(p.p, "deployasis")
+	}
 }
 
 func (p *RegisterTemplateParams) GetDeployasis() (bool, bool) {
@@ -2617,6 +3127,12 @@ func (p *RegisterTemplateParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *RegisterTemplateParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *RegisterTemplateParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2630,6 +3146,12 @@ func (p *RegisterTemplateParams) SetDirectdownload(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["directdownload"] = v
+}
+
+func (p *RegisterTemplateParams) ResetDirectdownload() {
+	if p.p != nil && p.p["directdownload"] != nil {
+		delete(p.p, "directdownload")
+	}
 }
 
 func (p *RegisterTemplateParams) GetDirectdownload() (bool, bool) {
@@ -2647,6 +3169,12 @@ func (p *RegisterTemplateParams) SetDisplaytext(v string) {
 	p.p["displaytext"] = v
 }
 
+func (p *RegisterTemplateParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
 func (p *RegisterTemplateParams) GetDisplaytext() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2660,6 +3188,12 @@ func (p *RegisterTemplateParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *RegisterTemplateParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *RegisterTemplateParams) GetDomainid() (string, bool) {
@@ -2677,6 +3211,12 @@ func (p *RegisterTemplateParams) SetFormat(v string) {
 	p.p["format"] = v
 }
 
+func (p *RegisterTemplateParams) ResetFormat() {
+	if p.p != nil && p.p["format"] != nil {
+		delete(p.p, "format")
+	}
+}
+
 func (p *RegisterTemplateParams) GetFormat() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2690,6 +3230,12 @@ func (p *RegisterTemplateParams) SetHypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *RegisterTemplateParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
 }
 
 func (p *RegisterTemplateParams) GetHypervisor() (string, bool) {
@@ -2707,6 +3253,12 @@ func (p *RegisterTemplateParams) SetIsdynamicallyscalable(v bool) {
 	p.p["isdynamicallyscalable"] = v
 }
 
+func (p *RegisterTemplateParams) ResetIsdynamicallyscalable() {
+	if p.p != nil && p.p["isdynamicallyscalable"] != nil {
+		delete(p.p, "isdynamicallyscalable")
+	}
+}
+
 func (p *RegisterTemplateParams) GetIsdynamicallyscalable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2720,6 +3272,12 @@ func (p *RegisterTemplateParams) SetIsextractable(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isextractable"] = v
+}
+
+func (p *RegisterTemplateParams) ResetIsextractable() {
+	if p.p != nil && p.p["isextractable"] != nil {
+		delete(p.p, "isextractable")
+	}
 }
 
 func (p *RegisterTemplateParams) GetIsextractable() (bool, bool) {
@@ -2737,6 +3295,12 @@ func (p *RegisterTemplateParams) SetIsfeatured(v bool) {
 	p.p["isfeatured"] = v
 }
 
+func (p *RegisterTemplateParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
 func (p *RegisterTemplateParams) GetIsfeatured() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2750,6 +3314,12 @@ func (p *RegisterTemplateParams) SetIspublic(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ispublic"] = v
+}
+
+func (p *RegisterTemplateParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
 }
 
 func (p *RegisterTemplateParams) GetIspublic() (bool, bool) {
@@ -2767,6 +3337,12 @@ func (p *RegisterTemplateParams) SetIsrouting(v bool) {
 	p.p["isrouting"] = v
 }
 
+func (p *RegisterTemplateParams) ResetIsrouting() {
+	if p.p != nil && p.p["isrouting"] != nil {
+		delete(p.p, "isrouting")
+	}
+}
+
 func (p *RegisterTemplateParams) GetIsrouting() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2780,6 +3356,12 @@ func (p *RegisterTemplateParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *RegisterTemplateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *RegisterTemplateParams) GetName() (string, bool) {
@@ -2797,6 +3379,12 @@ func (p *RegisterTemplateParams) SetOstypeid(v string) {
 	p.p["ostypeid"] = v
 }
 
+func (p *RegisterTemplateParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
+}
+
 func (p *RegisterTemplateParams) GetOstypeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2810,6 +3398,12 @@ func (p *RegisterTemplateParams) SetPasswordenabled(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["passwordenabled"] = v
+}
+
+func (p *RegisterTemplateParams) ResetPasswordenabled() {
+	if p.p != nil && p.p["passwordenabled"] != nil {
+		delete(p.p, "passwordenabled")
+	}
 }
 
 func (p *RegisterTemplateParams) GetPasswordenabled() (bool, bool) {
@@ -2827,6 +3421,12 @@ func (p *RegisterTemplateParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *RegisterTemplateParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *RegisterTemplateParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2840,6 +3440,12 @@ func (p *RegisterTemplateParams) SetRequireshvm(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["requireshvm"] = v
+}
+
+func (p *RegisterTemplateParams) ResetRequireshvm() {
+	if p.p != nil && p.p["requireshvm"] != nil {
+		delete(p.p, "requireshvm")
+	}
 }
 
 func (p *RegisterTemplateParams) GetRequireshvm() (bool, bool) {
@@ -2857,6 +3463,12 @@ func (p *RegisterTemplateParams) SetSshkeyenabled(v bool) {
 	p.p["sshkeyenabled"] = v
 }
 
+func (p *RegisterTemplateParams) ResetSshkeyenabled() {
+	if p.p != nil && p.p["sshkeyenabled"] != nil {
+		delete(p.p, "sshkeyenabled")
+	}
+}
+
 func (p *RegisterTemplateParams) GetSshkeyenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2870,6 +3482,12 @@ func (p *RegisterTemplateParams) SetTemplatetag(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templatetag"] = v
+}
+
+func (p *RegisterTemplateParams) ResetTemplatetag() {
+	if p.p != nil && p.p["templatetag"] != nil {
+		delete(p.p, "templatetag")
+	}
 }
 
 func (p *RegisterTemplateParams) GetTemplatetag() (string, bool) {
@@ -2887,6 +3505,12 @@ func (p *RegisterTemplateParams) SetTemplatetype(v string) {
 	p.p["templatetype"] = v
 }
 
+func (p *RegisterTemplateParams) ResetTemplatetype() {
+	if p.p != nil && p.p["templatetype"] != nil {
+		delete(p.p, "templatetype")
+	}
+}
+
 func (p *RegisterTemplateParams) GetTemplatetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2900,6 +3524,12 @@ func (p *RegisterTemplateParams) SetUrl(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *RegisterTemplateParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
 }
 
 func (p *RegisterTemplateParams) GetUrl() (string, bool) {
@@ -2917,6 +3547,12 @@ func (p *RegisterTemplateParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *RegisterTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
 func (p *RegisterTemplateParams) GetZoneid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2930,6 +3566,12 @@ func (p *RegisterTemplateParams) SetZoneids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneids"] = v
+}
+
+func (p *RegisterTemplateParams) ResetZoneids() {
+	if p.p != nil && p.p["zoneids"] != nil {
+		delete(p.p, "zoneids")
+	}
 }
 
 func (p *RegisterTemplateParams) GetZoneids() ([]string, bool) {
@@ -3132,6 +3774,12 @@ func (p *UpdateTemplateParams) SetBootable(v bool) {
 	p.p["bootable"] = v
 }
 
+func (p *UpdateTemplateParams) ResetBootable() {
+	if p.p != nil && p.p["bootable"] != nil {
+		delete(p.p, "bootable")
+	}
+}
+
 func (p *UpdateTemplateParams) GetBootable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3145,6 +3793,12 @@ func (p *UpdateTemplateParams) SetCleanupdetails(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cleanupdetails"] = v
+}
+
+func (p *UpdateTemplateParams) ResetCleanupdetails() {
+	if p.p != nil && p.p["cleanupdetails"] != nil {
+		delete(p.p, "cleanupdetails")
+	}
 }
 
 func (p *UpdateTemplateParams) GetCleanupdetails() (bool, bool) {
@@ -3162,6 +3816,12 @@ func (p *UpdateTemplateParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *UpdateTemplateParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *UpdateTemplateParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3175,6 +3835,12 @@ func (p *UpdateTemplateParams) SetDisplaytext(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["displaytext"] = v
+}
+
+func (p *UpdateTemplateParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
 }
 
 func (p *UpdateTemplateParams) GetDisplaytext() (string, bool) {
@@ -3192,6 +3858,12 @@ func (p *UpdateTemplateParams) SetFormat(v string) {
 	p.p["format"] = v
 }
 
+func (p *UpdateTemplateParams) ResetFormat() {
+	if p.p != nil && p.p["format"] != nil {
+		delete(p.p, "format")
+	}
+}
+
 func (p *UpdateTemplateParams) GetFormat() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3205,6 +3877,12 @@ func (p *UpdateTemplateParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateTemplateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateTemplateParams) GetId() (string, bool) {
@@ -3222,6 +3900,12 @@ func (p *UpdateTemplateParams) SetIsdynamicallyscalable(v bool) {
 	p.p["isdynamicallyscalable"] = v
 }
 
+func (p *UpdateTemplateParams) ResetIsdynamicallyscalable() {
+	if p.p != nil && p.p["isdynamicallyscalable"] != nil {
+		delete(p.p, "isdynamicallyscalable")
+	}
+}
+
 func (p *UpdateTemplateParams) GetIsdynamicallyscalable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3235,6 +3919,12 @@ func (p *UpdateTemplateParams) SetIsrouting(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrouting"] = v
+}
+
+func (p *UpdateTemplateParams) ResetIsrouting() {
+	if p.p != nil && p.p["isrouting"] != nil {
+		delete(p.p, "isrouting")
+	}
 }
 
 func (p *UpdateTemplateParams) GetIsrouting() (bool, bool) {
@@ -3252,6 +3942,12 @@ func (p *UpdateTemplateParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateTemplateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateTemplateParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3265,6 +3961,12 @@ func (p *UpdateTemplateParams) SetOstypeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ostypeid"] = v
+}
+
+func (p *UpdateTemplateParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
 }
 
 func (p *UpdateTemplateParams) GetOstypeid() (string, bool) {
@@ -3282,6 +3984,12 @@ func (p *UpdateTemplateParams) SetPasswordenabled(v bool) {
 	p.p["passwordenabled"] = v
 }
 
+func (p *UpdateTemplateParams) ResetPasswordenabled() {
+	if p.p != nil && p.p["passwordenabled"] != nil {
+		delete(p.p, "passwordenabled")
+	}
+}
+
 func (p *UpdateTemplateParams) GetPasswordenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3295,6 +4003,12 @@ func (p *UpdateTemplateParams) SetRequireshvm(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["requireshvm"] = v
+}
+
+func (p *UpdateTemplateParams) ResetRequireshvm() {
+	if p.p != nil && p.p["requireshvm"] != nil {
+		delete(p.p, "requireshvm")
+	}
 }
 
 func (p *UpdateTemplateParams) GetRequireshvm() (bool, bool) {
@@ -3312,6 +4026,12 @@ func (p *UpdateTemplateParams) SetSortkey(v int) {
 	p.p["sortkey"] = v
 }
 
+func (p *UpdateTemplateParams) ResetSortkey() {
+	if p.p != nil && p.p["sortkey"] != nil {
+		delete(p.p, "sortkey")
+	}
+}
+
 func (p *UpdateTemplateParams) GetSortkey() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3327,6 +4047,12 @@ func (p *UpdateTemplateParams) SetSshkeyenabled(v bool) {
 	p.p["sshkeyenabled"] = v
 }
 
+func (p *UpdateTemplateParams) ResetSshkeyenabled() {
+	if p.p != nil && p.p["sshkeyenabled"] != nil {
+		delete(p.p, "sshkeyenabled")
+	}
+}
+
 func (p *UpdateTemplateParams) GetSshkeyenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3340,6 +4066,12 @@ func (p *UpdateTemplateParams) SetTemplatetype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["templatetype"] = v
+}
+
+func (p *UpdateTemplateParams) ResetTemplatetype() {
+	if p.p != nil && p.p["templatetype"] != nil {
+		delete(p.p, "templatetype")
+	}
 }
 
 func (p *UpdateTemplateParams) GetTemplatetype() (string, bool) {
@@ -3503,6 +4235,12 @@ func (p *UpdateTemplatePermissionsParams) SetAccounts(v []string) {
 	p.p["accounts"] = v
 }
 
+func (p *UpdateTemplatePermissionsParams) ResetAccounts() {
+	if p.p != nil && p.p["accounts"] != nil {
+		delete(p.p, "accounts")
+	}
+}
+
 func (p *UpdateTemplatePermissionsParams) GetAccounts() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3516,6 +4254,12 @@ func (p *UpdateTemplatePermissionsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateTemplatePermissionsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateTemplatePermissionsParams) GetId() (string, bool) {
@@ -3533,6 +4277,12 @@ func (p *UpdateTemplatePermissionsParams) SetIsextractable(v bool) {
 	p.p["isextractable"] = v
 }
 
+func (p *UpdateTemplatePermissionsParams) ResetIsextractable() {
+	if p.p != nil && p.p["isextractable"] != nil {
+		delete(p.p, "isextractable")
+	}
+}
+
 func (p *UpdateTemplatePermissionsParams) GetIsextractable() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3546,6 +4296,12 @@ func (p *UpdateTemplatePermissionsParams) SetIsfeatured(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isfeatured"] = v
+}
+
+func (p *UpdateTemplatePermissionsParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
 }
 
 func (p *UpdateTemplatePermissionsParams) GetIsfeatured() (bool, bool) {
@@ -3563,6 +4319,12 @@ func (p *UpdateTemplatePermissionsParams) SetIspublic(v bool) {
 	p.p["ispublic"] = v
 }
 
+func (p *UpdateTemplatePermissionsParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
+}
+
 func (p *UpdateTemplatePermissionsParams) GetIspublic() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3578,6 +4340,12 @@ func (p *UpdateTemplatePermissionsParams) SetOp(v string) {
 	p.p["op"] = v
 }
 
+func (p *UpdateTemplatePermissionsParams) ResetOp() {
+	if p.p != nil && p.p["op"] != nil {
+		delete(p.p, "op")
+	}
+}
+
 func (p *UpdateTemplatePermissionsParams) GetOp() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3591,6 +4359,12 @@ func (p *UpdateTemplatePermissionsParams) SetProjectids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectids"] = v
+}
+
+func (p *UpdateTemplatePermissionsParams) ResetProjectids() {
+	if p.p != nil && p.p["projectids"] != nil {
+		delete(p.p, "projectids")
+	}
 }
 
 func (p *UpdateTemplatePermissionsParams) GetProjectids() ([]string, bool) {
@@ -3696,6 +4470,12 @@ func (p *UpgradeRouterTemplateParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpgradeRouterTemplateParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpgradeRouterTemplateParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3709,6 +4489,12 @@ func (p *UpgradeRouterTemplateParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *UpgradeRouterTemplateParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
 }
 
 func (p *UpgradeRouterTemplateParams) GetClusterid() (string, bool) {
@@ -3726,6 +4512,12 @@ func (p *UpgradeRouterTemplateParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpgradeRouterTemplateParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *UpgradeRouterTemplateParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3739,6 +4531,12 @@ func (p *UpgradeRouterTemplateParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpgradeRouterTemplateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpgradeRouterTemplateParams) GetId() (string, bool) {
@@ -3756,6 +4554,12 @@ func (p *UpgradeRouterTemplateParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *UpgradeRouterTemplateParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
 func (p *UpgradeRouterTemplateParams) GetPodid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3769,6 +4573,12 @@ func (p *UpgradeRouterTemplateParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *UpgradeRouterTemplateParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *UpgradeRouterTemplateParams) GetZoneid() (string, bool) {
@@ -3847,6 +4657,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListTemplateDirectDownloadCertificatesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3860,6 +4676,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListTemplateDirectDownloadCertificatesParams) GetKeyword() (string, bool) {
@@ -3877,6 +4699,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetListhosts(v bool) {
 	p.p["listhosts"] = v
 }
 
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetListhosts() {
+	if p.p != nil && p.p["listhosts"] != nil {
+		delete(p.p, "listhosts")
+	}
+}
+
 func (p *ListTemplateDirectDownloadCertificatesParams) GetListhosts() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3890,6 +4718,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListTemplateDirectDownloadCertificatesParams) GetPage() (int, bool) {
@@ -3907,6 +4741,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListTemplateDirectDownloadCertificatesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3920,6 +4760,12 @@ func (p *ListTemplateDirectDownloadCertificatesParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListTemplateDirectDownloadCertificatesParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListTemplateDirectDownloadCertificatesParams) GetZoneid() (string, bool) {
@@ -4032,6 +4878,12 @@ func (p *ProvisionTemplateDirectDownloadCertificateParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ProvisionTemplateDirectDownloadCertificateParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ProvisionTemplateDirectDownloadCertificateParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4045,6 +4897,12 @@ func (p *ProvisionTemplateDirectDownloadCertificateParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ProvisionTemplateDirectDownloadCertificateParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ProvisionTemplateDirectDownloadCertificateParams) GetId() (string, bool) {

@@ -87,6 +87,12 @@ func (p *CreatePodParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *CreatePodParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *CreatePodParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -100,6 +106,12 @@ func (p *CreatePodParams) SetEndip(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endip"] = v
+}
+
+func (p *CreatePodParams) ResetEndip() {
+	if p.p != nil && p.p["endip"] != nil {
+		delete(p.p, "endip")
+	}
 }
 
 func (p *CreatePodParams) GetEndip() (string, bool) {
@@ -117,6 +129,12 @@ func (p *CreatePodParams) SetGateway(v string) {
 	p.p["gateway"] = v
 }
 
+func (p *CreatePodParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
+}
+
 func (p *CreatePodParams) GetGateway() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -130,6 +148,12 @@ func (p *CreatePodParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreatePodParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *CreatePodParams) GetName() (string, bool) {
@@ -147,6 +171,12 @@ func (p *CreatePodParams) SetNetmask(v string) {
 	p.p["netmask"] = v
 }
 
+func (p *CreatePodParams) ResetNetmask() {
+	if p.p != nil && p.p["netmask"] != nil {
+		delete(p.p, "netmask")
+	}
+}
+
 func (p *CreatePodParams) GetNetmask() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -162,6 +192,12 @@ func (p *CreatePodParams) SetStartip(v string) {
 	p.p["startip"] = v
 }
 
+func (p *CreatePodParams) ResetStartip() {
+	if p.p != nil && p.p["startip"] != nil {
+		delete(p.p, "startip")
+	}
+}
+
 func (p *CreatePodParams) GetStartip() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -175,6 +211,12 @@ func (p *CreatePodParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *CreatePodParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *CreatePodParams) GetZoneid() (string, bool) {
@@ -285,6 +327,12 @@ func (p *DedicatePodParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicatePodParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *DedicatePodParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -300,6 +348,12 @@ func (p *DedicatePodParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DedicatePodParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *DedicatePodParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -313,6 +367,12 @@ func (p *DedicatePodParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *DedicatePodParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *DedicatePodParams) GetPodid() (string, bool) {
@@ -399,6 +459,12 @@ func (p *DeletePodParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeletePodParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeletePodParams) GetId() (string, bool) {
@@ -509,6 +575,12 @@ func (p *ListDedicatedPodsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedPodsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListDedicatedPodsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -522,6 +594,12 @@ func (p *ListDedicatedPodsParams) SetAffinitygroupid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedPodsParams) ResetAffinitygroupid() {
+	if p.p != nil && p.p["affinitygroupid"] != nil {
+		delete(p.p, "affinitygroupid")
+	}
 }
 
 func (p *ListDedicatedPodsParams) GetAffinitygroupid() (string, bool) {
@@ -539,6 +617,12 @@ func (p *ListDedicatedPodsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListDedicatedPodsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListDedicatedPodsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -552,6 +636,12 @@ func (p *ListDedicatedPodsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListDedicatedPodsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListDedicatedPodsParams) GetKeyword() (string, bool) {
@@ -569,6 +659,12 @@ func (p *ListDedicatedPodsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedPodsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListDedicatedPodsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -584,6 +680,12 @@ func (p *ListDedicatedPodsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListDedicatedPodsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListDedicatedPodsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -597,6 +699,12 @@ func (p *ListDedicatedPodsParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListDedicatedPodsParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *ListDedicatedPodsParams) GetPodid() (string, bool) {
@@ -692,6 +800,12 @@ func (p *ListPodsParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *ListPodsParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *ListPodsParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -705,6 +819,12 @@ func (p *ListPodsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListPodsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListPodsParams) GetId() (string, bool) {
@@ -722,6 +842,12 @@ func (p *ListPodsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListPodsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListPodsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -735,6 +861,12 @@ func (p *ListPodsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListPodsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListPodsParams) GetName() (string, bool) {
@@ -752,6 +884,12 @@ func (p *ListPodsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListPodsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListPodsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -765,6 +903,12 @@ func (p *ListPodsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListPodsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListPodsParams) GetPagesize() (int, bool) {
@@ -782,6 +926,12 @@ func (p *ListPodsParams) SetShowcapacities(v bool) {
 	p.p["showcapacities"] = v
 }
 
+func (p *ListPodsParams) ResetShowcapacities() {
+	if p.p != nil && p.p["showcapacities"] != nil {
+		delete(p.p, "showcapacities")
+	}
+}
+
 func (p *ListPodsParams) GetShowcapacities() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -795,6 +945,12 @@ func (p *ListPodsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListPodsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListPodsParams) GetZoneid() (string, bool) {
@@ -981,6 +1137,12 @@ func (p *ReleaseDedicatedPodParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *ReleaseDedicatedPodParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
 func (p *ReleaseDedicatedPodParams) GetPodid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1075,6 +1237,12 @@ func (p *UpdatePodParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdatePodParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *UpdatePodParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1088,6 +1256,12 @@ func (p *UpdatePodParams) SetEndip(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endip"] = v
+}
+
+func (p *UpdatePodParams) ResetEndip() {
+	if p.p != nil && p.p["endip"] != nil {
+		delete(p.p, "endip")
+	}
 }
 
 func (p *UpdatePodParams) GetEndip() (string, bool) {
@@ -1105,6 +1279,12 @@ func (p *UpdatePodParams) SetGateway(v string) {
 	p.p["gateway"] = v
 }
 
+func (p *UpdatePodParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
+}
+
 func (p *UpdatePodParams) GetGateway() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1118,6 +1298,12 @@ func (p *UpdatePodParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdatePodParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdatePodParams) GetId() (string, bool) {
@@ -1135,6 +1321,12 @@ func (p *UpdatePodParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdatePodParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdatePodParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1150,6 +1342,12 @@ func (p *UpdatePodParams) SetNetmask(v string) {
 	p.p["netmask"] = v
 }
 
+func (p *UpdatePodParams) ResetNetmask() {
+	if p.p != nil && p.p["netmask"] != nil {
+		delete(p.p, "netmask")
+	}
+}
+
 func (p *UpdatePodParams) GetNetmask() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1163,6 +1361,12 @@ func (p *UpdatePodParams) SetStartip(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startip"] = v
+}
+
+func (p *UpdatePodParams) ResetStartip() {
+	if p.p != nil && p.p["startip"] != nil {
+		delete(p.p, "startip")
+	}
 }
 
 func (p *UpdatePodParams) GetStartip() (string, bool) {

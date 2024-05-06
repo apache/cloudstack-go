@@ -141,6 +141,12 @@ func (p *ListResourceLimitsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -154,6 +160,12 @@ func (p *ListResourceLimitsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListResourceLimitsParams) GetDomainid() (string, bool) {
@@ -171,6 +183,12 @@ func (p *ListResourceLimitsParams) SetId(v int64) {
 	p.p["id"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetId() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -184,6 +202,12 @@ func (p *ListResourceLimitsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListResourceLimitsParams) GetIsrecursive() (bool, bool) {
@@ -201,6 +225,12 @@ func (p *ListResourceLimitsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -214,6 +244,12 @@ func (p *ListResourceLimitsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListResourceLimitsParams) GetListall() (bool, bool) {
@@ -231,6 +267,12 @@ func (p *ListResourceLimitsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -244,6 +286,12 @@ func (p *ListResourceLimitsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListResourceLimitsParams) GetPagesize() (int, bool) {
@@ -261,6 +309,12 @@ func (p *ListResourceLimitsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -276,6 +330,12 @@ func (p *ListResourceLimitsParams) SetResourcetype(v int) {
 	p.p["resourcetype"] = v
 }
 
+func (p *ListResourceLimitsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
 func (p *ListResourceLimitsParams) GetResourcetype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -289,6 +349,12 @@ func (p *ListResourceLimitsParams) SetResourcetypename(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetypename"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetResourcetypename() {
+	if p.p != nil && p.p["resourcetypename"] != nil {
+		delete(p.p, "resourcetypename")
+	}
 }
 
 func (p *ListResourceLimitsParams) GetResourcetypename() (string, bool) {
@@ -360,6 +426,12 @@ func (p *ResetApiLimitParams) SetAccount(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["account"] = v
+}
+
+func (p *ResetApiLimitParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
 }
 
 func (p *ResetApiLimitParams) GetAccount() (string, bool) {
@@ -459,6 +531,12 @@ func (p *UpdateResourceCountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateResourceCountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpdateResourceCountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -472,6 +550,12 @@ func (p *UpdateResourceCountParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UpdateResourceCountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *UpdateResourceCountParams) GetDomainid() (string, bool) {
@@ -489,6 +573,12 @@ func (p *UpdateResourceCountParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *UpdateResourceCountParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *UpdateResourceCountParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -502,6 +592,12 @@ func (p *UpdateResourceCountParams) SetResourcetype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *UpdateResourceCountParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
 }
 
 func (p *UpdateResourceCountParams) GetResourcetype() (int, bool) {
@@ -585,6 +681,12 @@ func (p *UpdateResourceLimitParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateResourceLimitParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpdateResourceLimitParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -598,6 +700,12 @@ func (p *UpdateResourceLimitParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *UpdateResourceLimitParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *UpdateResourceLimitParams) GetDomainid() (string, bool) {
@@ -615,6 +723,12 @@ func (p *UpdateResourceLimitParams) SetMax(v int64) {
 	p.p["max"] = v
 }
 
+func (p *UpdateResourceLimitParams) ResetMax() {
+	if p.p != nil && p.p["max"] != nil {
+		delete(p.p, "max")
+	}
+}
+
 func (p *UpdateResourceLimitParams) GetMax() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -630,6 +744,12 @@ func (p *UpdateResourceLimitParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *UpdateResourceLimitParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *UpdateResourceLimitParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -643,6 +763,12 @@ func (p *UpdateResourceLimitParams) SetResourcetype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["resourcetype"] = v
+}
+
+func (p *UpdateResourceLimitParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
 }
 
 func (p *UpdateResourceLimitParams) GetResourcetype() (int, bool) {
