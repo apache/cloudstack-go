@@ -115,6 +115,12 @@ func (p *CreateSnapshotParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateSnapshotParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateSnapshotParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -128,6 +134,12 @@ func (p *CreateSnapshotParams) SetAsyncbackup(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["asyncbackup"] = v
+}
+
+func (p *CreateSnapshotParams) ResetAsyncbackup() {
+	if p.p != nil && p.p["asyncbackup"] != nil {
+		delete(p.p, "asyncbackup")
+	}
 }
 
 func (p *CreateSnapshotParams) GetAsyncbackup() (bool, bool) {
@@ -145,6 +157,12 @@ func (p *CreateSnapshotParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateSnapshotParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateSnapshotParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -158,6 +176,12 @@ func (p *CreateSnapshotParams) SetLocationtype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["locationtype"] = v
+}
+
+func (p *CreateSnapshotParams) ResetLocationtype() {
+	if p.p != nil && p.p["locationtype"] != nil {
+		delete(p.p, "locationtype")
+	}
 }
 
 func (p *CreateSnapshotParams) GetLocationtype() (string, bool) {
@@ -175,6 +199,12 @@ func (p *CreateSnapshotParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateSnapshotParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateSnapshotParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -188,6 +218,12 @@ func (p *CreateSnapshotParams) SetPolicyid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["policyid"] = v
+}
+
+func (p *CreateSnapshotParams) ResetPolicyid() {
+	if p.p != nil && p.p["policyid"] != nil {
+		delete(p.p, "policyid")
+	}
 }
 
 func (p *CreateSnapshotParams) GetPolicyid() (string, bool) {
@@ -205,6 +241,12 @@ func (p *CreateSnapshotParams) SetQuiescevm(v bool) {
 	p.p["quiescevm"] = v
 }
 
+func (p *CreateSnapshotParams) ResetQuiescevm() {
+	if p.p != nil && p.p["quiescevm"] != nil {
+		delete(p.p, "quiescevm")
+	}
+}
+
 func (p *CreateSnapshotParams) GetQuiescevm() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -218,6 +260,12 @@ func (p *CreateSnapshotParams) SetTags(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *CreateSnapshotParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
 }
 
 func (p *CreateSnapshotParams) GetTags() (map[string]string, bool) {
@@ -235,6 +283,12 @@ func (p *CreateSnapshotParams) SetVolumeid(v string) {
 	p.p["volumeid"] = v
 }
 
+func (p *CreateSnapshotParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
 func (p *CreateSnapshotParams) GetVolumeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -248,6 +302,12 @@ func (p *CreateSnapshotParams) SetZoneids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneids"] = v
+}
+
+func (p *CreateSnapshotParams) ResetZoneids() {
+	if p.p != nil && p.p["zoneids"] != nil {
+		delete(p.p, "zoneids")
+	}
 }
 
 func (p *CreateSnapshotParams) GetZoneids() ([]string, bool) {
@@ -414,6 +474,12 @@ func (p *CreateSnapshotPolicyParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateSnapshotPolicyParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateSnapshotPolicyParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -427,6 +493,12 @@ func (p *CreateSnapshotPolicyParams) SetIntervaltype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["intervaltype"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) ResetIntervaltype() {
+	if p.p != nil && p.p["intervaltype"] != nil {
+		delete(p.p, "intervaltype")
+	}
 }
 
 func (p *CreateSnapshotPolicyParams) GetIntervaltype() (string, bool) {
@@ -444,6 +516,12 @@ func (p *CreateSnapshotPolicyParams) SetMaxsnaps(v int) {
 	p.p["maxsnaps"] = v
 }
 
+func (p *CreateSnapshotPolicyParams) ResetMaxsnaps() {
+	if p.p != nil && p.p["maxsnaps"] != nil {
+		delete(p.p, "maxsnaps")
+	}
+}
+
 func (p *CreateSnapshotPolicyParams) GetMaxsnaps() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -457,6 +535,12 @@ func (p *CreateSnapshotPolicyParams) SetSchedule(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["schedule"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) ResetSchedule() {
+	if p.p != nil && p.p["schedule"] != nil {
+		delete(p.p, "schedule")
+	}
 }
 
 func (p *CreateSnapshotPolicyParams) GetSchedule() (string, bool) {
@@ -474,6 +558,12 @@ func (p *CreateSnapshotPolicyParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *CreateSnapshotPolicyParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *CreateSnapshotPolicyParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -487,6 +577,12 @@ func (p *CreateSnapshotPolicyParams) SetTimezone(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
 }
 
 func (p *CreateSnapshotPolicyParams) GetTimezone() (string, bool) {
@@ -504,6 +600,12 @@ func (p *CreateSnapshotPolicyParams) SetVolumeid(v string) {
 	p.p["volumeid"] = v
 }
 
+func (p *CreateSnapshotPolicyParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
 func (p *CreateSnapshotPolicyParams) GetVolumeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -517,6 +619,12 @@ func (p *CreateSnapshotPolicyParams) SetZoneids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneids"] = v
+}
+
+func (p *CreateSnapshotPolicyParams) ResetZoneids() {
+	if p.p != nil && p.p["zoneids"] != nil {
+		delete(p.p, "zoneids")
+	}
 }
 
 func (p *CreateSnapshotPolicyParams) GetZoneids() ([]string, bool) {
@@ -606,6 +714,12 @@ func (p *CreateVMSnapshotParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateVMSnapshotParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *CreateVMSnapshotParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -619,6 +733,12 @@ func (p *CreateVMSnapshotParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateVMSnapshotParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *CreateVMSnapshotParams) GetName() (string, bool) {
@@ -636,6 +756,12 @@ func (p *CreateVMSnapshotParams) SetQuiescevm(v bool) {
 	p.p["quiescevm"] = v
 }
 
+func (p *CreateVMSnapshotParams) ResetQuiescevm() {
+	if p.p != nil && p.p["quiescevm"] != nil {
+		delete(p.p, "quiescevm")
+	}
+}
+
 func (p *CreateVMSnapshotParams) GetQuiescevm() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -651,6 +777,12 @@ func (p *CreateVMSnapshotParams) SetSnapshotmemory(v bool) {
 	p.p["snapshotmemory"] = v
 }
 
+func (p *CreateVMSnapshotParams) ResetSnapshotmemory() {
+	if p.p != nil && p.p["snapshotmemory"] != nil {
+		delete(p.p, "snapshotmemory")
+	}
+}
+
 func (p *CreateVMSnapshotParams) GetSnapshotmemory() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -664,6 +796,12 @@ func (p *CreateVMSnapshotParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *CreateVMSnapshotParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *CreateVMSnapshotParams) GetVirtualmachineid() (string, bool) {
@@ -770,6 +908,12 @@ func (p *DeleteSnapshotParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteSnapshotParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteSnapshotParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -783,6 +927,12 @@ func (p *DeleteSnapshotParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *DeleteSnapshotParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *DeleteSnapshotParams) GetZoneid() (string, bool) {
@@ -865,6 +1015,12 @@ func (p *DeleteSnapshotPoliciesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteSnapshotPoliciesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteSnapshotPoliciesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -878,6 +1034,12 @@ func (p *DeleteSnapshotPoliciesParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *DeleteSnapshotPoliciesParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *DeleteSnapshotPoliciesParams) GetIds() ([]string, bool) {
@@ -965,6 +1127,12 @@ func (p *DeleteVMSnapshotParams) SetVmsnapshotid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmsnapshotid"] = v
+}
+
+func (p *DeleteVMSnapshotParams) ResetVmsnapshotid() {
+	if p.p != nil && p.p["vmsnapshotid"] != nil {
+		delete(p.p, "vmsnapshotid")
+	}
 }
 
 func (p *DeleteVMSnapshotParams) GetVmsnapshotid() (string, bool) {
@@ -1061,6 +1229,12 @@ func (p *ListSnapshotPoliciesParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListSnapshotPoliciesParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListSnapshotPoliciesParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1074,6 +1248,12 @@ func (p *ListSnapshotPoliciesParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListSnapshotPoliciesParams) GetId() (string, bool) {
@@ -1091,6 +1271,12 @@ func (p *ListSnapshotPoliciesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListSnapshotPoliciesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListSnapshotPoliciesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1104,6 +1290,12 @@ func (p *ListSnapshotPoliciesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListSnapshotPoliciesParams) GetPage() (int, bool) {
@@ -1121,6 +1313,12 @@ func (p *ListSnapshotPoliciesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListSnapshotPoliciesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListSnapshotPoliciesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1134,6 +1332,12 @@ func (p *ListSnapshotPoliciesParams) SetVolumeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["volumeid"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
 }
 
 func (p *ListSnapshotPoliciesParams) GetVolumeid() (string, bool) {
@@ -1309,6 +1513,12 @@ func (p *ListSnapshotsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListSnapshotsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListSnapshotsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1322,6 +1532,12 @@ func (p *ListSnapshotsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListSnapshotsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListSnapshotsParams) GetDomainid() (string, bool) {
@@ -1339,6 +1555,12 @@ func (p *ListSnapshotsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListSnapshotsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListSnapshotsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1352,6 +1574,12 @@ func (p *ListSnapshotsParams) SetIds(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ids"] = v
+}
+
+func (p *ListSnapshotsParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
 }
 
 func (p *ListSnapshotsParams) GetIds() ([]string, bool) {
@@ -1369,6 +1597,12 @@ func (p *ListSnapshotsParams) SetImagestoreid(v string) {
 	p.p["imagestoreid"] = v
 }
 
+func (p *ListSnapshotsParams) ResetImagestoreid() {
+	if p.p != nil && p.p["imagestoreid"] != nil {
+		delete(p.p, "imagestoreid")
+	}
+}
+
 func (p *ListSnapshotsParams) GetImagestoreid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1382,6 +1616,12 @@ func (p *ListSnapshotsParams) SetIntervaltype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["intervaltype"] = v
+}
+
+func (p *ListSnapshotsParams) ResetIntervaltype() {
+	if p.p != nil && p.p["intervaltype"] != nil {
+		delete(p.p, "intervaltype")
+	}
 }
 
 func (p *ListSnapshotsParams) GetIntervaltype() (string, bool) {
@@ -1399,6 +1639,12 @@ func (p *ListSnapshotsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListSnapshotsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListSnapshotsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1412,6 +1658,12 @@ func (p *ListSnapshotsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListSnapshotsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListSnapshotsParams) GetKeyword() (string, bool) {
@@ -1429,6 +1681,12 @@ func (p *ListSnapshotsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListSnapshotsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListSnapshotsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1442,6 +1700,12 @@ func (p *ListSnapshotsParams) SetLocationtype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["locationtype"] = v
+}
+
+func (p *ListSnapshotsParams) ResetLocationtype() {
+	if p.p != nil && p.p["locationtype"] != nil {
+		delete(p.p, "locationtype")
+	}
 }
 
 func (p *ListSnapshotsParams) GetLocationtype() (string, bool) {
@@ -1459,6 +1723,12 @@ func (p *ListSnapshotsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListSnapshotsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListSnapshotsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1472,6 +1742,12 @@ func (p *ListSnapshotsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListSnapshotsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListSnapshotsParams) GetPage() (int, bool) {
@@ -1489,6 +1765,12 @@ func (p *ListSnapshotsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListSnapshotsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListSnapshotsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1502,6 +1784,12 @@ func (p *ListSnapshotsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListSnapshotsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListSnapshotsParams) GetProjectid() (string, bool) {
@@ -1519,6 +1807,12 @@ func (p *ListSnapshotsParams) SetShowunique(v bool) {
 	p.p["showunique"] = v
 }
 
+func (p *ListSnapshotsParams) ResetShowunique() {
+	if p.p != nil && p.p["showunique"] != nil {
+		delete(p.p, "showunique")
+	}
+}
+
 func (p *ListSnapshotsParams) GetShowunique() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1532,6 +1826,12 @@ func (p *ListSnapshotsParams) SetSnapshottype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["snapshottype"] = v
+}
+
+func (p *ListSnapshotsParams) ResetSnapshottype() {
+	if p.p != nil && p.p["snapshottype"] != nil {
+		delete(p.p, "snapshottype")
+	}
 }
 
 func (p *ListSnapshotsParams) GetSnapshottype() (string, bool) {
@@ -1549,6 +1849,12 @@ func (p *ListSnapshotsParams) SetStorageid(v string) {
 	p.p["storageid"] = v
 }
 
+func (p *ListSnapshotsParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
 func (p *ListSnapshotsParams) GetStorageid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1562,6 +1868,12 @@ func (p *ListSnapshotsParams) SetTags(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["tags"] = v
+}
+
+func (p *ListSnapshotsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
 }
 
 func (p *ListSnapshotsParams) GetTags() (map[string]string, bool) {
@@ -1579,6 +1891,12 @@ func (p *ListSnapshotsParams) SetVolumeid(v string) {
 	p.p["volumeid"] = v
 }
 
+func (p *ListSnapshotsParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
 func (p *ListSnapshotsParams) GetVolumeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1592,6 +1910,12 @@ func (p *ListSnapshotsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListSnapshotsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListSnapshotsParams) GetZoneid() (string, bool) {
@@ -1845,6 +2169,12 @@ func (p *ListVMSnapshotParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1858,6 +2188,12 @@ func (p *ListVMSnapshotParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetDomainid() (string, bool) {
@@ -1875,6 +2211,12 @@ func (p *ListVMSnapshotParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1888,6 +2230,12 @@ func (p *ListVMSnapshotParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetKeyword() (string, bool) {
@@ -1905,6 +2253,12 @@ func (p *ListVMSnapshotParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1918,6 +2272,12 @@ func (p *ListVMSnapshotParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetName() (string, bool) {
@@ -1935,6 +2295,12 @@ func (p *ListVMSnapshotParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1948,6 +2314,12 @@ func (p *ListVMSnapshotParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetPagesize() (int, bool) {
@@ -1965,6 +2337,12 @@ func (p *ListVMSnapshotParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1978,6 +2356,12 @@ func (p *ListVMSnapshotParams) SetState(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetState() (string, bool) {
@@ -1995,6 +2379,12 @@ func (p *ListVMSnapshotParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2008,6 +2398,12 @@ func (p *ListVMSnapshotParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetVirtualmachineid() (string, bool) {
@@ -2025,6 +2421,12 @@ func (p *ListVMSnapshotParams) SetVmsnapshotid(v string) {
 	p.p["vmsnapshotid"] = v
 }
 
+func (p *ListVMSnapshotParams) ResetVmsnapshotid() {
+	if p.p != nil && p.p["vmsnapshotid"] != nil {
+		delete(p.p, "vmsnapshotid")
+	}
+}
+
 func (p *ListVMSnapshotParams) GetVmsnapshotid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2038,6 +2440,12 @@ func (p *ListVMSnapshotParams) SetVmsnapshotids(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmsnapshotids"] = v
+}
+
+func (p *ListVMSnapshotParams) ResetVmsnapshotids() {
+	if p.p != nil && p.p["vmsnapshotids"] != nil {
+		delete(p.p, "vmsnapshotids")
+	}
 }
 
 func (p *ListVMSnapshotParams) GetVmsnapshotids() ([]string, bool) {
@@ -2159,6 +2567,12 @@ func (p *RevertSnapshotParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RevertSnapshotParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *RevertSnapshotParams) GetId() (string, bool) {
@@ -2295,6 +2709,12 @@ func (p *RevertToVMSnapshotParams) SetVmsnapshotid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmsnapshotid"] = v
+}
+
+func (p *RevertToVMSnapshotParams) ResetVmsnapshotid() {
+	if p.p != nil && p.p["vmsnapshotid"] != nil {
+		delete(p.p, "vmsnapshotid")
+	}
 }
 
 func (p *RevertToVMSnapshotParams) GetVmsnapshotid() (string, bool) {
@@ -2538,6 +2958,12 @@ func (p *UpdateSnapshotPolicyParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateSnapshotPolicyParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateSnapshotPolicyParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2553,6 +2979,12 @@ func (p *UpdateSnapshotPolicyParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateSnapshotPolicyParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateSnapshotPolicyParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2566,6 +2998,12 @@ func (p *UpdateSnapshotPolicyParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateSnapshotPolicyParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateSnapshotPolicyParams) GetId() (string, bool) {

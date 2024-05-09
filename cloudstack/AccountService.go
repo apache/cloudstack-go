@@ -119,6 +119,12 @@ func (p *CreateAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -132,6 +138,12 @@ func (p *CreateAccountParams) SetAccountdetails(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *CreateAccountParams) ResetAccountdetails() {
+	if p.p != nil && p.p["accountdetails"] != nil {
+		delete(p.p, "accountdetails")
+	}
 }
 
 func (p *CreateAccountParams) GetAccountdetails() (map[string]string, bool) {
@@ -149,6 +161,12 @@ func (p *CreateAccountParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *CreateAccountParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
 func (p *CreateAccountParams) GetAccountid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -162,6 +180,12 @@ func (p *CreateAccountParams) SetAccounttype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *CreateAccountParams) ResetAccounttype() {
+	if p.p != nil && p.p["accounttype"] != nil {
+		delete(p.p, "accounttype")
+	}
 }
 
 func (p *CreateAccountParams) GetAccounttype() (int, bool) {
@@ -179,6 +203,12 @@ func (p *CreateAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateAccountParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -192,6 +222,12 @@ func (p *CreateAccountParams) SetEmail(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *CreateAccountParams) ResetEmail() {
+	if p.p != nil && p.p["email"] != nil {
+		delete(p.p, "email")
+	}
 }
 
 func (p *CreateAccountParams) GetEmail() (string, bool) {
@@ -209,6 +245,12 @@ func (p *CreateAccountParams) SetFirstname(v string) {
 	p.p["firstname"] = v
 }
 
+func (p *CreateAccountParams) ResetFirstname() {
+	if p.p != nil && p.p["firstname"] != nil {
+		delete(p.p, "firstname")
+	}
+}
+
 func (p *CreateAccountParams) GetFirstname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -222,6 +264,12 @@ func (p *CreateAccountParams) SetLastname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["lastname"] = v
+}
+
+func (p *CreateAccountParams) ResetLastname() {
+	if p.p != nil && p.p["lastname"] != nil {
+		delete(p.p, "lastname")
+	}
 }
 
 func (p *CreateAccountParams) GetLastname() (string, bool) {
@@ -239,6 +287,12 @@ func (p *CreateAccountParams) SetNetworkdomain(v string) {
 	p.p["networkdomain"] = v
 }
 
+func (p *CreateAccountParams) ResetNetworkdomain() {
+	if p.p != nil && p.p["networkdomain"] != nil {
+		delete(p.p, "networkdomain")
+	}
+}
+
 func (p *CreateAccountParams) GetNetworkdomain() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -252,6 +306,12 @@ func (p *CreateAccountParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *CreateAccountParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *CreateAccountParams) GetPassword() (string, bool) {
@@ -269,6 +329,12 @@ func (p *CreateAccountParams) SetRoleid(v string) {
 	p.p["roleid"] = v
 }
 
+func (p *CreateAccountParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
+}
+
 func (p *CreateAccountParams) GetRoleid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -282,6 +348,12 @@ func (p *CreateAccountParams) SetTimezone(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *CreateAccountParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
 }
 
 func (p *CreateAccountParams) GetTimezone() (string, bool) {
@@ -299,6 +371,12 @@ func (p *CreateAccountParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *CreateAccountParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
+}
+
 func (p *CreateAccountParams) GetUserid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -312,6 +390,12 @@ func (p *CreateAccountParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *CreateAccountParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *CreateAccountParams) GetUsername() (string, bool) {
@@ -467,6 +551,12 @@ func (p *DeleteAccountParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteAccountParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteAccountParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -553,6 +643,12 @@ func (p *DisableAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DisableAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *DisableAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -566,6 +662,12 @@ func (p *DisableAccountParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *DisableAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *DisableAccountParams) GetDomainid() (string, bool) {
@@ -583,6 +685,12 @@ func (p *DisableAccountParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DisableAccountParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DisableAccountParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -596,6 +704,12 @@ func (p *DisableAccountParams) SetLock(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["lock"] = v
+}
+
+func (p *DisableAccountParams) ResetLock() {
+	if p.p != nil && p.p["lock"] != nil {
+		delete(p.p, "lock")
+	}
 }
 
 func (p *DisableAccountParams) GetLock() (bool, bool) {
@@ -769,6 +883,12 @@ func (p *EnableAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *EnableAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *EnableAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -784,6 +904,12 @@ func (p *EnableAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *EnableAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *EnableAccountParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -797,6 +923,12 @@ func (p *EnableAccountParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *EnableAccountParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *EnableAccountParams) GetId() (string, bool) {
@@ -946,6 +1078,12 @@ func (p *GetSolidFireAccountIdParams) SetAccountid(v string) {
 	p.p["accountid"] = v
 }
 
+func (p *GetSolidFireAccountIdParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
 func (p *GetSolidFireAccountIdParams) GetAccountid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -959,6 +1097,12 @@ func (p *GetSolidFireAccountIdParams) SetStorageid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["storageid"] = v
+}
+
+func (p *GetSolidFireAccountIdParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
 }
 
 func (p *GetSolidFireAccountIdParams) GetStorageid() (string, bool) {
@@ -1066,6 +1210,12 @@ func (p *ListAccountsParams) SetAccounttype(v int) {
 	p.p["accounttype"] = v
 }
 
+func (p *ListAccountsParams) ResetAccounttype() {
+	if p.p != nil && p.p["accounttype"] != nil {
+		delete(p.p, "accounttype")
+	}
+}
+
 func (p *ListAccountsParams) GetAccounttype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1079,6 +1229,12 @@ func (p *ListAccountsParams) SetDetails(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListAccountsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
 }
 
 func (p *ListAccountsParams) GetDetails() ([]string, bool) {
@@ -1096,6 +1252,12 @@ func (p *ListAccountsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListAccountsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListAccountsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1109,6 +1271,12 @@ func (p *ListAccountsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListAccountsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListAccountsParams) GetId() (string, bool) {
@@ -1126,6 +1294,12 @@ func (p *ListAccountsParams) SetIscleanuprequired(v bool) {
 	p.p["iscleanuprequired"] = v
 }
 
+func (p *ListAccountsParams) ResetIscleanuprequired() {
+	if p.p != nil && p.p["iscleanuprequired"] != nil {
+		delete(p.p, "iscleanuprequired")
+	}
+}
+
 func (p *ListAccountsParams) GetIscleanuprequired() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1139,6 +1313,12 @@ func (p *ListAccountsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListAccountsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListAccountsParams) GetIsrecursive() (bool, bool) {
@@ -1156,6 +1336,12 @@ func (p *ListAccountsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListAccountsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListAccountsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1169,6 +1355,12 @@ func (p *ListAccountsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListAccountsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListAccountsParams) GetListall() (bool, bool) {
@@ -1186,6 +1378,12 @@ func (p *ListAccountsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListAccountsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListAccountsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1199,6 +1397,12 @@ func (p *ListAccountsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListAccountsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListAccountsParams) GetPage() (int, bool) {
@@ -1216,6 +1420,12 @@ func (p *ListAccountsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAccountsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAccountsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1231,6 +1441,12 @@ func (p *ListAccountsParams) SetShowicon(v bool) {
 	p.p["showicon"] = v
 }
 
+func (p *ListAccountsParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
+}
+
 func (p *ListAccountsParams) GetShowicon() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1244,6 +1460,12 @@ func (p *ListAccountsParams) SetState(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListAccountsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
 }
 
 func (p *ListAccountsParams) GetState() (string, bool) {
@@ -1501,6 +1723,12 @@ func (p *ListProjectAccountsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListProjectAccountsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListProjectAccountsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1514,6 +1742,12 @@ func (p *ListProjectAccountsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListProjectAccountsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListProjectAccountsParams) GetKeyword() (string, bool) {
@@ -1531,6 +1765,12 @@ func (p *ListProjectAccountsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListProjectAccountsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListProjectAccountsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1544,6 +1784,12 @@ func (p *ListProjectAccountsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListProjectAccountsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListProjectAccountsParams) GetPagesize() (int, bool) {
@@ -1561,6 +1807,12 @@ func (p *ListProjectAccountsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListProjectAccountsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListProjectAccountsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1574,6 +1826,12 @@ func (p *ListProjectAccountsParams) SetProjectroleid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectroleid"] = v
+}
+
+func (p *ListProjectAccountsParams) ResetProjectroleid() {
+	if p.p != nil && p.p["projectroleid"] != nil {
+		delete(p.p, "projectroleid")
+	}
 }
 
 func (p *ListProjectAccountsParams) GetProjectroleid() (string, bool) {
@@ -1591,6 +1849,12 @@ func (p *ListProjectAccountsParams) SetRole(v string) {
 	p.p["role"] = v
 }
 
+func (p *ListProjectAccountsParams) ResetRole() {
+	if p.p != nil && p.p["role"] != nil {
+		delete(p.p, "role")
+	}
+}
+
 func (p *ListProjectAccountsParams) GetRole() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1604,6 +1868,12 @@ func (p *ListProjectAccountsParams) SetUserid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["userid"] = v
+}
+
+func (p *ListProjectAccountsParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
 }
 
 func (p *ListProjectAccountsParams) GetUserid() (string, bool) {
@@ -1769,6 +2039,12 @@ func (p *LockAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *LockAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *LockAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1782,6 +2058,12 @@ func (p *LockAccountParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *LockAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *LockAccountParams) GetDomainid() (string, bool) {
@@ -1936,6 +2218,12 @@ func (p *MarkDefaultZoneForAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *MarkDefaultZoneForAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *MarkDefaultZoneForAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1951,6 +2239,12 @@ func (p *MarkDefaultZoneForAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *MarkDefaultZoneForAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *MarkDefaultZoneForAccountParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1964,6 +2258,12 @@ func (p *MarkDefaultZoneForAccountParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *MarkDefaultZoneForAccountParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *MarkDefaultZoneForAccountParams) GetZoneid() (string, bool) {
@@ -2154,6 +2454,12 @@ func (p *UpdateAccountParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateAccountParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpdateAccountParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2167,6 +2473,12 @@ func (p *UpdateAccountParams) SetAccountdetails(v map[string]string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountdetails"] = v
+}
+
+func (p *UpdateAccountParams) ResetAccountdetails() {
+	if p.p != nil && p.p["accountdetails"] != nil {
+		delete(p.p, "accountdetails")
+	}
 }
 
 func (p *UpdateAccountParams) GetAccountdetails() (map[string]string, bool) {
@@ -2184,6 +2496,12 @@ func (p *UpdateAccountParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateAccountParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *UpdateAccountParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2197,6 +2515,12 @@ func (p *UpdateAccountParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateAccountParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateAccountParams) GetId() (string, bool) {
@@ -2214,6 +2538,12 @@ func (p *UpdateAccountParams) SetNetworkdomain(v string) {
 	p.p["networkdomain"] = v
 }
 
+func (p *UpdateAccountParams) ResetNetworkdomain() {
+	if p.p != nil && p.p["networkdomain"] != nil {
+		delete(p.p, "networkdomain")
+	}
+}
+
 func (p *UpdateAccountParams) GetNetworkdomain() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2229,6 +2559,12 @@ func (p *UpdateAccountParams) SetNewname(v string) {
 	p.p["newname"] = v
 }
 
+func (p *UpdateAccountParams) ResetNewname() {
+	if p.p != nil && p.p["newname"] != nil {
+		delete(p.p, "newname")
+	}
+}
+
 func (p *UpdateAccountParams) GetNewname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2242,6 +2578,12 @@ func (p *UpdateAccountParams) SetRoleid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["roleid"] = v
+}
+
+func (p *UpdateAccountParams) ResetRoleid() {
+	if p.p != nil && p.p["roleid"] != nil {
+		delete(p.p, "roleid")
+	}
 }
 
 func (p *UpdateAccountParams) GetRoleid() (string, bool) {

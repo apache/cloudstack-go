@@ -72,6 +72,12 @@ func (p *CreateInstanceGroupParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateInstanceGroupParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateInstanceGroupParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -85,6 +91,12 @@ func (p *CreateInstanceGroupParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateInstanceGroupParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateInstanceGroupParams) GetDomainid() (string, bool) {
@@ -102,6 +114,12 @@ func (p *CreateInstanceGroupParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateInstanceGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateInstanceGroupParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -115,6 +133,12 @@ func (p *CreateInstanceGroupParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *CreateInstanceGroupParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *CreateInstanceGroupParams) GetProjectid() (string, bool) {
@@ -183,6 +207,12 @@ func (p *DeleteInstanceGroupParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteInstanceGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteInstanceGroupParams) GetId() (string, bool) {
@@ -304,6 +334,12 @@ func (p *ListInstanceGroupsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListInstanceGroupsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListInstanceGroupsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -317,6 +353,12 @@ func (p *ListInstanceGroupsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListInstanceGroupsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListInstanceGroupsParams) GetDomainid() (string, bool) {
@@ -334,6 +376,12 @@ func (p *ListInstanceGroupsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListInstanceGroupsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListInstanceGroupsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -347,6 +395,12 @@ func (p *ListInstanceGroupsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListInstanceGroupsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListInstanceGroupsParams) GetIsrecursive() (bool, bool) {
@@ -364,6 +418,12 @@ func (p *ListInstanceGroupsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListInstanceGroupsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListInstanceGroupsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -377,6 +437,12 @@ func (p *ListInstanceGroupsParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListInstanceGroupsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListInstanceGroupsParams) GetListall() (bool, bool) {
@@ -394,6 +460,12 @@ func (p *ListInstanceGroupsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListInstanceGroupsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListInstanceGroupsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -407,6 +479,12 @@ func (p *ListInstanceGroupsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListInstanceGroupsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListInstanceGroupsParams) GetPage() (int, bool) {
@@ -424,6 +502,12 @@ func (p *ListInstanceGroupsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListInstanceGroupsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListInstanceGroupsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -437,6 +521,12 @@ func (p *ListInstanceGroupsParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListInstanceGroupsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListInstanceGroupsParams) GetProjectid() (string, bool) {
@@ -597,6 +687,12 @@ func (p *UpdateInstanceGroupParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateInstanceGroupParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateInstanceGroupParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -610,6 +706,12 @@ func (p *UpdateInstanceGroupParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateInstanceGroupParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateInstanceGroupParams) GetName() (string, bool) {

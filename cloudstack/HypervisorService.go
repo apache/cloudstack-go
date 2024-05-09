@@ -73,6 +73,12 @@ func (p *ListHypervisorCapabilitiesParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
 func (p *ListHypervisorCapabilitiesParams) GetHypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -86,6 +92,12 @@ func (p *ListHypervisorCapabilitiesParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListHypervisorCapabilitiesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListHypervisorCapabilitiesParams) GetId() (string, bool) {
@@ -103,6 +115,12 @@ func (p *ListHypervisorCapabilitiesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListHypervisorCapabilitiesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -118,6 +136,12 @@ func (p *ListHypervisorCapabilitiesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListHypervisorCapabilitiesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListHypervisorCapabilitiesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -131,6 +155,12 @@ func (p *ListHypervisorCapabilitiesParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListHypervisorCapabilitiesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListHypervisorCapabilitiesParams) GetPagesize() (int, bool) {
@@ -238,6 +268,12 @@ func (p *ListHypervisorsParams) SetZoneid(v string) {
 	p.p["zoneid"] = v
 }
 
+func (p *ListHypervisorsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
 func (p *ListHypervisorsParams) GetZoneid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -326,6 +362,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -339,6 +381,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetMaxdatavolumeslimit(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxdatavolumeslimit"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) ResetMaxdatavolumeslimit() {
+	if p.p != nil && p.p["maxdatavolumeslimit"] != nil {
+		delete(p.p, "maxdatavolumeslimit")
+	}
 }
 
 func (p *UpdateHypervisorCapabilitiesParams) GetMaxdatavolumeslimit() (int, bool) {
@@ -356,6 +404,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetMaxguestslimit(v int64) {
 	p.p["maxguestslimit"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) ResetMaxguestslimit() {
+	if p.p != nil && p.p["maxguestslimit"] != nil {
+		delete(p.p, "maxguestslimit")
+	}
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) GetMaxguestslimit() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -369,6 +423,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetMaxhostspercluster(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["maxhostspercluster"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) ResetMaxhostspercluster() {
+	if p.p != nil && p.p["maxhostspercluster"] != nil {
+		delete(p.p, "maxhostspercluster")
+	}
 }
 
 func (p *UpdateHypervisorCapabilitiesParams) GetMaxhostspercluster() (int, bool) {
@@ -386,6 +446,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetSecuritygroupenabled(v bool) {
 	p.p["securitygroupenabled"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) ResetSecuritygroupenabled() {
+	if p.p != nil && p.p["securitygroupenabled"] != nil {
+		delete(p.p, "securitygroupenabled")
+	}
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) GetSecuritygroupenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -401,6 +467,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetStoragemotionenabled(v bool) {
 	p.p["storagemotionenabled"] = v
 }
 
+func (p *UpdateHypervisorCapabilitiesParams) ResetStoragemotionenabled() {
+	if p.p != nil && p.p["storagemotionenabled"] != nil {
+		delete(p.p, "storagemotionenabled")
+	}
+}
+
 func (p *UpdateHypervisorCapabilitiesParams) GetStoragemotionenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -414,6 +486,12 @@ func (p *UpdateHypervisorCapabilitiesParams) SetVmsnapshotenabled(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vmsnapshotenabled"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) ResetVmsnapshotenabled() {
+	if p.p != nil && p.p["vmsnapshotenabled"] != nil {
+		delete(p.p, "vmsnapshotenabled")
+	}
 }
 
 func (p *UpdateHypervisorCapabilitiesParams) GetVmsnapshotenabled() (bool, bool) {

@@ -87,6 +87,12 @@ func (p *AddTrafficMonitorParams) SetExcludezones(v string) {
 	p.p["excludezones"] = v
 }
 
+func (p *AddTrafficMonitorParams) ResetExcludezones() {
+	if p.p != nil && p.p["excludezones"] != nil {
+		delete(p.p, "excludezones")
+	}
+}
+
 func (p *AddTrafficMonitorParams) GetExcludezones() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -100,6 +106,12 @@ func (p *AddTrafficMonitorParams) SetIncludezones(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["includezones"] = v
+}
+
+func (p *AddTrafficMonitorParams) ResetIncludezones() {
+	if p.p != nil && p.p["includezones"] != nil {
+		delete(p.p, "includezones")
+	}
 }
 
 func (p *AddTrafficMonitorParams) GetIncludezones() (string, bool) {
@@ -117,6 +129,12 @@ func (p *AddTrafficMonitorParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddTrafficMonitorParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddTrafficMonitorParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -130,6 +148,12 @@ func (p *AddTrafficMonitorParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddTrafficMonitorParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddTrafficMonitorParams) GetZoneid() (string, bool) {
@@ -221,6 +245,12 @@ func (p *AddTrafficTypeParams) SetHypervnetworklabel(v string) {
 	p.p["hypervnetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) ResetHypervnetworklabel() {
+	if p.p != nil && p.p["hypervnetworklabel"] != nil {
+		delete(p.p, "hypervnetworklabel")
+	}
+}
+
 func (p *AddTrafficTypeParams) GetHypervnetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -234,6 +264,12 @@ func (p *AddTrafficTypeParams) SetIsolationmethod(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isolationmethod"] = v
+}
+
+func (p *AddTrafficTypeParams) ResetIsolationmethod() {
+	if p.p != nil && p.p["isolationmethod"] != nil {
+		delete(p.p, "isolationmethod")
+	}
 }
 
 func (p *AddTrafficTypeParams) GetIsolationmethod() (string, bool) {
@@ -251,6 +287,12 @@ func (p *AddTrafficTypeParams) SetKvmnetworklabel(v string) {
 	p.p["kvmnetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) ResetKvmnetworklabel() {
+	if p.p != nil && p.p["kvmnetworklabel"] != nil {
+		delete(p.p, "kvmnetworklabel")
+	}
+}
+
 func (p *AddTrafficTypeParams) GetKvmnetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -264,6 +306,12 @@ func (p *AddTrafficTypeParams) SetOvm3networklabel(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ovm3networklabel"] = v
+}
+
+func (p *AddTrafficTypeParams) ResetOvm3networklabel() {
+	if p.p != nil && p.p["ovm3networklabel"] != nil {
+		delete(p.p, "ovm3networklabel")
+	}
 }
 
 func (p *AddTrafficTypeParams) GetOvm3networklabel() (string, bool) {
@@ -281,6 +329,12 @@ func (p *AddTrafficTypeParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddTrafficTypeParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
+}
+
 func (p *AddTrafficTypeParams) GetPhysicalnetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -294,6 +348,12 @@ func (p *AddTrafficTypeParams) SetTraffictype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *AddTrafficTypeParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
 }
 
 func (p *AddTrafficTypeParams) GetTraffictype() (string, bool) {
@@ -311,6 +371,12 @@ func (p *AddTrafficTypeParams) SetVlan(v string) {
 	p.p["vlan"] = v
 }
 
+func (p *AddTrafficTypeParams) ResetVlan() {
+	if p.p != nil && p.p["vlan"] != nil {
+		delete(p.p, "vlan")
+	}
+}
+
 func (p *AddTrafficTypeParams) GetVlan() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -326,6 +392,12 @@ func (p *AddTrafficTypeParams) SetVmwarenetworklabel(v string) {
 	p.p["vmwarenetworklabel"] = v
 }
 
+func (p *AddTrafficTypeParams) ResetVmwarenetworklabel() {
+	if p.p != nil && p.p["vmwarenetworklabel"] != nil {
+		delete(p.p, "vmwarenetworklabel")
+	}
+}
+
 func (p *AddTrafficTypeParams) GetVmwarenetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -339,6 +411,12 @@ func (p *AddTrafficTypeParams) SetXennetworklabel(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["xennetworklabel"] = v
+}
+
+func (p *AddTrafficTypeParams) ResetXennetworklabel() {
+	if p.p != nil && p.p["xennetworklabel"] != nil {
+		delete(p.p, "xennetworklabel")
+	}
 }
 
 func (p *AddTrafficTypeParams) GetXennetworklabel() (string, bool) {
@@ -429,6 +507,12 @@ func (p *DeleteTrafficMonitorParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteTrafficMonitorParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteTrafficMonitorParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -517,6 +601,12 @@ func (p *DeleteTrafficTypeParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteTrafficTypeParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteTrafficTypeParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -599,6 +689,12 @@ func (p *GenerateUsageRecordsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *GenerateUsageRecordsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *GenerateUsageRecordsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -614,6 +710,12 @@ func (p *GenerateUsageRecordsParams) SetEnddate(v string) {
 	p.p["enddate"] = v
 }
 
+func (p *GenerateUsageRecordsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
 func (p *GenerateUsageRecordsParams) GetEnddate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -627,6 +729,12 @@ func (p *GenerateUsageRecordsParams) SetStartdate(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *GenerateUsageRecordsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
 }
 
 func (p *GenerateUsageRecordsParams) GetStartdate() (string, bool) {
@@ -729,6 +837,12 @@ func (p *ListTrafficMonitorsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficMonitorsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListTrafficMonitorsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -742,6 +856,12 @@ func (p *ListTrafficMonitorsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficMonitorsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListTrafficMonitorsParams) GetPage() (int, bool) {
@@ -759,6 +879,12 @@ func (p *ListTrafficMonitorsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficMonitorsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListTrafficMonitorsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -772,6 +898,12 @@ func (p *ListTrafficMonitorsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListTrafficMonitorsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListTrafficMonitorsParams) GetZoneid() (string, bool) {
@@ -854,6 +986,12 @@ func (p *ListTrafficTypeImplementorsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficTypeImplementorsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListTrafficTypeImplementorsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -867,6 +1005,12 @@ func (p *ListTrafficTypeImplementorsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficTypeImplementorsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListTrafficTypeImplementorsParams) GetPage() (int, bool) {
@@ -884,6 +1028,12 @@ func (p *ListTrafficTypeImplementorsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficTypeImplementorsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListTrafficTypeImplementorsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -897,6 +1047,12 @@ func (p *ListTrafficTypeImplementorsParams) SetTraffictype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *ListTrafficTypeImplementorsParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
 }
 
 func (p *ListTrafficTypeImplementorsParams) GetTraffictype() (string, bool) {
@@ -975,6 +1131,12 @@ func (p *ListTrafficTypesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListTrafficTypesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListTrafficTypesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -988,6 +1150,12 @@ func (p *ListTrafficTypesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListTrafficTypesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListTrafficTypesParams) GetPage() (int, bool) {
@@ -1005,6 +1173,12 @@ func (p *ListTrafficTypesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListTrafficTypesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListTrafficTypesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1018,6 +1192,12 @@ func (p *ListTrafficTypesParams) SetPhysicalnetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListTrafficTypesParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
 }
 
 func (p *ListTrafficTypesParams) GetPhysicalnetworkid() (string, bool) {
@@ -1173,6 +1353,12 @@ func (p *ListUsageRecordsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1186,6 +1372,12 @@ func (p *ListUsageRecordsParams) SetAccountid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accountid"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetAccountid() (string, bool) {
@@ -1203,6 +1395,12 @@ func (p *ListUsageRecordsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1216,6 +1414,12 @@ func (p *ListUsageRecordsParams) SetEnddate(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["enddate"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetEnddate() (string, bool) {
@@ -1233,6 +1437,12 @@ func (p *ListUsageRecordsParams) SetIncludetags(v bool) {
 	p.p["includetags"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetIncludetags() {
+	if p.p != nil && p.p["includetags"] != nil {
+		delete(p.p, "includetags")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetIncludetags() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1246,6 +1456,12 @@ func (p *ListUsageRecordsParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetIsrecursive() (bool, bool) {
@@ -1263,6 +1479,12 @@ func (p *ListUsageRecordsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1276,6 +1498,12 @@ func (p *ListUsageRecordsParams) SetOldformat(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["oldformat"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetOldformat() {
+	if p.p != nil && p.p["oldformat"] != nil {
+		delete(p.p, "oldformat")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetOldformat() (bool, bool) {
@@ -1293,6 +1521,12 @@ func (p *ListUsageRecordsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1306,6 +1540,12 @@ func (p *ListUsageRecordsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetPagesize() (int, bool) {
@@ -1323,6 +1563,12 @@ func (p *ListUsageRecordsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1336,6 +1582,12 @@ func (p *ListUsageRecordsParams) SetStartdate(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetStartdate() (string, bool) {
@@ -1353,6 +1605,12 @@ func (p *ListUsageRecordsParams) SetType(v int64) {
 	p.p["type"] = v
 }
 
+func (p *ListUsageRecordsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
 func (p *ListUsageRecordsParams) GetType() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1366,6 +1624,12 @@ func (p *ListUsageRecordsParams) SetUsageid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["usageid"] = v
+}
+
+func (p *ListUsageRecordsParams) ResetUsageid() {
+	if p.p != nil && p.p["usageid"] != nil {
+		delete(p.p, "usageid")
+	}
 }
 
 func (p *ListUsageRecordsParams) GetUsageid() (string, bool) {
@@ -1543,6 +1807,12 @@ func (p *RemoveRawUsageRecordsParams) SetInterval(v int) {
 	p.p["interval"] = v
 }
 
+func (p *RemoveRawUsageRecordsParams) ResetInterval() {
+	if p.p != nil && p.p["interval"] != nil {
+		delete(p.p, "interval")
+	}
+}
+
 func (p *RemoveRawUsageRecordsParams) GetInterval() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1646,6 +1916,12 @@ func (p *UpdateTrafficTypeParams) SetHypervnetworklabel(v string) {
 	p.p["hypervnetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) ResetHypervnetworklabel() {
+	if p.p != nil && p.p["hypervnetworklabel"] != nil {
+		delete(p.p, "hypervnetworklabel")
+	}
+}
+
 func (p *UpdateTrafficTypeParams) GetHypervnetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1659,6 +1935,12 @@ func (p *UpdateTrafficTypeParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateTrafficTypeParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateTrafficTypeParams) GetId() (string, bool) {
@@ -1676,6 +1958,12 @@ func (p *UpdateTrafficTypeParams) SetKvmnetworklabel(v string) {
 	p.p["kvmnetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) ResetKvmnetworklabel() {
+	if p.p != nil && p.p["kvmnetworklabel"] != nil {
+		delete(p.p, "kvmnetworklabel")
+	}
+}
+
 func (p *UpdateTrafficTypeParams) GetKvmnetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1689,6 +1977,12 @@ func (p *UpdateTrafficTypeParams) SetOvm3networklabel(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ovm3networklabel"] = v
+}
+
+func (p *UpdateTrafficTypeParams) ResetOvm3networklabel() {
+	if p.p != nil && p.p["ovm3networklabel"] != nil {
+		delete(p.p, "ovm3networklabel")
+	}
 }
 
 func (p *UpdateTrafficTypeParams) GetOvm3networklabel() (string, bool) {
@@ -1706,6 +2000,12 @@ func (p *UpdateTrafficTypeParams) SetVmwarenetworklabel(v string) {
 	p.p["vmwarenetworklabel"] = v
 }
 
+func (p *UpdateTrafficTypeParams) ResetVmwarenetworklabel() {
+	if p.p != nil && p.p["vmwarenetworklabel"] != nil {
+		delete(p.p, "vmwarenetworklabel")
+	}
+}
+
 func (p *UpdateTrafficTypeParams) GetVmwarenetworklabel() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1719,6 +2019,12 @@ func (p *UpdateTrafficTypeParams) SetXennetworklabel(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["xennetworklabel"] = v
+}
+
+func (p *UpdateTrafficTypeParams) ResetXennetworklabel() {
+	if p.p != nil && p.p["xennetworklabel"] != nil {
+		delete(p.p, "xennetworklabel")
+	}
 }
 
 func (p *UpdateTrafficTypeParams) GetXennetworklabel() (string, bool) {

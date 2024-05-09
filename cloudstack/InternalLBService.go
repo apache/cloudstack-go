@@ -72,6 +72,12 @@ func (p *ConfigureInternalLoadBalancerElementParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ConfigureInternalLoadBalancerElementParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
 func (p *ConfigureInternalLoadBalancerElementParams) GetEnabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -85,6 +91,12 @@ func (p *ConfigureInternalLoadBalancerElementParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ConfigureInternalLoadBalancerElementParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ConfigureInternalLoadBalancerElementParams) GetId() (string, bool) {
@@ -168,6 +180,12 @@ func (p *CreateInternalLoadBalancerElementParams) SetNspid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nspid"] = v
+}
+
+func (p *CreateInternalLoadBalancerElementParams) ResetNspid() {
+	if p.p != nil && p.p["nspid"] != nil {
+		delete(p.p, "nspid")
+	}
 }
 
 func (p *CreateInternalLoadBalancerElementParams) GetNspid() (string, bool) {
@@ -270,6 +288,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetEnabled(v bool) {
 	p.p["enabled"] = v
 }
 
+func (p *ListInternalLoadBalancerElementsParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
 func (p *ListInternalLoadBalancerElementsParams) GetEnabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -283,6 +307,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListInternalLoadBalancerElementsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListInternalLoadBalancerElementsParams) GetId() (string, bool) {
@@ -300,6 +330,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListInternalLoadBalancerElementsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListInternalLoadBalancerElementsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -313,6 +349,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetNspid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nspid"] = v
+}
+
+func (p *ListInternalLoadBalancerElementsParams) ResetNspid() {
+	if p.p != nil && p.p["nspid"] != nil {
+		delete(p.p, "nspid")
+	}
 }
 
 func (p *ListInternalLoadBalancerElementsParams) GetNspid() (string, bool) {
@@ -330,6 +372,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListInternalLoadBalancerElementsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListInternalLoadBalancerElementsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -343,6 +391,12 @@ func (p *ListInternalLoadBalancerElementsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListInternalLoadBalancerElementsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListInternalLoadBalancerElementsParams) GetPagesize() (int, bool) {
@@ -501,6 +555,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -514,6 +574,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetDomainid() (string, bool) {
@@ -531,6 +597,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetFetchhealthcheckresults(v bool) {
 	p.p["fetchhealthcheckresults"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetFetchhealthcheckresults() {
+	if p.p != nil && p.p["fetchhealthcheckresults"] != nil {
+		delete(p.p, "fetchhealthcheckresults")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetFetchhealthcheckresults() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -544,6 +616,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetForvpc(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forvpc"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetForvpc() {
+	if p.p != nil && p.p["forvpc"] != nil {
+		delete(p.p, "forvpc")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetForvpc() (bool, bool) {
@@ -561,6 +639,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -574,6 +658,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetId() (string, bool) {
@@ -591,6 +681,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -604,6 +700,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetKeyword() (string, bool) {
@@ -621,6 +723,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -634,6 +742,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetName() (string, bool) {
@@ -651,6 +765,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetNetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -664,6 +784,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetPage() (int, bool) {
@@ -681,6 +807,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -694,6 +826,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetPodid() (string, bool) {
@@ -711,6 +849,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -724,6 +868,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetState(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetState() (string, bool) {
@@ -741,6 +891,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetVpcid(v string) {
 	p.p["vpcid"] = v
 }
 
+func (p *ListInternalLoadBalancerVMsParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
+}
+
 func (p *ListInternalLoadBalancerVMsParams) GetVpcid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -754,6 +910,12 @@ func (p *ListInternalLoadBalancerVMsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListInternalLoadBalancerVMsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListInternalLoadBalancerVMsParams) GetZoneid() (string, bool) {
@@ -963,6 +1125,12 @@ func (p *StartInternalLoadBalancerVMParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *StartInternalLoadBalancerVMParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *StartInternalLoadBalancerVMParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1107,6 +1275,12 @@ func (p *StopInternalLoadBalancerVMParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *StopInternalLoadBalancerVMParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
 func (p *StopInternalLoadBalancerVMParams) GetForced() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1120,6 +1294,12 @@ func (p *StopInternalLoadBalancerVMParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *StopInternalLoadBalancerVMParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *StopInternalLoadBalancerVMParams) GetId() (string, bool) {

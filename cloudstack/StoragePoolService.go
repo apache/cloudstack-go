@@ -56,6 +56,12 @@ func (p *CancelStorageMaintenanceParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *CancelStorageMaintenanceParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *CancelStorageMaintenanceParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -160,6 +166,12 @@ func (p *EnableStorageMaintenanceParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *EnableStorageMaintenanceParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *EnableStorageMaintenanceParams) GetId() (string, bool) {
@@ -279,6 +291,12 @@ func (p *ListStorageProvidersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListStorageProvidersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListStorageProvidersParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -292,6 +310,12 @@ func (p *ListStorageProvidersParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListStorageProvidersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListStorageProvidersParams) GetPage() (int, bool) {
@@ -309,6 +333,12 @@ func (p *ListStorageProvidersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListStorageProvidersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListStorageProvidersParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -322,6 +352,12 @@ func (p *ListStorageProvidersParams) SetType(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["type"] = v
+}
+
+func (p *ListStorageProvidersParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
 }
 
 func (p *ListStorageProvidersParams) GetType() (string, bool) {

@@ -80,6 +80,12 @@ func (p *ListCapacityParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListCapacityParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
 func (p *ListCapacityParams) GetClusterid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -93,6 +99,12 @@ func (p *ListCapacityParams) SetFetchlatest(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fetchlatest"] = v
+}
+
+func (p *ListCapacityParams) ResetFetchlatest() {
+	if p.p != nil && p.p["fetchlatest"] != nil {
+		delete(p.p, "fetchlatest")
+	}
 }
 
 func (p *ListCapacityParams) GetFetchlatest() (bool, bool) {
@@ -110,6 +122,12 @@ func (p *ListCapacityParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListCapacityParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListCapacityParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -123,6 +141,12 @@ func (p *ListCapacityParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListCapacityParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListCapacityParams) GetPage() (int, bool) {
@@ -140,6 +164,12 @@ func (p *ListCapacityParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListCapacityParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListCapacityParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -153,6 +183,12 @@ func (p *ListCapacityParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListCapacityParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *ListCapacityParams) GetPodid() (string, bool) {
@@ -170,6 +206,12 @@ func (p *ListCapacityParams) SetSortby(v string) {
 	p.p["sortby"] = v
 }
 
+func (p *ListCapacityParams) ResetSortby() {
+	if p.p != nil && p.p["sortby"] != nil {
+		delete(p.p, "sortby")
+	}
+}
+
 func (p *ListCapacityParams) GetSortby() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -185,6 +227,12 @@ func (p *ListCapacityParams) SetType(v int) {
 	p.p["type"] = v
 }
 
+func (p *ListCapacityParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
 func (p *ListCapacityParams) GetType() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -198,6 +246,12 @@ func (p *ListCapacityParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListCapacityParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListCapacityParams) GetZoneid() (string, bool) {

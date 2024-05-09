@@ -77,6 +77,12 @@ func (p *ListManagementServersMetricsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListManagementServersMetricsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListManagementServersMetricsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -90,6 +96,12 @@ func (p *ListManagementServersMetricsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListManagementServersMetricsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListManagementServersMetricsParams) GetKeyword() (string, bool) {
@@ -107,6 +119,12 @@ func (p *ListManagementServersMetricsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListManagementServersMetricsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListManagementServersMetricsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -120,6 +138,12 @@ func (p *ListManagementServersMetricsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListManagementServersMetricsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListManagementServersMetricsParams) GetPage() (int, bool) {
@@ -137,6 +161,12 @@ func (p *ListManagementServersMetricsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListManagementServersMetricsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListManagementServersMetricsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -150,6 +180,12 @@ func (p *ListManagementServersMetricsParams) SetSystem(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["system"] = v
+}
+
+func (p *ListManagementServersMetricsParams) ResetSystem() {
+	if p.p != nil && p.p["system"] != nil {
+		delete(p.p, "system")
+	}
 }
 
 func (p *ListManagementServersMetricsParams) GetSystem() (bool, bool) {

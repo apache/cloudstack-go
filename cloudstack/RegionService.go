@@ -65,6 +65,12 @@ func (p *AddRegionParams) SetEndpoint(v string) {
 	p.p["endpoint"] = v
 }
 
+func (p *AddRegionParams) ResetEndpoint() {
+	if p.p != nil && p.p["endpoint"] != nil {
+		delete(p.p, "endpoint")
+	}
+}
+
 func (p *AddRegionParams) GetEndpoint() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -80,6 +86,12 @@ func (p *AddRegionParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *AddRegionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *AddRegionParams) GetId() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -93,6 +105,12 @@ func (p *AddRegionParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *AddRegionParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *AddRegionParams) GetName() (string, bool) {
@@ -176,6 +194,12 @@ func (p *ListRegionsParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *ListRegionsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListRegionsParams) GetId() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -189,6 +213,12 @@ func (p *ListRegionsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRegionsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListRegionsParams) GetKeyword() (string, bool) {
@@ -206,6 +236,12 @@ func (p *ListRegionsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListRegionsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListRegionsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -221,6 +257,12 @@ func (p *ListRegionsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListRegionsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListRegionsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -234,6 +276,12 @@ func (p *ListRegionsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListRegionsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListRegionsParams) GetPagesize() (int, bool) {
@@ -303,6 +351,12 @@ func (p *RemoveRegionParams) SetId(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RemoveRegionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *RemoveRegionParams) GetId() (int, bool) {
@@ -400,6 +454,12 @@ func (p *UpdateRegionParams) SetEndpoint(v string) {
 	p.p["endpoint"] = v
 }
 
+func (p *UpdateRegionParams) ResetEndpoint() {
+	if p.p != nil && p.p["endpoint"] != nil {
+		delete(p.p, "endpoint")
+	}
+}
+
 func (p *UpdateRegionParams) GetEndpoint() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -415,6 +475,12 @@ func (p *UpdateRegionParams) SetId(v int) {
 	p.p["id"] = v
 }
 
+func (p *UpdateRegionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateRegionParams) GetId() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -428,6 +494,12 @@ func (p *UpdateRegionParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateRegionParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateRegionParams) GetName() (string, bool) {

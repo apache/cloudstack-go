@@ -51,6 +51,12 @@ func (p *ListApisParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListApisParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListApisParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})

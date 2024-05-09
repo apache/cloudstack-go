@@ -77,6 +77,12 @@ func (p *CreateDomainParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateDomainParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateDomainParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -90,6 +96,12 @@ func (p *CreateDomainParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *CreateDomainParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *CreateDomainParams) GetName() (string, bool) {
@@ -107,6 +119,12 @@ func (p *CreateDomainParams) SetNetworkdomain(v string) {
 	p.p["networkdomain"] = v
 }
 
+func (p *CreateDomainParams) ResetNetworkdomain() {
+	if p.p != nil && p.p["networkdomain"] != nil {
+		delete(p.p, "networkdomain")
+	}
+}
+
 func (p *CreateDomainParams) GetNetworkdomain() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -120,6 +138,12 @@ func (p *CreateDomainParams) SetParentdomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["parentdomainid"] = v
+}
+
+func (p *CreateDomainParams) ResetParentdomainid() {
+	if p.p != nil && p.p["parentdomainid"] != nil {
+		delete(p.p, "parentdomainid")
+	}
 }
 
 func (p *CreateDomainParams) GetParentdomainid() (string, bool) {
@@ -238,6 +262,12 @@ func (p *DeleteDomainParams) SetCleanup(v bool) {
 	p.p["cleanup"] = v
 }
 
+func (p *DeleteDomainParams) ResetCleanup() {
+	if p.p != nil && p.p["cleanup"] != nil {
+		delete(p.p, "cleanup")
+	}
+}
+
 func (p *DeleteDomainParams) GetCleanup() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -251,6 +281,12 @@ func (p *DeleteDomainParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteDomainParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteDomainParams) GetId() (string, bool) {
@@ -355,6 +391,12 @@ func (p *ListDomainChildrenParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListDomainChildrenParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListDomainChildrenParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -368,6 +410,12 @@ func (p *ListDomainChildrenParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListDomainChildrenParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListDomainChildrenParams) GetIsrecursive() (bool, bool) {
@@ -385,6 +433,12 @@ func (p *ListDomainChildrenParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDomainChildrenParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListDomainChildrenParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -398,6 +452,12 @@ func (p *ListDomainChildrenParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListDomainChildrenParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListDomainChildrenParams) GetListall() (bool, bool) {
@@ -415,6 +475,12 @@ func (p *ListDomainChildrenParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListDomainChildrenParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListDomainChildrenParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -428,6 +494,12 @@ func (p *ListDomainChildrenParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListDomainChildrenParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListDomainChildrenParams) GetPage() (int, bool) {
@@ -445,6 +517,12 @@ func (p *ListDomainChildrenParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListDomainChildrenParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListDomainChildrenParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -458,6 +536,12 @@ func (p *ListDomainChildrenParams) SetShowicon(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showicon"] = v
+}
+
+func (p *ListDomainChildrenParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
 }
 
 func (p *ListDomainChildrenParams) GetShowicon() (bool, bool) {
@@ -685,6 +769,12 @@ func (p *ListDomainsParams) SetDetails(v []string) {
 	p.p["details"] = v
 }
 
+func (p *ListDomainsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *ListDomainsParams) GetDetails() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -698,6 +788,12 @@ func (p *ListDomainsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListDomainsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListDomainsParams) GetId() (string, bool) {
@@ -715,6 +811,12 @@ func (p *ListDomainsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDomainsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListDomainsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -728,6 +830,12 @@ func (p *ListDomainsParams) SetLevel(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["level"] = v
+}
+
+func (p *ListDomainsParams) ResetLevel() {
+	if p.p != nil && p.p["level"] != nil {
+		delete(p.p, "level")
+	}
 }
 
 func (p *ListDomainsParams) GetLevel() (int, bool) {
@@ -745,6 +853,12 @@ func (p *ListDomainsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListDomainsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListDomainsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -758,6 +872,12 @@ func (p *ListDomainsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListDomainsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListDomainsParams) GetName() (string, bool) {
@@ -775,6 +895,12 @@ func (p *ListDomainsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDomainsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListDomainsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -790,6 +916,12 @@ func (p *ListDomainsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListDomainsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListDomainsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -803,6 +935,12 @@ func (p *ListDomainsParams) SetShowicon(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showicon"] = v
+}
+
+func (p *ListDomainsParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
 }
 
 func (p *ListDomainsParams) GetShowicon() (bool, bool) {
@@ -1006,6 +1144,12 @@ func (p *UpdateDomainParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateDomainParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateDomainParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1021,6 +1165,12 @@ func (p *UpdateDomainParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateDomainParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateDomainParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1034,6 +1184,12 @@ func (p *UpdateDomainParams) SetNetworkdomain(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkdomain"] = v
+}
+
+func (p *UpdateDomainParams) ResetNetworkdomain() {
+	if p.p != nil && p.p["networkdomain"] != nil {
+		delete(p.p, "networkdomain")
+	}
 }
 
 func (p *UpdateDomainParams) GetNetworkdomain() (string, bool) {

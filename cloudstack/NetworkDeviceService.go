@@ -64,6 +64,12 @@ func (p *AddNetworkDeviceParams) SetNetworkdeviceparameterlist(v map[string]stri
 	p.p["networkdeviceparameterlist"] = v
 }
 
+func (p *AddNetworkDeviceParams) ResetNetworkdeviceparameterlist() {
+	if p.p != nil && p.p["networkdeviceparameterlist"] != nil {
+		delete(p.p, "networkdeviceparameterlist")
+	}
+}
+
 func (p *AddNetworkDeviceParams) GetNetworkdeviceparameterlist() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -77,6 +83,12 @@ func (p *AddNetworkDeviceParams) SetNetworkdevicetype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkdevicetype"] = v
+}
+
+func (p *AddNetworkDeviceParams) ResetNetworkdevicetype() {
+	if p.p != nil && p.p["networkdevicetype"] != nil {
+		delete(p.p, "networkdevicetype")
+	}
 }
 
 func (p *AddNetworkDeviceParams) GetNetworkdevicetype() (string, bool) {
@@ -136,6 +148,12 @@ func (p *DeleteNetworkDeviceParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteNetworkDeviceParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteNetworkDeviceParams) GetId() (string, bool) {
@@ -244,6 +262,12 @@ func (p *ListNetworkDeviceParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListNetworkDeviceParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListNetworkDeviceParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -257,6 +281,12 @@ func (p *ListNetworkDeviceParams) SetNetworkdeviceparameterlist(v map[string]str
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkdeviceparameterlist"] = v
+}
+
+func (p *ListNetworkDeviceParams) ResetNetworkdeviceparameterlist() {
+	if p.p != nil && p.p["networkdeviceparameterlist"] != nil {
+		delete(p.p, "networkdeviceparameterlist")
+	}
 }
 
 func (p *ListNetworkDeviceParams) GetNetworkdeviceparameterlist() (map[string]string, bool) {
@@ -274,6 +304,12 @@ func (p *ListNetworkDeviceParams) SetNetworkdevicetype(v string) {
 	p.p["networkdevicetype"] = v
 }
 
+func (p *ListNetworkDeviceParams) ResetNetworkdevicetype() {
+	if p.p != nil && p.p["networkdevicetype"] != nil {
+		delete(p.p, "networkdevicetype")
+	}
+}
+
 func (p *ListNetworkDeviceParams) GetNetworkdevicetype() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -289,6 +325,12 @@ func (p *ListNetworkDeviceParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListNetworkDeviceParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListNetworkDeviceParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -302,6 +344,12 @@ func (p *ListNetworkDeviceParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListNetworkDeviceParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListNetworkDeviceParams) GetPagesize() (int, bool) {

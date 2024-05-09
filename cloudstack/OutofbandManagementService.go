@@ -59,6 +59,12 @@ func (p *ChangeOutOfBandManagementPasswordParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ChangeOutOfBandManagementPasswordParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ChangeOutOfBandManagementPasswordParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -72,6 +78,12 @@ func (p *ChangeOutOfBandManagementPasswordParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *ChangeOutOfBandManagementPasswordParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *ChangeOutOfBandManagementPasswordParams) GetPassword() (string, bool) {
@@ -179,6 +191,12 @@ func (p *ConfigureOutOfBandManagementParams) SetAddress(v string) {
 	p.p["address"] = v
 }
 
+func (p *ConfigureOutOfBandManagementParams) ResetAddress() {
+	if p.p != nil && p.p["address"] != nil {
+		delete(p.p, "address")
+	}
+}
+
 func (p *ConfigureOutOfBandManagementParams) GetAddress() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -192,6 +210,12 @@ func (p *ConfigureOutOfBandManagementParams) SetDriver(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["driver"] = v
+}
+
+func (p *ConfigureOutOfBandManagementParams) ResetDriver() {
+	if p.p != nil && p.p["driver"] != nil {
+		delete(p.p, "driver")
+	}
 }
 
 func (p *ConfigureOutOfBandManagementParams) GetDriver() (string, bool) {
@@ -209,6 +233,12 @@ func (p *ConfigureOutOfBandManagementParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ConfigureOutOfBandManagementParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ConfigureOutOfBandManagementParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -222,6 +252,12 @@ func (p *ConfigureOutOfBandManagementParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *ConfigureOutOfBandManagementParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *ConfigureOutOfBandManagementParams) GetPassword() (string, bool) {
@@ -239,6 +275,12 @@ func (p *ConfigureOutOfBandManagementParams) SetPort(v string) {
 	p.p["port"] = v
 }
 
+func (p *ConfigureOutOfBandManagementParams) ResetPort() {
+	if p.p != nil && p.p["port"] != nil {
+		delete(p.p, "port")
+	}
+}
+
 func (p *ConfigureOutOfBandManagementParams) GetPort() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -252,6 +294,12 @@ func (p *ConfigureOutOfBandManagementParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ConfigureOutOfBandManagementParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *ConfigureOutOfBandManagementParams) GetUsername() (string, bool) {
@@ -336,6 +384,12 @@ func (p *IssueOutOfBandManagementPowerActionParams) SetAction(v string) {
 	p.p["action"] = v
 }
 
+func (p *IssueOutOfBandManagementPowerActionParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
 func (p *IssueOutOfBandManagementPowerActionParams) GetAction() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -351,6 +405,12 @@ func (p *IssueOutOfBandManagementPowerActionParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *IssueOutOfBandManagementPowerActionParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *IssueOutOfBandManagementPowerActionParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -364,6 +424,12 @@ func (p *IssueOutOfBandManagementPowerActionParams) SetTimeout(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timeout"] = v
+}
+
+func (p *IssueOutOfBandManagementPowerActionParams) ResetTimeout() {
+	if p.p != nil && p.p["timeout"] != nil {
+		delete(p.p, "timeout")
+	}
 }
 
 func (p *IssueOutOfBandManagementPowerActionParams) GetTimeout() (int64, bool) {

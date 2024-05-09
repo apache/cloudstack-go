@@ -55,6 +55,12 @@ func (p *CreateConsoleEndpointParams) SetToken(v string) {
 	p.p["token"] = v
 }
 
+func (p *CreateConsoleEndpointParams) ResetToken() {
+	if p.p != nil && p.p["token"] != nil {
+		delete(p.p, "token")
+	}
+}
+
 func (p *CreateConsoleEndpointParams) GetToken() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -68,6 +74,12 @@ func (p *CreateConsoleEndpointParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *CreateConsoleEndpointParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *CreateConsoleEndpointParams) GetVirtualmachineid() (string, bool) {

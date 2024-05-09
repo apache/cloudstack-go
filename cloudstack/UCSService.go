@@ -79,6 +79,12 @@ func (p *AddUcsManagerParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *AddUcsManagerParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *AddUcsManagerParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -92,6 +98,12 @@ func (p *AddUcsManagerParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddUcsManagerParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *AddUcsManagerParams) GetPassword() (string, bool) {
@@ -109,6 +121,12 @@ func (p *AddUcsManagerParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddUcsManagerParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddUcsManagerParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -124,6 +142,12 @@ func (p *AddUcsManagerParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddUcsManagerParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
 func (p *AddUcsManagerParams) GetUsername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -137,6 +161,12 @@ func (p *AddUcsManagerParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddUcsManagerParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddUcsManagerParams) GetZoneid() (string, bool) {
@@ -211,6 +241,12 @@ func (p *AssociateUcsProfileToBladeParams) SetBladeid(v string) {
 	p.p["bladeid"] = v
 }
 
+func (p *AssociateUcsProfileToBladeParams) ResetBladeid() {
+	if p.p != nil && p.p["bladeid"] != nil {
+		delete(p.p, "bladeid")
+	}
+}
+
 func (p *AssociateUcsProfileToBladeParams) GetBladeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -226,6 +262,12 @@ func (p *AssociateUcsProfileToBladeParams) SetProfiledn(v string) {
 	p.p["profiledn"] = v
 }
 
+func (p *AssociateUcsProfileToBladeParams) ResetProfiledn() {
+	if p.p != nil && p.p["profiledn"] != nil {
+		delete(p.p, "profiledn")
+	}
+}
+
 func (p *AssociateUcsProfileToBladeParams) GetProfiledn() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -239,6 +281,12 @@ func (p *AssociateUcsProfileToBladeParams) SetUcsmanagerid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *AssociateUcsProfileToBladeParams) ResetUcsmanagerid() {
+	if p.p != nil && p.p["ucsmanagerid"] != nil {
+		delete(p.p, "ucsmanagerid")
+	}
 }
 
 func (p *AssociateUcsProfileToBladeParams) GetUcsmanagerid() (string, bool) {
@@ -325,6 +373,12 @@ func (p *DeleteUcsManagerParams) SetUcsmanagerid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *DeleteUcsManagerParams) ResetUcsmanagerid() {
+	if p.p != nil && p.p["ucsmanagerid"] != nil {
+		delete(p.p, "ucsmanagerid")
+	}
 }
 
 func (p *DeleteUcsManagerParams) GetUcsmanagerid() (string, bool) {
@@ -426,6 +480,12 @@ func (p *ListUcsBladesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUcsBladesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListUcsBladesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -439,6 +499,12 @@ func (p *ListUcsBladesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUcsBladesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListUcsBladesParams) GetPage() (int, bool) {
@@ -456,6 +522,12 @@ func (p *ListUcsBladesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsBladesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListUcsBladesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -469,6 +541,12 @@ func (p *ListUcsBladesParams) SetUcsmanagerid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *ListUcsBladesParams) ResetUcsmanagerid() {
+	if p.p != nil && p.p["ucsmanagerid"] != nil {
+		delete(p.p, "ucsmanagerid")
+	}
 }
 
 func (p *ListUcsBladesParams) GetUcsmanagerid() (string, bool) {
@@ -554,6 +632,12 @@ func (p *ListUcsManagersParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListUcsManagersParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListUcsManagersParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -567,6 +651,12 @@ func (p *ListUcsManagersParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListUcsManagersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListUcsManagersParams) GetKeyword() (string, bool) {
@@ -584,6 +674,12 @@ func (p *ListUcsManagersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListUcsManagersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListUcsManagersParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -599,6 +695,12 @@ func (p *ListUcsManagersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsManagersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListUcsManagersParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -612,6 +714,12 @@ func (p *ListUcsManagersParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListUcsManagersParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListUcsManagersParams) GetZoneid() (string, bool) {
@@ -775,6 +883,12 @@ func (p *ListUcsProfilesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListUcsProfilesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListUcsProfilesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -788,6 +902,12 @@ func (p *ListUcsProfilesParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUcsProfilesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListUcsProfilesParams) GetPage() (int, bool) {
@@ -805,6 +925,12 @@ func (p *ListUcsProfilesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUcsProfilesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListUcsProfilesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -818,6 +944,12 @@ func (p *ListUcsProfilesParams) SetUcsmanagerid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ucsmanagerid"] = v
+}
+
+func (p *ListUcsProfilesParams) ResetUcsmanagerid() {
+	if p.p != nil && p.p["ucsmanagerid"] != nil {
+		delete(p.p, "ucsmanagerid")
+	}
 }
 
 func (p *ListUcsProfilesParams) GetUcsmanagerid() (string, bool) {

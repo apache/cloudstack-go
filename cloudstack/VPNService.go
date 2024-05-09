@@ -111,6 +111,12 @@ func (p *AddVpnUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AddVpnUserParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *AddVpnUserParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -124,6 +130,12 @@ func (p *AddVpnUserParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *AddVpnUserParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *AddVpnUserParams) GetDomainid() (string, bool) {
@@ -141,6 +153,12 @@ func (p *AddVpnUserParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddVpnUserParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *AddVpnUserParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -156,6 +174,12 @@ func (p *AddVpnUserParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *AddVpnUserParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *AddVpnUserParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -169,6 +193,12 @@ func (p *AddVpnUserParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddVpnUserParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddVpnUserParams) GetUsername() (string, bool) {
@@ -276,6 +306,12 @@ func (p *CreateRemoteAccessVpnParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateRemoteAccessVpnParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -289,6 +325,12 @@ func (p *CreateRemoteAccessVpnParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateRemoteAccessVpnParams) GetDomainid() (string, bool) {
@@ -306,6 +348,12 @@ func (p *CreateRemoteAccessVpnParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateRemoteAccessVpnParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -319,6 +367,12 @@ func (p *CreateRemoteAccessVpnParams) SetIprange(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["iprange"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) ResetIprange() {
+	if p.p != nil && p.p["iprange"] != nil {
+		delete(p.p, "iprange")
+	}
 }
 
 func (p *CreateRemoteAccessVpnParams) GetIprange() (string, bool) {
@@ -336,6 +390,12 @@ func (p *CreateRemoteAccessVpnParams) SetOpenfirewall(v bool) {
 	p.p["openfirewall"] = v
 }
 
+func (p *CreateRemoteAccessVpnParams) ResetOpenfirewall() {
+	if p.p != nil && p.p["openfirewall"] != nil {
+		delete(p.p, "openfirewall")
+	}
+}
+
 func (p *CreateRemoteAccessVpnParams) GetOpenfirewall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -349,6 +409,12 @@ func (p *CreateRemoteAccessVpnParams) SetPublicipid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["publicipid"] = v
+}
+
+func (p *CreateRemoteAccessVpnParams) ResetPublicipid() {
+	if p.p != nil && p.p["publicipid"] != nil {
+		delete(p.p, "publicipid")
+	}
 }
 
 func (p *CreateRemoteAccessVpnParams) GetPublicipid() (string, bool) {
@@ -453,6 +519,12 @@ func (p *CreateVpnConnectionParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateVpnConnectionParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateVpnConnectionParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -466,6 +538,12 @@ func (p *CreateVpnConnectionParams) SetPassive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["passive"] = v
+}
+
+func (p *CreateVpnConnectionParams) ResetPassive() {
+	if p.p != nil && p.p["passive"] != nil {
+		delete(p.p, "passive")
+	}
 }
 
 func (p *CreateVpnConnectionParams) GetPassive() (bool, bool) {
@@ -483,6 +561,12 @@ func (p *CreateVpnConnectionParams) SetS2scustomergatewayid(v string) {
 	p.p["s2scustomergatewayid"] = v
 }
 
+func (p *CreateVpnConnectionParams) ResetS2scustomergatewayid() {
+	if p.p != nil && p.p["s2scustomergatewayid"] != nil {
+		delete(p.p, "s2scustomergatewayid")
+	}
+}
+
 func (p *CreateVpnConnectionParams) GetS2scustomergatewayid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -496,6 +580,12 @@ func (p *CreateVpnConnectionParams) SetS2svpngatewayid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["s2svpngatewayid"] = v
+}
+
+func (p *CreateVpnConnectionParams) ResetS2svpngatewayid() {
+	if p.p != nil && p.p["s2svpngatewayid"] != nil {
+		delete(p.p, "s2svpngatewayid")
+	}
 }
 
 func (p *CreateVpnConnectionParams) GetS2svpngatewayid() (string, bool) {
@@ -650,6 +740,12 @@ func (p *CreateVpnCustomerGatewayParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -663,6 +759,12 @@ func (p *CreateVpnCustomerGatewayParams) SetCidrlist(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetCidrlist() (string, bool) {
@@ -680,6 +782,12 @@ func (p *CreateVpnCustomerGatewayParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -693,6 +801,12 @@ func (p *CreateVpnCustomerGatewayParams) SetDpd(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dpd"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetDpd() {
+	if p.p != nil && p.p["dpd"] != nil {
+		delete(p.p, "dpd")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetDpd() (bool, bool) {
@@ -710,6 +824,12 @@ func (p *CreateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
 	p.p["esplifetime"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetEsplifetime() {
+	if p.p != nil && p.p["esplifetime"] != nil {
+		delete(p.p, "esplifetime")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetEsplifetime() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -723,6 +843,12 @@ func (p *CreateVpnCustomerGatewayParams) SetEsppolicy(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["esppolicy"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetEsppolicy() {
+	if p.p != nil && p.p["esppolicy"] != nil {
+		delete(p.p, "esppolicy")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetEsppolicy() (string, bool) {
@@ -740,6 +866,12 @@ func (p *CreateVpnCustomerGatewayParams) SetForceencap(v bool) {
 	p.p["forceencap"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetForceencap() {
+	if p.p != nil && p.p["forceencap"] != nil {
+		delete(p.p, "forceencap")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetForceencap() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -753,6 +885,12 @@ func (p *CreateVpnCustomerGatewayParams) SetGateway(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["gateway"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetGateway() (string, bool) {
@@ -770,6 +908,12 @@ func (p *CreateVpnCustomerGatewayParams) SetIkelifetime(v int64) {
 	p.p["ikelifetime"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetIkelifetime() {
+	if p.p != nil && p.p["ikelifetime"] != nil {
+		delete(p.p, "ikelifetime")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetIkelifetime() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -783,6 +927,12 @@ func (p *CreateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikepolicy"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetIkepolicy() {
+	if p.p != nil && p.p["ikepolicy"] != nil {
+		delete(p.p, "ikepolicy")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetIkepolicy() (string, bool) {
@@ -800,6 +950,12 @@ func (p *CreateVpnCustomerGatewayParams) SetIkeversion(v string) {
 	p.p["ikeversion"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetIkeversion() {
+	if p.p != nil && p.p["ikeversion"] != nil {
+		delete(p.p, "ikeversion")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetIkeversion() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -813,6 +969,12 @@ func (p *CreateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipsecpsk"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetIpsecpsk() {
+	if p.p != nil && p.p["ipsecpsk"] != nil {
+		delete(p.p, "ipsecpsk")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetIpsecpsk() (string, bool) {
@@ -830,6 +992,12 @@ func (p *CreateVpnCustomerGatewayParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -845,6 +1013,12 @@ func (p *CreateVpnCustomerGatewayParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *CreateVpnCustomerGatewayParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *CreateVpnCustomerGatewayParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -858,6 +1032,12 @@ func (p *CreateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["splitconnections"] = v
+}
+
+func (p *CreateVpnCustomerGatewayParams) ResetSplitconnections() {
+	if p.p != nil && p.p["splitconnections"] != nil {
+		delete(p.p, "splitconnections")
+	}
 }
 
 func (p *CreateVpnCustomerGatewayParams) GetSplitconnections() (bool, bool) {
@@ -968,6 +1148,12 @@ func (p *CreateVpnGatewayParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateVpnGatewayParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateVpnGatewayParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -981,6 +1167,12 @@ func (p *CreateVpnGatewayParams) SetVpcid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *CreateVpnGatewayParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
 }
 
 func (p *CreateVpnGatewayParams) GetVpcid() (string, bool) {
@@ -1073,6 +1265,12 @@ func (p *DeleteRemoteAccessVpnParams) SetPublicipid(v string) {
 	p.p["publicipid"] = v
 }
 
+func (p *DeleteRemoteAccessVpnParams) ResetPublicipid() {
+	if p.p != nil && p.p["publicipid"] != nil {
+		delete(p.p, "publicipid")
+	}
+}
+
 func (p *DeleteRemoteAccessVpnParams) GetPublicipid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1147,6 +1345,12 @@ func (p *DeleteVpnConnectionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteVpnConnectionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteVpnConnectionParams) GetId() (string, bool) {
@@ -1225,6 +1429,12 @@ func (p *DeleteVpnCustomerGatewayParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteVpnCustomerGatewayParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteVpnCustomerGatewayParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1299,6 +1509,12 @@ func (p *DeleteVpnGatewayParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteVpnGatewayParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteVpnGatewayParams) GetId() (string, bool) {
@@ -1415,6 +1631,12 @@ func (p *ListRemoteAccessVpnsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1428,6 +1650,12 @@ func (p *ListRemoteAccessVpnsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetDomainid() (string, bool) {
@@ -1445,6 +1673,12 @@ func (p *ListRemoteAccessVpnsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1458,6 +1692,12 @@ func (p *ListRemoteAccessVpnsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetId() (string, bool) {
@@ -1475,6 +1715,12 @@ func (p *ListRemoteAccessVpnsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1488,6 +1734,12 @@ func (p *ListRemoteAccessVpnsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetKeyword() (string, bool) {
@@ -1505,6 +1757,12 @@ func (p *ListRemoteAccessVpnsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1518,6 +1776,12 @@ func (p *ListRemoteAccessVpnsParams) SetNetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetNetworkid() (string, bool) {
@@ -1535,6 +1799,12 @@ func (p *ListRemoteAccessVpnsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1548,6 +1818,12 @@ func (p *ListRemoteAccessVpnsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetPagesize() (int, bool) {
@@ -1565,6 +1841,12 @@ func (p *ListRemoteAccessVpnsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListRemoteAccessVpnsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListRemoteAccessVpnsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1578,6 +1860,12 @@ func (p *ListRemoteAccessVpnsParams) SetPublicipid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["publicipid"] = v
+}
+
+func (p *ListRemoteAccessVpnsParams) ResetPublicipid() {
+	if p.p != nil && p.p["publicipid"] != nil {
+		delete(p.p, "publicipid")
+	}
 }
 
 func (p *ListRemoteAccessVpnsParams) GetPublicipid() (string, bool) {
@@ -1723,6 +2011,12 @@ func (p *ListVpnConnectionsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1736,6 +2030,12 @@ func (p *ListVpnConnectionsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnConnectionsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListVpnConnectionsParams) GetDomainid() (string, bool) {
@@ -1753,6 +2053,12 @@ func (p *ListVpnConnectionsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1766,6 +2072,12 @@ func (p *ListVpnConnectionsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListVpnConnectionsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListVpnConnectionsParams) GetId() (string, bool) {
@@ -1783,6 +2095,12 @@ func (p *ListVpnConnectionsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1796,6 +2114,12 @@ func (p *ListVpnConnectionsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVpnConnectionsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListVpnConnectionsParams) GetKeyword() (string, bool) {
@@ -1813,6 +2137,12 @@ func (p *ListVpnConnectionsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1826,6 +2156,12 @@ func (p *ListVpnConnectionsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVpnConnectionsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListVpnConnectionsParams) GetPage() (int, bool) {
@@ -1843,6 +2179,12 @@ func (p *ListVpnConnectionsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1858,6 +2200,12 @@ func (p *ListVpnConnectionsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnConnectionsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListVpnConnectionsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1871,6 +2219,12 @@ func (p *ListVpnConnectionsParams) SetVpcid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *ListVpnConnectionsParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
 }
 
 func (p *ListVpnConnectionsParams) GetVpcid() (string, bool) {
@@ -2022,6 +2376,12 @@ func (p *ListVpnCustomerGatewaysParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListVpnCustomerGatewaysParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2035,6 +2395,12 @@ func (p *ListVpnCustomerGatewaysParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListVpnCustomerGatewaysParams) GetDomainid() (string, bool) {
@@ -2052,6 +2418,12 @@ func (p *ListVpnCustomerGatewaysParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListVpnCustomerGatewaysParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2065,6 +2437,12 @@ func (p *ListVpnCustomerGatewaysParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListVpnCustomerGatewaysParams) GetIsrecursive() (bool, bool) {
@@ -2082,6 +2460,12 @@ func (p *ListVpnCustomerGatewaysParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListVpnCustomerGatewaysParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2095,6 +2479,12 @@ func (p *ListVpnCustomerGatewaysParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListVpnCustomerGatewaysParams) GetListall() (bool, bool) {
@@ -2112,6 +2502,12 @@ func (p *ListVpnCustomerGatewaysParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListVpnCustomerGatewaysParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2127,6 +2523,12 @@ func (p *ListVpnCustomerGatewaysParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnCustomerGatewaysParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListVpnCustomerGatewaysParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2140,6 +2542,12 @@ func (p *ListVpnCustomerGatewaysParams) SetProjectid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["projectid"] = v
+}
+
+func (p *ListVpnCustomerGatewaysParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
 }
 
 func (p *ListVpnCustomerGatewaysParams) GetProjectid() (string, bool) {
@@ -2344,6 +2752,12 @@ func (p *ListVpnGatewaysParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2357,6 +2771,12 @@ func (p *ListVpnGatewaysParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnGatewaysParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListVpnGatewaysParams) GetDomainid() (string, bool) {
@@ -2374,6 +2794,12 @@ func (p *ListVpnGatewaysParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2387,6 +2813,12 @@ func (p *ListVpnGatewaysParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListVpnGatewaysParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListVpnGatewaysParams) GetId() (string, bool) {
@@ -2404,6 +2836,12 @@ func (p *ListVpnGatewaysParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2417,6 +2855,12 @@ func (p *ListVpnGatewaysParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListVpnGatewaysParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListVpnGatewaysParams) GetKeyword() (string, bool) {
@@ -2434,6 +2878,12 @@ func (p *ListVpnGatewaysParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2447,6 +2897,12 @@ func (p *ListVpnGatewaysParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListVpnGatewaysParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListVpnGatewaysParams) GetPage() (int, bool) {
@@ -2464,6 +2920,12 @@ func (p *ListVpnGatewaysParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2479,6 +2941,12 @@ func (p *ListVpnGatewaysParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnGatewaysParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListVpnGatewaysParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2492,6 +2960,12 @@ func (p *ListVpnGatewaysParams) SetVpcid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *ListVpnGatewaysParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
 }
 
 func (p *ListVpnGatewaysParams) GetVpcid() (string, bool) {
@@ -2632,6 +3106,12 @@ func (p *ListVpnUsersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListVpnUsersParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListVpnUsersParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2645,6 +3125,12 @@ func (p *ListVpnUsersParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListVpnUsersParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListVpnUsersParams) GetDomainid() (string, bool) {
@@ -2662,6 +3148,12 @@ func (p *ListVpnUsersParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListVpnUsersParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListVpnUsersParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2675,6 +3167,12 @@ func (p *ListVpnUsersParams) SetIsrecursive(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["isrecursive"] = v
+}
+
+func (p *ListVpnUsersParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
 }
 
 func (p *ListVpnUsersParams) GetIsrecursive() (bool, bool) {
@@ -2692,6 +3190,12 @@ func (p *ListVpnUsersParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListVpnUsersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListVpnUsersParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2705,6 +3209,12 @@ func (p *ListVpnUsersParams) SetListall(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["listall"] = v
+}
+
+func (p *ListVpnUsersParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
 }
 
 func (p *ListVpnUsersParams) GetListall() (bool, bool) {
@@ -2722,6 +3232,12 @@ func (p *ListVpnUsersParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListVpnUsersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListVpnUsersParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2735,6 +3251,12 @@ func (p *ListVpnUsersParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListVpnUsersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListVpnUsersParams) GetPagesize() (int, bool) {
@@ -2752,6 +3274,12 @@ func (p *ListVpnUsersParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListVpnUsersParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListVpnUsersParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2765,6 +3293,12 @@ func (p *ListVpnUsersParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ListVpnUsersParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *ListVpnUsersParams) GetUsername() (string, bool) {
@@ -2880,6 +3414,12 @@ func (p *RemoveVpnUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *RemoveVpnUserParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *RemoveVpnUserParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2893,6 +3433,12 @@ func (p *RemoveVpnUserParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *RemoveVpnUserParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *RemoveVpnUserParams) GetDomainid() (string, bool) {
@@ -2910,6 +3456,12 @@ func (p *RemoveVpnUserParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *RemoveVpnUserParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *RemoveVpnUserParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2923,6 +3475,12 @@ func (p *RemoveVpnUserParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *RemoveVpnUserParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *RemoveVpnUserParams) GetUsername() (string, bool) {
@@ -3007,6 +3565,12 @@ func (p *ResetVpnConnectionParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ResetVpnConnectionParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ResetVpnConnectionParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3022,6 +3586,12 @@ func (p *ResetVpnConnectionParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ResetVpnConnectionParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ResetVpnConnectionParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3035,6 +3605,12 @@ func (p *ResetVpnConnectionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ResetVpnConnectionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ResetVpnConnectionParams) GetId() (string, bool) {
@@ -3148,6 +3724,12 @@ func (p *UpdateRemoteAccessVpnParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateRemoteAccessVpnParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateRemoteAccessVpnParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3163,6 +3745,12 @@ func (p *UpdateRemoteAccessVpnParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateRemoteAccessVpnParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateRemoteAccessVpnParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3176,6 +3764,12 @@ func (p *UpdateRemoteAccessVpnParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateRemoteAccessVpnParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateRemoteAccessVpnParams) GetId() (string, bool) {
@@ -3276,6 +3870,12 @@ func (p *UpdateVpnConnectionParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateVpnConnectionParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateVpnConnectionParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3291,6 +3891,12 @@ func (p *UpdateVpnConnectionParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateVpnConnectionParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateVpnConnectionParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3304,6 +3910,12 @@ func (p *UpdateVpnConnectionParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVpnConnectionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateVpnConnectionParams) GetId() (string, bool) {
@@ -3457,6 +4069,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3470,6 +4088,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetCidrlist(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetCidrlist() (string, bool) {
@@ -3487,6 +4111,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3500,6 +4130,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetDpd(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["dpd"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetDpd() {
+	if p.p != nil && p.p["dpd"] != nil {
+		delete(p.p, "dpd")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetDpd() (bool, bool) {
@@ -3517,6 +4153,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetEsplifetime(v int64) {
 	p.p["esplifetime"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetEsplifetime() {
+	if p.p != nil && p.p["esplifetime"] != nil {
+		delete(p.p, "esplifetime")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetEsplifetime() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3530,6 +4172,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetEsppolicy(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["esppolicy"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetEsppolicy() {
+	if p.p != nil && p.p["esppolicy"] != nil {
+		delete(p.p, "esppolicy")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetEsppolicy() (string, bool) {
@@ -3547,6 +4195,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetForceencap(v bool) {
 	p.p["forceencap"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetForceencap() {
+	if p.p != nil && p.p["forceencap"] != nil {
+		delete(p.p, "forceencap")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetForceencap() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3560,6 +4214,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetGateway(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["gateway"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetGateway() (string, bool) {
@@ -3577,6 +4237,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3590,6 +4256,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetIkelifetime(v int64) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikelifetime"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetIkelifetime() {
+	if p.p != nil && p.p["ikelifetime"] != nil {
+		delete(p.p, "ikelifetime")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetIkelifetime() (int64, bool) {
@@ -3607,6 +4279,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetIkepolicy(v string) {
 	p.p["ikepolicy"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetIkepolicy() {
+	if p.p != nil && p.p["ikepolicy"] != nil {
+		delete(p.p, "ikepolicy")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetIkepolicy() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3620,6 +4298,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetIkeversion(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ikeversion"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetIkeversion() {
+	if p.p != nil && p.p["ikeversion"] != nil {
+		delete(p.p, "ikeversion")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetIkeversion() (string, bool) {
@@ -3637,6 +4321,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetIpsecpsk(v string) {
 	p.p["ipsecpsk"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetIpsecpsk() {
+	if p.p != nil && p.p["ipsecpsk"] != nil {
+		delete(p.p, "ipsecpsk")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetIpsecpsk() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3652,6 +4342,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *UpdateVpnCustomerGatewayParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *UpdateVpnCustomerGatewayParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3665,6 +4361,12 @@ func (p *UpdateVpnCustomerGatewayParams) SetSplitconnections(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["splitconnections"] = v
+}
+
+func (p *UpdateVpnCustomerGatewayParams) ResetSplitconnections() {
+	if p.p != nil && p.p["splitconnections"] != nil {
+		delete(p.p, "splitconnections")
+	}
 }
 
 func (p *UpdateVpnCustomerGatewayParams) GetSplitconnections() (bool, bool) {
@@ -3779,6 +4481,12 @@ func (p *UpdateVpnGatewayParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateVpnGatewayParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateVpnGatewayParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3794,6 +4502,12 @@ func (p *UpdateVpnGatewayParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateVpnGatewayParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateVpnGatewayParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3807,6 +4521,12 @@ func (p *UpdateVpnGatewayParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateVpnGatewayParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateVpnGatewayParams) GetId() (string, bool) {

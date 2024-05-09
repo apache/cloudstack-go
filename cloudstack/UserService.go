@@ -99,6 +99,12 @@ func (p *CreateUserParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *CreateUserParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *CreateUserParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -112,6 +118,12 @@ func (p *CreateUserParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *CreateUserParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *CreateUserParams) GetDomainid() (string, bool) {
@@ -129,6 +141,12 @@ func (p *CreateUserParams) SetEmail(v string) {
 	p.p["email"] = v
 }
 
+func (p *CreateUserParams) ResetEmail() {
+	if p.p != nil && p.p["email"] != nil {
+		delete(p.p, "email")
+	}
+}
+
 func (p *CreateUserParams) GetEmail() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -142,6 +160,12 @@ func (p *CreateUserParams) SetFirstname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["firstname"] = v
+}
+
+func (p *CreateUserParams) ResetFirstname() {
+	if p.p != nil && p.p["firstname"] != nil {
+		delete(p.p, "firstname")
+	}
 }
 
 func (p *CreateUserParams) GetFirstname() (string, bool) {
@@ -159,6 +183,12 @@ func (p *CreateUserParams) SetLastname(v string) {
 	p.p["lastname"] = v
 }
 
+func (p *CreateUserParams) ResetLastname() {
+	if p.p != nil && p.p["lastname"] != nil {
+		delete(p.p, "lastname")
+	}
+}
+
 func (p *CreateUserParams) GetLastname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -172,6 +202,12 @@ func (p *CreateUserParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *CreateUserParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *CreateUserParams) GetPassword() (string, bool) {
@@ -189,6 +225,12 @@ func (p *CreateUserParams) SetTimezone(v string) {
 	p.p["timezone"] = v
 }
 
+func (p *CreateUserParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
+}
+
 func (p *CreateUserParams) GetTimezone() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -204,6 +246,12 @@ func (p *CreateUserParams) SetUserid(v string) {
 	p.p["userid"] = v
 }
 
+func (p *CreateUserParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
+}
+
 func (p *CreateUserParams) GetUserid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -217,6 +265,12 @@ func (p *CreateUserParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *CreateUserParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *CreateUserParams) GetUsername() (string, bool) {
@@ -311,6 +365,12 @@ func (p *DeleteUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteUserParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -397,6 +457,12 @@ func (p *DisableUserParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DisableUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DisableUserParams) GetId() (string, bool) {
@@ -502,6 +568,12 @@ func (p *EnableUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *EnableUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *EnableUserParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -589,6 +661,12 @@ func (p *GetUserParams) SetUserapikey(v string) {
 	p.p["userapikey"] = v
 }
 
+func (p *GetUserParams) ResetUserapikey() {
+	if p.p != nil && p.p["userapikey"] != nil {
+		delete(p.p, "userapikey")
+	}
+}
+
 func (p *GetUserParams) GetUserapikey() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -672,6 +750,12 @@ func (p *GetUserKeysParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *GetUserKeysParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *GetUserKeysParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -735,6 +819,12 @@ func (p *GetVirtualMachineUserDataParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *GetVirtualMachineUserDataParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *GetVirtualMachineUserDataParams) GetVirtualmachineid() (string, bool) {
@@ -841,6 +931,12 @@ func (p *ListUsersParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListUsersParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListUsersParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -854,6 +950,12 @@ func (p *ListUsersParams) SetAccounttype(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["accounttype"] = v
+}
+
+func (p *ListUsersParams) ResetAccounttype() {
+	if p.p != nil && p.p["accounttype"] != nil {
+		delete(p.p, "accounttype")
+	}
 }
 
 func (p *ListUsersParams) GetAccounttype() (int, bool) {
@@ -871,6 +973,12 @@ func (p *ListUsersParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListUsersParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListUsersParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -884,6 +992,12 @@ func (p *ListUsersParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListUsersParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListUsersParams) GetId() (string, bool) {
@@ -901,6 +1015,12 @@ func (p *ListUsersParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListUsersParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListUsersParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -914,6 +1034,12 @@ func (p *ListUsersParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListUsersParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListUsersParams) GetKeyword() (string, bool) {
@@ -931,6 +1057,12 @@ func (p *ListUsersParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListUsersParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListUsersParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -944,6 +1076,12 @@ func (p *ListUsersParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListUsersParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListUsersParams) GetPage() (int, bool) {
@@ -961,6 +1099,12 @@ func (p *ListUsersParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListUsersParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListUsersParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -974,6 +1118,12 @@ func (p *ListUsersParams) SetShowicon(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["showicon"] = v
+}
+
+func (p *ListUsersParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
 }
 
 func (p *ListUsersParams) GetShowicon() (bool, bool) {
@@ -991,6 +1141,12 @@ func (p *ListUsersParams) SetState(v string) {
 	p.p["state"] = v
 }
 
+func (p *ListUsersParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
 func (p *ListUsersParams) GetState() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1004,6 +1160,12 @@ func (p *ListUsersParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *ListUsersParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *ListUsersParams) GetUsername() (string, bool) {
@@ -1126,6 +1288,12 @@ func (p *LockUserParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *LockUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *LockUserParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1211,6 +1379,12 @@ func (p *RegisterUserKeysParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RegisterUserKeysParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *RegisterUserKeysParams) GetId() (string, bool) {
@@ -1309,6 +1483,12 @@ func (p *UpdateUserParams) SetCurrentpassword(v string) {
 	p.p["currentpassword"] = v
 }
 
+func (p *UpdateUserParams) ResetCurrentpassword() {
+	if p.p != nil && p.p["currentpassword"] != nil {
+		delete(p.p, "currentpassword")
+	}
+}
+
 func (p *UpdateUserParams) GetCurrentpassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1322,6 +1502,12 @@ func (p *UpdateUserParams) SetEmail(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["email"] = v
+}
+
+func (p *UpdateUserParams) ResetEmail() {
+	if p.p != nil && p.p["email"] != nil {
+		delete(p.p, "email")
+	}
 }
 
 func (p *UpdateUserParams) GetEmail() (string, bool) {
@@ -1339,6 +1525,12 @@ func (p *UpdateUserParams) SetFirstname(v string) {
 	p.p["firstname"] = v
 }
 
+func (p *UpdateUserParams) ResetFirstname() {
+	if p.p != nil && p.p["firstname"] != nil {
+		delete(p.p, "firstname")
+	}
+}
+
 func (p *UpdateUserParams) GetFirstname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1352,6 +1544,12 @@ func (p *UpdateUserParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateUserParams) GetId() (string, bool) {
@@ -1369,6 +1567,12 @@ func (p *UpdateUserParams) SetLastname(v string) {
 	p.p["lastname"] = v
 }
 
+func (p *UpdateUserParams) ResetLastname() {
+	if p.p != nil && p.p["lastname"] != nil {
+		delete(p.p, "lastname")
+	}
+}
+
 func (p *UpdateUserParams) GetLastname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1382,6 +1586,12 @@ func (p *UpdateUserParams) SetMandate2fa(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["mandate2fa"] = v
+}
+
+func (p *UpdateUserParams) ResetMandate2fa() {
+	if p.p != nil && p.p["mandate2fa"] != nil {
+		delete(p.p, "mandate2fa")
+	}
 }
 
 func (p *UpdateUserParams) GetMandate2fa() (bool, bool) {
@@ -1399,6 +1609,12 @@ func (p *UpdateUserParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *UpdateUserParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *UpdateUserParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1412,6 +1628,12 @@ func (p *UpdateUserParams) SetTimezone(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["timezone"] = v
+}
+
+func (p *UpdateUserParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
 }
 
 func (p *UpdateUserParams) GetTimezone() (string, bool) {
@@ -1429,6 +1651,12 @@ func (p *UpdateUserParams) SetUserapikey(v string) {
 	p.p["userapikey"] = v
 }
 
+func (p *UpdateUserParams) ResetUserapikey() {
+	if p.p != nil && p.p["userapikey"] != nil {
+		delete(p.p, "userapikey")
+	}
+}
+
 func (p *UpdateUserParams) GetUserapikey() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1444,6 +1672,12 @@ func (p *UpdateUserParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *UpdateUserParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
 func (p *UpdateUserParams) GetUsername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1457,6 +1691,12 @@ func (p *UpdateUserParams) SetUsersecretkey(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["usersecretkey"] = v
+}
+
+func (p *UpdateUserParams) ResetUsersecretkey() {
+	if p.p != nil && p.p["usersecretkey"] != nil {
+		delete(p.p, "usersecretkey")
+	}
 }
 
 func (p *UpdateUserParams) GetUsersecretkey() (string, bool) {

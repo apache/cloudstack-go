@@ -117,6 +117,12 @@ func (p *CreateNetworkACLParams) SetAclid(v string) {
 	p.p["aclid"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetAclid() {
+	if p.p != nil && p.p["aclid"] != nil {
+		delete(p.p, "aclid")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetAclid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -130,6 +136,12 @@ func (p *CreateNetworkACLParams) SetAction(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["action"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetAction() (string, bool) {
@@ -147,6 +159,12 @@ func (p *CreateNetworkACLParams) SetCidrlist(v []string) {
 	p.p["cidrlist"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetCidrlist() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -160,6 +178,12 @@ func (p *CreateNetworkACLParams) SetEndport(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endport"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetEndport() {
+	if p.p != nil && p.p["endport"] != nil {
+		delete(p.p, "endport")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetEndport() (int, bool) {
@@ -177,6 +201,12 @@ func (p *CreateNetworkACLParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -190,6 +220,12 @@ func (p *CreateNetworkACLParams) SetIcmpcode(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["icmpcode"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetIcmpcode() {
+	if p.p != nil && p.p["icmpcode"] != nil {
+		delete(p.p, "icmpcode")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetIcmpcode() (int, bool) {
@@ -207,6 +243,12 @@ func (p *CreateNetworkACLParams) SetIcmptype(v int) {
 	p.p["icmptype"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetIcmptype() {
+	if p.p != nil && p.p["icmptype"] != nil {
+		delete(p.p, "icmptype")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetIcmptype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -220,6 +262,12 @@ func (p *CreateNetworkACLParams) SetNetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetNetworkid() (string, bool) {
@@ -237,6 +285,12 @@ func (p *CreateNetworkACLParams) SetNumber(v int) {
 	p.p["number"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetNumber() {
+	if p.p != nil && p.p["number"] != nil {
+		delete(p.p, "number")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetNumber() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -250,6 +304,12 @@ func (p *CreateNetworkACLParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetProtocol() (string, bool) {
@@ -267,6 +327,12 @@ func (p *CreateNetworkACLParams) SetReason(v string) {
 	p.p["reason"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetReason() {
+	if p.p != nil && p.p["reason"] != nil {
+		delete(p.p, "reason")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetReason() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -282,6 +348,12 @@ func (p *CreateNetworkACLParams) SetStartport(v int) {
 	p.p["startport"] = v
 }
 
+func (p *CreateNetworkACLParams) ResetStartport() {
+	if p.p != nil && p.p["startport"] != nil {
+		delete(p.p, "startport")
+	}
+}
+
 func (p *CreateNetworkACLParams) GetStartport() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -295,6 +367,12 @@ func (p *CreateNetworkACLParams) SetTraffictype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *CreateNetworkACLParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
 }
 
 func (p *CreateNetworkACLParams) GetTraffictype() (string, bool) {
@@ -402,6 +480,12 @@ func (p *CreateNetworkACLListParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *CreateNetworkACLListParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *CreateNetworkACLListParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -415,6 +499,12 @@ func (p *CreateNetworkACLListParams) SetFordisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *CreateNetworkACLListParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
 }
 
 func (p *CreateNetworkACLListParams) GetFordisplay() (bool, bool) {
@@ -432,6 +522,12 @@ func (p *CreateNetworkACLListParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *CreateNetworkACLListParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *CreateNetworkACLListParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -445,6 +541,12 @@ func (p *CreateNetworkACLListParams) SetVpcid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *CreateNetworkACLListParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
 }
 
 func (p *CreateNetworkACLListParams) GetVpcid() (string, bool) {
@@ -533,6 +635,12 @@ func (p *DeleteNetworkACLParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *DeleteNetworkACLParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *DeleteNetworkACLParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -607,6 +715,12 @@ func (p *DeleteNetworkACLListParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteNetworkACLListParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteNetworkACLListParams) GetId() (string, bool) {
@@ -726,6 +840,12 @@ func (p *ListNetworkACLListsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -739,6 +859,12 @@ func (p *ListNetworkACLListsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetDomainid() (string, bool) {
@@ -756,6 +882,12 @@ func (p *ListNetworkACLListsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -769,6 +901,12 @@ func (p *ListNetworkACLListsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetId() (string, bool) {
@@ -786,6 +924,12 @@ func (p *ListNetworkACLListsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -799,6 +943,12 @@ func (p *ListNetworkACLListsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetKeyword() (string, bool) {
@@ -816,6 +966,12 @@ func (p *ListNetworkACLListsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -829,6 +985,12 @@ func (p *ListNetworkACLListsParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetName() (string, bool) {
@@ -846,6 +1008,12 @@ func (p *ListNetworkACLListsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetNetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -859,6 +1027,12 @@ func (p *ListNetworkACLListsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetPage() (int, bool) {
@@ -876,6 +1050,12 @@ func (p *ListNetworkACLListsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -891,6 +1071,12 @@ func (p *ListNetworkACLListsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListNetworkACLListsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListNetworkACLListsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -904,6 +1090,12 @@ func (p *ListNetworkACLListsParams) SetVpcid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["vpcid"] = v
+}
+
+func (p *ListNetworkACLListsParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
 }
 
 func (p *ListNetworkACLListsParams) GetVpcid() (string, bool) {
@@ -1112,6 +1304,12 @@ func (p *ListNetworkACLsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1125,6 +1323,12 @@ func (p *ListNetworkACLsParams) SetAclid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["aclid"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetAclid() {
+	if p.p != nil && p.p["aclid"] != nil {
+		delete(p.p, "aclid")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetAclid() (string, bool) {
@@ -1142,6 +1346,12 @@ func (p *ListNetworkACLsParams) SetAction(v string) {
 	p.p["action"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetAction() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1155,6 +1365,12 @@ func (p *ListNetworkACLsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetDomainid() (string, bool) {
@@ -1172,6 +1388,12 @@ func (p *ListNetworkACLsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1185,6 +1407,12 @@ func (p *ListNetworkACLsParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetId() (string, bool) {
@@ -1202,6 +1430,12 @@ func (p *ListNetworkACLsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1215,6 +1449,12 @@ func (p *ListNetworkACLsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetKeyword() (string, bool) {
@@ -1232,6 +1472,12 @@ func (p *ListNetworkACLsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1245,6 +1491,12 @@ func (p *ListNetworkACLsParams) SetNetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetNetworkid() (string, bool) {
@@ -1262,6 +1514,12 @@ func (p *ListNetworkACLsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1275,6 +1533,12 @@ func (p *ListNetworkACLsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetPagesize() (int, bool) {
@@ -1292,6 +1556,12 @@ func (p *ListNetworkACLsParams) SetProjectid(v string) {
 	p.p["projectid"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetProjectid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1305,6 +1575,12 @@ func (p *ListNetworkACLsParams) SetProtocol(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["protocol"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetProtocol() (string, bool) {
@@ -1322,6 +1598,12 @@ func (p *ListNetworkACLsParams) SetTags(v map[string]string) {
 	p.p["tags"] = v
 }
 
+func (p *ListNetworkACLsParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
 func (p *ListNetworkACLsParams) GetTags() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1335,6 +1617,12 @@ func (p *ListNetworkACLsParams) SetTraffictype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *ListNetworkACLsParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
 }
 
 func (p *ListNetworkACLsParams) GetTraffictype() (string, bool) {
@@ -1455,6 +1743,12 @@ func (p *ReplaceNetworkACLListParams) SetAclid(v string) {
 	p.p["aclid"] = v
 }
 
+func (p *ReplaceNetworkACLListParams) ResetAclid() {
+	if p.p != nil && p.p["aclid"] != nil {
+		delete(p.p, "aclid")
+	}
+}
+
 func (p *ReplaceNetworkACLListParams) GetAclid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1470,6 +1764,12 @@ func (p *ReplaceNetworkACLListParams) SetGatewayid(v string) {
 	p.p["gatewayid"] = v
 }
 
+func (p *ReplaceNetworkACLListParams) ResetGatewayid() {
+	if p.p != nil && p.p["gatewayid"] != nil {
+		delete(p.p, "gatewayid")
+	}
+}
+
 func (p *ReplaceNetworkACLListParams) GetGatewayid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1483,6 +1783,12 @@ func (p *ReplaceNetworkACLListParams) SetNetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["networkid"] = v
+}
+
+func (p *ReplaceNetworkACLListParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
 }
 
 func (p *ReplaceNetworkACLListParams) GetNetworkid() (string, bool) {
@@ -1608,6 +1914,12 @@ func (p *UpdateNetworkACLItemParams) SetAction(v string) {
 	p.p["action"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetAction() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1621,6 +1933,12 @@ func (p *UpdateNetworkACLItemParams) SetCidrlist(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["cidrlist"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetCidrlist() ([]string, bool) {
@@ -1638,6 +1956,12 @@ func (p *UpdateNetworkACLItemParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1651,6 +1975,12 @@ func (p *UpdateNetworkACLItemParams) SetEndport(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["endport"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetEndport() {
+	if p.p != nil && p.p["endport"] != nil {
+		delete(p.p, "endport")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetEndport() (int, bool) {
@@ -1668,6 +1998,12 @@ func (p *UpdateNetworkACLItemParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1681,6 +2017,12 @@ func (p *UpdateNetworkACLItemParams) SetIcmpcode(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["icmpcode"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetIcmpcode() {
+	if p.p != nil && p.p["icmpcode"] != nil {
+		delete(p.p, "icmpcode")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetIcmpcode() (int, bool) {
@@ -1698,6 +2040,12 @@ func (p *UpdateNetworkACLItemParams) SetIcmptype(v int) {
 	p.p["icmptype"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetIcmptype() {
+	if p.p != nil && p.p["icmptype"] != nil {
+		delete(p.p, "icmptype")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetIcmptype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1711,6 +2059,12 @@ func (p *UpdateNetworkACLItemParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetId() (string, bool) {
@@ -1728,6 +2082,12 @@ func (p *UpdateNetworkACLItemParams) SetNumber(v int) {
 	p.p["number"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetNumber() {
+	if p.p != nil && p.p["number"] != nil {
+		delete(p.p, "number")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetNumber() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1741,6 +2101,12 @@ func (p *UpdateNetworkACLItemParams) SetPartialupgrade(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["partialupgrade"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetPartialupgrade() {
+	if p.p != nil && p.p["partialupgrade"] != nil {
+		delete(p.p, "partialupgrade")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetPartialupgrade() (bool, bool) {
@@ -1758,6 +2124,12 @@ func (p *UpdateNetworkACLItemParams) SetProtocol(v string) {
 	p.p["protocol"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetProtocol() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1771,6 +2143,12 @@ func (p *UpdateNetworkACLItemParams) SetReason(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["reason"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetReason() {
+	if p.p != nil && p.p["reason"] != nil {
+		delete(p.p, "reason")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetReason() (string, bool) {
@@ -1788,6 +2166,12 @@ func (p *UpdateNetworkACLItemParams) SetStartport(v int) {
 	p.p["startport"] = v
 }
 
+func (p *UpdateNetworkACLItemParams) ResetStartport() {
+	if p.p != nil && p.p["startport"] != nil {
+		delete(p.p, "startport")
+	}
+}
+
 func (p *UpdateNetworkACLItemParams) GetStartport() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1801,6 +2185,12 @@ func (p *UpdateNetworkACLItemParams) SetTraffictype(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["traffictype"] = v
+}
+
+func (p *UpdateNetworkACLItemParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
 }
 
 func (p *UpdateNetworkACLItemParams) GetTraffictype() (string, bool) {
@@ -1911,6 +2301,12 @@ func (p *UpdateNetworkACLListParams) SetCustomid(v string) {
 	p.p["customid"] = v
 }
 
+func (p *UpdateNetworkACLListParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
 func (p *UpdateNetworkACLListParams) GetCustomid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1924,6 +2320,12 @@ func (p *UpdateNetworkACLListParams) SetDescription(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["description"] = v
+}
+
+func (p *UpdateNetworkACLListParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
 }
 
 func (p *UpdateNetworkACLListParams) GetDescription() (string, bool) {
@@ -1941,6 +2343,12 @@ func (p *UpdateNetworkACLListParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *UpdateNetworkACLListParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *UpdateNetworkACLListParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1956,6 +2364,12 @@ func (p *UpdateNetworkACLListParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateNetworkACLListParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateNetworkACLListParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1969,6 +2383,12 @@ func (p *UpdateNetworkACLListParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateNetworkACLListParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateNetworkACLListParams) GetName() (string, bool) {

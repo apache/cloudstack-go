@@ -94,6 +94,12 @@ func (p *AddGuestOsParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *AddGuestOsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *AddGuestOsParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -107,6 +113,12 @@ func (p *AddGuestOsParams) SetForDisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forDisplay"] = v
+}
+
+func (p *AddGuestOsParams) ResetForDisplay() {
+	if p.p != nil && p.p["forDisplay"] != nil {
+		delete(p.p, "forDisplay")
+	}
 }
 
 func (p *AddGuestOsParams) GetForDisplay() (bool, bool) {
@@ -124,6 +136,12 @@ func (p *AddGuestOsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *AddGuestOsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *AddGuestOsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -139,6 +157,12 @@ func (p *AddGuestOsParams) SetOscategoryid(v string) {
 	p.p["oscategoryid"] = v
 }
 
+func (p *AddGuestOsParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
 func (p *AddGuestOsParams) GetOscategoryid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -152,6 +176,12 @@ func (p *AddGuestOsParams) SetOsdisplayname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["osdisplayname"] = v
+}
+
+func (p *AddGuestOsParams) ResetOsdisplayname() {
+	if p.p != nil && p.p["osdisplayname"] != nil {
+		delete(p.p, "osdisplayname")
+	}
 }
 
 func (p *AddGuestOsParams) GetOsdisplayname() (string, bool) {
@@ -261,6 +291,12 @@ func (p *AddGuestOsMappingParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *AddGuestOsMappingParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
 func (p *AddGuestOsMappingParams) GetForced() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -274,6 +310,12 @@ func (p *AddGuestOsMappingParams) SetHypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *AddGuestOsMappingParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
 }
 
 func (p *AddGuestOsMappingParams) GetHypervisor() (string, bool) {
@@ -291,6 +333,12 @@ func (p *AddGuestOsMappingParams) SetHypervisorversion(v string) {
 	p.p["hypervisorversion"] = v
 }
 
+func (p *AddGuestOsMappingParams) ResetHypervisorversion() {
+	if p.p != nil && p.p["hypervisorversion"] != nil {
+		delete(p.p, "hypervisorversion")
+	}
+}
+
 func (p *AddGuestOsMappingParams) GetHypervisorversion() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -304,6 +352,12 @@ func (p *AddGuestOsMappingParams) SetOsdisplayname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["osdisplayname"] = v
+}
+
+func (p *AddGuestOsMappingParams) ResetOsdisplayname() {
+	if p.p != nil && p.p["osdisplayname"] != nil {
+		delete(p.p, "osdisplayname")
+	}
 }
 
 func (p *AddGuestOsMappingParams) GetOsdisplayname() (string, bool) {
@@ -321,6 +375,12 @@ func (p *AddGuestOsMappingParams) SetOsmappingcheckenabled(v bool) {
 	p.p["osmappingcheckenabled"] = v
 }
 
+func (p *AddGuestOsMappingParams) ResetOsmappingcheckenabled() {
+	if p.p != nil && p.p["osmappingcheckenabled"] != nil {
+		delete(p.p, "osmappingcheckenabled")
+	}
+}
+
 func (p *AddGuestOsMappingParams) GetOsmappingcheckenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -336,6 +396,12 @@ func (p *AddGuestOsMappingParams) SetOsnameforhypervisor(v string) {
 	p.p["osnameforhypervisor"] = v
 }
 
+func (p *AddGuestOsMappingParams) ResetOsnameforhypervisor() {
+	if p.p != nil && p.p["osnameforhypervisor"] != nil {
+		delete(p.p, "osnameforhypervisor")
+	}
+}
+
 func (p *AddGuestOsMappingParams) GetOsnameforhypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -349,6 +415,12 @@ func (p *AddGuestOsMappingParams) SetOstypeid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ostypeid"] = v
+}
+
+func (p *AddGuestOsMappingParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
 }
 
 func (p *AddGuestOsMappingParams) GetOstypeid() (string, bool) {
@@ -492,6 +564,12 @@ func (p *ListGuestOsMappingParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *ListGuestOsMappingParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
 func (p *ListGuestOsMappingParams) GetHypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -505,6 +583,12 @@ func (p *ListGuestOsMappingParams) SetHypervisorversion(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisorversion"] = v
+}
+
+func (p *ListGuestOsMappingParams) ResetHypervisorversion() {
+	if p.p != nil && p.p["hypervisorversion"] != nil {
+		delete(p.p, "hypervisorversion")
+	}
 }
 
 func (p *ListGuestOsMappingParams) GetHypervisorversion() (string, bool) {
@@ -522,6 +606,12 @@ func (p *ListGuestOsMappingParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListGuestOsMappingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListGuestOsMappingParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -535,6 +625,12 @@ func (p *ListGuestOsMappingParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListGuestOsMappingParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListGuestOsMappingParams) GetKeyword() (string, bool) {
@@ -552,6 +648,12 @@ func (p *ListGuestOsMappingParams) SetOsdisplayname(v string) {
 	p.p["osdisplayname"] = v
 }
 
+func (p *ListGuestOsMappingParams) ResetOsdisplayname() {
+	if p.p != nil && p.p["osdisplayname"] != nil {
+		delete(p.p, "osdisplayname")
+	}
+}
+
 func (p *ListGuestOsMappingParams) GetOsdisplayname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -565,6 +667,12 @@ func (p *ListGuestOsMappingParams) SetOsnameforhypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["osnameforhypervisor"] = v
+}
+
+func (p *ListGuestOsMappingParams) ResetOsnameforhypervisor() {
+	if p.p != nil && p.p["osnameforhypervisor"] != nil {
+		delete(p.p, "osnameforhypervisor")
+	}
 }
 
 func (p *ListGuestOsMappingParams) GetOsnameforhypervisor() (string, bool) {
@@ -582,6 +690,12 @@ func (p *ListGuestOsMappingParams) SetOstypeid(v string) {
 	p.p["ostypeid"] = v
 }
 
+func (p *ListGuestOsMappingParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
+}
+
 func (p *ListGuestOsMappingParams) GetOstypeid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -597,6 +711,12 @@ func (p *ListGuestOsMappingParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListGuestOsMappingParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListGuestOsMappingParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -610,6 +730,12 @@ func (p *ListGuestOsMappingParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListGuestOsMappingParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListGuestOsMappingParams) GetPagesize() (int, bool) {
@@ -756,6 +882,12 @@ func (p *ListOsCategoriesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListOsCategoriesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListOsCategoriesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -769,6 +901,12 @@ func (p *ListOsCategoriesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListOsCategoriesParams) GetKeyword() (string, bool) {
@@ -786,6 +924,12 @@ func (p *ListOsCategoriesParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListOsCategoriesParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListOsCategoriesParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -801,6 +945,12 @@ func (p *ListOsCategoriesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListOsCategoriesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListOsCategoriesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -814,6 +964,12 @@ func (p *ListOsCategoriesParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListOsCategoriesParams) GetPagesize() (int, bool) {
@@ -985,6 +1141,12 @@ func (p *ListOsTypesParams) SetDescription(v string) {
 	p.p["description"] = v
 }
 
+func (p *ListOsTypesParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
 func (p *ListOsTypesParams) GetDescription() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -998,6 +1160,12 @@ func (p *ListOsTypesParams) SetFordisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["fordisplay"] = v
+}
+
+func (p *ListOsTypesParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
 }
 
 func (p *ListOsTypesParams) GetFordisplay() (bool, bool) {
@@ -1015,6 +1183,12 @@ func (p *ListOsTypesParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListOsTypesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListOsTypesParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1028,6 +1202,12 @@ func (p *ListOsTypesParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListOsTypesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListOsTypesParams) GetKeyword() (string, bool) {
@@ -1045,6 +1225,12 @@ func (p *ListOsTypesParams) SetOscategoryid(v string) {
 	p.p["oscategoryid"] = v
 }
 
+func (p *ListOsTypesParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
 func (p *ListOsTypesParams) GetOscategoryid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1060,6 +1246,12 @@ func (p *ListOsTypesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListOsTypesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListOsTypesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1073,6 +1265,12 @@ func (p *ListOsTypesParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListOsTypesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListOsTypesParams) GetPagesize() (int, bool) {
@@ -1228,6 +1426,12 @@ func (p *RemoveGuestOsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RemoveGuestOsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *RemoveGuestOsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1302,6 +1506,12 @@ func (p *RemoveGuestOsMappingParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *RemoveGuestOsMappingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *RemoveGuestOsMappingParams) GetId() (string, bool) {
@@ -1394,6 +1604,12 @@ func (p *UpdateGuestOsParams) SetDetails(v map[string]string) {
 	p.p["details"] = v
 }
 
+func (p *UpdateGuestOsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
 func (p *UpdateGuestOsParams) GetDetails() (map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1407,6 +1623,12 @@ func (p *UpdateGuestOsParams) SetForDisplay(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["forDisplay"] = v
+}
+
+func (p *UpdateGuestOsParams) ResetForDisplay() {
+	if p.p != nil && p.p["forDisplay"] != nil {
+		delete(p.p, "forDisplay")
+	}
 }
 
 func (p *UpdateGuestOsParams) GetForDisplay() (bool, bool) {
@@ -1424,6 +1646,12 @@ func (p *UpdateGuestOsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateGuestOsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateGuestOsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1437,6 +1665,12 @@ func (p *UpdateGuestOsParams) SetOsdisplayname(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["osdisplayname"] = v
+}
+
+func (p *UpdateGuestOsParams) ResetOsdisplayname() {
+	if p.p != nil && p.p["osdisplayname"] != nil {
+		delete(p.p, "osdisplayname")
+	}
 }
 
 func (p *UpdateGuestOsParams) GetOsdisplayname() (string, bool) {
@@ -1533,6 +1767,12 @@ func (p *UpdateGuestOsMappingParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *UpdateGuestOsMappingParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *UpdateGuestOsMappingParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1548,6 +1788,12 @@ func (p *UpdateGuestOsMappingParams) SetOsmappingcheckenabled(v bool) {
 	p.p["osmappingcheckenabled"] = v
 }
 
+func (p *UpdateGuestOsMappingParams) ResetOsmappingcheckenabled() {
+	if p.p != nil && p.p["osmappingcheckenabled"] != nil {
+		delete(p.p, "osmappingcheckenabled")
+	}
+}
+
 func (p *UpdateGuestOsMappingParams) GetOsmappingcheckenabled() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1561,6 +1807,12 @@ func (p *UpdateGuestOsMappingParams) SetOsnameforhypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["osnameforhypervisor"] = v
+}
+
+func (p *UpdateGuestOsMappingParams) ResetOsnameforhypervisor() {
+	if p.p != nil && p.p["osnameforhypervisor"] != nil {
+		delete(p.p, "osnameforhypervisor")
+	}
 }
 
 func (p *UpdateGuestOsMappingParams) GetOsnameforhypervisor() (string, bool) {

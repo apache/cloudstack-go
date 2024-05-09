@@ -74,6 +74,12 @@ func (p *AddNiciraNvpDeviceParams) SetHostname(v string) {
 	p.p["hostname"] = v
 }
 
+func (p *AddNiciraNvpDeviceParams) ResetHostname() {
+	if p.p != nil && p.p["hostname"] != nil {
+		delete(p.p, "hostname")
+	}
+}
+
 func (p *AddNiciraNvpDeviceParams) GetHostname() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -87,6 +93,12 @@ func (p *AddNiciraNvpDeviceParams) SetL2gatewayserviceuuid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["l2gatewayserviceuuid"] = v
+}
+
+func (p *AddNiciraNvpDeviceParams) ResetL2gatewayserviceuuid() {
+	if p.p != nil && p.p["l2gatewayserviceuuid"] != nil {
+		delete(p.p, "l2gatewayserviceuuid")
+	}
 }
 
 func (p *AddNiciraNvpDeviceParams) GetL2gatewayserviceuuid() (string, bool) {
@@ -104,6 +116,12 @@ func (p *AddNiciraNvpDeviceParams) SetL3gatewayserviceuuid(v string) {
 	p.p["l3gatewayserviceuuid"] = v
 }
 
+func (p *AddNiciraNvpDeviceParams) ResetL3gatewayserviceuuid() {
+	if p.p != nil && p.p["l3gatewayserviceuuid"] != nil {
+		delete(p.p, "l3gatewayserviceuuid")
+	}
+}
+
 func (p *AddNiciraNvpDeviceParams) GetL3gatewayserviceuuid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -117,6 +135,12 @@ func (p *AddNiciraNvpDeviceParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddNiciraNvpDeviceParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *AddNiciraNvpDeviceParams) GetPassword() (string, bool) {
@@ -134,6 +158,12 @@ func (p *AddNiciraNvpDeviceParams) SetPhysicalnetworkid(v string) {
 	p.p["physicalnetworkid"] = v
 }
 
+func (p *AddNiciraNvpDeviceParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
+}
+
 func (p *AddNiciraNvpDeviceParams) GetPhysicalnetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -149,6 +179,12 @@ func (p *AddNiciraNvpDeviceParams) SetTransportzoneuuid(v string) {
 	p.p["transportzoneuuid"] = v
 }
 
+func (p *AddNiciraNvpDeviceParams) ResetTransportzoneuuid() {
+	if p.p != nil && p.p["transportzoneuuid"] != nil {
+		delete(p.p, "transportzoneuuid")
+	}
+}
+
 func (p *AddNiciraNvpDeviceParams) GetTransportzoneuuid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -162,6 +198,12 @@ func (p *AddNiciraNvpDeviceParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddNiciraNvpDeviceParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddNiciraNvpDeviceParams) GetUsername() (string, bool) {
@@ -255,6 +297,12 @@ func (p *DeleteNiciraNvpDeviceParams) SetNvpdeviceid(v string) {
 	p.p["nvpdeviceid"] = v
 }
 
+func (p *DeleteNiciraNvpDeviceParams) ResetNvpdeviceid() {
+	if p.p != nil && p.p["nvpdeviceid"] != nil {
+		delete(p.p, "nvpdeviceid")
+	}
+}
+
 func (p *DeleteNiciraNvpDeviceParams) GetNvpdeviceid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -345,6 +393,12 @@ func (p *ListNiciraNvpDevicesParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListNiciraNvpDevicesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListNiciraNvpDevicesParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -358,6 +412,12 @@ func (p *ListNiciraNvpDevicesParams) SetNvpdeviceid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nvpdeviceid"] = v
+}
+
+func (p *ListNiciraNvpDevicesParams) ResetNvpdeviceid() {
+	if p.p != nil && p.p["nvpdeviceid"] != nil {
+		delete(p.p, "nvpdeviceid")
+	}
 }
 
 func (p *ListNiciraNvpDevicesParams) GetNvpdeviceid() (string, bool) {
@@ -375,6 +435,12 @@ func (p *ListNiciraNvpDevicesParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListNiciraNvpDevicesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListNiciraNvpDevicesParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -390,6 +456,12 @@ func (p *ListNiciraNvpDevicesParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListNiciraNvpDevicesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListNiciraNvpDevicesParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -403,6 +475,12 @@ func (p *ListNiciraNvpDevicesParams) SetPhysicalnetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *ListNiciraNvpDevicesParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
 }
 
 func (p *ListNiciraNvpDevicesParams) GetPhysicalnetworkid() (string, bool) {

@@ -134,6 +134,12 @@ func (p *AddBaremetalHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -147,6 +153,12 @@ func (p *AddBaremetalHostParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *AddBaremetalHostParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
 }
 
 func (p *AddBaremetalHostParams) GetClusterid() (string, bool) {
@@ -164,6 +176,12 @@ func (p *AddBaremetalHostParams) SetClustername(v string) {
 	p.p["clustername"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetClustername() {
+	if p.p != nil && p.p["clustername"] != nil {
+		delete(p.p, "clustername")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetClustername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -177,6 +195,12 @@ func (p *AddBaremetalHostParams) SetHosttags(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hosttags"] = v
+}
+
+func (p *AddBaremetalHostParams) ResetHosttags() {
+	if p.p != nil && p.p["hosttags"] != nil {
+		delete(p.p, "hosttags")
+	}
 }
 
 func (p *AddBaremetalHostParams) GetHosttags() ([]string, bool) {
@@ -194,6 +218,12 @@ func (p *AddBaremetalHostParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetHypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -207,6 +237,12 @@ func (p *AddBaremetalHostParams) SetIpaddress(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["ipaddress"] = v
+}
+
+func (p *AddBaremetalHostParams) ResetIpaddress() {
+	if p.p != nil && p.p["ipaddress"] != nil {
+		delete(p.p, "ipaddress")
+	}
 }
 
 func (p *AddBaremetalHostParams) GetIpaddress() (string, bool) {
@@ -224,6 +260,12 @@ func (p *AddBaremetalHostParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -237,6 +279,12 @@ func (p *AddBaremetalHostParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *AddBaremetalHostParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *AddBaremetalHostParams) GetPodid() (string, bool) {
@@ -254,6 +302,12 @@ func (p *AddBaremetalHostParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -269,6 +323,12 @@ func (p *AddBaremetalHostParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddBaremetalHostParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
 func (p *AddBaremetalHostParams) GetUsername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -282,6 +342,12 @@ func (p *AddBaremetalHostParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddBaremetalHostParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddBaremetalHostParams) GetZoneid() (string, bool) {
@@ -432,6 +498,12 @@ func (p *AddGloboDnsHostParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *AddGloboDnsHostParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *AddGloboDnsHostParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -445,6 +517,12 @@ func (p *AddGloboDnsHostParams) SetPhysicalnetworkid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["physicalnetworkid"] = v
+}
+
+func (p *AddGloboDnsHostParams) ResetPhysicalnetworkid() {
+	if p.p != nil && p.p["physicalnetworkid"] != nil {
+		delete(p.p, "physicalnetworkid")
+	}
 }
 
 func (p *AddGloboDnsHostParams) GetPhysicalnetworkid() (string, bool) {
@@ -462,6 +540,12 @@ func (p *AddGloboDnsHostParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddGloboDnsHostParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddGloboDnsHostParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -475,6 +559,12 @@ func (p *AddGloboDnsHostParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddGloboDnsHostParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddGloboDnsHostParams) GetUsername() (string, bool) {
@@ -584,6 +674,12 @@ func (p *AddHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *AddHostParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *AddHostParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -597,6 +693,12 @@ func (p *AddHostParams) SetClusterid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["clusterid"] = v
+}
+
+func (p *AddHostParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
 }
 
 func (p *AddHostParams) GetClusterid() (string, bool) {
@@ -614,6 +716,12 @@ func (p *AddHostParams) SetClustername(v string) {
 	p.p["clustername"] = v
 }
 
+func (p *AddHostParams) ResetClustername() {
+	if p.p != nil && p.p["clustername"] != nil {
+		delete(p.p, "clustername")
+	}
+}
+
 func (p *AddHostParams) GetClustername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -627,6 +735,12 @@ func (p *AddHostParams) SetHosttags(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hosttags"] = v
+}
+
+func (p *AddHostParams) ResetHosttags() {
+	if p.p != nil && p.p["hosttags"] != nil {
+		delete(p.p, "hosttags")
+	}
 }
 
 func (p *AddHostParams) GetHosttags() ([]string, bool) {
@@ -644,6 +758,12 @@ func (p *AddHostParams) SetHypervisor(v string) {
 	p.p["hypervisor"] = v
 }
 
+func (p *AddHostParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
 func (p *AddHostParams) GetHypervisor() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -657,6 +777,12 @@ func (p *AddHostParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddHostParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *AddHostParams) GetPassword() (string, bool) {
@@ -674,6 +800,12 @@ func (p *AddHostParams) SetPodid(v string) {
 	p.p["podid"] = v
 }
 
+func (p *AddHostParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
 func (p *AddHostParams) GetPodid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -687,6 +819,12 @@ func (p *AddHostParams) SetUrl(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *AddHostParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
 }
 
 func (p *AddHostParams) GetUrl() (string, bool) {
@@ -704,6 +842,12 @@ func (p *AddHostParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddHostParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
 func (p *AddHostParams) GetUsername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -717,6 +861,12 @@ func (p *AddHostParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddHostParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddHostParams) GetZoneid() (string, bool) {
@@ -865,6 +1015,12 @@ func (p *AddSecondaryStorageParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddSecondaryStorageParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddSecondaryStorageParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -878,6 +1034,12 @@ func (p *AddSecondaryStorageParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddSecondaryStorageParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddSecondaryStorageParams) GetZoneid() (string, bool) {
@@ -949,6 +1111,12 @@ func (p *CancelHostMaintenanceParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *CancelHostMaintenanceParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *CancelHostMaintenanceParams) GetId() (string, bool) {
@@ -1110,6 +1278,12 @@ func (p *ConfigureHAForHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ConfigureHAForHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ConfigureHAForHostParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1123,6 +1297,12 @@ func (p *ConfigureHAForHostParams) SetProvider(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["provider"] = v
+}
+
+func (p *ConfigureHAForHostParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
 }
 
 func (p *ConfigureHAForHostParams) GetProvider() (string, bool) {
@@ -1208,6 +1388,12 @@ func (p *EnableHAForHostParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *EnableHAForHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *EnableHAForHostParams) GetHostid() (string, bool) {
@@ -1300,6 +1486,12 @@ func (p *DedicateHostParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *DedicateHostParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *DedicateHostParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1315,6 +1507,12 @@ func (p *DedicateHostParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *DedicateHostParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *DedicateHostParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1328,6 +1526,12 @@ func (p *DedicateHostParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *DedicateHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *DedicateHostParams) GetHostid() (string, bool) {
@@ -1424,6 +1628,12 @@ func (p *DeleteHostParams) SetForced(v bool) {
 	p.p["forced"] = v
 }
 
+func (p *DeleteHostParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
 func (p *DeleteHostParams) GetForced() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1439,6 +1649,12 @@ func (p *DeleteHostParams) SetForcedestroylocalstorage(v bool) {
 	p.p["forcedestroylocalstorage"] = v
 }
 
+func (p *DeleteHostParams) ResetForcedestroylocalstorage() {
+	if p.p != nil && p.p["forcedestroylocalstorage"] != nil {
+		delete(p.p, "forcedestroylocalstorage")
+	}
+}
+
 func (p *DeleteHostParams) GetForcedestroylocalstorage() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1452,6 +1668,12 @@ func (p *DeleteHostParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *DeleteHostParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *DeleteHostParams) GetId() (string, bool) {
@@ -1542,6 +1764,12 @@ func (p *DisableOutOfBandManagementForHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *DisableOutOfBandManagementForHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *DisableOutOfBandManagementForHostParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1630,6 +1858,12 @@ func (p *EnableOutOfBandManagementForHostParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *EnableOutOfBandManagementForHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *EnableOutOfBandManagementForHostParams) GetHostid() (string, bool) {
@@ -1733,6 +1967,12 @@ func (p *FindHostsForMigrationParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *FindHostsForMigrationParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *FindHostsForMigrationParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1746,6 +1986,12 @@ func (p *FindHostsForMigrationParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *FindHostsForMigrationParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *FindHostsForMigrationParams) GetPage() (int, bool) {
@@ -1763,6 +2009,12 @@ func (p *FindHostsForMigrationParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *FindHostsForMigrationParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *FindHostsForMigrationParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1776,6 +2028,12 @@ func (p *FindHostsForMigrationParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *FindHostsForMigrationParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *FindHostsForMigrationParams) GetVirtualmachineid() (string, bool) {
@@ -1912,6 +2170,12 @@ func (p *ListDedicatedHostsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListDedicatedHostsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListDedicatedHostsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1925,6 +2189,12 @@ func (p *ListDedicatedHostsParams) SetAffinitygroupid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["affinitygroupid"] = v
+}
+
+func (p *ListDedicatedHostsParams) ResetAffinitygroupid() {
+	if p.p != nil && p.p["affinitygroupid"] != nil {
+		delete(p.p, "affinitygroupid")
+	}
 }
 
 func (p *ListDedicatedHostsParams) GetAffinitygroupid() (string, bool) {
@@ -1942,6 +2212,12 @@ func (p *ListDedicatedHostsParams) SetDomainid(v string) {
 	p.p["domainid"] = v
 }
 
+func (p *ListDedicatedHostsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
 func (p *ListDedicatedHostsParams) GetDomainid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1955,6 +2231,12 @@ func (p *ListDedicatedHostsParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *ListDedicatedHostsParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *ListDedicatedHostsParams) GetHostid() (string, bool) {
@@ -1972,6 +2254,12 @@ func (p *ListDedicatedHostsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListDedicatedHostsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListDedicatedHostsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1987,6 +2275,12 @@ func (p *ListDedicatedHostsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListDedicatedHostsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListDedicatedHostsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2000,6 +2294,12 @@ func (p *ListDedicatedHostsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListDedicatedHostsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListDedicatedHostsParams) GetPagesize() (int, bool) {
@@ -2079,6 +2379,12 @@ func (p *ListHostTagsParams) SetKeyword(v string) {
 	p.p["keyword"] = v
 }
 
+func (p *ListHostTagsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
 func (p *ListHostTagsParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2094,6 +2400,12 @@ func (p *ListHostTagsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListHostTagsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListHostTagsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2107,6 +2419,12 @@ func (p *ListHostTagsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListHostTagsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListHostTagsParams) GetPagesize() (int, bool) {
@@ -2264,6 +2582,12 @@ func (p *ListHostsParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListHostsParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
 func (p *ListHostsParams) GetClusterid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2277,6 +2601,12 @@ func (p *ListHostsParams) SetDetails(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListHostsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
 }
 
 func (p *ListHostsParams) GetDetails() ([]string, bool) {
@@ -2294,6 +2624,12 @@ func (p *ListHostsParams) SetHahost(v bool) {
 	p.p["hahost"] = v
 }
 
+func (p *ListHostsParams) ResetHahost() {
+	if p.p != nil && p.p["hahost"] != nil {
+		delete(p.p, "hahost")
+	}
+}
+
 func (p *ListHostsParams) GetHahost() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2307,6 +2643,12 @@ func (p *ListHostsParams) SetHypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListHostsParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
 }
 
 func (p *ListHostsParams) GetHypervisor() (string, bool) {
@@ -2324,6 +2666,12 @@ func (p *ListHostsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListHostsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListHostsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2337,6 +2685,12 @@ func (p *ListHostsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListHostsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListHostsParams) GetKeyword() (string, bool) {
@@ -2354,6 +2708,12 @@ func (p *ListHostsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListHostsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListHostsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2367,6 +2727,12 @@ func (p *ListHostsParams) SetOutofbandmanagementenabled(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["outofbandmanagementenabled"] = v
+}
+
+func (p *ListHostsParams) ResetOutofbandmanagementenabled() {
+	if p.p != nil && p.p["outofbandmanagementenabled"] != nil {
+		delete(p.p, "outofbandmanagementenabled")
+	}
 }
 
 func (p *ListHostsParams) GetOutofbandmanagementenabled() (bool, bool) {
@@ -2384,6 +2750,12 @@ func (p *ListHostsParams) SetOutofbandmanagementpowerstate(v string) {
 	p.p["outofbandmanagementpowerstate"] = v
 }
 
+func (p *ListHostsParams) ResetOutofbandmanagementpowerstate() {
+	if p.p != nil && p.p["outofbandmanagementpowerstate"] != nil {
+		delete(p.p, "outofbandmanagementpowerstate")
+	}
+}
+
 func (p *ListHostsParams) GetOutofbandmanagementpowerstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2397,6 +2769,12 @@ func (p *ListHostsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListHostsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListHostsParams) GetPage() (int, bool) {
@@ -2414,6 +2792,12 @@ func (p *ListHostsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListHostsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListHostsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2427,6 +2811,12 @@ func (p *ListHostsParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListHostsParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *ListHostsParams) GetPodid() (string, bool) {
@@ -2444,6 +2834,12 @@ func (p *ListHostsParams) SetResourcestate(v string) {
 	p.p["resourcestate"] = v
 }
 
+func (p *ListHostsParams) ResetResourcestate() {
+	if p.p != nil && p.p["resourcestate"] != nil {
+		delete(p.p, "resourcestate")
+	}
+}
+
 func (p *ListHostsParams) GetResourcestate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2457,6 +2853,12 @@ func (p *ListHostsParams) SetState(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListHostsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
 }
 
 func (p *ListHostsParams) GetState() (string, bool) {
@@ -2474,6 +2876,12 @@ func (p *ListHostsParams) SetType(v string) {
 	p.p["type"] = v
 }
 
+func (p *ListHostsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
 func (p *ListHostsParams) GetType() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2489,6 +2897,12 @@ func (p *ListHostsParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListHostsParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
 func (p *ListHostsParams) GetVirtualmachineid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2502,6 +2916,12 @@ func (p *ListHostsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListHostsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListHostsParams) GetZoneid() (string, bool) {
@@ -2780,6 +3200,12 @@ func (p *ListHostsMetricsParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetClusterid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2793,6 +3219,12 @@ func (p *ListHostsMetricsParams) SetDetails(v []string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["details"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetDetails() ([]string, bool) {
@@ -2810,6 +3242,12 @@ func (p *ListHostsMetricsParams) SetHahost(v bool) {
 	p.p["hahost"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetHahost() {
+	if p.p != nil && p.p["hahost"] != nil {
+		delete(p.p, "hahost")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetHahost() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2823,6 +3261,12 @@ func (p *ListHostsMetricsParams) SetHypervisor(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hypervisor"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetHypervisor() (string, bool) {
@@ -2840,6 +3284,12 @@ func (p *ListHostsMetricsParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2853,6 +3303,12 @@ func (p *ListHostsMetricsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetKeyword() (string, bool) {
@@ -2870,6 +3326,12 @@ func (p *ListHostsMetricsParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2883,6 +3345,12 @@ func (p *ListHostsMetricsParams) SetOutofbandmanagementenabled(v bool) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["outofbandmanagementenabled"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetOutofbandmanagementenabled() {
+	if p.p != nil && p.p["outofbandmanagementenabled"] != nil {
+		delete(p.p, "outofbandmanagementenabled")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetOutofbandmanagementenabled() (bool, bool) {
@@ -2900,6 +3368,12 @@ func (p *ListHostsMetricsParams) SetOutofbandmanagementpowerstate(v string) {
 	p.p["outofbandmanagementpowerstate"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetOutofbandmanagementpowerstate() {
+	if p.p != nil && p.p["outofbandmanagementpowerstate"] != nil {
+		delete(p.p, "outofbandmanagementpowerstate")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetOutofbandmanagementpowerstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2913,6 +3387,12 @@ func (p *ListHostsMetricsParams) SetPage(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetPage() (int, bool) {
@@ -2930,6 +3410,12 @@ func (p *ListHostsMetricsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2943,6 +3429,12 @@ func (p *ListHostsMetricsParams) SetPodid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["podid"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetPodid() (string, bool) {
@@ -2960,6 +3452,12 @@ func (p *ListHostsMetricsParams) SetResourcestate(v string) {
 	p.p["resourcestate"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetResourcestate() {
+	if p.p != nil && p.p["resourcestate"] != nil {
+		delete(p.p, "resourcestate")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetResourcestate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2973,6 +3471,12 @@ func (p *ListHostsMetricsParams) SetState(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["state"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetState() (string, bool) {
@@ -2990,6 +3494,12 @@ func (p *ListHostsMetricsParams) SetType(v string) {
 	p.p["type"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetType() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3005,6 +3515,12 @@ func (p *ListHostsMetricsParams) SetVirtualmachineid(v string) {
 	p.p["virtualmachineid"] = v
 }
 
+func (p *ListHostsMetricsParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
 func (p *ListHostsMetricsParams) GetVirtualmachineid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3018,6 +3534,12 @@ func (p *ListHostsMetricsParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *ListHostsMetricsParams) GetZoneid() (string, bool) {
@@ -3262,6 +3784,12 @@ func (p *PrepareHostForMaintenanceParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *PrepareHostForMaintenanceParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *PrepareHostForMaintenanceParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3416,6 +3944,12 @@ func (p *ReconnectHostParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ReconnectHostParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ReconnectHostParams) GetId() (string, bool) {
@@ -3574,6 +4108,12 @@ func (p *ReleaseDedicatedHostParams) SetHostid(v string) {
 	p.p["hostid"] = v
 }
 
+func (p *ReleaseDedicatedHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
 func (p *ReleaseDedicatedHostParams) GetHostid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3648,6 +4188,12 @@ func (p *ReleaseHostReservationParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *ReleaseHostReservationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *ReleaseHostReservationParams) GetId() (string, bool) {
@@ -3749,6 +4295,12 @@ func (p *UpdateHostParams) SetAllocationstate(v string) {
 	p.p["allocationstate"] = v
 }
 
+func (p *UpdateHostParams) ResetAllocationstate() {
+	if p.p != nil && p.p["allocationstate"] != nil {
+		delete(p.p, "allocationstate")
+	}
+}
+
 func (p *UpdateHostParams) GetAllocationstate() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3762,6 +4314,12 @@ func (p *UpdateHostParams) SetAnnotation(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["annotation"] = v
+}
+
+func (p *UpdateHostParams) ResetAnnotation() {
+	if p.p != nil && p.p["annotation"] != nil {
+		delete(p.p, "annotation")
+	}
 }
 
 func (p *UpdateHostParams) GetAnnotation() (string, bool) {
@@ -3779,6 +4337,12 @@ func (p *UpdateHostParams) SetHosttags(v []string) {
 	p.p["hosttags"] = v
 }
 
+func (p *UpdateHostParams) ResetHosttags() {
+	if p.p != nil && p.p["hosttags"] != nil {
+		delete(p.p, "hosttags")
+	}
+}
+
 func (p *UpdateHostParams) GetHosttags() ([]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3792,6 +4356,12 @@ func (p *UpdateHostParams) SetId(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["id"] = v
+}
+
+func (p *UpdateHostParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
 }
 
 func (p *UpdateHostParams) GetId() (string, bool) {
@@ -3809,6 +4379,12 @@ func (p *UpdateHostParams) SetIstagarule(v bool) {
 	p.p["istagarule"] = v
 }
 
+func (p *UpdateHostParams) ResetIstagarule() {
+	if p.p != nil && p.p["istagarule"] != nil {
+		delete(p.p, "istagarule")
+	}
+}
+
 func (p *UpdateHostParams) GetIstagarule() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3822,6 +4398,12 @@ func (p *UpdateHostParams) SetName(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["name"] = v
+}
+
+func (p *UpdateHostParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
 }
 
 func (p *UpdateHostParams) GetName() (string, bool) {
@@ -3839,6 +4421,12 @@ func (p *UpdateHostParams) SetOscategoryid(v string) {
 	p.p["oscategoryid"] = v
 }
 
+func (p *UpdateHostParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
 func (p *UpdateHostParams) GetOscategoryid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3852,6 +4440,12 @@ func (p *UpdateHostParams) SetUrl(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *UpdateHostParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
 }
 
 func (p *UpdateHostParams) GetUrl() (string, bool) {
@@ -4003,6 +4597,12 @@ func (p *UpdateHostPasswordParams) SetClusterid(v string) {
 	p.p["clusterid"] = v
 }
 
+func (p *UpdateHostPasswordParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
 func (p *UpdateHostPasswordParams) GetClusterid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4016,6 +4616,12 @@ func (p *UpdateHostPasswordParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *UpdateHostPasswordParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *UpdateHostPasswordParams) GetHostid() (string, bool) {
@@ -4033,6 +4639,12 @@ func (p *UpdateHostPasswordParams) SetPassword(v string) {
 	p.p["password"] = v
 }
 
+func (p *UpdateHostPasswordParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
 func (p *UpdateHostPasswordParams) GetPassword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4048,6 +4660,12 @@ func (p *UpdateHostPasswordParams) SetUpdate_passwd_on_host(v bool) {
 	p.p["update_passwd_on_host"] = v
 }
 
+func (p *UpdateHostPasswordParams) ResetUpdate_passwd_on_host() {
+	if p.p != nil && p.p["update_passwd_on_host"] != nil {
+		delete(p.p, "update_passwd_on_host")
+	}
+}
+
 func (p *UpdateHostPasswordParams) GetUpdate_passwd_on_host() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4061,6 +4679,12 @@ func (p *UpdateHostPasswordParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *UpdateHostPasswordParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *UpdateHostPasswordParams) GetUsername() (string, bool) {

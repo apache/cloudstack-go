@@ -83,6 +83,12 @@ func (p *ListAsyncJobsParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *ListAsyncJobsParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *ListAsyncJobsParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -96,6 +102,12 @@ func (p *ListAsyncJobsParams) SetDomainid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["domainid"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
 }
 
 func (p *ListAsyncJobsParams) GetDomainid() (string, bool) {
@@ -113,6 +125,12 @@ func (p *ListAsyncJobsParams) SetIsrecursive(v bool) {
 	p.p["isrecursive"] = v
 }
 
+func (p *ListAsyncJobsParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
 func (p *ListAsyncJobsParams) GetIsrecursive() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -126,6 +144,12 @@ func (p *ListAsyncJobsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListAsyncJobsParams) GetKeyword() (string, bool) {
@@ -143,6 +167,12 @@ func (p *ListAsyncJobsParams) SetListall(v bool) {
 	p.p["listall"] = v
 }
 
+func (p *ListAsyncJobsParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
 func (p *ListAsyncJobsParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -156,6 +186,12 @@ func (p *ListAsyncJobsParams) SetManagementserverid(v UUID) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["managementserverid"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
 }
 
 func (p *ListAsyncJobsParams) GetManagementserverid() (UUID, bool) {
@@ -173,6 +209,12 @@ func (p *ListAsyncJobsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListAsyncJobsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListAsyncJobsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -188,6 +230,12 @@ func (p *ListAsyncJobsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListAsyncJobsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListAsyncJobsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -201,6 +249,12 @@ func (p *ListAsyncJobsParams) SetStartdate(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["startdate"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
 }
 
 func (p *ListAsyncJobsParams) GetStartdate() (string, bool) {
@@ -279,6 +333,12 @@ func (p *QueryAsyncJobResultParams) SetJobID(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["jobid"] = v
+}
+
+func (p *QueryAsyncJobResultParams) ResetJobID() {
+	if p.p != nil && p.p["jobid"] != nil {
+		delete(p.p, "jobid")
+	}
 }
 
 func (p *QueryAsyncJobResultParams) GetJobID() (string, bool) {

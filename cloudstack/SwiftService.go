@@ -65,6 +65,12 @@ func (p *AddSwiftParams) SetAccount(v string) {
 	p.p["account"] = v
 }
 
+func (p *AddSwiftParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
 func (p *AddSwiftParams) GetAccount() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -78,6 +84,12 @@ func (p *AddSwiftParams) SetKey(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["key"] = v
+}
+
+func (p *AddSwiftParams) ResetKey() {
+	if p.p != nil && p.p["key"] != nil {
+		delete(p.p, "key")
+	}
 }
 
 func (p *AddSwiftParams) GetKey() (string, bool) {
@@ -95,6 +107,12 @@ func (p *AddSwiftParams) SetUrl(v string) {
 	p.p["url"] = v
 }
 
+func (p *AddSwiftParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
+}
+
 func (p *AddSwiftParams) GetUrl() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -108,6 +126,12 @@ func (p *AddSwiftParams) SetUsername(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["username"] = v
+}
+
+func (p *AddSwiftParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
 }
 
 func (p *AddSwiftParams) GetUsername() (string, bool) {
@@ -193,6 +217,12 @@ func (p *ListSwiftsParams) SetId(v int64) {
 	p.p["id"] = v
 }
 
+func (p *ListSwiftsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *ListSwiftsParams) GetId() (int64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -206,6 +236,12 @@ func (p *ListSwiftsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListSwiftsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListSwiftsParams) GetKeyword() (string, bool) {
@@ -223,6 +259,12 @@ func (p *ListSwiftsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListSwiftsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListSwiftsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -236,6 +278,12 @@ func (p *ListSwiftsParams) SetPagesize(v int) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
+}
+
+func (p *ListSwiftsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
 }
 
 func (p *ListSwiftsParams) GetPagesize() (int, bool) {

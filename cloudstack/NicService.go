@@ -61,6 +61,12 @@ func (p *AddIpToNicParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
+func (p *AddIpToNicParams) ResetIpaddress() {
+	if p.p != nil && p.p["ipaddress"] != nil {
+		delete(p.p, "ipaddress")
+	}
+}
+
 func (p *AddIpToNicParams) GetIpaddress() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -74,6 +80,12 @@ func (p *AddIpToNicParams) SetNicid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *AddIpToNicParams) ResetNicid() {
+	if p.p != nil && p.p["nicid"] != nil {
+		delete(p.p, "nicid")
+	}
 }
 
 func (p *AddIpToNicParams) GetNicid() (string, bool) {
@@ -185,6 +197,12 @@ func (p *ListNicsParams) SetFordisplay(v bool) {
 	p.p["fordisplay"] = v
 }
 
+func (p *ListNicsParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
 func (p *ListNicsParams) GetFordisplay() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -198,6 +216,12 @@ func (p *ListNicsParams) SetKeyword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
+}
+
+func (p *ListNicsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
 }
 
 func (p *ListNicsParams) GetKeyword() (string, bool) {
@@ -215,6 +239,12 @@ func (p *ListNicsParams) SetNetworkid(v string) {
 	p.p["networkid"] = v
 }
 
+func (p *ListNicsParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
 func (p *ListNicsParams) GetNetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -228,6 +258,12 @@ func (p *ListNicsParams) SetNicid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *ListNicsParams) ResetNicid() {
+	if p.p != nil && p.p["nicid"] != nil {
+		delete(p.p, "nicid")
+	}
 }
 
 func (p *ListNicsParams) GetNicid() (string, bool) {
@@ -245,6 +281,12 @@ func (p *ListNicsParams) SetPage(v int) {
 	p.p["page"] = v
 }
 
+func (p *ListNicsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
 func (p *ListNicsParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -260,6 +302,12 @@ func (p *ListNicsParams) SetPagesize(v int) {
 	p.p["pagesize"] = v
 }
 
+func (p *ListNicsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
 func (p *ListNicsParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -273,6 +321,12 @@ func (p *ListNicsParams) SetVirtualmachineid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["virtualmachineid"] = v
+}
+
+func (p *ListNicsParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
 }
 
 func (p *ListNicsParams) GetVirtualmachineid() (string, bool) {
@@ -373,6 +427,12 @@ func (p *RemoveIpFromNicParams) SetId(v string) {
 	p.p["id"] = v
 }
 
+func (p *RemoveIpFromNicParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
 func (p *RemoveIpFromNicParams) GetId() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -452,6 +512,12 @@ func (p *UpdateVmNicIpParams) SetIpaddress(v string) {
 	p.p["ipaddress"] = v
 }
 
+func (p *UpdateVmNicIpParams) ResetIpaddress() {
+	if p.p != nil && p.p["ipaddress"] != nil {
+		delete(p.p, "ipaddress")
+	}
+}
+
 func (p *UpdateVmNicIpParams) GetIpaddress() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -465,6 +531,12 @@ func (p *UpdateVmNicIpParams) SetNicid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["nicid"] = v
+}
+
+func (p *UpdateVmNicIpParams) ResetNicid() {
+	if p.p != nil && p.p["nicid"] != nil {
+		delete(p.p, "nicid")
+	}
 }
 
 func (p *UpdateVmNicIpParams) GetNicid() (string, bool) {

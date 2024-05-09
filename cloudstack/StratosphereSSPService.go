@@ -69,6 +69,12 @@ func (p *AddStratosphereSspParams) SetName(v string) {
 	p.p["name"] = v
 }
 
+func (p *AddStratosphereSspParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
 func (p *AddStratosphereSspParams) GetName() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -82,6 +88,12 @@ func (p *AddStratosphereSspParams) SetPassword(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["password"] = v
+}
+
+func (p *AddStratosphereSspParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
 }
 
 func (p *AddStratosphereSspParams) GetPassword() (string, bool) {
@@ -99,6 +111,12 @@ func (p *AddStratosphereSspParams) SetTenantuuid(v string) {
 	p.p["tenantuuid"] = v
 }
 
+func (p *AddStratosphereSspParams) ResetTenantuuid() {
+	if p.p != nil && p.p["tenantuuid"] != nil {
+		delete(p.p, "tenantuuid")
+	}
+}
+
 func (p *AddStratosphereSspParams) GetTenantuuid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -112,6 +130,12 @@ func (p *AddStratosphereSspParams) SetUrl(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["url"] = v
+}
+
+func (p *AddStratosphereSspParams) ResetUrl() {
+	if p.p != nil && p.p["url"] != nil {
+		delete(p.p, "url")
+	}
 }
 
 func (p *AddStratosphereSspParams) GetUrl() (string, bool) {
@@ -129,6 +153,12 @@ func (p *AddStratosphereSspParams) SetUsername(v string) {
 	p.p["username"] = v
 }
 
+func (p *AddStratosphereSspParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
 func (p *AddStratosphereSspParams) GetUsername() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -142,6 +172,12 @@ func (p *AddStratosphereSspParams) SetZoneid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["zoneid"] = v
+}
+
+func (p *AddStratosphereSspParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
 }
 
 func (p *AddStratosphereSspParams) GetZoneid() (string, bool) {
@@ -207,6 +243,12 @@ func (p *DeleteStratosphereSspParams) SetHostid(v string) {
 		p.p = make(map[string]interface{})
 	}
 	p.p["hostid"] = v
+}
+
+func (p *DeleteStratosphereSspParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
 }
 
 func (p *DeleteStratosphereSspParams) GetHostid() (string, bool) {
