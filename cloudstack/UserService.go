@@ -297,7 +297,7 @@ func (s *UserService) NewCreateUserParams(account string, email string, firstnam
 
 // Creates a user for an account that already exists
 func (s *UserService) CreateUser(p *CreateUserParams) (*CreateUserResponse, error) {
-	resp, err := s.cs.newRequest("createUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1718,7 +1718,7 @@ func (s *UserService) NewUpdateUserParams(id string) *UpdateUserParams {
 
 // Updates a user account
 func (s *UserService) UpdateUser(p *UpdateUserParams) (*UpdateUserResponse, error) {
-	resp, err := s.cs.newRequest("updateUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

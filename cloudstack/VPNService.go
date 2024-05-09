@@ -221,7 +221,7 @@ func (s *VPNService) NewAddVpnUserParams(password string, username string) *AddV
 
 // Adds vpn users
 func (s *VPNService) AddVpnUser(p *AddVpnUserParams) (*AddVpnUserResponse, error) {
-	resp, err := s.cs.newRequest("addVpnUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addVpnUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
