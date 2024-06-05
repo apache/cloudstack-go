@@ -84,6 +84,11 @@ var mapRequireList = map[string]map[string]bool{
 	"migrateVirtualMachineWithVolume": map[string]bool{
 		"migrateto": true,
 	},
+	"importVm": map[string]bool{
+		"networklist":          true,
+		"nicipaddresslist":     true,
+		"datadiskofferinglist": true,
+	},
 }
 
 // nestedResponse is a prefilled map with the list of endpoints
@@ -98,6 +103,8 @@ var nestedResponse = map[string]string{
 	"getKubernetesClusterConfig": "clusterconfig",
 	"getPathForVolume":           "apipathforvolume",
 	"createConsoleEndpoint":      "consoleendpoint",
+	"addVmwareDc":                "vmwaredc",
+	"updateVmwareDc":             "vmwaredc",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -1361,6 +1368,15 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			} else {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 			}
+		case "nicnetworklist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].nic\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].network\", i), m[k])", name)
+		case "nicipaddresslist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].nic\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].ip4Address\", i), m[k])", name)
+		case "datadiskofferinglist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].disk\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].diskOffering\", i), m[k])", name)
 		default:
 			if zeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
@@ -1899,6 +1915,9 @@ func (s *service) generateResponseType(a *API) {
 		case "findHostsForMigration":
 			pn(" Count int `json:\"count\"`")
 			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
+		case "listVmwareDcVms":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "unmanagedinstance")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

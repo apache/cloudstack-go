@@ -117,6 +117,7 @@ var layout = apiInfo{
 		"updateDefaultNicForVirtualMachine",
 		"updateVirtualMachine",
 		"listVirtualMachinesUsageHistory",
+		"importVm",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -286,6 +287,11 @@ var layout = apiInfo{
 		"listZonesMetrics",
 		"releaseDedicatedZone",
 		"updateZone",
+		"listVmwareDcVms",
+		"addVmwareDc",
+		"listVmwareDcs",
+		"updateVmwareDc",
+		"removeVmwareDc",
 	},
 	"UsageService": {
 		"addTrafficMonitor",

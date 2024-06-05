@@ -361,6 +361,21 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesUsageHis
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesUsageHistoryID", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesUsageHistoryID), varargs...)
 }
 
+// ImportVm mocks base method.
+func (m *MockVirtualMachineServiceIface) ImportVm(p *ImportVmParams) (*ImportVmResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ImportVm", p)
+	ret0, _ := ret[0].(*ImportVmResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ImportVm indicates an expected call of ImportVm.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) ImportVm(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportVm", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ImportVm), p)
+}
+
 // ListVirtualMachines mocks base method.
 func (m *MockVirtualMachineServiceIface) ListVirtualMachines(p *ListVirtualMachinesParams) (*ListVirtualMachinesResponse, error) {
 	m.ctrl.T.Helper()
@@ -546,6 +561,20 @@ func (m *MockVirtualMachineServiceIface) NewGetVMPasswordParams(id string) *GetV
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewGetVMPasswordParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetVMPasswordParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewGetVMPasswordParams), id)
+}
+
+// NewImportVmParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewImportVmParams(clusterid, hypervisor, importsource, name, serviceofferingid, zoneid string) *ImportVmParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewImportVmParams", clusterid, hypervisor, importsource, name, serviceofferingid, zoneid)
+	ret0, _ := ret[0].(*ImportVmParams)
+	return ret0
+}
+
+// NewImportVmParams indicates an expected call of NewImportVmParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewImportVmParams(clusterid, hypervisor, importsource, name, serviceofferingid, zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportVmParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewImportVmParams), clusterid, hypervisor, importsource, name, serviceofferingid, zoneid)
 }
 
 // NewListVirtualMachinesMetricsParams mocks base method.
