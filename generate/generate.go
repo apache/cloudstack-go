@@ -105,6 +105,9 @@ var nestedResponse = map[string]string{
 	"createConsoleEndpoint":      "consoleendpoint",
 	"addVmwareDc":                "vmwaredc",
 	"updateVmwareDc":             "vmwaredc",
+	"createProjectRole":          "projectrole",
+	"updateProjectRole":          "projectrole",
+	"registerUserData":           "userdata",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -1881,7 +1884,7 @@ func (s *service) generateResponseType(a *API) {
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1918,6 +1921,18 @@ func (s *service) generateResponseType(a *API) {
 		case "listVmwareDcVms":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "unmanagedinstance")
+		case "registerUserData":
+			pn("    Account string `json:\"account\"`")
+			pn("    Accountid string `json:\"accountid\"`")
+			pn("    Domain string `json:\"domain\"`")
+			pn("    Domainid string `json:\"domainid\"`")
+			pn("    Hasannotations bool `json:\"hasannotations\"`")
+			pn("    Id string `json:\"id\"`")
+			pn("    JobID string `json:\"jobid\"`")
+			pn("    Jobstatus int `json:\"jobstatus\"`")
+			pn("    Name string `json:\"name\"`")
+			pn("    Params string `json:\"params\"`")
+			pn("    Userdata string `json:\"userdata\"`")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

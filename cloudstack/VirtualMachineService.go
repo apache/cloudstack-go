@@ -85,6 +85,12 @@ type VirtualMachineServiceIface interface {
 	GetVirtualMachinesUsageHistoryByID(id string, opts ...OptionFunc) (*VirtualMachinesUsageHistory, int, error)
 	ImportVm(p *ImportVmParams) (*ImportVmResponse, error)
 	NewImportVmParams(clusterid string, hypervisor string, importsource string, name string, serviceofferingid string, zoneid string) *ImportVmParams
+	UnmanageVirtualMachine(p *UnmanageVirtualMachineParams) (*UnmanageVirtualMachineResponse, error)
+	NewUnmanageVirtualMachineParams(id string) *UnmanageVirtualMachineParams
+	ListUnmanagedInstances(p *ListUnmanagedInstancesParams) (*ListUnmanagedInstancesResponse, error)
+	NewListUnmanagedInstancesParams(clusterid string) *ListUnmanagedInstancesParams
+	ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error)
+	NewImportUnmanagedInstanceParams(clusterid string, name string, serviceofferingid string) *ImportUnmanagedInstanceParams
 }
 
 type AddNicToVirtualMachineParams struct {
@@ -10887,5 +10893,883 @@ func (r *ImportVmResponse) UnmarshalJSON(b []byte) error {
 	}
 
 	type alias ImportVmResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type UnmanageVirtualMachineParams struct {
+	p map[string]interface{}
+}
+
+func (p *UnmanageVirtualMachineParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *UnmanageVirtualMachineParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UnmanageVirtualMachineParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UnmanageVirtualMachineParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UnmanageVirtualMachineParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewUnmanageVirtualMachineParams(id string) *UnmanageVirtualMachineParams {
+	p := &UnmanageVirtualMachineParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Unmanage a guest virtual machine.
+func (s *VirtualMachineService) UnmanageVirtualMachine(p *UnmanageVirtualMachineParams) (*UnmanageVirtualMachineResponse, error) {
+	resp, err := s.cs.newRequest("unmanageVirtualMachine", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UnmanageVirtualMachineResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type UnmanageVirtualMachineResponse struct {
+	Details   string `json:"details"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Success   bool   `json:"success"`
+}
+
+type ListUnmanagedInstancesParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListUnmanagedInstancesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	return u
+}
+
+func (p *ListUnmanagedInstancesParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListUnmanagedInstancesParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ListUnmanagedInstancesParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ListUnmanagedInstancesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListUnmanagedInstancesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListUnmanagedInstancesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListUnmanagedInstancesParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListUnmanagedInstancesParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListUnmanagedInstancesParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListUnmanagedInstancesParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListUnmanagedInstancesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListUnmanagedInstancesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListUnmanagedInstancesParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListUnmanagedInstancesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListUnmanagedInstancesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new ListUnmanagedInstancesParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewListUnmanagedInstancesParams(clusterid string) *ListUnmanagedInstancesParams {
+	p := &ListUnmanagedInstancesParams{}
+	p.p = make(map[string]interface{})
+	p.p["clusterid"] = clusterid
+	return p
+}
+
+// Lists unmanaged virtual machines for a given cluster.
+func (s *VirtualMachineService) ListUnmanagedInstances(p *ListUnmanagedInstancesParams) (*ListUnmanagedInstancesResponse, error) {
+	resp, err := s.cs.newRequest("listUnmanagedInstances", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListUnmanagedInstancesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListUnmanagedInstancesResponse struct {
+	Count              int                  `json:"count"`
+	UnmanagedInstances []*UnmanagedInstance `json:"unmanagedinstance"`
+}
+
+type UnmanagedInstance struct {
+	Clusterid        string                  `json:"clusterid"`
+	Clustername      string                  `json:"clustername"`
+	Cpucorepersocket int                     `json:"cpucorepersocket"`
+	Cpunumber        int                     `json:"cpunumber"`
+	Cpuspeed         int                     `json:"cpuspeed"`
+	Disk             []UnmanagedInstanceDisk `json:"disk"`
+	Hostid           string                  `json:"hostid"`
+	Hostname         string                  `json:"hostname"`
+	JobID            string                  `json:"jobid"`
+	Jobstatus        int                     `json:"jobstatus"`
+	Memory           int                     `json:"memory"`
+	Name             string                  `json:"name"`
+	Nic              []Nic                   `json:"nic"`
+	Osdisplayname    string                  `json:"osdisplayname"`
+	Osid             string                  `json:"osid"`
+	Powerstate       string                  `json:"powerstate"`
+}
+
+type UnmanagedInstanceDisk struct {
+	Capacity       int64  `json:"capacity"`
+	Controller     string `json:"controller"`
+	Controllerunit int    `json:"controllerunit"`
+	Datastorehost  string `json:"datastorehost"`
+	Datastorename  string `json:"datastorename"`
+	Datastorepath  string `json:"datastorepath"`
+	Datastoretype  string `json:"datastoretype"`
+	Id             string `json:"id"`
+	Imagepath      string `json:"imagepath"`
+	Label          string `json:"label"`
+	Position       int    `json:"position"`
+}
+
+type ImportUnmanagedInstanceParams struct {
+	p map[string]interface{}
+}
+
+func (p *ImportUnmanagedInstanceParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["datadiskofferinglist"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("datadiskofferinglist[%d].disk", i), k)
+			u.Set(fmt.Sprintf("datadiskofferinglist[%d].diskOffering", i), m[k])
+		}
+	}
+	if v, found := p.p["details"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("details[%d].%s", i, k), m[k])
+		}
+	}
+	if v, found := p.p["displayname"]; found {
+		u.Set("displayname", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["hostname"]; found {
+		u.Set("hostname", v.(string))
+	}
+	if v, found := p.p["migrateallowed"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("migrateallowed", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["nicipaddresslist"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nicipaddresslist[%d].nic", i), k)
+			u.Set(fmt.Sprintf("nicipaddresslist[%d].ip4Address", i), m[k])
+		}
+	}
+	if v, found := p.p["nicnetworklist"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nicnetworklist[%d].nic", i), k)
+			u.Set(fmt.Sprintf("nicnetworklist[%d].network", i), m[k])
+		}
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["serviceofferingid"]; found {
+		u.Set("serviceofferingid", v.(string))
+	}
+	if v, found := p.p["templateid"]; found {
+		u.Set("templateid", v.(string))
+	}
+	return u
+}
+
+func (p *ImportUnmanagedInstanceParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetDatadiskofferinglist(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["datadiskofferinglist"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetDatadiskofferinglist() {
+	if p.p != nil && p.p["datadiskofferinglist"] != nil {
+		delete(p.p, "datadiskofferinglist")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetDatadiskofferinglist() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["datadiskofferinglist"].(map[string]string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetDetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["details"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetDetails() {
+	if p.p != nil && p.p["details"] != nil {
+		delete(p.p, "details")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetDetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["details"].(map[string]string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetDisplayname(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["displayname"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetDisplayname() {
+	if p.p != nil && p.p["displayname"] != nil {
+		delete(p.p, "displayname")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetDisplayname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displayname"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetHostname(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostname"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetHostname() {
+	if p.p != nil && p.p["hostname"] != nil {
+		delete(p.p, "hostname")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetMigrateallowed(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["migrateallowed"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetMigrateallowed() {
+	if p.p != nil && p.p["migrateallowed"] != nil {
+		delete(p.p, "migrateallowed")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetMigrateallowed() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["migrateallowed"].(bool)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetNicipaddresslist(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nicipaddresslist"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetNicipaddresslist() {
+	if p.p != nil && p.p["nicipaddresslist"] != nil {
+		delete(p.p, "nicipaddresslist")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetNicipaddresslist() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicipaddresslist"].(map[string]string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetNicnetworklist(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nicnetworklist"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetNicnetworklist() {
+	if p.p != nil && p.p["nicnetworklist"] != nil {
+		delete(p.p, "nicnetworklist")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetNicnetworklist() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nicnetworklist"].(map[string]string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetServiceofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["serviceofferingid"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetServiceofferingid() {
+	if p.p != nil && p.p["serviceofferingid"] != nil {
+		delete(p.p, "serviceofferingid")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetServiceofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["serviceofferingid"].(string)
+	return value, ok
+}
+
+func (p *ImportUnmanagedInstanceParams) SetTemplateid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templateid"] = v
+}
+
+func (p *ImportUnmanagedInstanceParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
+func (p *ImportUnmanagedInstanceParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ImportUnmanagedInstanceParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewImportUnmanagedInstanceParams(clusterid string, name string, serviceofferingid string) *ImportUnmanagedInstanceParams {
+	p := &ImportUnmanagedInstanceParams{}
+	p.p = make(map[string]interface{})
+	p.p["clusterid"] = clusterid
+	p.p["name"] = name
+	p.p["serviceofferingid"] = serviceofferingid
+	return p
+}
+
+// Import unmanaged virtual machine from a given cluster.
+func (s *VirtualMachineService) ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error) {
+	resp, err := s.cs.newRequest("importUnmanagedInstance", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ImportUnmanagedInstanceResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type ImportUnmanagedInstanceResponse struct {
+	Account               string                                         `json:"account"`
+	Affinitygroup         []ImportUnmanagedInstanceResponseAffinitygroup `json:"affinitygroup"`
+	Autoscalevmgroupid    string                                         `json:"autoscalevmgroupid"`
+	Autoscalevmgroupname  string                                         `json:"autoscalevmgroupname"`
+	Backupofferingid      string                                         `json:"backupofferingid"`
+	Backupofferingname    string                                         `json:"backupofferingname"`
+	Bootmode              string                                         `json:"bootmode"`
+	Boottype              string                                         `json:"boottype"`
+	Cpunumber             int                                            `json:"cpunumber"`
+	Cpuspeed              int                                            `json:"cpuspeed"`
+	Cpuused               string                                         `json:"cpuused"`
+	Created               string                                         `json:"created"`
+	Details               map[string]string                              `json:"details"`
+	Diskioread            int64                                          `json:"diskioread"`
+	Diskiowrite           int64                                          `json:"diskiowrite"`
+	Diskkbsread           int64                                          `json:"diskkbsread"`
+	Diskkbswrite          int64                                          `json:"diskkbswrite"`
+	Diskofferingid        string                                         `json:"diskofferingid"`
+	Diskofferingname      string                                         `json:"diskofferingname"`
+	Displayname           string                                         `json:"displayname"`
+	Displayvm             bool                                           `json:"displayvm"`
+	Domain                string                                         `json:"domain"`
+	Domainid              string                                         `json:"domainid"`
+	Forvirtualnetwork     bool                                           `json:"forvirtualnetwork"`
+	Group                 string                                         `json:"group"`
+	Groupid               string                                         `json:"groupid"`
+	Guestosid             string                                         `json:"guestosid"`
+	Haenable              bool                                           `json:"haenable"`
+	Hasannotations        bool                                           `json:"hasannotations"`
+	Hostcontrolstate      string                                         `json:"hostcontrolstate"`
+	Hostid                string                                         `json:"hostid"`
+	Hostname              string                                         `json:"hostname"`
+	Hypervisor            string                                         `json:"hypervisor"`
+	Icon                  interface{}                                    `json:"icon"`
+	Id                    string                                         `json:"id"`
+	Instancename          string                                         `json:"instancename"`
+	Isdynamicallyscalable bool                                           `json:"isdynamicallyscalable"`
+	Isodisplaytext        string                                         `json:"isodisplaytext"`
+	Isoid                 string                                         `json:"isoid"`
+	Isoname               string                                         `json:"isoname"`
+	JobID                 string                                         `json:"jobid"`
+	Jobstatus             int                                            `json:"jobstatus"`
+	Keypairs              string                                         `json:"keypairs"`
+	Lastupdated           string                                         `json:"lastupdated"`
+	Memory                int                                            `json:"memory"`
+	Memoryintfreekbs      int64                                          `json:"memoryintfreekbs"`
+	Memorykbs             int64                                          `json:"memorykbs"`
+	Memorytargetkbs       int64                                          `json:"memorytargetkbs"`
+	Name                  string                                         `json:"name"`
+	Networkkbsread        int64                                          `json:"networkkbsread"`
+	Networkkbswrite       int64                                          `json:"networkkbswrite"`
+	Nic                   []Nic                                          `json:"nic"`
+	Osdisplayname         string                                         `json:"osdisplayname"`
+	Ostypeid              string                                         `json:"ostypeid"`
+	Password              string                                         `json:"password"`
+	Passwordenabled       bool                                           `json:"passwordenabled"`
+	Pooltype              string                                         `json:"pooltype"`
+	Project               string                                         `json:"project"`
+	Projectid             string                                         `json:"projectid"`
+	Publicip              string                                         `json:"publicip"`
+	Publicipid            string                                         `json:"publicipid"`
+	Readonlydetails       string                                         `json:"readonlydetails"`
+	Receivedbytes         int64                                          `json:"receivedbytes"`
+	Rootdeviceid          int64                                          `json:"rootdeviceid"`
+	Rootdevicetype        string                                         `json:"rootdevicetype"`
+	Securitygroup         []ImportUnmanagedInstanceResponseSecuritygroup `json:"securitygroup"`
+	Sentbytes             int64                                          `json:"sentbytes"`
+	Serviceofferingid     string                                         `json:"serviceofferingid"`
+	Serviceofferingname   string                                         `json:"serviceofferingname"`
+	Servicestate          string                                         `json:"servicestate"`
+	State                 string                                         `json:"state"`
+	Tags                  []Tags                                         `json:"tags"`
+	Templatedisplaytext   string                                         `json:"templatedisplaytext"`
+	Templateid            string                                         `json:"templateid"`
+	Templatename          string                                         `json:"templatename"`
+	Templatetype          string                                         `json:"templatetype"`
+	Userdata              string                                         `json:"userdata"`
+	Userdatadetails       string                                         `json:"userdatadetails"`
+	Userdataid            string                                         `json:"userdataid"`
+	Userdataname          string                                         `json:"userdataname"`
+	Userdatapolicy        string                                         `json:"userdatapolicy"`
+	Userid                string                                         `json:"userid"`
+	Username              string                                         `json:"username"`
+	Vgpu                  string                                         `json:"vgpu"`
+	Vnfdetails            map[string]string                              `json:"vnfdetails"`
+	Vnfnics               []string                                       `json:"vnfnics"`
+	Zoneid                string                                         `json:"zoneid"`
+	Zonename              string                                         `json:"zonename"`
+}
+
+type ImportUnmanagedInstanceResponseSecuritygroup struct {
+	Account             string                                             `json:"account"`
+	Description         string                                             `json:"description"`
+	Domain              string                                             `json:"domain"`
+	Domainid            string                                             `json:"domainid"`
+	Egressrule          []ImportUnmanagedInstanceResponseSecuritygroupRule `json:"egressrule"`
+	Id                  string                                             `json:"id"`
+	Ingressrule         []ImportUnmanagedInstanceResponseSecuritygroupRule `json:"ingressrule"`
+	Name                string                                             `json:"name"`
+	Project             string                                             `json:"project"`
+	Projectid           string                                             `json:"projectid"`
+	Tags                []Tags                                             `json:"tags"`
+	Virtualmachinecount int                                                `json:"virtualmachinecount"`
+	Virtualmachineids   []interface{}                                      `json:"virtualmachineids"`
+}
+
+type ImportUnmanagedInstanceResponseSecuritygroupRule struct {
+	Account           string `json:"account"`
+	Cidr              string `json:"cidr"`
+	Endport           int    `json:"endport"`
+	Icmpcode          int    `json:"icmpcode"`
+	Icmptype          int    `json:"icmptype"`
+	Protocol          string `json:"protocol"`
+	Ruleid            string `json:"ruleid"`
+	Securitygroupname string `json:"securitygroupname"`
+	Startport         int    `json:"startport"`
+	Tags              []Tags `json:"tags"`
+}
+
+type ImportUnmanagedInstanceResponseAffinitygroup struct {
+	Account           string   `json:"account"`
+	Description       string   `json:"description"`
+	Domain            string   `json:"domain"`
+	Domainid          string   `json:"domainid"`
+	Id                string   `json:"id"`
+	Name              string   `json:"name"`
+	Project           string   `json:"project"`
+	Projectid         string   `json:"projectid"`
+	Type              string   `json:"type"`
+	VirtualmachineIds []string `json:"virtualmachineIds"`
+}
+
+func (r *ImportUnmanagedInstanceResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias ImportUnmanagedInstanceResponse
 	return json.Unmarshal(b, (*alias)(r))
 }

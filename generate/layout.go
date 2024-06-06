@@ -118,6 +118,9 @@ var layout = apiInfo{
 		"updateVirtualMachine",
 		"listVirtualMachinesUsageHistory",
 		"importVm",
+		"unmanageVirtualMachine",
+		"listUnmanagedInstances",
+		"importUnmanagedInstance",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -334,6 +337,9 @@ var layout = apiInfo{
 		"lockUser",
 		"registerUserKeys",
 		"updateUser",
+		"listUserData",
+		"deleteUserData",
+		"registerUserData",
 	},
 	"LDAPService": {
 		"addLdapConfiguration",
@@ -388,6 +394,9 @@ var layout = apiInfo{
 		"createProjectRolePermission",
 		"updateProjectRolePermission",
 		"deleteProjectRolePermission",
+		"createProjectRole",
+		"updateProjectRole",
+		"deleteProjectRole",
 	},
 	"PoolService": {
 		"createStoragePool",
@@ -465,6 +474,7 @@ var layout = apiInfo{
 		"listRoles",
 		"updateRole",
 		"updateRolePermission",
+		"listProjectRoles",
 	},
 	"ImageStoreService": {
 		"addImageStore",
@@ -733,5 +743,11 @@ var layout = apiInfo{
 	},
 	"ConsoleEndpointService": {
 		"createConsoleEndpoint",
+	},
+	"ObjectStoreService": {
+		"createBucket",
+		"deleteBucket",
+		"updateBucket",
+		"listBuckets",
 	},
 }

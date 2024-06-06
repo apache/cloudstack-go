@@ -139,6 +139,7 @@ type CloudStackClient struct {
 	Network             NetworkServiceIface
 	Nic                 NicServiceIface
 	NiciraNVP           NiciraNVPServiceIface
+	ObjectStore         ObjectStoreServiceIface
 	OutofbandManagement OutofbandManagementServiceIface
 	OvsElement          OvsElementServiceIface
 	Pod                 PodServiceIface
@@ -246,6 +247,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
+	cs.ObjectStore = NewObjectStoreService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
 	cs.OvsElement = NewOvsElementService(cs)
 	cs.Pod = NewPodService(cs)
@@ -326,6 +328,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Network = NewMockNetworkServiceIface(ctrl)
 	cs.Nic = NewMockNicServiceIface(ctrl)
 	cs.NiciraNVP = NewMockNiciraNVPServiceIface(ctrl)
+	cs.ObjectStore = NewMockObjectStoreServiceIface(ctrl)
 	cs.OutofbandManagement = NewMockOutofbandManagementServiceIface(ctrl)
 	cs.OvsElement = NewMockOvsElementServiceIface(ctrl)
 	cs.Pod = NewMockPodServiceIface(ctrl)
@@ -1060,6 +1063,14 @@ type NiciraNVPService struct {
 
 func NewNiciraNVPService(cs *CloudStackClient) NiciraNVPServiceIface {
 	return &NiciraNVPService{cs: cs}
+}
+
+type ObjectStoreService struct {
+	cs *CloudStackClient
+}
+
+func NewObjectStoreService(cs *CloudStackClient) ObjectStoreServiceIface {
+	return &ObjectStoreService{cs: cs}
 }
 
 type OutofbandManagementService struct {

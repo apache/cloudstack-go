@@ -374,4 +374,43 @@ func TestVirtualMachineService(t *testing.T) {
 	}
 	t.Run("ImportVm", testimportVm)
 
+	testunmanageVirtualMachine := func(t *testing.T) {
+		if _, ok := response["unmanageVirtualMachine"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewUnmanageVirtualMachineParams("id")
+		_, err := client.VirtualMachine.UnmanageVirtualMachine(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UnmanageVirtualMachine", testunmanageVirtualMachine)
+
+	testlistUnmanagedInstances := func(t *testing.T) {
+		if _, ok := response["listUnmanagedInstances"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewListUnmanagedInstancesParams("clusterid")
+		_, err := client.VirtualMachine.ListUnmanagedInstances(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListUnmanagedInstances", testlistUnmanagedInstances)
+
+	testimportUnmanagedInstance := func(t *testing.T) {
+		if _, ok := response["importUnmanagedInstance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewImportUnmanagedInstanceParams("clusterid", "name", "serviceofferingid")
+		r, err := client.VirtualMachine.ImportUnmanagedInstance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ImportUnmanagedInstance", testimportUnmanagedInstance)
+
 }

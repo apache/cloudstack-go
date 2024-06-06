@@ -361,6 +361,21 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) GetVirtualMachinesUsageHis
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachinesUsageHistoryID", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).GetVirtualMachinesUsageHistoryID), varargs...)
 }
 
+// ImportUnmanagedInstance mocks base method.
+func (m *MockVirtualMachineServiceIface) ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ImportUnmanagedInstance", p)
+	ret0, _ := ret[0].(*ImportUnmanagedInstanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ImportUnmanagedInstance indicates an expected call of ImportUnmanagedInstance.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) ImportUnmanagedInstance(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportUnmanagedInstance", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ImportUnmanagedInstance), p)
+}
+
 // ImportVm mocks base method.
 func (m *MockVirtualMachineServiceIface) ImportVm(p *ImportVmParams) (*ImportVmResponse, error) {
 	m.ctrl.T.Helper()
@@ -374,6 +389,21 @@ func (m *MockVirtualMachineServiceIface) ImportVm(p *ImportVmParams) (*ImportVmR
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) ImportVm(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportVm", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ImportVm), p)
+}
+
+// ListUnmanagedInstances mocks base method.
+func (m *MockVirtualMachineServiceIface) ListUnmanagedInstances(p *ListUnmanagedInstancesParams) (*ListUnmanagedInstancesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListUnmanagedInstances", p)
+	ret0, _ := ret[0].(*ListUnmanagedInstancesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListUnmanagedInstances indicates an expected call of ListUnmanagedInstances.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) ListUnmanagedInstances(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUnmanagedInstances", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ListUnmanagedInstances), p)
 }
 
 // ListVirtualMachines mocks base method.
@@ -563,6 +593,20 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewGetVMPasswordParams(id 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetVMPasswordParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewGetVMPasswordParams), id)
 }
 
+// NewImportUnmanagedInstanceParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewImportUnmanagedInstanceParams(clusterid, name, serviceofferingid string) *ImportUnmanagedInstanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewImportUnmanagedInstanceParams", clusterid, name, serviceofferingid)
+	ret0, _ := ret[0].(*ImportUnmanagedInstanceParams)
+	return ret0
+}
+
+// NewImportUnmanagedInstanceParams indicates an expected call of NewImportUnmanagedInstanceParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewImportUnmanagedInstanceParams(clusterid, name, serviceofferingid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportUnmanagedInstanceParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewImportUnmanagedInstanceParams), clusterid, name, serviceofferingid)
+}
+
 // NewImportVmParams mocks base method.
 func (m *MockVirtualMachineServiceIface) NewImportVmParams(clusterid, hypervisor, importsource, name, serviceofferingid, zoneid string) *ImportVmParams {
 	m.ctrl.T.Helper()
@@ -575,6 +619,20 @@ func (m *MockVirtualMachineServiceIface) NewImportVmParams(clusterid, hypervisor
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewImportVmParams(clusterid, hypervisor, importsource, name, serviceofferingid, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportVmParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewImportVmParams), clusterid, hypervisor, importsource, name, serviceofferingid, zoneid)
+}
+
+// NewListUnmanagedInstancesParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewListUnmanagedInstancesParams(clusterid string) *ListUnmanagedInstancesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListUnmanagedInstancesParams", clusterid)
+	ret0, _ := ret[0].(*ListUnmanagedInstancesParams)
+	return ret0
+}
+
+// NewListUnmanagedInstancesParams indicates an expected call of NewListUnmanagedInstancesParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewListUnmanagedInstancesParams(clusterid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListUnmanagedInstancesParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewListUnmanagedInstancesParams), clusterid)
 }
 
 // NewListVirtualMachinesMetricsParams mocks base method.
@@ -759,6 +817,20 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewStopVirtualMachineParam
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewStopVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewStopVirtualMachineParams), id)
 }
 
+// NewUnmanageVirtualMachineParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewUnmanageVirtualMachineParams(id string) *UnmanageVirtualMachineParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUnmanageVirtualMachineParams", id)
+	ret0, _ := ret[0].(*UnmanageVirtualMachineParams)
+	return ret0
+}
+
+// NewUnmanageVirtualMachineParams indicates an expected call of NewUnmanageVirtualMachineParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewUnmanageVirtualMachineParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUnmanageVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewUnmanageVirtualMachineParams), id)
+}
+
 // NewUpdateDefaultNicForVirtualMachineParams mocks base method.
 func (m *MockVirtualMachineServiceIface) NewUpdateDefaultNicForVirtualMachineParams(nicid, virtualmachineid string) *UpdateDefaultNicForVirtualMachineParams {
 	m.ctrl.T.Helper()
@@ -905,6 +977,21 @@ func (m *MockVirtualMachineServiceIface) StopVirtualMachine(p *StopVirtualMachin
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) StopVirtualMachine(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StopVirtualMachine", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).StopVirtualMachine), p)
+}
+
+// UnmanageVirtualMachine mocks base method.
+func (m *MockVirtualMachineServiceIface) UnmanageVirtualMachine(p *UnmanageVirtualMachineParams) (*UnmanageVirtualMachineResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UnmanageVirtualMachine", p)
+	ret0, _ := ret[0].(*UnmanageVirtualMachineResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UnmanageVirtualMachine indicates an expected call of UnmanageVirtualMachine.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) UnmanageVirtualMachine(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UnmanageVirtualMachine", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).UnmanageVirtualMachine), p)
 }
 
 // UpdateDefaultNicForVirtualMachine mocks base method.
