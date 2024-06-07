@@ -122,4 +122,19 @@ func TestSecurityGroupService(t *testing.T) {
 	}
 	t.Run("RevokeSecurityGroupIngress", testrevokeSecurityGroupIngress)
 
+	testupdateSecurityGroup := func(t *testing.T) {
+		if _, ok := response["updateSecurityGroup"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.SecurityGroup.NewUpdateSecurityGroupParams("id")
+		r, err := client.SecurityGroup.UpdateSecurityGroup(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateSecurityGroup", testupdateSecurityGroup)
+
 }

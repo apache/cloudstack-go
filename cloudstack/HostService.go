@@ -79,6 +79,8 @@ type HostServiceIface interface {
 	NewUpdateHostParams(id string) *UpdateHostParams
 	UpdateHostPassword(p *UpdateHostPasswordParams) (*UpdateHostPasswordResponse, error)
 	NewUpdateHostPasswordParams(password string, username string) *UpdateHostPasswordParams
+	MigrateSecondaryStorageData(p *MigrateSecondaryStorageDataParams) (*MigrateSecondaryStorageDataResponse, error)
+	NewMigrateSecondaryStorageDataParams(destpools []string, srcpool string) *MigrateSecondaryStorageDataParams
 }
 
 type AddBaremetalHostParams struct {
@@ -4752,4 +4754,142 @@ func (r *UpdateHostPasswordResponse) UnmarshalJSON(b []byte) error {
 
 	type alias UpdateHostPasswordResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type MigrateSecondaryStorageDataParams struct {
+	p map[string]interface{}
+}
+
+func (p *MigrateSecondaryStorageDataParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["destpools"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("destpools", vv)
+	}
+	if v, found := p.p["migrationtype"]; found {
+		u.Set("migrationtype", v.(string))
+	}
+	if v, found := p.p["srcpool"]; found {
+		u.Set("srcpool", v.(string))
+	}
+	return u
+}
+
+func (p *MigrateSecondaryStorageDataParams) SetDestpools(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["destpools"] = v
+}
+
+func (p *MigrateSecondaryStorageDataParams) ResetDestpools() {
+	if p.p != nil && p.p["destpools"] != nil {
+		delete(p.p, "destpools")
+	}
+}
+
+func (p *MigrateSecondaryStorageDataParams) GetDestpools() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["destpools"].([]string)
+	return value, ok
+}
+
+func (p *MigrateSecondaryStorageDataParams) SetMigrationtype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["migrationtype"] = v
+}
+
+func (p *MigrateSecondaryStorageDataParams) ResetMigrationtype() {
+	if p.p != nil && p.p["migrationtype"] != nil {
+		delete(p.p, "migrationtype")
+	}
+}
+
+func (p *MigrateSecondaryStorageDataParams) GetMigrationtype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["migrationtype"].(string)
+	return value, ok
+}
+
+func (p *MigrateSecondaryStorageDataParams) SetSrcpool(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["srcpool"] = v
+}
+
+func (p *MigrateSecondaryStorageDataParams) ResetSrcpool() {
+	if p.p != nil && p.p["srcpool"] != nil {
+		delete(p.p, "srcpool")
+	}
+}
+
+func (p *MigrateSecondaryStorageDataParams) GetSrcpool() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["srcpool"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new MigrateSecondaryStorageDataParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewMigrateSecondaryStorageDataParams(destpools []string, srcpool string) *MigrateSecondaryStorageDataParams {
+	p := &MigrateSecondaryStorageDataParams{}
+	p.p = make(map[string]interface{})
+	p.p["destpools"] = destpools
+	p.p["srcpool"] = srcpool
+	return p
+}
+
+// migrates data objects from one secondary storage to destination image store(s)
+func (s *HostService) MigrateSecondaryStorageData(p *MigrateSecondaryStorageDataParams) (*MigrateSecondaryStorageDataResponse, error) {
+	resp, err := s.cs.newRequest("migrateSecondaryStorageData", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MigrateSecondaryStorageDataResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type MigrateSecondaryStorageDataResponse struct {
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Message       string `json:"message"`
+	Migrationtype string `json:"migrationtype"`
+	Success       bool   `json:"success"`
 }

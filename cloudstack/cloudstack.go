@@ -139,6 +139,7 @@ type CloudStackClient struct {
 	Network             NetworkServiceIface
 	Nic                 NicServiceIface
 	NiciraNVP           NiciraNVPServiceIface
+	Oauth               OauthServiceIface
 	ObjectStore         ObjectStoreServiceIface
 	OutofbandManagement OutofbandManagementServiceIface
 	OvsElement          OvsElementServiceIface
@@ -148,6 +149,7 @@ type CloudStackClient struct {
 	Project             ProjectServiceIface
 	Quota               QuotaServiceIface
 	Region              RegionServiceIface
+	Registration        RegistrationServiceIface
 	Resourcemetadata    ResourcemetadataServiceIface
 	Resourcetags        ResourcetagsServiceIface
 	Role                RoleServiceIface
@@ -155,6 +157,7 @@ type CloudStackClient struct {
 	SSH                 SSHServiceIface
 	SecurityGroup       SecurityGroupServiceIface
 	ServiceOffering     ServiceOfferingServiceIface
+	Shutdown            ShutdownServiceIface
 	Snapshot            SnapshotServiceIface
 	StoragePool         StoragePoolServiceIface
 	StratosphereSSP     StratosphereSSPServiceIface
@@ -247,6 +250,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
+	cs.Oauth = NewOauthService(cs)
 	cs.ObjectStore = NewObjectStoreService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
 	cs.OvsElement = NewOvsElementService(cs)
@@ -256,6 +260,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Project = NewProjectService(cs)
 	cs.Quota = NewQuotaService(cs)
 	cs.Region = NewRegionService(cs)
+	cs.Registration = NewRegistrationService(cs)
 	cs.Resourcemetadata = NewResourcemetadataService(cs)
 	cs.Resourcetags = NewResourcetagsService(cs)
 	cs.Role = NewRoleService(cs)
@@ -263,6 +268,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.SSH = NewSSHService(cs)
 	cs.SecurityGroup = NewSecurityGroupService(cs)
 	cs.ServiceOffering = NewServiceOfferingService(cs)
+	cs.Shutdown = NewShutdownService(cs)
 	cs.Snapshot = NewSnapshotService(cs)
 	cs.StoragePool = NewStoragePoolService(cs)
 	cs.StratosphereSSP = NewStratosphereSSPService(cs)
@@ -328,6 +334,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Network = NewMockNetworkServiceIface(ctrl)
 	cs.Nic = NewMockNicServiceIface(ctrl)
 	cs.NiciraNVP = NewMockNiciraNVPServiceIface(ctrl)
+	cs.Oauth = NewMockOauthServiceIface(ctrl)
 	cs.ObjectStore = NewMockObjectStoreServiceIface(ctrl)
 	cs.OutofbandManagement = NewMockOutofbandManagementServiceIface(ctrl)
 	cs.OvsElement = NewMockOvsElementServiceIface(ctrl)
@@ -337,6 +344,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Project = NewMockProjectServiceIface(ctrl)
 	cs.Quota = NewMockQuotaServiceIface(ctrl)
 	cs.Region = NewMockRegionServiceIface(ctrl)
+	cs.Registration = NewMockRegistrationServiceIface(ctrl)
 	cs.Resourcemetadata = NewMockResourcemetadataServiceIface(ctrl)
 	cs.Resourcetags = NewMockResourcetagsServiceIface(ctrl)
 	cs.Role = NewMockRoleServiceIface(ctrl)
@@ -344,6 +352,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.SSH = NewMockSSHServiceIface(ctrl)
 	cs.SecurityGroup = NewMockSecurityGroupServiceIface(ctrl)
 	cs.ServiceOffering = NewMockServiceOfferingServiceIface(ctrl)
+	cs.Shutdown = NewMockShutdownServiceIface(ctrl)
 	cs.Snapshot = NewMockSnapshotServiceIface(ctrl)
 	cs.StoragePool = NewMockStoragePoolServiceIface(ctrl)
 	cs.StratosphereSSP = NewMockStratosphereSSPServiceIface(ctrl)
@@ -1065,6 +1074,14 @@ func NewNiciraNVPService(cs *CloudStackClient) NiciraNVPServiceIface {
 	return &NiciraNVPService{cs: cs}
 }
 
+type OauthService struct {
+	cs *CloudStackClient
+}
+
+func NewOauthService(cs *CloudStackClient) OauthServiceIface {
+	return &OauthService{cs: cs}
+}
+
 type ObjectStoreService struct {
 	cs *CloudStackClient
 }
@@ -1137,6 +1154,14 @@ func NewRegionService(cs *CloudStackClient) RegionServiceIface {
 	return &RegionService{cs: cs}
 }
 
+type RegistrationService struct {
+	cs *CloudStackClient
+}
+
+func NewRegistrationService(cs *CloudStackClient) RegistrationServiceIface {
+	return &RegistrationService{cs: cs}
+}
+
 type ResourcemetadataService struct {
 	cs *CloudStackClient
 }
@@ -1191,6 +1216,14 @@ type ServiceOfferingService struct {
 
 func NewServiceOfferingService(cs *CloudStackClient) ServiceOfferingServiceIface {
 	return &ServiceOfferingService{cs: cs}
+}
+
+type ShutdownService struct {
+	cs *CloudStackClient
+}
+
+func NewShutdownService(cs *CloudStackClient) ShutdownServiceIface {
+	return &ShutdownService{cs: cs}
 }
 
 type SnapshotService struct {

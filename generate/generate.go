@@ -89,6 +89,9 @@ var mapRequireList = map[string]map[string]bool{
 		"nicipaddresslist":     true,
 		"datadiskofferinglist": true,
 	},
+	"registerOauthProvider": map[string]bool{
+		"details": true,
+	},
 }
 
 // nestedResponse is a prefilled map with the list of endpoints
@@ -108,6 +111,9 @@ var nestedResponse = map[string]string{
 	"createProjectRole":          "projectrole",
 	"updateProjectRole":          "projectrole",
 	"registerUserData":           "userdata",
+	"updateSecurityGroup":        "securitygroup",
+	"updateOauthProvider":        "oauthprovider",
+	"readyForShutdown":           "readyforshutdown",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -1933,6 +1939,12 @@ func (s *service) generateResponseType(a *API) {
 			pn("    Name string `json:\"name\"`")
 			pn("    Params string `json:\"params\"`")
 			pn("    Userdata string `json:\"userdata\"`")
+		case "listObjectStoragePools":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "objectstore")
+		case "listStoragePoolObjects":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

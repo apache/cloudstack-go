@@ -323,4 +323,16 @@ func TestHostService(t *testing.T) {
 	}
 	t.Run("UpdateHostPassword", testupdateHostPassword)
 
+	testmigrateSecondaryStorageData := func(t *testing.T) {
+		if _, ok := response["migrateSecondaryStorageData"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewMigrateSecondaryStorageDataParams([]string{}, "srcpool")
+		_, err := client.Host.MigrateSecondaryStorageData(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MigrateSecondaryStorageData", testmigrateSecondaryStorageData)
+
 }

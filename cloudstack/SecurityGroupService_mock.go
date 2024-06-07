@@ -288,6 +288,20 @@ func (mr *MockSecurityGroupServiceIfaceMockRecorder) NewRevokeSecurityGroupIngre
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRevokeSecurityGroupIngressParams", reflect.TypeOf((*MockSecurityGroupServiceIface)(nil).NewRevokeSecurityGroupIngressParams), id)
 }
 
+// NewUpdateSecurityGroupParams mocks base method.
+func (m *MockSecurityGroupServiceIface) NewUpdateSecurityGroupParams(id string) *UpdateSecurityGroupParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateSecurityGroupParams", id)
+	ret0, _ := ret[0].(*UpdateSecurityGroupParams)
+	return ret0
+}
+
+// NewUpdateSecurityGroupParams indicates an expected call of NewUpdateSecurityGroupParams.
+func (mr *MockSecurityGroupServiceIfaceMockRecorder) NewUpdateSecurityGroupParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateSecurityGroupParams", reflect.TypeOf((*MockSecurityGroupServiceIface)(nil).NewUpdateSecurityGroupParams), id)
+}
+
 // RevokeSecurityGroupEgress mocks base method.
 func (m *MockSecurityGroupServiceIface) RevokeSecurityGroupEgress(p *RevokeSecurityGroupEgressParams) (*RevokeSecurityGroupEgressResponse, error) {
 	m.ctrl.T.Helper()
@@ -316,4 +330,19 @@ func (m *MockSecurityGroupServiceIface) RevokeSecurityGroupIngress(p *RevokeSecu
 func (mr *MockSecurityGroupServiceIfaceMockRecorder) RevokeSecurityGroupIngress(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevokeSecurityGroupIngress", reflect.TypeOf((*MockSecurityGroupServiceIface)(nil).RevokeSecurityGroupIngress), p)
+}
+
+// UpdateSecurityGroup mocks base method.
+func (m *MockSecurityGroupServiceIface) UpdateSecurityGroup(p *UpdateSecurityGroupParams) (*UpdateSecurityGroupResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateSecurityGroup", p)
+	ret0, _ := ret[0].(*UpdateSecurityGroupResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSecurityGroup indicates an expected call of UpdateSecurityGroup.
+func (mr *MockSecurityGroupServiceIfaceMockRecorder) UpdateSecurityGroup(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSecurityGroup", reflect.TypeOf((*MockSecurityGroupServiceIface)(nil).UpdateSecurityGroup), p)
 }

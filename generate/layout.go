@@ -211,6 +211,7 @@ var layout = apiInfo{
 		"releaseHostReservation",
 		"updateHost",
 		"updateHostPassword",
+		"migrateSecondaryStorageData",
 	},
 	"VolumeService": {
 		"attachVolume",
@@ -656,6 +657,8 @@ var layout = apiInfo{
 		"cancelStorageMaintenance",
 		"enableStorageMaintenance",
 		"listStorageProviders",
+		"listObjectStoragePools",
+		"listStoragePoolObjects",
 	},
 	"PortableIPService": {
 		"createPortableIpRange",
@@ -749,5 +752,16 @@ var layout = apiInfo{
 		"deleteBucket",
 		"updateBucket",
 		"listBuckets",
+	},
+	"OauthService": {
+		"listOauthProvider",
+		"updateOauthProvider",
+		"deleteOauthProvider",
+	},
+	"RegistrationService": {
+		"registerOauthProvider",
+	},
+	"ShutdownService": {
+		"readyForShutdown",
 	},
 }

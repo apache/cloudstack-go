@@ -82,6 +82,120 @@ func (mr *MockStoragePoolServiceIfaceMockRecorder) EnableStorageMaintenance(p in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EnableStorageMaintenance", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).EnableStorageMaintenance), p)
 }
 
+// GetObjectStoragePoolByID mocks base method.
+func (m *MockStoragePoolServiceIface) GetObjectStoragePoolByID(id string, opts ...OptionFunc) (*ObjectStoragePool, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetObjectStoragePoolByID", varargs...)
+	ret0, _ := ret[0].(*ObjectStoragePool)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetObjectStoragePoolByID indicates an expected call of GetObjectStoragePoolByID.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) GetObjectStoragePoolByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetObjectStoragePoolByID", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).GetObjectStoragePoolByID), varargs...)
+}
+
+// GetObjectStoragePoolByName mocks base method.
+func (m *MockStoragePoolServiceIface) GetObjectStoragePoolByName(name string, opts ...OptionFunc) (*ObjectStoragePool, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetObjectStoragePoolByName", varargs...)
+	ret0, _ := ret[0].(*ObjectStoragePool)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetObjectStoragePoolByName indicates an expected call of GetObjectStoragePoolByName.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) GetObjectStoragePoolByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetObjectStoragePoolByName", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).GetObjectStoragePoolByName), varargs...)
+}
+
+// GetObjectStoragePoolID mocks base method.
+func (m *MockStoragePoolServiceIface) GetObjectStoragePoolID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetObjectStoragePoolID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetObjectStoragePoolID indicates an expected call of GetObjectStoragePoolID.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) GetObjectStoragePoolID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetObjectStoragePoolID", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).GetObjectStoragePoolID), varargs...)
+}
+
+// GetStoragePoolObjectByID mocks base method.
+func (m *MockStoragePoolServiceIface) GetStoragePoolObjectByID(id string, opts ...OptionFunc) (*StoragePoolObject, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetStoragePoolObjectByID", varargs...)
+	ret0, _ := ret[0].(*StoragePoolObject)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetStoragePoolObjectByID indicates an expected call of GetStoragePoolObjectByID.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) GetStoragePoolObjectByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetStoragePoolObjectByID", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).GetStoragePoolObjectByID), varargs...)
+}
+
+// ListObjectStoragePools mocks base method.
+func (m *MockStoragePoolServiceIface) ListObjectStoragePools(p *ListObjectStoragePoolsParams) (*ListObjectStoragePoolsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListObjectStoragePools", p)
+	ret0, _ := ret[0].(*ListObjectStoragePoolsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListObjectStoragePools indicates an expected call of ListObjectStoragePools.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) ListObjectStoragePools(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListObjectStoragePools", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).ListObjectStoragePools), p)
+}
+
+// ListStoragePoolObjects mocks base method.
+func (m *MockStoragePoolServiceIface) ListStoragePoolObjects(p *ListStoragePoolObjectsParams) (*ListStoragePoolObjectsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListStoragePoolObjects", p)
+	ret0, _ := ret[0].(*ListStoragePoolObjectsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListStoragePoolObjects indicates an expected call of ListStoragePoolObjects.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) ListStoragePoolObjects(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListStoragePoolObjects", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).ListStoragePoolObjects), p)
+}
+
 // ListStorageProviders mocks base method.
 func (m *MockStoragePoolServiceIface) ListStorageProviders(p *ListStorageProvidersParams) (*ListStorageProvidersResponse, error) {
 	m.ctrl.T.Helper()
@@ -123,6 +237,34 @@ func (m *MockStoragePoolServiceIface) NewEnableStorageMaintenanceParams(id strin
 func (mr *MockStoragePoolServiceIfaceMockRecorder) NewEnableStorageMaintenanceParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewEnableStorageMaintenanceParams", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).NewEnableStorageMaintenanceParams), id)
+}
+
+// NewListObjectStoragePoolsParams mocks base method.
+func (m *MockStoragePoolServiceIface) NewListObjectStoragePoolsParams() *ListObjectStoragePoolsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListObjectStoragePoolsParams")
+	ret0, _ := ret[0].(*ListObjectStoragePoolsParams)
+	return ret0
+}
+
+// NewListObjectStoragePoolsParams indicates an expected call of NewListObjectStoragePoolsParams.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) NewListObjectStoragePoolsParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListObjectStoragePoolsParams", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).NewListObjectStoragePoolsParams))
+}
+
+// NewListStoragePoolObjectsParams mocks base method.
+func (m *MockStoragePoolServiceIface) NewListStoragePoolObjectsParams(id string) *ListStoragePoolObjectsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListStoragePoolObjectsParams", id)
+	ret0, _ := ret[0].(*ListStoragePoolObjectsParams)
+	return ret0
+}
+
+// NewListStoragePoolObjectsParams indicates an expected call of NewListStoragePoolObjectsParams.
+func (mr *MockStoragePoolServiceIfaceMockRecorder) NewListStoragePoolObjectsParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListStoragePoolObjectsParams", reflect.TypeOf((*MockStoragePoolServiceIface)(nil).NewListStoragePoolObjectsParams), id)
 }
 
 // NewListStorageProvidersParams mocks base method.

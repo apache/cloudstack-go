@@ -439,6 +439,21 @@ func (mr *MockHostServiceIfaceMockRecorder) ListHostsMetrics(p interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHostsMetrics", reflect.TypeOf((*MockHostServiceIface)(nil).ListHostsMetrics), p)
 }
 
+// MigrateSecondaryStorageData mocks base method.
+func (m *MockHostServiceIface) MigrateSecondaryStorageData(p *MigrateSecondaryStorageDataParams) (*MigrateSecondaryStorageDataResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MigrateSecondaryStorageData", p)
+	ret0, _ := ret[0].(*MigrateSecondaryStorageDataResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// MigrateSecondaryStorageData indicates an expected call of MigrateSecondaryStorageData.
+func (mr *MockHostServiceIfaceMockRecorder) MigrateSecondaryStorageData(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MigrateSecondaryStorageData", reflect.TypeOf((*MockHostServiceIface)(nil).MigrateSecondaryStorageData), p)
+}
+
 // NewAddBaremetalHostParams mocks base method.
 func (m *MockHostServiceIface) NewAddBaremetalHostParams(hypervisor, podid, url, zoneid string) *AddBaremetalHostParams {
 	m.ctrl.T.Helper()
@@ -661,6 +676,20 @@ func (m *MockHostServiceIface) NewListHostsParams() *ListHostsParams {
 func (mr *MockHostServiceIfaceMockRecorder) NewListHostsParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListHostsParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListHostsParams))
+}
+
+// NewMigrateSecondaryStorageDataParams mocks base method.
+func (m *MockHostServiceIface) NewMigrateSecondaryStorageDataParams(destpools []string, srcpool string) *MigrateSecondaryStorageDataParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewMigrateSecondaryStorageDataParams", destpools, srcpool)
+	ret0, _ := ret[0].(*MigrateSecondaryStorageDataParams)
+	return ret0
+}
+
+// NewMigrateSecondaryStorageDataParams indicates an expected call of NewMigrateSecondaryStorageDataParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewMigrateSecondaryStorageDataParams(destpools, srcpool interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateSecondaryStorageDataParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewMigrateSecondaryStorageDataParams), destpools, srcpool)
 }
 
 // NewPrepareHostForMaintenanceParams mocks base method.
