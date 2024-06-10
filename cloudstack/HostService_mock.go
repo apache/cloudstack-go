@@ -112,6 +112,21 @@ func (mr *MockHostServiceIfaceMockRecorder) AddSecondaryStorage(p interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddSecondaryStorage", reflect.TypeOf((*MockHostServiceIface)(nil).AddSecondaryStorage), p)
 }
 
+// CancelHostAsDegraded mocks base method.
+func (m *MockHostServiceIface) CancelHostAsDegraded(p *CancelHostAsDegradedParams) (*CancelHostAsDegradedResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelHostAsDegraded", p)
+	ret0, _ := ret[0].(*CancelHostAsDegradedResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelHostAsDegraded indicates an expected call of CancelHostAsDegraded.
+func (mr *MockHostServiceIfaceMockRecorder) CancelHostAsDegraded(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelHostAsDegraded", reflect.TypeOf((*MockHostServiceIface)(nil).CancelHostAsDegraded), p)
+}
+
 // CancelHostMaintenance mocks base method.
 func (m *MockHostServiceIface) CancelHostMaintenance(p *CancelHostMaintenanceParams) (*CancelHostMaintenanceResponse, error) {
 	m.ctrl.T.Helper()
@@ -140,6 +155,36 @@ func (m *MockHostServiceIface) ConfigureHAForHost(p *ConfigureHAForHostParams) (
 func (mr *MockHostServiceIfaceMockRecorder) ConfigureHAForHost(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ConfigureHAForHost", reflect.TypeOf((*MockHostServiceIface)(nil).ConfigureHAForHost), p)
+}
+
+// CreateSecondaryStorageSelector mocks base method.
+func (m *MockHostServiceIface) CreateSecondaryStorageSelector(p *CreateSecondaryStorageSelectorParams) (*CreateSecondaryStorageSelectorResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateSecondaryStorageSelector", p)
+	ret0, _ := ret[0].(*CreateSecondaryStorageSelectorResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateSecondaryStorageSelector indicates an expected call of CreateSecondaryStorageSelector.
+func (mr *MockHostServiceIfaceMockRecorder) CreateSecondaryStorageSelector(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSecondaryStorageSelector", reflect.TypeOf((*MockHostServiceIface)(nil).CreateSecondaryStorageSelector), p)
+}
+
+// DeclareHostAsDegraded mocks base method.
+func (m *MockHostServiceIface) DeclareHostAsDegraded(p *DeclareHostAsDegradedParams) (*DeclareHostAsDegradedResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeclareHostAsDegraded", p)
+	ret0, _ := ret[0].(*DeclareHostAsDegradedResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeclareHostAsDegraded indicates an expected call of DeclareHostAsDegraded.
+func (mr *MockHostServiceIfaceMockRecorder) DeclareHostAsDegraded(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeclareHostAsDegraded", reflect.TypeOf((*MockHostServiceIface)(nil).DeclareHostAsDegraded), p)
 }
 
 // DedicateHost mocks base method.
@@ -379,6 +424,27 @@ func (mr *MockHostServiceIfaceMockRecorder) GetHostsMetricID(name interface{}, o
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHostsMetricID", reflect.TypeOf((*MockHostServiceIface)(nil).GetHostsMetricID), varargs...)
 }
 
+// GetSecondaryStorageSelectorID mocks base method.
+func (m *MockHostServiceIface) GetSecondaryStorageSelectorID(keyword, zoneid string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{keyword, zoneid}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetSecondaryStorageSelectorID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetSecondaryStorageSelectorID indicates an expected call of GetSecondaryStorageSelectorID.
+func (mr *MockHostServiceIfaceMockRecorder) GetSecondaryStorageSelectorID(keyword, zoneid interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{keyword, zoneid}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSecondaryStorageSelectorID", reflect.TypeOf((*MockHostServiceIface)(nil).GetSecondaryStorageSelectorID), varargs...)
+}
+
 // ListDedicatedHosts mocks base method.
 func (m *MockHostServiceIface) ListDedicatedHosts(p *ListDedicatedHostsParams) (*ListDedicatedHostsResponse, error) {
 	m.ctrl.T.Helper()
@@ -392,6 +458,36 @@ func (m *MockHostServiceIface) ListDedicatedHosts(p *ListDedicatedHostsParams) (
 func (mr *MockHostServiceIfaceMockRecorder) ListDedicatedHosts(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDedicatedHosts", reflect.TypeOf((*MockHostServiceIface)(nil).ListDedicatedHosts), p)
+}
+
+// ListHostHAProviders mocks base method.
+func (m *MockHostServiceIface) ListHostHAProviders(p *ListHostHAProvidersParams) (*ListHostHAProvidersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListHostHAProviders", p)
+	ret0, _ := ret[0].(*ListHostHAProvidersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHostHAProviders indicates an expected call of ListHostHAProviders.
+func (mr *MockHostServiceIfaceMockRecorder) ListHostHAProviders(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHostHAProviders", reflect.TypeOf((*MockHostServiceIface)(nil).ListHostHAProviders), p)
+}
+
+// ListHostHAResources mocks base method.
+func (m *MockHostServiceIface) ListHostHAResources(p *ListHostHAResourcesParams) (*ListHostHAResourcesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListHostHAResources", p)
+	ret0, _ := ret[0].(*ListHostHAResourcesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListHostHAResources indicates an expected call of ListHostHAResources.
+func (mr *MockHostServiceIfaceMockRecorder) ListHostHAResources(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHostHAResources", reflect.TypeOf((*MockHostServiceIface)(nil).ListHostHAResources), p)
 }
 
 // ListHostTags mocks base method.
@@ -437,6 +533,21 @@ func (m *MockHostServiceIface) ListHostsMetrics(p *ListHostsMetricsParams) (*Lis
 func (mr *MockHostServiceIfaceMockRecorder) ListHostsMetrics(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListHostsMetrics", reflect.TypeOf((*MockHostServiceIface)(nil).ListHostsMetrics), p)
+}
+
+// ListSecondaryStorageSelectors mocks base method.
+func (m *MockHostServiceIface) ListSecondaryStorageSelectors(p *ListSecondaryStorageSelectorsParams) (*ListSecondaryStorageSelectorsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListSecondaryStorageSelectors", p)
+	ret0, _ := ret[0].(*ListSecondaryStorageSelectorsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListSecondaryStorageSelectors indicates an expected call of ListSecondaryStorageSelectors.
+func (mr *MockHostServiceIfaceMockRecorder) ListSecondaryStorageSelectors(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListSecondaryStorageSelectors", reflect.TypeOf((*MockHostServiceIface)(nil).ListSecondaryStorageSelectors), p)
 }
 
 // MigrateSecondaryStorageData mocks base method.
@@ -510,6 +621,20 @@ func (mr *MockHostServiceIfaceMockRecorder) NewAddSecondaryStorageParams(url int
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddSecondaryStorageParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewAddSecondaryStorageParams), url)
 }
 
+// NewCancelHostAsDegradedParams mocks base method.
+func (m *MockHostServiceIface) NewCancelHostAsDegradedParams(id string) *CancelHostAsDegradedParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCancelHostAsDegradedParams", id)
+	ret0, _ := ret[0].(*CancelHostAsDegradedParams)
+	return ret0
+}
+
+// NewCancelHostAsDegradedParams indicates an expected call of NewCancelHostAsDegradedParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewCancelHostAsDegradedParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCancelHostAsDegradedParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewCancelHostAsDegradedParams), id)
+}
+
 // NewCancelHostMaintenanceParams mocks base method.
 func (m *MockHostServiceIface) NewCancelHostMaintenanceParams(id string) *CancelHostMaintenanceParams {
 	m.ctrl.T.Helper()
@@ -536,6 +661,34 @@ func (m *MockHostServiceIface) NewConfigureHAForHostParams(hostid, provider stri
 func (mr *MockHostServiceIfaceMockRecorder) NewConfigureHAForHostParams(hostid, provider interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewConfigureHAForHostParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewConfigureHAForHostParams), hostid, provider)
+}
+
+// NewCreateSecondaryStorageSelectorParams mocks base method.
+func (m *MockHostServiceIface) NewCreateSecondaryStorageSelectorParams(description, heuristicrule, name, hostType, zoneid string) *CreateSecondaryStorageSelectorParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCreateSecondaryStorageSelectorParams", description, heuristicrule, name, hostType, zoneid)
+	ret0, _ := ret[0].(*CreateSecondaryStorageSelectorParams)
+	return ret0
+}
+
+// NewCreateSecondaryStorageSelectorParams indicates an expected call of NewCreateSecondaryStorageSelectorParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewCreateSecondaryStorageSelectorParams(description, heuristicrule, name, hostType, zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateSecondaryStorageSelectorParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewCreateSecondaryStorageSelectorParams), description, heuristicrule, name, hostType, zoneid)
+}
+
+// NewDeclareHostAsDegradedParams mocks base method.
+func (m *MockHostServiceIface) NewDeclareHostAsDegradedParams(id string) *DeclareHostAsDegradedParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeclareHostAsDegradedParams", id)
+	ret0, _ := ret[0].(*DeclareHostAsDegradedParams)
+	return ret0
+}
+
+// NewDeclareHostAsDegradedParams indicates an expected call of NewDeclareHostAsDegradedParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewDeclareHostAsDegradedParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeclareHostAsDegradedParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewDeclareHostAsDegradedParams), id)
 }
 
 // NewDedicateHostParams mocks base method.
@@ -636,6 +789,34 @@ func (mr *MockHostServiceIfaceMockRecorder) NewListDedicatedHostsParams() *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDedicatedHostsParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListDedicatedHostsParams))
 }
 
+// NewListHostHAProvidersParams mocks base method.
+func (m *MockHostServiceIface) NewListHostHAProvidersParams(hypervisor string) *ListHostHAProvidersParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListHostHAProvidersParams", hypervisor)
+	ret0, _ := ret[0].(*ListHostHAProvidersParams)
+	return ret0
+}
+
+// NewListHostHAProvidersParams indicates an expected call of NewListHostHAProvidersParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewListHostHAProvidersParams(hypervisor interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListHostHAProvidersParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListHostHAProvidersParams), hypervisor)
+}
+
+// NewListHostHAResourcesParams mocks base method.
+func (m *MockHostServiceIface) NewListHostHAResourcesParams() *ListHostHAResourcesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListHostHAResourcesParams")
+	ret0, _ := ret[0].(*ListHostHAResourcesParams)
+	return ret0
+}
+
+// NewListHostHAResourcesParams indicates an expected call of NewListHostHAResourcesParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewListHostHAResourcesParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListHostHAResourcesParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListHostHAResourcesParams))
+}
+
 // NewListHostTagsParams mocks base method.
 func (m *MockHostServiceIface) NewListHostTagsParams() *ListHostTagsParams {
 	m.ctrl.T.Helper()
@@ -676,6 +857,20 @@ func (m *MockHostServiceIface) NewListHostsParams() *ListHostsParams {
 func (mr *MockHostServiceIfaceMockRecorder) NewListHostsParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListHostsParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListHostsParams))
+}
+
+// NewListSecondaryStorageSelectorsParams mocks base method.
+func (m *MockHostServiceIface) NewListSecondaryStorageSelectorsParams(zoneid string) *ListSecondaryStorageSelectorsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListSecondaryStorageSelectorsParams", zoneid)
+	ret0, _ := ret[0].(*ListSecondaryStorageSelectorsParams)
+	return ret0
+}
+
+// NewListSecondaryStorageSelectorsParams indicates an expected call of NewListSecondaryStorageSelectorsParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewListSecondaryStorageSelectorsParams(zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListSecondaryStorageSelectorsParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewListSecondaryStorageSelectorsParams), zoneid)
 }
 
 // NewMigrateSecondaryStorageDataParams mocks base method.
@@ -746,6 +941,20 @@ func (m *MockHostServiceIface) NewReleaseHostReservationParams(id string) *Relea
 func (mr *MockHostServiceIfaceMockRecorder) NewReleaseHostReservationParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleaseHostReservationParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewReleaseHostReservationParams), id)
+}
+
+// NewRemoveSecondaryStorageSelectorParams mocks base method.
+func (m *MockHostServiceIface) NewRemoveSecondaryStorageSelectorParams(id string) *RemoveSecondaryStorageSelectorParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveSecondaryStorageSelectorParams", id)
+	ret0, _ := ret[0].(*RemoveSecondaryStorageSelectorParams)
+	return ret0
+}
+
+// NewRemoveSecondaryStorageSelectorParams indicates an expected call of NewRemoveSecondaryStorageSelectorParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewRemoveSecondaryStorageSelectorParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveSecondaryStorageSelectorParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewRemoveSecondaryStorageSelectorParams), id)
 }
 
 // NewUpdateHostParams mocks base method.
@@ -834,6 +1043,21 @@ func (m *MockHostServiceIface) ReleaseHostReservation(p *ReleaseHostReservationP
 func (mr *MockHostServiceIfaceMockRecorder) ReleaseHostReservation(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseHostReservation", reflect.TypeOf((*MockHostServiceIface)(nil).ReleaseHostReservation), p)
+}
+
+// RemoveSecondaryStorageSelector mocks base method.
+func (m *MockHostServiceIface) RemoveSecondaryStorageSelector(p *RemoveSecondaryStorageSelectorParams) (*RemoveSecondaryStorageSelectorResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveSecondaryStorageSelector", p)
+	ret0, _ := ret[0].(*RemoveSecondaryStorageSelectorResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveSecondaryStorageSelector indicates an expected call of RemoveSecondaryStorageSelector.
+func (mr *MockHostServiceIfaceMockRecorder) RemoveSecondaryStorageSelector(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveSecondaryStorageSelector", reflect.TypeOf((*MockHostServiceIface)(nil).RemoveSecondaryStorageSelector), p)
 }
 
 // UpdateHost mocks base method.

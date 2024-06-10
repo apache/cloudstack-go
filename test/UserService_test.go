@@ -221,4 +221,16 @@ func TestUserService(t *testing.T) {
 	}
 	t.Run("RegisterUserData", testregisterUserData)
 
+	testmoveUser := func(t *testing.T) {
+		if _, ok := response["moveUser"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.User.NewMoveUserParams("id")
+		_, err := client.User.MoveUser(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MoveUser", testmoveUser)
+
 }

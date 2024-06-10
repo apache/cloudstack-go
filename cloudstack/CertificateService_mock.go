@@ -52,6 +52,49 @@ func (m *MockCertificateServiceIface) EXPECT() *MockCertificateServiceIfaceMockR
 	return m.recorder
 }
 
+// ListCAProviders mocks base method.
+func (m *MockCertificateServiceIface) ListCAProviders(p *ListCAProvidersParams) (*ListCAProvidersResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCAProviders", p)
+	ret0, _ := ret[0].(*ListCAProvidersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCAProviders indicates an expected call of ListCAProviders.
+func (mr *MockCertificateServiceIfaceMockRecorder) ListCAProviders(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCAProviders", reflect.TypeOf((*MockCertificateServiceIface)(nil).ListCAProviders), p)
+}
+
+// NewListCAProvidersParams mocks base method.
+func (m *MockCertificateServiceIface) NewListCAProvidersParams() *ListCAProvidersParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListCAProvidersParams")
+	ret0, _ := ret[0].(*ListCAProvidersParams)
+	return ret0
+}
+
+// NewListCAProvidersParams indicates an expected call of NewListCAProvidersParams.
+func (mr *MockCertificateServiceIfaceMockRecorder) NewListCAProvidersParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListCAProvidersParams", reflect.TypeOf((*MockCertificateServiceIface)(nil).NewListCAProvidersParams))
+}
+
+// NewProvisionCertificateParams mocks base method.
+func (m *MockCertificateServiceIface) NewProvisionCertificateParams(hostid string) *ProvisionCertificateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewProvisionCertificateParams", hostid)
+	ret0, _ := ret[0].(*ProvisionCertificateParams)
+	return ret0
+}
+
+// NewProvisionCertificateParams indicates an expected call of NewProvisionCertificateParams.
+func (mr *MockCertificateServiceIfaceMockRecorder) NewProvisionCertificateParams(hostid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewProvisionCertificateParams", reflect.TypeOf((*MockCertificateServiceIface)(nil).NewProvisionCertificateParams), hostid)
+}
+
 // NewUploadCustomCertificateParams mocks base method.
 func (m *MockCertificateServiceIface) NewUploadCustomCertificateParams(certificate, domainsuffix string) *UploadCustomCertificateParams {
 	m.ctrl.T.Helper()
@@ -64,6 +107,21 @@ func (m *MockCertificateServiceIface) NewUploadCustomCertificateParams(certifica
 func (mr *MockCertificateServiceIfaceMockRecorder) NewUploadCustomCertificateParams(certificate, domainsuffix interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUploadCustomCertificateParams", reflect.TypeOf((*MockCertificateServiceIface)(nil).NewUploadCustomCertificateParams), certificate, domainsuffix)
+}
+
+// ProvisionCertificate mocks base method.
+func (m *MockCertificateServiceIface) ProvisionCertificate(p *ProvisionCertificateParams) (*ProvisionCertificateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ProvisionCertificate", p)
+	ret0, _ := ret[0].(*ProvisionCertificateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ProvisionCertificate indicates an expected call of ProvisionCertificate.
+func (mr *MockCertificateServiceIfaceMockRecorder) ProvisionCertificate(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProvisionCertificate", reflect.TypeOf((*MockCertificateServiceIface)(nil).ProvisionCertificate), p)
 }
 
 // UploadCustomCertificate mocks base method.

@@ -117,6 +117,7 @@ type CloudStackClient struct {
 	Configuration       ConfigurationServiceIface
 	ConsoleEndpoint     ConsoleEndpointServiceIface
 	Custom              CustomServiceIface
+	Diagnostics         DiagnosticsServiceIface
 	DiskOffering        DiskOfferingServiceIface
 	Domain              DomainServiceIface
 	Event               EventServiceIface
@@ -132,6 +133,7 @@ type CloudStackClient struct {
 	LDAP                LDAPServiceIface
 	Limit               LimitServiceIface
 	LoadBalancer        LoadBalancerServiceIface
+	Metrics             MetricsServiceIface
 	NAT                 NATServiceIface
 	NetworkACL          NetworkACLServiceIface
 	NetworkDevice       NetworkDeviceServiceIface
@@ -228,6 +230,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Configuration = NewConfigurationService(cs)
 	cs.ConsoleEndpoint = NewConsoleEndpointService(cs)
 	cs.Custom = NewCustomService(cs)
+	cs.Diagnostics = NewDiagnosticsService(cs)
 	cs.DiskOffering = NewDiskOfferingService(cs)
 	cs.Domain = NewDomainService(cs)
 	cs.Event = NewEventService(cs)
@@ -243,6 +246,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.LDAP = NewLDAPService(cs)
 	cs.Limit = NewLimitService(cs)
 	cs.LoadBalancer = NewLoadBalancerService(cs)
+	cs.Metrics = NewMetricsService(cs)
 	cs.NAT = NewNATService(cs)
 	cs.NetworkACL = NewNetworkACLService(cs)
 	cs.NetworkDevice = NewNetworkDeviceService(cs)
@@ -312,6 +316,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Configuration = NewMockConfigurationServiceIface(ctrl)
 	cs.ConsoleEndpoint = NewMockConsoleEndpointServiceIface(ctrl)
 	cs.Custom = NewMockCustomServiceIface(ctrl)
+	cs.Diagnostics = NewMockDiagnosticsServiceIface(ctrl)
 	cs.DiskOffering = NewMockDiskOfferingServiceIface(ctrl)
 	cs.Domain = NewMockDomainServiceIface(ctrl)
 	cs.Event = NewMockEventServiceIface(ctrl)
@@ -327,6 +332,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
 	cs.Limit = NewMockLimitServiceIface(ctrl)
 	cs.LoadBalancer = NewMockLoadBalancerServiceIface(ctrl)
+	cs.Metrics = NewMockMetricsServiceIface(ctrl)
 	cs.NAT = NewMockNATServiceIface(ctrl)
 	cs.NetworkACL = NewMockNetworkACLServiceIface(ctrl)
 	cs.NetworkDevice = NewMockNetworkDeviceServiceIface(ctrl)
@@ -898,6 +904,14 @@ func NewCustomService(cs *CloudStackClient) CustomServiceIface {
 	return &CustomService{cs: cs}
 }
 
+type DiagnosticsService struct {
+	cs *CloudStackClient
+}
+
+func NewDiagnosticsService(cs *CloudStackClient) DiagnosticsServiceIface {
+	return &DiagnosticsService{cs: cs}
+}
+
 type DiskOfferingService struct {
 	cs *CloudStackClient
 }
@@ -1016,6 +1030,14 @@ type LoadBalancerService struct {
 
 func NewLoadBalancerService(cs *CloudStackClient) LoadBalancerServiceIface {
 	return &LoadBalancerService{cs: cs}
+}
+
+type MetricsService struct {
+	cs *CloudStackClient
+}
+
+func NewMetricsService(cs *CloudStackClient) MetricsServiceIface {
+	return &MetricsService{cs: cs}
 }
 
 type NATService struct {

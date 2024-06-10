@@ -91,6 +91,13 @@ type VirtualMachineServiceIface interface {
 	NewListUnmanagedInstancesParams(clusterid string) *ListUnmanagedInstancesParams
 	ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error)
 	NewImportUnmanagedInstanceParams(clusterid string, name string, serviceofferingid string) *ImportUnmanagedInstanceParams
+	CreateVMSchedule(p *CreateVMScheduleParams) (*CreateVMScheduleResponse, error)
+	NewCreateVMScheduleParams(action string, schedule string, timezone string, virtualmachineid string) *CreateVMScheduleParams
+	UpdateVMSchedule(p *UpdateVMScheduleParams) (*UpdateVMScheduleResponse, error)
+	NewUpdateVMScheduleParams(id string) *UpdateVMScheduleParams
+	ListVMSchedule(p *ListVMScheduleParams) (*ListVMScheduleResponse, error)
+	NewListVMScheduleParams(virtualmachineid string) *ListVMScheduleParams
+	GetVMScheduleByID(id string, virtualmachineid string, opts ...OptionFunc) (*VMSchedule, int, error)
 }
 
 type AddNicToVirtualMachineParams struct {
@@ -11772,4 +11779,738 @@ func (r *ImportUnmanagedInstanceResponse) UnmarshalJSON(b []byte) error {
 
 	type alias ImportUnmanagedInstanceResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type CreateVMScheduleParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateVMScheduleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["action"]; found {
+		u.Set("action", v.(string))
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["enabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enabled", vv)
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["schedule"]; found {
+		u.Set("schedule", v.(string))
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	if v, found := p.p["timezone"]; found {
+		u.Set("timezone", v.(string))
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	return u
+}
+
+func (p *CreateVMScheduleParams) SetAction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["action"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetAction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["action"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetEnabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enabled"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetEnabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enabled"].(bool)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetSchedule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["schedule"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetSchedule() {
+	if p.p != nil && p.p["schedule"] != nil {
+		delete(p.p, "schedule")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetSchedule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["schedule"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetTimezone(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["timezone"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
+}
+
+func (p *CreateVMScheduleParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *CreateVMScheduleParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *CreateVMScheduleParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateVMScheduleParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewCreateVMScheduleParams(action string, schedule string, timezone string, virtualmachineid string) *CreateVMScheduleParams {
+	p := &CreateVMScheduleParams{}
+	p.p = make(map[string]interface{})
+	p.p["action"] = action
+	p.p["schedule"] = schedule
+	p.p["timezone"] = timezone
+	p.p["virtualmachineid"] = virtualmachineid
+	return p
+}
+
+// Create VM Schedule
+func (s *VirtualMachineService) CreateVMSchedule(p *CreateVMScheduleParams) (*CreateVMScheduleResponse, error) {
+	resp, err := s.cs.newRequest("createVMSchedule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response CreateVMScheduleResponse `json:"vmschedule"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type CreateVMScheduleResponse struct {
+	Action           string `json:"action"`
+	Created          string `json:"created"`
+	Description      string `json:"description"`
+	Enabled          bool   `json:"enabled"`
+	Enddate          string `json:"enddate"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Schedule         string `json:"schedule"`
+	Startdate        string `json:"startdate"`
+	Timezone         string `json:"timezone"`
+	Virtualmachineid string `json:"virtualmachineid"`
+}
+
+type UpdateVMScheduleParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateVMScheduleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["enabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enabled", vv)
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["schedule"]; found {
+		u.Set("schedule", v.(string))
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	if v, found := p.p["timezone"]; found {
+		u.Set("timezone", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateVMScheduleParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetEnabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enabled"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetEnabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enabled"].(bool)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetSchedule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["schedule"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetSchedule() {
+	if p.p != nil && p.p["schedule"] != nil {
+		delete(p.p, "schedule")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetSchedule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["schedule"].(string)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+func (p *UpdateVMScheduleParams) SetTimezone(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["timezone"] = v
+}
+
+func (p *UpdateVMScheduleParams) ResetTimezone() {
+	if p.p != nil && p.p["timezone"] != nil {
+		delete(p.p, "timezone")
+	}
+}
+
+func (p *UpdateVMScheduleParams) GetTimezone() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["timezone"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateVMScheduleParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewUpdateVMScheduleParams(id string) *UpdateVMScheduleParams {
+	p := &UpdateVMScheduleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Update VM Schedule.
+func (s *VirtualMachineService) UpdateVMSchedule(p *UpdateVMScheduleParams) (*UpdateVMScheduleResponse, error) {
+	resp, err := s.cs.newRequest("updateVMSchedule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response UpdateVMScheduleResponse `json:"vmschedule"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type UpdateVMScheduleResponse struct {
+	Action           string `json:"action"`
+	Created          string `json:"created"`
+	Description      string `json:"description"`
+	Enabled          bool   `json:"enabled"`
+	Enddate          string `json:"enddate"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Schedule         string `json:"schedule"`
+	Startdate        string `json:"startdate"`
+	Timezone         string `json:"timezone"`
+	Virtualmachineid string `json:"virtualmachineid"`
+}
+
+type ListVMScheduleParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListVMScheduleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["action"]; found {
+		u.Set("action", v.(string))
+	}
+	if v, found := p.p["enabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enabled", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	return u
+}
+
+func (p *ListVMScheduleParams) SetAction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["action"] = v
+}
+
+func (p *ListVMScheduleParams) ResetAction() {
+	if p.p != nil && p.p["action"] != nil {
+		delete(p.p, "action")
+	}
+}
+
+func (p *ListVMScheduleParams) GetAction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["action"].(string)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetEnabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enabled"] = v
+}
+
+func (p *ListVMScheduleParams) ResetEnabled() {
+	if p.p != nil && p.p["enabled"] != nil {
+		delete(p.p, "enabled")
+	}
+}
+
+func (p *ListVMScheduleParams) GetEnabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enabled"].(bool)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListVMScheduleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListVMScheduleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListVMScheduleParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListVMScheduleParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListVMScheduleParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListVMScheduleParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListVMScheduleParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListVMScheduleParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListVMScheduleParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *ListVMScheduleParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *ListVMScheduleParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListVMScheduleParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewListVMScheduleParams(virtualmachineid string) *ListVMScheduleParams {
+	p := &ListVMScheduleParams{}
+	p.p = make(map[string]interface{})
+	p.p["virtualmachineid"] = virtualmachineid
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VirtualMachineService) GetVMScheduleByID(id string, virtualmachineid string, opts ...OptionFunc) (*VMSchedule, int, error) {
+	p := &ListVMScheduleParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+	p.p["virtualmachineid"] = virtualmachineid
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListVMSchedule(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.VMSchedule[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for VMSchedule UUID: %s!", id)
+}
+
+// List VM Schedules.
+func (s *VirtualMachineService) ListVMSchedule(p *ListVMScheduleParams) (*ListVMScheduleResponse, error) {
+	resp, err := s.cs.newRequest("listVMSchedule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListVMScheduleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListVMScheduleResponse struct {
+	Count      int           `json:"count"`
+	VMSchedule []*VMSchedule `json:"vmschedule"`
+}
+
+type VMSchedule struct {
+	Action           string `json:"action"`
+	Created          string `json:"created"`
+	Description      string `json:"description"`
+	Enabled          bool   `json:"enabled"`
+	Enddate          string `json:"enddate"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Schedule         string `json:"schedule"`
+	Startdate        string `json:"startdate"`
+	Timezone         string `json:"timezone"`
+	Virtualmachineid string `json:"virtualmachineid"`
 }

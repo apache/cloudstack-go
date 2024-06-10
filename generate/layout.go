@@ -121,6 +121,9 @@ var layout = apiInfo{
 		"unmanageVirtualMachine",
 		"listUnmanagedInstances",
 		"importUnmanagedInstance",
+		"createVMSchedule",
+		"updateVMSchedule",
+		"listVMSchedule",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -212,6 +215,13 @@ var layout = apiInfo{
 		"updateHost",
 		"updateHostPassword",
 		"migrateSecondaryStorageData",
+		"cancelHostAsDegraded",
+		"listHostHAProviders",
+		"listSecondaryStorageSelectors",
+		"createSecondaryStorageSelector",
+		"removeSecondaryStorageSelector",
+		"listHostHAResources",
+		"declareHostAsDegraded",
 	},
 	"VolumeService": {
 		"attachVolume",
@@ -232,6 +242,8 @@ var layout = apiInfo{
 		"updateVolume",
 		"uploadVolume",
 		"changeOfferingForVolume",
+		"listVolumesUsageHistory",
+		"assignVolume",
 	},
 	"VPCService": {
 		"createPrivateGateway",
@@ -265,6 +277,7 @@ var layout = apiInfo{
 		"upgradeRouterTemplate",
 		"listTemplateDirectDownloadCertificates",
 		"provisionTemplateDirectDownloadCertificate",
+		"linkUserDataToTemplate",
 	},
 	"AccountService": {
 		"createAccount",
@@ -341,6 +354,7 @@ var layout = apiInfo{
 		"listUserData",
 		"deleteUserData",
 		"registerUserData",
+		"moveUser",
 	},
 	"LDAPService": {
 		"addLdapConfiguration",
@@ -428,6 +442,7 @@ var layout = apiInfo{
 		"removeGuestOsMapping",
 		"updateGuestOs",
 		"updateGuestOsMapping",
+		"getHypervisorGuestOsNames",
 	},
 	"ClusterService": {
 		"addCluster",
@@ -486,6 +501,9 @@ var layout = apiInfo{
 		"listImageStores",
 		"listSecondaryStagingStores",
 		"updateCloudToUseObjectStore",
+		"listImageStoreObjects",
+		"updateImageStore",
+		"downloadImageStoreObject",
 	},
 	"AuthenticationService": {
 		"login",
@@ -511,6 +529,7 @@ var layout = apiInfo{
 		"listPods",
 		"releaseDedicatedPod",
 		"updatePod",
+		"updatePodManagementNetworkIpRange",
 	},
 	"VLANService": {
 		"createVlanIpRange",
@@ -633,6 +652,7 @@ var layout = apiInfo{
 		"listDeploymentPlanners",
 		"updateConfiguration",
 		"resetConfiguration",
+		"updateStorageCapabilities",
 	},
 	"BrocadeVCSService": {
 		"addBrocadeVcsDevice",
@@ -659,6 +679,10 @@ var layout = apiInfo{
 		"listStorageProviders",
 		"listObjectStoragePools",
 		"listStoragePoolObjects",
+		"updateObjectStoragePool",
+		"addObjectStoragePool",
+		"deleteObjectStoragePool",
+		"listStoragePoolsMetrics",
 	},
 	"PortableIPService": {
 		"createPortableIpRange",
@@ -714,6 +738,8 @@ var layout = apiInfo{
 	},
 	"CertificateService": {
 		"uploadCustomCertificate",
+		"listCAProviders",
+		"provisionCertificate",
 	},
 	"APIDiscoveryService": {
 		"listApis",
@@ -763,5 +789,11 @@ var layout = apiInfo{
 	},
 	"ShutdownService": {
 		"readyForShutdown",
+	},
+	"DiagnosticsService": {
+		"getDiagnosticsData",
+	},
+	"MetricsService": {
+		"listInfrastructure",
 	},
 }

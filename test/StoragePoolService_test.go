@@ -101,4 +101,58 @@ func TestStoragePoolService(t *testing.T) {
 	}
 	t.Run("ListStoragePoolObjects", testlistStoragePoolObjects)
 
+	testupdateObjectStoragePool := func(t *testing.T) {
+		if _, ok := response["updateObjectStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewUpdateObjectStoragePoolParams("id")
+		r, err := client.StoragePool.UpdateObjectStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateObjectStoragePool", testupdateObjectStoragePool)
+
+	testaddObjectStoragePool := func(t *testing.T) {
+		if _, ok := response["addObjectStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewAddObjectStoragePoolParams("name", "provider", "url")
+		r, err := client.StoragePool.AddObjectStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("AddObjectStoragePool", testaddObjectStoragePool)
+
+	testdeleteObjectStoragePool := func(t *testing.T) {
+		if _, ok := response["deleteObjectStoragePool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewDeleteObjectStoragePoolParams("id")
+		_, err := client.StoragePool.DeleteObjectStoragePool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteObjectStoragePool", testdeleteObjectStoragePool)
+
+	testlistStoragePoolsMetrics := func(t *testing.T) {
+		if _, ok := response["listStoragePoolsMetrics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewListStoragePoolsMetricsParams()
+		_, err := client.StoragePool.ListStoragePoolsMetrics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStoragePoolsMetrics", testlistStoragePoolsMetrics)
+
 }

@@ -103,6 +103,21 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) GetGuestOsMappingByID(id interfac
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGuestOsMappingByID", reflect.TypeOf((*MockGuestOSServiceIface)(nil).GetGuestOsMappingByID), varargs...)
 }
 
+// GetHypervisorGuestOsNames mocks base method.
+func (m *MockGuestOSServiceIface) GetHypervisorGuestOsNames(p *GetHypervisorGuestOsNamesParams) (*GetHypervisorGuestOsNamesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetHypervisorGuestOsNames", p)
+	ret0, _ := ret[0].(*GetHypervisorGuestOsNamesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetHypervisorGuestOsNames indicates an expected call of GetHypervisorGuestOsNames.
+func (mr *MockGuestOSServiceIfaceMockRecorder) GetHypervisorGuestOsNames(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHypervisorGuestOsNames", reflect.TypeOf((*MockGuestOSServiceIface)(nil).GetHypervisorGuestOsNames), p)
+}
+
 // GetOsCategoryByID mocks base method.
 func (m *MockGuestOSServiceIface) GetOsCategoryByID(id string, opts ...OptionFunc) (*OsCategory, int, error) {
 	m.ctrl.T.Helper()
@@ -300,6 +315,20 @@ func (m *MockGuestOSServiceIface) NewAddGuestOsParams(oscategoryid, osdisplaynam
 func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddGuestOsParams(oscategoryid, osdisplayname interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewAddGuestOsParams), oscategoryid, osdisplayname)
+}
+
+// NewGetHypervisorGuestOsNamesParams mocks base method.
+func (m *MockGuestOSServiceIface) NewGetHypervisorGuestOsNamesParams(hypervisor, hypervisorversion string) *GetHypervisorGuestOsNamesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewGetHypervisorGuestOsNamesParams", hypervisor, hypervisorversion)
+	ret0, _ := ret[0].(*GetHypervisorGuestOsNamesParams)
+	return ret0
+}
+
+// NewGetHypervisorGuestOsNamesParams indicates an expected call of NewGetHypervisorGuestOsNamesParams.
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewGetHypervisorGuestOsNamesParams(hypervisor, hypervisorversion interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetHypervisorGuestOsNamesParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewGetHypervisorGuestOsNamesParams), hypervisor, hypervisorversion)
 }
 
 // NewListGuestOsMappingParams mocks base method.

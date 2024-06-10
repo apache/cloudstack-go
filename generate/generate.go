@@ -47,6 +47,7 @@ var detailsRequireKeyValue = map[string]bool{
 	"updateCloudToUseObjectStore": true,
 	"updateGuestOs":               true,
 	"updateZone":                  true,
+	"addObjectStoragePool":        true,
 }
 
 // detailsRequireZeroIndex is a prefilled map with a list of details
@@ -114,6 +115,13 @@ var nestedResponse = map[string]string{
 	"updateSecurityGroup":        "securitygroup",
 	"updateOauthProvider":        "oauthprovider",
 	"readyForShutdown":           "readyforshutdown",
+	"updateObjectStoragePool":    "objectstore",
+	"addObjectStoragePool":       "objectstore",
+	"updateImageStore":           "imagestore",
+	"linkUserDataToTemplate":     "template",
+	"assignVolume":               "volume",
+	"createVMSchedule":           "vmschedule",
+	"updateVMSchedule":           "vmschedule",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -1945,6 +1953,27 @@ func (s *service) generateResponseType(a *API) {
 		case "listStoragePoolObjects":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
+		case "listImageStoreObjects":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
+		case "listVolumesUsageHistory":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "volume")
+		case "listHostHAProviders":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "haprovider")
+		case "listSecondaryStorageSelectors":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "heuristics")
+		case "listHostHAResources":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hostha")
+		case "listInfrastructure":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s *%s `json:\"%s\"`", ln, parseSingular(ln), "infrastructure")
+		case "listStoragePoolsMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "storagepool")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

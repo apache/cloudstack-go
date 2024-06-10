@@ -95,4 +95,19 @@ func TestConfigurationService(t *testing.T) {
 	}
 	t.Run("ResetConfiguration", testresetConfiguration)
 
+	testupdateStorageCapabilities := func(t *testing.T) {
+		if _, ok := response["updateStorageCapabilities"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Configuration.NewUpdateStorageCapabilitiesParams("id")
+		r, err := client.Configuration.UpdateStorageCapabilities(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateStorageCapabilities", testupdateStorageCapabilities)
+
 }

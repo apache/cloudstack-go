@@ -60,6 +60,8 @@ type UserServiceIface interface {
 	NewDeleteUserDataParams(id string) *DeleteUserDataParams
 	RegisterUserData(p *RegisterUserDataParams) (*RegisterUserDataResponse, error)
 	NewRegisterUserDataParams(name string, userdata string) *RegisterUserDataParams
+	MoveUser(p *MoveUserParams) (*MoveUserResponse, error)
+	NewMoveUserParams(id string) *MoveUserParams
 }
 
 type CreateUserParams struct {
@@ -2545,5 +2547,147 @@ func (r *RegisterUserData) UnmarshalJSON(b []byte) error {
 	}
 
 	type alias RegisterUserData
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type MoveUserParams struct {
+	p map[string]interface{}
+}
+
+func (p *MoveUserParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *MoveUserParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *MoveUserParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *MoveUserParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *MoveUserParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *MoveUserParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
+func (p *MoveUserParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *MoveUserParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *MoveUserParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *MoveUserParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new MoveUserParams instance,
+// as then you are sure you have configured all required params
+func (s *UserService) NewMoveUserParams(id string) *MoveUserParams {
+	p := &MoveUserParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Moves a user to another account
+func (s *UserService) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
+	resp, err := s.cs.newRequest("moveUser", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MoveUserResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type MoveUserResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *MoveUserResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias MoveUserResponse
 	return json.Unmarshal(b, (*alias)(r))
 }

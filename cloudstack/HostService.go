@@ -81,6 +81,21 @@ type HostServiceIface interface {
 	NewUpdateHostPasswordParams(password string, username string) *UpdateHostPasswordParams
 	MigrateSecondaryStorageData(p *MigrateSecondaryStorageDataParams) (*MigrateSecondaryStorageDataResponse, error)
 	NewMigrateSecondaryStorageDataParams(destpools []string, srcpool string) *MigrateSecondaryStorageDataParams
+	CancelHostAsDegraded(p *CancelHostAsDegradedParams) (*CancelHostAsDegradedResponse, error)
+	NewCancelHostAsDegradedParams(id string) *CancelHostAsDegradedParams
+	ListHostHAProviders(p *ListHostHAProvidersParams) (*ListHostHAProvidersResponse, error)
+	NewListHostHAProvidersParams(hypervisor string) *ListHostHAProvidersParams
+	ListSecondaryStorageSelectors(p *ListSecondaryStorageSelectorsParams) (*ListSecondaryStorageSelectorsResponse, error)
+	NewListSecondaryStorageSelectorsParams(zoneid string) *ListSecondaryStorageSelectorsParams
+	GetSecondaryStorageSelectorID(keyword string, zoneid string, opts ...OptionFunc) (string, int, error)
+	CreateSecondaryStorageSelector(p *CreateSecondaryStorageSelectorParams) (*CreateSecondaryStorageSelectorResponse, error)
+	NewCreateSecondaryStorageSelectorParams(description string, heuristicrule string, name string, hostType string, zoneid string) *CreateSecondaryStorageSelectorParams
+	RemoveSecondaryStorageSelector(p *RemoveSecondaryStorageSelectorParams) (*RemoveSecondaryStorageSelectorResponse, error)
+	NewRemoveSecondaryStorageSelectorParams(id string) *RemoveSecondaryStorageSelectorParams
+	ListHostHAResources(p *ListHostHAResourcesParams) (*ListHostHAResourcesResponse, error)
+	NewListHostHAResourcesParams() *ListHostHAResourcesParams
+	DeclareHostAsDegraded(p *DeclareHostAsDegradedParams) (*DeclareHostAsDegradedResponse, error)
+	NewDeclareHostAsDegradedParams(id string) *DeclareHostAsDegradedParams
 }
 
 type AddBaremetalHostParams struct {
@@ -4892,4 +4907,961 @@ type MigrateSecondaryStorageDataResponse struct {
 	Message       string `json:"message"`
 	Migrationtype string `json:"migrationtype"`
 	Success       bool   `json:"success"`
+}
+
+type CancelHostAsDegradedParams struct {
+	p map[string]interface{}
+}
+
+func (p *CancelHostAsDegradedParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *CancelHostAsDegradedParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *CancelHostAsDegradedParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *CancelHostAsDegradedParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CancelHostAsDegradedParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewCancelHostAsDegradedParams(id string) *CancelHostAsDegradedParams {
+	p := &CancelHostAsDegradedParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Cancel host status from 'Degraded'. Host will transit back to status 'Enabled'.
+func (s *HostService) CancelHostAsDegraded(p *CancelHostAsDegradedParams) (*CancelHostAsDegradedResponse, error) {
+	resp, err := s.cs.newRequest("cancelHostAsDegraded", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CancelHostAsDegradedResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type CancelHostAsDegradedResponse struct {
+	Annotation                       string                                 `json:"annotation"`
+	Capabilities                     string                                 `json:"capabilities"`
+	Clusterid                        string                                 `json:"clusterid"`
+	Clustername                      string                                 `json:"clustername"`
+	Clustertype                      string                                 `json:"clustertype"`
+	Cpuallocated                     string                                 `json:"cpuallocated"`
+	Cpuallocatedpercentage           string                                 `json:"cpuallocatedpercentage"`
+	Cpuallocatedvalue                int64                                  `json:"cpuallocatedvalue"`
+	Cpuallocatedwithoverprovisioning string                                 `json:"cpuallocatedwithoverprovisioning"`
+	Cpuloadaverage                   float64                                `json:"cpuloadaverage"`
+	Cpunumber                        int                                    `json:"cpunumber"`
+	Cpusockets                       int                                    `json:"cpusockets"`
+	Cpuspeed                         int64                                  `json:"cpuspeed"`
+	Cpuused                          string                                 `json:"cpuused"`
+	Cpuwithoverprovisioning          string                                 `json:"cpuwithoverprovisioning"`
+	Created                          string                                 `json:"created"`
+	Details                          map[string]string                      `json:"details"`
+	Disconnected                     string                                 `json:"disconnected"`
+	Disksizeallocated                int64                                  `json:"disksizeallocated"`
+	Disksizetotal                    int64                                  `json:"disksizetotal"`
+	Encryptionsupported              bool                                   `json:"encryptionsupported"`
+	Events                           string                                 `json:"events"`
+	Gpugroup                         []CancelHostAsDegradedResponseGpugroup `json:"gpugroup"`
+	Hahost                           bool                                   `json:"hahost"`
+	Hasannotations                   bool                                   `json:"hasannotations"`
+	Hasenoughcapacity                bool                                   `json:"hasenoughcapacity"`
+	Hostha                           HAForHostResponse                      `json:"hostha"`
+	Hosttags                         string                                 `json:"hosttags"`
+	Hypervisor                       string                                 `json:"hypervisor"`
+	Hypervisorversion                string                                 `json:"hypervisorversion"`
+	Id                               string                                 `json:"id"`
+	Ipaddress                        string                                 `json:"ipaddress"`
+	Islocalstorageactive             bool                                   `json:"islocalstorageactive"`
+	Istagarule                       bool                                   `json:"istagarule"`
+	JobID                            string                                 `json:"jobid"`
+	Jobstatus                        int                                    `json:"jobstatus"`
+	Lastannotated                    string                                 `json:"lastannotated"`
+	Lastpinged                       string                                 `json:"lastpinged"`
+	Managementserverid               UUID                                   `json:"managementserverid"`
+	Memoryallocated                  int64                                  `json:"memoryallocated"`
+	Memoryallocatedbytes             int64                                  `json:"memoryallocatedbytes"`
+	Memoryallocatedpercentage        string                                 `json:"memoryallocatedpercentage"`
+	Memorytotal                      int64                                  `json:"memorytotal"`
+	Memoryused                       int64                                  `json:"memoryused"`
+	Memorywithoverprovisioning       string                                 `json:"memorywithoverprovisioning"`
+	Name                             string                                 `json:"name"`
+	Networkkbsread                   int64                                  `json:"networkkbsread"`
+	Networkkbswrite                  int64                                  `json:"networkkbswrite"`
+	Oscategoryid                     string                                 `json:"oscategoryid"`
+	Oscategoryname                   string                                 `json:"oscategoryname"`
+	Outofbandmanagement              OutOfBandManagementResponse            `json:"outofbandmanagement"`
+	Podid                            string                                 `json:"podid"`
+	Podname                          string                                 `json:"podname"`
+	Removed                          string                                 `json:"removed"`
+	Resourcestate                    string                                 `json:"resourcestate"`
+	State                            string                                 `json:"state"`
+	Suitableformigration             bool                                   `json:"suitableformigration"`
+	Type                             string                                 `json:"type"`
+	Ueficapability                   bool                                   `json:"ueficapability"`
+	Username                         string                                 `json:"username"`
+	Version                          string                                 `json:"version"`
+	Zoneid                           string                                 `json:"zoneid"`
+	Zonename                         string                                 `json:"zonename"`
+}
+
+type CancelHostAsDegradedResponseGpugroup struct {
+	Gpugroupname string                                     `json:"gpugroupname"`
+	Vgpu         []CancelHostAsDegradedResponseGpugroupVgpu `json:"vgpu"`
+}
+
+type CancelHostAsDegradedResponseGpugroupVgpu struct {
+	Maxcapacity       int64  `json:"maxcapacity"`
+	Maxheads          int64  `json:"maxheads"`
+	Maxresolutionx    int64  `json:"maxresolutionx"`
+	Maxresolutiony    int64  `json:"maxresolutiony"`
+	Maxvgpuperpgpu    int64  `json:"maxvgpuperpgpu"`
+	Remainingcapacity int64  `json:"remainingcapacity"`
+	Vgputype          string `json:"vgputype"`
+	Videoram          int64  `json:"videoram"`
+}
+
+type ListHostHAProvidersParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListHostHAProvidersParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hypervisor"]; found {
+		u.Set("hypervisor", v.(string))
+	}
+	return u
+}
+
+func (p *ListHostHAProvidersParams) SetHypervisor(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisor"] = v
+}
+
+func (p *ListHostHAProvidersParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
+func (p *ListHostHAProvidersParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListHostHAProvidersParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewListHostHAProvidersParams(hypervisor string) *ListHostHAProvidersParams {
+	p := &ListHostHAProvidersParams{}
+	p.p = make(map[string]interface{})
+	p.p["hypervisor"] = hypervisor
+	return p
+}
+
+// Lists HA providers
+func (s *HostService) ListHostHAProviders(p *ListHostHAProvidersParams) (*ListHostHAProvidersResponse, error) {
+	resp, err := s.cs.newRequest("listHostHAProviders", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListHostHAProvidersResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListHostHAProvidersResponse struct {
+	Count           int               `json:"count"`
+	HostHAProviders []*HostHAProvider `json:"haprovider"`
+}
+
+type HostHAProvider struct {
+	Haenable   bool   `json:"haenable"`
+	Haprovider string `json:"haprovider"`
+	Hastate    string `json:"hastate"`
+	Hostid     string `json:"hostid"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Status     bool   `json:"status"`
+}
+
+type ListSecondaryStorageSelectorsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["showremoved"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showremoved", vv)
+	}
+	if v, found := p.p["type"]; found {
+		u.Set("type", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetShowremoved(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showremoved"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetShowremoved() {
+	if p.p != nil && p.p["showremoved"] != nil {
+		delete(p.p, "showremoved")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetShowremoved() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showremoved"].(bool)
+	return value, ok
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetType(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["type"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
+func (p *ListSecondaryStorageSelectorsParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListSecondaryStorageSelectorsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ListSecondaryStorageSelectorsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListSecondaryStorageSelectorsParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewListSecondaryStorageSelectorsParams(zoneid string) *ListSecondaryStorageSelectorsParams {
+	p := &ListSecondaryStorageSelectorsParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *HostService) GetSecondaryStorageSelectorID(keyword string, zoneid string, opts ...OptionFunc) (string, int, error) {
+	p := &ListSecondaryStorageSelectorsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["keyword"] = keyword
+	p.p["zoneid"] = zoneid
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListSecondaryStorageSelectors(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+	}
+
+	if l.Count == 1 {
+		return l.SecondaryStorageSelectors[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.SecondaryStorageSelectors {
+			if v.Name == keyword {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+}
+
+// Lists the secondary storage selectors and their rules.
+func (s *HostService) ListSecondaryStorageSelectors(p *ListSecondaryStorageSelectorsParams) (*ListSecondaryStorageSelectorsResponse, error) {
+	resp, err := s.cs.newRequest("listSecondaryStorageSelectors", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListSecondaryStorageSelectorsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListSecondaryStorageSelectorsResponse struct {
+	Count                     int                         `json:"count"`
+	SecondaryStorageSelectors []*SecondaryStorageSelector `json:"heuristics"`
+}
+
+type SecondaryStorageSelector struct {
+	Created       string `json:"created"`
+	Description   string `json:"description"`
+	Heuristicrule string `json:"heuristicrule"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Removed       string `json:"removed"`
+	Type          string `json:"type"`
+	Zoneid        string `json:"zoneid"`
+}
+
+type CreateSecondaryStorageSelectorParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["heuristicrule"]; found {
+		u.Set("heuristicrule", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["type"]; found {
+		u.Set("type", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *CreateSecondaryStorageSelectorParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *CreateSecondaryStorageSelectorParams) ResetDescription() {
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
+	}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *CreateSecondaryStorageSelectorParams) SetHeuristicrule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["heuristicrule"] = v
+}
+
+func (p *CreateSecondaryStorageSelectorParams) ResetHeuristicrule() {
+	if p.p != nil && p.p["heuristicrule"] != nil {
+		delete(p.p, "heuristicrule")
+	}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) GetHeuristicrule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["heuristicrule"].(string)
+	return value, ok
+}
+
+func (p *CreateSecondaryStorageSelectorParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *CreateSecondaryStorageSelectorParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *CreateSecondaryStorageSelectorParams) SetType(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["type"] = v
+}
+
+func (p *CreateSecondaryStorageSelectorParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
+func (p *CreateSecondaryStorageSelectorParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *CreateSecondaryStorageSelectorParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *CreateSecondaryStorageSelectorParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateSecondaryStorageSelectorParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewCreateSecondaryStorageSelectorParams(description string, heuristicrule string, name string, hostType string, zoneid string) *CreateSecondaryStorageSelectorParams {
+	p := &CreateSecondaryStorageSelectorParams{}
+	p.p = make(map[string]interface{})
+	p.p["description"] = description
+	p.p["heuristicrule"] = heuristicrule
+	p.p["name"] = name
+	p.p["type"] = hostType
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Creates a secondary storage selector, described by the heuristic rule.
+func (s *HostService) CreateSecondaryStorageSelector(p *CreateSecondaryStorageSelectorParams) (*CreateSecondaryStorageSelectorResponse, error) {
+	resp, err := s.cs.newRequest("createSecondaryStorageSelector", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateSecondaryStorageSelectorResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type CreateSecondaryStorageSelectorResponse struct {
+	Created       string `json:"created"`
+	Description   string `json:"description"`
+	Heuristicrule string `json:"heuristicrule"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Removed       string `json:"removed"`
+	Type          string `json:"type"`
+	Zoneid        string `json:"zoneid"`
+}
+
+type RemoveSecondaryStorageSelectorParams struct {
+	p map[string]interface{}
+}
+
+func (p *RemoveSecondaryStorageSelectorParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *RemoveSecondaryStorageSelectorParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *RemoveSecondaryStorageSelectorParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *RemoveSecondaryStorageSelectorParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RemoveSecondaryStorageSelectorParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewRemoveSecondaryStorageSelectorParams(id string) *RemoveSecondaryStorageSelectorParams {
+	p := &RemoveSecondaryStorageSelectorParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Removes an existing secondary storage selector.
+func (s *HostService) RemoveSecondaryStorageSelector(p *RemoveSecondaryStorageSelectorParams) (*RemoveSecondaryStorageSelectorResponse, error) {
+	resp, err := s.cs.newRequest("removeSecondaryStorageSelector", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RemoveSecondaryStorageSelectorResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type RemoveSecondaryStorageSelectorResponse struct {
+	Created       string `json:"created"`
+	Description   string `json:"description"`
+	Heuristicrule string `json:"heuristicrule"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Removed       string `json:"removed"`
+	Type          string `json:"type"`
+	Zoneid        string `json:"zoneid"`
+}
+
+type ListHostHAResourcesParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListHostHAResourcesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	return u
+}
+
+func (p *ListHostHAResourcesParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ListHostHAResourcesParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *ListHostHAResourcesParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListHostHAResourcesParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewListHostHAResourcesParams() *ListHostHAResourcesParams {
+	p := &ListHostHAResourcesParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists host HA resources
+func (s *HostService) ListHostHAResources(p *ListHostHAResourcesParams) (*ListHostHAResourcesResponse, error) {
+	resp, err := s.cs.newRequest("listHostHAResources", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListHostHAResourcesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListHostHAResourcesResponse struct {
+	Count           int               `json:"count"`
+	HostHAResources []*HostHAResource `json:"hostha"`
+}
+
+type HostHAResource struct {
+	Haenable   bool   `json:"haenable"`
+	Haprovider string `json:"haprovider"`
+	Hastate    string `json:"hastate"`
+	Hostid     string `json:"hostid"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Status     bool   `json:"status"`
+}
+
+type DeclareHostAsDegradedParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeclareHostAsDegradedParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DeclareHostAsDegradedParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeclareHostAsDegradedParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeclareHostAsDegradedParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeclareHostAsDegradedParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewDeclareHostAsDegradedParams(id string) *DeclareHostAsDegradedParams {
+	p := &DeclareHostAsDegradedParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Declare host as 'Degraded'. Host must be on 'Disconnected' or 'Alert' state. The ADMIN must be sure that there are no VMs running on the respective host otherwise this command might corrupted VMs that were running on the 'Degraded' host.
+func (s *HostService) DeclareHostAsDegraded(p *DeclareHostAsDegradedParams) (*DeclareHostAsDegradedResponse, error) {
+	resp, err := s.cs.newRequest("declareHostAsDegraded", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeclareHostAsDegradedResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DeclareHostAsDegradedResponse struct {
+	Annotation                       string                                  `json:"annotation"`
+	Capabilities                     string                                  `json:"capabilities"`
+	Clusterid                        string                                  `json:"clusterid"`
+	Clustername                      string                                  `json:"clustername"`
+	Clustertype                      string                                  `json:"clustertype"`
+	Cpuallocated                     string                                  `json:"cpuallocated"`
+	Cpuallocatedpercentage           string                                  `json:"cpuallocatedpercentage"`
+	Cpuallocatedvalue                int64                                   `json:"cpuallocatedvalue"`
+	Cpuallocatedwithoverprovisioning string                                  `json:"cpuallocatedwithoverprovisioning"`
+	Cpuloadaverage                   float64                                 `json:"cpuloadaverage"`
+	Cpunumber                        int                                     `json:"cpunumber"`
+	Cpusockets                       int                                     `json:"cpusockets"`
+	Cpuspeed                         int64                                   `json:"cpuspeed"`
+	Cpuused                          string                                  `json:"cpuused"`
+	Cpuwithoverprovisioning          string                                  `json:"cpuwithoverprovisioning"`
+	Created                          string                                  `json:"created"`
+	Details                          map[string]string                       `json:"details"`
+	Disconnected                     string                                  `json:"disconnected"`
+	Disksizeallocated                int64                                   `json:"disksizeallocated"`
+	Disksizetotal                    int64                                   `json:"disksizetotal"`
+	Encryptionsupported              bool                                    `json:"encryptionsupported"`
+	Events                           string                                  `json:"events"`
+	Gpugroup                         []DeclareHostAsDegradedResponseGpugroup `json:"gpugroup"`
+	Hahost                           bool                                    `json:"hahost"`
+	Hasannotations                   bool                                    `json:"hasannotations"`
+	Hasenoughcapacity                bool                                    `json:"hasenoughcapacity"`
+	Hostha                           HAForHostResponse                       `json:"hostha"`
+	Hosttags                         string                                  `json:"hosttags"`
+	Hypervisor                       string                                  `json:"hypervisor"`
+	Hypervisorversion                string                                  `json:"hypervisorversion"`
+	Id                               string                                  `json:"id"`
+	Ipaddress                        string                                  `json:"ipaddress"`
+	Islocalstorageactive             bool                                    `json:"islocalstorageactive"`
+	Istagarule                       bool                                    `json:"istagarule"`
+	JobID                            string                                  `json:"jobid"`
+	Jobstatus                        int                                     `json:"jobstatus"`
+	Lastannotated                    string                                  `json:"lastannotated"`
+	Lastpinged                       string                                  `json:"lastpinged"`
+	Managementserverid               UUID                                    `json:"managementserverid"`
+	Memoryallocated                  int64                                   `json:"memoryallocated"`
+	Memoryallocatedbytes             int64                                   `json:"memoryallocatedbytes"`
+	Memoryallocatedpercentage        string                                  `json:"memoryallocatedpercentage"`
+	Memorytotal                      int64                                   `json:"memorytotal"`
+	Memoryused                       int64                                   `json:"memoryused"`
+	Memorywithoverprovisioning       string                                  `json:"memorywithoverprovisioning"`
+	Name                             string                                  `json:"name"`
+	Networkkbsread                   int64                                   `json:"networkkbsread"`
+	Networkkbswrite                  int64                                   `json:"networkkbswrite"`
+	Oscategoryid                     string                                  `json:"oscategoryid"`
+	Oscategoryname                   string                                  `json:"oscategoryname"`
+	Outofbandmanagement              OutOfBandManagementResponse             `json:"outofbandmanagement"`
+	Podid                            string                                  `json:"podid"`
+	Podname                          string                                  `json:"podname"`
+	Removed                          string                                  `json:"removed"`
+	Resourcestate                    string                                  `json:"resourcestate"`
+	State                            string                                  `json:"state"`
+	Suitableformigration             bool                                    `json:"suitableformigration"`
+	Type                             string                                  `json:"type"`
+	Ueficapability                   bool                                    `json:"ueficapability"`
+	Username                         string                                  `json:"username"`
+	Version                          string                                  `json:"version"`
+	Zoneid                           string                                  `json:"zoneid"`
+	Zonename                         string                                  `json:"zonename"`
+}
+
+type DeclareHostAsDegradedResponseGpugroup struct {
+	Gpugroupname string                                      `json:"gpugroupname"`
+	Vgpu         []DeclareHostAsDegradedResponseGpugroupVgpu `json:"vgpu"`
+}
+
+type DeclareHostAsDegradedResponseGpugroupVgpu struct {
+	Maxcapacity       int64  `json:"maxcapacity"`
+	Maxheads          int64  `json:"maxheads"`
+	Maxresolutionx    int64  `json:"maxresolutionx"`
+	Maxresolutiony    int64  `json:"maxresolutiony"`
+	Maxvgpuperpgpu    int64  `json:"maxvgpuperpgpu"`
+	Remainingcapacity int64  `json:"remainingcapacity"`
+	Vgputype          string `json:"vgputype"`
+	Videoram          int64  `json:"videoram"`
 }

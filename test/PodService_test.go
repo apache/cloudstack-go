@@ -128,4 +128,16 @@ func TestPodService(t *testing.T) {
 	}
 	t.Run("UpdatePod", testupdatePod)
 
+	testupdatePodManagementNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["updatePodManagementNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pod.NewUpdatePodManagementNetworkIpRangeParams("currentendip", "currentstartip", "podid")
+		_, err := client.Pod.UpdatePodManagementNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdatePodManagementNetworkIpRange", testupdatePodManagementNetworkIpRange)
+
 }

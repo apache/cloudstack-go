@@ -301,6 +301,21 @@ func (mr *MockUserServiceIfaceMockRecorder) LockUser(p interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LockUser", reflect.TypeOf((*MockUserServiceIface)(nil).LockUser), p)
 }
 
+// MoveUser mocks base method.
+func (m *MockUserServiceIface) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MoveUser", p)
+	ret0, _ := ret[0].(*MoveUserResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// MoveUser indicates an expected call of MoveUser.
+func (mr *MockUserServiceIfaceMockRecorder) MoveUser(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MoveUser", reflect.TypeOf((*MockUserServiceIface)(nil).MoveUser), p)
+}
+
 // NewCreateUserParams mocks base method.
 func (m *MockUserServiceIface) NewCreateUserParams(account, email, firstname, lastname, password, username string) *CreateUserParams {
 	m.ctrl.T.Helper()
@@ -453,6 +468,20 @@ func (m *MockUserServiceIface) NewLockUserParams(id string) *LockUserParams {
 func (mr *MockUserServiceIfaceMockRecorder) NewLockUserParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewLockUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewLockUserParams), id)
+}
+
+// NewMoveUserParams mocks base method.
+func (m *MockUserServiceIface) NewMoveUserParams(id string) *MoveUserParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewMoveUserParams", id)
+	ret0, _ := ret[0].(*MoveUserParams)
+	return ret0
+}
+
+// NewMoveUserParams indicates an expected call of NewMoveUserParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewMoveUserParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMoveUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewMoveUserParams), id)
 }
 
 // NewRegisterUserDataParams mocks base method.
