@@ -431,4 +431,19 @@ func TestHostService(t *testing.T) {
 	}
 	t.Run("DeclareHostAsDegraded", testdeclareHostAsDegraded)
 
+	testupdateSecondaryStorageSelector := func(t *testing.T) {
+		if _, ok := response["updateSecondaryStorageSelector"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewUpdateSecondaryStorageSelectorParams("heuristicrule", "id")
+		r, err := client.Host.UpdateSecondaryStorageSelector(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateSecondaryStorageSelector", testupdateSecondaryStorageSelector)
+
 }

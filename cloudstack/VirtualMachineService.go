@@ -98,6 +98,8 @@ type VirtualMachineServiceIface interface {
 	ListVMSchedule(p *ListVMScheduleParams) (*ListVMScheduleResponse, error)
 	NewListVMScheduleParams(virtualmachineid string) *ListVMScheduleParams
 	GetVMScheduleByID(id string, virtualmachineid string, opts ...OptionFunc) (*VMSchedule, int, error)
+	DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error)
+	NewDeleteVMScheduleParams(virtualmachineid string) *DeleteVMScheduleParams
 }
 
 type AddNicToVirtualMachineParams struct {
@@ -12513,4 +12515,147 @@ type VMSchedule struct {
 	Startdate        string `json:"startdate"`
 	Timezone         string `json:"timezone"`
 	Virtualmachineid string `json:"virtualmachineid"`
+}
+
+type DeleteVMScheduleParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteVMScheduleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["ids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ids", vv)
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteVMScheduleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteVMScheduleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteVMScheduleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DeleteVMScheduleParams) SetIds(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ids"] = v
+}
+
+func (p *DeleteVMScheduleParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
+}
+
+func (p *DeleteVMScheduleParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
+}
+
+func (p *DeleteVMScheduleParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *DeleteVMScheduleParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *DeleteVMScheduleParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteVMScheduleParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewDeleteVMScheduleParams(virtualmachineid string) *DeleteVMScheduleParams {
+	p := &DeleteVMScheduleParams{}
+	p.p = make(map[string]interface{})
+	p.p["virtualmachineid"] = virtualmachineid
+	return p
+}
+
+// Delete VM Schedule.
+func (s *VirtualMachineService) DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error) {
+	resp, err := s.cs.newRequest("deleteVMSchedule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteVMScheduleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type DeleteVMScheduleResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *DeleteVMScheduleResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias DeleteVMScheduleResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

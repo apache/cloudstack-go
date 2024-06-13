@@ -455,4 +455,16 @@ func TestVirtualMachineService(t *testing.T) {
 	}
 	t.Run("ListVMSchedule", testlistVMSchedule)
 
+	testdeleteVMSchedule := func(t *testing.T) {
+		if _, ok := response["deleteVMSchedule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewDeleteVMScheduleParams("virtualmachineid")
+		_, err := client.VirtualMachine.DeleteVMSchedule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteVMSchedule", testdeleteVMSchedule)
+
 }

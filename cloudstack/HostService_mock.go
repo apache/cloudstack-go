@@ -985,6 +985,20 @@ func (mr *MockHostServiceIfaceMockRecorder) NewUpdateHostPasswordParams(password
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateHostPasswordParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewUpdateHostPasswordParams), password, username)
 }
 
+// NewUpdateSecondaryStorageSelectorParams mocks base method.
+func (m *MockHostServiceIface) NewUpdateSecondaryStorageSelectorParams(heuristicrule, id string) *UpdateSecondaryStorageSelectorParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateSecondaryStorageSelectorParams", heuristicrule, id)
+	ret0, _ := ret[0].(*UpdateSecondaryStorageSelectorParams)
+	return ret0
+}
+
+// NewUpdateSecondaryStorageSelectorParams indicates an expected call of NewUpdateSecondaryStorageSelectorParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewUpdateSecondaryStorageSelectorParams(heuristicrule, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateSecondaryStorageSelectorParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewUpdateSecondaryStorageSelectorParams), heuristicrule, id)
+}
+
 // PrepareHostForMaintenance mocks base method.
 func (m *MockHostServiceIface) PrepareHostForMaintenance(p *PrepareHostForMaintenanceParams) (*PrepareHostForMaintenanceResponse, error) {
 	m.ctrl.T.Helper()
@@ -1088,4 +1102,19 @@ func (m *MockHostServiceIface) UpdateHostPassword(p *UpdateHostPasswordParams) (
 func (mr *MockHostServiceIfaceMockRecorder) UpdateHostPassword(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateHostPassword", reflect.TypeOf((*MockHostServiceIface)(nil).UpdateHostPassword), p)
+}
+
+// UpdateSecondaryStorageSelector mocks base method.
+func (m *MockHostServiceIface) UpdateSecondaryStorageSelector(p *UpdateSecondaryStorageSelectorParams) (*UpdateSecondaryStorageSelectorResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateSecondaryStorageSelector", p)
+	ret0, _ := ret[0].(*UpdateSecondaryStorageSelectorResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateSecondaryStorageSelector indicates an expected call of UpdateSecondaryStorageSelector.
+func (mr *MockHostServiceIfaceMockRecorder) UpdateSecondaryStorageSelector(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSecondaryStorageSelector", reflect.TypeOf((*MockHostServiceIface)(nil).UpdateSecondaryStorageSelector), p)
 }

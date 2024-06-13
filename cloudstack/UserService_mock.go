@@ -512,6 +512,20 @@ func (mr *MockUserServiceIfaceMockRecorder) NewRegisterUserKeysParams(id interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterUserKeysParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewRegisterUserKeysParams), id)
 }
 
+// NewSetupUserTwoFactorAuthenticationParams mocks base method.
+func (m *MockUserServiceIface) NewSetupUserTwoFactorAuthenticationParams() *SetupUserTwoFactorAuthenticationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewSetupUserTwoFactorAuthenticationParams")
+	ret0, _ := ret[0].(*SetupUserTwoFactorAuthenticationParams)
+	return ret0
+}
+
+// NewSetupUserTwoFactorAuthenticationParams indicates an expected call of NewSetupUserTwoFactorAuthenticationParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewSetupUserTwoFactorAuthenticationParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewSetupUserTwoFactorAuthenticationParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewSetupUserTwoFactorAuthenticationParams))
+}
+
 // NewUpdateUserParams mocks base method.
 func (m *MockUserServiceIface) NewUpdateUserParams(id string) *UpdateUserParams {
 	m.ctrl.T.Helper()
@@ -554,6 +568,21 @@ func (m *MockUserServiceIface) RegisterUserKeys(p *RegisterUserKeysParams) (*Reg
 func (mr *MockUserServiceIfaceMockRecorder) RegisterUserKeys(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUserKeys", reflect.TypeOf((*MockUserServiceIface)(nil).RegisterUserKeys), p)
+}
+
+// SetupUserTwoFactorAuthentication mocks base method.
+func (m *MockUserServiceIface) SetupUserTwoFactorAuthentication(p *SetupUserTwoFactorAuthenticationParams) (*SetupUserTwoFactorAuthenticationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetupUserTwoFactorAuthentication", p)
+	ret0, _ := ret[0].(*SetupUserTwoFactorAuthenticationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetupUserTwoFactorAuthentication indicates an expected call of SetupUserTwoFactorAuthentication.
+func (mr *MockUserServiceIfaceMockRecorder) SetupUserTwoFactorAuthentication(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetupUserTwoFactorAuthentication", reflect.TypeOf((*MockUserServiceIface)(nil).SetupUserTwoFactorAuthentication), p)
 }
 
 // UpdateUser mocks base method.

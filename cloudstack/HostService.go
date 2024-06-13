@@ -96,6 +96,8 @@ type HostServiceIface interface {
 	NewListHostHAResourcesParams() *ListHostHAResourcesParams
 	DeclareHostAsDegraded(p *DeclareHostAsDegradedParams) (*DeclareHostAsDegradedResponse, error)
 	NewDeclareHostAsDegradedParams(id string) *DeclareHostAsDegradedParams
+	UpdateSecondaryStorageSelector(p *UpdateSecondaryStorageSelectorParams) (*UpdateSecondaryStorageSelectorResponse, error)
+	NewUpdateSecondaryStorageSelectorParams(heuristicrule string, id string) *UpdateSecondaryStorageSelectorParams
 }
 
 type AddBaremetalHostParams struct {
@@ -5535,11 +5537,14 @@ func (s *HostService) CreateSecondaryStorageSelector(p *CreateSecondaryStorageSe
 	if err != nil {
 		return nil, err
 	}
-
-	var r CreateSecondaryStorageSelectorResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	fmt.Println(string(resp))
+	var nested struct {
+		Response CreateSecondaryStorageSelectorResponse `json:"heuristics"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
@@ -5864,4 +5869,105 @@ type DeclareHostAsDegradedResponseGpugroupVgpu struct {
 	Remainingcapacity int64  `json:"remainingcapacity"`
 	Vgputype          string `json:"vgputype"`
 	Videoram          int64  `json:"videoram"`
+}
+
+type UpdateSecondaryStorageSelectorParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["heuristicrule"]; found {
+		u.Set("heuristicrule", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) SetHeuristicrule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["heuristicrule"] = v
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) ResetHeuristicrule() {
+	if p.p != nil && p.p["heuristicrule"] != nil {
+		delete(p.p, "heuristicrule")
+	}
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) GetHeuristicrule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["heuristicrule"].(string)
+	return value, ok
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateSecondaryStorageSelectorParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateSecondaryStorageSelectorParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewUpdateSecondaryStorageSelectorParams(heuristicrule string, id string) *UpdateSecondaryStorageSelectorParams {
+	p := &UpdateSecondaryStorageSelectorParams{}
+	p.p = make(map[string]interface{})
+	p.p["heuristicrule"] = heuristicrule
+	p.p["id"] = id
+	return p
+}
+
+// Updates an existing secondary storage selector.
+func (s *HostService) UpdateSecondaryStorageSelector(p *UpdateSecondaryStorageSelectorParams) (*UpdateSecondaryStorageSelectorResponse, error) {
+	resp, err := s.cs.newRequest("updateSecondaryStorageSelector", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response UpdateSecondaryStorageSelectorResponse `json:"heuristics"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type UpdateSecondaryStorageSelectorResponse struct {
+	Created       string `json:"created"`
+	Description   string `json:"description"`
+	Heuristicrule string `json:"heuristicrule"`
+	Id            string `json:"id"`
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Name          string `json:"name"`
+	Removed       string `json:"removed"`
+	Type          string `json:"type"`
+	Zoneid        string `json:"zoneid"`
 }

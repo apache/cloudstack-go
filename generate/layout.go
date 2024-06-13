@@ -124,6 +124,7 @@ var layout = apiInfo{
 		"createVMSchedule",
 		"updateVMSchedule",
 		"listVMSchedule",
+		"deleteVMSchedule",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -222,6 +223,7 @@ var layout = apiInfo{
 		"removeSecondaryStorageSelector",
 		"listHostHAResources",
 		"declareHostAsDegraded",
+		"updateSecondaryStorageSelector",
 	},
 	"VolumeService": {
 		"attachVolume",
@@ -355,6 +357,7 @@ var layout = apiInfo{
 		"deleteUserData",
 		"registerUserData",
 		"moveUser",
+		"setupUserTwoFactorAuthentication",
 	},
 	"LDAPService": {
 		"addLdapConfiguration",
@@ -795,5 +798,8 @@ var layout = apiInfo{
 	},
 	"MetricsService": {
 		"listInfrastructure",
+	},
+	"ManagementService": {
+		"listManagementServers",
 	},
 }

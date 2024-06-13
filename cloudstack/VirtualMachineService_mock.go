@@ -127,6 +127,21 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) CreateVMSchedule(p interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateVMSchedule", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).CreateVMSchedule), p)
 }
 
+// DeleteVMSchedule mocks base method.
+func (m *MockVirtualMachineServiceIface) DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteVMSchedule", p)
+	ret0, _ := ret[0].(*DeleteVMScheduleResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteVMSchedule indicates an expected call of DeleteVMSchedule.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) DeleteVMSchedule(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteVMSchedule", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).DeleteVMSchedule), p)
+}
+
 // DeployVirtualMachine mocks base method.
 func (m *MockVirtualMachineServiceIface) DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error) {
 	m.ctrl.T.Helper()
@@ -600,6 +615,20 @@ func (m *MockVirtualMachineServiceIface) NewCreateVMScheduleParams(action, sched
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewCreateVMScheduleParams(action, schedule, timezone, virtualmachineid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateVMScheduleParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewCreateVMScheduleParams), action, schedule, timezone, virtualmachineid)
+}
+
+// NewDeleteVMScheduleParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewDeleteVMScheduleParams(virtualmachineid string) *DeleteVMScheduleParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteVMScheduleParams", virtualmachineid)
+	ret0, _ := ret[0].(*DeleteVMScheduleParams)
+	return ret0
+}
+
+// NewDeleteVMScheduleParams indicates an expected call of NewDeleteVMScheduleParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewDeleteVMScheduleParams(virtualmachineid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteVMScheduleParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewDeleteVMScheduleParams), virtualmachineid)
 }
 
 // NewDeployVirtualMachineParams mocks base method.

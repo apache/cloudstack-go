@@ -133,6 +133,7 @@ type CloudStackClient struct {
 	LDAP                LDAPServiceIface
 	Limit               LimitServiceIface
 	LoadBalancer        LoadBalancerServiceIface
+	Management          ManagementServiceIface
 	Metrics             MetricsServiceIface
 	NAT                 NATServiceIface
 	NetworkACL          NetworkACLServiceIface
@@ -246,6 +247,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.LDAP = NewLDAPService(cs)
 	cs.Limit = NewLimitService(cs)
 	cs.LoadBalancer = NewLoadBalancerService(cs)
+	cs.Management = NewManagementService(cs)
 	cs.Metrics = NewMetricsService(cs)
 	cs.NAT = NewNATService(cs)
 	cs.NetworkACL = NewNetworkACLService(cs)
@@ -332,6 +334,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
 	cs.Limit = NewMockLimitServiceIface(ctrl)
 	cs.LoadBalancer = NewMockLoadBalancerServiceIface(ctrl)
+	cs.Management = NewMockManagementServiceIface(ctrl)
 	cs.Metrics = NewMockMetricsServiceIface(ctrl)
 	cs.NAT = NewMockNATServiceIface(ctrl)
 	cs.NetworkACL = NewMockNetworkACLServiceIface(ctrl)
@@ -1030,6 +1033,14 @@ type LoadBalancerService struct {
 
 func NewLoadBalancerService(cs *CloudStackClient) LoadBalancerServiceIface {
 	return &LoadBalancerService{cs: cs}
+}
+
+type ManagementService struct {
+	cs *CloudStackClient
+}
+
+func NewManagementService(cs *CloudStackClient) ManagementServiceIface {
+	return &ManagementService{cs: cs}
 }
 
 type MetricsService struct {

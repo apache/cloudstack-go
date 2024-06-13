@@ -62,6 +62,8 @@ type UserServiceIface interface {
 	NewRegisterUserDataParams(name string, userdata string) *RegisterUserDataParams
 	MoveUser(p *MoveUserParams) (*MoveUserResponse, error)
 	NewMoveUserParams(id string) *MoveUserParams
+	SetupUserTwoFactorAuthentication(p *SetupUserTwoFactorAuthenticationParams) (*SetupUserTwoFactorAuthenticationResponse, error)
+	NewSetupUserTwoFactorAuthenticationParams() *SetupUserTwoFactorAuthenticationParams
 }
 
 type CreateUserParams struct {
@@ -2690,4 +2692,124 @@ func (r *MoveUserResponse) UnmarshalJSON(b []byte) error {
 
 	type alias MoveUserResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type SetupUserTwoFactorAuthenticationParams struct {
+	p map[string]interface{}
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["enable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enable", vv)
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
+	}
+	if v, found := p.p["userid"]; found {
+		u.Set("userid", v.(string))
+	}
+	return u
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) SetEnable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enable"] = v
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) ResetEnable() {
+	if p.p != nil && p.p["enable"] != nil {
+		delete(p.p, "enable")
+	}
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) GetEnable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enable"].(bool)
+	return value, ok
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
+	return value, ok
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) SetUserid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userid"] = v
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) ResetUserid() {
+	if p.p != nil && p.p["userid"] != nil {
+		delete(p.p, "userid")
+	}
+}
+
+func (p *SetupUserTwoFactorAuthenticationParams) GetUserid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new SetupUserTwoFactorAuthenticationParams instance,
+// as then you are sure you have configured all required params
+func (s *UserService) NewSetupUserTwoFactorAuthenticationParams() *SetupUserTwoFactorAuthenticationParams {
+	p := &SetupUserTwoFactorAuthenticationParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Setup the 2FA for the user.
+func (s *UserService) SetupUserTwoFactorAuthentication(p *SetupUserTwoFactorAuthenticationParams) (*SetupUserTwoFactorAuthenticationResponse, error) {
+	resp, err := s.cs.newPostRequest("setupUserTwoFactorAuthentication", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response SetupUserTwoFactorAuthenticationResponse `json:"setup2fa"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type SetupUserTwoFactorAuthenticationResponse struct {
+	Accountid  string `json:"accountid"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Secretcode string `json:"secretcode"`
+	Username   string `json:"username"`
 }
