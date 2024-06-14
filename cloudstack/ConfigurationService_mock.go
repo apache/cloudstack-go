@@ -167,6 +167,20 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) NewUpdateConfigurationParam
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewUpdateConfigurationParams), name)
 }
 
+// NewUpdateStorageCapabilitiesParams mocks base method.
+func (m *MockConfigurationServiceIface) NewUpdateStorageCapabilitiesParams(id string) *UpdateStorageCapabilitiesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateStorageCapabilitiesParams", id)
+	ret0, _ := ret[0].(*UpdateStorageCapabilitiesParams)
+	return ret0
+}
+
+// NewUpdateStorageCapabilitiesParams indicates an expected call of NewUpdateStorageCapabilitiesParams.
+func (mr *MockConfigurationServiceIfaceMockRecorder) NewUpdateStorageCapabilitiesParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateStorageCapabilitiesParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewUpdateStorageCapabilitiesParams), id)
+}
+
 // ResetConfiguration mocks base method.
 func (m *MockConfigurationServiceIface) ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error) {
 	m.ctrl.T.Helper()
@@ -195,4 +209,19 @@ func (m *MockConfigurationServiceIface) UpdateConfiguration(p *UpdateConfigurati
 func (mr *MockConfigurationServiceIfaceMockRecorder) UpdateConfiguration(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateConfiguration", reflect.TypeOf((*MockConfigurationServiceIface)(nil).UpdateConfiguration), p)
+}
+
+// UpdateStorageCapabilities mocks base method.
+func (m *MockConfigurationServiceIface) UpdateStorageCapabilities(p *UpdateStorageCapabilitiesParams) (*UpdateStorageCapabilitiesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateStorageCapabilities", p)
+	ret0, _ := ret[0].(*UpdateStorageCapabilitiesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateStorageCapabilities indicates an expected call of UpdateStorageCapabilities.
+func (mr *MockConfigurationServiceIfaceMockRecorder) UpdateStorageCapabilities(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateStorageCapabilities", reflect.TypeOf((*MockConfigurationServiceIface)(nil).UpdateStorageCapabilities), p)
 }

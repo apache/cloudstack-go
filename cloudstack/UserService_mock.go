@@ -82,6 +82,21 @@ func (mr *MockUserServiceIfaceMockRecorder) DeleteUser(p interface{}) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUser", reflect.TypeOf((*MockUserServiceIface)(nil).DeleteUser), p)
 }
 
+// DeleteUserData mocks base method.
+func (m *MockUserServiceIface) DeleteUserData(p *DeleteUserDataParams) (*DeleteUserDataResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteUserData", p)
+	ret0, _ := ret[0].(*DeleteUserDataResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteUserData indicates an expected call of DeleteUserData.
+func (mr *MockUserServiceIfaceMockRecorder) DeleteUserData(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUserData", reflect.TypeOf((*MockUserServiceIface)(nil).DeleteUserData), p)
+}
+
 // DisableUser mocks base method.
 func (m *MockUserServiceIface) DisableUser(p *DisableUserParams) (*DisableUserResponse, error) {
 	m.ctrl.T.Helper()
@@ -148,6 +163,69 @@ func (mr *MockUserServiceIfaceMockRecorder) GetUserByID(id interface{}, opts ...
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByID", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserByID), varargs...)
 }
 
+// GetUserDataByID mocks base method.
+func (m *MockUserServiceIface) GetUserDataByID(id string, opts ...OptionFunc) (*UserData, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetUserDataByID", varargs...)
+	ret0, _ := ret[0].(*UserData)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUserDataByID indicates an expected call of GetUserDataByID.
+func (mr *MockUserServiceIfaceMockRecorder) GetUserDataByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserDataByID", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserDataByID), varargs...)
+}
+
+// GetUserDataByName mocks base method.
+func (m *MockUserServiceIface) GetUserDataByName(name string, opts ...OptionFunc) (*UserData, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetUserDataByName", varargs...)
+	ret0, _ := ret[0].(*UserData)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUserDataByName indicates an expected call of GetUserDataByName.
+func (mr *MockUserServiceIfaceMockRecorder) GetUserDataByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserDataByName", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserDataByName), varargs...)
+}
+
+// GetUserDataID mocks base method.
+func (m *MockUserServiceIface) GetUserDataID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetUserDataID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetUserDataID indicates an expected call of GetUserDataID.
+func (mr *MockUserServiceIfaceMockRecorder) GetUserDataID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserDataID", reflect.TypeOf((*MockUserServiceIface)(nil).GetUserDataID), varargs...)
+}
+
 // GetUserKeys mocks base method.
 func (m *MockUserServiceIface) GetUserKeys(p *GetUserKeysParams) (*GetUserKeysResponse, error) {
 	m.ctrl.T.Helper()
@@ -176,6 +254,21 @@ func (m *MockUserServiceIface) GetVirtualMachineUserData(p *GetVirtualMachineUse
 func (mr *MockUserServiceIfaceMockRecorder) GetVirtualMachineUserData(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVirtualMachineUserData", reflect.TypeOf((*MockUserServiceIface)(nil).GetVirtualMachineUserData), p)
+}
+
+// ListUserData mocks base method.
+func (m *MockUserServiceIface) ListUserData(p *ListUserDataParams) (*ListUserDataResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListUserData", p)
+	ret0, _ := ret[0].(*ListUserDataResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListUserData indicates an expected call of ListUserData.
+func (mr *MockUserServiceIfaceMockRecorder) ListUserData(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListUserData", reflect.TypeOf((*MockUserServiceIface)(nil).ListUserData), p)
 }
 
 // ListUsers mocks base method.
@@ -208,6 +301,21 @@ func (mr *MockUserServiceIfaceMockRecorder) LockUser(p interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LockUser", reflect.TypeOf((*MockUserServiceIface)(nil).LockUser), p)
 }
 
+// MoveUser mocks base method.
+func (m *MockUserServiceIface) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MoveUser", p)
+	ret0, _ := ret[0].(*MoveUserResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// MoveUser indicates an expected call of MoveUser.
+func (mr *MockUserServiceIfaceMockRecorder) MoveUser(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MoveUser", reflect.TypeOf((*MockUserServiceIface)(nil).MoveUser), p)
+}
+
 // NewCreateUserParams mocks base method.
 func (m *MockUserServiceIface) NewCreateUserParams(account, email, firstname, lastname, password, username string) *CreateUserParams {
 	m.ctrl.T.Helper()
@@ -220,6 +328,20 @@ func (m *MockUserServiceIface) NewCreateUserParams(account, email, firstname, la
 func (mr *MockUserServiceIfaceMockRecorder) NewCreateUserParams(account, email, firstname, lastname, password, username interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewCreateUserParams), account, email, firstname, lastname, password, username)
+}
+
+// NewDeleteUserDataParams mocks base method.
+func (m *MockUserServiceIface) NewDeleteUserDataParams(id string) *DeleteUserDataParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteUserDataParams", id)
+	ret0, _ := ret[0].(*DeleteUserDataParams)
+	return ret0
+}
+
+// NewDeleteUserDataParams indicates an expected call of NewDeleteUserDataParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewDeleteUserDataParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteUserDataParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewDeleteUserDataParams), id)
 }
 
 // NewDeleteUserParams mocks base method.
@@ -306,6 +428,20 @@ func (mr *MockUserServiceIfaceMockRecorder) NewGetVirtualMachineUserDataParams(v
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetVirtualMachineUserDataParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewGetVirtualMachineUserDataParams), virtualmachineid)
 }
 
+// NewListUserDataParams mocks base method.
+func (m *MockUserServiceIface) NewListUserDataParams() *ListUserDataParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListUserDataParams")
+	ret0, _ := ret[0].(*ListUserDataParams)
+	return ret0
+}
+
+// NewListUserDataParams indicates an expected call of NewListUserDataParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewListUserDataParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListUserDataParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewListUserDataParams))
+}
+
 // NewListUsersParams mocks base method.
 func (m *MockUserServiceIface) NewListUsersParams() *ListUsersParams {
 	m.ctrl.T.Helper()
@@ -334,6 +470,34 @@ func (mr *MockUserServiceIfaceMockRecorder) NewLockUserParams(id interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewLockUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewLockUserParams), id)
 }
 
+// NewMoveUserParams mocks base method.
+func (m *MockUserServiceIface) NewMoveUserParams(id string) *MoveUserParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewMoveUserParams", id)
+	ret0, _ := ret[0].(*MoveUserParams)
+	return ret0
+}
+
+// NewMoveUserParams indicates an expected call of NewMoveUserParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewMoveUserParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMoveUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewMoveUserParams), id)
+}
+
+// NewRegisterUserDataParams mocks base method.
+func (m *MockUserServiceIface) NewRegisterUserDataParams(name, userdata string) *RegisterUserDataParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRegisterUserDataParams", name, userdata)
+	ret0, _ := ret[0].(*RegisterUserDataParams)
+	return ret0
+}
+
+// NewRegisterUserDataParams indicates an expected call of NewRegisterUserDataParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewRegisterUserDataParams(name, userdata interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterUserDataParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewRegisterUserDataParams), name, userdata)
+}
+
 // NewRegisterUserKeysParams mocks base method.
 func (m *MockUserServiceIface) NewRegisterUserKeysParams(id string) *RegisterUserKeysParams {
 	m.ctrl.T.Helper()
@@ -346,6 +510,20 @@ func (m *MockUserServiceIface) NewRegisterUserKeysParams(id string) *RegisterUse
 func (mr *MockUserServiceIfaceMockRecorder) NewRegisterUserKeysParams(id interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterUserKeysParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewRegisterUserKeysParams), id)
+}
+
+// NewSetupUserTwoFactorAuthenticationParams mocks base method.
+func (m *MockUserServiceIface) NewSetupUserTwoFactorAuthenticationParams() *SetupUserTwoFactorAuthenticationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewSetupUserTwoFactorAuthenticationParams")
+	ret0, _ := ret[0].(*SetupUserTwoFactorAuthenticationParams)
+	return ret0
+}
+
+// NewSetupUserTwoFactorAuthenticationParams indicates an expected call of NewSetupUserTwoFactorAuthenticationParams.
+func (mr *MockUserServiceIfaceMockRecorder) NewSetupUserTwoFactorAuthenticationParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewSetupUserTwoFactorAuthenticationParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewSetupUserTwoFactorAuthenticationParams))
 }
 
 // NewUpdateUserParams mocks base method.
@@ -362,6 +540,21 @@ func (mr *MockUserServiceIfaceMockRecorder) NewUpdateUserParams(id interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateUserParams", reflect.TypeOf((*MockUserServiceIface)(nil).NewUpdateUserParams), id)
 }
 
+// RegisterUserData mocks base method.
+func (m *MockUserServiceIface) RegisterUserData(p *RegisterUserDataParams) (*RegisterUserDataResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterUserData", p)
+	ret0, _ := ret[0].(*RegisterUserDataResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterUserData indicates an expected call of RegisterUserData.
+func (mr *MockUserServiceIfaceMockRecorder) RegisterUserData(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUserData", reflect.TypeOf((*MockUserServiceIface)(nil).RegisterUserData), p)
+}
+
 // RegisterUserKeys mocks base method.
 func (m *MockUserServiceIface) RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUserKeysResponse, error) {
 	m.ctrl.T.Helper()
@@ -375,6 +568,21 @@ func (m *MockUserServiceIface) RegisterUserKeys(p *RegisterUserKeysParams) (*Reg
 func (mr *MockUserServiceIfaceMockRecorder) RegisterUserKeys(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUserKeys", reflect.TypeOf((*MockUserServiceIface)(nil).RegisterUserKeys), p)
+}
+
+// SetupUserTwoFactorAuthentication mocks base method.
+func (m *MockUserServiceIface) SetupUserTwoFactorAuthentication(p *SetupUserTwoFactorAuthenticationParams) (*SetupUserTwoFactorAuthenticationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SetupUserTwoFactorAuthentication", p)
+	ret0, _ := ret[0].(*SetupUserTwoFactorAuthenticationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// SetupUserTwoFactorAuthentication indicates an expected call of SetupUserTwoFactorAuthentication.
+func (mr *MockUserServiceIfaceMockRecorder) SetupUserTwoFactorAuthentication(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetupUserTwoFactorAuthentication", reflect.TypeOf((*MockUserServiceIface)(nil).SetupUserTwoFactorAuthentication), p)
 }
 
 // UpdateUser mocks base method.

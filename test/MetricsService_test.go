@@ -25,8 +25,8 @@ import (
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestCertificateService(t *testing.T) {
-	service := "CertificateService"
+func TestMetricsService(t *testing.T) {
+	service := "MetricsService"
 	response, err := readData(service)
 	if err != nil {
 		t.Skipf("Skipping test as %v", err)
@@ -35,40 +35,16 @@ func TestCertificateService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testuploadCustomCertificate := func(t *testing.T) {
-		if _, ok := response["uploadCustomCertificate"]; !ok {
+	testlistInfrastructure := func(t *testing.T) {
+		if _, ok := response["listInfrastructure"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
-		_, err := client.Certificate.UploadCustomCertificate(p)
+		p := client.Metrics.NewListInfrastructureParams()
+		_, err := client.Metrics.ListInfrastructure(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
-
-	testlistCAProviders := func(t *testing.T) {
-		if _, ok := response["listCAProviders"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Certificate.NewListCAProvidersParams()
-		_, err := client.Certificate.ListCAProviders(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("ListCAProviders", testlistCAProviders)
-
-	testprovisionCertificate := func(t *testing.T) {
-		if _, ok := response["provisionCertificate"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Certificate.NewProvisionCertificateParams("hostid")
-		_, err := client.Certificate.ProvisionCertificate(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("ProvisionCertificate", testprovisionCertificate)
+	t.Run("ListInfrastructure", testlistInfrastructure)
 
 }

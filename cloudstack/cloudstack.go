@@ -117,6 +117,7 @@ type CloudStackClient struct {
 	Configuration       ConfigurationServiceIface
 	ConsoleEndpoint     ConsoleEndpointServiceIface
 	Custom              CustomServiceIface
+	Diagnostics         DiagnosticsServiceIface
 	DiskOffering        DiskOfferingServiceIface
 	Domain              DomainServiceIface
 	Event               EventServiceIface
@@ -132,6 +133,8 @@ type CloudStackClient struct {
 	LDAP                LDAPServiceIface
 	Limit               LimitServiceIface
 	LoadBalancer        LoadBalancerServiceIface
+	Management          ManagementServiceIface
+	Metrics             MetricsServiceIface
 	NAT                 NATServiceIface
 	NetworkACL          NetworkACLServiceIface
 	NetworkDevice       NetworkDeviceServiceIface
@@ -139,6 +142,8 @@ type CloudStackClient struct {
 	Network             NetworkServiceIface
 	Nic                 NicServiceIface
 	NiciraNVP           NiciraNVPServiceIface
+	Oauth               OauthServiceIface
+	ObjectStore         ObjectStoreServiceIface
 	OutofbandManagement OutofbandManagementServiceIface
 	OvsElement          OvsElementServiceIface
 	Pod                 PodServiceIface
@@ -147,6 +152,7 @@ type CloudStackClient struct {
 	Project             ProjectServiceIface
 	Quota               QuotaServiceIface
 	Region              RegionServiceIface
+	Registration        RegistrationServiceIface
 	Resourcemetadata    ResourcemetadataServiceIface
 	Resourcetags        ResourcetagsServiceIface
 	Role                RoleServiceIface
@@ -154,6 +160,7 @@ type CloudStackClient struct {
 	SSH                 SSHServiceIface
 	SecurityGroup       SecurityGroupServiceIface
 	ServiceOffering     ServiceOfferingServiceIface
+	Shutdown            ShutdownServiceIface
 	Snapshot            SnapshotServiceIface
 	StoragePool         StoragePoolServiceIface
 	StratosphereSSP     StratosphereSSPServiceIface
@@ -224,6 +231,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Configuration = NewConfigurationService(cs)
 	cs.ConsoleEndpoint = NewConsoleEndpointService(cs)
 	cs.Custom = NewCustomService(cs)
+	cs.Diagnostics = NewDiagnosticsService(cs)
 	cs.DiskOffering = NewDiskOfferingService(cs)
 	cs.Domain = NewDomainService(cs)
 	cs.Event = NewEventService(cs)
@@ -239,6 +247,8 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.LDAP = NewLDAPService(cs)
 	cs.Limit = NewLimitService(cs)
 	cs.LoadBalancer = NewLoadBalancerService(cs)
+	cs.Management = NewManagementService(cs)
+	cs.Metrics = NewMetricsService(cs)
 	cs.NAT = NewNATService(cs)
 	cs.NetworkACL = NewNetworkACLService(cs)
 	cs.NetworkDevice = NewNetworkDeviceService(cs)
@@ -246,6 +256,8 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
+	cs.Oauth = NewOauthService(cs)
+	cs.ObjectStore = NewObjectStoreService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
 	cs.OvsElement = NewOvsElementService(cs)
 	cs.Pod = NewPodService(cs)
@@ -254,6 +266,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Project = NewProjectService(cs)
 	cs.Quota = NewQuotaService(cs)
 	cs.Region = NewRegionService(cs)
+	cs.Registration = NewRegistrationService(cs)
 	cs.Resourcemetadata = NewResourcemetadataService(cs)
 	cs.Resourcetags = NewResourcetagsService(cs)
 	cs.Role = NewRoleService(cs)
@@ -261,6 +274,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.SSH = NewSSHService(cs)
 	cs.SecurityGroup = NewSecurityGroupService(cs)
 	cs.ServiceOffering = NewServiceOfferingService(cs)
+	cs.Shutdown = NewShutdownService(cs)
 	cs.Snapshot = NewSnapshotService(cs)
 	cs.StoragePool = NewStoragePoolService(cs)
 	cs.StratosphereSSP = NewStratosphereSSPService(cs)
@@ -304,6 +318,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Configuration = NewMockConfigurationServiceIface(ctrl)
 	cs.ConsoleEndpoint = NewMockConsoleEndpointServiceIface(ctrl)
 	cs.Custom = NewMockCustomServiceIface(ctrl)
+	cs.Diagnostics = NewMockDiagnosticsServiceIface(ctrl)
 	cs.DiskOffering = NewMockDiskOfferingServiceIface(ctrl)
 	cs.Domain = NewMockDomainServiceIface(ctrl)
 	cs.Event = NewMockEventServiceIface(ctrl)
@@ -319,6 +334,8 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.LDAP = NewMockLDAPServiceIface(ctrl)
 	cs.Limit = NewMockLimitServiceIface(ctrl)
 	cs.LoadBalancer = NewMockLoadBalancerServiceIface(ctrl)
+	cs.Management = NewMockManagementServiceIface(ctrl)
+	cs.Metrics = NewMockMetricsServiceIface(ctrl)
 	cs.NAT = NewMockNATServiceIface(ctrl)
 	cs.NetworkACL = NewMockNetworkACLServiceIface(ctrl)
 	cs.NetworkDevice = NewMockNetworkDeviceServiceIface(ctrl)
@@ -326,6 +343,8 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Network = NewMockNetworkServiceIface(ctrl)
 	cs.Nic = NewMockNicServiceIface(ctrl)
 	cs.NiciraNVP = NewMockNiciraNVPServiceIface(ctrl)
+	cs.Oauth = NewMockOauthServiceIface(ctrl)
+	cs.ObjectStore = NewMockObjectStoreServiceIface(ctrl)
 	cs.OutofbandManagement = NewMockOutofbandManagementServiceIface(ctrl)
 	cs.OvsElement = NewMockOvsElementServiceIface(ctrl)
 	cs.Pod = NewMockPodServiceIface(ctrl)
@@ -334,6 +353,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Project = NewMockProjectServiceIface(ctrl)
 	cs.Quota = NewMockQuotaServiceIface(ctrl)
 	cs.Region = NewMockRegionServiceIface(ctrl)
+	cs.Registration = NewMockRegistrationServiceIface(ctrl)
 	cs.Resourcemetadata = NewMockResourcemetadataServiceIface(ctrl)
 	cs.Resourcetags = NewMockResourcetagsServiceIface(ctrl)
 	cs.Role = NewMockRoleServiceIface(ctrl)
@@ -341,6 +361,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.SSH = NewMockSSHServiceIface(ctrl)
 	cs.SecurityGroup = NewMockSecurityGroupServiceIface(ctrl)
 	cs.ServiceOffering = NewMockServiceOfferingServiceIface(ctrl)
+	cs.Shutdown = NewMockShutdownServiceIface(ctrl)
 	cs.Snapshot = NewMockSnapshotServiceIface(ctrl)
 	cs.StoragePool = NewMockStoragePoolServiceIface(ctrl)
 	cs.StratosphereSSP = NewMockStratosphereSSPServiceIface(ctrl)
@@ -886,6 +907,14 @@ func NewCustomService(cs *CloudStackClient) CustomServiceIface {
 	return &CustomService{cs: cs}
 }
 
+type DiagnosticsService struct {
+	cs *CloudStackClient
+}
+
+func NewDiagnosticsService(cs *CloudStackClient) DiagnosticsServiceIface {
+	return &DiagnosticsService{cs: cs}
+}
+
 type DiskOfferingService struct {
 	cs *CloudStackClient
 }
@@ -1006,6 +1035,22 @@ func NewLoadBalancerService(cs *CloudStackClient) LoadBalancerServiceIface {
 	return &LoadBalancerService{cs: cs}
 }
 
+type ManagementService struct {
+	cs *CloudStackClient
+}
+
+func NewManagementService(cs *CloudStackClient) ManagementServiceIface {
+	return &ManagementService{cs: cs}
+}
+
+type MetricsService struct {
+	cs *CloudStackClient
+}
+
+func NewMetricsService(cs *CloudStackClient) MetricsServiceIface {
+	return &MetricsService{cs: cs}
+}
+
 type NATService struct {
 	cs *CloudStackClient
 }
@@ -1060,6 +1105,22 @@ type NiciraNVPService struct {
 
 func NewNiciraNVPService(cs *CloudStackClient) NiciraNVPServiceIface {
 	return &NiciraNVPService{cs: cs}
+}
+
+type OauthService struct {
+	cs *CloudStackClient
+}
+
+func NewOauthService(cs *CloudStackClient) OauthServiceIface {
+	return &OauthService{cs: cs}
+}
+
+type ObjectStoreService struct {
+	cs *CloudStackClient
+}
+
+func NewObjectStoreService(cs *CloudStackClient) ObjectStoreServiceIface {
+	return &ObjectStoreService{cs: cs}
 }
 
 type OutofbandManagementService struct {
@@ -1126,6 +1187,14 @@ func NewRegionService(cs *CloudStackClient) RegionServiceIface {
 	return &RegionService{cs: cs}
 }
 
+type RegistrationService struct {
+	cs *CloudStackClient
+}
+
+func NewRegistrationService(cs *CloudStackClient) RegistrationServiceIface {
+	return &RegistrationService{cs: cs}
+}
+
 type ResourcemetadataService struct {
 	cs *CloudStackClient
 }
@@ -1180,6 +1249,14 @@ type ServiceOfferingService struct {
 
 func NewServiceOfferingService(cs *CloudStackClient) ServiceOfferingServiceIface {
 	return &ServiceOfferingService{cs: cs}
+}
+
+type ShutdownService struct {
+	cs *CloudStackClient
+}
+
+func NewShutdownService(cs *CloudStackClient) ShutdownServiceIface {
+	return &ShutdownService{cs: cs}
 }
 
 type SnapshotService struct {

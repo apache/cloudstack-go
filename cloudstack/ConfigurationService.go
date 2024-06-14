@@ -36,6 +36,8 @@ type ConfigurationServiceIface interface {
 	NewUpdateConfigurationParams(name string) *UpdateConfigurationParams
 	ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error)
 	NewResetConfigurationParams(name string) *ResetConfigurationParams
+	UpdateStorageCapabilities(p *UpdateStorageCapabilitiesParams) (*UpdateStorageCapabilitiesResponse, error)
+	NewUpdateStorageCapabilitiesParams(id string) *UpdateStorageCapabilitiesParams
 }
 
 type ListCapabilitiesParams struct {
@@ -1099,4 +1101,96 @@ type ResetConfigurationResponse struct {
 	Subgroup     string `json:"subgroup"`
 	Type         string `json:"type"`
 	Value        string `json:"value"`
+}
+
+type UpdateStorageCapabilitiesParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateStorageCapabilitiesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateStorageCapabilitiesParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateStorageCapabilitiesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateStorageCapabilitiesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateStorageCapabilitiesParams instance,
+// as then you are sure you have configured all required params
+func (s *ConfigurationService) NewUpdateStorageCapabilitiesParams(id string) *UpdateStorageCapabilitiesParams {
+	p := &UpdateStorageCapabilitiesParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Syncs capabilities of storage pools
+func (s *ConfigurationService) UpdateStorageCapabilities(p *UpdateStorageCapabilitiesParams) (*UpdateStorageCapabilitiesResponse, error) {
+	resp, err := s.cs.newRequest("updateStorageCapabilities", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateStorageCapabilitiesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type UpdateStorageCapabilitiesResponse struct {
+	Allocatediops        int64             `json:"allocatediops"`
+	Capacityiops         int64             `json:"capacityiops"`
+	Clusterid            string            `json:"clusterid"`
+	Clustername          string            `json:"clustername"`
+	Created              string            `json:"created"`
+	Disksizeallocated    int64             `json:"disksizeallocated"`
+	Disksizetotal        int64             `json:"disksizetotal"`
+	Disksizeused         int64             `json:"disksizeused"`
+	Hasannotations       bool              `json:"hasannotations"`
+	Hypervisor           string            `json:"hypervisor"`
+	Id                   string            `json:"id"`
+	Ipaddress            string            `json:"ipaddress"`
+	Istagarule           bool              `json:"istagarule"`
+	JobID                string            `json:"jobid"`
+	Jobstatus            int               `json:"jobstatus"`
+	Name                 string            `json:"name"`
+	Overprovisionfactor  string            `json:"overprovisionfactor"`
+	Path                 string            `json:"path"`
+	Podid                string            `json:"podid"`
+	Podname              string            `json:"podname"`
+	Provider             string            `json:"provider"`
+	Scope                string            `json:"scope"`
+	State                string            `json:"state"`
+	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Suitableformigration bool              `json:"suitableformigration"`
+	Tags                 string            `json:"tags"`
+	Type                 string            `json:"type"`
+	Zoneid               string            `json:"zoneid"`
+	Zonename             string            `json:"zonename"`
 }

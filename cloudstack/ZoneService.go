@@ -58,6 +58,17 @@ type ZoneServiceIface interface {
 	NewReleaseDedicatedZoneParams(zoneid string) *ReleaseDedicatedZoneParams
 	UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, error)
 	NewUpdateZoneParams(id string) *UpdateZoneParams
+	ListVmwareDcVms(p *ListVmwareDcVmsParams) (*ListVmwareDcVmsResponse, error)
+	NewListVmwareDcVmsParams() *ListVmwareDcVmsParams
+	AddVmwareDc(p *AddVmwareDcParams) (*AddVmwareDcResponse, error)
+	NewAddVmwareDcParams(name string, vcenter string, zoneid string) *AddVmwareDcParams
+	ListVmwareDcs(p *ListVmwareDcsParams) (*ListVmwareDcsResponse, error)
+	NewListVmwareDcsParams(zoneid string) *ListVmwareDcsParams
+	GetVmwareDcID(keyword string, zoneid string, opts ...OptionFunc) (string, int, error)
+	UpdateVmwareDc(p *UpdateVmwareDcParams) (*UpdateVmwareDcResponse, error)
+	NewUpdateVmwareDcParams(zoneid string) *UpdateVmwareDcParams
+	RemoveVmwareDc(p *RemoveVmwareDcParams) (*RemoveVmwareDcResponse, error)
+	NewRemoveVmwareDcParams(zoneid string) *RemoveVmwareDcParams
 }
 
 type CreateZoneParams struct {
@@ -2865,4 +2876,913 @@ type UpdateZoneResponseCapacity struct {
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
+}
+
+type ListVmwareDcVmsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListVmwareDcVmsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["datacentername"]; found {
+		u.Set("datacentername", v.(string))
+	}
+	if v, found := p.p["existingvcenterid"]; found {
+		u.Set("existingvcenterid", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["password"]; found {
+		u.Set("password", v.(string))
+	}
+	if v, found := p.p["username"]; found {
+		u.Set("username", v.(string))
+	}
+	if v, found := p.p["vcenter"]; found {
+		u.Set("vcenter", v.(string))
+	}
+	return u
+}
+
+func (p *ListVmwareDcVmsParams) SetDatacentername(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["datacentername"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetDatacentername() {
+	if p.p != nil && p.p["datacentername"] != nil {
+		delete(p.p, "datacentername")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetDatacentername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["datacentername"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetExistingvcenterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["existingvcenterid"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetExistingvcenterid() {
+	if p.p != nil && p.p["existingvcenterid"] != nil {
+		delete(p.p, "existingvcenterid")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetExistingvcenterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["existingvcenterid"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetPassword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["password"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetUsername(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["username"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetVcenter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vcenter"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetVcenter() {
+	if p.p != nil && p.p["vcenter"] != nil {
+		delete(p.p, "vcenter")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetVcenter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vcenter"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListVmwareDcVmsParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewListVmwareDcVmsParams() *ListVmwareDcVmsParams {
+	p := &ListVmwareDcVmsParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists the VMs in a VMware Datacenter
+func (s *ZoneService) ListVmwareDcVms(p *ListVmwareDcVmsParams) (*ListVmwareDcVmsResponse, error) {
+	resp, err := s.cs.newRequest("listVmwareDcVms", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListVmwareDcVmsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListVmwareDcVmsResponse struct {
+	Count       int           `json:"count"`
+	VmwareDcVms []*VmwareDcVm `json:"unmanagedinstance"`
+}
+
+type VmwareDcVm struct {
+	Clusterid        string           `json:"clusterid"`
+	Clustername      string           `json:"clustername"`
+	Cpucorepersocket int              `json:"cpucorepersocket"`
+	Cpunumber        int              `json:"cpunumber"`
+	Cpuspeed         int              `json:"cpuspeed"`
+	Disk             []VmwareDcVmDisk `json:"disk"`
+	Hostid           string           `json:"hostid"`
+	Hostname         string           `json:"hostname"`
+	JobID            string           `json:"jobid"`
+	Jobstatus        int              `json:"jobstatus"`
+	Memory           int              `json:"memory"`
+	Name             string           `json:"name"`
+	Nic              []Nic            `json:"nic"`
+	Osdisplayname    string           `json:"osdisplayname"`
+	Osid             string           `json:"osid"`
+	Powerstate       string           `json:"powerstate"`
+}
+
+type VmwareDcVmDisk struct {
+	Capacity       int64  `json:"capacity"`
+	Controller     string `json:"controller"`
+	Controllerunit int    `json:"controllerunit"`
+	Datastorehost  string `json:"datastorehost"`
+	Datastorename  string `json:"datastorename"`
+	Datastorepath  string `json:"datastorepath"`
+	Datastoretype  string `json:"datastoretype"`
+	Id             string `json:"id"`
+	Imagepath      string `json:"imagepath"`
+	Label          string `json:"label"`
+	Position       int    `json:"position"`
+}
+
+type AddVmwareDcParams struct {
+	p map[string]interface{}
+}
+
+func (p *AddVmwareDcParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["password"]; found {
+		u.Set("password", v.(string))
+	}
+	if v, found := p.p["username"]; found {
+		u.Set("username", v.(string))
+	}
+	if v, found := p.p["vcenter"]; found {
+		u.Set("vcenter", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *AddVmwareDcParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *AddVmwareDcParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *AddVmwareDcParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *AddVmwareDcParams) SetPassword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["password"] = v
+}
+
+func (p *AddVmwareDcParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
+func (p *AddVmwareDcParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
+func (p *AddVmwareDcParams) SetUsername(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["username"] = v
+}
+
+func (p *AddVmwareDcParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
+func (p *AddVmwareDcParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
+func (p *AddVmwareDcParams) SetVcenter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vcenter"] = v
+}
+
+func (p *AddVmwareDcParams) ResetVcenter() {
+	if p.p != nil && p.p["vcenter"] != nil {
+		delete(p.p, "vcenter")
+	}
+}
+
+func (p *AddVmwareDcParams) GetVcenter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vcenter"].(string)
+	return value, ok
+}
+
+func (p *AddVmwareDcParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *AddVmwareDcParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *AddVmwareDcParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new AddVmwareDcParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewAddVmwareDcParams(name string, vcenter string, zoneid string) *AddVmwareDcParams {
+	p := &AddVmwareDcParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	p.p["vcenter"] = vcenter
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Adds a VMware datacenter to specified zone
+func (s *ZoneService) AddVmwareDc(p *AddVmwareDcParams) (*AddVmwareDcResponse, error) {
+	resp, err := s.cs.newRequest("addVmwareDc", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response AddVmwareDcResponse `json:"vmwaredc"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type AddVmwareDcResponse struct {
+	Id        string `json:"id"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Name      string `json:"name"`
+	Vcenter   string `json:"vcenter"`
+	Zoneid    int64  `json:"zoneid"`
+}
+
+type ListVmwareDcsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListVmwareDcsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ListVmwareDcsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListVmwareDcsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListVmwareDcsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListVmwareDcsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListVmwareDcsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListVmwareDcsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListVmwareDcsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListVmwareDcsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListVmwareDcsParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListVmwareDcsParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ListVmwareDcsParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListVmwareDcsParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewListVmwareDcsParams(zoneid string) *ListVmwareDcsParams {
+	p := &ListVmwareDcsParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ZoneService) GetVmwareDcID(keyword string, zoneid string, opts ...OptionFunc) (string, int, error) {
+	p := &ListVmwareDcsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["keyword"] = keyword
+	p.p["zoneid"] = zoneid
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListVmwareDcs(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+	}
+
+	if l.Count == 1 {
+		return l.VmwareDcs[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.VmwareDcs {
+			if v.Name == keyword {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+}
+
+// Retrieves VMware DC(s) associated with a zone.
+func (s *ZoneService) ListVmwareDcs(p *ListVmwareDcsParams) (*ListVmwareDcsResponse, error) {
+	resp, err := s.cs.newRequest("listVmwareDcs", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListVmwareDcsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListVmwareDcsResponse struct {
+	Count     int         `json:"count"`
+	VmwareDcs []*VmwareDc `json:"vmwaredc"`
+}
+
+type VmwareDc struct {
+	Id        string `json:"id"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Name      string `json:"name"`
+	Vcenter   string `json:"vcenter"`
+	Zoneid    int64  `json:"zoneid"`
+}
+
+type UpdateVmwareDcParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateVmwareDcParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["password"]; found {
+		u.Set("password", v.(string))
+	}
+	if v, found := p.p["username"]; found {
+		u.Set("username", v.(string))
+	}
+	if v, found := p.p["vcenter"]; found {
+		u.Set("vcenter", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateVmwareDcParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *UpdateVmwareDcParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *UpdateVmwareDcParams) SetPassword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["password"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetPassword() {
+	if p.p != nil && p.p["password"] != nil {
+		delete(p.p, "password")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetPassword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["password"].(string)
+	return value, ok
+}
+
+func (p *UpdateVmwareDcParams) SetUsername(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["username"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetUsername() {
+	if p.p != nil && p.p["username"] != nil {
+		delete(p.p, "username")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetUsername() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
+func (p *UpdateVmwareDcParams) SetVcenter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vcenter"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetVcenter() {
+	if p.p != nil && p.p["vcenter"] != nil {
+		delete(p.p, "vcenter")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetVcenter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vcenter"].(string)
+	return value, ok
+}
+
+func (p *UpdateVmwareDcParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *UpdateVmwareDcParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *UpdateVmwareDcParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateVmwareDcParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewUpdateVmwareDcParams(zoneid string) *UpdateVmwareDcParams {
+	p := &UpdateVmwareDcParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Updates a VMware datacenter details for a zone
+func (s *ZoneService) UpdateVmwareDc(p *UpdateVmwareDcParams) (*UpdateVmwareDcResponse, error) {
+	resp, err := s.cs.newRequest("updateVmwareDc", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response UpdateVmwareDcResponse `json:"vmwaredc"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type UpdateVmwareDcResponse struct {
+	Id        string `json:"id"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Name      string `json:"name"`
+	Vcenter   string `json:"vcenter"`
+	Zoneid    int64  `json:"zoneid"`
+}
+
+type RemoveVmwareDcParams struct {
+	p map[string]interface{}
+}
+
+func (p *RemoveVmwareDcParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *RemoveVmwareDcParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *RemoveVmwareDcParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *RemoveVmwareDcParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RemoveVmwareDcParams instance,
+// as then you are sure you have configured all required params
+func (s *ZoneService) NewRemoveVmwareDcParams(zoneid string) *RemoveVmwareDcParams {
+	p := &RemoveVmwareDcParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Remove a VMware datacenter from a zone.
+func (s *ZoneService) RemoveVmwareDc(p *RemoveVmwareDcParams) (*RemoveVmwareDcResponse, error) {
+	resp, err := s.cs.newRequest("removeVmwareDc", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RemoveVmwareDcResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type RemoveVmwareDcResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *RemoveVmwareDcResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias RemoveVmwareDcResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

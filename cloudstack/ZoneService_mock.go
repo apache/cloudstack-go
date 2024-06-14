@@ -52,6 +52,21 @@ func (m *MockZoneServiceIface) EXPECT() *MockZoneServiceIfaceMockRecorder {
 	return m.recorder
 }
 
+// AddVmwareDc mocks base method.
+func (m *MockZoneServiceIface) AddVmwareDc(p *AddVmwareDcParams) (*AddVmwareDcResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddVmwareDc", p)
+	ret0, _ := ret[0].(*AddVmwareDcResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddVmwareDc indicates an expected call of AddVmwareDc.
+func (mr *MockZoneServiceIfaceMockRecorder) AddVmwareDc(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddVmwareDc", reflect.TypeOf((*MockZoneServiceIface)(nil).AddVmwareDc), p)
+}
+
 // CreateZone mocks base method.
 func (m *MockZoneServiceIface) CreateZone(p *CreateZoneParams) (*CreateZoneResponse, error) {
 	m.ctrl.T.Helper()
@@ -155,6 +170,27 @@ func (m *MockZoneServiceIface) EnableOutOfBandManagementForZone(p *EnableOutOfBa
 func (mr *MockZoneServiceIfaceMockRecorder) EnableOutOfBandManagementForZone(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "EnableOutOfBandManagementForZone", reflect.TypeOf((*MockZoneServiceIface)(nil).EnableOutOfBandManagementForZone), p)
+}
+
+// GetVmwareDcID mocks base method.
+func (m *MockZoneServiceIface) GetVmwareDcID(keyword, zoneid string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{keyword, zoneid}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVmwareDcID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVmwareDcID indicates an expected call of GetVmwareDcID.
+func (mr *MockZoneServiceIfaceMockRecorder) GetVmwareDcID(keyword, zoneid interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{keyword, zoneid}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVmwareDcID", reflect.TypeOf((*MockZoneServiceIface)(nil).GetVmwareDcID), varargs...)
 }
 
 // GetZoneByID mocks base method.
@@ -298,6 +334,36 @@ func (mr *MockZoneServiceIfaceMockRecorder) ListDedicatedZones(p interface{}) *g
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDedicatedZones", reflect.TypeOf((*MockZoneServiceIface)(nil).ListDedicatedZones), p)
 }
 
+// ListVmwareDcVms mocks base method.
+func (m *MockZoneServiceIface) ListVmwareDcVms(p *ListVmwareDcVmsParams) (*ListVmwareDcVmsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListVmwareDcVms", p)
+	ret0, _ := ret[0].(*ListVmwareDcVmsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListVmwareDcVms indicates an expected call of ListVmwareDcVms.
+func (mr *MockZoneServiceIfaceMockRecorder) ListVmwareDcVms(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVmwareDcVms", reflect.TypeOf((*MockZoneServiceIface)(nil).ListVmwareDcVms), p)
+}
+
+// ListVmwareDcs mocks base method.
+func (m *MockZoneServiceIface) ListVmwareDcs(p *ListVmwareDcsParams) (*ListVmwareDcsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListVmwareDcs", p)
+	ret0, _ := ret[0].(*ListVmwareDcsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListVmwareDcs indicates an expected call of ListVmwareDcs.
+func (mr *MockZoneServiceIfaceMockRecorder) ListVmwareDcs(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVmwareDcs", reflect.TypeOf((*MockZoneServiceIface)(nil).ListVmwareDcs), p)
+}
+
 // ListZones mocks base method.
 func (m *MockZoneServiceIface) ListZones(p *ListZonesParams) (*ListZonesResponse, error) {
 	m.ctrl.T.Helper()
@@ -326,6 +392,20 @@ func (m *MockZoneServiceIface) ListZonesMetrics(p *ListZonesMetricsParams) (*Lis
 func (mr *MockZoneServiceIfaceMockRecorder) ListZonesMetrics(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListZonesMetrics", reflect.TypeOf((*MockZoneServiceIface)(nil).ListZonesMetrics), p)
+}
+
+// NewAddVmwareDcParams mocks base method.
+func (m *MockZoneServiceIface) NewAddVmwareDcParams(name, vcenter, zoneid string) *AddVmwareDcParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewAddVmwareDcParams", name, vcenter, zoneid)
+	ret0, _ := ret[0].(*AddVmwareDcParams)
+	return ret0
+}
+
+// NewAddVmwareDcParams indicates an expected call of NewAddVmwareDcParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewAddVmwareDcParams(name, vcenter, zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddVmwareDcParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewAddVmwareDcParams), name, vcenter, zoneid)
 }
 
 // NewCreateZoneParams mocks base method.
@@ -440,6 +520,34 @@ func (mr *MockZoneServiceIfaceMockRecorder) NewListDedicatedZonesParams() *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDedicatedZonesParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewListDedicatedZonesParams))
 }
 
+// NewListVmwareDcVmsParams mocks base method.
+func (m *MockZoneServiceIface) NewListVmwareDcVmsParams() *ListVmwareDcVmsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListVmwareDcVmsParams")
+	ret0, _ := ret[0].(*ListVmwareDcVmsParams)
+	return ret0
+}
+
+// NewListVmwareDcVmsParams indicates an expected call of NewListVmwareDcVmsParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewListVmwareDcVmsParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVmwareDcVmsParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewListVmwareDcVmsParams))
+}
+
+// NewListVmwareDcsParams mocks base method.
+func (m *MockZoneServiceIface) NewListVmwareDcsParams(zoneid string) *ListVmwareDcsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListVmwareDcsParams", zoneid)
+	ret0, _ := ret[0].(*ListVmwareDcsParams)
+	return ret0
+}
+
+// NewListVmwareDcsParams indicates an expected call of NewListVmwareDcsParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewListVmwareDcsParams(zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVmwareDcsParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewListVmwareDcsParams), zoneid)
+}
+
 // NewListZonesMetricsParams mocks base method.
 func (m *MockZoneServiceIface) NewListZonesMetricsParams() *ListZonesMetricsParams {
 	m.ctrl.T.Helper()
@@ -482,6 +590,34 @@ func (mr *MockZoneServiceIfaceMockRecorder) NewReleaseDedicatedZoneParams(zoneid
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleaseDedicatedZoneParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewReleaseDedicatedZoneParams), zoneid)
 }
 
+// NewRemoveVmwareDcParams mocks base method.
+func (m *MockZoneServiceIface) NewRemoveVmwareDcParams(zoneid string) *RemoveVmwareDcParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveVmwareDcParams", zoneid)
+	ret0, _ := ret[0].(*RemoveVmwareDcParams)
+	return ret0
+}
+
+// NewRemoveVmwareDcParams indicates an expected call of NewRemoveVmwareDcParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewRemoveVmwareDcParams(zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveVmwareDcParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewRemoveVmwareDcParams), zoneid)
+}
+
+// NewUpdateVmwareDcParams mocks base method.
+func (m *MockZoneServiceIface) NewUpdateVmwareDcParams(zoneid string) *UpdateVmwareDcParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateVmwareDcParams", zoneid)
+	ret0, _ := ret[0].(*UpdateVmwareDcParams)
+	return ret0
+}
+
+// NewUpdateVmwareDcParams indicates an expected call of NewUpdateVmwareDcParams.
+func (mr *MockZoneServiceIfaceMockRecorder) NewUpdateVmwareDcParams(zoneid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateVmwareDcParams", reflect.TypeOf((*MockZoneServiceIface)(nil).NewUpdateVmwareDcParams), zoneid)
+}
+
 // NewUpdateZoneParams mocks base method.
 func (m *MockZoneServiceIface) NewUpdateZoneParams(id string) *UpdateZoneParams {
 	m.ctrl.T.Helper()
@@ -509,6 +645,36 @@ func (m *MockZoneServiceIface) ReleaseDedicatedZone(p *ReleaseDedicatedZoneParam
 func (mr *MockZoneServiceIfaceMockRecorder) ReleaseDedicatedZone(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseDedicatedZone", reflect.TypeOf((*MockZoneServiceIface)(nil).ReleaseDedicatedZone), p)
+}
+
+// RemoveVmwareDc mocks base method.
+func (m *MockZoneServiceIface) RemoveVmwareDc(p *RemoveVmwareDcParams) (*RemoveVmwareDcResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveVmwareDc", p)
+	ret0, _ := ret[0].(*RemoveVmwareDcResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveVmwareDc indicates an expected call of RemoveVmwareDc.
+func (mr *MockZoneServiceIfaceMockRecorder) RemoveVmwareDc(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveVmwareDc", reflect.TypeOf((*MockZoneServiceIface)(nil).RemoveVmwareDc), p)
+}
+
+// UpdateVmwareDc mocks base method.
+func (m *MockZoneServiceIface) UpdateVmwareDc(p *UpdateVmwareDcParams) (*UpdateVmwareDcResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateVmwareDc", p)
+	ret0, _ := ret[0].(*UpdateVmwareDcResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateVmwareDc indicates an expected call of UpdateVmwareDc.
+func (mr *MockZoneServiceIfaceMockRecorder) UpdateVmwareDc(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateVmwareDc", reflect.TypeOf((*MockZoneServiceIface)(nil).UpdateVmwareDc), p)
 }
 
 // UpdateZone mocks base method.

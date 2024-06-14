@@ -218,4 +218,19 @@ func TestTemplateService(t *testing.T) {
 	}
 	t.Run("ProvisionTemplateDirectDownloadCertificate", testprovisionTemplateDirectDownloadCertificate)
 
+	testlinkUserDataToTemplate := func(t *testing.T) {
+		if _, ok := response["linkUserDataToTemplate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Template.NewLinkUserDataToTemplateParams()
+		r, err := client.Template.LinkUserDataToTemplate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("LinkUserDataToTemplate", testlinkUserDataToTemplate)
+
 }

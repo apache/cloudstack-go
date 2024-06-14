@@ -50,6 +50,13 @@ type ImageStoreServiceIface interface {
 	GetSecondaryStagingStoreByID(id string, opts ...OptionFunc) (*SecondaryStagingStore, int, error)
 	UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjectStoreParams) (*UpdateCloudToUseObjectStoreResponse, error)
 	NewUpdateCloudToUseObjectStoreParams(provider string) *UpdateCloudToUseObjectStoreParams
+	ListImageStoreObjects(p *ListImageStoreObjectsParams) (*ListImageStoreObjectsResponse, error)
+	NewListImageStoreObjectsParams(id string) *ListImageStoreObjectsParams
+	GetImageStoreObjectByID(id string, opts ...OptionFunc) (*ImageStoreObject, int, error)
+	UpdateImageStore(p *UpdateImageStoreParams) (*UpdateImageStoreResponse, error)
+	NewUpdateImageStoreParams(id string, readonly bool) *UpdateImageStoreParams
+	DownloadImageStoreObject(p *DownloadImageStoreObjectParams) (*DownloadImageStoreObjectResponse, error)
+	NewDownloadImageStoreObjectParams(id string) *DownloadImageStoreObjectParams
 }
 
 type AddImageStoreParams struct {
@@ -1768,4 +1775,442 @@ type UpdateCloudToUseObjectStoreResponse struct {
 	Url            string `json:"url"`
 	Zoneid         string `json:"zoneid"`
 	Zonename       string `json:"zonename"`
+}
+
+type ListImageStoreObjectsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListImageStoreObjectsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["path"]; found {
+		u.Set("path", v.(string))
+	}
+	return u
+}
+
+func (p *ListImageStoreObjectsParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListImageStoreObjectsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListImageStoreObjectsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListImageStoreObjectsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListImageStoreObjectsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListImageStoreObjectsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListImageStoreObjectsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListImageStoreObjectsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListImageStoreObjectsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListImageStoreObjectsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListImageStoreObjectsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListImageStoreObjectsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListImageStoreObjectsParams) SetPath(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["path"] = v
+}
+
+func (p *ListImageStoreObjectsParams) ResetPath() {
+	if p.p != nil && p.p["path"] != nil {
+		delete(p.p, "path")
+	}
+}
+
+func (p *ListImageStoreObjectsParams) GetPath() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["path"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListImageStoreObjectsParams instance,
+// as then you are sure you have configured all required params
+func (s *ImageStoreService) NewListImageStoreObjectsParams(id string) *ListImageStoreObjectsParams {
+	p := &ListImageStoreObjectsParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ImageStoreService) GetImageStoreObjectByID(id string, opts ...OptionFunc) (*ImageStoreObject, int, error) {
+	p := &ListImageStoreObjectsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListImageStoreObjects(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.ImageStoreObjects[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for ImageStoreObject UUID: %s!", id)
+}
+
+// Lists objects at specified path on an image store.
+func (s *ImageStoreService) ListImageStoreObjects(p *ListImageStoreObjectsParams) (*ListImageStoreObjectsResponse, error) {
+	resp, err := s.cs.newRequest("listImageStoreObjects", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListImageStoreObjectsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListImageStoreObjectsResponse struct {
+	Count             int                 `json:"count"`
+	ImageStoreObjects []*ImageStoreObject `json:"datastoreobject"`
+}
+
+type ImageStoreObject struct {
+	Format      string `json:"format"`
+	Isdirectory bool   `json:"isdirectory"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Lastupdated string `json:"lastupdated"`
+	Name        string `json:"name"`
+	Size        int64  `json:"size"`
+	Snapshotid  string `json:"snapshotid"`
+	Templateid  string `json:"templateid"`
+	Volumeid    string `json:"volumeid"`
+}
+
+type UpdateImageStoreParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateImageStoreParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["readonly"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("readonly", vv)
+	}
+	return u
+}
+
+func (p *UpdateImageStoreParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateImageStoreParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateImageStoreParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateImageStoreParams) SetReadonly(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["readonly"] = v
+}
+
+func (p *UpdateImageStoreParams) ResetReadonly() {
+	if p.p != nil && p.p["readonly"] != nil {
+		delete(p.p, "readonly")
+	}
+}
+
+func (p *UpdateImageStoreParams) GetReadonly() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["readonly"].(bool)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateImageStoreParams instance,
+// as then you are sure you have configured all required params
+func (s *ImageStoreService) NewUpdateImageStoreParams(id string, readonly bool) *UpdateImageStoreParams {
+	p := &UpdateImageStoreParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	p.p["readonly"] = readonly
+	return p
+}
+
+// Updates image store read-only status
+func (s *ImageStoreService) UpdateImageStore(p *UpdateImageStoreParams) (*UpdateImageStoreResponse, error) {
+	resp, err := s.cs.newRequest("updateImageStore", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response UpdateImageStoreResponse `json:"imagestore"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type UpdateImageStoreResponse struct {
+	Disksizetotal  int64  `json:"disksizetotal"`
+	Disksizeused   int64  `json:"disksizeused"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Protocol       string `json:"protocol"`
+	Providername   string `json:"providername"`
+	Readonly       bool   `json:"readonly"`
+	Scope          string `json:"scope"`
+	Url            string `json:"url"`
+	Zoneid         string `json:"zoneid"`
+	Zonename       string `json:"zonename"`
+}
+
+type DownloadImageStoreObjectParams struct {
+	p map[string]interface{}
+}
+
+func (p *DownloadImageStoreObjectParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["path"]; found {
+		u.Set("path", v.(string))
+	}
+	return u
+}
+
+func (p *DownloadImageStoreObjectParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DownloadImageStoreObjectParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DownloadImageStoreObjectParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DownloadImageStoreObjectParams) SetPath(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["path"] = v
+}
+
+func (p *DownloadImageStoreObjectParams) ResetPath() {
+	if p.p != nil && p.p["path"] != nil {
+		delete(p.p, "path")
+	}
+}
+
+func (p *DownloadImageStoreObjectParams) GetPath() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["path"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DownloadImageStoreObjectParams instance,
+// as then you are sure you have configured all required params
+func (s *ImageStoreService) NewDownloadImageStoreObjectParams(id string) *DownloadImageStoreObjectParams {
+	p := &DownloadImageStoreObjectParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Download object at a specified path on an image store.
+func (s *ImageStoreService) DownloadImageStoreObject(p *DownloadImageStoreObjectParams) (*DownloadImageStoreObjectResponse, error) {
+	resp, err := s.cs.newRequest("downloadImageStoreObject", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DownloadImageStoreObjectResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DownloadImageStoreObjectResponse struct {
+	Accountid        string `json:"accountid"`
+	Created          string `json:"created"`
+	ExtractId        string `json:"extractId"`
+	ExtractMode      string `json:"extractMode"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Resultstring     string `json:"resultstring"`
+	State            string `json:"state"`
+	Status           string `json:"status"`
+	Storagetype      string `json:"storagetype"`
+	Uploadpercentage int    `json:"uploadpercentage"`
+	Url              string `json:"url"`
+	Zoneid           string `json:"zoneid"`
+	Zonename         string `json:"zonename"`
 }

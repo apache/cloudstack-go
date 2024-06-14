@@ -25,8 +25,8 @@ import (
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestCertificateService(t *testing.T) {
-	service := "CertificateService"
+func TestObjectStoreService(t *testing.T) {
+	service := "ObjectStoreService"
 	response, err := readData(service)
 	if err != nil {
 		t.Skipf("Skipping test as %v", err)
@@ -35,40 +35,55 @@ func TestCertificateService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testuploadCustomCertificate := func(t *testing.T) {
-		if _, ok := response["uploadCustomCertificate"]; !ok {
+	testcreateBucket := func(t *testing.T) {
+		if _, ok := response["createBucket"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
-		_, err := client.Certificate.UploadCustomCertificate(p)
+		p := client.ObjectStore.NewCreateBucketParams("name", "objectstorageid")
+		r, err := client.ObjectStore.CreateBucket(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
 	}
-	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
+	t.Run("CreateBucket", testcreateBucket)
 
-	testlistCAProviders := func(t *testing.T) {
-		if _, ok := response["listCAProviders"]; !ok {
+	testdeleteBucket := func(t *testing.T) {
+		if _, ok := response["deleteBucket"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewListCAProvidersParams()
-		_, err := client.Certificate.ListCAProviders(p)
+		p := client.ObjectStore.NewDeleteBucketParams("id")
+		_, err := client.ObjectStore.DeleteBucket(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ListCAProviders", testlistCAProviders)
+	t.Run("DeleteBucket", testdeleteBucket)
 
-	testprovisionCertificate := func(t *testing.T) {
-		if _, ok := response["provisionCertificate"]; !ok {
+	testupdateBucket := func(t *testing.T) {
+		if _, ok := response["updateBucket"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewProvisionCertificateParams("hostid")
-		_, err := client.Certificate.ProvisionCertificate(p)
+		p := client.ObjectStore.NewUpdateBucketParams("id")
+		_, err := client.ObjectStore.UpdateBucket(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ProvisionCertificate", testprovisionCertificate)
+	t.Run("UpdateBucket", testupdateBucket)
+
+	testlistBuckets := func(t *testing.T) {
+		if _, ok := response["listBuckets"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ObjectStore.NewListBucketsParams()
+		_, err := client.ObjectStore.ListBuckets(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListBuckets", testlistBuckets)
 
 }

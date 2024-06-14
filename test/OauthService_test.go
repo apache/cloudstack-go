@@ -25,8 +25,8 @@ import (
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestCertificateService(t *testing.T) {
-	service := "CertificateService"
+func TestOauthService(t *testing.T) {
+	service := "OauthService"
 	response, err := readData(service)
 	if err != nil {
 		t.Skipf("Skipping test as %v", err)
@@ -35,40 +35,43 @@ func TestCertificateService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testuploadCustomCertificate := func(t *testing.T) {
-		if _, ok := response["uploadCustomCertificate"]; !ok {
+	testlistOauthProvider := func(t *testing.T) {
+		if _, ok := response["listOauthProvider"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
-		_, err := client.Certificate.UploadCustomCertificate(p)
+		p := client.Oauth.NewListOauthProviderParams()
+		_, err := client.Oauth.ListOauthProvider(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
+	t.Run("ListOauthProvider", testlistOauthProvider)
 
-	testlistCAProviders := func(t *testing.T) {
-		if _, ok := response["listCAProviders"]; !ok {
+	testupdateOauthProvider := func(t *testing.T) {
+		if _, ok := response["updateOauthProvider"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewListCAProvidersParams()
-		_, err := client.Certificate.ListCAProviders(p)
+		p := client.Oauth.NewUpdateOauthProviderParams("id")
+		r, err := client.Oauth.UpdateOauthProvider(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
 	}
-	t.Run("ListCAProviders", testlistCAProviders)
+	t.Run("UpdateOauthProvider", testupdateOauthProvider)
 
-	testprovisionCertificate := func(t *testing.T) {
-		if _, ok := response["provisionCertificate"]; !ok {
+	testdeleteOauthProvider := func(t *testing.T) {
+		if _, ok := response["deleteOauthProvider"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewProvisionCertificateParams("hostid")
-		_, err := client.Certificate.ProvisionCertificate(p)
+		p := client.Oauth.NewDeleteOauthProviderParams("id")
+		_, err := client.Oauth.DeleteOauthProvider(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ProvisionCertificate", testprovisionCertificate)
+	t.Run("DeleteOauthProvider", testdeleteOauthProvider)
 
 }

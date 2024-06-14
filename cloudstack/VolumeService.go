@@ -70,6 +70,13 @@ type VolumeServiceIface interface {
 	NewUploadVolumeParams(format string, name string, url string, zoneid string) *UploadVolumeParams
 	ChangeOfferingForVolume(p *ChangeOfferingForVolumeParams) (*ChangeOfferingForVolumeResponse, error)
 	NewChangeOfferingForVolumeParams(diskofferingid string, id string) *ChangeOfferingForVolumeParams
+	ListVolumesUsageHistory(p *ListVolumesUsageHistoryParams) (*ListVolumesUsageHistoryResponse, error)
+	NewListVolumesUsageHistoryParams() *ListVolumesUsageHistoryParams
+	GetVolumesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error)
+	GetVolumesUsageHistoryByName(name string, opts ...OptionFunc) (*VolumesUsageHistory, int, error)
+	GetVolumesUsageHistoryByID(id string, opts ...OptionFunc) (*VolumesUsageHistory, int, error)
+	AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error)
+	NewAssignVolumeParams(volumeid string) *AssignVolumeParams
 }
 
 type AttachVolumeParams struct {
@@ -4942,6 +4949,514 @@ func (s *VolumeService) ChangeOfferingForVolume(p *ChangeOfferingForVolumeParams
 }
 
 type ChangeOfferingForVolumeResponse struct {
+	Account                    string `json:"account"`
+	Attached                   string `json:"attached"`
+	Chaininfo                  string `json:"chaininfo"`
+	Clusterid                  string `json:"clusterid"`
+	Clustername                string `json:"clustername"`
+	Created                    string `json:"created"`
+	Destroyed                  bool   `json:"destroyed"`
+	Deviceid                   int64  `json:"deviceid"`
+	DiskBytesReadRate          int64  `json:"diskBytesReadRate"`
+	DiskBytesWriteRate         int64  `json:"diskBytesWriteRate"`
+	DiskIopsReadRate           int64  `json:"diskIopsReadRate"`
+	DiskIopsWriteRate          int64  `json:"diskIopsWriteRate"`
+	Diskioread                 int64  `json:"diskioread"`
+	Diskiowrite                int64  `json:"diskiowrite"`
+	Diskkbsread                int64  `json:"diskkbsread"`
+	Diskkbswrite               int64  `json:"diskkbswrite"`
+	Diskofferingdisplaytext    string `json:"diskofferingdisplaytext"`
+	Diskofferingid             string `json:"diskofferingid"`
+	Diskofferingname           string `json:"diskofferingname"`
+	Displayvolume              bool   `json:"displayvolume"`
+	Domain                     string `json:"domain"`
+	Domainid                   string `json:"domainid"`
+	Externaluuid               string `json:"externaluuid"`
+	Hasannotations             bool   `json:"hasannotations"`
+	Hypervisor                 string `json:"hypervisor"`
+	Id                         string `json:"id"`
+	Isextractable              bool   `json:"isextractable"`
+	Isodisplaytext             string `json:"isodisplaytext"`
+	Isoid                      string `json:"isoid"`
+	Isoname                    string `json:"isoname"`
+	JobID                      string `json:"jobid"`
+	Jobstatus                  int    `json:"jobstatus"`
+	Maxiops                    int64  `json:"maxiops"`
+	Miniops                    int64  `json:"miniops"`
+	Name                       string `json:"name"`
+	Path                       string `json:"path"`
+	Physicalsize               int64  `json:"physicalsize"`
+	Podid                      string `json:"podid"`
+	Podname                    string `json:"podname"`
+	Project                    string `json:"project"`
+	Projectid                  string `json:"projectid"`
+	Provisioningtype           string `json:"provisioningtype"`
+	Quiescevm                  bool   `json:"quiescevm"`
+	Serviceofferingdisplaytext string `json:"serviceofferingdisplaytext"`
+	Serviceofferingid          string `json:"serviceofferingid"`
+	Serviceofferingname        string `json:"serviceofferingname"`
+	Size                       int64  `json:"size"`
+	Snapshotid                 string `json:"snapshotid"`
+	State                      string `json:"state"`
+	Status                     string `json:"status"`
+	Storage                    string `json:"storage"`
+	Storageid                  string `json:"storageid"`
+	Storagetype                string `json:"storagetype"`
+	Supportsstoragesnapshot    bool   `json:"supportsstoragesnapshot"`
+	Tags                       []Tags `json:"tags"`
+	Templatedisplaytext        string `json:"templatedisplaytext"`
+	Templateid                 string `json:"templateid"`
+	Templatename               string `json:"templatename"`
+	Type                       string `json:"type"`
+	Utilization                string `json:"utilization"`
+	Virtualmachineid           string `json:"virtualmachineid"`
+	Virtualsize                int64  `json:"virtualsize"`
+	Vmdisplayname              string `json:"vmdisplayname"`
+	Vmname                     string `json:"vmname"`
+	Vmstate                    string `json:"vmstate"`
+	Vmtype                     string `json:"vmtype"`
+	Zoneid                     string `json:"zoneid"`
+	Zonename                   string `json:"zonename"`
+}
+
+type ListVolumesUsageHistoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListVolumesUsageHistoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["ids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ids", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	return u
+}
+
+func (p *ListVolumesUsageHistoryParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetIds(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ids"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListVolumesUsageHistoryParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *ListVolumesUsageHistoryParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
+func (p *ListVolumesUsageHistoryParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListVolumesUsageHistoryParams instance,
+// as then you are sure you have configured all required params
+func (s *VolumeService) NewListVolumesUsageHistoryParams() *ListVolumesUsageHistoryParams {
+	p := &ListVolumesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VolumeService) GetVolumesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListVolumesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListVolumesUsageHistory(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.VolumesUsageHistory[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.VolumesUsageHistory {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VolumeService) GetVolumesUsageHistoryByName(name string, opts ...OptionFunc) (*VolumesUsageHistory, int, error) {
+	id, count, err := s.GetVolumesUsageHistoryID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetVolumesUsageHistoryByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *VolumeService) GetVolumesUsageHistoryByID(id string, opts ...OptionFunc) (*VolumesUsageHistory, int, error) {
+	p := &ListVolumesUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListVolumesUsageHistory(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.VolumesUsageHistory[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for VolumesUsageHistory UUID: %s!", id)
+}
+
+// Lists volume stats
+func (s *VolumeService) ListVolumesUsageHistory(p *ListVolumesUsageHistoryParams) (*ListVolumesUsageHistoryResponse, error) {
+	resp, err := s.cs.newRequest("listVolumesUsageHistory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListVolumesUsageHistoryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListVolumesUsageHistoryResponse struct {
+	Count               int                    `json:"count"`
+	VolumesUsageHistory []*VolumesUsageHistory `json:"volume"`
+}
+
+type VolumesUsageHistory struct {
+	Id        string   `json:"id"`
+	JobID     string   `json:"jobid"`
+	Jobstatus int      `json:"jobstatus"`
+	Name      string   `json:"name"`
+	Stats     []string `json:"stats"`
+}
+
+type AssignVolumeParams struct {
+	p map[string]interface{}
+}
+
+func (p *AssignVolumeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["volumeid"]; found {
+		u.Set("volumeid", v.(string))
+	}
+	return u
+}
+
+func (p *AssignVolumeParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *AssignVolumeParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
+func (p *AssignVolumeParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *AssignVolumeParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *AssignVolumeParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *AssignVolumeParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *AssignVolumeParams) SetVolumeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["volumeid"] = v
+}
+
+func (p *AssignVolumeParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
+func (p *AssignVolumeParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new AssignVolumeParams instance,
+// as then you are sure you have configured all required params
+func (s *VolumeService) NewAssignVolumeParams(volumeid string) *AssignVolumeParams {
+	p := &AssignVolumeParams{}
+	p.p = make(map[string]interface{})
+	p.p["volumeid"] = volumeid
+	return p
+}
+
+// Changes ownership of a Volume from one account to another.
+func (s *VolumeService) AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error) {
+	resp, err := s.cs.newRequest("assignVolume", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response AssignVolumeResponse `json:"volume"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type AssignVolumeResponse struct {
 	Account                    string `json:"account"`
 	Attached                   string `json:"attached"`
 	Chaininfo                  string `json:"chaininfo"`

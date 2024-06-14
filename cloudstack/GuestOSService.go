@@ -53,6 +53,8 @@ type GuestOSServiceIface interface {
 	NewUpdateGuestOsParams(id string, osdisplayname string) *UpdateGuestOsParams
 	UpdateGuestOsMapping(p *UpdateGuestOsMappingParams) (*UpdateGuestOsMappingResponse, error)
 	NewUpdateGuestOsMappingParams(id string, osnameforhypervisor string) *UpdateGuestOsMappingParams
+	GetHypervisorGuestOsNames(p *GetHypervisorGuestOsNamesParams) (*GetHypervisorGuestOsNamesResponse, error)
+	NewGetHypervisorGuestOsNamesParams(hypervisor string, hypervisorversion string) *GetHypervisorGuestOsNamesParams
 }
 
 type AddGuestOsParams struct {
@@ -1905,4 +1907,147 @@ func (r *UpdateGuestOsMappingResponse) UnmarshalJSON(b []byte) error {
 
 	type alias UpdateGuestOsMappingResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type GetHypervisorGuestOsNamesParams struct {
+	p map[string]interface{}
+}
+
+func (p *GetHypervisorGuestOsNamesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hypervisor"]; found {
+		u.Set("hypervisor", v.(string))
+	}
+	if v, found := p.p["hypervisorversion"]; found {
+		u.Set("hypervisorversion", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	return u
+}
+
+func (p *GetHypervisorGuestOsNamesParams) SetHypervisor(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisor"] = v
+}
+
+func (p *GetHypervisorGuestOsNamesParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
+func (p *GetHypervisorGuestOsNamesParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
+func (p *GetHypervisorGuestOsNamesParams) SetHypervisorversion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisorversion"] = v
+}
+
+func (p *GetHypervisorGuestOsNamesParams) ResetHypervisorversion() {
+	if p.p != nil && p.p["hypervisorversion"] != nil {
+		delete(p.p, "hypervisorversion")
+	}
+}
+
+func (p *GetHypervisorGuestOsNamesParams) GetHypervisorversion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisorversion"].(string)
+	return value, ok
+}
+
+func (p *GetHypervisorGuestOsNamesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *GetHypervisorGuestOsNamesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *GetHypervisorGuestOsNamesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new GetHypervisorGuestOsNamesParams instance,
+// as then you are sure you have configured all required params
+func (s *GuestOSService) NewGetHypervisorGuestOsNamesParams(hypervisor string, hypervisorversion string) *GetHypervisorGuestOsNamesParams {
+	p := &GetHypervisorGuestOsNamesParams{}
+	p.p = make(map[string]interface{})
+	p.p["hypervisor"] = hypervisor
+	p.p["hypervisorversion"] = hypervisorversion
+	return p
+}
+
+// Gets the guest OS names in the hypervisor
+func (s *GuestOSService) GetHypervisorGuestOsNames(p *GetHypervisorGuestOsNamesParams) (*GetHypervisorGuestOsNamesResponse, error) {
+	resp, err := s.cs.newRequest("getHypervisorGuestOsNames", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r GetHypervisorGuestOsNamesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type GetHypervisorGuestOsNamesResponse struct {
+	Guestoscount      int                                            `json:"guestoscount"`
+	Guestoslist       []GetHypervisorGuestOsNamesResponseGuestoslist `json:"guestoslist"`
+	Hypervisor        string                                         `json:"hypervisor"`
+	Hypervisorversion string                                         `json:"hypervisorversion"`
+	JobID             string                                         `json:"jobid"`
+	Jobstatus         int                                            `json:"jobstatus"`
+}
+
+type GetHypervisorGuestOsNamesResponseGuestoslist struct {
+	Osdisplayname       string `json:"osdisplayname"`
+	Osnameforhypervisor string `json:"osnameforhypervisor"`
 }
