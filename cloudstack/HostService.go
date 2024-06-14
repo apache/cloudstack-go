@@ -5537,7 +5537,7 @@ func (s *HostService) CreateSecondaryStorageSelector(p *CreateSecondaryStorageSe
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(string(resp))
+
 	var nested struct {
 		Response CreateSecondaryStorageSelectorResponse `json:"heuristics"`
 	}
