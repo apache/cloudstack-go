@@ -232,6 +232,21 @@ func (mr *MockTemplateServiceIfaceMockRecorder) GetUploadParamsForTemplate(p int
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUploadParamsForTemplate", reflect.TypeOf((*MockTemplateServiceIface)(nil).GetUploadParamsForTemplate), p)
 }
 
+// LinkUserDataToTemplate mocks base method.
+func (m *MockTemplateServiceIface) LinkUserDataToTemplate(p *LinkUserDataToTemplateParams) (*LinkUserDataToTemplateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "LinkUserDataToTemplate", p)
+	ret0, _ := ret[0].(*LinkUserDataToTemplateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// LinkUserDataToTemplate indicates an expected call of LinkUserDataToTemplate.
+func (mr *MockTemplateServiceIfaceMockRecorder) LinkUserDataToTemplate(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LinkUserDataToTemplate", reflect.TypeOf((*MockTemplateServiceIface)(nil).LinkUserDataToTemplate), p)
+}
+
 // ListTemplateDirectDownloadCertificates mocks base method.
 func (m *MockTemplateServiceIface) ListTemplateDirectDownloadCertificates(p *ListTemplateDirectDownloadCertificatesParams) (*ListTemplateDirectDownloadCertificatesResponse, error) {
 	m.ctrl.T.Helper()
@@ -345,6 +360,20 @@ func (m *MockTemplateServiceIface) NewGetUploadParamsForTemplateParams(displayte
 func (mr *MockTemplateServiceIfaceMockRecorder) NewGetUploadParamsForTemplateParams(displaytext, format, hypervisor, name, zoneid interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUploadParamsForTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewGetUploadParamsForTemplateParams), displaytext, format, hypervisor, name, zoneid)
+}
+
+// NewLinkUserDataToTemplateParams mocks base method.
+func (m *MockTemplateServiceIface) NewLinkUserDataToTemplateParams() *LinkUserDataToTemplateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewLinkUserDataToTemplateParams")
+	ret0, _ := ret[0].(*LinkUserDataToTemplateParams)
+	return ret0
+}
+
+// NewLinkUserDataToTemplateParams indicates an expected call of NewLinkUserDataToTemplateParams.
+func (mr *MockTemplateServiceIfaceMockRecorder) NewLinkUserDataToTemplateParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewLinkUserDataToTemplateParams", reflect.TypeOf((*MockTemplateServiceIface)(nil).NewLinkUserDataToTemplateParams))
 }
 
 // NewListTemplateDirectDownloadCertificatesParams mocks base method.

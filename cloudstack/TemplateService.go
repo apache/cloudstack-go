@@ -61,6 +61,8 @@ type TemplateServiceIface interface {
 	GetTemplateDirectDownloadCertificateByID(id string, opts ...OptionFunc) (*TemplateDirectDownloadCertificate, int, error)
 	ProvisionTemplateDirectDownloadCertificate(p *ProvisionTemplateDirectDownloadCertificateParams) (*ProvisionTemplateDirectDownloadCertificateResponse, error)
 	NewProvisionTemplateDirectDownloadCertificateParams(hostid string, id string) *ProvisionTemplateDirectDownloadCertificateParams
+	LinkUserDataToTemplate(p *LinkUserDataToTemplateParams) (*LinkUserDataToTemplateResponse, error)
+	NewLinkUserDataToTemplateParams() *LinkUserDataToTemplateParams
 }
 
 type CopyTemplateParams struct {
@@ -4945,4 +4947,222 @@ type ProvisionTemplateDirectDownloadCertificateResponse struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Status    string `json:"status"`
+}
+
+type LinkUserDataToTemplateParams struct {
+	p map[string]interface{}
+}
+
+func (p *LinkUserDataToTemplateParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["isoid"]; found {
+		u.Set("isoid", v.(string))
+	}
+	if v, found := p.p["templateid"]; found {
+		u.Set("templateid", v.(string))
+	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
+	if v, found := p.p["userdatapolicy"]; found {
+		u.Set("userdatapolicy", v.(string))
+	}
+	return u
+}
+
+func (p *LinkUserDataToTemplateParams) SetIsoid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isoid"] = v
+}
+
+func (p *LinkUserDataToTemplateParams) ResetIsoid() {
+	if p.p != nil && p.p["isoid"] != nil {
+		delete(p.p, "isoid")
+	}
+}
+
+func (p *LinkUserDataToTemplateParams) GetIsoid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isoid"].(string)
+	return value, ok
+}
+
+func (p *LinkUserDataToTemplateParams) SetTemplateid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templateid"] = v
+}
+
+func (p *LinkUserDataToTemplateParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
+func (p *LinkUserDataToTemplateParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
+	return value, ok
+}
+
+func (p *LinkUserDataToTemplateParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *LinkUserDataToTemplateParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *LinkUserDataToTemplateParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
+func (p *LinkUserDataToTemplateParams) SetUserdatapolicy(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdatapolicy"] = v
+}
+
+func (p *LinkUserDataToTemplateParams) ResetUserdatapolicy() {
+	if p.p != nil && p.p["userdatapolicy"] != nil {
+		delete(p.p, "userdatapolicy")
+	}
+}
+
+func (p *LinkUserDataToTemplateParams) GetUserdatapolicy() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdatapolicy"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new LinkUserDataToTemplateParams instance,
+// as then you are sure you have configured all required params
+func (s *TemplateService) NewLinkUserDataToTemplateParams() *LinkUserDataToTemplateParams {
+	p := &LinkUserDataToTemplateParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Link or unlink a userdata to a template.
+func (s *TemplateService) LinkUserDataToTemplate(p *LinkUserDataToTemplateParams) (*LinkUserDataToTemplateResponse, error) {
+	resp, err := s.cs.newRequest("linkUserDataToTemplate", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response LinkUserDataToTemplateResponse `json:"template"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type LinkUserDataToTemplateResponse struct {
+	Account               string              `json:"account"`
+	Accountid             string              `json:"accountid"`
+	Bits                  int                 `json:"bits"`
+	Bootable              bool                `json:"bootable"`
+	Checksum              string              `json:"checksum"`
+	Childtemplates        []interface{}       `json:"childtemplates"`
+	Created               string              `json:"created"`
+	CrossZones            bool                `json:"crossZones"`
+	Deployasis            bool                `json:"deployasis"`
+	Deployasisdetails     map[string]string   `json:"deployasisdetails"`
+	Details               map[string]string   `json:"details"`
+	Directdownload        bool                `json:"directdownload"`
+	Displaytext           string              `json:"displaytext"`
+	Domain                string              `json:"domain"`
+	Domainid              string              `json:"domainid"`
+	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Format                string              `json:"format"`
+	Hasannotations        bool                `json:"hasannotations"`
+	Hostid                string              `json:"hostid"`
+	Hostname              string              `json:"hostname"`
+	Hypervisor            string              `json:"hypervisor"`
+	Icon                  interface{}         `json:"icon"`
+	Id                    string              `json:"id"`
+	Isdynamicallyscalable bool                `json:"isdynamicallyscalable"`
+	Isextractable         bool                `json:"isextractable"`
+	Isfeatured            bool                `json:"isfeatured"`
+	Ispublic              bool                `json:"ispublic"`
+	Isready               bool                `json:"isready"`
+	JobID                 string              `json:"jobid"`
+	Jobstatus             int                 `json:"jobstatus"`
+	Name                  string              `json:"name"`
+	Ostypeid              string              `json:"ostypeid"`
+	Ostypename            string              `json:"ostypename"`
+	Parenttemplateid      string              `json:"parenttemplateid"`
+	Passwordenabled       bool                `json:"passwordenabled"`
+	Physicalsize          int64               `json:"physicalsize"`
+	Project               string              `json:"project"`
+	Projectid             string              `json:"projectid"`
+	Removed               string              `json:"removed"`
+	Requireshvm           bool                `json:"requireshvm"`
+	Size                  int64               `json:"size"`
+	Sourcetemplateid      string              `json:"sourcetemplateid"`
+	Sshkeyenabled         bool                `json:"sshkeyenabled"`
+	Status                string              `json:"status"`
+	Tags                  []Tags              `json:"tags"`
+	Templatetag           string              `json:"templatetag"`
+	Templatetype          string              `json:"templatetype"`
+	Url                   string              `json:"url"`
+	Userdataid            string              `json:"userdataid"`
+	Userdataname          string              `json:"userdataname"`
+	Userdataparams        string              `json:"userdataparams"`
+	Userdatapolicy        string              `json:"userdatapolicy"`
+	Zoneid                string              `json:"zoneid"`
+	Zonename              string              `json:"zonename"`
+}
+
+func (r *LinkUserDataToTemplateResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias LinkUserDataToTemplateResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

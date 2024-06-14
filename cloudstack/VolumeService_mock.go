@@ -52,6 +52,21 @@ func (m *MockVolumeServiceIface) EXPECT() *MockVolumeServiceIfaceMockRecorder {
 	return m.recorder
 }
 
+// AssignVolume mocks base method.
+func (m *MockVolumeServiceIface) AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AssignVolume", p)
+	ret0, _ := ret[0].(*AssignVolumeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AssignVolume indicates an expected call of AssignVolume.
+func (mr *MockVolumeServiceIfaceMockRecorder) AssignVolume(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AssignVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).AssignVolume), p)
+}
+
 // AttachVolume mocks base method.
 func (m *MockVolumeServiceIface) AttachVolume(p *AttachVolumeParams) (*AttachVolumeResponse, error) {
 	m.ctrl.T.Helper()
@@ -343,6 +358,69 @@ func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesMetricID(name interface{
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesMetricID", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesMetricID), varargs...)
 }
 
+// GetVolumesUsageHistoryByID mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesUsageHistoryByID(id string, opts ...OptionFunc) (*VolumesUsageHistory, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesUsageHistoryByID", varargs...)
+	ret0, _ := ret[0].(*VolumesUsageHistory)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesUsageHistoryByID indicates an expected call of GetVolumesUsageHistoryByID.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesUsageHistoryByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesUsageHistoryByID", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesUsageHistoryByID), varargs...)
+}
+
+// GetVolumesUsageHistoryByName mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesUsageHistoryByName(name string, opts ...OptionFunc) (*VolumesUsageHistory, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesUsageHistoryByName", varargs...)
+	ret0, _ := ret[0].(*VolumesUsageHistory)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesUsageHistoryByName indicates an expected call of GetVolumesUsageHistoryByName.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesUsageHistoryByName(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesUsageHistoryByName", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesUsageHistoryByName), varargs...)
+}
+
+// GetVolumesUsageHistoryID mocks base method.
+func (m *MockVolumeServiceIface) GetVolumesUsageHistoryID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetVolumesUsageHistoryID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetVolumesUsageHistoryID indicates an expected call of GetVolumesUsageHistoryID.
+func (mr *MockVolumeServiceIfaceMockRecorder) GetVolumesUsageHistoryID(name interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetVolumesUsageHistoryID", reflect.TypeOf((*MockVolumeServiceIface)(nil).GetVolumesUsageHistoryID), varargs...)
+}
+
 // ListVolumes mocks base method.
 func (m *MockVolumeServiceIface) ListVolumes(p *ListVolumesParams) (*ListVolumesResponse, error) {
 	m.ctrl.T.Helper()
@@ -373,6 +451,21 @@ func (mr *MockVolumeServiceIfaceMockRecorder) ListVolumesMetrics(p interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVolumesMetrics", reflect.TypeOf((*MockVolumeServiceIface)(nil).ListVolumesMetrics), p)
 }
 
+// ListVolumesUsageHistory mocks base method.
+func (m *MockVolumeServiceIface) ListVolumesUsageHistory(p *ListVolumesUsageHistoryParams) (*ListVolumesUsageHistoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListVolumesUsageHistory", p)
+	ret0, _ := ret[0].(*ListVolumesUsageHistoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListVolumesUsageHistory indicates an expected call of ListVolumesUsageHistory.
+func (mr *MockVolumeServiceIfaceMockRecorder) ListVolumesUsageHistory(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListVolumesUsageHistory", reflect.TypeOf((*MockVolumeServiceIface)(nil).ListVolumesUsageHistory), p)
+}
+
 // MigrateVolume mocks base method.
 func (m *MockVolumeServiceIface) MigrateVolume(p *MigrateVolumeParams) (*MigrateVolumeResponse, error) {
 	m.ctrl.T.Helper()
@@ -386,6 +479,20 @@ func (m *MockVolumeServiceIface) MigrateVolume(p *MigrateVolumeParams) (*Migrate
 func (mr *MockVolumeServiceIfaceMockRecorder) MigrateVolume(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MigrateVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).MigrateVolume), p)
+}
+
+// NewAssignVolumeParams mocks base method.
+func (m *MockVolumeServiceIface) NewAssignVolumeParams(volumeid string) *AssignVolumeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewAssignVolumeParams", volumeid)
+	ret0, _ := ret[0].(*AssignVolumeParams)
+	return ret0
+}
+
+// NewAssignVolumeParams indicates an expected call of NewAssignVolumeParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewAssignVolumeParams(volumeid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAssignVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewAssignVolumeParams), volumeid)
 }
 
 // NewAttachVolumeParams mocks base method.
@@ -568,6 +675,20 @@ func (m *MockVolumeServiceIface) NewListVolumesParams() *ListVolumesParams {
 func (mr *MockVolumeServiceIfaceMockRecorder) NewListVolumesParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVolumesParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewListVolumesParams))
+}
+
+// NewListVolumesUsageHistoryParams mocks base method.
+func (m *MockVolumeServiceIface) NewListVolumesUsageHistoryParams() *ListVolumesUsageHistoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListVolumesUsageHistoryParams")
+	ret0, _ := ret[0].(*ListVolumesUsageHistoryParams)
+	return ret0
+}
+
+// NewListVolumesUsageHistoryParams indicates an expected call of NewListVolumesUsageHistoryParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewListVolumesUsageHistoryParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListVolumesUsageHistoryParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewListVolumesUsageHistoryParams))
 }
 
 // NewMigrateVolumeParams mocks base method.
