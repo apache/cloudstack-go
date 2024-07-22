@@ -1401,7 +1401,7 @@ type QuotaTariffUpdateResponse struct {
 }
 
 func (s *QuotaService) QuotaUpdate() (*QuotaUpdateResponse, error) {
-	resp, err := s.cs.newRequest("quotaUpdate")
+	resp, err := s.cs.newRequest("quotaUpdate", nil)
 	if err != nil {
 		return nil, err
 	}
