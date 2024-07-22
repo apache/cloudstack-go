@@ -26,8 +26,9 @@ import (
 
 type QuotaServiceIface interface {
 	QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceResponse, error)
-	NewQuotaBalanceParams(account string, domainid string) *QuotaBalanceParams
-	//CreateCredit(p *CreateCreditParams) (*CreateCreditResponse, error)
+	NewQuotaBalanceParams(account, domainid string) *QuotaBalanceParams
+	QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsParams, error)
+	NewQuotaCreditsParams(account, domainid, value string) *QuotaCreditsParams
 	QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error)
 	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
 	//CreateStatement(p *CreateStatementParams) (*CreateStatementResponse, error)
@@ -208,6 +209,176 @@ type QuotaBalanceResponse struct {
 	Quota     string `json:"quota"`
 	Type      string `json:"type"`
 	Unit      string `json:"unit"`
+}
+
+type QuotaCreditsParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaCreditsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["value"]; found {
+		u.Set("value", v.(string))
+	}
+	if v, found := p.p["min_balance"]; found {
+		u.Set("min_balance", v.(string))
+
+	}
+	if v, found := p.p["quota_enforce"]; found {
+		u.Set("quota_enforce", v.(string))
+	}
+	return u
+}
+
+func (p *QuotaCreditsParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *QuotaCreditsParams) ResetAccount() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "account")
+}
+
+func (p *QuotaCreditsParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *QuotaCreditsParams) ResetDomainid() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "domainid")
+}
+
+func (p *QuotaCreditsParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetValue(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["value"] = v
+}
+
+func (p *QuotaCreditsParams) ResetValue() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "value")
+}
+
+func (p *QuotaCreditsParams) GetValue() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["value"].(string)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetMinBalance(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["min_balance"] = v
+}
+
+func (p *QuotaCreditsParams) ResetMinBalance() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "min_balance")
+}
+
+func (p *QuotaCreditsParams) GetMinBalance() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["min_balance"].(string)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetQuotaEnforce(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["quota_enforce"] = v
+}
+
+func (p *QuotaCreditsParams) ResetQuotaEnforce() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "quota_enforce")
+}
+
+func (p *QuotaCreditsParams) GetQuotaEnforce() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["quota_enforce"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new QuotaCreditsParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaCreditsParams(account, domainid, value string) *QuotaCreditsParams {
+	p := &QuotaCreditsParams{}
+	p.p = make(map[string]interface{})
+	p.p["account"] = account
+	p.p["domainid"] = domainid
+	p.p["value"] = value
+	return p
+}
+
+func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error) {
+	resp, err := s.cs.newRequest("quotaCredits", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaCreditsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaCreditsResponse struct {
+	Credits    string `json:"credits"`
+	Currency   string `json:"currency"`
+	Updated_by string `json:"updated_by"`
+	Updated_on string `json:"updated_on"`
 }
 
 type QuotaIsEnabledParams struct {
