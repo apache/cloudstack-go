@@ -25,8 +25,17 @@ import (
 )
 
 type QuotaServiceIface interface {
+	//CreateBalance(p *CreateBalanceParams) (*CreateBalanceResponse, error)
+	//CreateCredit(p *CreateCreditParams) (*CreateCreditResponse, error)
 	QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error)
 	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
+	//CreateStatement(p *CreateStatementParams) (*CreateStatementResponse, error)
+	//ListSummary(p *GetSummaryParams) (*GetSummaryResponse, error)
+	//CreateTariff(p *CreateTariffParams) (*CreateTariffResponse, error)
+	//DeleteTariff(p *DeleteTariffParams) (*DeleteTariffResponse, error)
+	//ListTariffs(p *ListTariffsParams) (*ListTariffsResponse, error)
+	//UpdateTariff(p *UpdateTariffParams) (*UpdateTariffResponse, error)
+	//UpdateQuota(p *UpdateQuotaParams) (*UpdateQuotaResponse, error)
 }
 
 type QuotaIsEnabledParams struct {
