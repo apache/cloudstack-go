@@ -42,6 +42,8 @@ type QuotaServiceIface interface {
 	NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams
 	QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error)
 	NewQuotaTariffListParams() *QuotaTariffListParams
+	QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error)
+	NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams
 }
 
 type QuotaBalanceParams struct {
@@ -1153,6 +1155,234 @@ func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffLi
 }
 
 type QuotaTariffListResponse struct {
+	Activationrule       string `json:"activationRule"`
+	Currency             string `json:"currency"`
+	Description          string `json:"description"`
+	EffectiveDate        string `json:"effectiveDate"`
+	EndDate              string `json:"endDate"`
+	Name                 string `json:"name"`
+	Removed              string `json:"removed"`
+	TariffValue          string `json:"tariffValue"`
+	UsageDiscriminator   string `json:"usageDiscriminator"`
+	UsageName            string `json:"usageName"`
+	UsageType            string `json:"usageType"`
+	UsageTypeDescription string `json:"usageTypeDescription"`
+	UsageUnit            string `json:"usageUnit"`
+	Uuid                 string `json:"uuid"`
+}
+
+type QuotaTariffUpdateParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaTariffUpdateParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["activationrule"]; found {
+		u.Set("activationrule", v.(string))
+	}
+	if v, found := p.p["usagetype"]; found {
+		u.Set("usagetype", v.(string))
+	}
+	if v, found := p.p["value"]; found {
+		u.Set("value", v.(string))
+	}
+	if v, found := p.p["description"]; found {
+		u.Set("description", v.(string))
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	return u
+}
+
+func (p *QuotaTariffUpdateParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetName() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "name")
+}
+
+func (p *QuotaTariffUpdateParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetActivationrule(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["activationrule"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetActivationrule() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "activationrule")
+}
+
+func (p *QuotaTariffUpdateParams) GetActivationrule() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["activationrule"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetDescription(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["description"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetDescription() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "description")
+}
+
+func (p *QuotaTariffUpdateParams) GetDescription() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["description"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) ResetEnddate() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "enddate")
+}
+
+func (p *QuotaTariffUpdateParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetStartdate() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "startdate")
+}
+
+func (p *QuotaTariffUpdateParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetUsagetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["usagetype"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetUsagetype() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "usagetype")
+}
+
+func (p *QuotaTariffUpdateParams) GetUsagetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usagetype"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetValue(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["value"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetValue() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "value")
+}
+
+func (p *QuotaTariffUpdateParams) GetValue() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["value"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new QuotaTariffUpdateParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams {
+	p := &QuotaTariffUpdateParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	return p
+}
+
+func (s *QuotaService) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error) {
+	resp, err := s.cs.newRequest("quotaTariffUpdate", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaTariffUpdateResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaTariffUpdateResponse struct {
 	Activationrule       string `json:"activationRule"`
 	Currency             string `json:"currency"`
 	Description          string `json:"description"`
