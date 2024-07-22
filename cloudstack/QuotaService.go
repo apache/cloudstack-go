@@ -38,13 +38,8 @@ type QuotaServiceIface interface {
 	NewQuotaSummaryParams() *QuotaSummaryParams
 	QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTariffCreateResponse, error)
 	NewQuotaTariffCreateParams(name, usagetype, value string) *QuotaTariffCreateParams
-	//CreateStatement(p *CreateStatementParams) (*CreateStatementResponse, error)
-	//ListSummary(p *GetSummaryParams) (*GetSummaryResponse, error)
-	//CreateTariff(p *CreateTariffParams) (*CreateTariffResponse, error)
-	//DeleteTariff(p *DeleteTariffParams) (*DeleteTariffResponse, error)
-	//ListTariffs(p *ListTariffsParams) (*ListTariffsResponse, error)
-	//UpdateTariff(p *UpdateTariffParams) (*UpdateTariffResponse, error)
-	//UpdateQuota(p *UpdateQuotaParams) (*UpdateQuotaResponse, error)
+	QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error)
+	NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams
 }
 
 type QuotaBalanceParams struct {
@@ -1054,4 +1049,69 @@ type QuotaTariffCreateResponse struct {
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
+}
+
+type QuotaTariffDeleteParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaTariffDeleteParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *QuotaTariffDeleteParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *QuotaTariffDeleteParams) ResetId() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "id")
+}
+
+func (p *QuotaTariffDeleteParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new QuotaTariffDeleteParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams {
+	p := &QuotaTariffDeleteParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+func (s *QuotaService) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error) {
+	resp, err := s.cs.newRequest("quotaTariffDelete", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaTariffDeleteResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaTariffDeleteResponse struct {
+	DisplayText string `json:"displaytext"`
+	Success     bool   `json:"success"`
 }
