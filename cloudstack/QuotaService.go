@@ -22,6 +22,7 @@ package cloudstack
 import (
 	"encoding/json"
 	"net/url"
+	"strconv"
 )
 
 type QuotaServiceIface interface {
@@ -33,6 +34,8 @@ type QuotaServiceIface interface {
 	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
 	QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error)
 	NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams
+	QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error)
+	NewQuotaSummaryParams() *QuotaSummaryParams
 	//CreateStatement(p *CreateStatementParams) (*CreateStatementResponse, error)
 	//ListSummary(p *GetSummaryParams) (*GetSummaryResponse, error)
 	//CreateTariff(p *CreateTariffParams) (*CreateTariffResponse, error)
@@ -620,4 +623,204 @@ type QuotaStatementResponse struct {
 	Quota     string `json:"quota"`
 	Type      string `json:"type"`
 	Unit      string `json:"unit"`
+}
+
+type QuotaSummaryParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaSummaryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		u.Add("listall", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	return u
+}
+
+func (p *QuotaSummaryParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *QuotaSummaryParams) ResetAccount() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "account")
+}
+
+func (p *QuotaSummaryParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *QuotaSummaryParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *QuotaSummaryParams) ResetDomainid() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "domainid")
+}
+
+func (p *QuotaSummaryParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *QuotaSummaryParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *QuotaSummaryParams) ResetKeyword() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "keyword")
+}
+
+func (p *QuotaSummaryParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *QuotaSummaryParams) SetListall(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *QuotaSummaryParams) ResetListall() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "listall")
+}
+
+func (p *QuotaSummaryParams) GetListall() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(string)
+	return value, ok
+}
+
+func (p *QuotaSummaryParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *QuotaSummaryParams) ResetPage() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "page")
+}
+
+func (p *QuotaSummaryParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *QuotaSummaryParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *QuotaSummaryParams) ResetPagesize() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "pagesize")
+}
+
+func (p *QuotaSummaryParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new QuotaSummaryParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaSummaryParams() *QuotaSummaryParams {
+	p := &QuotaSummaryParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+func (s *QuotaService) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error) {
+	resp, err := s.cs.newRequest("quotaSummary", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaSummaryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaSummaryResponse struct {
+	Account      string `json:"account"`
+	Accountid    string `json:"accountid"`
+	Balance      string `json:"balance"`
+	Currency     string `json:"currency"`
+	Domain       string `json:"domain"`
+	Domainid     string `json:"domainid"`
+	Enddate      string `json:"enddate"`
+	Quota        string `json:"quota"`
+	Quotaenabled string `json:"quotaenabled"`
+	Startdate    string `json:"startdate"`
+	State        string `json:"state"`
 }
