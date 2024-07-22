@@ -31,6 +31,8 @@ type QuotaServiceIface interface {
 	NewQuotaCreditsParams(account, domainid, value string) *QuotaCreditsParams
 	QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error)
 	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
+	QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error)
+	NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams
 	//CreateStatement(p *CreateStatementParams) (*CreateStatementResponse, error)
 	//ListSummary(p *GetSummaryParams) (*GetSummaryResponse, error)
 	//CreateTariff(p *CreateTariffParams) (*CreateTariffResponse, error)
@@ -420,4 +422,202 @@ type QuotaIsEnabledResponse struct {
 	Isenabled bool   `json:"isenabled"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
+}
+
+type QuotaStatementParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaStatementParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["type"]; found {
+		u.Set("type", v.(string))
+	}
+	return u
+}
+
+func (p *QuotaStatementParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *QuotaStatementParams) ResetAccount() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "account")
+}
+
+func (p *QuotaStatementParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *QuotaStatementParams) ResetDomainid() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "domainid")
+}
+
+func (p *QuotaStatementParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *QuotaStatementParams) ResetEnddate() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "enddate")
+}
+
+func (p *QuotaStatementParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *QuotaStatementParams) ResetStartdate() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "startdate")
+}
+
+func (p *QuotaStatementParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *QuotaStatementParams) ResetAccountid() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "accountid")
+}
+
+func (p *QuotaStatementParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetType(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["type"] = v
+}
+
+func (p *QuotaStatementParams) ResetType() {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	delete(p.p, "type")
+}
+
+func (p *QuotaStatementParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new QuotaStatementParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams {
+	p := &QuotaStatementParams{}
+	p.p = make(map[string]interface{})
+	p.p["account"] = account
+	p.p["domainid"] = domainid
+	p.p["enddate"] = enddate
+	p.p["startdate"] = startdate
+	return p
+}
+
+func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error) {
+	resp, err := s.cs.newRequest("quotaStatement", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaStatementResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaStatementResponse struct {
+	Account   string `json:"account"`
+	Accountid string `json:"accountid"`
+	Domain    string `json:"domain"`
+	Name      string `json:"name"`
+	Quota     string `json:"quota"`
+	Type      string `json:"type"`
+	Unit      string `json:"unit"`
 }
