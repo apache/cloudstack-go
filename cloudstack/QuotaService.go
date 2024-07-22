@@ -45,6 +45,7 @@ type QuotaServiceIface interface {
 	QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error)
 	NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams
 	QuotaUpdate() (*QuotaUpdateResponse, error)
+	NewQuotaUpdateParams() *QuotaUpdateParams
 }
 
 type QuotaBalanceParams struct {
@@ -1398,6 +1399,18 @@ type QuotaTariffUpdateResponse struct {
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
+}
+
+type QuotaUpdateParams struct {
+	p map[string]interface{}
+}
+
+// You should always use this function to get a new QuotaUpdateParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaUpdateParams() *QuotaUpdateParams {
+	p := &QuotaUpdateParams{}
+	p.p = make(map[string]interface{})
+	return p
 }
 
 func (s *QuotaService) QuotaUpdate() (*QuotaUpdateResponse, error) {
