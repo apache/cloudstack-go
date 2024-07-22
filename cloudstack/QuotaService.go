@@ -44,6 +44,7 @@ type QuotaServiceIface interface {
 	NewQuotaTariffListParams() *QuotaTariffListParams
 	QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error)
 	NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams
+	QuotaUpdate() (*QuotaUpdateResponse, error)
 }
 
 type QuotaBalanceParams struct {
@@ -1397,4 +1398,22 @@ type QuotaTariffUpdateResponse struct {
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
+}
+
+func (s *QuotaService) QuotaUpdate() (*QuotaUpdateResponse, error) {
+	resp, err := s.cs.newRequest("quotaUpdate")
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaUpdateResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaUpdateResponse struct {
+	UpdatedOn string `json:"updated_on"`
 }
