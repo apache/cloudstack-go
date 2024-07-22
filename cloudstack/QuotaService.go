@@ -40,6 +40,8 @@ type QuotaServiceIface interface {
 	NewQuotaTariffCreateParams(name, usagetype, value string) *QuotaTariffCreateParams
 	QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error)
 	NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams
+	QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error)
+	NewQuotaTariffListParams() *QuotaTariffListParams
 }
 
 type QuotaBalanceParams struct {
@@ -1114,4 +1116,55 @@ func (s *QuotaService) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTari
 type QuotaTariffDeleteResponse struct {
 	DisplayText string `json:"displaytext"`
 	Success     bool   `json:"success"`
+}
+
+type QuotaTariffListParams struct {
+	p map[string]interface{}
+}
+
+func (p *QuotaTariffListParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	return u
+}
+
+// You should always use this function to get a new QuotaTariffListParams instance,
+// as then you are sure you have configured all required params
+func (s *QuotaService) NewQuotaTariffListParams() *QuotaTariffListParams {
+	p := &QuotaTariffListParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error) {
+	resp, err := s.cs.newRequest("quotaTariffList", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r QuotaTariffListResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type QuotaTariffListResponse struct {
+	Activationrule       string `json:"activationRule"`
+	Currency             string `json:"currency"`
+	Description          string `json:"description"`
+	EffectiveDate        string `json:"effectiveDate"`
+	EndDate              string `json:"endDate"`
+	Name                 string `json:"name"`
+	Removed              string `json:"removed"`
+	TariffValue          string `json:"tariffValue"`
+	UsageDiscriminator   string `json:"usageDiscriminator"`
+	UsageName            string `json:"usageName"`
+	UsageType            string `json:"usageType"`
+	UsageTypeDescription string `json:"usageTypeDescription"`
+	UsageUnit            string `json:"usageUnit"`
+	Uuid                 string `json:"uuid"`
 }
