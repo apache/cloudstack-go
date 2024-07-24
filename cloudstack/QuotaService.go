@@ -27,24 +27,24 @@ import (
 
 type QuotaServiceIface interface {
 	QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceResponse, error)
-	NewQuotaBalanceParams(account, domainid string) *QuotaBalanceParams
-	QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsParams, error)
-	NewQuotaCreditsParams(account, domainid, value string) *QuotaCreditsParams
+	NewQuotaBalanceParams(account string, domainid string) *QuotaBalanceParams
+	QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error)
+	NewQuotaCreditsParams(account string, domainid string, value float64) *QuotaCreditsParams
 	QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error)
 	NewQuotaIsEnabledParams() *QuotaIsEnabledParams
 	QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error)
-	NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams
+	NewQuotaStatementParams(account string, domainid string, enddate string, startdate string) *QuotaStatementParams
 	QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error)
 	NewQuotaSummaryParams() *QuotaSummaryParams
 	QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTariffCreateResponse, error)
-	NewQuotaTariffCreateParams(name, usagetype, value string) *QuotaTariffCreateParams
+	NewQuotaTariffCreateParams(name string, usagetype int, value float64) *QuotaTariffCreateParams
 	QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error)
 	NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams
 	QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error)
 	NewQuotaTariffListParams() *QuotaTariffListParams
 	QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error)
 	NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams
-	QuotaUpdate() (*QuotaUpdateResponse, error)
+	QuotaUpdate(p *QuotaUpdateParams) (*QuotaUpdateResponse, error)
 	NewQuotaUpdateParams() *QuotaUpdateParams
 }
 
@@ -60,11 +60,11 @@ func (p *QuotaBalanceParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
-	if v, found := p.p["domainid"]; found {
-		u.Set("domainid", v.(string))
-	}
 	if v, found := p.p["accountid"]; found {
 		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
 	}
 	if v, found := p.p["enddate"]; found {
 		u.Set("enddate", v.(string))
@@ -83,10 +83,9 @@ func (p *QuotaBalanceParams) SetAccount(v string) {
 }
 
 func (p *QuotaBalanceParams) ResetAccount() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
 	}
-	delete(p.p, "account")
 }
 
 func (p *QuotaBalanceParams) GetAccount() (string, bool) {
@@ -94,28 +93,6 @@ func (p *QuotaBalanceParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
-	return value, ok
-}
-
-func (p *QuotaBalanceParams) SetDomainid(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["domainid"] = v
-}
-
-func (p *QuotaBalanceParams) ResetDomainid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "domainid")
-}
-
-func (p *QuotaBalanceParams) GetDomainid() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["domainid"].(string)
 	return value, ok
 }
 
@@ -127,10 +104,9 @@ func (p *QuotaBalanceParams) SetAccountid(v string) {
 }
 
 func (p *QuotaBalanceParams) ResetAccountid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
 	}
-	delete(p.p, "accountid")
 }
 
 func (p *QuotaBalanceParams) GetAccountid() (string, bool) {
@@ -138,6 +114,27 @@ func (p *QuotaBalanceParams) GetAccountid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *QuotaBalanceParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *QuotaBalanceParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *QuotaBalanceParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
 	return value, ok
 }
 
@@ -149,10 +146,9 @@ func (p *QuotaBalanceParams) SetEnddate(v string) {
 }
 
 func (p *QuotaBalanceParams) ResetEnddate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
 	}
-	delete(p.p, "enddate")
 }
 
 func (p *QuotaBalanceParams) GetEnddate() (string, bool) {
@@ -171,10 +167,9 @@ func (p *QuotaBalanceParams) SetStartdate(v string) {
 }
 
 func (p *QuotaBalanceParams) ResetStartdate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
 	}
-	delete(p.p, "startdate")
 }
 
 func (p *QuotaBalanceParams) GetStartdate() (string, bool) {
@@ -195,6 +190,7 @@ func (s *QuotaService) NewQuotaBalanceParams(account string, domainid string) *Q
 	return p
 }
 
+// Create a quota balance statement
 func (s *QuotaService) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceResponse, error) {
 	resp, err := s.cs.newRequest("quotaBalance", p.toURLValues())
 	if err != nil {
@@ -211,11 +207,13 @@ func (s *QuotaService) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceRespons
 
 type QuotaBalanceResponse struct {
 	Account   string `json:"account"`
-	Accountid string `json:"accountid"`
-	Domain    string `json:"domain"`
+	Accountid int64  `json:"accountid"`
+	Domain    int64  `json:"domain"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
 	Name      string `json:"name"`
 	Quota     string `json:"quota"`
-	Type      string `json:"type"`
+	Type      int    `json:"type"`
 	Unit      string `json:"unit"`
 }
 
@@ -234,15 +232,13 @@ func (p *QuotaCreditsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
-	if v, found := p.p["value"]; found {
-		u.Set("value", v.(string))
-	}
 	if v, found := p.p["min_balance"]; found {
-		u.Set("min_balance", v.(string))
-
 	}
 	if v, found := p.p["quota_enforce"]; found {
-		u.Set("quota_enforce", v.(string))
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("quota_enforce", vv)
+	}
+	if v, found := p.p["value"]; found {
 	}
 	return u
 }
@@ -255,10 +251,9 @@ func (p *QuotaCreditsParams) SetAccount(v string) {
 }
 
 func (p *QuotaCreditsParams) ResetAccount() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
 	}
-	delete(p.p, "account")
 }
 
 func (p *QuotaCreditsParams) GetAccount() (string, bool) {
@@ -277,10 +272,9 @@ func (p *QuotaCreditsParams) SetDomainid(v string) {
 }
 
 func (p *QuotaCreditsParams) ResetDomainid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
 	}
-	delete(p.p, "domainid")
 }
 
 func (p *QuotaCreditsParams) GetDomainid() (string, bool) {
@@ -291,7 +285,49 @@ func (p *QuotaCreditsParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
-func (p *QuotaCreditsParams) SetValue(v string) {
+func (p *QuotaCreditsParams) SetMin_balance(v float64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["min_balance"] = v
+}
+
+func (p *QuotaCreditsParams) ResetMin_balance() {
+	if p.p != nil && p.p["min_balance"] != nil {
+		delete(p.p, "min_balance")
+	}
+}
+
+func (p *QuotaCreditsParams) GetMin_balance() (float64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["min_balance"].(float64)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetQuota_enforce(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["quota_enforce"] = v
+}
+
+func (p *QuotaCreditsParams) ResetQuota_enforce() {
+	if p.p != nil && p.p["quota_enforce"] != nil {
+		delete(p.p, "quota_enforce")
+	}
+}
+
+func (p *QuotaCreditsParams) GetQuota_enforce() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["quota_enforce"].(bool)
+	return value, ok
+}
+
+func (p *QuotaCreditsParams) SetValue(v float64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -299,67 +335,22 @@ func (p *QuotaCreditsParams) SetValue(v string) {
 }
 
 func (p *QuotaCreditsParams) ResetValue() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
 	}
-	delete(p.p, "value")
 }
 
-func (p *QuotaCreditsParams) GetValue() (string, bool) {
+func (p *QuotaCreditsParams) GetValue() (float64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["value"].(string)
-	return value, ok
-}
-
-func (p *QuotaCreditsParams) SetMinBalance(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["min_balance"] = v
-}
-
-func (p *QuotaCreditsParams) ResetMinBalance() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "min_balance")
-}
-
-func (p *QuotaCreditsParams) GetMinBalance() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["min_balance"].(string)
-	return value, ok
-}
-
-func (p *QuotaCreditsParams) SetQuotaEnforce(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["quota_enforce"] = v
-}
-
-func (p *QuotaCreditsParams) ResetQuotaEnforce() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "quota_enforce")
-}
-
-func (p *QuotaCreditsParams) GetQuotaEnforce() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["quota_enforce"].(string)
+	value, ok := p.p["value"].(float64)
 	return value, ok
 }
 
 // You should always use this function to get a new QuotaCreditsParams instance,
 // as then you are sure you have configured all required params
-func (s *QuotaService) NewQuotaCreditsParams(account, domainid, value string) *QuotaCreditsParams {
+func (s *QuotaService) NewQuotaCreditsParams(account string, domainid string, value float64) *QuotaCreditsParams {
 	p := &QuotaCreditsParams{}
 	p.p = make(map[string]interface{})
 	p.p["account"] = account
@@ -368,6 +359,7 @@ func (s *QuotaService) NewQuotaCreditsParams(account, domainid, value string) *Q
 	return p
 }
 
+// Add +-credits to an account
 func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error) {
 	resp, err := s.cs.newRequest("quotaCredits", p.toURLValues())
 	if err != nil {
@@ -385,6 +377,8 @@ func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsRespons
 type QuotaCreditsResponse struct {
 	Credits    string `json:"credits"`
 	Currency   string `json:"currency"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
 	Updated_by string `json:"updated_by"`
 	Updated_on string `json:"updated_on"`
 }
@@ -442,6 +436,9 @@ func (p *QuotaStatementParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -451,11 +448,9 @@ func (p *QuotaStatementParams) toURLValues() url.Values {
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
-	if v, found := p.p["accountid"]; found {
-		u.Set("accountid", v.(string))
-	}
 	if v, found := p.p["type"]; found {
-		u.Set("type", v.(string))
+		vv := strconv.Itoa(v.(int))
+		u.Set("type", vv)
 	}
 	return u
 }
@@ -468,10 +463,9 @@ func (p *QuotaStatementParams) SetAccount(v string) {
 }
 
 func (p *QuotaStatementParams) ResetAccount() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
 	}
-	delete(p.p, "account")
 }
 
 func (p *QuotaStatementParams) GetAccount() (string, bool) {
@@ -479,6 +473,27 @@ func (p *QuotaStatementParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *QuotaStatementParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *QuotaStatementParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
+func (p *QuotaStatementParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
 	return value, ok
 }
 
@@ -490,10 +505,9 @@ func (p *QuotaStatementParams) SetDomainid(v string) {
 }
 
 func (p *QuotaStatementParams) ResetDomainid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
 	}
-	delete(p.p, "domainid")
 }
 
 func (p *QuotaStatementParams) GetDomainid() (string, bool) {
@@ -512,10 +526,9 @@ func (p *QuotaStatementParams) SetEnddate(v string) {
 }
 
 func (p *QuotaStatementParams) ResetEnddate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
 	}
-	delete(p.p, "enddate")
 }
 
 func (p *QuotaStatementParams) GetEnddate() (string, bool) {
@@ -534,10 +547,9 @@ func (p *QuotaStatementParams) SetStartdate(v string) {
 }
 
 func (p *QuotaStatementParams) ResetStartdate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
 	}
-	delete(p.p, "startdate")
 }
 
 func (p *QuotaStatementParams) GetStartdate() (string, bool) {
@@ -548,29 +560,7 @@ func (p *QuotaStatementParams) GetStartdate() (string, bool) {
 	return value, ok
 }
 
-func (p *QuotaStatementParams) SetAccountid(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["accountid"] = v
-}
-
-func (p *QuotaStatementParams) ResetAccountid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "accountid")
-}
-
-func (p *QuotaStatementParams) GetAccountid() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["accountid"].(string)
-	return value, ok
-}
-
-func (p *QuotaStatementParams) SetType(v string) {
+func (p *QuotaStatementParams) SetType(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -578,23 +568,22 @@ func (p *QuotaStatementParams) SetType(v string) {
 }
 
 func (p *QuotaStatementParams) ResetType() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
 	}
-	delete(p.p, "type")
 }
 
-func (p *QuotaStatementParams) GetType() (string, bool) {
+func (p *QuotaStatementParams) GetType() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["type"].(string)
+	value, ok := p.p["type"].(int)
 	return value, ok
 }
 
 // You should always use this function to get a new QuotaStatementParams instance,
 // as then you are sure you have configured all required params
-func (s *QuotaService) NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams {
+func (s *QuotaService) NewQuotaStatementParams(account string, domainid string, enddate string, startdate string) *QuotaStatementParams {
 	p := &QuotaStatementParams{}
 	p.p = make(map[string]interface{})
 	p.p["account"] = account
@@ -604,6 +593,7 @@ func (s *QuotaService) NewQuotaStatementParams(account, domainid, enddate, start
 	return p
 }
 
+// Create a quota statement
 func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error) {
 	resp, err := s.cs.newRequest("quotaStatement", p.toURLValues())
 	if err != nil {
@@ -620,11 +610,13 @@ func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementR
 
 type QuotaStatementResponse struct {
 	Account   string `json:"account"`
-	Accountid string `json:"accountid"`
-	Domain    string `json:"domain"`
+	Accountid int64  `json:"accountid"`
+	Domain    int64  `json:"domain"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
 	Name      string `json:"name"`
 	Quota     string `json:"quota"`
-	Type      string `json:"type"`
+	Type      int    `json:"type"`
 	Unit      string `json:"unit"`
 }
 
@@ -647,7 +639,8 @@ func (p *QuotaSummaryParams) toURLValues() url.Values {
 		u.Set("keyword", v.(string))
 	}
 	if v, found := p.p["listall"]; found {
-		u.Add("listall", v.(string))
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -668,10 +661,9 @@ func (p *QuotaSummaryParams) SetAccount(v string) {
 }
 
 func (p *QuotaSummaryParams) ResetAccount() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
 	}
-	delete(p.p, "account")
 }
 
 func (p *QuotaSummaryParams) GetAccount() (string, bool) {
@@ -690,10 +682,9 @@ func (p *QuotaSummaryParams) SetDomainid(v string) {
 }
 
 func (p *QuotaSummaryParams) ResetDomainid() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
 	}
-	delete(p.p, "domainid")
 }
 
 func (p *QuotaSummaryParams) GetDomainid() (string, bool) {
@@ -712,10 +703,9 @@ func (p *QuotaSummaryParams) SetKeyword(v string) {
 }
 
 func (p *QuotaSummaryParams) ResetKeyword() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
 	}
-	delete(p.p, "keyword")
 }
 
 func (p *QuotaSummaryParams) GetKeyword() (string, bool) {
@@ -726,7 +716,7 @@ func (p *QuotaSummaryParams) GetKeyword() (string, bool) {
 	return value, ok
 }
 
-func (p *QuotaSummaryParams) SetListall(v string) {
+func (p *QuotaSummaryParams) SetListall(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -734,17 +724,16 @@ func (p *QuotaSummaryParams) SetListall(v string) {
 }
 
 func (p *QuotaSummaryParams) ResetListall() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
 	}
-	delete(p.p, "listall")
 }
 
-func (p *QuotaSummaryParams) GetListall() (string, bool) {
+func (p *QuotaSummaryParams) GetListall() (bool, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["listall"].(string)
+	value, ok := p.p["listall"].(bool)
 	return value, ok
 }
 
@@ -756,10 +745,9 @@ func (p *QuotaSummaryParams) SetPage(v int) {
 }
 
 func (p *QuotaSummaryParams) ResetPage() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
 	}
-	delete(p.p, "page")
 }
 
 func (p *QuotaSummaryParams) GetPage() (int, bool) {
@@ -778,10 +766,9 @@ func (p *QuotaSummaryParams) SetPagesize(v int) {
 }
 
 func (p *QuotaSummaryParams) ResetPagesize() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
 	}
-	delete(p.p, "pagesize")
 }
 
 func (p *QuotaSummaryParams) GetPagesize() (int, bool) {
@@ -800,6 +787,7 @@ func (s *QuotaService) NewQuotaSummaryParams() *QuotaSummaryParams {
 	return p
 }
 
+// Lists balance and quota usage for all accounts
 func (s *QuotaService) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error) {
 	resp, err := s.cs.newRequest("quotaSummary", p.toURLValues())
 	if err != nil {
@@ -822,8 +810,10 @@ type QuotaSummaryResponse struct {
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
 	Enddate      string `json:"enddate"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
 	Quota        string `json:"quota"`
-	Quotaenabled string `json:"quotaenabled"`
+	Quotaenabled bool   `json:"quotaenabled"`
 	Startdate    string `json:"startdate"`
 	State        string `json:"state"`
 }
@@ -837,15 +827,6 @@ func (p *QuotaTariffCreateParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
-	if v, found := p.p["name"]; found {
-		u.Set("name", v.(string))
-	}
-	if v, found := p.p["usagetype"]; found {
-		u.Set("usagetype", v.(string))
-	}
-	if v, found := p.p["value"]; found {
-		u.Set("value", v.(string))
-	}
 	if v, found := p.p["activationrule"]; found {
 		u.Set("activationrule", v.(string))
 	}
@@ -855,76 +836,19 @@ func (p *QuotaTariffCreateParams) toURLValues() url.Values {
 	if v, found := p.p["enddate"]; found {
 		u.Set("enddate", v.(string))
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
+	if v, found := p.p["usagetype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("usagetype", vv)
+	}
+	if v, found := p.p["value"]; found {
+	}
 	return u
-}
-
-func (p *QuotaTariffCreateParams) SetName(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["name"] = v
-}
-
-func (p *QuotaTariffCreateParams) ResetName() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "name")
-}
-
-func (p *QuotaTariffCreateParams) GetName() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["name"].(string)
-	return value, ok
-}
-
-func (p *QuotaTariffCreateParams) SetUsagetype(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["usagetype"] = v
-}
-
-func (p *QuotaTariffCreateParams) ResetUsagetype() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "usagetype")
-}
-
-func (p *QuotaTariffCreateParams) GetUsagetype() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["usagetype"].(string)
-	return value, ok
-}
-
-func (p *QuotaTariffCreateParams) SetValue(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["value"] = v
-}
-
-func (p *QuotaTariffCreateParams) ResetValue() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "value")
-}
-
-func (p *QuotaTariffCreateParams) GetValue() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["value"].(string)
-	return value, ok
 }
 
 func (p *QuotaTariffCreateParams) SetActivationrule(v string) {
@@ -935,10 +859,9 @@ func (p *QuotaTariffCreateParams) SetActivationrule(v string) {
 }
 
 func (p *QuotaTariffCreateParams) ResetActivationrule() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["activationrule"] != nil {
+		delete(p.p, "activationrule")
 	}
-	delete(p.p, "activationrule")
 }
 
 func (p *QuotaTariffCreateParams) GetActivationrule() (string, bool) {
@@ -957,10 +880,9 @@ func (p *QuotaTariffCreateParams) SetDescription(v string) {
 }
 
 func (p *QuotaTariffCreateParams) ResetDescription() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
 	}
-	delete(p.p, "description")
 }
 
 func (p *QuotaTariffCreateParams) GetDescription() (string, bool) {
@@ -979,10 +901,9 @@ func (p *QuotaTariffCreateParams) SetEnddate(v string) {
 }
 
 func (p *QuotaTariffCreateParams) ResetEnddate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
 	}
-	delete(p.p, "enddate")
 }
 
 func (p *QuotaTariffCreateParams) GetEnddate() (string, bool) {
@@ -990,6 +911,27 @@ func (p *QuotaTariffCreateParams) GetEnddate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffCreateParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *QuotaTariffCreateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *QuotaTariffCreateParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -1001,10 +943,9 @@ func (p *QuotaTariffCreateParams) SetStartdate(v string) {
 }
 
 func (p *QuotaTariffCreateParams) ResetStartdate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
 	}
-	delete(p.p, "startdate")
 }
 
 func (p *QuotaTariffCreateParams) GetStartdate() (string, bool) {
@@ -1015,9 +956,51 @@ func (p *QuotaTariffCreateParams) GetStartdate() (string, bool) {
 	return value, ok
 }
 
+func (p *QuotaTariffCreateParams) SetUsagetype(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["usagetype"] = v
+}
+
+func (p *QuotaTariffCreateParams) ResetUsagetype() {
+	if p.p != nil && p.p["usagetype"] != nil {
+		delete(p.p, "usagetype")
+	}
+}
+
+func (p *QuotaTariffCreateParams) GetUsagetype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usagetype"].(int)
+	return value, ok
+}
+
+func (p *QuotaTariffCreateParams) SetValue(v float64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["value"] = v
+}
+
+func (p *QuotaTariffCreateParams) ResetValue() {
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
+	}
+}
+
+func (p *QuotaTariffCreateParams) GetValue() (float64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["value"].(float64)
+	return value, ok
+}
+
 // You should always use this function to get a new QuotaTariffCreateParams instance,
 // as then you are sure you have configured all required params
-func (s *QuotaService) NewQuotaTariffCreateParams(name, usagetype, value string) *QuotaTariffCreateParams {
+func (s *QuotaService) NewQuotaTariffCreateParams(name string, usagetype int, value float64) *QuotaTariffCreateParams {
 	p := &QuotaTariffCreateParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
@@ -1026,6 +1009,7 @@ func (s *QuotaService) NewQuotaTariffCreateParams(name, usagetype, value string)
 	return p
 }
 
+// Creates a quota tariff for a resource.
 func (s *QuotaService) QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTariffCreateResponse, error) {
 	resp, err := s.cs.newRequest("quotaTariffCreate", p.toURLValues())
 	if err != nil {
@@ -1041,17 +1025,19 @@ func (s *QuotaService) QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTari
 }
 
 type QuotaTariffCreateResponse struct {
-	Activationrule       string `json:"activationRule"`
+	ActivationRule       string `json:"activationRule"`
 	Currency             string `json:"currency"`
 	Description          string `json:"description"`
 	EffectiveDate        string `json:"effectiveDate"`
 	EndDate              string `json:"endDate"`
+	JobID                string `json:"jobid"`
+	Jobstatus            int    `json:"jobstatus"`
 	Name                 string `json:"name"`
 	Removed              string `json:"removed"`
 	TariffValue          string `json:"tariffValue"`
 	UsageDiscriminator   string `json:"usageDiscriminator"`
 	UsageName            string `json:"usageName"`
-	UsageType            string `json:"usageType"`
+	UsageType            int    `json:"usageType"`
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
@@ -1080,10 +1066,9 @@ func (p *QuotaTariffDeleteParams) SetId(v string) {
 }
 
 func (p *QuotaTariffDeleteParams) ResetId() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
 	}
-	delete(p.p, "id")
 }
 
 func (p *QuotaTariffDeleteParams) GetId() (string, bool) {
@@ -1103,6 +1088,7 @@ func (s *QuotaService) NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteP
 	return p
 }
 
+// Marks a quota tariff as removed.
 func (s *QuotaService) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error) {
 	resp, err := s.cs.newRequest("quotaTariffDelete", p.toURLValues())
 	if err != nil {
@@ -1118,8 +1104,37 @@ func (s *QuotaService) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTari
 }
 
 type QuotaTariffDeleteResponse struct {
-	DisplayText string `json:"displaytext"`
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+func (r *QuotaTariffDeleteResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias QuotaTariffDeleteResponse
+	return json.Unmarshal(b, (*alias)(r))
 }
 
 type QuotaTariffListParams struct {
@@ -1131,7 +1146,203 @@ func (p *QuotaTariffListParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	if v, found := p.p["usagetype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("usagetype", vv)
+	}
 	return u
+}
+
+func (p *QuotaTariffListParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *QuotaTariffListParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
+func (p *QuotaTariffListParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *QuotaTariffListParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *QuotaTariffListParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *QuotaTariffListParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
+func (p *QuotaTariffListParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *QuotaTariffListParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *QuotaTariffListParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *QuotaTariffListParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *QuotaTariffListParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *QuotaTariffListParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *QuotaTariffListParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *QuotaTariffListParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
+func (p *QuotaTariffListParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetUsagetype(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["usagetype"] = v
+}
+
+func (p *QuotaTariffListParams) ResetUsagetype() {
+	if p.p != nil && p.p["usagetype"] != nil {
+		delete(p.p, "usagetype")
+	}
+}
+
+func (p *QuotaTariffListParams) GetUsagetype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usagetype"].(int)
+	return value, ok
 }
 
 // You should always use this function to get a new QuotaTariffListParams instance,
@@ -1142,6 +1353,7 @@ func (s *QuotaService) NewQuotaTariffListParams() *QuotaTariffListParams {
 	return p
 }
 
+// Lists all quota tariff plans
 func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error) {
 	resp, err := s.cs.newRequest("quotaTariffList", p.toURLValues())
 	if err != nil {
@@ -1157,17 +1369,19 @@ func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffLi
 }
 
 type QuotaTariffListResponse struct {
-	Activationrule       string `json:"activationRule"`
+	ActivationRule       string `json:"activationRule"`
 	Currency             string `json:"currency"`
 	Description          string `json:"description"`
 	EffectiveDate        string `json:"effectiveDate"`
 	EndDate              string `json:"endDate"`
+	JobID                string `json:"jobid"`
+	Jobstatus            int    `json:"jobstatus"`
 	Name                 string `json:"name"`
 	Removed              string `json:"removed"`
 	TariffValue          string `json:"tariffValue"`
 	UsageDiscriminator   string `json:"usageDiscriminator"`
 	UsageName            string `json:"usageName"`
-	UsageType            string `json:"usageType"`
+	UsageType            int    `json:"usageType"`
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
@@ -1182,17 +1396,8 @@ func (p *QuotaTariffUpdateParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
-	if v, found := p.p["name"]; found {
-		u.Set("name", v.(string))
-	}
 	if v, found := p.p["activationrule"]; found {
 		u.Set("activationrule", v.(string))
-	}
-	if v, found := p.p["usagetype"]; found {
-		u.Set("usagetype", v.(string))
-	}
-	if v, found := p.p["value"]; found {
-		u.Set("value", v.(string))
 	}
 	if v, found := p.p["description"]; found {
 		u.Set("description", v.(string))
@@ -1200,32 +1405,19 @@ func (p *QuotaTariffUpdateParams) toURLValues() url.Values {
 	if v, found := p.p["enddate"]; found {
 		u.Set("enddate", v.(string))
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
+	if v, found := p.p["usagetype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("usagetype", vv)
+	}
+	if v, found := p.p["value"]; found {
+	}
 	return u
-}
-
-func (p *QuotaTariffUpdateParams) SetName(v string) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["name"] = v
-}
-
-func (p *QuotaTariffUpdateParams) ResetName() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	delete(p.p, "name")
-}
-
-func (p *QuotaTariffUpdateParams) GetName() (string, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["name"].(string)
-	return value, ok
 }
 
 func (p *QuotaTariffUpdateParams) SetActivationrule(v string) {
@@ -1236,10 +1428,9 @@ func (p *QuotaTariffUpdateParams) SetActivationrule(v string) {
 }
 
 func (p *QuotaTariffUpdateParams) ResetActivationrule() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["activationrule"] != nil {
+		delete(p.p, "activationrule")
 	}
-	delete(p.p, "activationrule")
 }
 
 func (p *QuotaTariffUpdateParams) GetActivationrule() (string, bool) {
@@ -1258,10 +1449,9 @@ func (p *QuotaTariffUpdateParams) SetDescription(v string) {
 }
 
 func (p *QuotaTariffUpdateParams) ResetDescription() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["description"] != nil {
+		delete(p.p, "description")
 	}
-	delete(p.p, "description")
 }
 
 func (p *QuotaTariffUpdateParams) GetDescription() (string, bool) {
@@ -1272,19 +1462,17 @@ func (p *QuotaTariffUpdateParams) GetDescription() (string, bool) {
 	return value, ok
 }
 
-func (p *QuotaTariffUpdateParams) SetEnddate() (string, bool) {
+func (p *QuotaTariffUpdateParams) SetEnddate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["enddate"].(string)
-	return value, ok
+	p.p["enddate"] = v
 }
 
 func (p *QuotaTariffUpdateParams) ResetEnddate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
 	}
-	delete(p.p, "enddate")
 }
 
 func (p *QuotaTariffUpdateParams) GetEnddate() (string, bool) {
@@ -1292,6 +1480,27 @@ func (p *QuotaTariffUpdateParams) GetEnddate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *QuotaTariffUpdateParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *QuotaTariffUpdateParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -1303,10 +1512,9 @@ func (p *QuotaTariffUpdateParams) SetStartdate(v string) {
 }
 
 func (p *QuotaTariffUpdateParams) ResetStartdate() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
 	}
-	delete(p.p, "startdate")
 }
 
 func (p *QuotaTariffUpdateParams) GetStartdate() (string, bool) {
@@ -1317,7 +1525,7 @@ func (p *QuotaTariffUpdateParams) GetStartdate() (string, bool) {
 	return value, ok
 }
 
-func (p *QuotaTariffUpdateParams) SetUsagetype(v string) {
+func (p *QuotaTariffUpdateParams) SetUsagetype(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1325,21 +1533,20 @@ func (p *QuotaTariffUpdateParams) SetUsagetype(v string) {
 }
 
 func (p *QuotaTariffUpdateParams) ResetUsagetype() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["usagetype"] != nil {
+		delete(p.p, "usagetype")
 	}
-	delete(p.p, "usagetype")
 }
 
-func (p *QuotaTariffUpdateParams) GetUsagetype() (string, bool) {
+func (p *QuotaTariffUpdateParams) GetUsagetype() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["usagetype"].(string)
+	value, ok := p.p["usagetype"].(int)
 	return value, ok
 }
 
-func (p *QuotaTariffUpdateParams) SetValue(v string) {
+func (p *QuotaTariffUpdateParams) SetValue(v float64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1347,17 +1554,16 @@ func (p *QuotaTariffUpdateParams) SetValue(v string) {
 }
 
 func (p *QuotaTariffUpdateParams) ResetValue() {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
+	if p.p != nil && p.p["value"] != nil {
+		delete(p.p, "value")
 	}
-	delete(p.p, "value")
 }
 
-func (p *QuotaTariffUpdateParams) GetValue() (string, bool) {
+func (p *QuotaTariffUpdateParams) GetValue() (float64, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["value"].(string)
+	value, ok := p.p["value"].(float64)
 	return value, ok
 }
 
@@ -1370,6 +1576,7 @@ func (s *QuotaService) NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdat
 	return p
 }
 
+// Update the tariff plan for a resource
 func (s *QuotaService) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error) {
 	resp, err := s.cs.newRequest("quotaTariffUpdate", p.toURLValues())
 	if err != nil {
@@ -1385,17 +1592,19 @@ func (s *QuotaService) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTari
 }
 
 type QuotaTariffUpdateResponse struct {
-	Activationrule       string `json:"activationRule"`
+	ActivationRule       string `json:"activationRule"`
 	Currency             string `json:"currency"`
 	Description          string `json:"description"`
 	EffectiveDate        string `json:"effectiveDate"`
 	EndDate              string `json:"endDate"`
+	JobID                string `json:"jobid"`
+	Jobstatus            int    `json:"jobstatus"`
 	Name                 string `json:"name"`
 	Removed              string `json:"removed"`
 	TariffValue          string `json:"tariffValue"`
 	UsageDiscriminator   string `json:"usageDiscriminator"`
 	UsageName            string `json:"usageName"`
-	UsageType            string `json:"usageType"`
+	UsageType            int    `json:"usageType"`
 	UsageTypeDescription string `json:"usageTypeDescription"`
 	UsageUnit            string `json:"usageUnit"`
 	Uuid                 string `json:"uuid"`
@@ -1403,6 +1612,14 @@ type QuotaTariffUpdateResponse struct {
 
 type QuotaUpdateParams struct {
 	p map[string]interface{}
+}
+
+func (p *QuotaUpdateParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	return u
 }
 
 // You should always use this function to get a new QuotaUpdateParams instance,
@@ -1413,8 +1630,9 @@ func (s *QuotaService) NewQuotaUpdateParams() *QuotaUpdateParams {
 	return p
 }
 
-func (s *QuotaService) QuotaUpdate() (*QuotaUpdateResponse, error) {
-	resp, err := s.cs.newRequest("quotaUpdate", nil)
+// Update quota calculations, alerts and statements
+func (s *QuotaService) QuotaUpdate(p *QuotaUpdateParams) (*QuotaUpdateResponse, error) {
+	resp, err := s.cs.newRequest("quotaUpdate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1428,5 +1646,7 @@ func (s *QuotaService) QuotaUpdate() (*QuotaUpdateResponse, error) {
 }
 
 type QuotaUpdateResponse struct {
-	UpdatedOn string `json:"updated_on"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Updated_on string `json:"updated_on"`
 }
