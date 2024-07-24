@@ -484,7 +484,16 @@ var layout = apiInfo{
 		"revokeSecurityGroupIngress",
 	},
 	"QuotaService": {
+		"quotaBalance",
+		"quotaCredits",
 		"quotaIsEnabled",
+		"quotaStatement",
+		"quotaSummary",
+		"quotaTariffCreate",
+		"quotaTariffDelete",
+		"quotaTariffList",
+		"quotaTariffUpdate",
+		"quotaUpdate",
 	},
 	"PodService": {
 		"createPod",
