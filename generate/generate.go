@@ -1340,6 +1340,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	case "int64":
 		pn("vv := strconv.FormatInt(v.(int64), 10)")
 		pn("u.Set(\"%s\", vv)", name)
+	case "float64":
+		pn("vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)")
+		pn("u.Set(\"%s\", vv)", name)
 	case "bool":
 		pn("vv := strconv.FormatBool(v.(bool))")
 		pn("u.Set(\"%s\", vv)", name)
