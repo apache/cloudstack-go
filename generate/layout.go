@@ -579,7 +579,16 @@ var layout = apiInfo{
 		"updateSecurityGroup",
 	},
 	"QuotaService": {
+		"quotaBalance",
+		"quotaCredits",
 		"quotaIsEnabled",
+		"quotaStatement",
+		"quotaSummary",
+		"quotaTariffCreate",
+		"quotaTariffDelete",
+		"quotaTariffList",
+		"quotaTariffUpdate",
+		"quotaUpdate",
 	},
 	"PodService": {
 		"createManagementNetworkIpRange",
