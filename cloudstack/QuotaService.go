@@ -233,12 +233,16 @@ func (p *QuotaCreditsParams) toURLValues() url.Values {
 		u.Set("domainid", v.(string))
 	}
 	if v, found := p.p["min_balance"]; found {
+		vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)
+		u.Set("min_balance", vv)
 	}
 	if v, found := p.p["quota_enforce"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("quota_enforce", vv)
 	}
 	if v, found := p.p["value"]; found {
+		vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)
+		u.Set("value", vv)
 	}
 	return u
 }
@@ -847,6 +851,8 @@ func (p *QuotaTariffCreateParams) toURLValues() url.Values {
 		u.Set("usagetype", vv)
 	}
 	if v, found := p.p["value"]; found {
+		vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)
+		u.Set("value", vv)
 	}
 	return u
 }
@@ -1416,6 +1422,8 @@ func (p *QuotaTariffUpdateParams) toURLValues() url.Values {
 		u.Set("usagetype", vv)
 	}
 	if v, found := p.p["value"]; found {
+		vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)
+		u.Set("value", vv)
 	}
 	return u
 }
