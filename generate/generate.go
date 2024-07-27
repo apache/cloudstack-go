@@ -70,6 +70,7 @@ var requiresPostMethod = map[string]bool{
 	"registerUserData":                 true,
 	"setupUserTwoFactorAuthentication": true,
 	"validateUserTwoFactorAuthenticationCode": true,
+	"quotaTariffCreate":                       true,
 }
 
 var mapRequireList = map[string]map[string]bool{
