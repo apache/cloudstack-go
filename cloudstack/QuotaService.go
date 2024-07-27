@@ -206,15 +206,15 @@ func (s *QuotaService) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceRespons
 }
 
 type QuotaBalanceResponse struct {
-	Account   string `json:"account"`
-	Accountid int64  `json:"accountid"`
-	Domain    int64  `json:"domain"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
-	Quota     string `json:"quota"`
-	Type      int    `json:"type"`
-	Unit      string `json:"unit"`
+	Account   string  `json:"account"`
+	Accountid int64   `json:"accountid"`
+	Domain    int64   `json:"domain"`
+	JobID     string  `json:"jobid"`
+	Jobstatus int     `json:"jobstatus"`
+	Name      string  `json:"name"`
+	Quota     float64 `json:"quota"`
+	Type      int     `json:"type"`
+	Unit      string  `json:"unit"`
 }
 
 type QuotaCreditsParams struct {
@@ -379,12 +379,12 @@ func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsRespons
 }
 
 type QuotaCreditsResponse struct {
-	Credits    string `json:"credits"`
-	Currency   string `json:"currency"`
-	JobID      string `json:"jobid"`
-	Jobstatus  int    `json:"jobstatus"`
-	Updated_by string `json:"updated_by"`
-	Updated_on string `json:"updated_on"`
+	Credits    float64 `json:"credits"`
+	Currency   string  `json:"currency"`
+	JobID      string  `json:"jobid"`
+	Jobstatus  int     `json:"jobstatus"`
+	Updated_by string  `json:"updated_by"`
+	Updated_on string  `json:"updated_on"`
 }
 
 type QuotaIsEnabledParams struct {
@@ -613,15 +613,15 @@ func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementR
 }
 
 type QuotaStatementResponse struct {
-	Account   string `json:"account"`
-	Accountid int64  `json:"accountid"`
-	Domain    int64  `json:"domain"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
-	Quota     string `json:"quota"`
-	Type      int    `json:"type"`
-	Unit      string `json:"unit"`
+	Account   string  `json:"account"`
+	Accountid int64   `json:"accountid"`
+	Domain    int64   `json:"domain"`
+	JobID     string  `json:"jobid"`
+	Jobstatus int     `json:"jobstatus"`
+	Name      string  `json:"name"`
+	Quota     float64 `json:"quota"`
+	Type      int     `json:"type"`
+	Unit      string  `json:"unit"`
 }
 
 type QuotaSummaryParams struct {
@@ -807,19 +807,24 @@ func (s *QuotaService) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryRespons
 }
 
 type QuotaSummaryResponse struct {
-	Account      string `json:"account"`
-	Accountid    string `json:"accountid"`
-	Balance      string `json:"balance"`
-	Currency     string `json:"currency"`
-	Domain       string `json:"domain"`
-	Domainid     string `json:"domainid"`
-	Enddate      string `json:"enddate"`
-	JobID        string `json:"jobid"`
-	Jobstatus    int    `json:"jobstatus"`
-	Quota        string `json:"quota"`
-	Quotaenabled bool   `json:"quotaenabled"`
-	Startdate    string `json:"startdate"`
-	State        string `json:"state"`
+	Count        int             `json:"count"`
+	QuotaSummary []*QuotaSummary `json:"summary"`
+}
+
+type QuotaSummary struct {
+	Account      string  `json:"account"`
+	Accountid    string  `json:"accountid"`
+	Balance      float64 `json:"balance"`
+	Currency     string  `json:"currency"`
+	Domain       string  `json:"domain"`
+	Domainid     string  `json:"domainid"`
+	Enddate      string  `json:"enddate"`
+	JobID        string  `json:"jobid"`
+	Jobstatus    int     `json:"jobstatus"`
+	Quota        float64 `json:"quota"`
+	Quotaenabled bool    `json:"quotaenabled"`
+	Startdate    string  `json:"startdate"`
+	State        string  `json:"state"`
 }
 
 type QuotaTariffCreateParams struct {
@@ -1031,22 +1036,22 @@ func (s *QuotaService) QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTari
 }
 
 type QuotaTariffCreateResponse struct {
-	ActivationRule       string `json:"activationRule"`
-	Currency             string `json:"currency"`
-	Description          string `json:"description"`
-	EffectiveDate        string `json:"effectiveDate"`
-	EndDate              string `json:"endDate"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Name                 string `json:"name"`
-	Removed              string `json:"removed"`
-	TariffValue          string `json:"tariffValue"`
-	UsageDiscriminator   string `json:"usageDiscriminator"`
-	UsageName            string `json:"usageName"`
-	UsageType            int    `json:"usageType"`
-	UsageTypeDescription string `json:"usageTypeDescription"`
-	UsageUnit            string `json:"usageUnit"`
-	Uuid                 string `json:"uuid"`
+	ActivationRule       string  `json:"activationRule"`
+	Currency             string  `json:"currency"`
+	Description          string  `json:"description"`
+	EffectiveDate        string  `json:"effectiveDate"`
+	EndDate              string  `json:"endDate"`
+	JobID                string  `json:"jobid"`
+	Jobstatus            int     `json:"jobstatus"`
+	Name                 string  `json:"name"`
+	Removed              string  `json:"removed"`
+	TariffValue          float64 `json:"tariffValue"`
+	UsageDiscriminator   string  `json:"usageDiscriminator"`
+	UsageName            string  `json:"usageName"`
+	UsageType            int     `json:"usageType"`
+	UsageTypeDescription string  `json:"usageTypeDescription"`
+	UsageUnit            string  `json:"usageUnit"`
+	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaTariffDeleteParams struct {
@@ -1375,22 +1380,22 @@ func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffLi
 }
 
 type QuotaTariffListResponse struct {
-	ActivationRule       string `json:"activationRule"`
-	Currency             string `json:"currency"`
-	Description          string `json:"description"`
-	EffectiveDate        string `json:"effectiveDate"`
-	EndDate              string `json:"endDate"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Name                 string `json:"name"`
-	Removed              string `json:"removed"`
-	TariffValue          string `json:"tariffValue"`
-	UsageDiscriminator   string `json:"usageDiscriminator"`
-	UsageName            string `json:"usageName"`
-	UsageType            int    `json:"usageType"`
-	UsageTypeDescription string `json:"usageTypeDescription"`
-	UsageUnit            string `json:"usageUnit"`
-	Uuid                 string `json:"uuid"`
+	ActivationRule       string  `json:"activationRule"`
+	Currency             string  `json:"currency"`
+	Description          string  `json:"description"`
+	EffectiveDate        string  `json:"effectiveDate"`
+	EndDate              string  `json:"endDate"`
+	JobID                string  `json:"jobid"`
+	Jobstatus            int     `json:"jobstatus"`
+	Name                 string  `json:"name"`
+	Removed              string  `json:"removed"`
+	TariffValue          float64 `json:"tariffValue"`
+	UsageDiscriminator   string  `json:"usageDiscriminator"`
+	UsageName            string  `json:"usageName"`
+	UsageType            int     `json:"usageType"`
+	UsageTypeDescription string  `json:"usageTypeDescription"`
+	UsageUnit            string  `json:"usageUnit"`
+	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaTariffUpdateParams struct {
@@ -1600,22 +1605,22 @@ func (s *QuotaService) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTari
 }
 
 type QuotaTariffUpdateResponse struct {
-	ActivationRule       string `json:"activationRule"`
-	Currency             string `json:"currency"`
-	Description          string `json:"description"`
-	EffectiveDate        string `json:"effectiveDate"`
-	EndDate              string `json:"endDate"`
-	JobID                string `json:"jobid"`
-	Jobstatus            int    `json:"jobstatus"`
-	Name                 string `json:"name"`
-	Removed              string `json:"removed"`
-	TariffValue          string `json:"tariffValue"`
-	UsageDiscriminator   string `json:"usageDiscriminator"`
-	UsageName            string `json:"usageName"`
-	UsageType            int    `json:"usageType"`
-	UsageTypeDescription string `json:"usageTypeDescription"`
-	UsageUnit            string `json:"usageUnit"`
-	Uuid                 string `json:"uuid"`
+	ActivationRule       string  `json:"activationRule"`
+	Currency             string  `json:"currency"`
+	Description          string  `json:"description"`
+	EffectiveDate        string  `json:"effectiveDate"`
+	EndDate              string  `json:"endDate"`
+	JobID                string  `json:"jobid"`
+	Jobstatus            int     `json:"jobstatus"`
+	Name                 string  `json:"name"`
+	Removed              string  `json:"removed"`
+	TariffValue          float64 `json:"tariffValue"`
+	UsageDiscriminator   string  `json:"usageDiscriminator"`
+	UsageName            string  `json:"usageName"`
+	UsageType            int     `json:"usageType"`
+	UsageTypeDescription string  `json:"usageTypeDescription"`
+	UsageUnit            string  `json:"usageUnit"`
+	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaUpdateParams struct {
