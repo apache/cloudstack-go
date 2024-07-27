@@ -613,15 +613,24 @@ func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementR
 }
 
 type QuotaStatementResponse struct {
-	Account   string  `json:"account"`
-	Accountid int64   `json:"accountid"`
-	Domain    int64   `json:"domain"`
-	JobID     string  `json:"jobid"`
-	Jobstatus int     `json:"jobstatus"`
-	Name      string  `json:"name"`
-	Quota     float64 `json:"quota"`
+	Statement QuotaStatementResponseType `json:"statement"`
+}
+
+type QuotaStatementResponseType struct {
+	QuotaUsage []QuotaUsage `json:"quotausage"`
+	TotalQuota float64      `json:"totalquota"`
+	StartDate  string       `json:"startdate"`
+	EndDate    string       `json:"enddate"`
+	Currency   string       `json:"currency"`
+}
+
+type QuotaUsage struct {
 	Type      int     `json:"type"`
+	Accountid int     `json:"accountid"`
+	Domain    int     `json:"domain"`
+	Name      string  `json:"name"`
 	Unit      string  `json:"unit"`
+	Quota     float64 `json:"quota"`
 }
 
 type QuotaSummaryParams struct {

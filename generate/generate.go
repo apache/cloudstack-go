@@ -1900,13 +1900,40 @@ func isSuccessOnlyResponse(resp APIResponses) bool {
 func (s *service) generateResponseType(a *API) {
 	pn := s.pn
 	tn := capitalize(strings.TrimPrefix(a.Name, "configure") + "Response")
+
+	// add custom response types for some specific API calls
+	if a.Name == "quotaStatement" {
+		pn("type QuotaStatementResponse struct {")
+		pn("    Statement QuotaStatementResponseType `json:\"statement\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaStatementResponseType struct {")
+		pn("    QuotaUsage []QuotaUsage `json:\"quotausage\"`")
+		pn("    TotalQuota float64      `json:\"totalquota\"`")
+		pn("    StartDate  string       `json:\"startdate\"`")
+		pn("    EndDate    string       `json:\"enddate\"`")
+		pn("    Currency   string       `json:\"currency\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaUsage struct {")
+		pn("    Type      int     `json:\"type\"`")
+		pn("    Accountid int     `json:\"accountid\"`")
+		pn("    Domain    int     `json:\"domain\"`")
+		pn("    Name      string  `json:\"name\"`")
+		pn("    Unit      string  `json:\"unit\"`")
+		pn("    Quota     float64 `json:\"quota\"`")
+		pn("}")
+		pn("")
+		return
+	}
+
 	ln := capitalize(strings.TrimPrefix(a.Name, "list"))
 
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
 	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" ||
-		a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
+		a.Name == "quotaBalance" || a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1985,9 +2012,14 @@ func (s *service) generateResponseType(a *API) {
 		case "quotaTariffList":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "quotatariff")
+		case "quotaBalance":
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "balance")
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "quotaTariffList":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "quotatariff")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
