@@ -1905,7 +1905,8 @@ func (s *service) generateResponseType(a *API) {
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" || a.Name == "quotaSummary" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" ||
+		a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1981,6 +1982,9 @@ func (s *service) generateResponseType(a *API) {
 		case "listStoragePoolsMetrics":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "storagepool")
+		case "quotaTariffList":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "quotatariff")
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")

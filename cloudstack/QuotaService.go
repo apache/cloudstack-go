@@ -1380,6 +1380,11 @@ func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffLi
 }
 
 type QuotaTariffListResponse struct {
+	Count           int                `json:"count"`
+	QuotaTariffList []*QuotaTariffList `json:"quotatariff"`
+}
+
+type QuotaTariffList struct {
 	ActivationRule       string  `json:"activationRule"`
 	Currency             string  `json:"currency"`
 	Description          string  `json:"description"`
