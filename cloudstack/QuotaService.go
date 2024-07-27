@@ -206,15 +206,14 @@ func (s *QuotaService) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceRespons
 }
 
 type QuotaBalanceResponse struct {
-	Account   string  `json:"account"`
-	Accountid int64   `json:"accountid"`
-	Domain    int64   `json:"domain"`
-	JobID     string  `json:"jobid"`
-	Jobstatus int     `json:"jobstatus"`
-	Name      string  `json:"name"`
-	Quota     float64 `json:"quota"`
-	Type      int     `json:"type"`
-	Unit      string  `json:"unit"`
+	Statement QuotaBalanceResponseType `json:"balance"`
+}
+
+type QuotaBalanceResponseType struct {
+	StartQuota float64  `json:"startquota"`
+	Credits    []string `json:"credits"`
+	StartDate  string   `json:"startdate"`
+	Currency   string   `json:"currency"`
 }
 
 type QuotaCreditsParams struct {

@@ -1902,6 +1902,20 @@ func (s *service) generateResponseType(a *API) {
 	tn := capitalize(strings.TrimPrefix(a.Name, "configure") + "Response")
 
 	// add custom response types for some specific API calls
+	if a.Name == "quotaBalance" {
+		pn("type QuotaBalanceResponse struct {")
+		pn("    Statement QuotaBalanceResponseType `json:\"balance\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaBalanceResponseType struct {")
+		pn("    StartQuota float64  `json:\"startquota\"`")
+		pn("    Credits    []string `json:\"credits\"`")
+		pn("    StartDate  string   `json:\"startdate\"`")
+		pn("    Currency   string   `json:\"currency\"`")
+		pn("}")
+		pn("")
+		return
+	}
 	if a.Name == "quotaStatement" {
 		pn("type QuotaStatementResponse struct {")
 		pn("    Statement QuotaStatementResponseType `json:\"statement\"`")
