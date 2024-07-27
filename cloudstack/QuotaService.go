@@ -1017,7 +1017,7 @@ func (s *QuotaService) NewQuotaTariffCreateParams(name string, usagetype int, va
 
 // Creates a quota tariff for a resource.
 func (s *QuotaService) QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTariffCreateResponse, error) {
-	resp, err := s.cs.newRequest("quotaTariffCreate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("quotaTariffCreate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
