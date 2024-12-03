@@ -294,6 +294,7 @@ type CreatePodResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -1110,6 +1111,7 @@ type PodCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -1439,6 +1441,7 @@ type UpdatePodResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`

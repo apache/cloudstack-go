@@ -4523,7 +4523,7 @@ func (s *FirewallService) NewCreateIpv6FirewallRuleParams(networkid string, prot
 	return p
 }
 
-// Creates an Ipv6 firewall rule in the given network (the network has to belong to VPC)
+// Creates an Ipv6 firewall rule in the given network (the network must not belong to VPC)
 func (s *FirewallService) CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error) {
 	resp, err := s.cs.newRequest("createIpv6FirewallRule", p.toURLValues())
 	if err != nil {

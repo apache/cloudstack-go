@@ -219,6 +219,7 @@ func (s *TemplateService) CopyTemplate(p *CopyTemplateParams) (*CopyTemplateResp
 type CopyTemplateResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -232,6 +233,7 @@ type CopyTemplateResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -851,6 +853,7 @@ func (s *TemplateService) CreateTemplate(p *CreateTemplateParams) (*CreateTempla
 type CreateTemplateResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -864,6 +867,7 @@ type CreateTemplateResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -948,6 +952,10 @@ func (p *DeleteTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["issystem"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("issystem", vv)
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -993,6 +1001,27 @@ func (p *DeleteTemplateParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DeleteTemplateParams) SetIssystem(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["issystem"] = v
+}
+
+func (p *DeleteTemplateParams) ResetIssystem() {
+	if p.p != nil && p.p["issystem"] != nil {
+		delete(p.p, "issystem")
+	}
+}
+
+func (p *DeleteTemplateParams) GetIssystem() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["issystem"].(bool)
 	return value, ok
 }
 
@@ -1247,6 +1276,9 @@ func (p *GetUploadParamsForTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["bits"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("bits", vv)
@@ -1344,6 +1376,27 @@ func (p *GetUploadParamsForTemplateParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForTemplateParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *GetUploadParamsForTemplateParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -1949,6 +2002,9 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["details"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("details", vv)
@@ -2053,6 +2109,27 @@ func (p *ListTemplatesParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListTemplatesParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListTemplatesParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListTemplatesParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -2657,6 +2734,7 @@ type ListTemplatesResponse struct {
 type Template struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -2670,6 +2748,7 @@ type Template struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -2850,6 +2929,7 @@ func (s *TemplateService) PrepareTemplate(p *PrepareTemplateParams) (*PrepareTem
 type PrepareTemplateResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -2863,6 +2943,7 @@ type PrepareTemplateResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -2942,6 +3023,9 @@ func (p *RegisterTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
+	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
 	}
 	if v, found := p.p["bits"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -3054,6 +3138,27 @@ func (p *RegisterTemplateParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *RegisterTemplateParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *RegisterTemplateParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *RegisterTemplateParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -3618,6 +3723,7 @@ type RegisterTemplateResponse struct {
 type RegisterTemplate struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -3631,6 +3737,7 @@ type RegisterTemplate struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -3708,6 +3815,9 @@ func (p *UpdateTemplateParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["bootable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bootable", vv)
@@ -3761,10 +3871,34 @@ func (p *UpdateTemplateParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("sshkeyenabled", vv)
 	}
+	if v, found := p.p["templatetag"]; found {
+		u.Set("templatetag", v.(string))
+	}
 	if v, found := p.p["templatetype"]; found {
 		u.Set("templatetype", v.(string))
 	}
 	return u
+}
+
+func (p *UpdateTemplateParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *UpdateTemplateParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *UpdateTemplateParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *UpdateTemplateParams) SetBootable(v bool) {
@@ -4061,6 +4195,27 @@ func (p *UpdateTemplateParams) GetSshkeyenabled() (bool, bool) {
 	return value, ok
 }
 
+func (p *UpdateTemplateParams) SetTemplatetag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templatetag"] = v
+}
+
+func (p *UpdateTemplateParams) ResetTemplatetag() {
+	if p.p != nil && p.p["templatetag"] != nil {
+		delete(p.p, "templatetag")
+	}
+}
+
+func (p *UpdateTemplateParams) GetTemplatetag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templatetag"].(string)
+	return value, ok
+}
+
 func (p *UpdateTemplateParams) SetTemplatetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4109,6 +4264,7 @@ func (s *TemplateService) UpdateTemplate(p *UpdateTemplateParams) (*UpdateTempla
 type UpdateTemplateResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -4122,6 +4278,7 @@ type UpdateTemplateResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`

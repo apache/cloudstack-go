@@ -36,7 +36,7 @@ type UsageServiceIface interface {
 	DeleteTrafficType(p *DeleteTrafficTypeParams) (*DeleteTrafficTypeResponse, error)
 	NewDeleteTrafficTypeParams(id string) *DeleteTrafficTypeParams
 	GenerateUsageRecords(p *GenerateUsageRecordsParams) (*GenerateUsageRecordsResponse, error)
-	NewGenerateUsageRecordsParams(enddate string, startdate string) *GenerateUsageRecordsParams
+	NewGenerateUsageRecordsParams() *GenerateUsageRecordsParams
 	ListTrafficMonitors(p *ListTrafficMonitorsParams) (*ListTrafficMonitorsResponse, error)
 	NewListTrafficMonitorsParams(zoneid string) *ListTrafficMonitorsParams
 	ListTrafficTypeImplementors(p *ListTrafficTypeImplementorsParams) (*ListTrafficTypeImplementorsResponse, error)
@@ -747,11 +747,9 @@ func (p *GenerateUsageRecordsParams) GetStartdate() (string, bool) {
 
 // You should always use this function to get a new GenerateUsageRecordsParams instance,
 // as then you are sure you have configured all required params
-func (s *UsageService) NewGenerateUsageRecordsParams(enddate string, startdate string) *GenerateUsageRecordsParams {
+func (s *UsageService) NewGenerateUsageRecordsParams() *GenerateUsageRecordsParams {
 	p := &GenerateUsageRecordsParams{}
 	p.p = make(map[string]interface{})
-	p.p["enddate"] = enddate
-	p.p["startdate"] = startdate
 	return p
 }
 
@@ -1678,6 +1676,7 @@ type UsageRecord struct {
 	Description      string `json:"description"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	Enddate          string `json:"enddate"`
 	Hasannotations   bool   `json:"hasannotations"`
 	Isdefault        bool   `json:"isdefault"`
@@ -1779,9 +1778,10 @@ type ListUsageTypesResponse struct {
 
 type UsageType struct {
 	Description string `json:"description"`
+	Id          int    `json:"id"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
-	Usagetypeid int    `json:"usagetypeid"`
+	Name        string `json:"name"`
 }
 
 type RemoveRawUsageRecordsParams struct {

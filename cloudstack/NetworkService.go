@@ -462,12 +462,24 @@ func (p *CreateNetworkParams) toURLValues() url.Values {
 	if v, found := p.p["acltype"]; found {
 		u.Set("acltype", v.(string))
 	}
+	if v, found := p.p["asnumber"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("asnumber", vv)
+	}
 	if v, found := p.p["associatednetworkid"]; found {
 		u.Set("associatednetworkid", v.(string))
+	}
+	if v, found := p.p["bgppeerids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("bgppeerids", vv)
 	}
 	if v, found := p.p["bypassvlanoverlapcheck"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bypassvlanoverlapcheck", vv)
+	}
+	if v, found := p.p["cidrsize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("cidrsize", vv)
 	}
 	if v, found := p.p["displaynetwork"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -642,6 +654,27 @@ func (p *CreateNetworkParams) GetAcltype() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetAsnumber(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["asnumber"] = v
+}
+
+func (p *CreateNetworkParams) ResetAsnumber() {
+	if p.p != nil && p.p["asnumber"] != nil {
+		delete(p.p, "asnumber")
+	}
+}
+
+func (p *CreateNetworkParams) GetAsnumber() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["asnumber"].(int64)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetAssociatednetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -663,6 +696,27 @@ func (p *CreateNetworkParams) GetAssociatednetworkid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateNetworkParams) SetBgppeerids(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bgppeerids"] = v
+}
+
+func (p *CreateNetworkParams) ResetBgppeerids() {
+	if p.p != nil && p.p["bgppeerids"] != nil {
+		delete(p.p, "bgppeerids")
+	}
+}
+
+func (p *CreateNetworkParams) GetBgppeerids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bgppeerids"].([]string)
+	return value, ok
+}
+
 func (p *CreateNetworkParams) SetBypassvlanoverlapcheck(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -681,6 +735,27 @@ func (p *CreateNetworkParams) GetBypassvlanoverlapcheck() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["bypassvlanoverlapcheck"].(bool)
+	return value, ok
+}
+
+func (p *CreateNetworkParams) SetCidrsize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrsize"] = v
+}
+
+func (p *CreateNetworkParams) ResetCidrsize() {
+	if p.p != nil && p.p["cidrsize"] != nil {
+		delete(p.p, "cidrsize")
+	}
+}
+
+func (p *CreateNetworkParams) GetCidrsize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrsize"].(int)
 	return value, ok
 }
 
@@ -1433,8 +1508,11 @@ type CreateNetworkResponse struct {
 	Aclid                       string                         `json:"aclid"`
 	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
+	Asnumber                    int64                          `json:"asnumber"`
+	Asnumberid                  string                         `json:"asnumberid"`
 	Associatednetwork           string                         `json:"associatednetwork"`
 	Associatednetworkid         string                         `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                  `json:"bgppeers"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
@@ -1455,6 +1533,8 @@ type CreateNetworkResponse struct {
 	Icon                        interface{}                    `json:"icon"`
 	Id                          string                         `json:"id"`
 	Internetprotocol            string                         `json:"internetprotocol"`
+	Ip4routes                   []interface{}                  `json:"ip4routes"`
+	Ip4routing                  string                         `json:"ip4routing"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6dns1                     string                         `json:"ip6dns1"`
 	Ip6dns2                     string                         `json:"ip6dns2"`
@@ -2075,6 +2155,7 @@ type CreateServiceInstanceResponse struct {
 	Displayname string `json:"displayname"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Id          string `json:"id"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
@@ -2440,8 +2521,10 @@ type DedicatePublicIpRangeResponse struct {
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
+	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -3087,8 +3170,11 @@ type NetscalerLoadBalancerNetwork struct {
 	Aclid                       string                                `json:"aclid"`
 	Aclname                     string                                `json:"aclname"`
 	Acltype                     string                                `json:"acltype"`
+	Asnumber                    int64                                 `json:"asnumber"`
+	Asnumberid                  string                                `json:"asnumberid"`
 	Associatednetwork           string                                `json:"associatednetwork"`
 	Associatednetworkid         string                                `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                         `json:"bgppeers"`
 	Broadcastdomaintype         string                                `json:"broadcastdomaintype"`
 	Broadcasturi                string                                `json:"broadcasturi"`
 	Canusefordeploy             bool                                  `json:"canusefordeploy"`
@@ -3109,6 +3195,8 @@ type NetscalerLoadBalancerNetwork struct {
 	Icon                        interface{}                           `json:"icon"`
 	Id                          string                                `json:"id"`
 	Internetprotocol            string                                `json:"internetprotocol"`
+	Ip4routes                   []interface{}                         `json:"ip4routes"`
+	Ip4routing                  string                                `json:"ip4routing"`
 	Ip6cidr                     string                                `json:"ip6cidr"`
 	Ip6dns1                     string                                `json:"ip6dns1"`
 	Ip6dns2                     string                                `json:"ip6dns2"`
@@ -4375,8 +4463,11 @@ type Network struct {
 	Aclid                       string                   `json:"aclid"`
 	Aclname                     string                   `json:"aclname"`
 	Acltype                     string                   `json:"acltype"`
+	Asnumber                    int64                    `json:"asnumber"`
+	Asnumberid                  string                   `json:"asnumberid"`
 	Associatednetwork           string                   `json:"associatednetwork"`
 	Associatednetworkid         string                   `json:"associatednetworkid"`
+	Bgppeers                    []interface{}            `json:"bgppeers"`
 	Broadcastdomaintype         string                   `json:"broadcastdomaintype"`
 	Broadcasturi                string                   `json:"broadcasturi"`
 	Canusefordeploy             bool                     `json:"canusefordeploy"`
@@ -4397,6 +4488,8 @@ type Network struct {
 	Icon                        interface{}              `json:"icon"`
 	Id                          string                   `json:"id"`
 	Internetprotocol            string                   `json:"internetprotocol"`
+	Ip4routes                   []interface{}            `json:"ip4routes"`
+	Ip4routing                  string                   `json:"ip4routing"`
 	Ip6cidr                     string                   `json:"ip6cidr"`
 	Ip6dns1                     string                   `json:"ip6dns1"`
 	Ip6dns2                     string                   `json:"ip6dns2"`
@@ -4649,8 +4742,11 @@ type NiciraNvpDeviceNetwork struct {
 	Aclid                       string                          `json:"aclid"`
 	Aclname                     string                          `json:"aclname"`
 	Acltype                     string                          `json:"acltype"`
+	Asnumber                    int64                           `json:"asnumber"`
+	Asnumberid                  string                          `json:"asnumberid"`
 	Associatednetwork           string                          `json:"associatednetwork"`
 	Associatednetworkid         string                          `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                   `json:"bgppeers"`
 	Broadcastdomaintype         string                          `json:"broadcastdomaintype"`
 	Broadcasturi                string                          `json:"broadcasturi"`
 	Canusefordeploy             bool                            `json:"canusefordeploy"`
@@ -4671,6 +4767,8 @@ type NiciraNvpDeviceNetwork struct {
 	Icon                        interface{}                     `json:"icon"`
 	Id                          string                          `json:"id"`
 	Internetprotocol            string                          `json:"internetprotocol"`
+	Ip4routes                   []interface{}                   `json:"ip4routes"`
+	Ip4routing                  string                          `json:"ip4routing"`
 	Ip6cidr                     string                          `json:"ip6cidr"`
 	Ip6dns1                     string                          `json:"ip6dns1"`
 	Ip6dns2                     string                          `json:"ip6dns2"`
@@ -5054,8 +5152,11 @@ type PaloAltoFirewallNetwork struct {
 	Aclid                       string                           `json:"aclid"`
 	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
+	Asnumber                    int64                            `json:"asnumber"`
+	Asnumberid                  string                           `json:"asnumberid"`
 	Associatednetwork           string                           `json:"associatednetwork"`
 	Associatednetworkid         string                           `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                    `json:"bgppeers"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
@@ -5076,6 +5177,8 @@ type PaloAltoFirewallNetwork struct {
 	Icon                        interface{}                      `json:"icon"`
 	Id                          string                           `json:"id"`
 	Internetprotocol            string                           `json:"internetprotocol"`
+	Ip4routes                   []interface{}                    `json:"ip4routes"`
+	Ip4routing                  string                           `json:"ip4routing"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6dns1                     string                           `json:"ip6dns1"`
 	Ip6dns2                     string                           `json:"ip6dns2"`
@@ -6626,8 +6729,11 @@ type UpdateNetworkResponse struct {
 	Aclid                       string                         `json:"aclid"`
 	Aclname                     string                         `json:"aclname"`
 	Acltype                     string                         `json:"acltype"`
+	Asnumber                    int64                          `json:"asnumber"`
+	Asnumberid                  string                         `json:"asnumberid"`
 	Associatednetwork           string                         `json:"associatednetwork"`
 	Associatednetworkid         string                         `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                  `json:"bgppeers"`
 	Broadcastdomaintype         string                         `json:"broadcastdomaintype"`
 	Broadcasturi                string                         `json:"broadcasturi"`
 	Canusefordeploy             bool                           `json:"canusefordeploy"`
@@ -6648,6 +6754,8 @@ type UpdateNetworkResponse struct {
 	Icon                        interface{}                    `json:"icon"`
 	Id                          string                         `json:"id"`
 	Internetprotocol            string                         `json:"internetprotocol"`
+	Ip4routes                   []interface{}                  `json:"ip4routes"`
+	Ip4routing                  string                         `json:"ip4routing"`
 	Ip6cidr                     string                         `json:"ip6cidr"`
 	Ip6dns1                     string                         `json:"ip6dns1"`
 	Ip6dns2                     string                         `json:"ip6dns2"`

@@ -131,6 +131,9 @@ func (p *ListResourceLimitsParams) toURLValues() url.Values {
 	if v, found := p.p["resourcetypename"]; found {
 		u.Set("resourcetypename", v.(string))
 	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
+	}
 	return u
 }
 
@@ -365,6 +368,27 @@ func (p *ListResourceLimitsParams) GetResourcetypename() (string, bool) {
 	return value, ok
 }
 
+func (p *ListResourceLimitsParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *ListResourceLimitsParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *ListResourceLimitsParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListResourceLimitsParams instance,
 // as then you are sure you have configured all required params
 func (s *LimitService) NewListResourceLimitsParams() *ListResourceLimitsParams {
@@ -397,6 +421,7 @@ type ResourceLimit struct {
 	Account          string `json:"account"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	JobID            string `json:"jobid"`
 	Jobstatus        int    `json:"jobstatus"`
 	Max              int64  `json:"max"`
@@ -404,6 +429,7 @@ type ResourceLimit struct {
 	Projectid        string `json:"projectid"`
 	Resourcetype     string `json:"resourcetype"`
 	Resourcetypename string `json:"resourcetypename"`
+	Tag              string `json:"tag"`
 }
 
 type ResetApiLimitParams struct {
@@ -521,6 +547,9 @@ func (p *UpdateResourceCountParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("resourcetype", vv)
 	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
+	}
 	return u
 }
 
@@ -608,6 +637,27 @@ func (p *UpdateResourceCountParams) GetResourcetype() (int, bool) {
 	return value, ok
 }
 
+func (p *UpdateResourceCountParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *UpdateResourceCountParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *UpdateResourceCountParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new UpdateResourceCountParams instance,
 // as then you are sure you have configured all required params
 func (s *LimitService) NewUpdateResourceCountParams(domainid string) *UpdateResourceCountParams {
@@ -617,7 +667,7 @@ func (s *LimitService) NewUpdateResourceCountParams(domainid string) *UpdateReso
 	return p
 }
 
-// Recalculate and update resource count for an account or domain.
+// Recalculate and update resource count for an account or domain. This also executes some cleanup tasks before calculating resource counts.
 func (s *LimitService) UpdateResourceCount(p *UpdateResourceCountParams) (*UpdateResourceCountResponse, error) {
 	resp, err := s.cs.newRequest("updateResourceCount", p.toURLValues())
 	if err != nil {
@@ -636,6 +686,7 @@ type UpdateResourceCountResponse struct {
 	Account          string `json:"account"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	JobID            string `json:"jobid"`
 	Jobstatus        int    `json:"jobstatus"`
 	Project          string `json:"project"`
@@ -643,6 +694,7 @@ type UpdateResourceCountResponse struct {
 	Resourcecount    int64  `json:"resourcecount"`
 	Resourcetype     string `json:"resourcetype"`
 	Resourcetypename string `json:"resourcetypename"`
+	Tag              string `json:"tag"`
 }
 
 type UpdateResourceLimitParams struct {
@@ -670,6 +722,9 @@ func (p *UpdateResourceLimitParams) toURLValues() url.Values {
 	if v, found := p.p["resourcetype"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("resourcetype", vv)
+	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
 	}
 	return u
 }
@@ -779,6 +834,27 @@ func (p *UpdateResourceLimitParams) GetResourcetype() (int, bool) {
 	return value, ok
 }
 
+func (p *UpdateResourceLimitParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *UpdateResourceLimitParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *UpdateResourceLimitParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new UpdateResourceLimitParams instance,
 // as then you are sure you have configured all required params
 func (s *LimitService) NewUpdateResourceLimitParams(resourcetype int) *UpdateResourceLimitParams {
@@ -807,6 +883,7 @@ type UpdateResourceLimitResponse struct {
 	Account          string `json:"account"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	JobID            string `json:"jobid"`
 	Jobstatus        int    `json:"jobstatus"`
 	Max              int64  `json:"max"`
@@ -814,4 +891,5 @@ type UpdateResourceLimitResponse struct {
 	Projectid        string `json:"projectid"`
 	Resourcetype     string `json:"resourcetype"`
 	Resourcetypename string `json:"resourcetypename"`
+	Tag              string `json:"tag"`
 }

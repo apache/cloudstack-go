@@ -466,8 +466,11 @@ type BrocadeVcsDeviceNetwork struct {
 	Aclid                       string                           `json:"aclid"`
 	Aclname                     string                           `json:"aclname"`
 	Acltype                     string                           `json:"acltype"`
+	Asnumber                    int64                            `json:"asnumber"`
+	Asnumberid                  string                           `json:"asnumberid"`
 	Associatednetwork           string                           `json:"associatednetwork"`
 	Associatednetworkid         string                           `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                    `json:"bgppeers"`
 	Broadcastdomaintype         string                           `json:"broadcastdomaintype"`
 	Broadcasturi                string                           `json:"broadcasturi"`
 	Canusefordeploy             bool                             `json:"canusefordeploy"`
@@ -488,6 +491,8 @@ type BrocadeVcsDeviceNetwork struct {
 	Icon                        interface{}                      `json:"icon"`
 	Id                          string                           `json:"id"`
 	Internetprotocol            string                           `json:"internetprotocol"`
+	Ip4routes                   []interface{}                    `json:"ip4routes"`
+	Ip4routing                  string                           `json:"ip4routing"`
 	Ip6cidr                     string                           `json:"ip6cidr"`
 	Ip6dns1                     string                           `json:"ip6dns1"`
 	Ip6dns2                     string                           `json:"ip6dns2"`

@@ -295,17 +295,17 @@ func (mr *MockUsageServiceIfaceMockRecorder) NewDeleteTrafficTypeParams(id inter
 }
 
 // NewGenerateUsageRecordsParams mocks base method.
-func (m *MockUsageServiceIface) NewGenerateUsageRecordsParams(enddate, startdate string) *GenerateUsageRecordsParams {
+func (m *MockUsageServiceIface) NewGenerateUsageRecordsParams() *GenerateUsageRecordsParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewGenerateUsageRecordsParams", enddate, startdate)
+	ret := m.ctrl.Call(m, "NewGenerateUsageRecordsParams")
 	ret0, _ := ret[0].(*GenerateUsageRecordsParams)
 	return ret0
 }
 
 // NewGenerateUsageRecordsParams indicates an expected call of NewGenerateUsageRecordsParams.
-func (mr *MockUsageServiceIfaceMockRecorder) NewGenerateUsageRecordsParams(enddate, startdate interface{}) *gomock.Call {
+func (mr *MockUsageServiceIfaceMockRecorder) NewGenerateUsageRecordsParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGenerateUsageRecordsParams", reflect.TypeOf((*MockUsageServiceIface)(nil).NewGenerateUsageRecordsParams), enddate, startdate)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGenerateUsageRecordsParams", reflect.TypeOf((*MockUsageServiceIface)(nil).NewGenerateUsageRecordsParams))
 }
 
 // NewListTrafficMonitorsParams mocks base method.

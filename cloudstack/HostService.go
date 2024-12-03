@@ -387,6 +387,7 @@ func (s *HostService) AddBaremetalHost(p *AddBaremetalHostParams) (*AddBaremetal
 
 type AddBaremetalHostResponse struct {
 	Annotation                       string                             `json:"annotation"`
+	Arch                             string                             `json:"arch"`
 	Capabilities                     string                             `json:"capabilities"`
 	Clusterid                        string                             `json:"clusterid"`
 	Clustername                      string                             `json:"clustername"`
@@ -408,6 +409,7 @@ type AddBaremetalHostResponse struct {
 	Disksizetotal                    int64                              `json:"disksizetotal"`
 	Encryptionsupported              bool                               `json:"encryptionsupported"`
 	Events                           string                             `json:"events"`
+	Explicithosttags                 string                             `json:"explicithosttags"`
 	Gpugroup                         []AddBaremetalHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                               `json:"hahost"`
 	Hasannotations                   bool                               `json:"hasannotations"`
@@ -417,6 +419,8 @@ type AddBaremetalHostResponse struct {
 	Hypervisor                       string                             `json:"hypervisor"`
 	Hypervisorversion                string                             `json:"hypervisorversion"`
 	Id                               string                             `json:"id"`
+	Implicithosttags                 string                             `json:"implicithosttags"`
+	Instanceconversionsupported      bool                               `json:"instanceconversionsupported"`
 	Ipaddress                        string                             `json:"ipaddress"`
 	Islocalstorageactive             bool                               `json:"islocalstorageactive"`
 	Istagarule                       bool                               `json:"istagarule"`
@@ -910,6 +914,7 @@ func (s *HostService) AddHost(p *AddHostParams) (*AddHostResponse, error) {
 
 type AddHostResponse struct {
 	Annotation                       string                      `json:"annotation"`
+	Arch                             string                      `json:"arch"`
 	Capabilities                     string                      `json:"capabilities"`
 	Clusterid                        string                      `json:"clusterid"`
 	Clustername                      string                      `json:"clustername"`
@@ -931,6 +936,7 @@ type AddHostResponse struct {
 	Disksizetotal                    int64                       `json:"disksizetotal"`
 	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
+	Explicithosttags                 string                      `json:"explicithosttags"`
 	Gpugroup                         []AddHostResponseGpugroup   `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasannotations                   bool                        `json:"hasannotations"`
@@ -940,6 +946,8 @@ type AddHostResponse struct {
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
 	Id                               string                      `json:"id"`
+	Implicithosttags                 string                      `json:"implicithosttags"`
+	Instanceconversionsupported      bool                        `json:"instanceconversionsupported"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
 	Istagarule                       bool                        `json:"istagarule"`
@@ -1173,6 +1181,7 @@ func (s *HostService) CancelHostMaintenance(p *CancelHostMaintenanceParams) (*Ca
 
 type CancelHostMaintenanceResponse struct {
 	Annotation                       string                                  `json:"annotation"`
+	Arch                             string                                  `json:"arch"`
 	Capabilities                     string                                  `json:"capabilities"`
 	Clusterid                        string                                  `json:"clusterid"`
 	Clustername                      string                                  `json:"clustername"`
@@ -1194,6 +1203,7 @@ type CancelHostMaintenanceResponse struct {
 	Disksizetotal                    int64                                   `json:"disksizetotal"`
 	Encryptionsupported              bool                                    `json:"encryptionsupported"`
 	Events                           string                                  `json:"events"`
+	Explicithosttags                 string                                  `json:"explicithosttags"`
 	Gpugroup                         []CancelHostMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                    `json:"hahost"`
 	Hasannotations                   bool                                    `json:"hasannotations"`
@@ -1203,6 +1213,8 @@ type CancelHostMaintenanceResponse struct {
 	Hypervisor                       string                                  `json:"hypervisor"`
 	Hypervisorversion                string                                  `json:"hypervisorversion"`
 	Id                               string                                  `json:"id"`
+	Implicithosttags                 string                                  `json:"implicithosttags"`
+	Instanceconversionsupported      bool                                    `json:"instanceconversionsupported"`
 	Ipaddress                        string                                  `json:"ipaddress"`
 	Islocalstorageactive             bool                                    `json:"islocalstorageactive"`
 	Istagarule                       bool                                    `json:"istagarule"`
@@ -2092,12 +2104,14 @@ type HostForMigration struct {
 	Disksizeallocated                int64  `json:"disksizeallocated"`
 	Disksizetotal                    int64  `json:"disksizetotal"`
 	Events                           string `json:"events"`
+	Explicithosttags                 string `json:"explicithosttags"`
 	Hahost                           bool   `json:"hahost"`
 	Hasenoughcapacity                bool   `json:"hasenoughcapacity"`
 	Hosttags                         string `json:"hosttags"`
 	Hypervisor                       string `json:"hypervisor"`
 	Hypervisorversion                string `json:"hypervisorversion"`
 	Id                               string `json:"id"`
+	Implicithosttags                 string `json:"implicithosttags"`
 	Ipaddress                        string `json:"ipaddress"`
 	Islocalstorageactive             bool   `json:"islocalstorageactive"`
 	JobID                            string `json:"jobid"`
@@ -2500,11 +2514,12 @@ type ListHostTagsResponse struct {
 }
 
 type HostTag struct {
-	Hostid    int64  `json:"hostid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
+	Hostid     int64  `json:"hostid"`
+	Id         string `json:"id"`
+	Isimplicit bool   `json:"isimplicit"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Name       string `json:"name"`
 }
 
 type ListHostsParams struct {
@@ -3045,6 +3060,7 @@ type ListHostsResponse struct {
 
 type Host struct {
 	Annotation                       string                      `json:"annotation"`
+	Arch                             string                      `json:"arch"`
 	Capabilities                     string                      `json:"capabilities"`
 	Clusterid                        string                      `json:"clusterid"`
 	Clustername                      string                      `json:"clustername"`
@@ -3066,6 +3082,7 @@ type Host struct {
 	Disksizetotal                    int64                       `json:"disksizetotal"`
 	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
+	Explicithosttags                 string                      `json:"explicithosttags"`
 	Gpugroup                         []HostGpugroup              `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasannotations                   bool                        `json:"hasannotations"`
@@ -3075,6 +3092,8 @@ type Host struct {
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
 	Id                               string                      `json:"id"`
+	Implicithosttags                 string                      `json:"implicithosttags"`
+	Instanceconversionsupported      bool                        `json:"instanceconversionsupported"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
 	Istagarule                       bool                        `json:"istagarule"`
@@ -3663,6 +3682,7 @@ type ListHostsMetricsResponse struct {
 
 type HostsMetric struct {
 	Annotation                       string                      `json:"annotation"`
+	Arch                             string                      `json:"arch"`
 	Capabilities                     string                      `json:"capabilities"`
 	Clusterid                        string                      `json:"clusterid"`
 	Clustername                      string                      `json:"clustername"`
@@ -3691,6 +3711,7 @@ type HostsMetric struct {
 	Disksizetotal                    int64                       `json:"disksizetotal"`
 	Encryptionsupported              bool                        `json:"encryptionsupported"`
 	Events                           string                      `json:"events"`
+	Explicithosttags                 string                      `json:"explicithosttags"`
 	Gpugroup                         []HostsMetricGpugroup       `json:"gpugroup"`
 	Hahost                           bool                        `json:"hahost"`
 	Hasannotations                   bool                        `json:"hasannotations"`
@@ -3700,6 +3721,8 @@ type HostsMetric struct {
 	Hypervisor                       string                      `json:"hypervisor"`
 	Hypervisorversion                string                      `json:"hypervisorversion"`
 	Id                               string                      `json:"id"`
+	Implicithosttags                 string                      `json:"implicithosttags"`
+	Instanceconversionsupported      bool                        `json:"instanceconversionsupported"`
 	Instances                        string                      `json:"instances"`
 	Ipaddress                        string                      `json:"ipaddress"`
 	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
@@ -3844,6 +3867,7 @@ func (s *HostService) PrepareHostForMaintenance(p *PrepareHostForMaintenancePara
 
 type PrepareHostForMaintenanceResponse struct {
 	Annotation                       string                                      `json:"annotation"`
+	Arch                             string                                      `json:"arch"`
 	Capabilities                     string                                      `json:"capabilities"`
 	Clusterid                        string                                      `json:"clusterid"`
 	Clustername                      string                                      `json:"clustername"`
@@ -3865,6 +3889,7 @@ type PrepareHostForMaintenanceResponse struct {
 	Disksizetotal                    int64                                       `json:"disksizetotal"`
 	Encryptionsupported              bool                                        `json:"encryptionsupported"`
 	Events                           string                                      `json:"events"`
+	Explicithosttags                 string                                      `json:"explicithosttags"`
 	Gpugroup                         []PrepareHostForMaintenanceResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                        `json:"hahost"`
 	Hasannotations                   bool                                        `json:"hasannotations"`
@@ -3874,6 +3899,8 @@ type PrepareHostForMaintenanceResponse struct {
 	Hypervisor                       string                                      `json:"hypervisor"`
 	Hypervisorversion                string                                      `json:"hypervisorversion"`
 	Id                               string                                      `json:"id"`
+	Implicithosttags                 string                                      `json:"implicithosttags"`
+	Instanceconversionsupported      bool                                        `json:"instanceconversionsupported"`
 	Ipaddress                        string                                      `json:"ipaddress"`
 	Islocalstorageactive             bool                                        `json:"islocalstorageactive"`
 	Istagarule                       bool                                        `json:"istagarule"`
@@ -4006,6 +4033,7 @@ func (s *HostService) ReconnectHost(p *ReconnectHostParams) (*ReconnectHostRespo
 
 type ReconnectHostResponse struct {
 	Annotation                       string                          `json:"annotation"`
+	Arch                             string                          `json:"arch"`
 	Capabilities                     string                          `json:"capabilities"`
 	Clusterid                        string                          `json:"clusterid"`
 	Clustername                      string                          `json:"clustername"`
@@ -4027,6 +4055,7 @@ type ReconnectHostResponse struct {
 	Disksizetotal                    int64                           `json:"disksizetotal"`
 	Encryptionsupported              bool                            `json:"encryptionsupported"`
 	Events                           string                          `json:"events"`
+	Explicithosttags                 string                          `json:"explicithosttags"`
 	Gpugroup                         []ReconnectHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                            `json:"hahost"`
 	Hasannotations                   bool                            `json:"hasannotations"`
@@ -4036,6 +4065,8 @@ type ReconnectHostResponse struct {
 	Hypervisor                       string                          `json:"hypervisor"`
 	Hypervisorversion                string                          `json:"hypervisorversion"`
 	Id                               string                          `json:"id"`
+	Implicithosttags                 string                          `json:"implicithosttags"`
+	Instanceconversionsupported      bool                            `json:"instanceconversionsupported"`
 	Ipaddress                        string                          `json:"ipaddress"`
 	Islocalstorageactive             bool                            `json:"islocalstorageactive"`
 	Istagarule                       bool                            `json:"istagarule"`
@@ -4482,6 +4513,7 @@ func (s *HostService) UpdateHost(p *UpdateHostParams) (*UpdateHostResponse, erro
 
 type UpdateHostResponse struct {
 	Annotation                       string                       `json:"annotation"`
+	Arch                             string                       `json:"arch"`
 	Capabilities                     string                       `json:"capabilities"`
 	Clusterid                        string                       `json:"clusterid"`
 	Clustername                      string                       `json:"clustername"`
@@ -4503,6 +4535,7 @@ type UpdateHostResponse struct {
 	Disksizetotal                    int64                        `json:"disksizetotal"`
 	Encryptionsupported              bool                         `json:"encryptionsupported"`
 	Events                           string                       `json:"events"`
+	Explicithosttags                 string                       `json:"explicithosttags"`
 	Gpugroup                         []UpdateHostResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                         `json:"hahost"`
 	Hasannotations                   bool                         `json:"hasannotations"`
@@ -4512,6 +4545,8 @@ type UpdateHostResponse struct {
 	Hypervisor                       string                       `json:"hypervisor"`
 	Hypervisorversion                string                       `json:"hypervisorversion"`
 	Id                               string                       `json:"id"`
+	Implicithosttags                 string                       `json:"implicithosttags"`
+	Instanceconversionsupported      bool                         `json:"instanceconversionsupported"`
 	Ipaddress                        string                       `json:"ipaddress"`
 	Islocalstorageactive             bool                         `json:"islocalstorageactive"`
 	Istagarule                       bool                         `json:"istagarule"`

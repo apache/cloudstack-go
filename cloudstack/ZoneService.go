@@ -469,6 +469,7 @@ func (s *ZoneService) CreateZone(p *CreateZoneParams) (*CreateZoneResponse, erro
 type CreateZoneResponse struct {
 	Allocationstate              string                       `json:"allocationstate"`
 	Allowuserspecifyvrmtu        bool                         `json:"allowuserspecifyvrmtu"`
+	Asnrange                     string                       `json:"asnrange"`
 	Capacity                     []CreateZoneResponseCapacity `json:"capacity"`
 	Description                  string                       `json:"description"`
 	Dhcpprovider                 string                       `json:"dhcpprovider"`
@@ -486,6 +487,8 @@ type CreateZoneResponse struct {
 	Internaldns2                 string                       `json:"internaldns2"`
 	Ip6dns1                      string                       `json:"ip6dns1"`
 	Ip6dns2                      string                       `json:"ip6dns2"`
+	Ismultiarch                  bool                         `json:"ismultiarch"`
+	Isnsxenabled                 bool                         `json:"isnsxenabled"`
 	JobID                        string                       `json:"jobid"`
 	Jobstatus                    int                          `json:"jobstatus"`
 	Localstorageenabled          bool                         `json:"localstorageenabled"`
@@ -510,6 +513,7 @@ type CreateZoneResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -1750,6 +1754,7 @@ type ListZonesResponse struct {
 type Zone struct {
 	Allocationstate              string            `json:"allocationstate"`
 	Allowuserspecifyvrmtu        bool              `json:"allowuserspecifyvrmtu"`
+	Asnrange                     string            `json:"asnrange"`
 	Capacity                     []ZoneCapacity    `json:"capacity"`
 	Description                  string            `json:"description"`
 	Dhcpprovider                 string            `json:"dhcpprovider"`
@@ -1767,6 +1772,8 @@ type Zone struct {
 	Internaldns2                 string            `json:"internaldns2"`
 	Ip6dns1                      string            `json:"ip6dns1"`
 	Ip6dns2                      string            `json:"ip6dns2"`
+	Ismultiarch                  bool              `json:"ismultiarch"`
+	Isnsxenabled                 bool              `json:"isnsxenabled"`
 	JobID                        string            `json:"jobid"`
 	Jobstatus                    int               `json:"jobstatus"`
 	Localstorageenabled          bool              `json:"localstorageenabled"`
@@ -1791,6 +1798,7 @@ type ZoneCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -2220,6 +2228,7 @@ type ListZonesMetricsResponse struct {
 type ZonesMetric struct {
 	Allocationstate                 string                `json:"allocationstate"`
 	Allowuserspecifyvrmtu           bool                  `json:"allowuserspecifyvrmtu"`
+	Asnrange                        string                `json:"asnrange"`
 	Capacity                        []ZonesMetricCapacity `json:"capacity"`
 	Clusters                        string                `json:"clusters"`
 	Cpuallocated                    string                `json:"cpuallocated"`
@@ -2246,6 +2255,8 @@ type ZonesMetric struct {
 	Internaldns2                    string                `json:"internaldns2"`
 	Ip6dns1                         string                `json:"ip6dns1"`
 	Ip6dns2                         string                `json:"ip6dns2"`
+	Ismultiarch                     bool                  `json:"ismultiarch"`
+	Isnsxenabled                    bool                  `json:"isnsxenabled"`
 	JobID                           string                `json:"jobid"`
 	Jobstatus                       int                   `json:"jobstatus"`
 	Localstorageenabled             bool                  `json:"localstorageenabled"`
@@ -2279,6 +2290,7 @@ type ZonesMetricCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -2821,6 +2833,7 @@ func (s *ZoneService) UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, erro
 type UpdateZoneResponse struct {
 	Allocationstate              string                       `json:"allocationstate"`
 	Allowuserspecifyvrmtu        bool                         `json:"allowuserspecifyvrmtu"`
+	Asnrange                     string                       `json:"asnrange"`
 	Capacity                     []UpdateZoneResponseCapacity `json:"capacity"`
 	Description                  string                       `json:"description"`
 	Dhcpprovider                 string                       `json:"dhcpprovider"`
@@ -2838,6 +2851,8 @@ type UpdateZoneResponse struct {
 	Internaldns2                 string                       `json:"internaldns2"`
 	Ip6dns1                      string                       `json:"ip6dns1"`
 	Ip6dns2                      string                       `json:"ip6dns2"`
+	Ismultiarch                  bool                         `json:"ismultiarch"`
+	Isnsxenabled                 bool                         `json:"isnsxenabled"`
 	JobID                        string                       `json:"jobid"`
 	Jobstatus                    int                          `json:"jobstatus"`
 	Localstorageenabled          bool                         `json:"localstorageenabled"`
@@ -2862,6 +2877,7 @@ type UpdateZoneResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`

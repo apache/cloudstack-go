@@ -73,6 +73,9 @@ func (p *AddKubernetesSupportedVersionParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["checksum"]; found {
 		u.Set("checksum", v.(string))
 	}
@@ -101,6 +104,27 @@ func (p *AddKubernetesSupportedVersionParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *AddKubernetesSupportedVersionParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *AddKubernetesSupportedVersionParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *AddKubernetesSupportedVersionParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *AddKubernetesSupportedVersionParams) SetChecksum(v string) {
@@ -854,6 +878,7 @@ type CreateKubernetesClusterResponse struct {
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
@@ -1593,6 +1618,7 @@ type KubernetesCluster struct {
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
@@ -2175,6 +2201,7 @@ type ScaleKubernetesClusterResponse struct {
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
@@ -2295,6 +2322,7 @@ type StartKubernetesClusterResponse struct {
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
@@ -2627,6 +2655,7 @@ type UpgradeKubernetesClusterResponse struct {
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
+	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`

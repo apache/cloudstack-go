@@ -72,6 +72,9 @@ func (p *AddClusterParams) toURLValues() url.Values {
 	if v, found := p.p["allocationstate"]; found {
 		u.Set("allocationstate", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clustername"]; found {
 		u.Set("clustername", v.(string))
 	}
@@ -147,6 +150,27 @@ func (p *AddClusterParams) GetAllocationstate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
+func (p *AddClusterParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *AddClusterParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *AddClusterParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -562,6 +586,7 @@ func (s *ClusterService) AddCluster(p *AddClusterParams) (*AddClusterResponse, e
 
 type AddClusterResponse struct {
 	Allocationstate       string                       `json:"allocationstate"`
+	Arch                  string                       `json:"arch"`
 	Capacity              []AddClusterResponseCapacity `json:"capacity"`
 	Clustertype           string                       `json:"clustertype"`
 	Cpuovercommitratio    string                       `json:"cpuovercommitratio"`
@@ -591,6 +616,7 @@ type AddClusterResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -1602,6 +1628,7 @@ type ListClustersResponse struct {
 
 type Cluster struct {
 	Allocationstate       string            `json:"allocationstate"`
+	Arch                  string            `json:"arch"`
 	Capacity              []ClusterCapacity `json:"capacity"`
 	Clustertype           string            `json:"clustertype"`
 	Cpuovercommitratio    string            `json:"cpuovercommitratio"`
@@ -1631,6 +1658,7 @@ type ClusterCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -2052,6 +2080,7 @@ type ListClustersMetricsResponse struct {
 
 type ClustersMetric struct {
 	Allocationstate                 string                   `json:"allocationstate"`
+	Arch                            string                   `json:"arch"`
 	Capacity                        []ClustersMetricCapacity `json:"capacity"`
 	Clustertype                     string                   `json:"clustertype"`
 	Cpuallocated                    string                   `json:"cpuallocated"`
@@ -2063,6 +2092,7 @@ type ClustersMetric struct {
 	Cputhreshold                    bool                     `json:"cputhreshold"`
 	Cputotal                        string                   `json:"cputotal"`
 	Cpuused                         string                   `json:"cpuused"`
+	Drsimbalance                    string                   `json:"drsimbalance"`
 	Hasannotations                  bool                     `json:"hasannotations"`
 	Hosts                           string                   `json:"hosts"`
 	Hypervisortype                  string                   `json:"hypervisortype"`
@@ -2099,6 +2129,7 @@ type ClustersMetricCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
@@ -2419,6 +2450,9 @@ func (p *UpdateClusterParams) toURLValues() url.Values {
 	if v, found := p.p["allocationstate"]; found {
 		u.Set("allocationstate", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clustername"]; found {
 		u.Set("clustername", v.(string))
 	}
@@ -2455,6 +2489,27 @@ func (p *UpdateClusterParams) GetAllocationstate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
+func (p *UpdateClusterParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *UpdateClusterParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *UpdateClusterParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -2593,6 +2648,7 @@ func (s *ClusterService) UpdateCluster(p *UpdateClusterParams) (*UpdateClusterRe
 
 type UpdateClusterResponse struct {
 	Allocationstate       string                          `json:"allocationstate"`
+	Arch                  string                          `json:"arch"`
 	Capacity              []UpdateClusterResponseCapacity `json:"capacity"`
 	Clustertype           string                          `json:"clustertype"`
 	Cpuovercommitratio    string                          `json:"cpuovercommitratio"`
@@ -2622,6 +2678,7 @@ type UpdateClusterResponseCapacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`

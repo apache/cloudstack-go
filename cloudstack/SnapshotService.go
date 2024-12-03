@@ -371,6 +371,7 @@ type CreateSnapshotResponse struct {
 	Datastoretype   string            `json:"datastoretype"`
 	Domain          string            `json:"domain"`
 	Domainid        string            `json:"domainid"`
+	Domainpath      string            `json:"domainpath"`
 	Downloaddetails map[string]string `json:"downloaddetails"`
 	Hasannotations  bool              `json:"hasannotations"`
 	Id              string            `json:"id"`
@@ -392,6 +393,7 @@ type CreateSnapshotResponse struct {
 	Virtualsize     int64             `json:"virtualsize"`
 	Volumeid        string            `json:"volumeid"`
 	Volumename      string            `json:"volumename"`
+	Volumestate     string            `json:"volumestate"`
 	Volumetype      string            `json:"volumetype"`
 	Zoneid          string            `json:"zoneid"`
 	Zonename        string            `json:"zonename"`
@@ -864,6 +866,7 @@ type CreateVMSnapshotResponse struct {
 	Displayname        string `json:"displayname"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Domainpath         string `json:"domainpath"`
 	Hasannotations     bool   `json:"hasannotations"`
 	Hypervisor         string `json:"hypervisor"`
 	Id                 string `json:"id"`
@@ -2046,6 +2049,7 @@ type Snapshot struct {
 	Datastoretype   string            `json:"datastoretype"`
 	Domain          string            `json:"domain"`
 	Domainid        string            `json:"domainid"`
+	Domainpath      string            `json:"domainpath"`
 	Downloaddetails map[string]string `json:"downloaddetails"`
 	Hasannotations  bool              `json:"hasannotations"`
 	Id              string            `json:"id"`
@@ -2067,6 +2071,7 @@ type Snapshot struct {
 	Virtualsize     int64             `json:"virtualsize"`
 	Volumeid        string            `json:"volumeid"`
 	Volumename      string            `json:"volumename"`
+	Volumestate     string            `json:"volumestate"`
 	Volumetype      string            `json:"volumetype"`
 	Zoneid          string            `json:"zoneid"`
 	Zonename        string            `json:"zonename"`
@@ -2528,6 +2533,7 @@ type VMSnapshot struct {
 	Displayname        string `json:"displayname"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Domainpath         string `json:"domainpath"`
 	Hasannotations     bool   `json:"hasannotations"`
 	Hypervisor         string `json:"hypervisor"`
 	Id                 string `json:"id"`
@@ -2636,6 +2642,7 @@ type RevertSnapshotResponse struct {
 	Datastoretype   string            `json:"datastoretype"`
 	Domain          string            `json:"domain"`
 	Domainid        string            `json:"domainid"`
+	Domainpath      string            `json:"domainpath"`
 	Downloaddetails map[string]string `json:"downloaddetails"`
 	Hasannotations  bool              `json:"hasannotations"`
 	Id              string            `json:"id"`
@@ -2657,6 +2664,7 @@ type RevertSnapshotResponse struct {
 	Virtualsize     int64             `json:"virtualsize"`
 	Volumeid        string            `json:"volumeid"`
 	Volumename      string            `json:"volumename"`
+	Volumestate     string            `json:"volumestate"`
 	Volumetype      string            `json:"volumetype"`
 	Zoneid          string            `json:"zoneid"`
 	Zonename        string            `json:"zonename"`
@@ -2782,6 +2790,7 @@ type RevertToVMSnapshotResponse struct {
 	Cpuspeed              int                                       `json:"cpuspeed"`
 	Cpuused               string                                    `json:"cpuused"`
 	Created               string                                    `json:"created"`
+	Deleteprotection      bool                                      `json:"deleteprotection"`
 	Details               map[string]string                         `json:"details"`
 	Diskioread            int64                                     `json:"diskioread"`
 	Diskiowrite           int64                                     `json:"diskiowrite"`
@@ -2793,6 +2802,7 @@ type RevertToVMSnapshotResponse struct {
 	Displayvm             bool                                      `json:"displayvm"`
 	Domain                string                                    `json:"domain"`
 	Domainid              string                                    `json:"domainid"`
+	Domainpath            string                                    `json:"domainpath"`
 	Forvirtualnetwork     bool                                      `json:"forvirtualnetwork"`
 	Group                 string                                    `json:"group"`
 	Groupid               string                                    `json:"groupid"`
@@ -2806,6 +2816,7 @@ type RevertToVMSnapshotResponse struct {
 	Icon                  interface{}                               `json:"icon"`
 	Id                    string                                    `json:"id"`
 	Instancename          string                                    `json:"instancename"`
+	Ipaddress             string                                    `json:"ipaddress"`
 	Isdynamicallyscalable bool                                      `json:"isdynamicallyscalable"`
 	Isodisplaytext        string                                    `json:"isodisplaytext"`
 	Isoid                 string                                    `json:"isoid"`
@@ -2843,6 +2854,7 @@ type RevertToVMSnapshotResponse struct {
 	State                 string                                    `json:"state"`
 	Tags                  []Tags                                    `json:"tags"`
 	Templatedisplaytext   string                                    `json:"templatedisplaytext"`
+	Templateformat        string                                    `json:"templateformat"`
 	Templateid            string                                    `json:"templateid"`
 	Templatename          string                                    `json:"templatename"`
 	Templatetype          string                                    `json:"templatetype"`
@@ -2854,6 +2866,7 @@ type RevertToVMSnapshotResponse struct {
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
+	Vmtype                string                                    `json:"vmtype"`
 	Vnfdetails            map[string]string                         `json:"vnfdetails"`
 	Vnfnics               []string                                  `json:"vnfnics"`
 	Zoneid                string                                    `json:"zoneid"`
@@ -2865,6 +2878,7 @@ type RevertToVMSnapshotResponseSecuritygroup struct {
 	Description         string                                        `json:"description"`
 	Domain              string                                        `json:"domain"`
 	Domainid            string                                        `json:"domainid"`
+	Domainpath          string                                        `json:"domainpath"`
 	Egressrule          []RevertToVMSnapshotResponseSecuritygroupRule `json:"egressrule"`
 	Id                  string                                        `json:"id"`
 	Ingressrule         []RevertToVMSnapshotResponseSecuritygroupRule `json:"ingressrule"`
@@ -2890,16 +2904,18 @@ type RevertToVMSnapshotResponseSecuritygroupRule struct {
 }
 
 type RevertToVMSnapshotResponseAffinitygroup struct {
-	Account           string   `json:"account"`
-	Description       string   `json:"description"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Id                string   `json:"id"`
-	Name              string   `json:"name"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Type              string   `json:"type"`
-	VirtualmachineIds []string `json:"virtualmachineIds"`
+	Account            string   `json:"account"`
+	Dedicatedresources []string `json:"dedicatedresources"`
+	Description        string   `json:"description"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	Name               string   `json:"name"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Type               string   `json:"type"`
+	VirtualmachineIds  []string `json:"virtualmachineIds"`
 }
 
 func (r *RevertToVMSnapshotResponse) UnmarshalJSON(b []byte) error {

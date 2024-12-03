@@ -203,6 +203,10 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["provisioningtype"]; found {
 		u.Set("provisioningtype", v.(string))
 	}
+	if v, found := p.p["purgeresources"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("purgeresources", vv)
+	}
 	if v, found := p.p["rootdisksize"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("rootdisksize", vv)
@@ -1073,6 +1077,27 @@ func (p *CreateServiceOfferingParams) GetProvisioningtype() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateServiceOfferingParams) SetPurgeresources(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["purgeresources"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetPurgeresources() {
+	if p.p != nil && p.p["purgeresources"] != nil {
+		delete(p.p, "purgeresources")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetPurgeresources() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["purgeresources"].(bool)
+	return value, ok
+}
+
 func (p *CreateServiceOfferingParams) SetRootdisksize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1295,8 +1320,10 @@ type CreateServiceOfferingResponse struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Purgeresources              bool              `json:"purgeresources"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	State                       string            `json:"state"`
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
@@ -1462,11 +1489,17 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
 	}
+	if v, found := p.p["state"]; found {
+		u.Set("state", v.(string))
+	}
 	if v, found := p.p["storagetype"]; found {
 		u.Set("storagetype", v.(string))
 	}
 	if v, found := p.p["systemvmtype"]; found {
 		u.Set("systemvmtype", v.(string))
+	}
+	if v, found := p.p["templateid"]; found {
+		u.Set("templateid", v.(string))
 	}
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
@@ -1792,6 +1825,27 @@ func (p *ListServiceOfferingsParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListServiceOfferingsParams) SetState(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["state"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
+func (p *ListServiceOfferingsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
+	return value, ok
+}
+
 func (p *ListServiceOfferingsParams) SetStoragetype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1831,6 +1885,27 @@ func (p *ListServiceOfferingsParams) GetSystemvmtype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["systemvmtype"].(string)
+	return value, ok
+}
+
+func (p *ListServiceOfferingsParams) SetTemplateid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templateid"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetTemplateid() {
+	if p.p != nil && p.p["templateid"] != nil {
+		delete(p.p, "templateid")
+	}
+}
+
+func (p *ListServiceOfferingsParams) GetTemplateid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templateid"].(string)
 	return value, ok
 }
 
@@ -2033,8 +2108,10 @@ type ServiceOffering struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Purgeresources              bool              `json:"purgeresources"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	State                       string            `json:"state"`
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
@@ -2067,9 +2144,16 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["purgeresources"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("purgeresources", vv)
+	}
 	if v, found := p.p["sortkey"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("sortkey", vv)
+	}
+	if v, found := p.p["state"]; found {
+		u.Set("state", v.(string))
 	}
 	if v, found := p.p["storagetags"]; found {
 		u.Set("storagetags", v.(string))
@@ -2185,6 +2269,27 @@ func (p *UpdateServiceOfferingParams) GetName() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateServiceOfferingParams) SetPurgeresources(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["purgeresources"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetPurgeresources() {
+	if p.p != nil && p.p["purgeresources"] != nil {
+		delete(p.p, "purgeresources")
+	}
+}
+
+func (p *UpdateServiceOfferingParams) GetPurgeresources() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["purgeresources"].(bool)
+	return value, ok
+}
+
 func (p *UpdateServiceOfferingParams) SetSortkey(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2203,6 +2308,27 @@ func (p *UpdateServiceOfferingParams) GetSortkey() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["sortkey"].(int)
+	return value, ok
+}
+
+func (p *UpdateServiceOfferingParams) SetState(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["state"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
+func (p *UpdateServiceOfferingParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
 	return value, ok
 }
 
@@ -2322,8 +2448,10 @@ type UpdateServiceOfferingResponse struct {
 	Networkrate                 int               `json:"networkrate"`
 	Offerha                     bool              `json:"offerha"`
 	Provisioningtype            string            `json:"provisioningtype"`
+	Purgeresources              bool              `json:"purgeresources"`
 	Rootdisksize                int64             `json:"rootdisksize"`
 	Serviceofferingdetails      map[string]string `json:"serviceofferingdetails"`
+	State                       string            `json:"state"`
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
