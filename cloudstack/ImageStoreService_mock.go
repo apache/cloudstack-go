@@ -127,6 +127,21 @@ func (mr *MockImageStoreServiceIfaceMockRecorder) DeleteSecondaryStagingStore(p 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSecondaryStagingStore", reflect.TypeOf((*MockImageStoreServiceIface)(nil).DeleteSecondaryStagingStore), p)
 }
 
+// DownloadImageStoreObject mocks base method.
+func (m *MockImageStoreServiceIface) DownloadImageStoreObject(p *DownloadImageStoreObjectParams) (*DownloadImageStoreObjectResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DownloadImageStoreObject", p)
+	ret0, _ := ret[0].(*DownloadImageStoreObjectResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DownloadImageStoreObject indicates an expected call of DownloadImageStoreObject.
+func (mr *MockImageStoreServiceIfaceMockRecorder) DownloadImageStoreObject(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DownloadImageStoreObject", reflect.TypeOf((*MockImageStoreServiceIface)(nil).DownloadImageStoreObject), p)
+}
+
 // GetImageStoreByID mocks base method.
 func (m *MockImageStoreServiceIface) GetImageStoreByID(id string, opts ...OptionFunc) (*ImageStore, int, error) {
 	m.ctrl.T.Helper()
@@ -190,6 +205,27 @@ func (mr *MockImageStoreServiceIfaceMockRecorder) GetImageStoreID(name interface
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetImageStoreID", reflect.TypeOf((*MockImageStoreServiceIface)(nil).GetImageStoreID), varargs...)
 }
 
+// GetImageStoreObjectByID mocks base method.
+func (m *MockImageStoreServiceIface) GetImageStoreObjectByID(id string, opts ...OptionFunc) (*ImageStoreObject, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetImageStoreObjectByID", varargs...)
+	ret0, _ := ret[0].(*ImageStoreObject)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetImageStoreObjectByID indicates an expected call of GetImageStoreObjectByID.
+func (mr *MockImageStoreServiceIfaceMockRecorder) GetImageStoreObjectByID(id interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetImageStoreObjectByID", reflect.TypeOf((*MockImageStoreServiceIface)(nil).GetImageStoreObjectByID), varargs...)
+}
+
 // GetSecondaryStagingStoreByID mocks base method.
 func (m *MockImageStoreServiceIface) GetSecondaryStagingStoreByID(id string, opts ...OptionFunc) (*SecondaryStagingStore, int, error) {
 	m.ctrl.T.Helper()
@@ -251,6 +287,21 @@ func (mr *MockImageStoreServiceIfaceMockRecorder) GetSecondaryStagingStoreID(nam
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{name}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSecondaryStagingStoreID", reflect.TypeOf((*MockImageStoreServiceIface)(nil).GetSecondaryStagingStoreID), varargs...)
+}
+
+// ListImageStoreObjects mocks base method.
+func (m *MockImageStoreServiceIface) ListImageStoreObjects(p *ListImageStoreObjectsParams) (*ListImageStoreObjectsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListImageStoreObjects", p)
+	ret0, _ := ret[0].(*ListImageStoreObjectsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListImageStoreObjects indicates an expected call of ListImageStoreObjects.
+func (mr *MockImageStoreServiceIfaceMockRecorder) ListImageStoreObjects(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListImageStoreObjects", reflect.TypeOf((*MockImageStoreServiceIface)(nil).ListImageStoreObjects), p)
 }
 
 // ListImageStores mocks base method.
@@ -353,6 +404,34 @@ func (mr *MockImageStoreServiceIfaceMockRecorder) NewDeleteSecondaryStagingStore
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteSecondaryStagingStoreParams", reflect.TypeOf((*MockImageStoreServiceIface)(nil).NewDeleteSecondaryStagingStoreParams), id)
 }
 
+// NewDownloadImageStoreObjectParams mocks base method.
+func (m *MockImageStoreServiceIface) NewDownloadImageStoreObjectParams(id string) *DownloadImageStoreObjectParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDownloadImageStoreObjectParams", id)
+	ret0, _ := ret[0].(*DownloadImageStoreObjectParams)
+	return ret0
+}
+
+// NewDownloadImageStoreObjectParams indicates an expected call of NewDownloadImageStoreObjectParams.
+func (mr *MockImageStoreServiceIfaceMockRecorder) NewDownloadImageStoreObjectParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDownloadImageStoreObjectParams", reflect.TypeOf((*MockImageStoreServiceIface)(nil).NewDownloadImageStoreObjectParams), id)
+}
+
+// NewListImageStoreObjectsParams mocks base method.
+func (m *MockImageStoreServiceIface) NewListImageStoreObjectsParams(id string) *ListImageStoreObjectsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListImageStoreObjectsParams", id)
+	ret0, _ := ret[0].(*ListImageStoreObjectsParams)
+	return ret0
+}
+
+// NewListImageStoreObjectsParams indicates an expected call of NewListImageStoreObjectsParams.
+func (mr *MockImageStoreServiceIfaceMockRecorder) NewListImageStoreObjectsParams(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListImageStoreObjectsParams", reflect.TypeOf((*MockImageStoreServiceIface)(nil).NewListImageStoreObjectsParams), id)
+}
+
 // NewListImageStoresParams mocks base method.
 func (m *MockImageStoreServiceIface) NewListImageStoresParams() *ListImageStoresParams {
 	m.ctrl.T.Helper()
@@ -395,6 +474,20 @@ func (mr *MockImageStoreServiceIfaceMockRecorder) NewUpdateCloudToUseObjectStore
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateCloudToUseObjectStoreParams", reflect.TypeOf((*MockImageStoreServiceIface)(nil).NewUpdateCloudToUseObjectStoreParams), provider)
 }
 
+// NewUpdateImageStoreParams mocks base method.
+func (m *MockImageStoreServiceIface) NewUpdateImageStoreParams(id string, readonly bool) *UpdateImageStoreParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateImageStoreParams", id, readonly)
+	ret0, _ := ret[0].(*UpdateImageStoreParams)
+	return ret0
+}
+
+// NewUpdateImageStoreParams indicates an expected call of NewUpdateImageStoreParams.
+func (mr *MockImageStoreServiceIfaceMockRecorder) NewUpdateImageStoreParams(id, readonly interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateImageStoreParams", reflect.TypeOf((*MockImageStoreServiceIface)(nil).NewUpdateImageStoreParams), id, readonly)
+}
+
 // UpdateCloudToUseObjectStore mocks base method.
 func (m *MockImageStoreServiceIface) UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjectStoreParams) (*UpdateCloudToUseObjectStoreResponse, error) {
 	m.ctrl.T.Helper()
@@ -408,4 +501,19 @@ func (m *MockImageStoreServiceIface) UpdateCloudToUseObjectStore(p *UpdateCloudT
 func (mr *MockImageStoreServiceIfaceMockRecorder) UpdateCloudToUseObjectStore(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateCloudToUseObjectStore", reflect.TypeOf((*MockImageStoreServiceIface)(nil).UpdateCloudToUseObjectStore), p)
+}
+
+// UpdateImageStore mocks base method.
+func (m *MockImageStoreServiceIface) UpdateImageStore(p *UpdateImageStoreParams) (*UpdateImageStoreResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateImageStore", p)
+	ret0, _ := ret[0].(*UpdateImageStoreResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateImageStore indicates an expected call of UpdateImageStore.
+func (mr *MockImageStoreServiceIfaceMockRecorder) UpdateImageStore(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateImageStore", reflect.TypeOf((*MockImageStoreServiceIface)(nil).UpdateImageStore), p)
 }

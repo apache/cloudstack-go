@@ -274,6 +274,20 @@ func (mr *MockPodServiceIfaceMockRecorder) NewReleaseDedicatedPodParams(podid in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReleaseDedicatedPodParams", reflect.TypeOf((*MockPodServiceIface)(nil).NewReleaseDedicatedPodParams), podid)
 }
 
+// NewUpdatePodManagementNetworkIpRangeParams mocks base method.
+func (m *MockPodServiceIface) NewUpdatePodManagementNetworkIpRangeParams(currentendip, currentstartip, podid string) *UpdatePodManagementNetworkIpRangeParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdatePodManagementNetworkIpRangeParams", currentendip, currentstartip, podid)
+	ret0, _ := ret[0].(*UpdatePodManagementNetworkIpRangeParams)
+	return ret0
+}
+
+// NewUpdatePodManagementNetworkIpRangeParams indicates an expected call of NewUpdatePodManagementNetworkIpRangeParams.
+func (mr *MockPodServiceIfaceMockRecorder) NewUpdatePodManagementNetworkIpRangeParams(currentendip, currentstartip, podid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdatePodManagementNetworkIpRangeParams", reflect.TypeOf((*MockPodServiceIface)(nil).NewUpdatePodManagementNetworkIpRangeParams), currentendip, currentstartip, podid)
+}
+
 // NewUpdatePodParams mocks base method.
 func (m *MockPodServiceIface) NewUpdatePodParams(id string) *UpdatePodParams {
 	m.ctrl.T.Helper()
@@ -316,4 +330,19 @@ func (m *MockPodServiceIface) UpdatePod(p *UpdatePodParams) (*UpdatePodResponse,
 func (mr *MockPodServiceIfaceMockRecorder) UpdatePod(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePod", reflect.TypeOf((*MockPodServiceIface)(nil).UpdatePod), p)
+}
+
+// UpdatePodManagementNetworkIpRange mocks base method.
+func (m *MockPodServiceIface) UpdatePodManagementNetworkIpRange(p *UpdatePodManagementNetworkIpRangeParams) (*UpdatePodManagementNetworkIpRangeResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdatePodManagementNetworkIpRange", p)
+	ret0, _ := ret[0].(*UpdatePodManagementNetworkIpRangeResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdatePodManagementNetworkIpRange indicates an expected call of UpdatePodManagementNetworkIpRange.
+func (mr *MockPodServiceIfaceMockRecorder) UpdatePodManagementNetworkIpRange(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePodManagementNetworkIpRange", reflect.TypeOf((*MockPodServiceIface)(nil).UpdatePodManagementNetworkIpRange), p)
 }

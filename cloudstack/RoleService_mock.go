@@ -112,6 +112,27 @@ func (mr *MockRoleServiceIfaceMockRecorder) DeleteRolePermission(p interface{}) 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteRolePermission", reflect.TypeOf((*MockRoleServiceIface)(nil).DeleteRolePermission), p)
 }
 
+// GetProjectRoleID mocks base method.
+func (m *MockRoleServiceIface) GetProjectRoleID(name, projectid string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{name, projectid}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetProjectRoleID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetProjectRoleID indicates an expected call of GetProjectRoleID.
+func (mr *MockRoleServiceIfaceMockRecorder) GetProjectRoleID(name, projectid interface{}, opts ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{name, projectid}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProjectRoleID", reflect.TypeOf((*MockRoleServiceIface)(nil).GetProjectRoleID), varargs...)
+}
+
 // GetRoleByID mocks base method.
 func (m *MockRoleServiceIface) GetRoleByID(id string, opts ...OptionFunc) (*Role, int, error) {
 	m.ctrl.T.Helper()
@@ -188,6 +209,21 @@ func (m *MockRoleServiceIface) ImportRole(p *ImportRoleParams) (*ImportRoleRespo
 func (mr *MockRoleServiceIfaceMockRecorder) ImportRole(p interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportRole", reflect.TypeOf((*MockRoleServiceIface)(nil).ImportRole), p)
+}
+
+// ListProjectRoles mocks base method.
+func (m *MockRoleServiceIface) ListProjectRoles(p *ListProjectRolesParams) (*ListProjectRolesResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListProjectRoles", p)
+	ret0, _ := ret[0].(*ListProjectRolesResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListProjectRoles indicates an expected call of ListProjectRoles.
+func (mr *MockRoleServiceIfaceMockRecorder) ListProjectRoles(p interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListProjectRoles", reflect.TypeOf((*MockRoleServiceIface)(nil).ListProjectRoles), p)
 }
 
 // ListRolePermissions mocks base method.
@@ -288,6 +324,20 @@ func (m *MockRoleServiceIface) NewImportRoleParams(name string, rules map[string
 func (mr *MockRoleServiceIfaceMockRecorder) NewImportRoleParams(name, rules interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportRoleParams", reflect.TypeOf((*MockRoleServiceIface)(nil).NewImportRoleParams), name, rules)
+}
+
+// NewListProjectRolesParams mocks base method.
+func (m *MockRoleServiceIface) NewListProjectRolesParams(projectid string) *ListProjectRolesParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListProjectRolesParams", projectid)
+	ret0, _ := ret[0].(*ListProjectRolesParams)
+	return ret0
+}
+
+// NewListProjectRolesParams indicates an expected call of NewListProjectRolesParams.
+func (mr *MockRoleServiceIfaceMockRecorder) NewListProjectRolesParams(projectid interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListProjectRolesParams", reflect.TypeOf((*MockRoleServiceIface)(nil).NewListProjectRolesParams), projectid)
 }
 
 // NewListRolePermissionsParams mocks base method.

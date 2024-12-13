@@ -45,6 +45,8 @@ type PodServiceIface interface {
 	NewReleaseDedicatedPodParams(podid string) *ReleaseDedicatedPodParams
 	UpdatePod(p *UpdatePodParams) (*UpdatePodResponse, error)
 	NewUpdatePodParams(id string) *UpdatePodParams
+	UpdatePodManagementNetworkIpRange(p *UpdatePodManagementNetworkIpRangeParams) (*UpdatePodManagementNetworkIpRangeResponse, error)
+	NewUpdatePodManagementNetworkIpRangeParams(currentendip string, currentstartip string, podid string) *UpdatePodManagementNetworkIpRangeParams
 }
 
 type CreatePodParams struct {
@@ -1442,4 +1444,184 @@ type UpdatePodResponseCapacity struct {
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
+}
+
+type UpdatePodManagementNetworkIpRangeParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["currentendip"]; found {
+		u.Set("currentendip", v.(string))
+	}
+	if v, found := p.p["currentstartip"]; found {
+		u.Set("currentstartip", v.(string))
+	}
+	if v, found := p.p["newendip"]; found {
+		u.Set("newendip", v.(string))
+	}
+	if v, found := p.p["newstartip"]; found {
+		u.Set("newstartip", v.(string))
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
+	return u
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) SetCurrentendip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["currentendip"] = v
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) ResetCurrentendip() {
+	if p.p != nil && p.p["currentendip"] != nil {
+		delete(p.p, "currentendip")
+	}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) GetCurrentendip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["currentendip"].(string)
+	return value, ok
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) SetCurrentstartip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["currentstartip"] = v
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) ResetCurrentstartip() {
+	if p.p != nil && p.p["currentstartip"] != nil {
+		delete(p.p, "currentstartip")
+	}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) GetCurrentstartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["currentstartip"].(string)
+	return value, ok
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) SetNewendip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["newendip"] = v
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) ResetNewendip() {
+	if p.p != nil && p.p["newendip"] != nil {
+		delete(p.p, "newendip")
+	}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) GetNewendip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["newendip"].(string)
+	return value, ok
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) SetNewstartip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["newstartip"] = v
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) ResetNewstartip() {
+	if p.p != nil && p.p["newstartip"] != nil {
+		delete(p.p, "newstartip")
+	}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) GetNewstartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["newstartip"].(string)
+	return value, ok
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
+func (p *UpdatePodManagementNetworkIpRangeParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdatePodManagementNetworkIpRangeParams instance,
+// as then you are sure you have configured all required params
+func (s *PodService) NewUpdatePodManagementNetworkIpRangeParams(currentendip string, currentstartip string, podid string) *UpdatePodManagementNetworkIpRangeParams {
+	p := &UpdatePodManagementNetworkIpRangeParams{}
+	p.p = make(map[string]interface{})
+	p.p["currentendip"] = currentendip
+	p.p["currentstartip"] = currentstartip
+	p.p["podid"] = podid
+	return p
+}
+
+// Updates a management network IP range. Only allowed when no IPs are allocated.
+func (s *PodService) UpdatePodManagementNetworkIpRange(p *UpdatePodManagementNetworkIpRangeParams) (*UpdatePodManagementNetworkIpRangeResponse, error) {
+	resp, err := s.cs.newRequest("updatePodManagementNetworkIpRange", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdatePodManagementNetworkIpRangeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type UpdatePodManagementNetworkIpRangeResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

@@ -47,6 +47,7 @@ var detailsRequireKeyValue = map[string]bool{
 	"updateCloudToUseObjectStore": true,
 	"updateGuestOs":               true,
 	"updateZone":                  true,
+	"addObjectStoragePool":        true,
 }
 
 // detailsRequireZeroIndex is a prefilled map with a list of details
@@ -84,20 +85,46 @@ var mapRequireList = map[string]map[string]bool{
 	"migrateVirtualMachineWithVolume": map[string]bool{
 		"migrateto": true,
 	},
+	"importVm": map[string]bool{
+		"networklist":          true,
+		"nicipaddresslist":     true,
+		"datadiskofferinglist": true,
+	},
+	"registerOauthProvider": map[string]bool{
+		"details": true,
+	},
 }
 
 // nestedResponse is a prefilled map with the list of endpoints
 // that responses fields are nested in a parent object. The map value
 // gives the object field name.
 var nestedResponse = map[string]string{
-	"getUploadParamsForTemplate": "getuploadparams",
-	"getUploadParamsForVolume":   "getuploadparams",
-	"createRole":                 "role",
-	"createRolePermission":       "rolepermission",
-	"getCloudIdentifier":         "cloudidentifier",
-	"getKubernetesClusterConfig": "clusterconfig",
-	"getPathForVolume":           "apipathforvolume",
-	"createConsoleEndpoint":      "consoleendpoint",
+	"getUploadParamsForTemplate":       "getuploadparams",
+	"getUploadParamsForVolume":         "getuploadparams",
+	"createRole":                       "role",
+	"createRolePermission":             "rolepermission",
+	"getCloudIdentifier":               "cloudidentifier",
+	"getKubernetesClusterConfig":       "clusterconfig",
+	"getPathForVolume":                 "apipathforvolume",
+	"createConsoleEndpoint":            "consoleendpoint",
+	"addVmwareDc":                      "vmwaredc",
+	"updateVmwareDc":                   "vmwaredc",
+	"createProjectRole":                "projectrole",
+	"updateProjectRole":                "projectrole",
+	"registerUserData":                 "userdata",
+	"updateSecurityGroup":              "securitygroup",
+	"updateOauthProvider":              "oauthprovider",
+	"readyForShutdown":                 "readyforshutdown",
+	"updateObjectStoragePool":          "objectstore",
+	"addObjectStoragePool":             "objectstore",
+	"updateImageStore":                 "imagestore",
+	"linkUserDataToTemplate":           "template",
+	"assignVolume":                     "volume",
+	"createVMSchedule":                 "vmschedule",
+	"updateVMSchedule":                 "vmschedule",
+	"setupUserTwoFactorAuthentication": "setup2fa",
+	"updateSecondaryStorageSelector":   "heuristics",
+	"createSecondaryStorageSelector":   "heuristics",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -1361,6 +1388,15 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			} else {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 			}
+		case "nicnetworklist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].nic\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].network\", i), m[k])", name)
+		case "nicipaddresslist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].nic\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].ip4Address\", i), m[k])", name)
+		case "datadiskofferinglist":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].disk\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].diskOffering\", i), m[k])", name)
 		default:
 			if zeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
@@ -1865,7 +1901,7 @@ func (s *service) generateResponseType(a *API) {
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1899,6 +1935,48 @@ func (s *service) generateResponseType(a *API) {
 		case "findHostsForMigration":
 			pn(" Count int `json:\"count\"`")
 			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
+		case "listVmwareDcVms":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "unmanagedinstance")
+		case "registerUserData":
+			pn("    Account string `json:\"account\"`")
+			pn("    Accountid string `json:\"accountid\"`")
+			pn("    Domain string `json:\"domain\"`")
+			pn("    Domainid string `json:\"domainid\"`")
+			pn("    Hasannotations bool `json:\"hasannotations\"`")
+			pn("    Id string `json:\"id\"`")
+			pn("    JobID string `json:\"jobid\"`")
+			pn("    Jobstatus int `json:\"jobstatus\"`")
+			pn("    Name string `json:\"name\"`")
+			pn("    Params string `json:\"params\"`")
+			pn("    Userdata string `json:\"userdata\"`")
+		case "listObjectStoragePools":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "objectstore")
+		case "listStoragePoolObjects":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
+		case "listImageStoreObjects":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
+		case "listVolumesUsageHistory":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "volume")
+		case "listHostHAProviders":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "haprovider")
+		case "listSecondaryStorageSelectors":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "heuristics")
+		case "listHostHAResources":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hostha")
+		case "listInfrastructure":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s *%s `json:\"%s\"`", ln, parseSingular(ln), "infrastructure")
+		case "listStoragePoolsMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "storagepool")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
