@@ -197,6 +197,7 @@ type AttachIsoResponse struct {
 	Cpuspeed              int                              `json:"cpuspeed"`
 	Cpuused               string                           `json:"cpuused"`
 	Created               string                           `json:"created"`
+	Deleteprotection      bool                             `json:"deleteprotection"`
 	Details               map[string]string                `json:"details"`
 	Diskioread            int64                            `json:"diskioread"`
 	Diskiowrite           int64                            `json:"diskiowrite"`
@@ -208,6 +209,7 @@ type AttachIsoResponse struct {
 	Displayvm             bool                             `json:"displayvm"`
 	Domain                string                           `json:"domain"`
 	Domainid              string                           `json:"domainid"`
+	Domainpath            string                           `json:"domainpath"`
 	Forvirtualnetwork     bool                             `json:"forvirtualnetwork"`
 	Group                 string                           `json:"group"`
 	Groupid               string                           `json:"groupid"`
@@ -221,6 +223,7 @@ type AttachIsoResponse struct {
 	Icon                  interface{}                      `json:"icon"`
 	Id                    string                           `json:"id"`
 	Instancename          string                           `json:"instancename"`
+	Ipaddress             string                           `json:"ipaddress"`
 	Isdynamicallyscalable bool                             `json:"isdynamicallyscalable"`
 	Isodisplaytext        string                           `json:"isodisplaytext"`
 	Isoid                 string                           `json:"isoid"`
@@ -258,6 +261,7 @@ type AttachIsoResponse struct {
 	State                 string                           `json:"state"`
 	Tags                  []Tags                           `json:"tags"`
 	Templatedisplaytext   string                           `json:"templatedisplaytext"`
+	Templateformat        string                           `json:"templateformat"`
 	Templateid            string                           `json:"templateid"`
 	Templatename          string                           `json:"templatename"`
 	Templatetype          string                           `json:"templatetype"`
@@ -269,6 +273,7 @@ type AttachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vmtype                string                           `json:"vmtype"`
 	Vnfdetails            map[string]string                `json:"vnfdetails"`
 	Vnfnics               []string                         `json:"vnfnics"`
 	Zoneid                string                           `json:"zoneid"`
@@ -280,6 +285,7 @@ type AttachIsoResponseSecuritygroup struct {
 	Description         string                               `json:"description"`
 	Domain              string                               `json:"domain"`
 	Domainid            string                               `json:"domainid"`
+	Domainpath          string                               `json:"domainpath"`
 	Egressrule          []AttachIsoResponseSecuritygroupRule `json:"egressrule"`
 	Id                  string                               `json:"id"`
 	Ingressrule         []AttachIsoResponseSecuritygroupRule `json:"ingressrule"`
@@ -305,16 +311,18 @@ type AttachIsoResponseSecuritygroupRule struct {
 }
 
 type AttachIsoResponseAffinitygroup struct {
-	Account           string   `json:"account"`
-	Description       string   `json:"description"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Id                string   `json:"id"`
-	Name              string   `json:"name"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Type              string   `json:"type"`
-	VirtualmachineIds []string `json:"virtualmachineIds"`
+	Account            string   `json:"account"`
+	Dedicatedresources []string `json:"dedicatedresources"`
+	Description        string   `json:"description"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	Name               string   `json:"name"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Type               string   `json:"type"`
+	VirtualmachineIds  []string `json:"virtualmachineIds"`
 }
 
 func (r *AttachIsoResponse) UnmarshalJSON(b []byte) error {
@@ -500,6 +508,7 @@ func (s *ISOService) CopyIso(p *CopyIsoParams) (*CopyIsoResponse, error) {
 type CopyIsoResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -513,6 +522,7 @@ type CopyIsoResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -805,6 +815,7 @@ type DetachIsoResponse struct {
 	Cpuspeed              int                              `json:"cpuspeed"`
 	Cpuused               string                           `json:"cpuused"`
 	Created               string                           `json:"created"`
+	Deleteprotection      bool                             `json:"deleteprotection"`
 	Details               map[string]string                `json:"details"`
 	Diskioread            int64                            `json:"diskioread"`
 	Diskiowrite           int64                            `json:"diskiowrite"`
@@ -816,6 +827,7 @@ type DetachIsoResponse struct {
 	Displayvm             bool                             `json:"displayvm"`
 	Domain                string                           `json:"domain"`
 	Domainid              string                           `json:"domainid"`
+	Domainpath            string                           `json:"domainpath"`
 	Forvirtualnetwork     bool                             `json:"forvirtualnetwork"`
 	Group                 string                           `json:"group"`
 	Groupid               string                           `json:"groupid"`
@@ -829,6 +841,7 @@ type DetachIsoResponse struct {
 	Icon                  interface{}                      `json:"icon"`
 	Id                    string                           `json:"id"`
 	Instancename          string                           `json:"instancename"`
+	Ipaddress             string                           `json:"ipaddress"`
 	Isdynamicallyscalable bool                             `json:"isdynamicallyscalable"`
 	Isodisplaytext        string                           `json:"isodisplaytext"`
 	Isoid                 string                           `json:"isoid"`
@@ -866,6 +879,7 @@ type DetachIsoResponse struct {
 	State                 string                           `json:"state"`
 	Tags                  []Tags                           `json:"tags"`
 	Templatedisplaytext   string                           `json:"templatedisplaytext"`
+	Templateformat        string                           `json:"templateformat"`
 	Templateid            string                           `json:"templateid"`
 	Templatename          string                           `json:"templatename"`
 	Templatetype          string                           `json:"templatetype"`
@@ -877,6 +891,7 @@ type DetachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vmtype                string                           `json:"vmtype"`
 	Vnfdetails            map[string]string                `json:"vnfdetails"`
 	Vnfnics               []string                         `json:"vnfnics"`
 	Zoneid                string                           `json:"zoneid"`
@@ -888,6 +903,7 @@ type DetachIsoResponseSecuritygroup struct {
 	Description         string                               `json:"description"`
 	Domain              string                               `json:"domain"`
 	Domainid            string                               `json:"domainid"`
+	Domainpath          string                               `json:"domainpath"`
 	Egressrule          []DetachIsoResponseSecuritygroupRule `json:"egressrule"`
 	Id                  string                               `json:"id"`
 	Ingressrule         []DetachIsoResponseSecuritygroupRule `json:"ingressrule"`
@@ -913,16 +929,18 @@ type DetachIsoResponseSecuritygroupRule struct {
 }
 
 type DetachIsoResponseAffinitygroup struct {
-	Account           string   `json:"account"`
-	Description       string   `json:"description"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Id                string   `json:"id"`
-	Name              string   `json:"name"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Type              string   `json:"type"`
-	VirtualmachineIds []string `json:"virtualmachineIds"`
+	Account            string   `json:"account"`
+	Dedicatedresources []string `json:"dedicatedresources"`
+	Description        string   `json:"description"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	Name               string   `json:"name"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Type               string   `json:"type"`
+	VirtualmachineIds  []string `json:"virtualmachineIds"`
 }
 
 func (r *DetachIsoResponse) UnmarshalJSON(b []byte) error {
@@ -1244,6 +1262,9 @@ func (p *ListIsosParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["bootable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bootable", vv)
@@ -1342,6 +1363,27 @@ func (p *ListIsosParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListIsosParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListIsosParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListIsosParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -1902,6 +1944,7 @@ type ListIsosResponse struct {
 type Iso struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -1915,6 +1958,7 @@ type Iso struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -1995,6 +2039,9 @@ func (p *RegisterIsoParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["bootable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bootable", vv)
@@ -2071,6 +2118,27 @@ func (p *RegisterIsoParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *RegisterIsoParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *RegisterIsoParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *RegisterIsoParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -2444,6 +2512,7 @@ func (s *ISOService) RegisterIso(p *RegisterIsoParams) (*RegisterIsoResponse, er
 type RegisterIsoResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -2457,6 +2526,7 @@ type RegisterIsoResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
@@ -2534,6 +2604,9 @@ func (p *UpdateIsoParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["bootable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("bootable", vv)
@@ -2588,6 +2661,27 @@ func (p *UpdateIsoParams) toURLValues() url.Values {
 		u.Set("sshkeyenabled", vv)
 	}
 	return u
+}
+
+func (p *UpdateIsoParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *UpdateIsoParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *UpdateIsoParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *UpdateIsoParams) SetBootable(v bool) {
@@ -2911,6 +3005,7 @@ func (s *ISOService) UpdateIso(p *UpdateIsoParams) (*UpdateIsoResponse, error) {
 type UpdateIsoResponse struct {
 	Account               string              `json:"account"`
 	Accountid             string              `json:"accountid"`
+	Arch                  string              `json:"arch"`
 	Bits                  int                 `json:"bits"`
 	Bootable              bool                `json:"bootable"`
 	Checksum              string              `json:"checksum"`
@@ -2924,6 +3019,7 @@ type UpdateIsoResponse struct {
 	Displaytext           string              `json:"displaytext"`
 	Domain                string              `json:"domain"`
 	Domainid              string              `json:"domainid"`
+	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`

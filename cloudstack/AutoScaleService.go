@@ -268,6 +268,7 @@ type CreateAutoScalePolicyResponse struct {
 	Conditions []string `json:"conditions"`
 	Domain     string   `json:"domain"`
 	Domainid   string   `json:"domainid"`
+	Domainpath string   `json:"domainpath"`
 	Duration   int      `json:"duration"`
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
@@ -569,6 +570,7 @@ type CreateAutoScaleVmGroupResponse struct {
 	Created                      string   `json:"created"`
 	Domain                       string   `json:"domain"`
 	Domainid                     string   `json:"domainid"`
+	Domainpath                   string   `json:"domainpath"`
 	Fordisplay                   bool     `json:"fordisplay"`
 	Hasannotations               bool     `json:"hasannotations"`
 	Id                           string   `json:"id"`
@@ -1005,6 +1007,7 @@ type CreateAutoScaleVmProfileResponse struct {
 	Autoscaleuserid      string            `json:"autoscaleuserid"`
 	Domain               string            `json:"domain"`
 	Domainid             string            `json:"domainid"`
+	Domainpath           string            `json:"domainpath"`
 	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
 	Fordisplay           bool              `json:"fordisplay"`
 	Id                   string            `json:"id"`
@@ -1233,6 +1236,7 @@ type CreateConditionResponse struct {
 	Countername        string `json:"countername"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Domainpath         string `json:"domainpath"`
 	Id                 string `json:"id"`
 	JobID              string `json:"jobid"`
 	Jobstatus          int    `json:"jobstatus"`
@@ -1932,6 +1936,7 @@ type DisableAutoScaleVmGroupResponse struct {
 	Created                      string   `json:"created"`
 	Domain                       string   `json:"domain"`
 	Domainid                     string   `json:"domainid"`
+	Domainpath                   string   `json:"domainpath"`
 	Fordisplay                   bool     `json:"fordisplay"`
 	Hasannotations               bool     `json:"hasannotations"`
 	Id                           string   `json:"id"`
@@ -2043,6 +2048,7 @@ type EnableAutoScaleVmGroupResponse struct {
 	Created                      string   `json:"created"`
 	Domain                       string   `json:"domain"`
 	Domainid                     string   `json:"domainid"`
+	Domainpath                   string   `json:"domainpath"`
 	Fordisplay                   bool     `json:"fordisplay"`
 	Hasannotations               bool     `json:"hasannotations"`
 	Id                           string   `json:"id"`
@@ -2511,6 +2517,7 @@ type AutoScalePolicy struct {
 	Conditions []string `json:"conditions"`
 	Domain     string   `json:"domain"`
 	Domainid   string   `json:"domainid"`
+	Domainpath string   `json:"domainpath"`
 	Duration   int      `json:"duration"`
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
@@ -3017,6 +3024,7 @@ type AutoScaleVmGroup struct {
 	Created                      string   `json:"created"`
 	Domain                       string   `json:"domain"`
 	Domainid                     string   `json:"domainid"`
+	Domainpath                   string   `json:"domainpath"`
 	Fordisplay                   bool     `json:"fordisplay"`
 	Hasannotations               bool     `json:"hasannotations"`
 	Id                           string   `json:"id"`
@@ -3459,6 +3467,7 @@ type AutoScaleVmProfile struct {
 	Autoscaleuserid      string            `json:"autoscaleuserid"`
 	Domain               string            `json:"domain"`
 	Domainid             string            `json:"domainid"`
+	Domainpath           string            `json:"domainpath"`
 	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
 	Fordisplay           bool              `json:"fordisplay"`
 	Id                   string            `json:"id"`
@@ -3825,6 +3834,7 @@ type Condition struct {
 	Countername        string `json:"countername"`
 	Domain             string `json:"domain"`
 	Domainid           string `json:"domainid"`
+	Domainpath         string `json:"domainpath"`
 	Id                 string `json:"id"`
 	JobID              string `json:"jobid"`
 	Jobstatus          int    `json:"jobstatus"`
@@ -4324,6 +4334,7 @@ type UpdateAutoScalePolicyResponse struct {
 	Conditions []string `json:"conditions"`
 	Domain     string   `json:"domain"`
 	Domainid   string   `json:"domainid"`
+	Domainpath string   `json:"domainpath"`
 	Duration   int      `json:"duration"`
 	Id         string   `json:"id"`
 	JobID      string   `json:"jobid"`
@@ -4620,6 +4631,7 @@ type UpdateAutoScaleVmGroupResponse struct {
 	Created                      string   `json:"created"`
 	Domain                       string   `json:"domain"`
 	Domainid                     string   `json:"domainid"`
+	Domainpath                   string   `json:"domainpath"`
 	Fordisplay                   bool     `json:"fordisplay"`
 	Hasannotations               bool     `json:"hasannotations"`
 	Id                           string   `json:"id"`
@@ -5006,6 +5018,7 @@ type UpdateAutoScaleVmProfileResponse struct {
 	Autoscaleuserid      string            `json:"autoscaleuserid"`
 	Domain               string            `json:"domain"`
 	Domainid             string            `json:"domainid"`
+	Domainpath           string            `json:"domainpath"`
 	Expungevmgraceperiod int               `json:"expungevmgraceperiod"`
 	Fordisplay           bool              `json:"fordisplay"`
 	Id                   string            `json:"id"`

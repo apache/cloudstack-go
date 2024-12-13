@@ -69,6 +69,10 @@ func (p *CreateVlanIpRangeParams) toURLValues() url.Values {
 	if v, found := p.p["endipv6"]; found {
 		u.Set("endipv6", v.(string))
 	}
+	if v, found := p.p["fornsx"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fornsx", vv)
+	}
 	if v, found := p.p["forsystemvms"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forsystemvms", vv)
@@ -197,6 +201,27 @@ func (p *CreateVlanIpRangeParams) GetEndipv6() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["endipv6"].(string)
+	return value, ok
+}
+
+func (p *CreateVlanIpRangeParams) SetFornsx(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fornsx"] = v
+}
+
+func (p *CreateVlanIpRangeParams) ResetFornsx() {
+	if p.p != nil && p.p["fornsx"] != nil {
+		delete(p.p, "fornsx")
+	}
+}
+
+func (p *CreateVlanIpRangeParams) GetFornsx() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fornsx"].(bool)
 	return value, ok
 }
 
@@ -527,8 +552,10 @@ type CreateVlanIpRangeResponse struct {
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
+	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -715,6 +742,7 @@ type DedicateGuestVlanRangeResponse struct {
 	Account           string `json:"account"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Guestvlanrange    string `json:"guestvlanrange"`
 	Id                string `json:"id"`
 	JobID             string `json:"jobid"`
@@ -770,7 +798,7 @@ func (s *VLANService) NewDeleteVlanIpRangeParams(id string) *DeleteVlanIpRangePa
 	return p
 }
 
-// Creates a VLAN IP range.
+// Deletes a VLAN IP range.
 func (s *VLANService) DeleteVlanIpRange(p *DeleteVlanIpRangeParams) (*DeleteVlanIpRangeResponse, error) {
 	resp, err := s.cs.newRequest("deleteVlanIpRange", p.toURLValues())
 	if err != nil {
@@ -1138,6 +1166,7 @@ type DedicatedGuestVlanRange struct {
 	Account           string `json:"account"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Guestvlanrange    string `json:"guestvlanrange"`
 	Id                string `json:"id"`
 	JobID             string `json:"jobid"`
@@ -1542,8 +1571,10 @@ type VlanIpRange struct {
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
+	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -1888,6 +1919,7 @@ type GuestVlan struct {
 	Allocationstate     string     `json:"allocationstate"`
 	Domain              string     `json:"domain"`
 	Domainid            string     `json:"domainid"`
+	Domainpath          string     `json:"domainpath"`
 	Id                  int64      `json:"id"`
 	Isdedicated         bool       `json:"isdedicated"`
 	JobID               string     `json:"jobid"`
@@ -2190,8 +2222,10 @@ type UpdateVlanIpRangeResponse struct {
 	Description       string `json:"description"`
 	Domain            string `json:"domain"`
 	Domainid          string `json:"domainid"`
+	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
+	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`

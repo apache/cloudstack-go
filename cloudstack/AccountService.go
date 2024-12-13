@@ -485,6 +485,7 @@ type CreateAccountResponse struct {
 	Snapshotlimit             string                      `json:"snapshotlimit"`
 	Snapshottotal             int64                       `json:"snapshottotal"`
 	State                     string                      `json:"state"`
+	Taggedresources           []string                    `json:"taggedresources"`
 	Templateavailable         string                      `json:"templateavailable"`
 	Templatelimit             string                      `json:"templatelimit"`
 	Templatetotal             int64                       `json:"templatetotal"`
@@ -811,6 +812,7 @@ type DisableAccountResponse struct {
 	Snapshotlimit             string                       `json:"snapshotlimit"`
 	Snapshottotal             int64                        `json:"snapshottotal"`
 	State                     string                       `json:"state"`
+	Taggedresources           []string                     `json:"taggedresources"`
 	Templateavailable         string                       `json:"templateavailable"`
 	Templatelimit             string                       `json:"templatelimit"`
 	Templatetotal             int64                        `json:"templatetotal"`
@@ -1009,6 +1011,7 @@ type EnableAccountResponse struct {
 	Snapshotlimit             string                      `json:"snapshotlimit"`
 	Snapshottotal             int64                       `json:"snapshottotal"`
 	State                     string                      `json:"state"`
+	Taggedresources           []string                    `json:"taggedresources"`
 	Templateavailable         string                      `json:"templateavailable"`
 	Templatelimit             string                      `json:"templatelimit"`
 	Templatetotal             int64                       `json:"templatetotal"`
@@ -1199,6 +1202,9 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
+	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
 	}
 	return u
 }
@@ -1476,6 +1482,27 @@ func (p *ListAccountsParams) GetState() (string, bool) {
 	return value, ok
 }
 
+func (p *ListAccountsParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *ListAccountsParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *ListAccountsParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListAccountsParams instance,
 // as then you are sure you have configured all required params
 func (s *AccountService) NewListAccountsParams() *ListAccountsParams {
@@ -1634,6 +1661,7 @@ type Account struct {
 	Snapshotlimit             string            `json:"snapshotlimit"`
 	Snapshottotal             int64             `json:"snapshottotal"`
 	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
 	Templateavailable         string            `json:"templateavailable"`
 	Templatelimit             string            `json:"templatelimit"`
 	Templatetotal             int64             `json:"templatetotal"`
@@ -1984,6 +2012,7 @@ type ProjectAccount struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`
@@ -2006,6 +2035,7 @@ type Tags struct {
 	Customer     string `json:"customer"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	Key          string `json:"key"`
 	Project      string `json:"project"`
 	Projectid    string `json:"projectid"`
@@ -2146,6 +2176,7 @@ type LockAccountResponse struct {
 	Snapshotlimit             string                    `json:"snapshotlimit"`
 	Snapshottotal             int64                     `json:"snapshottotal"`
 	State                     string                    `json:"state"`
+	Taggedresources           []string                  `json:"taggedresources"`
 	Templateavailable         string                    `json:"templateavailable"`
 	Templatelimit             string                    `json:"templatelimit"`
 	Templatetotal             int64                     `json:"templatetotal"`
@@ -2367,6 +2398,7 @@ type MarkDefaultZoneForAccountResponse struct {
 	Snapshotlimit             string                                  `json:"snapshotlimit"`
 	Snapshottotal             int64                                   `json:"snapshottotal"`
 	State                     string                                  `json:"state"`
+	Taggedresources           []string                                `json:"taggedresources"`
 	Templateavailable         string                                  `json:"templateavailable"`
 	Templatelimit             string                                  `json:"templatelimit"`
 	Templatetotal             int64                                   `json:"templatetotal"`
@@ -2664,6 +2696,7 @@ type UpdateAccountResponse struct {
 	Snapshotlimit             string                      `json:"snapshotlimit"`
 	Snapshottotal             int64                       `json:"snapshottotal"`
 	State                     string                      `json:"state"`
+	Taggedresources           []string                    `json:"taggedresources"`
 	Templateavailable         string                      `json:"templateavailable"`
 	Templatelimit             string                      `json:"templatelimit"`
 	Templatetotal             int64                       `json:"templatetotal"`

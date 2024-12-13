@@ -604,6 +604,7 @@ type UpdateVmNicIpResponse struct {
 	Cpuspeed              int                                  `json:"cpuspeed"`
 	Cpuused               string                               `json:"cpuused"`
 	Created               string                               `json:"created"`
+	Deleteprotection      bool                                 `json:"deleteprotection"`
 	Details               map[string]string                    `json:"details"`
 	Diskioread            int64                                `json:"diskioread"`
 	Diskiowrite           int64                                `json:"diskiowrite"`
@@ -615,6 +616,7 @@ type UpdateVmNicIpResponse struct {
 	Displayvm             bool                                 `json:"displayvm"`
 	Domain                string                               `json:"domain"`
 	Domainid              string                               `json:"domainid"`
+	Domainpath            string                               `json:"domainpath"`
 	Forvirtualnetwork     bool                                 `json:"forvirtualnetwork"`
 	Group                 string                               `json:"group"`
 	Groupid               string                               `json:"groupid"`
@@ -628,6 +630,7 @@ type UpdateVmNicIpResponse struct {
 	Icon                  interface{}                          `json:"icon"`
 	Id                    string                               `json:"id"`
 	Instancename          string                               `json:"instancename"`
+	Ipaddress             string                               `json:"ipaddress"`
 	Isdynamicallyscalable bool                                 `json:"isdynamicallyscalable"`
 	Isodisplaytext        string                               `json:"isodisplaytext"`
 	Isoid                 string                               `json:"isoid"`
@@ -665,6 +668,7 @@ type UpdateVmNicIpResponse struct {
 	State                 string                               `json:"state"`
 	Tags                  []Tags                               `json:"tags"`
 	Templatedisplaytext   string                               `json:"templatedisplaytext"`
+	Templateformat        string                               `json:"templateformat"`
 	Templateid            string                               `json:"templateid"`
 	Templatename          string                               `json:"templatename"`
 	Templatetype          string                               `json:"templatetype"`
@@ -676,6 +680,7 @@ type UpdateVmNicIpResponse struct {
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`
+	Vmtype                string                               `json:"vmtype"`
 	Vnfdetails            map[string]string                    `json:"vnfdetails"`
 	Vnfnics               []string                             `json:"vnfnics"`
 	Zoneid                string                               `json:"zoneid"`
@@ -687,6 +692,7 @@ type UpdateVmNicIpResponseSecuritygroup struct {
 	Description         string                                   `json:"description"`
 	Domain              string                                   `json:"domain"`
 	Domainid            string                                   `json:"domainid"`
+	Domainpath          string                                   `json:"domainpath"`
 	Egressrule          []UpdateVmNicIpResponseSecuritygroupRule `json:"egressrule"`
 	Id                  string                                   `json:"id"`
 	Ingressrule         []UpdateVmNicIpResponseSecuritygroupRule `json:"ingressrule"`
@@ -712,16 +718,18 @@ type UpdateVmNicIpResponseSecuritygroupRule struct {
 }
 
 type UpdateVmNicIpResponseAffinitygroup struct {
-	Account           string   `json:"account"`
-	Description       string   `json:"description"`
-	Domain            string   `json:"domain"`
-	Domainid          string   `json:"domainid"`
-	Id                string   `json:"id"`
-	Name              string   `json:"name"`
-	Project           string   `json:"project"`
-	Projectid         string   `json:"projectid"`
-	Type              string   `json:"type"`
-	VirtualmachineIds []string `json:"virtualmachineIds"`
+	Account            string   `json:"account"`
+	Dedicatedresources []string `json:"dedicatedresources"`
+	Description        string   `json:"description"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	Name               string   `json:"name"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Type               string   `json:"type"`
+	VirtualmachineIds  []string `json:"virtualmachineIds"`
 }
 
 func (r *UpdateVmNicIpResponse) UnmarshalJSON(b []byte) error {

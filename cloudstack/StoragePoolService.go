@@ -151,7 +151,9 @@ type CancelStorageMaintenanceResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -160,6 +162,7 @@ type CancelStorageMaintenanceResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
@@ -263,7 +266,9 @@ type EnableStorageMaintenanceResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -272,6 +277,7 @@ type EnableStorageMaintenanceResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`

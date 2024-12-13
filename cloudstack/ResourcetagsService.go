@@ -857,6 +857,7 @@ type Tag struct {
 	Customer     string `json:"customer"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	JobID        string `json:"jobid"`
 	Jobstatus    int    `json:"jobstatus"`
 	Key          string `json:"key"`

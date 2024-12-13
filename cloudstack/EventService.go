@@ -960,6 +960,7 @@ type Event struct {
 	Description  string `json:"description"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	Id           string `json:"id"`
 	JobID        string `json:"jobid"`
 	Jobstatus    int    `json:"jobstatus"`

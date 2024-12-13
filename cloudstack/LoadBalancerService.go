@@ -1267,6 +1267,7 @@ type CreateGlobalLoadBalancerRuleResponse struct {
 	Description                 string                                                 `json:"description"`
 	Domain                      string                                                 `json:"domain"`
 	Domainid                    string                                                 `json:"domainid"`
+	Domainpath                  string                                                 `json:"domainpath"`
 	Gslbdomainname              string                                                 `json:"gslbdomainname"`
 	Gslblbmethod                string                                                 `json:"gslblbmethod"`
 	Gslbservicetype             string                                                 `json:"gslbservicetype"`
@@ -1288,6 +1289,7 @@ type CreateGlobalLoadBalancerRuleResponseLoadbalancerrule struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	Name        string `json:"name"`
@@ -2123,6 +2125,7 @@ type CreateLoadBalancerResponse struct {
 	Description              string                                           `json:"description"`
 	Domain                   string                                           `json:"domain"`
 	Domainid                 string                                           `json:"domainid"`
+	Domainpath               string                                           `json:"domainpath"`
 	Fordisplay               bool                                             `json:"fordisplay"`
 	Id                       string                                           `json:"id"`
 	JobID                    string                                           `json:"jobid"`
@@ -2558,6 +2561,7 @@ type CreateLoadBalancerRuleResponse struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	JobID       string `json:"jobid"`
@@ -3564,6 +3568,7 @@ type GlobalLoadBalancerRule struct {
 	Description                 string                                   `json:"description"`
 	Domain                      string                                   `json:"domain"`
 	Domainid                    string                                   `json:"domainid"`
+	Domainpath                  string                                   `json:"domainpath"`
 	Gslbdomainname              string                                   `json:"gslbdomainname"`
 	Gslblbmethod                string                                   `json:"gslblbmethod"`
 	Gslbservicetype             string                                   `json:"gslbservicetype"`
@@ -3585,6 +3590,7 @@ type GlobalLoadBalancerRuleLoadbalancerrule struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	Name        string `json:"name"`
@@ -4842,6 +4848,7 @@ type LoadBalancerRule struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	JobID       string `json:"jobid"`
@@ -5383,6 +5390,7 @@ type LoadBalancer struct {
 	Description              string                             `json:"description"`
 	Domain                   string                             `json:"domain"`
 	Domainid                 string                             `json:"domainid"`
+	Domainpath               string                             `json:"domainpath"`
 	Fordisplay               bool                               `json:"fordisplay"`
 	Id                       string                             `json:"id"`
 	JobID                    string                             `json:"jobid"`
@@ -6227,6 +6235,7 @@ type UpdateGlobalLoadBalancerRuleResponse struct {
 	Description                 string                                                 `json:"description"`
 	Domain                      string                                                 `json:"domain"`
 	Domainid                    string                                                 `json:"domainid"`
+	Domainpath                  string                                                 `json:"domainpath"`
 	Gslbdomainname              string                                                 `json:"gslbdomainname"`
 	Gslblbmethod                string                                                 `json:"gslblbmethod"`
 	Gslbservicetype             string                                                 `json:"gslbservicetype"`
@@ -6248,6 +6257,7 @@ type UpdateGlobalLoadBalancerRuleResponseLoadbalancerrule struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	Name        string `json:"name"`
@@ -6705,6 +6715,7 @@ type UpdateLoadBalancerResponse struct {
 	Description              string                                           `json:"description"`
 	Domain                   string                                           `json:"domain"`
 	Domainid                 string                                           `json:"domainid"`
+	Domainpath               string                                           `json:"domainpath"`
 	Fordisplay               bool                                             `json:"fordisplay"`
 	Id                       string                                           `json:"id"`
 	JobID                    string                                           `json:"jobid"`
@@ -6965,6 +6976,7 @@ type UpdateLoadBalancerRuleResponse struct {
 	Description string `json:"description"`
 	Domain      string `json:"domain"`
 	Domainid    string `json:"domainid"`
+	Domainpath  string `json:"domainpath"`
 	Fordisplay  bool   `json:"fordisplay"`
 	Id          string `json:"id"`
 	JobID       string `json:"jobid"`

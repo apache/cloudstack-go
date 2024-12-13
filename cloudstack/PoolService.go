@@ -446,7 +446,9 @@ type CreateStoragePoolResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -455,6 +457,7 @@ type CreateStoragePoolResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
@@ -731,7 +734,9 @@ type FindStoragePoolsForMigrationResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -740,6 +745,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
@@ -793,6 +799,10 @@ func (p *ListStoragePoolsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["status"]; found {
 		u.Set("status", v.(string))
+	}
+	if v, found := p.p["storagecustomstats"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("storagecustomstats", vv)
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -1052,6 +1062,27 @@ func (p *ListStoragePoolsParams) GetStatus() (string, bool) {
 	return value, ok
 }
 
+func (p *ListStoragePoolsParams) SetStoragecustomstats(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagecustomstats"] = v
+}
+
+func (p *ListStoragePoolsParams) ResetStoragecustomstats() {
+	if p.p != nil && p.p["storagecustomstats"] != nil {
+		delete(p.p, "storagecustomstats")
+	}
+}
+
+func (p *ListStoragePoolsParams) GetStoragecustomstats() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storagecustomstats"].(bool)
+	return value, ok
+}
+
 func (p *ListStoragePoolsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1200,7 +1231,9 @@ type StoragePool struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -1209,6 +1242,7 @@ type StoragePool struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
@@ -1312,7 +1346,9 @@ type SyncStoragePoolResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -1321,6 +1357,7 @@ type SyncStoragePoolResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
@@ -1604,7 +1641,9 @@ type UpdateStoragePoolResponse struct {
 	Istagarule           bool              `json:"istagarule"`
 	JobID                string            `json:"jobid"`
 	Jobstatus            int               `json:"jobstatus"`
+	Managed              bool              `json:"managed"`
 	Name                 string            `json:"name"`
+	Nfsmountopts         string            `json:"nfsmountopts"`
 	Overprovisionfactor  string            `json:"overprovisionfactor"`
 	Path                 string            `json:"path"`
 	Podid                string            `json:"podid"`
@@ -1613,6 +1652,7 @@ type UpdateStoragePoolResponse struct {
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
+	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`

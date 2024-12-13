@@ -83,6 +83,7 @@ type Capability struct {
 	Allowusercreateprojects                      bool   `json:"allowusercreateprojects"`
 	Allowuserexpungerecovervm                    bool   `json:"allowuserexpungerecovervm"`
 	Allowuserexpungerecovervolume                bool   `json:"allowuserexpungerecovervolume"`
+	Allowuserforcestopvm                         bool   `json:"allowuserforcestopvm"`
 	Allowuserviewalldomainaccounts               bool   `json:"allowuserviewalldomainaccounts"`
 	Allowuserviewdestroyedvm                     bool   `json:"allowuserviewdestroyedvm"`
 	Apilimitinterval                             int    `json:"apilimitinterval"`
@@ -105,6 +106,8 @@ type Capability struct {
 	Projectinviterequired                        bool   `json:"projectinviterequired"`
 	Regionsecondaryenabled                       bool   `json:"regionsecondaryenabled"`
 	Securitygroupsenabled                        bool   `json:"securitygroupsenabled"`
+	Sharedfsvmmincpucount                        int    `json:"sharedfsvmmincpucount"`
+	Sharedfsvmminramsize                         int    `json:"sharedfsvmminramsize"`
 	SupportELB                                   string `json:"supportELB"`
 	Userpublictemplateenabled                    bool   `json:"userpublictemplateenabled"`
 }

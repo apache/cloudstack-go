@@ -346,7 +346,9 @@ type AssociateIpAddressResponse struct {
 	Associatednetworkname     string `json:"associatednetworkname"`
 	Domain                    string `json:"domain"`
 	Domainid                  string `json:"domainid"`
+	Domainpath                string `json:"domainpath"`
 	Fordisplay                bool   `json:"fordisplay"`
+	Forsystemvms              bool   `json:"forsystemvms"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
 	Hasrules                  bool   `json:"hasrules"`
@@ -514,6 +516,10 @@ func (p *ListPublicIpAddressesParams) toURLValues() url.Values {
 	if v, found := p.p["forloadbalancing"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forloadbalancing", vv)
+	}
+	if v, found := p.p["forsystemvms"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forsystemvms", vv)
 	}
 	if v, found := p.p["forvirtualnetwork"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -710,6 +716,27 @@ func (p *ListPublicIpAddressesParams) GetForloadbalancing() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["forloadbalancing"].(bool)
+	return value, ok
+}
+
+func (p *ListPublicIpAddressesParams) SetForsystemvms(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forsystemvms"] = v
+}
+
+func (p *ListPublicIpAddressesParams) ResetForsystemvms() {
+	if p.p != nil && p.p["forsystemvms"] != nil {
+		delete(p.p, "forsystemvms")
+	}
+}
+
+func (p *ListPublicIpAddressesParams) GetForsystemvms() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forsystemvms"].(bool)
 	return value, ok
 }
 
@@ -1180,7 +1207,9 @@ type PublicIpAddress struct {
 	Associatednetworkname     string `json:"associatednetworkname"`
 	Domain                    string `json:"domain"`
 	Domainid                  string `json:"domainid"`
+	Domainpath                string `json:"domainpath"`
 	Fordisplay                bool   `json:"fordisplay"`
+	Forsystemvms              bool   `json:"forsystemvms"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
 	Hasrules                  bool   `json:"hasrules"`
@@ -1349,7 +1378,9 @@ type UpdateIpAddressResponse struct {
 	Associatednetworkname     string `json:"associatednetworkname"`
 	Domain                    string `json:"domain"`
 	Domainid                  string `json:"domainid"`
+	Domainpath                string `json:"domainpath"`
 	Fordisplay                bool   `json:"fordisplay"`
+	Forsystemvms              bool   `json:"forsystemvms"`
 	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
 	Hasannotations            bool   `json:"hasannotations"`
 	Hasrules                  bool   `json:"hasrules"`

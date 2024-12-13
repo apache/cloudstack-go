@@ -144,6 +144,7 @@ type ChangeServiceForRouterResponse struct {
 	Dns2                string                                             `json:"dns2"`
 	Domain              string                                             `json:"domain"`
 	Domainid            string                                             `json:"domainid"`
+	Domainpath          string                                             `json:"domainpath"`
 	Gateway             string                                             `json:"gateway"`
 	Guestipaddress      string                                             `json:"guestipaddress"`
 	Guestmacaddress     string                                             `json:"guestmacaddress"`
@@ -310,16 +311,17 @@ func (s *RouterService) ConfigureVirtualRouterElement(p *ConfigureVirtualRouterE
 }
 
 type VirtualRouterElementResponse struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Enabled   bool   `json:"enabled"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Nspid     string `json:"nspid"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Enabled    bool   `json:"enabled"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Nspid      string `json:"nspid"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
 }
 
 type CreateVirtualRouterElementParams struct {
@@ -427,16 +429,17 @@ func (s *RouterService) CreateVirtualRouterElement(p *CreateVirtualRouterElement
 }
 
 type CreateVirtualRouterElementResponse struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Enabled   bool   `json:"enabled"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Nspid     string `json:"nspid"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Enabled    bool   `json:"enabled"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Nspid      string `json:"nspid"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
 }
 
 type DestroyRouterParams struct {
@@ -526,6 +529,7 @@ type DestroyRouterResponse struct {
 	Dns2                string                                    `json:"dns2"`
 	Domain              string                                    `json:"domain"`
 	Domainid            string                                    `json:"domainid"`
+	Domainpath          string                                    `json:"domainpath"`
 	Gateway             string                                    `json:"gateway"`
 	Guestipaddress      string                                    `json:"guestipaddress"`
 	Guestmacaddress     string                                    `json:"guestmacaddress"`
@@ -1226,6 +1230,7 @@ type Router struct {
 	Dns2                string                     `json:"dns2"`
 	Domain              string                     `json:"domain"`
 	Domainid            string                     `json:"domainid"`
+	Domainpath          string                     `json:"domainpath"`
 	Gateway             string                     `json:"gateway"`
 	Guestipaddress      string                     `json:"guestipaddress"`
 	Guestmacaddress     string                     `json:"guestmacaddress"`
@@ -1506,16 +1511,17 @@ type ListVirtualRouterElementsResponse struct {
 }
 
 type VirtualRouterElement struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Enabled   bool   `json:"enabled"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Nspid     string `json:"nspid"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Enabled    bool   `json:"enabled"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Nspid      string `json:"nspid"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
 }
 
 type RebootRouterParams struct {
@@ -1630,6 +1636,7 @@ type RebootRouterResponse struct {
 	Dns2                string                                   `json:"dns2"`
 	Domain              string                                   `json:"domain"`
 	Domainid            string                                   `json:"domainid"`
+	Domainpath          string                                   `json:"domainpath"`
 	Gateway             string                                   `json:"gateway"`
 	Guestipaddress      string                                   `json:"guestipaddress"`
 	Guestmacaddress     string                                   `json:"guestmacaddress"`
@@ -1776,6 +1783,7 @@ type StartRouterResponse struct {
 	Dns2                string                                  `json:"dns2"`
 	Domain              string                                  `json:"domain"`
 	Domainid            string                                  `json:"domainid"`
+	Domainpath          string                                  `json:"domainpath"`
 	Gateway             string                                  `json:"gateway"`
 	Guestipaddress      string                                  `json:"guestipaddress"`
 	Guestmacaddress     string                                  `json:"guestmacaddress"`
@@ -1947,6 +1955,7 @@ type StopRouterResponse struct {
 	Dns2                string                                 `json:"dns2"`
 	Domain              string                                 `json:"domain"`
 	Domainid            string                                 `json:"domainid"`
+	Domainpath          string                                 `json:"domainpath"`
 	Gateway             string                                 `json:"gateway"`
 	Guestipaddress      string                                 `json:"guestipaddress"`
 	Guestmacaddress     string                                 `json:"guestmacaddress"`

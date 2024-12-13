@@ -1196,6 +1196,7 @@ type LdapCreateAccountResponse struct {
 	Snapshotlimit             string                          `json:"snapshotlimit"`
 	Snapshottotal             int64                           `json:"snapshottotal"`
 	State                     string                          `json:"state"`
+	Taggedresources           []string                        `json:"taggedresources"`
 	Templateavailable         string                          `json:"templateavailable"`
 	Templatelimit             string                          `json:"templatelimit"`
 	Templatetotal             int64                           `json:"templatetotal"`

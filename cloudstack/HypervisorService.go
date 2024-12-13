@@ -325,6 +325,12 @@ func (p *UpdateHypervisorCapabilitiesParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["hypervisor"]; found {
+		u.Set("hypervisor", v.(string))
+	}
+	if v, found := p.p["hypervisorversion"]; found {
+		u.Set("hypervisorversion", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -353,6 +359,48 @@ func (p *UpdateHypervisorCapabilitiesParams) toURLValues() url.Values {
 		u.Set("vmsnapshotenabled", vv)
 	}
 	return u
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) SetHypervisor(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisor"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
+	return value, ok
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) SetHypervisorversion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisorversion"] = v
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) ResetHypervisorversion() {
+	if p.p != nil && p.p["hypervisorversion"] != nil {
+		delete(p.p, "hypervisorversion")
+	}
+}
+
+func (p *UpdateHypervisorCapabilitiesParams) GetHypervisorversion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisorversion"].(string)
+	return value, ok
 }
 
 func (p *UpdateHypervisorCapabilitiesParams) SetId(v string) {

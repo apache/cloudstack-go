@@ -1044,6 +1044,7 @@ type InternalLoadBalancerVM struct {
 	Dns2                string                                     `json:"dns2"`
 	Domain              string                                     `json:"domain"`
 	Domainid            string                                     `json:"domainid"`
+	Domainpath          string                                     `json:"domainpath"`
 	Gateway             string                                     `json:"gateway"`
 	Guestipaddress      string                                     `json:"guestipaddress"`
 	Guestmacaddress     string                                     `json:"guestmacaddress"`
@@ -1190,6 +1191,7 @@ type StartInternalLoadBalancerVMResponse struct {
 	Dns2                string                                                  `json:"dns2"`
 	Domain              string                                                  `json:"domain"`
 	Domainid            string                                                  `json:"domainid"`
+	Domainpath          string                                                  `json:"domainpath"`
 	Gateway             string                                                  `json:"gateway"`
 	Guestipaddress      string                                                  `json:"guestipaddress"`
 	Guestmacaddress     string                                                  `json:"guestmacaddress"`
@@ -1361,6 +1363,7 @@ type StopInternalLoadBalancerVMResponse struct {
 	Dns2                string                                                 `json:"dns2"`
 	Domain              string                                                 `json:"domain"`
 	Domainid            string                                                 `json:"domainid"`
+	Domainpath          string                                                 `json:"domainpath"`
 	Gateway             string                                                 `json:"gateway"`
 	Guestipaddress      string                                                 `json:"guestipaddress"`
 	Guestmacaddress     string                                                 `json:"guestmacaddress"`

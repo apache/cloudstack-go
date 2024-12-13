@@ -178,6 +178,7 @@ type CreateInstanceGroupResponse struct {
 	Created        string `json:"created"`
 	Domain         string `json:"domain"`
 	Domainid       string `json:"domainid"`
+	Domainpath     string `json:"domainpath"`
 	Hasannotations bool   `json:"hasannotations"`
 	Id             string `json:"id"`
 	JobID          string `json:"jobid"`
@@ -653,6 +654,7 @@ type InstanceGroup struct {
 	Created        string `json:"created"`
 	Domain         string `json:"domain"`
 	Domainid       string `json:"domainid"`
+	Domainpath     string `json:"domainpath"`
 	Hasannotations bool   `json:"hasannotations"`
 	Id             string `json:"id"`
 	JobID          string `json:"jobid"`
@@ -751,6 +753,7 @@ type UpdateInstanceGroupResponse struct {
 	Created        string `json:"created"`
 	Domain         string `json:"domain"`
 	Domainid       string `json:"domainid"`
+	Domainpath     string `json:"domainpath"`
 	Hasannotations bool   `json:"hasannotations"`
 	Id             string `json:"id"`
 	JobID          string `json:"jobid"`

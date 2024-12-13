@@ -222,6 +222,7 @@ type CreateDomainResponse struct {
 	Snapshotlimit             string            `json:"snapshotlimit"`
 	Snapshottotal             int64             `json:"snapshottotal"`
 	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
 	Templateavailable         string            `json:"templateavailable"`
 	Templatelimit             string            `json:"templatelimit"`
 	Templatetotal             int64             `json:"templatetotal"`
@@ -703,6 +704,7 @@ type DomainChildren struct {
 	Snapshotlimit             string            `json:"snapshotlimit"`
 	Snapshottotal             int64             `json:"snapshottotal"`
 	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
 	Templateavailable         string            `json:"templateavailable"`
 	Templatelimit             string            `json:"templatelimit"`
 	Templatetotal             int64             `json:"templatetotal"`
@@ -758,6 +760,9 @@ func (p *ListDomainsParams) toURLValues() url.Values {
 	if v, found := p.p["showicon"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showicon", vv)
+	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
 	}
 	return u
 }
@@ -951,6 +956,27 @@ func (p *ListDomainsParams) GetShowicon() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListDomainsParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *ListDomainsParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *ListDomainsParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new ListDomainsParams instance,
 // as then you are sure you have configured all required params
 func (s *DomainService) NewListDomainsParams() *ListDomainsParams {
@@ -1102,6 +1128,7 @@ type Domain struct {
 	Snapshotlimit             string            `json:"snapshotlimit"`
 	Snapshottotal             int64             `json:"snapshottotal"`
 	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
 	Templateavailable         string            `json:"templateavailable"`
 	Templatelimit             string            `json:"templatelimit"`
 	Templatetotal             int64             `json:"templatetotal"`
@@ -1268,6 +1295,7 @@ type UpdateDomainResponse struct {
 	Snapshotlimit             string            `json:"snapshotlimit"`
 	Snapshottotal             int64             `json:"snapshottotal"`
 	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
 	Templateavailable         string            `json:"templateavailable"`
 	Templatelimit             string            `json:"templatelimit"`
 	Templatetotal             int64             `json:"templatetotal"`

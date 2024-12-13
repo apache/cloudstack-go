@@ -255,16 +255,17 @@ func (s *VPNService) AddVpnUser(p *AddVpnUserParams) (*AddVpnUserResponse, error
 }
 
 type AddVpnUserResponse struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
-	State     string `json:"state"`
-	Username  string `json:"username"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
+	State      string `json:"state"`
+	Username   string `json:"username"`
 }
 
 type CreateRemoteAccessVpnParams struct {
@@ -473,6 +474,7 @@ type CreateRemoteAccessVpnResponse struct {
 	Account      string `json:"account"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	Fordisplay   bool   `json:"fordisplay"`
 	Id           string `json:"id"`
 	Iprange      string `json:"iprange"`
@@ -647,6 +649,7 @@ type CreateVpnConnectionResponse struct {
 	Created              string `json:"created"`
 	Domain               string `json:"domain"`
 	Domainid             string `json:"domainid"`
+	Domainpath           string `json:"domainpath"`
 	Dpd                  bool   `json:"dpd"`
 	Esplifetime          int64  `json:"esplifetime"`
 	Esppolicy            string `json:"esppolicy"`
@@ -1101,6 +1104,7 @@ type CreateVpnCustomerGatewayResponse struct {
 	Cidrlist         string `json:"cidrlist"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	Dpd              bool   `json:"dpd"`
 	Esplifetime      int64  `json:"esplifetime"`
 	Esppolicy        string `json:"esppolicy"`
@@ -1231,6 +1235,7 @@ type CreateVpnGatewayResponse struct {
 	Account    string `json:"account"`
 	Domain     string `json:"domain"`
 	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
 	Fordisplay bool   `json:"fordisplay"`
 	Id         string `json:"id"`
 	JobID      string `json:"jobid"`
@@ -1941,6 +1946,7 @@ type RemoteAccessVpn struct {
 	Account      string `json:"account"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	Fordisplay   bool   `json:"fordisplay"`
 	Id           string `json:"id"`
 	Iprange      string `json:"iprange"`
@@ -2302,6 +2308,7 @@ type VpnConnection struct {
 	Created              string `json:"created"`
 	Domain               string `json:"domain"`
 	Domainid             string `json:"domainid"`
+	Domainpath           string `json:"domainpath"`
 	Dpd                  bool   `json:"dpd"`
 	Esplifetime          int64  `json:"esplifetime"`
 	Esppolicy            string `json:"esppolicy"`
@@ -2674,6 +2681,7 @@ type VpnCustomerGateway struct {
 	Cidrlist         string `json:"cidrlist"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	Dpd              bool   `json:"dpd"`
 	Esplifetime      int64  `json:"esplifetime"`
 	Esppolicy        string `json:"esppolicy"`
@@ -3041,6 +3049,7 @@ type VpnGateway struct {
 	Account    string `json:"account"`
 	Domain     string `json:"domain"`
 	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
 	Fordisplay bool   `json:"fordisplay"`
 	Id         string `json:"id"`
 	JobID      string `json:"jobid"`
@@ -3371,16 +3380,17 @@ type ListVpnUsersResponse struct {
 }
 
 type VpnUser struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
-	State     string `json:"state"`
-	Username  string `json:"username"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
+	State      string `json:"state"`
+	Username   string `json:"username"`
 }
 
 type RemoveVpnUserParams struct {
@@ -3671,6 +3681,7 @@ type ResetVpnConnectionResponse struct {
 	Created              string `json:"created"`
 	Domain               string `json:"domain"`
 	Domainid             string `json:"domainid"`
+	Domainpath           string `json:"domainpath"`
 	Dpd                  bool   `json:"dpd"`
 	Esplifetime          int64  `json:"esplifetime"`
 	Esppolicy            string `json:"esppolicy"`
@@ -3828,6 +3839,7 @@ type UpdateRemoteAccessVpnResponse struct {
 	Account      string `json:"account"`
 	Domain       string `json:"domain"`
 	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
 	Fordisplay   bool   `json:"fordisplay"`
 	Id           string `json:"id"`
 	Iprange      string `json:"iprange"`
@@ -3976,6 +3988,7 @@ type UpdateVpnConnectionResponse struct {
 	Created              string `json:"created"`
 	Domain               string `json:"domain"`
 	Domainid             string `json:"domainid"`
+	Domainpath           string `json:"domainpath"`
 	Dpd                  bool   `json:"dpd"`
 	Esplifetime          int64  `json:"esplifetime"`
 	Esppolicy            string `json:"esppolicy"`
@@ -4431,6 +4444,7 @@ type UpdateVpnCustomerGatewayResponse struct {
 	Cidrlist         string `json:"cidrlist"`
 	Domain           string `json:"domain"`
 	Domainid         string `json:"domainid"`
+	Domainpath       string `json:"domainpath"`
 	Dpd              bool   `json:"dpd"`
 	Esplifetime      int64  `json:"esplifetime"`
 	Esppolicy        string `json:"esppolicy"`
@@ -4585,6 +4599,7 @@ type UpdateVpnGatewayResponse struct {
 	Account    string `json:"account"`
 	Domain     string `json:"domain"`
 	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
 	Fordisplay bool   `json:"fordisplay"`
 	Id         string `json:"id"`
 	JobID      string `json:"jobid"`

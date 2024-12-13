@@ -188,6 +188,7 @@ type ActivateProjectResponse struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`
@@ -797,6 +798,7 @@ type CreateProjectResponse struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`
@@ -1584,17 +1586,18 @@ type ListProjectInvitationsResponse struct {
 }
 
 type ProjectInvitation struct {
-	Account   string `json:"account"`
-	Domain    string `json:"domain"`
-	Domainid  string `json:"domainid"`
-	Email     string `json:"email"`
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Project   string `json:"project"`
-	Projectid string `json:"projectid"`
-	State     string `json:"state"`
-	Userid    string `json:"userid"`
+	Account    string `json:"account"`
+	Domain     string `json:"domain"`
+	Domainid   string `json:"domainid"`
+	Domainpath string `json:"domainpath"`
+	Email      string `json:"email"`
+	Id         string `json:"id"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Project    string `json:"project"`
+	Projectid  string `json:"projectid"`
+	State      string `json:"state"`
+	Userid     string `json:"userid"`
 }
 
 type ListProjectsParams struct {
@@ -2124,6 +2127,7 @@ type Project struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`
@@ -2255,6 +2259,7 @@ type SuspendProjectResponse struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`
@@ -2531,6 +2536,7 @@ type UpdateProjectResponse struct {
 	Snapshotlimit             string              `json:"snapshotlimit"`
 	Snapshottotal             int64               `json:"snapshottotal"`
 	State                     string              `json:"state"`
+	Taggedresources           []string            `json:"taggedresources"`
 	Tags                      []Tags              `json:"tags"`
 	Templateavailable         string              `json:"templateavailable"`
 	Templatelimit             string              `json:"templatelimit"`

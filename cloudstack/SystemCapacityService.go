@@ -63,6 +63,9 @@ func (p *ListCapacityParams) toURLValues() url.Values {
 	if v, found := p.p["sortby"]; found {
 		u.Set("sortby", v.(string))
 	}
+	if v, found := p.p["tag"]; found {
+		u.Set("tag", v.(string))
+	}
 	if v, found := p.p["type"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("type", vv)
@@ -220,6 +223,27 @@ func (p *ListCapacityParams) GetSortby() (string, bool) {
 	return value, ok
 }
 
+func (p *ListCapacityParams) SetTag(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tag"] = v
+}
+
+func (p *ListCapacityParams) ResetTag() {
+	if p.p != nil && p.p["tag"] != nil {
+		delete(p.p, "tag")
+	}
+}
+
+func (p *ListCapacityParams) GetTag() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tag"].(string)
+	return value, ok
+}
+
 func (p *ListCapacityParams) SetType(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -302,6 +326,7 @@ type Capacity struct {
 	Percentused       string `json:"percentused"`
 	Podid             string `json:"podid"`
 	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`

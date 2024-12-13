@@ -988,6 +988,7 @@ type CreateSecurityGroupResponse struct {
 	Description         string                            `json:"description"`
 	Domain              string                            `json:"domain"`
 	Domainid            string                            `json:"domainid"`
+	Domainpath          string                            `json:"domainpath"`
 	Egressrule          []CreateSecurityGroupResponseRule `json:"egressrule"`
 	Id                  string                            `json:"id"`
 	Ingressrule         []CreateSecurityGroupResponseRule `json:"ingressrule"`
@@ -1627,6 +1628,7 @@ type SecurityGroup struct {
 	Description         string              `json:"description"`
 	Domain              string              `json:"domain"`
 	Domainid            string              `json:"domainid"`
+	Domainpath          string              `json:"domainpath"`
 	Egressrule          []SecurityGroupRule `json:"egressrule"`
 	Id                  string              `json:"id"`
 	Ingressrule         []SecurityGroupRule `json:"ingressrule"`

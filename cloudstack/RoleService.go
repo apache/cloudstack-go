@@ -222,6 +222,7 @@ type CreateRoleResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
+	State       string `json:"state"`
 	Type        string `json:"type"`
 }
 
@@ -756,6 +757,7 @@ type ImportRoleResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
+	State       string `json:"state"`
 	Type        string `json:"type"`
 }
 
@@ -859,6 +861,9 @@ func (p *ListRolesParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["state"]; found {
+		u.Set("state", v.(string))
 	}
 	if v, found := p.p["type"]; found {
 		u.Set("type", v.(string))
@@ -968,6 +973,27 @@ func (p *ListRolesParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListRolesParams) SetState(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["state"] = v
+}
+
+func (p *ListRolesParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
+func (p *ListRolesParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
 	return value, ok
 }
 
@@ -1111,6 +1137,7 @@ type Role struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
+	State       string `json:"state"`
 	Type        string `json:"type"`
 }
 
@@ -1282,6 +1309,7 @@ type UpdateRoleResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Name        string `json:"name"`
+	State       string `json:"state"`
 	Type        string `json:"type"`
 }
 

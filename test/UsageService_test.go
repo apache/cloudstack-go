@@ -93,7 +93,7 @@ func TestUsageService(t *testing.T) {
 		if _, ok := response["generateUsageRecords"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Usage.NewGenerateUsageRecordsParams("enddate", "startdate")
+		p := client.Usage.NewGenerateUsageRecordsParams()
 		_, err := client.Usage.GenerateUsageRecords(p)
 		if err != nil {
 			t.Errorf(err.Error())
