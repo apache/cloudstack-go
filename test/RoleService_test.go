@@ -155,4 +155,16 @@ func TestRoleService(t *testing.T) {
 	}
 	t.Run("UpdateRolePermission", testupdateRolePermission)
 
+	testlistProjectRoles := func(t *testing.T) {
+		if _, ok := response["listProjectRoles"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Role.NewListProjectRolesParams("projectid")
+		_, err := client.Role.ListProjectRoles(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListProjectRoles", testlistProjectRoles)
+
 }

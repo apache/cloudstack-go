@@ -117,6 +117,14 @@ var layout = apiInfo{
 		"updateDefaultNicForVirtualMachine",
 		"updateVirtualMachine",
 		"listVirtualMachinesUsageHistory",
+		"importVm",
+		"unmanageVirtualMachine",
+		"listUnmanagedInstances",
+		"importUnmanagedInstance",
+		"createVMSchedule",
+		"updateVMSchedule",
+		"listVMSchedule",
+		"deleteVMSchedule",
 	},
 	"VPNService": {
 		"addVpnUser",
@@ -207,6 +215,15 @@ var layout = apiInfo{
 		"releaseHostReservation",
 		"updateHost",
 		"updateHostPassword",
+		"migrateSecondaryStorageData",
+		"cancelHostAsDegraded",
+		"listHostHAProviders",
+		"listSecondaryStorageSelectors",
+		"createSecondaryStorageSelector",
+		"removeSecondaryStorageSelector",
+		"listHostHAResources",
+		"declareHostAsDegraded",
+		"updateSecondaryStorageSelector",
 	},
 	"VolumeService": {
 		"attachVolume",
@@ -227,6 +244,8 @@ var layout = apiInfo{
 		"updateVolume",
 		"uploadVolume",
 		"changeOfferingForVolume",
+		"listVolumesUsageHistory",
+		"assignVolume",
 	},
 	"VPCService": {
 		"createPrivateGateway",
@@ -260,6 +279,7 @@ var layout = apiInfo{
 		"upgradeRouterTemplate",
 		"listTemplateDirectDownloadCertificates",
 		"provisionTemplateDirectDownloadCertificate",
+		"linkUserDataToTemplate",
 	},
 	"AccountService": {
 		"createAccount",
@@ -286,6 +306,11 @@ var layout = apiInfo{
 		"listZonesMetrics",
 		"releaseDedicatedZone",
 		"updateZone",
+		"listVmwareDcVms",
+		"addVmwareDc",
+		"listVmwareDcs",
+		"updateVmwareDc",
+		"removeVmwareDc",
 	},
 	"UsageService": {
 		"addTrafficMonitor",
@@ -328,6 +353,11 @@ var layout = apiInfo{
 		"lockUser",
 		"registerUserKeys",
 		"updateUser",
+		"listUserData",
+		"deleteUserData",
+		"registerUserData",
+		"moveUser",
+		"setupUserTwoFactorAuthentication",
 	},
 	"LDAPService": {
 		"addLdapConfiguration",
@@ -382,6 +412,9 @@ var layout = apiInfo{
 		"createProjectRolePermission",
 		"updateProjectRolePermission",
 		"deleteProjectRolePermission",
+		"createProjectRole",
+		"updateProjectRole",
+		"deleteProjectRole",
 	},
 	"PoolService": {
 		"createStoragePool",
@@ -412,6 +445,7 @@ var layout = apiInfo{
 		"removeGuestOsMapping",
 		"updateGuestOs",
 		"updateGuestOsMapping",
+		"getHypervisorGuestOsNames",
 	},
 	"ClusterService": {
 		"addCluster",
@@ -459,6 +493,7 @@ var layout = apiInfo{
 		"listRoles",
 		"updateRole",
 		"updateRolePermission",
+		"listProjectRoles",
 	},
 	"ImageStoreService": {
 		"addImageStore",
@@ -469,6 +504,9 @@ var layout = apiInfo{
 		"listImageStores",
 		"listSecondaryStagingStores",
 		"updateCloudToUseObjectStore",
+		"listImageStoreObjects",
+		"updateImageStore",
+		"downloadImageStoreObject",
 	},
 	"AuthenticationService": {
 		"login",
@@ -503,6 +541,7 @@ var layout = apiInfo{
 		"listPods",
 		"releaseDedicatedPod",
 		"updatePod",
+		"updatePodManagementNetworkIpRange",
 	},
 	"VLANService": {
 		"createVlanIpRange",
@@ -625,6 +664,7 @@ var layout = apiInfo{
 		"listDeploymentPlanners",
 		"updateConfiguration",
 		"resetConfiguration",
+		"updateStorageCapabilities",
 	},
 	"BrocadeVCSService": {
 		"addBrocadeVcsDevice",
@@ -649,6 +689,12 @@ var layout = apiInfo{
 		"cancelStorageMaintenance",
 		"enableStorageMaintenance",
 		"listStorageProviders",
+		"listObjectStoragePools",
+		"listStoragePoolObjects",
+		"updateObjectStoragePool",
+		"addObjectStoragePool",
+		"deleteObjectStoragePool",
+		"listStoragePoolsMetrics",
 	},
 	"PortableIPService": {
 		"createPortableIpRange",
@@ -704,6 +750,8 @@ var layout = apiInfo{
 	},
 	"CertificateService": {
 		"uploadCustomCertificate",
+		"listCAProviders",
+		"provisionCertificate",
 	},
 	"APIDiscoveryService": {
 		"listApis",
@@ -736,5 +784,31 @@ var layout = apiInfo{
 	},
 	"ConsoleEndpointService": {
 		"createConsoleEndpoint",
+	},
+	"ObjectStoreService": {
+		"createBucket",
+		"deleteBucket",
+		"updateBucket",
+		"listBuckets",
+	},
+	"OauthService": {
+		"listOauthProvider",
+		"updateOauthProvider",
+		"deleteOauthProvider",
+	},
+	"RegistrationService": {
+		"registerOauthProvider",
+	},
+	"ShutdownService": {
+		"readyForShutdown",
+	},
+	"DiagnosticsService": {
+		"getDiagnosticsData",
+	},
+	"MetricsService": {
+		"listInfrastructure",
+	},
+	"ManagementService": {
+		"listManagementServers",
 	},
 }

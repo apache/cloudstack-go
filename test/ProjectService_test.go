@@ -254,4 +254,46 @@ func TestProjectService(t *testing.T) {
 	}
 	t.Run("DeleteProjectRolePermission", testdeleteProjectRolePermission)
 
+	testcreateProjectRole := func(t *testing.T) {
+		if _, ok := response["createProjectRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewCreateProjectRoleParams("name", "projectid")
+		r, err := client.Project.CreateProjectRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateProjectRole", testcreateProjectRole)
+
+	testupdateProjectRole := func(t *testing.T) {
+		if _, ok := response["updateProjectRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewUpdateProjectRoleParams("id", "projectid")
+		r, err := client.Project.UpdateProjectRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateProjectRole", testupdateProjectRole)
+
+	testdeleteProjectRole := func(t *testing.T) {
+		if _, ok := response["deleteProjectRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Project.NewDeleteProjectRoleParams("id", "projectid")
+		_, err := client.Project.DeleteProjectRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteProjectRole", testdeleteProjectRole)
+
 }

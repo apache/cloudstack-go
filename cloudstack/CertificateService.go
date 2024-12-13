@@ -28,6 +28,10 @@ import (
 type CertificateServiceIface interface {
 	UploadCustomCertificate(p *UploadCustomCertificateParams) (*UploadCustomCertificateResponse, error)
 	NewUploadCustomCertificateParams(certificate string, domainsuffix string) *UploadCustomCertificateParams
+	ListCAProviders(p *ListCAProvidersParams) (*ListCAProvidersResponse, error)
+	NewListCAProvidersParams() *ListCAProvidersParams
+	ProvisionCertificate(p *ProvisionCertificateParams) (*ProvisionCertificateResponse, error)
+	NewProvisionCertificateParams(hostid string) *ProvisionCertificateParams
 }
 
 type UploadCustomCertificateParams struct {
@@ -212,4 +216,206 @@ type UploadCustomCertificateResponse struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Message   string `json:"message"`
+}
+
+type ListCAProvidersParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListCAProvidersParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	return u
+}
+
+func (p *ListCAProvidersParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListCAProvidersParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListCAProvidersParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListCAProvidersParams instance,
+// as then you are sure you have configured all required params
+func (s *CertificateService) NewListCAProvidersParams() *ListCAProvidersParams {
+	p := &ListCAProvidersParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists available certificate authority providers in CloudStack
+func (s *CertificateService) ListCAProviders(p *ListCAProvidersParams) (*ListCAProvidersResponse, error) {
+	resp, err := s.cs.newRequest("listCAProviders", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListCAProvidersResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListCAProvidersResponse struct {
+	Count       int           `json:"count"`
+	CAProviders []*CAProvider `json:"caprovider"`
+}
+
+type CAProvider struct {
+	Description string `json:"description"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
+}
+
+type ProvisionCertificateParams struct {
+	p map[string]interface{}
+}
+
+func (p *ProvisionCertificateParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
+	}
+	if v, found := p.p["reconnect"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("reconnect", vv)
+	}
+	return u
+}
+
+func (p *ProvisionCertificateParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ProvisionCertificateParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *ProvisionCertificateParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
+func (p *ProvisionCertificateParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *ProvisionCertificateParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *ProvisionCertificateParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
+	return value, ok
+}
+
+func (p *ProvisionCertificateParams) SetReconnect(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["reconnect"] = v
+}
+
+func (p *ProvisionCertificateParams) ResetReconnect() {
+	if p.p != nil && p.p["reconnect"] != nil {
+		delete(p.p, "reconnect")
+	}
+}
+
+func (p *ProvisionCertificateParams) GetReconnect() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["reconnect"].(bool)
+	return value, ok
+}
+
+// You should always use this function to get a new ProvisionCertificateParams instance,
+// as then you are sure you have configured all required params
+func (s *CertificateService) NewProvisionCertificateParams(hostid string) *ProvisionCertificateParams {
+	p := &ProvisionCertificateParams{}
+	p.p = make(map[string]interface{})
+	p.p["hostid"] = hostid
+	return p
+}
+
+// Issues and propagates client certificate on a connected host/agent using configured CA plugin
+func (s *CertificateService) ProvisionCertificate(p *ProvisionCertificateParams) (*ProvisionCertificateResponse, error) {
+	resp, err := s.cs.newRequest("provisionCertificate", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ProvisionCertificateResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type ProvisionCertificateResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

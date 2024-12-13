@@ -284,4 +284,31 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("ChangeOfferingForVolume", testchangeOfferingForVolume)
 
+	testlistVolumesUsageHistory := func(t *testing.T) {
+		if _, ok := response["listVolumesUsageHistory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewListVolumesUsageHistoryParams()
+		_, err := client.Volume.ListVolumesUsageHistory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVolumesUsageHistory", testlistVolumesUsageHistory)
+
+	testassignVolume := func(t *testing.T) {
+		if _, ok := response["assignVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewAssignVolumeParams("volumeid")
+		r, err := client.Volume.AssignVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("AssignVolume", testassignVolume)
+
 }
