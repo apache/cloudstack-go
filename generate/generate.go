@@ -71,6 +71,7 @@ var requiresPostMethod = map[string]bool{
 	"registerUserData":                 true,
 	"setupUserTwoFactorAuthentication": true,
 	"validateUserTwoFactorAuthenticationCode": true,
+	"quotaTariffCreate":                       true,
 }
 
 var mapRequireList = map[string]map[string]bool{
@@ -1340,6 +1341,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	case "int64":
 		pn("vv := strconv.FormatInt(v.(int64), 10)")
 		pn("u.Set(\"%s\", vv)", name)
+	case "float64":
+		pn("vv := strconv.FormatFloat(v.(float64), 'f', -1, 64)")
+		pn("u.Set(\"%s\", vv)", name)
 	case "bool":
 		pn("vv := strconv.FormatBool(v.(bool))")
 		pn("u.Set(\"%s\", vv)", name)
@@ -1896,12 +1900,54 @@ func isSuccessOnlyResponse(resp APIResponses) bool {
 func (s *service) generateResponseType(a *API) {
 	pn := s.pn
 	tn := capitalize(strings.TrimPrefix(a.Name, "configure") + "Response")
+
+	// add custom response types for some specific API calls
+	if a.Name == "quotaBalance" {
+		pn("type QuotaBalanceResponse struct {")
+		pn("    Statement QuotaBalanceResponseType `json:\"balance\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaBalanceResponseType struct {")
+		pn("    StartQuota float64  `json:\"startquota\"`")
+		pn("    Credits    []string `json:\"credits\"`")
+		pn("    StartDate  string   `json:\"startdate\"`")
+		pn("    Currency   string   `json:\"currency\"`")
+		pn("}")
+		pn("")
+		return
+	}
+	if a.Name == "quotaStatement" {
+		pn("type QuotaStatementResponse struct {")
+		pn("    Statement QuotaStatementResponseType `json:\"statement\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaStatementResponseType struct {")
+		pn("    QuotaUsage []QuotaUsage `json:\"quotausage\"`")
+		pn("    TotalQuota float64      `json:\"totalquota\"`")
+		pn("    StartDate  string       `json:\"startdate\"`")
+		pn("    EndDate    string       `json:\"enddate\"`")
+		pn("    Currency   string       `json:\"currency\"`")
+		pn("}")
+		pn("")
+		pn("type QuotaUsage struct {")
+		pn("    Type      int     `json:\"type\"`")
+		pn("    Accountid int     `json:\"accountid\"`")
+		pn("    Domain    int     `json:\"domain\"`")
+		pn("    Name      string  `json:\"name\"`")
+		pn("    Unit      string  `json:\"unit\"`")
+		pn("    Quota     float64 `json:\"quota\"`")
+		pn("}")
+		pn("")
+		return
+	}
+
 	ln := capitalize(strings.TrimPrefix(a.Name, "list"))
 
 	// If this is a 'list' response, we need an separate list struct. There seem to be other
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
-	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" {
+	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" ||
+		a.Name == "quotaBalance" || a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -1935,6 +1981,14 @@ func (s *service) generateResponseType(a *API) {
 		case "findHostsForMigration":
 			pn(" Count int `json:\"count\"`")
 			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
+		case "quotaBalance":
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "balance")
+		case "quotaSummary":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "quotaTariffList":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "quotatariff")
 		case "listVmwareDcVms":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "unmanagedinstance")
@@ -2240,7 +2294,7 @@ func mapType(aName string, pName string, pType string) string {
 		return "int"
 	case "long":
 		return "int64"
-	case "float", "double":
+	case "float", "double", "bigdecimal":
 		return "float64"
 	case "list":
 		if pName == "downloaddetails" || pName == "owner" {
