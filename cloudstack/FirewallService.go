@@ -88,6 +88,8 @@ type FirewallServiceIface interface {
 	NewCreateFirewallRuleParams(ipaddressid string, protocol string) *CreateFirewallRuleParams
 	CreatePortForwardingRule(p *CreatePortForwardingRuleParams) (*CreatePortForwardingRuleResponse, error)
 	NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams
+	CreateRoutingFirewallRule(p *CreateRoutingFirewallRuleParams) (*CreateRoutingFirewallRuleResponse, error)
+	NewCreateRoutingFirewallRuleParams(networkid string, protocol string) *CreateRoutingFirewallRuleParams
 	DeleteEgressFirewallRule(p *DeleteEgressFirewallRuleParams) (*DeleteEgressFirewallRuleResponse, error)
 	NewDeleteEgressFirewallRuleParams(id string) *DeleteEgressFirewallRuleParams
 	DeleteFirewallRule(p *DeleteFirewallRuleParams) (*DeleteFirewallRuleResponse, error)
@@ -96,6 +98,8 @@ type FirewallServiceIface interface {
 	NewDeletePaloAltoFirewallParams(fwdeviceid string) *DeletePaloAltoFirewallParams
 	DeletePortForwardingRule(p *DeletePortForwardingRuleParams) (*DeletePortForwardingRuleResponse, error)
 	NewDeletePortForwardingRuleParams(id string) *DeletePortForwardingRuleParams
+	DeleteRoutingFirewallRule(p *DeleteRoutingFirewallRuleParams) (*DeleteRoutingFirewallRuleResponse, error)
+	NewDeleteRoutingFirewallRuleParams(id string) *DeleteRoutingFirewallRuleParams
 	ListEgressFirewallRules(p *ListEgressFirewallRulesParams) (*ListEgressFirewallRulesResponse, error)
 	NewListEgressFirewallRulesParams() *ListEgressFirewallRulesParams
 	GetEgressFirewallRuleByID(id string, opts ...OptionFunc) (*EgressFirewallRule, int, error)
@@ -107,6 +111,9 @@ type FirewallServiceIface interface {
 	ListPortForwardingRules(p *ListPortForwardingRulesParams) (*ListPortForwardingRulesResponse, error)
 	NewListPortForwardingRulesParams() *ListPortForwardingRulesParams
 	GetPortForwardingRuleByID(id string, opts ...OptionFunc) (*PortForwardingRule, int, error)
+	ListRoutingFirewallRules(p *ListRoutingFirewallRulesParams) (*ListRoutingFirewallRulesResponse, error)
+	NewListRoutingFirewallRulesParams() *ListRoutingFirewallRulesParams
+	GetRoutingFirewallRuleByID(id string, opts ...OptionFunc) (*RoutingFirewallRule, int, error)
 	UpdateEgressFirewallRule(p *UpdateEgressFirewallRuleParams) (*UpdateEgressFirewallRuleResponse, error)
 	NewUpdateEgressFirewallRuleParams(id string) *UpdateEgressFirewallRuleParams
 	UpdateFirewallRule(p *UpdateFirewallRuleParams) (*UpdateFirewallRuleResponse, error)
@@ -122,6 +129,8 @@ type FirewallServiceIface interface {
 	NewUpdateIpv6FirewallRuleParams(id string) *UpdateIpv6FirewallRuleParams
 	DeleteIpv6FirewallRule(p *DeleteIpv6FirewallRuleParams) (*DeleteIpv6FirewallRuleResponse, error)
 	NewDeleteIpv6FirewallRuleParams(id string) *DeleteIpv6FirewallRuleParams
+	UpdateRoutingFirewallRule(p *UpdateRoutingFirewallRuleParams) (*UpdateRoutingFirewallRuleResponse, error)
+	NewUpdateRoutingFirewallRuleParams(id string) *UpdateRoutingFirewallRuleParams
 }
 
 type AddPaloAltoFirewallParams struct {
@@ -1476,6 +1485,337 @@ type CreatePortForwardingRuleResponse struct {
 	Vmguestip                 string `json:"vmguestip"`
 }
 
+type CreateRoutingFirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateRoutingFirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
+	if v, found := p.p["destcidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("destcidrlist", vv)
+	}
+	if v, found := p.p["endport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("endport", vv)
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["icmpcode"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmpcode", vv)
+	}
+	if v, found := p.p["icmptype"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("icmptype", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	if v, found := p.p["protocol"]; found {
+		u.Set("protocol", v.(string))
+	}
+	if v, found := p.p["startport"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("startport", vv)
+	}
+	if v, found := p.p["traffictype"]; found {
+		u.Set("traffictype", v.(string))
+	}
+	return u
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetDestcidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["destcidrlist"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetDestcidrlist() {
+	if p.p != nil && p.p["destcidrlist"] != nil {
+		delete(p.p, "destcidrlist")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetDestcidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["destcidrlist"].([]string)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetEndport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endport"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetEndport() {
+	if p.p != nil && p.p["endport"] != nil {
+		delete(p.p, "endport")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetEndport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endport"].(int)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetIcmpcode(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmpcode"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetIcmpcode() {
+	if p.p != nil && p.p["icmpcode"] != nil {
+		delete(p.p, "icmpcode")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetIcmpcode() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmpcode"].(int)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetIcmptype(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["icmptype"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetIcmptype() {
+	if p.p != nil && p.p["icmptype"] != nil {
+		delete(p.p, "icmptype")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetIcmptype() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["icmptype"].(int)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetProtocol(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["protocol"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetProtocol() {
+	if p.p != nil && p.p["protocol"] != nil {
+		delete(p.p, "protocol")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetProtocol() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["protocol"].(string)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetStartport(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startport"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetStartport() {
+	if p.p != nil && p.p["startport"] != nil {
+		delete(p.p, "startport")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetStartport() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startport"].(int)
+	return value, ok
+}
+
+func (p *CreateRoutingFirewallRuleParams) SetTraffictype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["traffictype"] = v
+}
+
+func (p *CreateRoutingFirewallRuleParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
+}
+
+func (p *CreateRoutingFirewallRuleParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateRoutingFirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewCreateRoutingFirewallRuleParams(networkid string, protocol string) *CreateRoutingFirewallRuleParams {
+	p := &CreateRoutingFirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["networkid"] = networkid
+	p.p["protocol"] = protocol
+	return p
+}
+
+// Creates a routing firewall rule in the given network in ROUTED mode
+func (s *FirewallService) CreateRoutingFirewallRule(p *CreateRoutingFirewallRuleParams) (*CreateRoutingFirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("createRoutingFirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateRoutingFirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type CreateRoutingFirewallRuleResponse struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
+}
+
 type DeleteEgressFirewallRuleParams struct {
 	p map[string]interface{}
 }
@@ -1818,6 +2158,93 @@ func (s *FirewallService) DeletePortForwardingRule(p *DeletePortForwardingRulePa
 }
 
 type DeletePortForwardingRuleResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+type DeleteRoutingFirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteRoutingFirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteRoutingFirewallRuleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteRoutingFirewallRuleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteRoutingFirewallRuleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteRoutingFirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewDeleteRoutingFirewallRuleParams(id string) *DeleteRoutingFirewallRuleParams {
+	p := &DeleteRoutingFirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Deletes a routing firewall rule
+func (s *FirewallService) DeleteRoutingFirewallRule(p *DeleteRoutingFirewallRuleParams) (*DeleteRoutingFirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("deleteRoutingFirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteRoutingFirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DeleteRoutingFirewallRuleResponse struct {
 	Displaytext string `json:"displaytext"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
@@ -3250,6 +3677,427 @@ type ListPortForwardingRulesResponse struct {
 }
 
 type PortForwardingRule struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
+}
+
+type ListRoutingFirewallRulesParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListRoutingFirewallRulesParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["tags"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tags[%d].key", i), k)
+			u.Set(fmt.Sprintf("tags[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["traffictype"]; found {
+		u.Set("traffictype", v.(string))
+	}
+	return u
+}
+
+func (p *ListRoutingFirewallRulesParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetTags(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tags"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetTags() {
+	if p.p != nil && p.p["tags"] != nil {
+		delete(p.p, "tags")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetTags() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tags"].(map[string]string)
+	return value, ok
+}
+
+func (p *ListRoutingFirewallRulesParams) SetTraffictype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["traffictype"] = v
+}
+
+func (p *ListRoutingFirewallRulesParams) ResetTraffictype() {
+	if p.p != nil && p.p["traffictype"] != nil {
+		delete(p.p, "traffictype")
+	}
+}
+
+func (p *ListRoutingFirewallRulesParams) GetTraffictype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["traffictype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListRoutingFirewallRulesParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewListRoutingFirewallRulesParams() *ListRoutingFirewallRulesParams {
+	p := &ListRoutingFirewallRulesParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *FirewallService) GetRoutingFirewallRuleByID(id string, opts ...OptionFunc) (*RoutingFirewallRule, int, error) {
+	p := &ListRoutingFirewallRulesParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListRoutingFirewallRules(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.RoutingFirewallRules[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for RoutingFirewallRule UUID: %s!", id)
+}
+
+// Lists all Routing firewall rules
+func (s *FirewallService) ListRoutingFirewallRules(p *ListRoutingFirewallRulesParams) (*ListRoutingFirewallRulesResponse, error) {
+	resp, err := s.cs.newRequest("listRoutingFirewallRules", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err = convertFirewallServiceResponse(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListRoutingFirewallRulesResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListRoutingFirewallRulesResponse struct {
+	Count                int                    `json:"count"`
+	RoutingFirewallRules []*RoutingFirewallRule `json:"routingfirewallrule"`
+}
+
+type RoutingFirewallRule struct {
 	Cidrlist                  string `json:"cidrlist"`
 	Fordisplay                bool   `json:"fordisplay"`
 	Id                        string `json:"id"`
@@ -4999,4 +5847,160 @@ type DeleteIpv6FirewallRuleResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+type UpdateRoutingFirewallRuleParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateRoutingFirewallRuleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["customid"]; found {
+		u.Set("customid", v.(string))
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateRoutingFirewallRuleParams) SetCustomid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["customid"] = v
+}
+
+func (p *UpdateRoutingFirewallRuleParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
+func (p *UpdateRoutingFirewallRuleParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
+func (p *UpdateRoutingFirewallRuleParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *UpdateRoutingFirewallRuleParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
+func (p *UpdateRoutingFirewallRuleParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *UpdateRoutingFirewallRuleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateRoutingFirewallRuleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateRoutingFirewallRuleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateRoutingFirewallRuleParams instance,
+// as then you are sure you have configured all required params
+func (s *FirewallService) NewUpdateRoutingFirewallRuleParams(id string) *UpdateRoutingFirewallRuleParams {
+	p := &UpdateRoutingFirewallRuleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Updates Routing firewall rule with specified ID
+func (s *FirewallService) UpdateRoutingFirewallRule(p *UpdateRoutingFirewallRuleParams) (*UpdateRoutingFirewallRuleResponse, error) {
+	resp, err := s.cs.newRequest("updateRoutingFirewallRule", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateRoutingFirewallRuleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err = convertFirewallServiceResponse(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type UpdateRoutingFirewallRuleResponse struct {
+	Cidrlist                  string `json:"cidrlist"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Ipaddressid               string `json:"ipaddressid"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Privateendport            string `json:"privateendport"`
+	Privateport               string `json:"privateport"`
+	Protocol                  string `json:"protocol"`
+	Publicendport             string `json:"publicendport"`
+	Publicport                string `json:"publicport"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Vmguestip                 string `json:"vmguestip"`
 }

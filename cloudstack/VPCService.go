@@ -60,6 +60,8 @@ type VPCServiceIface interface {
 	GetVPCID(name string, opts ...OptionFunc) (string, int, error)
 	GetVPCByName(name string, opts ...OptionFunc) (*VPC, int, error)
 	GetVPCByID(id string, opts ...OptionFunc) (*VPC, int, error)
+	MigrateVPC(p *MigrateVPCParams) (*MigrateVPCResponse, error)
+	NewMigrateVPCParams(vpcid string, vpcofferingid string) *MigrateVPCParams
 	RestartVPC(p *RestartVPCParams) (*RestartVPCResponse, error)
 	NewRestartVPCParams(id string) *RestartVPCParams
 	UpdateVPC(p *UpdateVPCParams) (*UpdateVPCResponse, error)
@@ -3896,6 +3898,229 @@ type VPCServiceInternalProvider struct {
 }
 
 type VPCServiceInternalCapability struct {
+	Canchooseservicecapability bool   `json:"canchooseservicecapability"`
+	Name                       string `json:"name"`
+	Value                      string `json:"value"`
+}
+
+type MigrateVPCParams struct {
+	p map[string]interface{}
+}
+
+func (p *MigrateVPCParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["resume"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("resume", vv)
+	}
+	if v, found := p.p["tiernetworkofferings"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("tiernetworkofferings[%d].key", i), k)
+			u.Set(fmt.Sprintf("tiernetworkofferings[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["vpcid"]; found {
+		u.Set("vpcid", v.(string))
+	}
+	if v, found := p.p["vpcofferingid"]; found {
+		u.Set("vpcofferingid", v.(string))
+	}
+	return u
+}
+
+func (p *MigrateVPCParams) SetResume(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resume"] = v
+}
+
+func (p *MigrateVPCParams) ResetResume() {
+	if p.p != nil && p.p["resume"] != nil {
+		delete(p.p, "resume")
+	}
+}
+
+func (p *MigrateVPCParams) GetResume() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resume"].(bool)
+	return value, ok
+}
+
+func (p *MigrateVPCParams) SetTiernetworkofferings(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tiernetworkofferings"] = v
+}
+
+func (p *MigrateVPCParams) ResetTiernetworkofferings() {
+	if p.p != nil && p.p["tiernetworkofferings"] != nil {
+		delete(p.p, "tiernetworkofferings")
+	}
+}
+
+func (p *MigrateVPCParams) GetTiernetworkofferings() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tiernetworkofferings"].(map[string]string)
+	return value, ok
+}
+
+func (p *MigrateVPCParams) SetVpcid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vpcid"] = v
+}
+
+func (p *MigrateVPCParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
+}
+
+func (p *MigrateVPCParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
+}
+
+func (p *MigrateVPCParams) SetVpcofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vpcofferingid"] = v
+}
+
+func (p *MigrateVPCParams) ResetVpcofferingid() {
+	if p.p != nil && p.p["vpcofferingid"] != nil {
+		delete(p.p, "vpcofferingid")
+	}
+}
+
+func (p *MigrateVPCParams) GetVpcofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcofferingid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new MigrateVPCParams instance,
+// as then you are sure you have configured all required params
+func (s *VPCService) NewMigrateVPCParams(vpcid string, vpcofferingid string) *MigrateVPCParams {
+	p := &MigrateVPCParams{}
+	p.p = make(map[string]interface{})
+	p.p["vpcid"] = vpcid
+	p.p["vpcofferingid"] = vpcofferingid
+	return p
+}
+
+// moves a vpc to another physical network
+func (s *VPCService) MigrateVPC(p *MigrateVPCParams) (*MigrateVPCResponse, error) {
+	resp, err := s.cs.newRequest("migrateVPC", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MigrateVPCResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type MigrateVPCResponse struct {
+	Account              string                      `json:"account"`
+	Asnumber             int64                       `json:"asnumber"`
+	Asnumberid           string                      `json:"asnumberid"`
+	Bgppeers             []interface{}               `json:"bgppeers"`
+	Cidr                 string                      `json:"cidr"`
+	Created              string                      `json:"created"`
+	Displaytext          string                      `json:"displaytext"`
+	Distributedvpcrouter bool                        `json:"distributedvpcrouter"`
+	Dns1                 string                      `json:"dns1"`
+	Dns2                 string                      `json:"dns2"`
+	Domain               string                      `json:"domain"`
+	Domainid             string                      `json:"domainid"`
+	Domainpath           string                      `json:"domainpath"`
+	Fordisplay           bool                        `json:"fordisplay"`
+	Hasannotations       bool                        `json:"hasannotations"`
+	Icon                 interface{}                 `json:"icon"`
+	Id                   string                      `json:"id"`
+	Ip4routes            []interface{}               `json:"ip4routes"`
+	Ip4routing           string                      `json:"ip4routing"`
+	Ip6dns1              string                      `json:"ip6dns1"`
+	Ip6dns2              string                      `json:"ip6dns2"`
+	Ip6routes            []interface{}               `json:"ip6routes"`
+	JobID                string                      `json:"jobid"`
+	Jobstatus            int                         `json:"jobstatus"`
+	Name                 string                      `json:"name"`
+	Network              []*Network                  `json:"network"`
+	Networkdomain        string                      `json:"networkdomain"`
+	Project              string                      `json:"project"`
+	Projectid            string                      `json:"projectid"`
+	Publicmtu            int                         `json:"publicmtu"`
+	Redundantvpcrouter   bool                        `json:"redundantvpcrouter"`
+	Regionlevelvpc       bool                        `json:"regionlevelvpc"`
+	Restartrequired      bool                        `json:"restartrequired"`
+	Service              []MigrateVPCResponseService `json:"service"`
+	State                string                      `json:"state"`
+	Tags                 []Tags                      `json:"tags"`
+	Vpcofferingid        string                      `json:"vpcofferingid"`
+	Vpcofferingname      string                      `json:"vpcofferingname"`
+	Zoneid               string                      `json:"zoneid"`
+	Zonename             string                      `json:"zonename"`
+}
+
+type MigrateVPCResponseService struct {
+	Capability []MigrateVPCResponseServiceCapability `json:"capability"`
+	Name       string                                `json:"name"`
+	Provider   []MigrateVPCResponseServiceProvider   `json:"provider"`
+}
+
+type MigrateVPCResponseServiceProvider struct {
+	Canenableindividualservice   bool     `json:"canenableindividualservice"`
+	Destinationphysicalnetworkid string   `json:"destinationphysicalnetworkid"`
+	Id                           string   `json:"id"`
+	Name                         string   `json:"name"`
+	Physicalnetworkid            string   `json:"physicalnetworkid"`
+	Servicelist                  []string `json:"servicelist"`
+	State                        string   `json:"state"`
+}
+
+type MigrateVPCResponseServiceCapability struct {
 	Canchooseservicecapability bool   `json:"canchooseservicecapability"`
 	Name                       string `json:"name"`
 	Value                      string `json:"value"`

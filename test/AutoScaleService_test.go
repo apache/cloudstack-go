@@ -305,4 +305,16 @@ func TestAutoScaleService(t *testing.T) {
 	}
 	t.Run("UpdateAutoScaleVmProfile", testupdateAutoScaleVmProfile)
 
+	testupdateCondition := func(t *testing.T) {
+		if _, ok := response["updateCondition"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.AutoScale.NewUpdateConditionParams("id", "relationaloperator", 0)
+		_, err := client.AutoScale.UpdateCondition(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UpdateCondition", testupdateCondition)
+
 }

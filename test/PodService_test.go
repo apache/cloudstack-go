@@ -35,6 +35,21 @@ func TestPodService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
+	testcreateManagementNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["createManagementNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pod.NewCreateManagementNetworkIpRangeParams("gateway", "netmask", "podid", "startip")
+		r, err := client.Pod.CreateManagementNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateManagementNetworkIpRange", testcreateManagementNetworkIpRange)
+
 	testcreatePod := func(t *testing.T) {
 		if _, ok := response["createPod"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -64,6 +79,18 @@ func TestPodService(t *testing.T) {
 		}
 	}
 	t.Run("DedicatePod", testdedicatePod)
+
+	testdeleteManagementNetworkIpRange := func(t *testing.T) {
+		if _, ok := response["deleteManagementNetworkIpRange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pod.NewDeleteManagementNetworkIpRangeParams("endip", "podid", "startip", "vlan")
+		_, err := client.Pod.DeleteManagementNetworkIpRange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteManagementNetworkIpRange", testdeleteManagementNetworkIpRange)
 
 	testdeletePod := func(t *testing.T) {
 		if _, ok := response["deletePod"]; !ok {

@@ -59,4 +59,16 @@ func TestAuthenticationService(t *testing.T) {
 	}
 	t.Run("Logout", testlogout)
 
+	testoauthlogin := func(t *testing.T) {
+		if _, ok := response["oauthlogin"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Authentication.NewOauthloginParams("email", "provider")
+		_, err := client.Authentication.Oauthlogin(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("Oauthlogin", testoauthlogin)
+
 }

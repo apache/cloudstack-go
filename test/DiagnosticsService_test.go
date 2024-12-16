@@ -47,4 +47,16 @@ func TestDiagnosticsService(t *testing.T) {
 	}
 	t.Run("GetDiagnosticsData", testgetDiagnosticsData)
 
+	testrunDiagnostics := func(t *testing.T) {
+		if _, ok := response["runDiagnostics"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Diagnostics.NewRunDiagnosticsParams("ipaddress", "targetid", "type")
+		_, err := client.Diagnostics.RunDiagnostics(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RunDiagnostics", testrunDiagnostics)
+
 }

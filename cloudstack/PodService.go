@@ -28,10 +28,14 @@ import (
 )
 
 type PodServiceIface interface {
+	CreateManagementNetworkIpRange(p *CreateManagementNetworkIpRangeParams) (*CreateManagementNetworkIpRangeResponse, error)
+	NewCreateManagementNetworkIpRangeParams(gateway string, netmask string, podid string, startip string) *CreateManagementNetworkIpRangeParams
 	CreatePod(p *CreatePodParams) (*CreatePodResponse, error)
 	NewCreatePodParams(name string, zoneid string) *CreatePodParams
 	DedicatePod(p *DedicatePodParams) (*DedicatePodResponse, error)
 	NewDedicatePodParams(domainid string, podid string) *DedicatePodParams
+	DeleteManagementNetworkIpRange(p *DeleteManagementNetworkIpRangeParams) (*DeleteManagementNetworkIpRangeResponse, error)
+	NewDeleteManagementNetworkIpRangeParams(endip string, podid string, startip string, vlan string) *DeleteManagementNetworkIpRangeParams
 	DeletePod(p *DeletePodParams) (*DeletePodResponse, error)
 	NewDeletePodParams(id string) *DeletePodParams
 	ListDedicatedPods(p *ListDedicatedPodsParams) (*ListDedicatedPodsResponse, error)
@@ -47,6 +51,278 @@ type PodServiceIface interface {
 	NewUpdatePodParams(id string) *UpdatePodParams
 	UpdatePodManagementNetworkIpRange(p *UpdatePodManagementNetworkIpRangeParams) (*UpdatePodManagementNetworkIpRangeResponse, error)
 	NewUpdatePodManagementNetworkIpRangeParams(currentendip string, currentstartip string, podid string) *UpdatePodManagementNetworkIpRangeParams
+}
+
+type CreateManagementNetworkIpRangeParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["endip"]; found {
+		u.Set("endip", v.(string))
+	}
+	if v, found := p.p["forsystemvms"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forsystemvms", vv)
+	}
+	if v, found := p.p["gateway"]; found {
+		u.Set("gateway", v.(string))
+	}
+	if v, found := p.p["netmask"]; found {
+		u.Set("netmask", v.(string))
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
+	if v, found := p.p["startip"]; found {
+		u.Set("startip", v.(string))
+	}
+	if v, found := p.p["vlan"]; found {
+		u.Set("vlan", v.(string))
+	}
+	return u
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetEndip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endip"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetEndip() {
+	if p.p != nil && p.p["endip"] != nil {
+		delete(p.p, "endip")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetEndip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endip"].(string)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetForsystemvms(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forsystemvms"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetForsystemvms() {
+	if p.p != nil && p.p["forsystemvms"] != nil {
+		delete(p.p, "forsystemvms")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetForsystemvms() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forsystemvms"].(bool)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetGateway(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gateway"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetGateway() {
+	if p.p != nil && p.p["gateway"] != nil {
+		delete(p.p, "gateway")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetGateway() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gateway"].(string)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetNetmask(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["netmask"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetNetmask() {
+	if p.p != nil && p.p["netmask"] != nil {
+		delete(p.p, "netmask")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetNetmask() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["netmask"].(string)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetStartip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startip"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetStartip() {
+	if p.p != nil && p.p["startip"] != nil {
+		delete(p.p, "startip")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetStartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startip"].(string)
+	return value, ok
+}
+
+func (p *CreateManagementNetworkIpRangeParams) SetVlan(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vlan"] = v
+}
+
+func (p *CreateManagementNetworkIpRangeParams) ResetVlan() {
+	if p.p != nil && p.p["vlan"] != nil {
+		delete(p.p, "vlan")
+	}
+}
+
+func (p *CreateManagementNetworkIpRangeParams) GetVlan() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vlan"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateManagementNetworkIpRangeParams instance,
+// as then you are sure you have configured all required params
+func (s *PodService) NewCreateManagementNetworkIpRangeParams(gateway string, netmask string, podid string, startip string) *CreateManagementNetworkIpRangeParams {
+	p := &CreateManagementNetworkIpRangeParams{}
+	p.p = make(map[string]interface{})
+	p.p["gateway"] = gateway
+	p.p["netmask"] = netmask
+	p.p["podid"] = podid
+	p.p["startip"] = startip
+	return p
+}
+
+// Creates a Management network IP range.
+func (s *PodService) CreateManagementNetworkIpRange(p *CreateManagementNetworkIpRangeParams) (*CreateManagementNetworkIpRangeResponse, error) {
+	resp, err := s.cs.newRequest("createManagementNetworkIpRange", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateManagementNetworkIpRangeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type CreateManagementNetworkIpRangeResponse struct {
+	Allocationstate string                                           `json:"allocationstate"`
+	Capacity        []CreateManagementNetworkIpRangeResponseCapacity `json:"capacity"`
+	Endip           []string                                         `json:"endip"`
+	Forsystemvms    []string                                         `json:"forsystemvms"`
+	Gateway         string                                           `json:"gateway"`
+	Hasannotations  bool                                             `json:"hasannotations"`
+	Id              string                                           `json:"id"`
+	Ipranges        []CreateManagementNetworkIpRangeResponseIpranges `json:"ipranges"`
+	JobID           string                                           `json:"jobid"`
+	Jobstatus       int                                              `json:"jobstatus"`
+	Name            string                                           `json:"name"`
+	Netmask         string                                           `json:"netmask"`
+	Startip         []string                                         `json:"startip"`
+	Vlanid          []string                                         `json:"vlanid"`
+	Zoneid          string                                           `json:"zoneid"`
+	Zonename        string                                           `json:"zonename"`
+}
+
+type CreateManagementNetworkIpRangeResponseIpranges struct {
+	Cidr         string `json:"cidr"`
+	Endip        string `json:"endip"`
+	Forsystemvms string `json:"forsystemvms"`
+	Gateway      string `json:"gateway"`
+	Startip      string `json:"startip"`
+	Vlanid       string `json:"vlanid"`
+}
+
+type CreateManagementNetworkIpRangeResponseCapacity struct {
+	Capacityallocated int64  `json:"capacityallocated"`
+	Capacitytotal     int64  `json:"capacitytotal"`
+	Capacityused      int64  `json:"capacityused"`
+	Clusterid         string `json:"clusterid"`
+	Clustername       string `json:"clustername"`
+	Name              string `json:"name"`
+	Percentused       string `json:"percentused"`
+	Podid             string `json:"podid"`
+	Podname           string `json:"podname"`
+	Tag               string `json:"tag"`
+	Type              int    `json:"type"`
+	Zoneid            string `json:"zoneid"`
+	Zonename          string `json:"zonename"`
 }
 
 type CreatePodParams struct {
@@ -440,6 +716,163 @@ type DedicatePodResponse struct {
 	Jobstatus       int    `json:"jobstatus"`
 	Podid           string `json:"podid"`
 	Podname         string `json:"podname"`
+}
+
+type DeleteManagementNetworkIpRangeParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["endip"]; found {
+		u.Set("endip", v.(string))
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
+	if v, found := p.p["startip"]; found {
+		u.Set("startip", v.(string))
+	}
+	if v, found := p.p["vlan"]; found {
+		u.Set("vlan", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) SetEndip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["endip"] = v
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) ResetEndip() {
+	if p.p != nil && p.p["endip"] != nil {
+		delete(p.p, "endip")
+	}
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) GetEndip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["endip"].(string)
+	return value, ok
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) SetStartip(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startip"] = v
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) ResetStartip() {
+	if p.p != nil && p.p["startip"] != nil {
+		delete(p.p, "startip")
+	}
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) GetStartip() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startip"].(string)
+	return value, ok
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) SetVlan(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vlan"] = v
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) ResetVlan() {
+	if p.p != nil && p.p["vlan"] != nil {
+		delete(p.p, "vlan")
+	}
+}
+
+func (p *DeleteManagementNetworkIpRangeParams) GetVlan() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vlan"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteManagementNetworkIpRangeParams instance,
+// as then you are sure you have configured all required params
+func (s *PodService) NewDeleteManagementNetworkIpRangeParams(endip string, podid string, startip string, vlan string) *DeleteManagementNetworkIpRangeParams {
+	p := &DeleteManagementNetworkIpRangeParams{}
+	p.p = make(map[string]interface{})
+	p.p["endip"] = endip
+	p.p["podid"] = podid
+	p.p["startip"] = startip
+	p.p["vlan"] = vlan
+	return p
+}
+
+// Deletes a management network IP range. This action is only allowed when no IPs in this range are allocated.
+func (s *PodService) DeleteManagementNetworkIpRange(p *DeleteManagementNetworkIpRangeParams) (*DeleteManagementNetworkIpRangeResponse, error) {
+	resp, err := s.cs.newRequest("deleteManagementNetworkIpRange", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteManagementNetworkIpRangeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DeleteManagementNetworkIpRangeResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }
 
 type DeletePodParams struct {

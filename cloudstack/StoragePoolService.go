@@ -30,8 +30,13 @@ import (
 type StoragePoolServiceIface interface {
 	CancelStorageMaintenance(p *CancelStorageMaintenanceParams) (*CancelStorageMaintenanceResponse, error)
 	NewCancelStorageMaintenanceParams(id string) *CancelStorageMaintenanceParams
+	ChangeStoragePoolScope(p *ChangeStoragePoolScopeParams) (*ChangeStoragePoolScopeResponse, error)
+	NewChangeStoragePoolScopeParams(id string, scope string) *ChangeStoragePoolScopeParams
 	EnableStorageMaintenance(p *EnableStorageMaintenanceParams) (*EnableStorageMaintenanceResponse, error)
 	NewEnableStorageMaintenanceParams(id string) *EnableStorageMaintenanceParams
+	ListAffectedVmsForStorageScopeChange(p *ListAffectedVmsForStorageScopeChangeParams) (*ListAffectedVmsForStorageScopeChangeResponse, error)
+	NewListAffectedVmsForStorageScopeChangeParams(clusterid string, storageid string) *ListAffectedVmsForStorageScopeChangeParams
+	GetAffectedVmsForStorageScopeChangeID(keyword string, clusterid string, storageid string, opts ...OptionFunc) (string, int, error)
 	ListStorageProviders(p *ListStorageProvidersParams) (*ListStorageProvidersResponse, error)
 	NewListStorageProvidersParams(storagePoolType string) *ListStorageProvidersParams
 	ListObjectStoragePools(p *ListObjectStoragePoolsParams) (*ListObjectStoragePoolsResponse, error)
@@ -170,6 +175,137 @@ type CancelStorageMaintenanceResponse struct {
 	Zonename             string            `json:"zonename"`
 }
 
+type ChangeStoragePoolScopeParams struct {
+	p map[string]interface{}
+}
+
+func (p *ChangeStoragePoolScopeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["scope"]; found {
+		u.Set("scope", v.(string))
+	}
+	return u
+}
+
+func (p *ChangeStoragePoolScopeParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ChangeStoragePoolScopeParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ChangeStoragePoolScopeParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ChangeStoragePoolScopeParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ChangeStoragePoolScopeParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ChangeStoragePoolScopeParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ChangeStoragePoolScopeParams) SetScope(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["scope"] = v
+}
+
+func (p *ChangeStoragePoolScopeParams) ResetScope() {
+	if p.p != nil && p.p["scope"] != nil {
+		delete(p.p, "scope")
+	}
+}
+
+func (p *ChangeStoragePoolScopeParams) GetScope() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["scope"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ChangeStoragePoolScopeParams instance,
+// as then you are sure you have configured all required params
+func (s *StoragePoolService) NewChangeStoragePoolScopeParams(id string, scope string) *ChangeStoragePoolScopeParams {
+	p := &ChangeStoragePoolScopeParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	p.p["scope"] = scope
+	return p
+}
+
+// Changes the scope of a storage pool when the pool is in Disabled state.This feature is officially tested and supported for Hypervisors: KVM and VMware, Protocols: NFS and Ceph, and Storage Provider: DefaultPrimary. There might be extra steps involved to make this work for other hypervisors and storage options.
+func (s *StoragePoolService) ChangeStoragePoolScope(p *ChangeStoragePoolScopeParams) (*ChangeStoragePoolScopeResponse, error) {
+	resp, err := s.cs.newRequest("changeStoragePoolScope", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ChangeStoragePoolScopeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type ChangeStoragePoolScopeResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
 type EnableStorageMaintenanceParams struct {
 	p map[string]interface{}
 }
@@ -283,6 +419,220 @@ type EnableStorageMaintenanceResponse struct {
 	Type                 string            `json:"type"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
+}
+
+type ListAffectedVmsForStorageScopeChangeParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
+	}
+	return u
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
+func (p *ListAffectedVmsForStorageScopeChangeParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListAffectedVmsForStorageScopeChangeParams instance,
+// as then you are sure you have configured all required params
+func (s *StoragePoolService) NewListAffectedVmsForStorageScopeChangeParams(clusterid string, storageid string) *ListAffectedVmsForStorageScopeChangeParams {
+	p := &ListAffectedVmsForStorageScopeChangeParams{}
+	p.p = make(map[string]interface{})
+	p.p["clusterid"] = clusterid
+	p.p["storageid"] = storageid
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *StoragePoolService) GetAffectedVmsForStorageScopeChangeID(keyword string, clusterid string, storageid string, opts ...OptionFunc) (string, int, error) {
+	p := &ListAffectedVmsForStorageScopeChangeParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["keyword"] = keyword
+	p.p["clusterid"] = clusterid
+	p.p["storageid"] = storageid
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListAffectedVmsForStorageScopeChange(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+	}
+
+	if l.Count == 1 {
+		return l.AffectedVmsForStorageScopeChange[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.AffectedVmsForStorageScopeChange {
+			if v.Name == keyword {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+}
+
+// List user and system VMs that need to be stopped and destroyed respectively for changing the scope of the storage pool from Zone to Cluster.
+func (s *StoragePoolService) ListAffectedVmsForStorageScopeChange(p *ListAffectedVmsForStorageScopeChangeParams) (*ListAffectedVmsForStorageScopeChangeResponse, error) {
+	resp, err := s.cs.newRequest("listAffectedVmsForStorageScopeChange", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListAffectedVmsForStorageScopeChangeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListAffectedVmsForStorageScopeChangeResponse struct {
+	Count                            int                                 `json:"count"`
+	AffectedVmsForStorageScopeChange []*AffectedVmsForStorageScopeChange `json:"affectedvmsforstoragescopechange"`
+}
+
+type AffectedVmsForStorageScopeChange struct {
+	Clusterid   string `json:"clusterid"`
+	Clustername string `json:"clustername"`
+	Hostid      string `json:"hostid"`
+	Hostname    string `json:"hostname"`
+	Id          string `json:"id"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
+	Type        string `json:"type"`
 }
 
 type ListStorageProvidersParams struct {
@@ -909,16 +1259,19 @@ type ListStoragePoolObjectsResponse struct {
 }
 
 type StoragePoolObject struct {
-	Format      string `json:"format"`
-	Isdirectory bool   `json:"isdirectory"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Lastupdated string `json:"lastupdated"`
-	Name        string `json:"name"`
-	Size        int64  `json:"size"`
-	Snapshotid  string `json:"snapshotid"`
-	Templateid  string `json:"templateid"`
-	Volumeid    string `json:"volumeid"`
+	Format       string `json:"format"`
+	Isdirectory  bool   `json:"isdirectory"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Lastupdated  string `json:"lastupdated"`
+	Name         string `json:"name"`
+	Size         int64  `json:"size"`
+	Snapshotid   string `json:"snapshotid"`
+	Snapshotname string `json:"snapshotname"`
+	Templateid   string `json:"templateid"`
+	Templatename string `json:"templatename"`
+	Volumeid     string `json:"volumeid"`
+	Volumename   string `json:"volumename"`
 }
 
 type UpdateObjectStoragePoolParams struct {
@@ -1362,6 +1715,10 @@ func (p *ListStoragePoolsMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["status"]; found {
 		u.Set("status", v.(string))
 	}
+	if v, found := p.p["storagecustomstats"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("storagecustomstats", vv)
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -1620,6 +1977,27 @@ func (p *ListStoragePoolsMetricsParams) GetStatus() (string, bool) {
 	return value, ok
 }
 
+func (p *ListStoragePoolsMetricsParams) SetStoragecustomstats(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storagecustomstats"] = v
+}
+
+func (p *ListStoragePoolsMetricsParams) ResetStoragecustomstats() {
+	if p.p != nil && p.p["storagecustomstats"] != nil {
+		delete(p.p, "storagecustomstats")
+	}
+}
+
+func (p *ListStoragePoolsMetricsParams) GetStoragecustomstats() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storagecustomstats"].(bool)
+	return value, ok
+}
+
 func (p *ListStoragePoolsMetricsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1772,7 +2150,9 @@ type StoragePoolsMetric struct {
 	Istagarule                       bool              `json:"istagarule"`
 	JobID                            string            `json:"jobid"`
 	Jobstatus                        int               `json:"jobstatus"`
+	Managed                          bool              `json:"managed"`
 	Name                             string            `json:"name"`
+	Nfsmountopts                     string            `json:"nfsmountopts"`
 	Overprovisionfactor              string            `json:"overprovisionfactor"`
 	Path                             string            `json:"path"`
 	Podid                            string            `json:"podid"`
@@ -1783,6 +2163,7 @@ type StoragePoolsMetric struct {
 	Storageallocateddisablethreshold bool              `json:"storageallocateddisablethreshold"`
 	Storageallocatedthreshold        bool              `json:"storageallocatedthreshold"`
 	Storagecapabilities              map[string]string `json:"storagecapabilities"`
+	Storagecustomstats               map[string]string `json:"storagecustomstats"`
 	Storageusagedisablethreshold     bool              `json:"storageusagedisablethreshold"`
 	Storageusagethreshold            bool              `json:"storageusagethreshold"`
 	Suitableformigration             bool              `json:"suitableformigration"`

@@ -42,6 +42,8 @@ type DomainServiceIface interface {
 	GetDomainID(name string, opts ...OptionFunc) (string, int, error)
 	GetDomainByName(name string, opts ...OptionFunc) (*Domain, int, error)
 	GetDomainByID(id string, opts ...OptionFunc) (*Domain, int, error)
+	MoveDomain(p *MoveDomainParams) (*MoveDomainResponse, error)
+	NewMoveDomainParams(domainid string, parentdomainid string) *MoveDomainParams
 	UpdateDomain(p *UpdateDomainParams) (*UpdateDomainResponse, error)
 	NewUpdateDomainParams(id string) *UpdateDomainParams
 }
@@ -1089,6 +1091,146 @@ type ListDomainsResponse struct {
 }
 
 type Domain struct {
+	Cpuavailable              string            `json:"cpuavailable"`
+	Cpulimit                  string            `json:"cpulimit"`
+	Cputotal                  int64             `json:"cputotal"`
+	Created                   string            `json:"created"`
+	Domaindetails             map[string]string `json:"domaindetails"`
+	Hasannotations            bool              `json:"hasannotations"`
+	Haschild                  bool              `json:"haschild"`
+	Icon                      interface{}       `json:"icon"`
+	Id                        string            `json:"id"`
+	Ipavailable               string            `json:"ipavailable"`
+	Iplimit                   string            `json:"iplimit"`
+	Iptotal                   int64             `json:"iptotal"`
+	JobID                     string            `json:"jobid"`
+	Jobstatus                 int               `json:"jobstatus"`
+	Level                     int               `json:"level"`
+	Memoryavailable           string            `json:"memoryavailable"`
+	Memorylimit               string            `json:"memorylimit"`
+	Memorytotal               int64             `json:"memorytotal"`
+	Name                      string            `json:"name"`
+	Networkavailable          string            `json:"networkavailable"`
+	Networkdomain             string            `json:"networkdomain"`
+	Networklimit              string            `json:"networklimit"`
+	Networktotal              int64             `json:"networktotal"`
+	Parentdomainid            string            `json:"parentdomainid"`
+	Parentdomainname          string            `json:"parentdomainname"`
+	Path                      string            `json:"path"`
+	Primarystorageavailable   string            `json:"primarystorageavailable"`
+	Primarystoragelimit       string            `json:"primarystoragelimit"`
+	Primarystoragetotal       int64             `json:"primarystoragetotal"`
+	Projectavailable          string            `json:"projectavailable"`
+	Projectlimit              string            `json:"projectlimit"`
+	Projecttotal              int64             `json:"projecttotal"`
+	Secondarystorageavailable string            `json:"secondarystorageavailable"`
+	Secondarystoragelimit     string            `json:"secondarystoragelimit"`
+	Secondarystoragetotal     float64           `json:"secondarystoragetotal"`
+	Snapshotavailable         string            `json:"snapshotavailable"`
+	Snapshotlimit             string            `json:"snapshotlimit"`
+	Snapshottotal             int64             `json:"snapshottotal"`
+	State                     string            `json:"state"`
+	Taggedresources           []string          `json:"taggedresources"`
+	Templateavailable         string            `json:"templateavailable"`
+	Templatelimit             string            `json:"templatelimit"`
+	Templatetotal             int64             `json:"templatetotal"`
+	Vmavailable               string            `json:"vmavailable"`
+	Vmlimit                   string            `json:"vmlimit"`
+	Vmtotal                   int64             `json:"vmtotal"`
+	Volumeavailable           string            `json:"volumeavailable"`
+	Volumelimit               string            `json:"volumelimit"`
+	Volumetotal               int64             `json:"volumetotal"`
+	Vpcavailable              string            `json:"vpcavailable"`
+	Vpclimit                  string            `json:"vpclimit"`
+	Vpctotal                  int64             `json:"vpctotal"`
+}
+
+type MoveDomainParams struct {
+	p map[string]interface{}
+}
+
+func (p *MoveDomainParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["parentdomainid"]; found {
+		u.Set("parentdomainid", v.(string))
+	}
+	return u
+}
+
+func (p *MoveDomainParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *MoveDomainParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *MoveDomainParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *MoveDomainParams) SetParentdomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["parentdomainid"] = v
+}
+
+func (p *MoveDomainParams) ResetParentdomainid() {
+	if p.p != nil && p.p["parentdomainid"] != nil {
+		delete(p.p, "parentdomainid")
+	}
+}
+
+func (p *MoveDomainParams) GetParentdomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["parentdomainid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new MoveDomainParams instance,
+// as then you are sure you have configured all required params
+func (s *DomainService) NewMoveDomainParams(domainid string, parentdomainid string) *MoveDomainParams {
+	p := &MoveDomainParams{}
+	p.p = make(map[string]interface{})
+	p.p["domainid"] = domainid
+	p.p["parentdomainid"] = parentdomainid
+	return p
+}
+
+// Moves a domain and its children to a new parent domain.
+func (s *DomainService) MoveDomain(p *MoveDomainParams) (*MoveDomainResponse, error) {
+	resp, err := s.cs.newRequest("moveDomain", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MoveDomainResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type MoveDomainResponse struct {
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`

@@ -28,6 +28,8 @@ import (
 )
 
 type AddressServiceIface interface {
+	AcquirePodIpAddress(p *AcquirePodIpAddressParams) (*AcquirePodIpAddressResponse, error)
+	NewAcquirePodIpAddressParams(zoneid string) *AcquirePodIpAddressParams
 	AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error)
 	NewAssociateIpAddressParams() *AssociateIpAddressParams
 	DisassociateIpAddress(p *DisassociateIpAddressParams) (*DisassociateIpAddressResponse, error)
@@ -39,6 +41,106 @@ type AddressServiceIface interface {
 	NewUpdateIpAddressParams(id string) *UpdateIpAddressParams
 	ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error)
 	NewReleaseIpAddressParams(id string) *ReleaseIpAddressParams
+	ReleasePodIpAddress(p *ReleasePodIpAddressParams) (*ReleasePodIpAddressResponse, error)
+	NewReleasePodIpAddressParams(id int64) *ReleasePodIpAddressParams
+	ReserveIpAddress(p *ReserveIpAddressParams) (*ReserveIpAddressResponse, error)
+	NewReserveIpAddressParams(id string) *ReserveIpAddressParams
+}
+
+type AcquirePodIpAddressParams struct {
+	p map[string]interface{}
+}
+
+func (p *AcquirePodIpAddressParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *AcquirePodIpAddressParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *AcquirePodIpAddressParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
+func (p *AcquirePodIpAddressParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
+func (p *AcquirePodIpAddressParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *AcquirePodIpAddressParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *AcquirePodIpAddressParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new AcquirePodIpAddressParams instance,
+// as then you are sure you have configured all required params
+func (s *AddressService) NewAcquirePodIpAddressParams(zoneid string) *AcquirePodIpAddressParams {
+	p := &AcquirePodIpAddressParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Allocates IP addresses in respective Pod of a Zone
+func (s *AddressService) AcquirePodIpAddress(p *AcquirePodIpAddressParams) (*AcquirePodIpAddressResponse, error) {
+	resp, err := s.cs.newRequest("acquirePodIpAddress", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r AcquirePodIpAddressResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type AcquirePodIpAddressResponse struct {
+	Cidr      string `json:"cidr"`
+	Gateway   string `json:"gateway"`
+	Hostmac   int64  `json:"hostmac"`
+	Id        int64  `json:"id"`
+	Ipaddress string `json:"ipaddress"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Nicid     int64  `json:"nicid"`
+	Podid     int64  `json:"podid"`
 }
 
 type AssociateIpAddressParams struct {
@@ -1505,4 +1607,298 @@ func (r *ReleaseIpAddressResponse) UnmarshalJSON(b []byte) error {
 
 	type alias ReleaseIpAddressResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ReleasePodIpAddressParams struct {
+	p map[string]interface{}
+}
+
+func (p *ReleasePodIpAddressParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("id", vv)
+	}
+	return u
+}
+
+func (p *ReleasePodIpAddressParams) SetId(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ReleasePodIpAddressParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ReleasePodIpAddressParams) GetId() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(int64)
+	return value, ok
+}
+
+// You should always use this function to get a new ReleasePodIpAddressParams instance,
+// as then you are sure you have configured all required params
+func (s *AddressService) NewReleasePodIpAddressParams(id int64) *ReleasePodIpAddressParams {
+	p := &ReleasePodIpAddressParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Releases a Pod IP back to the Pod
+func (s *AddressService) ReleasePodIpAddress(p *ReleasePodIpAddressParams) (*ReleasePodIpAddressResponse, error) {
+	resp, err := s.cs.newRequest("releasePodIpAddress", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ReleasePodIpAddressResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ReleasePodIpAddressResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *ReleasePodIpAddressResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias ReleasePodIpAddressResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ReserveIpAddressParams struct {
+	p map[string]interface{}
+}
+
+func (p *ReserveIpAddressParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["fordisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("fordisplay", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	return u
+}
+
+func (p *ReserveIpAddressParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ReserveIpAddressParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ReserveIpAddressParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ReserveIpAddressParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ReserveIpAddressParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ReserveIpAddressParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ReserveIpAddressParams) SetFordisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["fordisplay"] = v
+}
+
+func (p *ReserveIpAddressParams) ResetFordisplay() {
+	if p.p != nil && p.p["fordisplay"] != nil {
+		delete(p.p, "fordisplay")
+	}
+}
+
+func (p *ReserveIpAddressParams) GetFordisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *ReserveIpAddressParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ReserveIpAddressParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ReserveIpAddressParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ReserveIpAddressParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ReserveIpAddressParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ReserveIpAddressParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ReserveIpAddressParams instance,
+// as then you are sure you have configured all required params
+func (s *AddressService) NewReserveIpAddressParams(id string) *ReserveIpAddressParams {
+	p := &ReserveIpAddressParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Reserve a public IP to an account.
+func (s *AddressService) ReserveIpAddress(p *ReserveIpAddressParams) (*ReserveIpAddressResponse, error) {
+	resp, err := s.cs.newRequest("reserveIpAddress", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ReserveIpAddressResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ReserveIpAddressResponse struct {
+	Account                   string `json:"account"`
+	Allocated                 string `json:"allocated"`
+	Associatednetworkid       string `json:"associatednetworkid"`
+	Associatednetworkname     string `json:"associatednetworkname"`
+	Domain                    string `json:"domain"`
+	Domainid                  string `json:"domainid"`
+	Domainpath                string `json:"domainpath"`
+	Fordisplay                bool   `json:"fordisplay"`
+	Forsystemvms              bool   `json:"forsystemvms"`
+	Forvirtualnetwork         bool   `json:"forvirtualnetwork"`
+	Hasannotations            bool   `json:"hasannotations"`
+	Hasrules                  bool   `json:"hasrules"`
+	Id                        string `json:"id"`
+	Ipaddress                 string `json:"ipaddress"`
+	Isportable                bool   `json:"isportable"`
+	Issourcenat               bool   `json:"issourcenat"`
+	Isstaticnat               bool   `json:"isstaticnat"`
+	Issystem                  bool   `json:"issystem"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Networkid                 string `json:"networkid"`
+	Networkname               string `json:"networkname"`
+	Physicalnetworkid         string `json:"physicalnetworkid"`
+	Project                   string `json:"project"`
+	Projectid                 string `json:"projectid"`
+	Purpose                   string `json:"purpose"`
+	State                     string `json:"state"`
+	Tags                      []Tags `json:"tags"`
+	Virtualmachinedisplayname string `json:"virtualmachinedisplayname"`
+	Virtualmachineid          string `json:"virtualmachineid"`
+	Virtualmachinename        string `json:"virtualmachinename"`
+	Virtualmachinetype        string `json:"virtualmachinetype"`
+	Vlanid                    string `json:"vlanid"`
+	Vlanname                  string `json:"vlanname"`
+	Vmipaddress               string `json:"vmipaddress"`
+	Vpcid                     string `json:"vpcid"`
+	Vpcname                   string `json:"vpcname"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }

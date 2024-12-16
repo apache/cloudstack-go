@@ -95,6 +95,18 @@ func TestRouterService(t *testing.T) {
 	}
 	t.Run("DestroyRouter", testdestroyRouter)
 
+	testgetRouterHealthCheckResults := func(t *testing.T) {
+		if _, ok := response["getRouterHealthCheckResults"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Router.NewGetRouterHealthCheckResultsParams("routerid")
+		_, err := client.Router.GetRouterHealthCheckResults(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetRouterHealthCheckResults", testgetRouterHealthCheckResults)
+
 	testlistRouters := func(t *testing.T) {
 		if _, ok := response["listRouters"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

@@ -48,13 +48,15 @@ type ImageStoreServiceIface interface {
 	GetSecondaryStagingStoreID(name string, opts ...OptionFunc) (string, int, error)
 	GetSecondaryStagingStoreByName(name string, opts ...OptionFunc) (*SecondaryStagingStore, int, error)
 	GetSecondaryStagingStoreByID(id string, opts ...OptionFunc) (*SecondaryStagingStore, int, error)
+	MigrateResourceToAnotherSecondaryStorage(p *MigrateResourceToAnotherSecondaryStorageParams) (*MigrateResourceToAnotherSecondaryStorageResponse, error)
+	NewMigrateResourceToAnotherSecondaryStorageParams(destpool string, srcpool string) *MigrateResourceToAnotherSecondaryStorageParams
 	UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjectStoreParams) (*UpdateCloudToUseObjectStoreResponse, error)
 	NewUpdateCloudToUseObjectStoreParams(provider string) *UpdateCloudToUseObjectStoreParams
 	ListImageStoreObjects(p *ListImageStoreObjectsParams) (*ListImageStoreObjectsResponse, error)
 	NewListImageStoreObjectsParams(id string) *ListImageStoreObjectsParams
 	GetImageStoreObjectByID(id string, opts ...OptionFunc) (*ImageStoreObject, int, error)
 	UpdateImageStore(p *UpdateImageStoreParams) (*UpdateImageStoreResponse, error)
-	NewUpdateImageStoreParams(id string, readonly bool) *UpdateImageStoreParams
+	NewUpdateImageStoreParams(id string) *UpdateImageStoreParams
 	DownloadImageStoreObject(p *DownloadImageStoreObjectParams) (*DownloadImageStoreObjectResponse, error)
 	NewDownloadImageStoreObjectParams(id string) *DownloadImageStoreObjectParams
 }
@@ -1624,6 +1626,169 @@ type SecondaryStagingStore struct {
 	Zonename       string `json:"zonename"`
 }
 
+type MigrateResourceToAnotherSecondaryStorageParams struct {
+	p map[string]interface{}
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["destpool"]; found {
+		u.Set("destpool", v.(string))
+	}
+	if v, found := p.p["snapshots"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("snapshots", vv)
+	}
+	if v, found := p.p["srcpool"]; found {
+		u.Set("srcpool", v.(string))
+	}
+	if v, found := p.p["templates"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("templates", vv)
+	}
+	return u
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) SetDestpool(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["destpool"] = v
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) ResetDestpool() {
+	if p.p != nil && p.p["destpool"] != nil {
+		delete(p.p, "destpool")
+	}
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) GetDestpool() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["destpool"].(string)
+	return value, ok
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) SetSnapshots(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["snapshots"] = v
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) ResetSnapshots() {
+	if p.p != nil && p.p["snapshots"] != nil {
+		delete(p.p, "snapshots")
+	}
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) GetSnapshots() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["snapshots"].([]string)
+	return value, ok
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) SetSrcpool(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["srcpool"] = v
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) ResetSrcpool() {
+	if p.p != nil && p.p["srcpool"] != nil {
+		delete(p.p, "srcpool")
+	}
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) GetSrcpool() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["srcpool"].(string)
+	return value, ok
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) SetTemplates(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templates"] = v
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) ResetTemplates() {
+	if p.p != nil && p.p["templates"] != nil {
+		delete(p.p, "templates")
+	}
+}
+
+func (p *MigrateResourceToAnotherSecondaryStorageParams) GetTemplates() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templates"].([]string)
+	return value, ok
+}
+
+// You should always use this function to get a new MigrateResourceToAnotherSecondaryStorageParams instance,
+// as then you are sure you have configured all required params
+func (s *ImageStoreService) NewMigrateResourceToAnotherSecondaryStorageParams(destpool string, srcpool string) *MigrateResourceToAnotherSecondaryStorageParams {
+	p := &MigrateResourceToAnotherSecondaryStorageParams{}
+	p.p = make(map[string]interface{})
+	p.p["destpool"] = destpool
+	p.p["srcpool"] = srcpool
+	return p
+}
+
+// migrates resources from one secondary storage to destination image store
+func (s *ImageStoreService) MigrateResourceToAnotherSecondaryStorage(p *MigrateResourceToAnotherSecondaryStorageParams) (*MigrateResourceToAnotherSecondaryStorageResponse, error) {
+	resp, err := s.cs.newRequest("migrateResourceToAnotherSecondaryStorage", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MigrateResourceToAnotherSecondaryStorageResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type MigrateResourceToAnotherSecondaryStorageResponse struct {
+	JobID         string `json:"jobid"`
+	Jobstatus     int    `json:"jobstatus"`
+	Message       string `json:"message"`
+	Migrationtype string `json:"migrationtype"`
+	Success       bool   `json:"success"`
+}
+
 type UpdateCloudToUseObjectStoreParams struct {
 	p map[string]interface{}
 }
@@ -1974,16 +2139,19 @@ type ListImageStoreObjectsResponse struct {
 }
 
 type ImageStoreObject struct {
-	Format      string `json:"format"`
-	Isdirectory bool   `json:"isdirectory"`
-	JobID       string `json:"jobid"`
-	Jobstatus   int    `json:"jobstatus"`
-	Lastupdated string `json:"lastupdated"`
-	Name        string `json:"name"`
-	Size        int64  `json:"size"`
-	Snapshotid  string `json:"snapshotid"`
-	Templateid  string `json:"templateid"`
-	Volumeid    string `json:"volumeid"`
+	Format       string `json:"format"`
+	Isdirectory  bool   `json:"isdirectory"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Lastupdated  string `json:"lastupdated"`
+	Name         string `json:"name"`
+	Size         int64  `json:"size"`
+	Snapshotid   string `json:"snapshotid"`
+	Snapshotname string `json:"snapshotname"`
+	Templateid   string `json:"templateid"`
+	Templatename string `json:"templatename"`
+	Volumeid     string `json:"volumeid"`
+	Volumename   string `json:"volumename"`
 }
 
 type UpdateImageStoreParams struct {
@@ -1995,14 +2163,42 @@ func (p *UpdateImageStoreParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["capacitybytes"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("capacitybytes", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
 	}
 	if v, found := p.p["readonly"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("readonly", vv)
 	}
 	return u
+}
+
+func (p *UpdateImageStoreParams) SetCapacitybytes(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["capacitybytes"] = v
+}
+
+func (p *UpdateImageStoreParams) ResetCapacitybytes() {
+	if p.p != nil && p.p["capacitybytes"] != nil {
+		delete(p.p, "capacitybytes")
+	}
+}
+
+func (p *UpdateImageStoreParams) GetCapacitybytes() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["capacitybytes"].(int64)
+	return value, ok
 }
 
 func (p *UpdateImageStoreParams) SetId(v string) {
@@ -2023,6 +2219,27 @@ func (p *UpdateImageStoreParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateImageStoreParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateImageStoreParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *UpdateImageStoreParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -2049,11 +2266,10 @@ func (p *UpdateImageStoreParams) GetReadonly() (bool, bool) {
 
 // You should always use this function to get a new UpdateImageStoreParams instance,
 // as then you are sure you have configured all required params
-func (s *ImageStoreService) NewUpdateImageStoreParams(id string, readonly bool) *UpdateImageStoreParams {
+func (s *ImageStoreService) NewUpdateImageStoreParams(id string) *UpdateImageStoreParams {
 	p := &UpdateImageStoreParams{}
 	p.p = make(map[string]interface{})
 	p.p["id"] = id
-	p.p["readonly"] = readonly
 	return p
 }
 

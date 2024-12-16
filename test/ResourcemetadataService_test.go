@@ -47,6 +47,18 @@ func TestResourcemetadataService(t *testing.T) {
 	}
 	t.Run("AddResourceDetail", testaddResourceDetail)
 
+	testlistDetailOptions := func(t *testing.T) {
+		if _, ok := response["listDetailOptions"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Resourcemetadata.NewListDetailOptionsParams("resourcetype")
+		_, err := client.Resourcemetadata.ListDetailOptions(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListDetailOptions", testlistDetailOptions)
+
 	testgetVolumeSnapshotDetails := func(t *testing.T) {
 		if _, ok := response["getVolumeSnapshotDetails"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

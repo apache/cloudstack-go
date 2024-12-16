@@ -35,6 +35,21 @@ func TestZoneService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
+	testcreateIpv4SubnetForZone := func(t *testing.T) {
+		if _, ok := response["createIpv4SubnetForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewCreateIpv4SubnetForZoneParams("subnet", "zoneid")
+		r, err := client.Zone.CreateIpv4SubnetForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateIpv4SubnetForZone", testcreateIpv4SubnetForZone)
+
 	testcreateZone := func(t *testing.T) {
 		if _, ok := response["createZone"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -49,6 +64,21 @@ func TestZoneService(t *testing.T) {
 		}
 	}
 	t.Run("CreateZone", testcreateZone)
+
+	testdedicateIpv4SubnetForZone := func(t *testing.T) {
+		if _, ok := response["dedicateIpv4SubnetForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewDedicateIpv4SubnetForZoneParams("id")
+		r, err := client.Zone.DedicateIpv4SubnetForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("DedicateIpv4SubnetForZone", testdedicateIpv4SubnetForZone)
 
 	testdedicateZone := func(t *testing.T) {
 		if _, ok := response["dedicateZone"]; !ok {
@@ -76,6 +106,18 @@ func TestZoneService(t *testing.T) {
 		}
 	}
 	t.Run("DeleteZone", testdeleteZone)
+
+	testdeleteIpv4SubnetForZone := func(t *testing.T) {
+		if _, ok := response["deleteIpv4SubnetForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewDeleteIpv4SubnetForZoneParams("id")
+		_, err := client.Zone.DeleteIpv4SubnetForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteIpv4SubnetForZone", testdeleteIpv4SubnetForZone)
 
 	testdisableOutOfBandManagementForZone := func(t *testing.T) {
 		if _, ok := response["disableOutOfBandManagementForZone"]; !ok {
@@ -137,6 +179,18 @@ func TestZoneService(t *testing.T) {
 	}
 	t.Run("ListDedicatedZones", testlistDedicatedZones)
 
+	testlistIpv4SubnetsForZone := func(t *testing.T) {
+		if _, ok := response["listIpv4SubnetsForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewListIpv4SubnetsForZoneParams()
+		_, err := client.Zone.ListIpv4SubnetsForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListIpv4SubnetsForZone", testlistIpv4SubnetsForZone)
+
 	testlistZones := func(t *testing.T) {
 		if _, ok := response["listZones"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -172,6 +226,21 @@ func TestZoneService(t *testing.T) {
 		}
 	}
 	t.Run("ReleaseDedicatedZone", testreleaseDedicatedZone)
+
+	testreleaseIpv4SubnetForZone := func(t *testing.T) {
+		if _, ok := response["releaseIpv4SubnetForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewReleaseIpv4SubnetForZoneParams("id")
+		r, err := client.Zone.ReleaseIpv4SubnetForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ReleaseIpv4SubnetForZone", testreleaseIpv4SubnetForZone)
 
 	testupdateZone := func(t *testing.T) {
 		if _, ok := response["updateZone"]; !ok {
@@ -227,6 +296,33 @@ func TestZoneService(t *testing.T) {
 	}
 	t.Run("ListVmwareDcs", testlistVmwareDcs)
 
+	testremoveVmwareDc := func(t *testing.T) {
+		if _, ok := response["removeVmwareDc"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewRemoveVmwareDcParams("zoneid")
+		_, err := client.Zone.RemoveVmwareDc(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RemoveVmwareDc", testremoveVmwareDc)
+
+	testupdateIpv4SubnetForZone := func(t *testing.T) {
+		if _, ok := response["updateIpv4SubnetForZone"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Zone.NewUpdateIpv4SubnetForZoneParams("id", "subnet")
+		r, err := client.Zone.UpdateIpv4SubnetForZone(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateIpv4SubnetForZone", testupdateIpv4SubnetForZone)
+
 	testupdateVmwareDc := func(t *testing.T) {
 		if _, ok := response["updateVmwareDc"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -241,17 +337,5 @@ func TestZoneService(t *testing.T) {
 		}
 	}
 	t.Run("UpdateVmwareDc", testupdateVmwareDc)
-
-	testremoveVmwareDc := func(t *testing.T) {
-		if _, ok := response["removeVmwareDc"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Zone.NewRemoveVmwareDcParams("zoneid")
-		_, err := client.Zone.RemoveVmwareDc(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("RemoveVmwareDc", testremoveVmwareDc)
 
 }

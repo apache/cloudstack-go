@@ -86,6 +86,21 @@ func TestDomainService(t *testing.T) {
 	}
 	t.Run("ListDomains", testlistDomains)
 
+	testmoveDomain := func(t *testing.T) {
+		if _, ok := response["moveDomain"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Domain.NewMoveDomainParams("domainid", "parentdomainid")
+		r, err := client.Domain.MoveDomain(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("MoveDomain", testmoveDomain)
+
 	testupdateDomain := func(t *testing.T) {
 		if _, ok := response["updateDomain"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

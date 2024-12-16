@@ -113,6 +113,36 @@ func TestClusterService(t *testing.T) {
 	}
 	t.Run("EnableHAForCluster", testenableHAForCluster)
 
+	testexecuteClusterDrsPlan := func(t *testing.T) {
+		if _, ok := response["executeClusterDrsPlan"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewExecuteClusterDrsPlanParams("id")
+		r, err := client.Cluster.ExecuteClusterDrsPlan(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ExecuteClusterDrsPlan", testexecuteClusterDrsPlan)
+
+	testgenerateClusterDrsPlan := func(t *testing.T) {
+		if _, ok := response["generateClusterDrsPlan"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewGenerateClusterDrsPlanParams("id")
+		r, err := client.Cluster.GenerateClusterDrsPlan(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("GenerateClusterDrsPlan", testgenerateClusterDrsPlan)
+
 	testdisableHAForCluster := func(t *testing.T) {
 		if _, ok := response["disableHAForCluster"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -136,6 +166,18 @@ func TestClusterService(t *testing.T) {
 		}
 	}
 	t.Run("ListClusters", testlistClusters)
+
+	testlistClusterDrsPlan := func(t *testing.T) {
+		if _, ok := response["listClusterDrsPlan"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Cluster.NewListClusterDrsPlanParams()
+		_, err := client.Cluster.ListClusterDrsPlan(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListClusterDrsPlan", testlistClusterDrsPlan)
 
 	testlistClustersMetrics := func(t *testing.T) {
 		if _, ok := response["listClustersMetrics"]; !ok {

@@ -191,6 +191,21 @@ func TestVPCService(t *testing.T) {
 	}
 	t.Run("ListVPCs", testlistVPCs)
 
+	testmigrateVPC := func(t *testing.T) {
+		if _, ok := response["migrateVPC"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VPC.NewMigrateVPCParams("vpcid", "vpcofferingid")
+		r, err := client.VPC.MigrateVPC(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("MigrateVPC", testmigrateVPC)
+
 	testrestartVPC := func(t *testing.T) {
 		if _, ok := response["restartVPC"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

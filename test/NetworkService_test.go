@@ -65,6 +65,36 @@ func TestNetworkService(t *testing.T) {
 	}
 	t.Run("AddOpenDaylightController", testaddOpenDaylightController)
 
+	testchangeBgpPeersForNetwork := func(t *testing.T) {
+		if _, ok := response["changeBgpPeersForNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewChangeBgpPeersForNetworkParams("networkid")
+		r, err := client.Network.ChangeBgpPeersForNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ChangeBgpPeersForNetwork", testchangeBgpPeersForNetwork)
+
+	testcreateIpv4SubnetForGuestNetwork := func(t *testing.T) {
+		if _, ok := response["createIpv4SubnetForGuestNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewCreateIpv4SubnetForGuestNetworkParams("parentid")
+		r, err := client.Network.CreateIpv4SubnetForGuestNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateIpv4SubnetForGuestNetwork", testcreateIpv4SubnetForGuestNetwork)
+
 	testcreateNetwork := func(t *testing.T) {
 		if _, ok := response["createNetwork"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -140,6 +170,18 @@ func TestNetworkService(t *testing.T) {
 	}
 	t.Run("DedicatePublicIpRange", testdedicatePublicIpRange)
 
+	testdeleteIpv4SubnetForGuestNetwork := func(t *testing.T) {
+		if _, ok := response["deleteIpv4SubnetForGuestNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewDeleteIpv4SubnetForGuestNetworkParams("id")
+		_, err := client.Network.DeleteIpv4SubnetForGuestNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteIpv4SubnetForGuestNetwork", testdeleteIpv4SubnetForGuestNetwork)
+
 	testdeleteNetwork := func(t *testing.T) {
 		if _, ok := response["deleteNetwork"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -203,17 +245,17 @@ func TestNetworkService(t *testing.T) {
 	}
 	t.Run("DeleteStorageNetworkIpRange", testdeleteStorageNetworkIpRange)
 
-	testlistNetscalerLoadBalancerNetworks := func(t *testing.T) {
-		if _, ok := response["listNetscalerLoadBalancerNetworks"]; !ok {
+	testlistIpv4SubnetsForGuestNetwork := func(t *testing.T) {
+		if _, ok := response["listIpv4SubnetsForGuestNetwork"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Network.NewListNetscalerLoadBalancerNetworksParams("lbdeviceid")
-		_, err := client.Network.ListNetscalerLoadBalancerNetworks(p)
+		p := client.Network.NewListIpv4SubnetsForGuestNetworkParams()
+		_, err := client.Network.ListIpv4SubnetsForGuestNetwork(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ListNetscalerLoadBalancerNetworks", testlistNetscalerLoadBalancerNetworks)
+	t.Run("ListIpv4SubnetsForGuestNetwork", testlistIpv4SubnetsForGuestNetwork)
 
 	testlistNetworkIsolationMethods := func(t *testing.T) {
 		if _, ok := response["listNetworkIsolationMethods"]; !ok {
@@ -226,6 +268,18 @@ func TestNetworkService(t *testing.T) {
 		}
 	}
 	t.Run("ListNetworkIsolationMethods", testlistNetworkIsolationMethods)
+
+	testlistNetworkProtocols := func(t *testing.T) {
+		if _, ok := response["listNetworkProtocols"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewListNetworkProtocolsParams("option")
+		_, err := client.Network.ListNetworkProtocols(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListNetworkProtocols", testlistNetworkProtocols)
 
 	testlistNetworkServiceProviders := func(t *testing.T) {
 		if _, ok := response["listNetworkServiceProviders"]; !ok {
@@ -322,6 +376,21 @@ func TestNetworkService(t *testing.T) {
 		}
 	}
 	t.Run("ListSupportedNetworkServices", testlistSupportedNetworkServices)
+
+	testmigrateNetwork := func(t *testing.T) {
+		if _, ok := response["migrateNetwork"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Network.NewMigrateNetworkParams("networkid", "networkofferingid")
+		r, err := client.Network.MigrateNetwork(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("MigrateNetwork", testmigrateNetwork)
 
 	testreleasePublicIpRange := func(t *testing.T) {
 		if _, ok := response["releasePublicIpRange"]; !ok {

@@ -77,6 +77,18 @@ func TestSystemVMService(t *testing.T) {
 	}
 	t.Run("ListSystemVms", testlistSystemVms)
 
+	testlistSystemVmsUsageHistory := func(t *testing.T) {
+		if _, ok := response["listSystemVmsUsageHistory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.SystemVM.NewListSystemVmsUsageHistoryParams()
+		_, err := client.SystemVM.ListSystemVmsUsageHistory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListSystemVmsUsageHistory", testlistSystemVmsUsageHistory)
+
 	testmigrateSystemVm := func(t *testing.T) {
 		if _, ok := response["migrateSystemVm"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

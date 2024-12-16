@@ -128,6 +128,18 @@ func TestImageStoreService(t *testing.T) {
 	}
 	t.Run("ListSecondaryStagingStores", testlistSecondaryStagingStores)
 
+	testmigrateResourceToAnotherSecondaryStorage := func(t *testing.T) {
+		if _, ok := response["migrateResourceToAnotherSecondaryStorage"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ImageStore.NewMigrateResourceToAnotherSecondaryStorageParams("destpool", "srcpool")
+		_, err := client.ImageStore.MigrateResourceToAnotherSecondaryStorage(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("MigrateResourceToAnotherSecondaryStorage", testmigrateResourceToAnotherSecondaryStorage)
+
 	testupdateCloudToUseObjectStore := func(t *testing.T) {
 		if _, ok := response["updateCloudToUseObjectStore"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -159,7 +171,7 @@ func TestImageStoreService(t *testing.T) {
 		if _, ok := response["updateImageStore"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.ImageStore.NewUpdateImageStoreParams("id", true)
+		p := client.ImageStore.NewUpdateImageStoreParams("id")
 		r, err := client.ImageStore.UpdateImageStore(p)
 		if err != nil {
 			t.Errorf(err.Error())

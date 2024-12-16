@@ -29,6 +29,8 @@ import (
 type ResourcemetadataServiceIface interface {
 	AddResourceDetail(p *AddResourceDetailParams) (*AddResourceDetailResponse, error)
 	NewAddResourceDetailParams(details map[string]string, resourceid string, resourcetype string) *AddResourceDetailParams
+	ListDetailOptions(p *ListDetailOptionsParams) (*ListDetailOptionsResponse, error)
+	NewListDetailOptionsParams(resourcetype string) *ListDetailOptionsParams
 	GetVolumeSnapshotDetails(p *GetVolumeSnapshotDetailsParams) (*GetVolumeSnapshotDetailsResponse, error)
 	NewGetVolumeSnapshotDetailsParams(snapshotid string) *GetVolumeSnapshotDetailsParams
 	ListResourceDetails(p *ListResourceDetailsParams) (*ListResourceDetailsResponse, error)
@@ -196,6 +198,101 @@ type AddResourceDetailResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+type ListDetailOptionsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListDetailOptionsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["resourceid"]; found {
+		u.Set("resourceid", v.(string))
+	}
+	if v, found := p.p["resourcetype"]; found {
+		u.Set("resourcetype", v.(string))
+	}
+	return u
+}
+
+func (p *ListDetailOptionsParams) SetResourceid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourceid"] = v
+}
+
+func (p *ListDetailOptionsParams) ResetResourceid() {
+	if p.p != nil && p.p["resourceid"] != nil {
+		delete(p.p, "resourceid")
+	}
+}
+
+func (p *ListDetailOptionsParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
+func (p *ListDetailOptionsParams) SetResourcetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourcetype"] = v
+}
+
+func (p *ListDetailOptionsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
+func (p *ListDetailOptionsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListDetailOptionsParams instance,
+// as then you are sure you have configured all required params
+func (s *ResourcemetadataService) NewListDetailOptionsParams(resourcetype string) *ListDetailOptionsParams {
+	p := &ListDetailOptionsParams{}
+	p.p = make(map[string]interface{})
+	p.p["resourcetype"] = resourcetype
+	return p
+}
+
+// Lists all possible details and their options for a resource type such as a VM or a template
+func (s *ResourcemetadataService) ListDetailOptions(p *ListDetailOptionsParams) (*ListDetailOptionsResponse, error) {
+	resp, err := s.cs.newRequest("listDetailOptions", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListDetailOptionsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListDetailOptionsResponse struct {
+	Count         int             `json:"count"`
+	DetailOptions []*DetailOption `json:"detailoption"`
+}
+
+type DetailOption struct {
+	Details   map[string]string `json:"details"`
+	JobID     string            `json:"jobid"`
+	Jobstatus int               `json:"jobstatus"`
 }
 
 type GetVolumeSnapshotDetailsParams struct {

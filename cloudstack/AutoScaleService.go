@@ -79,6 +79,8 @@ type AutoScaleServiceIface interface {
 	NewUpdateAutoScaleVmGroupParams(id string) *UpdateAutoScaleVmGroupParams
 	UpdateAutoScaleVmProfile(p *UpdateAutoScaleVmProfileParams) (*UpdateAutoScaleVmProfileResponse, error)
 	NewUpdateAutoScaleVmProfileParams(id string) *UpdateAutoScaleVmProfileParams
+	UpdateCondition(p *UpdateConditionParams) (*UpdateConditionResponse, error)
+	NewUpdateConditionParams(id string, relationaloperator string, threshold int64) *UpdateConditionParams
 }
 
 type CreateAutoScalePolicyParams struct {
@@ -5035,4 +5037,137 @@ type UpdateAutoScaleVmProfileResponse struct {
 	Userdataname         string            `json:"userdataname"`
 	Userdatapolicy       string            `json:"userdatapolicy"`
 	Zoneid               string            `json:"zoneid"`
+}
+
+type UpdateConditionParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateConditionParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["relationaloperator"]; found {
+		u.Set("relationaloperator", v.(string))
+	}
+	if v, found := p.p["threshold"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("threshold", vv)
+	}
+	return u
+}
+
+func (p *UpdateConditionParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateConditionParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateConditionParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateConditionParams) SetRelationaloperator(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["relationaloperator"] = v
+}
+
+func (p *UpdateConditionParams) ResetRelationaloperator() {
+	if p.p != nil && p.p["relationaloperator"] != nil {
+		delete(p.p, "relationaloperator")
+	}
+}
+
+func (p *UpdateConditionParams) GetRelationaloperator() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["relationaloperator"].(string)
+	return value, ok
+}
+
+func (p *UpdateConditionParams) SetThreshold(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["threshold"] = v
+}
+
+func (p *UpdateConditionParams) ResetThreshold() {
+	if p.p != nil && p.p["threshold"] != nil {
+		delete(p.p, "threshold")
+	}
+}
+
+func (p *UpdateConditionParams) GetThreshold() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["threshold"].(int64)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateConditionParams instance,
+// as then you are sure you have configured all required params
+func (s *AutoScaleService) NewUpdateConditionParams(id string, relationaloperator string, threshold int64) *UpdateConditionParams {
+	p := &UpdateConditionParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	p.p["relationaloperator"] = relationaloperator
+	p.p["threshold"] = threshold
+	return p
+}
+
+// Updates a condition for VM auto scaling
+func (s *AutoScaleService) UpdateCondition(p *UpdateConditionParams) (*UpdateConditionResponse, error) {
+	resp, err := s.cs.newRequest("updateCondition", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateConditionResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type UpdateConditionResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

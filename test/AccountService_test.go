@@ -92,17 +92,29 @@ func TestAccountService(t *testing.T) {
 	}
 	t.Run("EnableAccount", testenableAccount)
 
-	testgetSolidFireAccountId := func(t *testing.T) {
-		if _, ok := response["getSolidFireAccountId"]; !ok {
+	testisAccountAllowedToCreateOfferingsWithTags := func(t *testing.T) {
+		if _, ok := response["isAccountAllowedToCreateOfferingsWithTags"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Account.NewGetSolidFireAccountIdParams("accountid", "storageid")
-		_, err := client.Account.GetSolidFireAccountId(p)
+		p := client.Account.NewIsAccountAllowedToCreateOfferingsWithTagsParams()
+		_, err := client.Account.IsAccountAllowedToCreateOfferingsWithTags(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("GetSolidFireAccountId", testgetSolidFireAccountId)
+	t.Run("IsAccountAllowedToCreateOfferingsWithTags", testisAccountAllowedToCreateOfferingsWithTags)
+
+	testlinkAccountToLdap := func(t *testing.T) {
+		if _, ok := response["linkAccountToLdap"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Account.NewLinkAccountToLdapParams("account", "domainid", "ldapdomain")
+		_, err := client.Account.LinkAccountToLdap(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("LinkAccountToLdap", testlinkAccountToLdap)
 
 	testlistAccounts := func(t *testing.T) {
 		if _, ok := response["listAccounts"]; !ok {

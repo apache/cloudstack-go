@@ -36,6 +36,10 @@ type RoleServiceIface interface {
 	NewDeleteRoleParams(id string) *DeleteRoleParams
 	DeleteRolePermission(p *DeleteRolePermissionParams) (*DeleteRolePermissionResponse, error)
 	NewDeleteRolePermissionParams(id string) *DeleteRolePermissionParams
+	DisableRole(p *DisableRoleParams) (*DisableRoleResponse, error)
+	NewDisableRoleParams(id string) *DisableRoleParams
+	EnableRole(p *EnableRoleParams) (*EnableRoleResponse, error)
+	NewEnableRoleParams(id string) *EnableRoleParams
 	ImportRole(p *ImportRoleParams) (*ImportRoleResponse, error)
 	NewImportRoleParams(name string, rules map[string]string) *ImportRoleParams
 	ListRolePermissions(p *ListRolePermissionsParams) (*ListRolePermissionsResponse, error)
@@ -559,6 +563,194 @@ func (r *DeleteRolePermissionResponse) UnmarshalJSON(b []byte) error {
 	}
 
 	type alias DeleteRolePermissionResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type DisableRoleParams struct {
+	p map[string]interface{}
+}
+
+func (p *DisableRoleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DisableRoleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DisableRoleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DisableRoleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DisableRoleParams instance,
+// as then you are sure you have configured all required params
+func (s *RoleService) NewDisableRoleParams(id string) *DisableRoleParams {
+	p := &DisableRoleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Disables a role
+func (s *RoleService) DisableRole(p *DisableRoleParams) (*DisableRoleResponse, error) {
+	resp, err := s.cs.newRequest("disableRole", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DisableRoleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type DisableRoleResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *DisableRoleResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias DisableRoleResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type EnableRoleParams struct {
+	p map[string]interface{}
+}
+
+func (p *EnableRoleParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *EnableRoleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *EnableRoleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *EnableRoleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new EnableRoleParams instance,
+// as then you are sure you have configured all required params
+func (s *RoleService) NewEnableRoleParams(id string) *EnableRoleParams {
+	p := &EnableRoleParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Enables a role
+func (s *RoleService) EnableRole(p *EnableRoleParams) (*EnableRoleResponse, error) {
+	resp, err := s.cs.newRequest("enableRole", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r EnableRoleResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type EnableRoleResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *EnableRoleResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias EnableRoleResponse
 	return json.Unmarshal(b, (*alias)(r))
 }
 

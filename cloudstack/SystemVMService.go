@@ -37,6 +37,11 @@ type SystemVMServiceIface interface {
 	GetSystemVmID(name string, opts ...OptionFunc) (string, int, error)
 	GetSystemVmByName(name string, opts ...OptionFunc) (*SystemVm, int, error)
 	GetSystemVmByID(id string, opts ...OptionFunc) (*SystemVm, int, error)
+	ListSystemVmsUsageHistory(p *ListSystemVmsUsageHistoryParams) (*ListSystemVmsUsageHistoryResponse, error)
+	NewListSystemVmsUsageHistoryParams() *ListSystemVmsUsageHistoryParams
+	GetSystemVmsUsageHistoryID(name string, opts ...OptionFunc) (string, int, error)
+	GetSystemVmsUsageHistoryByName(name string, opts ...OptionFunc) (*SystemVmsUsageHistory, int, error)
+	GetSystemVmsUsageHistoryByID(id string, opts ...OptionFunc) (*SystemVmsUsageHistory, int, error)
 	MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSystemVmResponse, error)
 	NewMigrateSystemVmParams(virtualmachineid string) *MigrateSystemVmParams
 	RebootSystemVm(p *RebootSystemVmParams) (*RebootSystemVmResponse, error)
@@ -759,6 +764,333 @@ type SystemVm struct {
 	Version               string   `json:"version"`
 	Zoneid                string   `json:"zoneid"`
 	Zonename              string   `json:"zonename"`
+}
+
+type ListSystemVmsUsageHistoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["enddate"]; found {
+		u.Set("enddate", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["ids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ids", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["startdate"]; found {
+		u.Set("startdate", v.(string))
+	}
+	return u
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetEnddate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enddate"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetEnddate() {
+	if p.p != nil && p.p["enddate"] != nil {
+		delete(p.p, "enddate")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetEnddate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enddate"].(string)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetIds(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ids"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListSystemVmsUsageHistoryParams) SetStartdate(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["startdate"] = v
+}
+
+func (p *ListSystemVmsUsageHistoryParams) ResetStartdate() {
+	if p.p != nil && p.p["startdate"] != nil {
+		delete(p.p, "startdate")
+	}
+}
+
+func (p *ListSystemVmsUsageHistoryParams) GetStartdate() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["startdate"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListSystemVmsUsageHistoryParams instance,
+// as then you are sure you have configured all required params
+func (s *SystemVMService) NewListSystemVmsUsageHistoryParams() *ListSystemVmsUsageHistoryParams {
+	p := &ListSystemVmsUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *SystemVMService) GetSystemVmsUsageHistoryID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListSystemVmsUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListSystemVmsUsageHistory(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.SystemVmsUsageHistory[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.SystemVmsUsageHistory {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *SystemVMService) GetSystemVmsUsageHistoryByName(name string, opts ...OptionFunc) (*SystemVmsUsageHistory, int, error) {
+	id, count, err := s.GetSystemVmsUsageHistoryID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetSystemVmsUsageHistoryByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *SystemVMService) GetSystemVmsUsageHistoryByID(id string, opts ...OptionFunc) (*SystemVmsUsageHistory, int, error) {
+	p := &ListSystemVmsUsageHistoryParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListSystemVmsUsageHistory(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.SystemVmsUsageHistory[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for SystemVmsUsageHistory UUID: %s!", id)
+}
+
+// Lists System VM stats
+func (s *SystemVMService) ListSystemVmsUsageHistory(p *ListSystemVmsUsageHistoryParams) (*ListSystemVmsUsageHistoryResponse, error) {
+	resp, err := s.cs.newRequest("listSystemVmsUsageHistory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListSystemVmsUsageHistoryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListSystemVmsUsageHistoryResponse struct {
+	Count                 int                      `json:"count"`
+	SystemVmsUsageHistory []*SystemVmsUsageHistory `json:"systemvmsusagehistory"`
+}
+
+type SystemVmsUsageHistory struct {
+	Displayname string   `json:"displayname"`
+	Id          string   `json:"id"`
+	JobID       string   `json:"jobid"`
+	Jobstatus   int      `json:"jobstatus"`
+	Name        string   `json:"name"`
+	Stats       []string `json:"stats"`
 }
 
 type MigrateSystemVmParams struct {

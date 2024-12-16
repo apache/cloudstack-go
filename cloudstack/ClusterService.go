@@ -40,6 +40,10 @@ type ClusterServiceIface interface {
 	NewEnableOutOfBandManagementForClusterParams(clusterid string) *EnableOutOfBandManagementForClusterParams
 	EnableHAForCluster(p *EnableHAForClusterParams) (*EnableHAForClusterResponse, error)
 	NewEnableHAForClusterParams(clusterid string) *EnableHAForClusterParams
+	ExecuteClusterDrsPlan(p *ExecuteClusterDrsPlanParams) (*ExecuteClusterDrsPlanResponse, error)
+	NewExecuteClusterDrsPlanParams(id string) *ExecuteClusterDrsPlanParams
+	GenerateClusterDrsPlan(p *GenerateClusterDrsPlanParams) (*GenerateClusterDrsPlanResponse, error)
+	NewGenerateClusterDrsPlanParams(id string) *GenerateClusterDrsPlanParams
 	DisableHAForCluster(p *DisableHAForClusterParams) (*DisableHAForClusterResponse, error)
 	NewDisableHAForClusterParams(clusterid string) *DisableHAForClusterParams
 	ListClusters(p *ListClustersParams) (*ListClustersResponse, error)
@@ -47,6 +51,9 @@ type ClusterServiceIface interface {
 	GetClusterID(name string, opts ...OptionFunc) (string, int, error)
 	GetClusterByName(name string, opts ...OptionFunc) (*Cluster, int, error)
 	GetClusterByID(id string, opts ...OptionFunc) (*Cluster, int, error)
+	ListClusterDrsPlan(p *ListClusterDrsPlanParams) (*ListClusterDrsPlanResponse, error)
+	NewListClusterDrsPlanParams() *ListClusterDrsPlanParams
+	GetClusterDrsPlanByID(id string, opts ...OptionFunc) (*ClusterDrsPlan, int, error)
 	ListClustersMetrics(p *ListClustersMetricsParams) (*ListClustersMetricsResponse, error)
 	NewListClustersMetricsParams() *ListClustersMetricsParams
 	GetClustersMetricID(name string, opts ...OptionFunc) (string, int, error)
@@ -1130,6 +1137,221 @@ type EnableHAForClusterResponse struct {
 	Success     bool   `json:"success"`
 }
 
+type ExecuteClusterDrsPlanParams struct {
+	p map[string]interface{}
+}
+
+func (p *ExecuteClusterDrsPlanParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["migrateto"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("migrateto[%d].key", i), k)
+			u.Set(fmt.Sprintf("migrateto[%d].value", i), m[k])
+		}
+	}
+	return u
+}
+
+func (p *ExecuteClusterDrsPlanParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ExecuteClusterDrsPlanParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ExecuteClusterDrsPlanParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ExecuteClusterDrsPlanParams) SetMigrateto(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["migrateto"] = v
+}
+
+func (p *ExecuteClusterDrsPlanParams) ResetMigrateto() {
+	if p.p != nil && p.p["migrateto"] != nil {
+		delete(p.p, "migrateto")
+	}
+}
+
+func (p *ExecuteClusterDrsPlanParams) GetMigrateto() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["migrateto"].(map[string]string)
+	return value, ok
+}
+
+// You should always use this function to get a new ExecuteClusterDrsPlanParams instance,
+// as then you are sure you have configured all required params
+func (s *ClusterService) NewExecuteClusterDrsPlanParams(id string) *ExecuteClusterDrsPlanParams {
+	p := &ExecuteClusterDrsPlanParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Execute DRS for a cluster. If there is another plan in progress for the same cluster, this command will fail.
+func (s *ClusterService) ExecuteClusterDrsPlan(p *ExecuteClusterDrsPlanParams) (*ExecuteClusterDrsPlanResponse, error) {
+	resp, err := s.cs.newRequest("executeClusterDrsPlan", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ExecuteClusterDrsPlanResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type ExecuteClusterDrsPlanResponse struct {
+	Clusterid  string   `json:"clusterid"`
+	Eventid    string   `json:"eventid"`
+	Id         string   `json:"id"`
+	JobID      string   `json:"jobid"`
+	Jobstatus  int      `json:"jobstatus"`
+	Migrations []string `json:"migrations"`
+	Status     string   `json:"status"`
+	Type       string   `json:"type"`
+}
+
+type GenerateClusterDrsPlanParams struct {
+	p map[string]interface{}
+}
+
+func (p *GenerateClusterDrsPlanParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["migrations"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("migrations", vv)
+	}
+	return u
+}
+
+func (p *GenerateClusterDrsPlanParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *GenerateClusterDrsPlanParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *GenerateClusterDrsPlanParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *GenerateClusterDrsPlanParams) SetMigrations(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["migrations"] = v
+}
+
+func (p *GenerateClusterDrsPlanParams) ResetMigrations() {
+	if p.p != nil && p.p["migrations"] != nil {
+		delete(p.p, "migrations")
+	}
+}
+
+func (p *GenerateClusterDrsPlanParams) GetMigrations() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["migrations"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new GenerateClusterDrsPlanParams instance,
+// as then you are sure you have configured all required params
+func (s *ClusterService) NewGenerateClusterDrsPlanParams(id string) *GenerateClusterDrsPlanParams {
+	p := &GenerateClusterDrsPlanParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Generate DRS plan for a cluster
+func (s *ClusterService) GenerateClusterDrsPlan(p *GenerateClusterDrsPlanParams) (*GenerateClusterDrsPlanResponse, error) {
+	resp, err := s.cs.newRequest("generateClusterDrsPlan", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r GenerateClusterDrsPlanResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type GenerateClusterDrsPlanResponse struct {
+	Clusterid  string   `json:"clusterid"`
+	Eventid    string   `json:"eventid"`
+	Id         string   `json:"id"`
+	JobID      string   `json:"jobid"`
+	Jobstatus  int      `json:"jobstatus"`
+	Migrations []string `json:"migrations"`
+	Status     string   `json:"status"`
+	Type       string   `json:"type"`
+}
+
 type DisableHAForClusterParams struct {
 	p map[string]interface{}
 }
@@ -1662,6 +1884,212 @@ type ClusterCapacity struct {
 	Type              int    `json:"type"`
 	Zoneid            string `json:"zoneid"`
 	Zonename          string `json:"zonename"`
+}
+
+type ListClusterDrsPlanParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListClusterDrsPlanParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	return u
+}
+
+func (p *ListClusterDrsPlanParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ListClusterDrsPlanParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ListClusterDrsPlanParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ListClusterDrsPlanParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListClusterDrsPlanParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListClusterDrsPlanParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListClusterDrsPlanParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListClusterDrsPlanParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListClusterDrsPlanParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListClusterDrsPlanParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListClusterDrsPlanParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListClusterDrsPlanParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListClusterDrsPlanParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListClusterDrsPlanParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListClusterDrsPlanParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new ListClusterDrsPlanParams instance,
+// as then you are sure you have configured all required params
+func (s *ClusterService) NewListClusterDrsPlanParams() *ListClusterDrsPlanParams {
+	p := &ListClusterDrsPlanParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ClusterService) GetClusterDrsPlanByID(id string, opts ...OptionFunc) (*ClusterDrsPlan, int, error) {
+	p := &ListClusterDrsPlanParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListClusterDrsPlan(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.ClusterDrsPlan[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for ClusterDrsPlan UUID: %s!", id)
+}
+
+// List DRS plans for a clusters
+func (s *ClusterService) ListClusterDrsPlan(p *ListClusterDrsPlanParams) (*ListClusterDrsPlanResponse, error) {
+	resp, err := s.cs.newRequest("listClusterDrsPlan", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListClusterDrsPlanResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListClusterDrsPlanResponse struct {
+	Count          int               `json:"count"`
+	ClusterDrsPlan []*ClusterDrsPlan `json:"clusterdrsplan"`
+}
+
+type ClusterDrsPlan struct {
+	Clusterid  string   `json:"clusterid"`
+	Eventid    string   `json:"eventid"`
+	Id         string   `json:"id"`
+	JobID      string   `json:"jobid"`
+	Jobstatus  int      `json:"jobstatus"`
+	Migrations []string `json:"migrations"`
+	Status     string   `json:"status"`
+	Type       string   `json:"type"`
 }
 
 type ListClustersMetricsParams struct {
