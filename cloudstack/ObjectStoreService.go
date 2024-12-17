@@ -348,6 +348,7 @@ type CreateBucketResponse struct {
 	Created         string `json:"created"`
 	Domain          string `json:"domain"`
 	Domainid        string `json:"domainid"`
+	Domainpath      string `json:"domainpath"`
 	Encryption      bool   `json:"encryption"`
 	Hasannotations  bool   `json:"hasannotations"`
 	Id              string `json:"id"`
@@ -1107,6 +1108,7 @@ type Bucket struct {
 	Created         string `json:"created"`
 	Domain          string `json:"domain"`
 	Domainid        string `json:"domainid"`
+	Domainpath      string `json:"domainpath"`
 	Encryption      bool   `json:"encryption"`
 	Hasannotations  bool   `json:"hasannotations"`
 	Id              string `json:"id"`

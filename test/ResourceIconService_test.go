@@ -25,8 +25,8 @@ import (
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
 
-func TestShutdownService(t *testing.T) {
-	service := "ShutdownService"
+func TestResourceIconService(t *testing.T) {
+	service := "ResourceIconService"
 	response, err := readData(service)
 	if err != nil {
 		t.Skipf("Skipping test as %v", err)
@@ -35,16 +35,40 @@ func TestShutdownService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testreadyForShutdown := func(t *testing.T) {
-		if _, ok := response["readyForShutdown"]; !ok {
+	testdeleteResourceIcon := func(t *testing.T) {
+		if _, ok := response["deleteResourceIcon"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Shutdown.NewReadyForShutdownParams()
-		_, err := client.Shutdown.ReadyForShutdown(p)
+		p := client.ResourceIcon.NewDeleteResourceIconParams([]string{}, "resourcetype")
+		_, err := client.ResourceIcon.DeleteResourceIcon(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ReadyForShutdown", testreadyForShutdown)
+	t.Run("DeleteResourceIcon", testdeleteResourceIcon)
+
+	testlistResourceIcon := func(t *testing.T) {
+		if _, ok := response["listResourceIcon"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ResourceIcon.NewListResourceIconParams([]string{}, "resourcetype")
+		_, err := client.ResourceIcon.ListResourceIcon(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListResourceIcon", testlistResourceIcon)
+
+	testuploadResourceIcon := func(t *testing.T) {
+		if _, ok := response["uploadResourceIcon"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ResourceIcon.NewUploadResourceIconParams("base64image", []string{}, "resourcetype")
+		_, err := client.ResourceIcon.UploadResourceIcon(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UploadResourceIcon", testuploadResourceIcon)
 
 }

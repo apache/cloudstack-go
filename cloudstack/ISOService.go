@@ -38,6 +38,8 @@ type ISOServiceIface interface {
 	NewDetachIsoParams(virtualmachineid string) *DetachIsoParams
 	ExtractIso(p *ExtractIsoParams) (*ExtractIsoResponse, error)
 	NewExtractIsoParams(id string, mode string) *ExtractIsoParams
+	GetUploadParamsForIso(p *GetUploadParamsForIsoParams) (*GetUploadParamsForIsoResponse, error)
+	NewGetUploadParamsForIsoParams(format string, name string, zoneid string) *GetUploadParamsForIsoParams
 	ListIsoPermissions(p *ListIsoPermissionsParams) (*ListIsoPermissionsResponse, error)
 	NewListIsoPermissionsParams(id string) *ListIsoPermissionsParams
 	GetIsoPermissionByID(id string, opts ...OptionFunc) (*IsoPermission, int, error)
@@ -1140,6 +1142,370 @@ type ExtractIsoResponse struct {
 	Url              string `json:"url"`
 	Zoneid           string `json:"zoneid"`
 	Zonename         string `json:"zonename"`
+}
+
+type GetUploadParamsForIsoParams struct {
+	p map[string]interface{}
+}
+
+func (p *GetUploadParamsForIsoParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["bootable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("bootable", vv)
+	}
+	if v, found := p.p["checksum"]; found {
+		u.Set("checksum", v.(string))
+	}
+	if v, found := p.p["displaytext"]; found {
+		u.Set("displaytext", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["format"]; found {
+		u.Set("format", v.(string))
+	}
+	if v, found := p.p["isextractable"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isextractable", vv)
+	}
+	if v, found := p.p["isfeatured"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isfeatured", vv)
+	}
+	if v, found := p.p["ispublic"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("ispublic", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["ostypeid"]; found {
+		u.Set("ostypeid", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *GetUploadParamsForIsoParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetBootable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bootable"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetBootable() {
+	if p.p != nil && p.p["bootable"] != nil {
+		delete(p.p, "bootable")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetBootable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bootable"].(bool)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetChecksum(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["checksum"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetChecksum() {
+	if p.p != nil && p.p["checksum"] != nil {
+		delete(p.p, "checksum")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetChecksum() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["checksum"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetDisplaytext(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["displaytext"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetDisplaytext() {
+	if p.p != nil && p.p["displaytext"] != nil {
+		delete(p.p, "displaytext")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetDisplaytext() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["displaytext"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetFormat(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["format"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetFormat() {
+	if p.p != nil && p.p["format"] != nil {
+		delete(p.p, "format")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetFormat() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["format"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetIsextractable(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isextractable"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetIsextractable() {
+	if p.p != nil && p.p["isextractable"] != nil {
+		delete(p.p, "isextractable")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetIsextractable() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isextractable"].(bool)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetIsfeatured(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isfeatured"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetIsfeatured() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isfeatured"].(bool)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetIspublic(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ispublic"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetIspublic() {
+	if p.p != nil && p.p["ispublic"] != nil {
+		delete(p.p, "ispublic")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetIspublic() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ispublic"].(bool)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetOstypeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ostypeid"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetOstypeid() {
+	if p.p != nil && p.p["ostypeid"] != nil {
+		delete(p.p, "ostypeid")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetOstypeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ostypeid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForIsoParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *GetUploadParamsForIsoParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *GetUploadParamsForIsoParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new GetUploadParamsForIsoParams instance,
+// as then you are sure you have configured all required params
+func (s *ISOService) NewGetUploadParamsForIsoParams(format string, name string, zoneid string) *GetUploadParamsForIsoParams {
+	p := &GetUploadParamsForIsoParams{}
+	p.p = make(map[string]interface{})
+	p.p["format"] = format
+	p.p["name"] = name
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// upload an existing ISO into the CloudStack cloud.
+func (s *ISOService) GetUploadParamsForIso(p *GetUploadParamsForIsoParams) (*GetUploadParamsForIsoResponse, error) {
+	resp, err := s.cs.newRequest("getUploadParamsForIso", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r GetUploadParamsForIsoResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type GetUploadParamsForIsoResponse struct {
+	Expires   string `json:"expires"`
+	Id        string `json:"id"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Metadata  string `json:"metadata"`
+	PostURL   string `json:"postURL"`
+	Signature string `json:"signature"`
 }
 
 type ListIsoPermissionsParams struct {

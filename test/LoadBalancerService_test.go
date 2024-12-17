@@ -35,18 +35,6 @@ func TestLoadBalancerService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testaddNetscalerLoadBalancer := func(t *testing.T) {
-		if _, ok := response["addNetscalerLoadBalancer"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.LoadBalancer.NewAddNetscalerLoadBalancerParams("networkdevicetype", "password", "physicalnetworkid", "url", "username")
-		_, err := client.LoadBalancer.AddNetscalerLoadBalancer(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("AddNetscalerLoadBalancer", testaddNetscalerLoadBalancer)
-
 	testassignCertToLoadBalancer := func(t *testing.T) {
 		if _, ok := response["assignCertToLoadBalancer"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -82,18 +70,6 @@ func TestLoadBalancerService(t *testing.T) {
 		}
 	}
 	t.Run("AssignToLoadBalancerRule", testassignToLoadBalancerRule)
-
-	testconfigureNetscalerLoadBalancer := func(t *testing.T) {
-		if _, ok := response["configureNetscalerLoadBalancer"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.LoadBalancer.NewConfigureNetscalerLoadBalancerParams("lbdeviceid")
-		_, err := client.LoadBalancer.ConfigureNetscalerLoadBalancer(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("ConfigureNetscalerLoadBalancer", testconfigureNetscalerLoadBalancer)
 
 	testcreateGlobalLoadBalancerRule := func(t *testing.T) {
 		if _, ok := response["createGlobalLoadBalancerRule"]; !ok {
@@ -224,17 +200,17 @@ func TestLoadBalancerService(t *testing.T) {
 	}
 	t.Run("DeleteLoadBalancerRule", testdeleteLoadBalancerRule)
 
-	testdeleteNetscalerLoadBalancer := func(t *testing.T) {
-		if _, ok := response["deleteNetscalerLoadBalancer"]; !ok {
+	testdeleteServicePackageOffering := func(t *testing.T) {
+		if _, ok := response["deleteServicePackageOffering"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.LoadBalancer.NewDeleteNetscalerLoadBalancerParams("lbdeviceid")
-		_, err := client.LoadBalancer.DeleteNetscalerLoadBalancer(p)
+		p := client.LoadBalancer.NewDeleteServicePackageOfferingParams("id")
+		_, err := client.LoadBalancer.DeleteServicePackageOffering(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("DeleteNetscalerLoadBalancer", testdeleteNetscalerLoadBalancer)
+	t.Run("DeleteServicePackageOffering", testdeleteServicePackageOffering)
 
 	testdeleteSslCert := func(t *testing.T) {
 		if _, ok := response["deleteSslCert"]; !ok {
@@ -247,6 +223,18 @@ func TestLoadBalancerService(t *testing.T) {
 		}
 	}
 	t.Run("DeleteSslCert", testdeleteSslCert)
+
+	testdeployNetscalerVpx := func(t *testing.T) {
+		if _, ok := response["deployNetscalerVpx"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.LoadBalancer.NewDeployNetscalerVpxParams("serviceofferingid", "templateid", "zoneid")
+		_, err := client.LoadBalancer.DeployNetscalerVpx(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeployNetscalerVpx", testdeployNetscalerVpx)
 
 	testlistGlobalLoadBalancerRules := func(t *testing.T) {
 		if _, ok := response["listGlobalLoadBalancerRules"]; !ok {
@@ -320,17 +308,17 @@ func TestLoadBalancerService(t *testing.T) {
 	}
 	t.Run("ListLoadBalancers", testlistLoadBalancers)
 
-	testlistNetscalerLoadBalancers := func(t *testing.T) {
-		if _, ok := response["listNetscalerLoadBalancers"]; !ok {
+	testlistRegisteredServicePackages := func(t *testing.T) {
+		if _, ok := response["listRegisteredServicePackages"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.LoadBalancer.NewListNetscalerLoadBalancersParams()
-		_, err := client.LoadBalancer.ListNetscalerLoadBalancers(p)
+		p := client.LoadBalancer.NewListRegisteredServicePackagesParams()
+		_, err := client.LoadBalancer.ListRegisteredServicePackages(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("ListNetscalerLoadBalancers", testlistNetscalerLoadBalancers)
+	t.Run("ListRegisteredServicePackages", testlistRegisteredServicePackages)
 
 	testlistSslCerts := func(t *testing.T) {
 		if _, ok := response["listSslCerts"]; !ok {
@@ -379,6 +367,21 @@ func TestLoadBalancerService(t *testing.T) {
 		}
 	}
 	t.Run("RemoveFromLoadBalancerRule", testremoveFromLoadBalancerRule)
+
+	teststopNetScalerVpx := func(t *testing.T) {
+		if _, ok := response["stopNetScalerVpx"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.LoadBalancer.NewStopNetScalerVpxParams("id")
+		r, err := client.LoadBalancer.StopNetScalerVpx(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("StopNetScalerVpx", teststopNetScalerVpx)
 
 	testupdateGlobalLoadBalancerRule := func(t *testing.T) {
 		if _, ok := response["updateGlobalLoadBalancerRule"]; !ok {

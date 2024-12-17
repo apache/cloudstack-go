@@ -50,6 +50,36 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("AttachVolume", testattachVolume)
 
+	testchangeOfferingForVolume := func(t *testing.T) {
+		if _, ok := response["changeOfferingForVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewChangeOfferingForVolumeParams("diskofferingid", "id")
+		r, err := client.Volume.ChangeOfferingForVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ChangeOfferingForVolume", testchangeOfferingForVolume)
+
+	testcheckVolume := func(t *testing.T) {
+		if _, ok := response["checkVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewCheckVolumeParams("id")
+		r, err := client.Volume.CheckVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CheckVolume", testcheckVolume)
+
 	testcreateVolume := func(t *testing.T) {
 		if _, ok := response["createVolume"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -134,18 +164,6 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("GetPathForVolume", testgetPathForVolume)
 
-	testgetSolidFireVolumeSize := func(t *testing.T) {
-		if _, ok := response["getSolidFireVolumeSize"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Volume.NewGetSolidFireVolumeSizeParams("volumeid")
-		_, err := client.Volume.GetSolidFireVolumeSize(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("GetSolidFireVolumeSize", testgetSolidFireVolumeSize)
-
 	testgetUploadParamsForVolume := func(t *testing.T) {
 		if _, ok := response["getUploadParamsForVolume"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -170,6 +188,33 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("GetVolumeiScsiName", testgetVolumeiScsiName)
 
+	testimportVolume := func(t *testing.T) {
+		if _, ok := response["importVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewImportVolumeParams("path", "storageid")
+		r, err := client.Volume.ImportVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ImportVolume", testimportVolume)
+
+	testlistElastistorVolume := func(t *testing.T) {
+		if _, ok := response["listElastistorVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewListElastistorVolumeParams("id")
+		_, err := client.Volume.ListElastistorVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListElastistorVolume", testlistElastistorVolume)
+
 	testlistVolumes := func(t *testing.T) {
 		if _, ok := response["listVolumes"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -181,6 +226,18 @@ func TestVolumeService(t *testing.T) {
 		}
 	}
 	t.Run("ListVolumes", testlistVolumes)
+
+	testlistVolumesForImport := func(t *testing.T) {
+		if _, ok := response["listVolumesForImport"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewListVolumesForImportParams("storageid")
+		_, err := client.Volume.ListVolumesForImport(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListVolumesForImport", testlistVolumesForImport)
 
 	testlistVolumesMetrics := func(t *testing.T) {
 		if _, ok := response["listVolumesMetrics"]; !ok {
@@ -239,6 +296,18 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("ResizeVolume", testresizeVolume)
 
+	testunmanageVolume := func(t *testing.T) {
+		if _, ok := response["unmanageVolume"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewUnmanageVolumeParams("id")
+		_, err := client.Volume.UnmanageVolume(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UnmanageVolume", testunmanageVolume)
+
 	testupdateVolume := func(t *testing.T) {
 		if _, ok := response["updateVolume"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -268,21 +337,6 @@ func TestVolumeService(t *testing.T) {
 		}
 	}
 	t.Run("UploadVolume", testuploadVolume)
-
-	testchangeOfferingForVolume := func(t *testing.T) {
-		if _, ok := response["changeOfferingForVolume"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Volume.NewChangeOfferingForVolumeParams("diskofferingid", "id")
-		r, err := client.Volume.ChangeOfferingForVolume(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-		if r.Id == "" {
-			t.Errorf("Failed to parse response. ID not found")
-		}
-	}
-	t.Run("ChangeOfferingForVolume", testchangeOfferingForVolume)
 
 	testlistVolumesUsageHistory := func(t *testing.T) {
 		if _, ok := response["listVolumesUsageHistory"]; !ok {

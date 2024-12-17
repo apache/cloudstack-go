@@ -46,6 +46,8 @@ type HostServiceIface interface {
 	NewDedicateHostParams(domainid string, hostid string) *DedicateHostParams
 	DeleteHost(p *DeleteHostParams) (*DeleteHostResponse, error)
 	NewDeleteHostParams(id string) *DeleteHostParams
+	DisableHAForHost(p *DisableHAForHostParams) (*DisableHAForHostResponse, error)
+	NewDisableHAForHostParams(hostid string) *DisableHAForHostParams
 	DisableOutOfBandManagementForHost(p *DisableOutOfBandManagementForHostParams) (*DisableOutOfBandManagementForHostResponse, error)
 	NewDisableOutOfBandManagementForHostParams(hostid string) *DisableOutOfBandManagementForHostParams
 	EnableOutOfBandManagementForHost(p *EnableOutOfBandManagementForHostParams) (*EnableOutOfBandManagementForHostResponse, error)
@@ -1771,6 +1773,96 @@ func (r *DeleteHostResponse) UnmarshalJSON(b []byte) error {
 
 	type alias DeleteHostResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type DisableHAForHostParams struct {
+	p map[string]interface{}
+}
+
+func (p *DisableHAForHostParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	return u
+}
+
+func (p *DisableHAForHostParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *DisableHAForHostParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *DisableHAForHostParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DisableHAForHostParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewDisableHAForHostParams(hostid string) *DisableHAForHostParams {
+	p := &DisableHAForHostParams{}
+	p.p = make(map[string]interface{})
+	p.p["hostid"] = hostid
+	return p
+}
+
+// Disables HA for a host
+func (s *HostService) DisableHAForHost(p *DisableHAForHostParams) (*DisableHAForHostResponse, error) {
+	resp, err := s.cs.newRequest("disableHAForHost", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DisableHAForHostResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DisableHAForHostResponse struct {
+	Haenable   bool   `json:"haenable"`
+	Haprovider string `json:"haprovider"`
+	Hastate    string `json:"hastate"`
+	Hostid     string `json:"hostid"`
+	JobID      string `json:"jobid"`
+	Jobstatus  int    `json:"jobstatus"`
+	Status     bool   `json:"status"`
 }
 
 type DisableOutOfBandManagementForHostParams struct {
@@ -5028,6 +5120,7 @@ func (s *HostService) CancelHostAsDegraded(p *CancelHostAsDegradedParams) (*Canc
 
 type CancelHostAsDegradedResponse struct {
 	Annotation                       string                                 `json:"annotation"`
+	Arch                             string                                 `json:"arch"`
 	Capabilities                     string                                 `json:"capabilities"`
 	Clusterid                        string                                 `json:"clusterid"`
 	Clustername                      string                                 `json:"clustername"`
@@ -5049,6 +5142,7 @@ type CancelHostAsDegradedResponse struct {
 	Disksizetotal                    int64                                  `json:"disksizetotal"`
 	Encryptionsupported              bool                                   `json:"encryptionsupported"`
 	Events                           string                                 `json:"events"`
+	Explicithosttags                 string                                 `json:"explicithosttags"`
 	Gpugroup                         []CancelHostAsDegradedResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                   `json:"hahost"`
 	Hasannotations                   bool                                   `json:"hasannotations"`
@@ -5058,6 +5152,8 @@ type CancelHostAsDegradedResponse struct {
 	Hypervisor                       string                                 `json:"hypervisor"`
 	Hypervisorversion                string                                 `json:"hypervisorversion"`
 	Id                               string                                 `json:"id"`
+	Implicithosttags                 string                                 `json:"implicithosttags"`
+	Instanceconversionsupported      bool                                   `json:"instanceconversionsupported"`
 	Ipaddress                        string                                 `json:"ipaddress"`
 	Islocalstorageactive             bool                                   `json:"islocalstorageactive"`
 	Istagarule                       bool                                   `json:"istagarule"`
@@ -5658,16 +5754,37 @@ func (s *HostService) RemoveSecondaryStorageSelector(p *RemoveSecondaryStorageSe
 }
 
 type RemoveSecondaryStorageSelectorResponse struct {
-	Created       string `json:"created"`
-	Description   string `json:"description"`
-	Heuristicrule string `json:"heuristicrule"`
-	Id            string `json:"id"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Name          string `json:"name"`
-	Removed       string `json:"removed"`
-	Type          string `json:"type"`
-	Zoneid        string `json:"zoneid"`
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *RemoveSecondaryStorageSelectorResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias RemoveSecondaryStorageSelectorResponse
+	return json.Unmarshal(b, (*alias)(r))
 }
 
 type ListHostHAResourcesParams struct {
@@ -5826,6 +5943,7 @@ func (s *HostService) DeclareHostAsDegraded(p *DeclareHostAsDegradedParams) (*De
 
 type DeclareHostAsDegradedResponse struct {
 	Annotation                       string                                  `json:"annotation"`
+	Arch                             string                                  `json:"arch"`
 	Capabilities                     string                                  `json:"capabilities"`
 	Clusterid                        string                                  `json:"clusterid"`
 	Clustername                      string                                  `json:"clustername"`
@@ -5847,6 +5965,7 @@ type DeclareHostAsDegradedResponse struct {
 	Disksizetotal                    int64                                   `json:"disksizetotal"`
 	Encryptionsupported              bool                                    `json:"encryptionsupported"`
 	Events                           string                                  `json:"events"`
+	Explicithosttags                 string                                  `json:"explicithosttags"`
 	Gpugroup                         []DeclareHostAsDegradedResponseGpugroup `json:"gpugroup"`
 	Hahost                           bool                                    `json:"hahost"`
 	Hasannotations                   bool                                    `json:"hasannotations"`
@@ -5856,6 +5975,8 @@ type DeclareHostAsDegradedResponse struct {
 	Hypervisor                       string                                  `json:"hypervisor"`
 	Hypervisorversion                string                                  `json:"hypervisorversion"`
 	Id                               string                                  `json:"id"`
+	Implicithosttags                 string                                  `json:"implicithosttags"`
+	Instanceconversionsupported      bool                                    `json:"instanceconversionsupported"`
 	Ipaddress                        string                                  `json:"ipaddress"`
 	Islocalstorageactive             bool                                    `json:"islocalstorageactive"`
 	Istagarule                       bool                                    `json:"istagarule"`

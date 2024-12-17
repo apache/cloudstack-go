@@ -35,17 +35,17 @@ func TestCertificateService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testuploadCustomCertificate := func(t *testing.T) {
-		if _, ok := response["uploadCustomCertificate"]; !ok {
+	testissueCertificate := func(t *testing.T) {
+		if _, ok := response["issueCertificate"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
-		_, err := client.Certificate.UploadCustomCertificate(p)
+		p := client.Certificate.NewIssueCertificateParams()
+		_, err := client.Certificate.IssueCertificate(p)
 		if err != nil {
 			t.Errorf(err.Error())
 		}
 	}
-	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
+	t.Run("IssueCertificate", testissueCertificate)
 
 	testlistCAProviders := func(t *testing.T) {
 		if _, ok := response["listCAProviders"]; !ok {
@@ -59,6 +59,30 @@ func TestCertificateService(t *testing.T) {
 	}
 	t.Run("ListCAProviders", testlistCAProviders)
 
+	testlistCaCertificate := func(t *testing.T) {
+		if _, ok := response["listCaCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewListCaCertificateParams()
+		_, err := client.Certificate.ListCaCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListCaCertificate", testlistCaCertificate)
+
+	testlistTemplateDirectDownloadCertificates := func(t *testing.T) {
+		if _, ok := response["listTemplateDirectDownloadCertificates"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewListTemplateDirectDownloadCertificatesParams()
+		_, err := client.Certificate.ListTemplateDirectDownloadCertificates(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListTemplateDirectDownloadCertificates", testlistTemplateDirectDownloadCertificates)
+
 	testprovisionCertificate := func(t *testing.T) {
 		if _, ok := response["provisionCertificate"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -70,5 +94,68 @@ func TestCertificateService(t *testing.T) {
 		}
 	}
 	t.Run("ProvisionCertificate", testprovisionCertificate)
+
+	testprovisionTemplateDirectDownloadCertificate := func(t *testing.T) {
+		if _, ok := response["provisionTemplateDirectDownloadCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewProvisionTemplateDirectDownloadCertificateParams("hostid", "id")
+		_, err := client.Certificate.ProvisionTemplateDirectDownloadCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ProvisionTemplateDirectDownloadCertificate", testprovisionTemplateDirectDownloadCertificate)
+
+	testrevokeCertificate := func(t *testing.T) {
+		if _, ok := response["revokeCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewRevokeCertificateParams("serial")
+		_, err := client.Certificate.RevokeCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RevokeCertificate", testrevokeCertificate)
+
+	testrevokeTemplateDirectDownloadCertificate := func(t *testing.T) {
+		if _, ok := response["revokeTemplateDirectDownloadCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewRevokeTemplateDirectDownloadCertificateParams("zoneid")
+		_, err := client.Certificate.RevokeTemplateDirectDownloadCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RevokeTemplateDirectDownloadCertificate", testrevokeTemplateDirectDownloadCertificate)
+
+	testuploadCustomCertificate := func(t *testing.T) {
+		if _, ok := response["uploadCustomCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewUploadCustomCertificateParams("certificate", "domainsuffix")
+		_, err := client.Certificate.UploadCustomCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("UploadCustomCertificate", testuploadCustomCertificate)
+
+	testuploadTemplateDirectDownloadCertificate := func(t *testing.T) {
+		if _, ok := response["uploadTemplateDirectDownloadCertificate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Certificate.NewUploadTemplateDirectDownloadCertificateParams("certificate", "hypervisor", "name", "zoneid")
+		r, err := client.Certificate.UploadTemplateDirectDownloadCertificate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UploadTemplateDirectDownloadCertificate", testuploadTemplateDirectDownloadCertificate)
 
 }

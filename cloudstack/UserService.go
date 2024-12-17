@@ -42,6 +42,8 @@ type UserServiceIface interface {
 	NewGetUserKeysParams(id string) *GetUserKeysParams
 	GetVirtualMachineUserData(p *GetVirtualMachineUserDataParams) (*GetVirtualMachineUserDataResponse, error)
 	NewGetVirtualMachineUserDataParams(virtualmachineid string) *GetVirtualMachineUserDataParams
+	ListUserTwoFactorAuthenticatorProviders(p *ListUserTwoFactorAuthenticatorProvidersParams) (*ListUserTwoFactorAuthenticatorProvidersResponse, error)
+	NewListUserTwoFactorAuthenticatorProvidersParams() *ListUserTwoFactorAuthenticatorProvidersParams
 	ListUsers(p *ListUsersParams) (*ListUsersResponse, error)
 	NewListUsersParams() *ListUsersParams
 	GetUserByID(id string, opts ...OptionFunc) (*User, int, error)
@@ -64,6 +66,10 @@ type UserServiceIface interface {
 	NewMoveUserParams(id string) *MoveUserParams
 	SetupUserTwoFactorAuthentication(p *SetupUserTwoFactorAuthenticationParams) (*SetupUserTwoFactorAuthenticationResponse, error)
 	NewSetupUserTwoFactorAuthenticationParams() *SetupUserTwoFactorAuthenticationParams
+	ValidateUserTwoFactorAuthenticationCode(p *ValidateUserTwoFactorAuthenticationCodeParams) (*ValidateUserTwoFactorAuthenticationCodeResponse, error)
+	NewValidateUserTwoFactorAuthenticationCodeParams(codefor2fa string) *ValidateUserTwoFactorAuthenticationCodeParams
+	VerifyOAuthCodeAndGetUser(p *VerifyOAuthCodeAndGetUserParams) (*VerifyOAuthCodeAndGetUserResponse, error)
+	NewVerifyOAuthCodeAndGetUserParams(provider string) *VerifyOAuthCodeAndGetUserParams
 }
 
 type CreateUserParams struct {
@@ -881,6 +887,77 @@ type GetVirtualMachineUserDataResponse struct {
 	Jobstatus        int    `json:"jobstatus"`
 	Userdata         string `json:"userdata"`
 	Virtualmachineid string `json:"virtualmachineid"`
+}
+
+type ListUserTwoFactorAuthenticatorProvidersParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListUserTwoFactorAuthenticatorProvidersParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	return u
+}
+
+func (p *ListUserTwoFactorAuthenticatorProvidersParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListUserTwoFactorAuthenticatorProvidersParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListUserTwoFactorAuthenticatorProvidersParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListUserTwoFactorAuthenticatorProvidersParams instance,
+// as then you are sure you have configured all required params
+func (s *UserService) NewListUserTwoFactorAuthenticatorProvidersParams() *ListUserTwoFactorAuthenticatorProvidersParams {
+	p := &ListUserTwoFactorAuthenticatorProvidersParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Lists user two factor authenticator providers
+func (s *UserService) ListUserTwoFactorAuthenticatorProviders(p *ListUserTwoFactorAuthenticatorProvidersParams) (*ListUserTwoFactorAuthenticatorProvidersResponse, error) {
+	resp, err := s.cs.newRequest("listUserTwoFactorAuthenticatorProviders", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListUserTwoFactorAuthenticatorProvidersResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListUserTwoFactorAuthenticatorProvidersResponse struct {
+	Count                               int                                   `json:"count"`
+	UserTwoFactorAuthenticatorProviders []*UserTwoFactorAuthenticatorProvider `json:"usertwofactorauthenticatorprovider"`
+}
+
+type UserTwoFactorAuthenticatorProvider struct {
+	Description string `json:"description"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
 }
 
 type ListUsersParams struct {
@@ -2145,12 +2222,15 @@ type UserData struct {
 	Accountid      string `json:"accountid"`
 	Domain         string `json:"domain"`
 	Domainid       string `json:"domainid"`
+	Domainpath     string `json:"domainpath"`
 	Hasannotations bool   `json:"hasannotations"`
 	Id             string `json:"id"`
 	JobID          string `json:"jobid"`
 	Jobstatus      int    `json:"jobstatus"`
 	Name           string `json:"name"`
 	Params         string `json:"params"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
 	Userdata       string `json:"userdata"`
 }
 
@@ -2645,7 +2725,7 @@ func (s *UserService) NewMoveUserParams(id string) *MoveUserParams {
 	return p
 }
 
-// Moves a user to another account
+// Moves a user to another account in the same domain.
 func (s *UserService) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
 	resp, err := s.cs.newRequest("moveUser", p.toURLValues())
 	if err != nil {
@@ -2812,4 +2892,269 @@ type SetupUserTwoFactorAuthenticationResponse struct {
 	Jobstatus  int    `json:"jobstatus"`
 	Secretcode string `json:"secretcode"`
 	Username   string `json:"username"`
+}
+
+type ValidateUserTwoFactorAuthenticationCodeParams struct {
+	p map[string]interface{}
+}
+
+func (p *ValidateUserTwoFactorAuthenticationCodeParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["codefor2fa"]; found {
+		u.Set("codefor2fa", v.(string))
+	}
+	return u
+}
+
+func (p *ValidateUserTwoFactorAuthenticationCodeParams) SetCodefor2fa(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["codefor2fa"] = v
+}
+
+func (p *ValidateUserTwoFactorAuthenticationCodeParams) ResetCodefor2fa() {
+	if p.p != nil && p.p["codefor2fa"] != nil {
+		delete(p.p, "codefor2fa")
+	}
+}
+
+func (p *ValidateUserTwoFactorAuthenticationCodeParams) GetCodefor2fa() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["codefor2fa"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ValidateUserTwoFactorAuthenticationCodeParams instance,
+// as then you are sure you have configured all required params
+func (s *UserService) NewValidateUserTwoFactorAuthenticationCodeParams(codefor2fa string) *ValidateUserTwoFactorAuthenticationCodeParams {
+	p := &ValidateUserTwoFactorAuthenticationCodeParams{}
+	p.p = make(map[string]interface{})
+	p.p["codefor2fa"] = codefor2fa
+	return p
+}
+
+// Checks the 2FA code for the user.
+func (s *UserService) ValidateUserTwoFactorAuthenticationCode(p *ValidateUserTwoFactorAuthenticationCodeParams) (*ValidateUserTwoFactorAuthenticationCodeResponse, error) {
+	resp, err := s.cs.newPostRequest("validateUserTwoFactorAuthenticationCode", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ValidateUserTwoFactorAuthenticationCodeResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ValidateUserTwoFactorAuthenticationCodeResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *ValidateUserTwoFactorAuthenticationCodeResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias ValidateUserTwoFactorAuthenticationCodeResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type VerifyOAuthCodeAndGetUserParams struct {
+	p map[string]interface{}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
+	}
+	if v, found := p.p["secretcode"]; found {
+		u.Set("secretcode", v.(string))
+	}
+	return u
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
+	return value, ok
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) SetSecretcode(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["secretcode"] = v
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) ResetSecretcode() {
+	if p.p != nil && p.p["secretcode"] != nil {
+		delete(p.p, "secretcode")
+	}
+}
+
+func (p *VerifyOAuthCodeAndGetUserParams) GetSecretcode() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["secretcode"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new VerifyOAuthCodeAndGetUserParams instance,
+// as then you are sure you have configured all required params
+func (s *UserService) NewVerifyOAuthCodeAndGetUserParams(provider string) *VerifyOAuthCodeAndGetUserParams {
+	p := &VerifyOAuthCodeAndGetUserParams{}
+	p.p = make(map[string]interface{})
+	p.p["provider"] = provider
+	return p
+}
+
+// Verify the OAuth Code and fetch the corresponding user from provider
+func (s *UserService) VerifyOAuthCodeAndGetUser(p *VerifyOAuthCodeAndGetUserParams) (*VerifyOAuthCodeAndGetUserResponse, error) {
+	resp, err := s.cs.newRequest("verifyOAuthCodeAndGetUser", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r VerifyOAuthCodeAndGetUserResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type VerifyOAuthCodeAndGetUserResponse struct {
+	Clientid    string `json:"clientid"`
+	Description string `json:"description"`
+	Enabled     bool   `json:"enabled"`
+	Id          string `json:"id"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Name        string `json:"name"`
+	Provider    string `json:"provider"`
+	Redirecturi string `json:"redirecturi"`
+	Secretkey   string `json:"secretkey"`
 }

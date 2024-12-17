@@ -27,4 +27,5 @@ test:
 
 MOCKGEN := mockgen
 mockgen: ## Download conversion-gen locally if necessary.
-	go get github.com/golang/mock/mockgen; go install github.com/golang/mock/mockgen;
+	go install go.uber.org/mock/mockgen@latest
+

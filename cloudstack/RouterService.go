@@ -36,6 +36,8 @@ type RouterServiceIface interface {
 	NewCreateVirtualRouterElementParams(nspid string) *CreateVirtualRouterElementParams
 	DestroyRouter(p *DestroyRouterParams) (*DestroyRouterResponse, error)
 	NewDestroyRouterParams(id string) *DestroyRouterParams
+	GetRouterHealthCheckResults(p *GetRouterHealthCheckResultsParams) (*GetRouterHealthCheckResultsResponse, error)
+	NewGetRouterHealthCheckResultsParams(routerid string) *GetRouterHealthCheckResultsParams
 	ListRouters(p *ListRoutersParams) (*ListRoutersResponse, error)
 	NewListRoutersParams() *ListRoutersParams
 	GetRouterID(name string, opts ...OptionFunc) (string, int, error)
@@ -587,6 +589,98 @@ type DestroyRouterResponseHealthcheckresults struct {
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
 	Success     bool   `json:"success"`
+}
+
+type GetRouterHealthCheckResultsParams struct {
+	p map[string]interface{}
+}
+
+func (p *GetRouterHealthCheckResultsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["performfreshchecks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("performfreshchecks", vv)
+	}
+	if v, found := p.p["routerid"]; found {
+		u.Set("routerid", v.(string))
+	}
+	return u
+}
+
+func (p *GetRouterHealthCheckResultsParams) SetPerformfreshchecks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["performfreshchecks"] = v
+}
+
+func (p *GetRouterHealthCheckResultsParams) ResetPerformfreshchecks() {
+	if p.p != nil && p.p["performfreshchecks"] != nil {
+		delete(p.p, "performfreshchecks")
+	}
+}
+
+func (p *GetRouterHealthCheckResultsParams) GetPerformfreshchecks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["performfreshchecks"].(bool)
+	return value, ok
+}
+
+func (p *GetRouterHealthCheckResultsParams) SetRouterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["routerid"] = v
+}
+
+func (p *GetRouterHealthCheckResultsParams) ResetRouterid() {
+	if p.p != nil && p.p["routerid"] != nil {
+		delete(p.p, "routerid")
+	}
+}
+
+func (p *GetRouterHealthCheckResultsParams) GetRouterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["routerid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new GetRouterHealthCheckResultsParams instance,
+// as then you are sure you have configured all required params
+func (s *RouterService) NewGetRouterHealthCheckResultsParams(routerid string) *GetRouterHealthCheckResultsParams {
+	p := &GetRouterHealthCheckResultsParams{}
+	p.p = make(map[string]interface{})
+	p.p["routerid"] = routerid
+	return p
+}
+
+// Starts a router.
+func (s *RouterService) GetRouterHealthCheckResults(p *GetRouterHealthCheckResultsParams) (*GetRouterHealthCheckResultsResponse, error) {
+	resp, err := s.cs.newRequest("getRouterHealthCheckResults", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r GetRouterHealthCheckResultsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type GetRouterHealthCheckResultsResponse struct {
+	Healthchecks []string `json:"healthchecks"`
+	JobID        string   `json:"jobid"`
+	Jobstatus    int      `json:"jobstatus"`
+	Routerid     string   `json:"routerid"`
 }
 
 type ListRoutersParams struct {

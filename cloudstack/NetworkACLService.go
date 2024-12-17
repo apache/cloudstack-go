@@ -44,6 +44,8 @@ type NetworkACLServiceIface interface {
 	ListNetworkACLs(p *ListNetworkACLsParams) (*ListNetworkACLsResponse, error)
 	NewListNetworkACLsParams() *ListNetworkACLsParams
 	GetNetworkACLByID(id string, opts ...OptionFunc) (*NetworkACL, int, error)
+	MoveNetworkAclItem(p *MoveNetworkAclItemParams) (*MoveNetworkAclItemResponse, error)
+	NewMoveNetworkAclItemParams(id string) *MoveNetworkAclItemParams
 	ReplaceNetworkACLList(p *ReplaceNetworkACLListParams) (*ReplaceNetworkACLListResponse, error)
 	NewReplaceNetworkACLListParams(aclid string) *ReplaceNetworkACLListParams
 	UpdateNetworkACLItem(p *UpdateNetworkACLItemParams) (*UpdateNetworkACLItemResponse, error)
@@ -1695,6 +1697,203 @@ type ListNetworkACLsResponse struct {
 }
 
 type NetworkACL struct {
+	Aclid       string `json:"aclid"`
+	Aclname     string `json:"aclname"`
+	Action      string `json:"action"`
+	Cidrlist    string `json:"cidrlist"`
+	Endport     string `json:"endport"`
+	Fordisplay  bool   `json:"fordisplay"`
+	Icmpcode    int    `json:"icmpcode"`
+	Icmptype    int    `json:"icmptype"`
+	Id          string `json:"id"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Number      int    `json:"number"`
+	Protocol    string `json:"protocol"`
+	Reason      string `json:"reason"`
+	Startport   string `json:"startport"`
+	State       string `json:"state"`
+	Tags        []Tags `json:"tags"`
+	Traffictype string `json:"traffictype"`
+}
+
+type MoveNetworkAclItemParams struct {
+	p map[string]interface{}
+}
+
+func (p *MoveNetworkAclItemParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["aclconsistencyhash"]; found {
+		u.Set("aclconsistencyhash", v.(string))
+	}
+	if v, found := p.p["customid"]; found {
+		u.Set("customid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["nextaclruleid"]; found {
+		u.Set("nextaclruleid", v.(string))
+	}
+	if v, found := p.p["previousaclruleid"]; found {
+		u.Set("previousaclruleid", v.(string))
+	}
+	return u
+}
+
+func (p *MoveNetworkAclItemParams) SetAclconsistencyhash(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["aclconsistencyhash"] = v
+}
+
+func (p *MoveNetworkAclItemParams) ResetAclconsistencyhash() {
+	if p.p != nil && p.p["aclconsistencyhash"] != nil {
+		delete(p.p, "aclconsistencyhash")
+	}
+}
+
+func (p *MoveNetworkAclItemParams) GetAclconsistencyhash() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["aclconsistencyhash"].(string)
+	return value, ok
+}
+
+func (p *MoveNetworkAclItemParams) SetCustomid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["customid"] = v
+}
+
+func (p *MoveNetworkAclItemParams) ResetCustomid() {
+	if p.p != nil && p.p["customid"] != nil {
+		delete(p.p, "customid")
+	}
+}
+
+func (p *MoveNetworkAclItemParams) GetCustomid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["customid"].(string)
+	return value, ok
+}
+
+func (p *MoveNetworkAclItemParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *MoveNetworkAclItemParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *MoveNetworkAclItemParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *MoveNetworkAclItemParams) SetNextaclruleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nextaclruleid"] = v
+}
+
+func (p *MoveNetworkAclItemParams) ResetNextaclruleid() {
+	if p.p != nil && p.p["nextaclruleid"] != nil {
+		delete(p.p, "nextaclruleid")
+	}
+}
+
+func (p *MoveNetworkAclItemParams) GetNextaclruleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nextaclruleid"].(string)
+	return value, ok
+}
+
+func (p *MoveNetworkAclItemParams) SetPreviousaclruleid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["previousaclruleid"] = v
+}
+
+func (p *MoveNetworkAclItemParams) ResetPreviousaclruleid() {
+	if p.p != nil && p.p["previousaclruleid"] != nil {
+		delete(p.p, "previousaclruleid")
+	}
+}
+
+func (p *MoveNetworkAclItemParams) GetPreviousaclruleid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["previousaclruleid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new MoveNetworkAclItemParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkACLService) NewMoveNetworkAclItemParams(id string) *MoveNetworkAclItemParams {
+	p := &MoveNetworkAclItemParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Move an ACL rule to a position bettwen two other ACL rules of the same ACL network list
+func (s *NetworkACLService) MoveNetworkAclItem(p *MoveNetworkAclItemParams) (*MoveNetworkAclItemResponse, error) {
+	resp, err := s.cs.newRequest("moveNetworkAclItem", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MoveNetworkAclItemResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type MoveNetworkAclItemResponse struct {
 	Aclid       string `json:"aclid"`
 	Aclname     string `json:"aclname"`
 	Action      string `json:"action"`

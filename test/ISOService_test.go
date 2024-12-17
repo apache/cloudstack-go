@@ -107,6 +107,18 @@ func TestISOService(t *testing.T) {
 	}
 	t.Run("ExtractIso", testextractIso)
 
+	testgetUploadParamsForIso := func(t *testing.T) {
+		if _, ok := response["getUploadParamsForIso"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.ISO.NewGetUploadParamsForIsoParams("format", "name", "zoneid")
+		_, err := client.ISO.GetUploadParamsForIso(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("GetUploadParamsForIso", testgetUploadParamsForIso)
+
 	testlistIsoPermissions := func(t *testing.T) {
 		if _, ok := response["listIsoPermissions"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

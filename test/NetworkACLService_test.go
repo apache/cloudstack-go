@@ -113,6 +113,21 @@ func TestNetworkACLService(t *testing.T) {
 	}
 	t.Run("ListNetworkACLs", testlistNetworkACLs)
 
+	testmoveNetworkAclItem := func(t *testing.T) {
+		if _, ok := response["moveNetworkAclItem"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.NetworkACL.NewMoveNetworkAclItemParams("id")
+		r, err := client.NetworkACL.MoveNetworkAclItem(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("MoveNetworkAclItem", testmoveNetworkAclItem)
+
 	testreplaceNetworkACLList := func(t *testing.T) {
 		if _, ok := response["replaceNetworkACLList"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

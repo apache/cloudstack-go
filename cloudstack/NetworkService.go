@@ -32,6 +32,10 @@ type NetworkServiceIface interface {
 	NewAddNetworkServiceProviderParams(name string, physicalnetworkid string) *AddNetworkServiceProviderParams
 	AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error)
 	NewAddOpenDaylightControllerParams(password string, physicalnetworkid string, url string, username string) *AddOpenDaylightControllerParams
+	ChangeBgpPeersForNetwork(p *ChangeBgpPeersForNetworkParams) (*ChangeBgpPeersForNetworkResponse, error)
+	NewChangeBgpPeersForNetworkParams(networkid string) *ChangeBgpPeersForNetworkParams
+	CreateIpv4SubnetForGuestNetwork(p *CreateIpv4SubnetForGuestNetworkParams) (*CreateIpv4SubnetForGuestNetworkResponse, error)
+	NewCreateIpv4SubnetForGuestNetworkParams(parentid string) *CreateIpv4SubnetForGuestNetworkParams
 	CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error)
 	NewCreateNetworkParams(name string, networkofferingid string, zoneid string) *CreateNetworkParams
 	CreatePhysicalNetwork(p *CreatePhysicalNetworkParams) (*CreatePhysicalNetworkResponse, error)
@@ -42,6 +46,8 @@ type NetworkServiceIface interface {
 	NewCreateStorageNetworkIpRangeParams(gateway string, netmask string, podid string, startip string) *CreateStorageNetworkIpRangeParams
 	DedicatePublicIpRange(p *DedicatePublicIpRangeParams) (*DedicatePublicIpRangeResponse, error)
 	NewDedicatePublicIpRangeParams(domainid string, id string) *DedicatePublicIpRangeParams
+	DeleteIpv4SubnetForGuestNetwork(p *DeleteIpv4SubnetForGuestNetworkParams) (*DeleteIpv4SubnetForGuestNetworkResponse, error)
+	NewDeleteIpv4SubnetForGuestNetworkParams(id string) *DeleteIpv4SubnetForGuestNetworkParams
 	DeleteNetwork(p *DeleteNetworkParams) (*DeleteNetworkResponse, error)
 	NewDeleteNetworkParams(id string) *DeleteNetworkParams
 	DeleteNetworkServiceProvider(p *DeleteNetworkServiceProviderParams) (*DeleteNetworkServiceProviderResponse, error)
@@ -52,11 +58,13 @@ type NetworkServiceIface interface {
 	NewDeletePhysicalNetworkParams(id string) *DeletePhysicalNetworkParams
 	DeleteStorageNetworkIpRange(p *DeleteStorageNetworkIpRangeParams) (*DeleteStorageNetworkIpRangeResponse, error)
 	NewDeleteStorageNetworkIpRangeParams(id string) *DeleteStorageNetworkIpRangeParams
-	ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadBalancerNetworksParams) (*ListNetscalerLoadBalancerNetworksResponse, error)
-	NewListNetscalerLoadBalancerNetworksParams(lbdeviceid string) *ListNetscalerLoadBalancerNetworksParams
-	GetNetscalerLoadBalancerNetworkID(keyword string, lbdeviceid string, opts ...OptionFunc) (string, int, error)
+	ListIpv4SubnetsForGuestNetwork(p *ListIpv4SubnetsForGuestNetworkParams) (*ListIpv4SubnetsForGuestNetworkResponse, error)
+	NewListIpv4SubnetsForGuestNetworkParams() *ListIpv4SubnetsForGuestNetworkParams
+	GetIpv4SubnetsForGuestNetworkByID(id string, opts ...OptionFunc) (*Ipv4SubnetsForGuestNetwork, int, error)
 	ListNetworkIsolationMethods(p *ListNetworkIsolationMethodsParams) (*ListNetworkIsolationMethodsResponse, error)
 	NewListNetworkIsolationMethodsParams() *ListNetworkIsolationMethodsParams
+	ListNetworkProtocols(p *ListNetworkProtocolsParams) (*ListNetworkProtocolsResponse, error)
+	NewListNetworkProtocolsParams(option string) *ListNetworkProtocolsParams
 	ListNetworkServiceProviders(p *ListNetworkServiceProvidersParams) (*ListNetworkServiceProvidersResponse, error)
 	NewListNetworkServiceProvidersParams() *ListNetworkServiceProvidersParams
 	GetNetworkServiceProviderID(name string, opts ...OptionFunc) (string, int, error)
@@ -84,6 +92,8 @@ type NetworkServiceIface interface {
 	GetStorageNetworkIpRangeByID(id string, opts ...OptionFunc) (*StorageNetworkIpRange, int, error)
 	ListSupportedNetworkServices(p *ListSupportedNetworkServicesParams) (*ListSupportedNetworkServicesResponse, error)
 	NewListSupportedNetworkServicesParams() *ListSupportedNetworkServicesParams
+	MigrateNetwork(p *MigrateNetworkParams) (*MigrateNetworkResponse, error)
+	NewMigrateNetworkParams(networkid string, networkofferingid string) *MigrateNetworkParams
 	ReleasePublicIpRange(p *ReleasePublicIpRangeParams) (*ReleasePublicIpRangeResponse, error)
 	NewReleasePublicIpRangeParams(id string) *ReleasePublicIpRangeParams
 	RestartNetwork(p *RestartNetworkParams) (*RestartNetworkResponse, error)
@@ -399,7 +409,7 @@ func (s *NetworkService) NewAddOpenDaylightControllerParams(password string, phy
 	return p
 }
 
-// Adds an OpenDaylight controller
+// Adds an OpenDyalight controler
 func (s *NetworkService) AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("addOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -442,6 +452,278 @@ type AddOpenDaylightControllerResponse struct {
 	Physicalnetworkid string `json:"physicalnetworkid"`
 	Url               string `json:"url"`
 	Username          string `json:"username"`
+}
+
+type ChangeBgpPeersForNetworkParams struct {
+	p map[string]interface{}
+}
+
+func (p *ChangeBgpPeersForNetworkParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["bgppeerids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("bgppeerids", vv)
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	return u
+}
+
+func (p *ChangeBgpPeersForNetworkParams) SetBgppeerids(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["bgppeerids"] = v
+}
+
+func (p *ChangeBgpPeersForNetworkParams) ResetBgppeerids() {
+	if p.p != nil && p.p["bgppeerids"] != nil {
+		delete(p.p, "bgppeerids")
+	}
+}
+
+func (p *ChangeBgpPeersForNetworkParams) GetBgppeerids() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["bgppeerids"].([]string)
+	return value, ok
+}
+
+func (p *ChangeBgpPeersForNetworkParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *ChangeBgpPeersForNetworkParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
+func (p *ChangeBgpPeersForNetworkParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ChangeBgpPeersForNetworkParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkService) NewChangeBgpPeersForNetworkParams(networkid string) *ChangeBgpPeersForNetworkParams {
+	p := &ChangeBgpPeersForNetworkParams{}
+	p.p = make(map[string]interface{})
+	p.p["networkid"] = networkid
+	return p
+}
+
+// Change the BGP peers for a network.
+func (s *NetworkService) ChangeBgpPeersForNetwork(p *ChangeBgpPeersForNetworkParams) (*ChangeBgpPeersForNetworkResponse, error) {
+	resp, err := s.cs.newRequest("changeBgpPeersForNetwork", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ChangeBgpPeersForNetworkResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type ChangeBgpPeersForNetworkResponse struct {
+	Account    string            `json:"account"`
+	Asnumber   int64             `json:"asnumber"`
+	Created    string            `json:"created"`
+	Details    map[string]string `json:"details"`
+	Domain     string            `json:"domain"`
+	Domainid   string            `json:"domainid"`
+	Id         string            `json:"id"`
+	Ip6address string            `json:"ip6address"`
+	Ipaddress  string            `json:"ipaddress"`
+	JobID      string            `json:"jobid"`
+	Jobstatus  int               `json:"jobstatus"`
+	Password   string            `json:"password"`
+	Project    string            `json:"project"`
+	Projectid  string            `json:"projectid"`
+	Zoneid     string            `json:"zoneid"`
+	Zonename   string            `json:"zonename"`
+}
+
+type CreateIpv4SubnetForGuestNetworkParams struct {
+	p map[string]interface{}
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["cidrsize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("cidrsize", vv)
+	}
+	if v, found := p.p["parentid"]; found {
+		u.Set("parentid", v.(string))
+	}
+	if v, found := p.p["subnet"]; found {
+		u.Set("subnet", v.(string))
+	}
+	return u
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) SetCidrsize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrsize"] = v
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) ResetCidrsize() {
+	if p.p != nil && p.p["cidrsize"] != nil {
+		delete(p.p, "cidrsize")
+	}
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) GetCidrsize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrsize"].(int)
+	return value, ok
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) SetParentid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["parentid"] = v
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) ResetParentid() {
+	if p.p != nil && p.p["parentid"] != nil {
+		delete(p.p, "parentid")
+	}
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) GetParentid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["parentid"].(string)
+	return value, ok
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) SetSubnet(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["subnet"] = v
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) ResetSubnet() {
+	if p.p != nil && p.p["subnet"] != nil {
+		delete(p.p, "subnet")
+	}
+}
+
+func (p *CreateIpv4SubnetForGuestNetworkParams) GetSubnet() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["subnet"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new CreateIpv4SubnetForGuestNetworkParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkService) NewCreateIpv4SubnetForGuestNetworkParams(parentid string) *CreateIpv4SubnetForGuestNetworkParams {
+	p := &CreateIpv4SubnetForGuestNetworkParams{}
+	p.p = make(map[string]interface{})
+	p.p["parentid"] = parentid
+	return p
+}
+
+// Creates a IPv4 subnet for guest networks.
+func (s *NetworkService) CreateIpv4SubnetForGuestNetwork(p *CreateIpv4SubnetForGuestNetworkParams) (*CreateIpv4SubnetForGuestNetworkResponse, error) {
+	resp, err := s.cs.newRequest("createIpv4SubnetForGuestNetwork", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CreateIpv4SubnetForGuestNetworkResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type CreateIpv4SubnetForGuestNetworkResponse struct {
+	Allocated    string `json:"allocated"`
+	Created      string `json:"created"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Networkid    string `json:"networkid"`
+	Networkname  string `json:"networkname"`
+	Parentid     string `json:"parentid"`
+	Parentsubnet string `json:"parentsubnet"`
+	Removed      string `json:"removed"`
+	State        string `json:"state"`
+	Subnet       string `json:"subnet"`
+	Vpcid        string `json:"vpcid"`
+	Vpcname      string `json:"vpcname"`
+	Zoneid       string `json:"zoneid"`
+	Zonename     string `json:"zonename"`
 }
 
 type CreateNetworkParams struct {
@@ -2546,6 +2828,88 @@ type DedicatePublicIpRangeResponse struct {
 	Zoneid            string `json:"zoneid"`
 }
 
+type DeleteIpv4SubnetForGuestNetworkParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteIpv4SubnetForGuestNetworkParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteIpv4SubnetForGuestNetworkParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteIpv4SubnetForGuestNetworkParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteIpv4SubnetForGuestNetworkParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteIpv4SubnetForGuestNetworkParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkService) NewDeleteIpv4SubnetForGuestNetworkParams(id string) *DeleteIpv4SubnetForGuestNetworkParams {
+	p := &DeleteIpv4SubnetForGuestNetworkParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Deletes an existing IPv4 subnet for guest network.
+func (s *NetworkService) DeleteIpv4SubnetForGuestNetwork(p *DeleteIpv4SubnetForGuestNetworkParams) (*DeleteIpv4SubnetForGuestNetworkResponse, error) {
+	resp, err := s.cs.newRequest("deleteIpv4SubnetForGuestNetwork", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteIpv4SubnetForGuestNetworkResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type DeleteIpv4SubnetForGuestNetworkResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
 type DeleteNetworkParams struct {
 	p map[string]interface{}
 }
@@ -2780,7 +3144,7 @@ func (s *NetworkService) NewDeleteOpenDaylightControllerParams(id string) *Delet
 	return p
 }
 
-// Removes an OpenDaylight controller
+// Removes an OpenDyalight controler
 func (s *NetworkService) DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error) {
 	resp, err := s.cs.newRequest("deleteOpenDaylightController", p.toURLValues())
 	if err != nil {
@@ -2989,20 +3353,23 @@ type DeleteStorageNetworkIpRangeResponse struct {
 	Success     bool   `json:"success"`
 }
 
-type ListNetscalerLoadBalancerNetworksParams struct {
+type ListIpv4SubnetsForGuestNetworkParams struct {
 	p map[string]interface{}
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) toURLValues() url.Values {
+func (p *ListIpv4SubnetsForGuestNetworkParams) toURLValues() url.Values {
 	u := url.Values{}
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
-	if v, found := p.p["lbdeviceid"]; found {
-		u.Set("lbdeviceid", v.(string))
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -3012,23 +3379,56 @@ func (p *ListNetscalerLoadBalancerNetworksParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["parentid"]; found {
+		u.Set("parentid", v.(string))
+	}
+	if v, found := p.p["subnet"]; found {
+		u.Set("subnet", v.(string))
+	}
+	if v, found := p.p["vpcid"]; found {
+		u.Set("vpcid", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) SetKeyword(v string) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["keyword"] = v
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) ResetKeyword() {
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetKeyword() {
 	if p.p != nil && p.p["keyword"] != nil {
 		delete(p.p, "keyword")
 	}
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) GetKeyword() (string, bool) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetKeyword() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -3036,41 +3436,41 @@ func (p *ListNetscalerLoadBalancerNetworksParams) GetKeyword() (string, bool) {
 	return value, ok
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) SetLbdeviceid(v string) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetNetworkid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	p.p["lbdeviceid"] = v
+	p.p["networkid"] = v
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) ResetLbdeviceid() {
-	if p.p != nil && p.p["lbdeviceid"] != nil {
-		delete(p.p, "lbdeviceid")
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
 	}
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) GetLbdeviceid() (string, bool) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetNetworkid() (string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["lbdeviceid"].(string)
+	value, ok := p.p["networkid"].(string)
 	return value, ok
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) SetPage(v int) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["page"] = v
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) ResetPage() {
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetPage() {
 	if p.p != nil && p.p["page"] != nil {
 		delete(p.p, "page")
 	}
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) GetPage() (int, bool) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetPage() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -3078,20 +3478,20 @@ func (p *ListNetscalerLoadBalancerNetworksParams) GetPage() (int, bool) {
 	return value, ok
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) SetPagesize(v int) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetPagesize(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
 	p.p["pagesize"] = v
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) ResetPagesize() {
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetPagesize() {
 	if p.p != nil && p.p["pagesize"] != nil {
 		delete(p.p, "pagesize")
 	}
 }
 
-func (p *ListNetscalerLoadBalancerNetworksParams) GetPagesize() (int, bool) {
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetPagesize() (int, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -3099,60 +3499,139 @@ func (p *ListNetscalerLoadBalancerNetworksParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
-// You should always use this function to get a new ListNetscalerLoadBalancerNetworksParams instance,
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetParentid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["parentid"] = v
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetParentid() {
+	if p.p != nil && p.p["parentid"] != nil {
+		delete(p.p, "parentid")
+	}
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetParentid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["parentid"].(string)
+	return value, ok
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetSubnet(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["subnet"] = v
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetSubnet() {
+	if p.p != nil && p.p["subnet"] != nil {
+		delete(p.p, "subnet")
+	}
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetSubnet() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["subnet"].(string)
+	return value, ok
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetVpcid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vpcid"] = v
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ListIpv4SubnetsForGuestNetworkParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListIpv4SubnetsForGuestNetworkParams instance,
 // as then you are sure you have configured all required params
-func (s *NetworkService) NewListNetscalerLoadBalancerNetworksParams(lbdeviceid string) *ListNetscalerLoadBalancerNetworksParams {
-	p := &ListNetscalerLoadBalancerNetworksParams{}
+func (s *NetworkService) NewListIpv4SubnetsForGuestNetworkParams() *ListIpv4SubnetsForGuestNetworkParams {
+	p := &ListIpv4SubnetsForGuestNetworkParams{}
 	p.p = make(map[string]interface{})
-	p.p["lbdeviceid"] = lbdeviceid
 	return p
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
-func (s *NetworkService) GetNetscalerLoadBalancerNetworkID(keyword string, lbdeviceid string, opts ...OptionFunc) (string, int, error) {
-	p := &ListNetscalerLoadBalancerNetworksParams{}
+func (s *NetworkService) GetIpv4SubnetsForGuestNetworkByID(id string, opts ...OptionFunc) (*Ipv4SubnetsForGuestNetwork, int, error) {
+	p := &ListIpv4SubnetsForGuestNetworkParams{}
 	p.p = make(map[string]interface{})
 
-	p.p["keyword"] = keyword
-	p.p["lbdeviceid"] = lbdeviceid
+	p.p["id"] = id
 
 	for _, fn := range append(s.cs.options, opts...) {
 		if err := fn(s.cs, p); err != nil {
-			return "", -1, err
+			return nil, -1, err
 		}
 	}
 
-	l, err := s.ListNetscalerLoadBalancerNetworks(p)
+	l, err := s.ListIpv4SubnetsForGuestNetwork(p)
 	if err != nil {
-		return "", -1, err
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
 	}
 
 	if l.Count == 0 {
-		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
 	}
 
 	if l.Count == 1 {
-		return l.NetscalerLoadBalancerNetworks[0].Id, l.Count, nil
+		return l.Ipv4SubnetsForGuestNetwork[0], l.Count, nil
 	}
-
-	if l.Count > 1 {
-		for _, v := range l.NetscalerLoadBalancerNetworks {
-			if v.Name == keyword {
-				return v.Id, l.Count, nil
-			}
-		}
-	}
-	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+	return nil, l.Count, fmt.Errorf("There is more then one result for Ipv4SubnetsForGuestNetwork UUID: %s!", id)
 }
 
-// lists network that are using a netscaler load balancer device
-func (s *NetworkService) ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadBalancerNetworksParams) (*ListNetscalerLoadBalancerNetworksResponse, error) {
-	resp, err := s.cs.newRequest("listNetscalerLoadBalancerNetworks", p.toURLValues())
+// Lists IPv4 subnets for guest networks.
+func (s *NetworkService) ListIpv4SubnetsForGuestNetwork(p *ListIpv4SubnetsForGuestNetworkParams) (*ListIpv4SubnetsForGuestNetworkResponse, error) {
+	resp, err := s.cs.newRequest("listIpv4SubnetsForGuestNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
 
-	var r ListNetscalerLoadBalancerNetworksResponse
+	var r ListIpv4SubnetsForGuestNetworkResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
 	}
@@ -3160,112 +3639,28 @@ func (s *NetworkService) ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadB
 	return &r, nil
 }
 
-type ListNetscalerLoadBalancerNetworksResponse struct {
-	Count                         int                             `json:"count"`
-	NetscalerLoadBalancerNetworks []*NetscalerLoadBalancerNetwork `json:"netscalerloadbalancernetwork"`
+type ListIpv4SubnetsForGuestNetworkResponse struct {
+	Count                      int                           `json:"count"`
+	Ipv4SubnetsForGuestNetwork []*Ipv4SubnetsForGuestNetwork `json:"ipv4subnetsforguestnetwork"`
 }
 
-type NetscalerLoadBalancerNetwork struct {
-	Account                     string                                `json:"account"`
-	Aclid                       string                                `json:"aclid"`
-	Aclname                     string                                `json:"aclname"`
-	Acltype                     string                                `json:"acltype"`
-	Asnumber                    int64                                 `json:"asnumber"`
-	Asnumberid                  string                                `json:"asnumberid"`
-	Associatednetwork           string                                `json:"associatednetwork"`
-	Associatednetworkid         string                                `json:"associatednetworkid"`
-	Bgppeers                    []interface{}                         `json:"bgppeers"`
-	Broadcastdomaintype         string                                `json:"broadcastdomaintype"`
-	Broadcasturi                string                                `json:"broadcasturi"`
-	Canusefordeploy             bool                                  `json:"canusefordeploy"`
-	Cidr                        string                                `json:"cidr"`
-	Created                     string                                `json:"created"`
-	Details                     map[string]string                     `json:"details"`
-	Displaynetwork              bool                                  `json:"displaynetwork"`
-	Displaytext                 string                                `json:"displaytext"`
-	Dns1                        string                                `json:"dns1"`
-	Dns2                        string                                `json:"dns2"`
-	Domain                      string                                `json:"domain"`
-	Domainid                    string                                `json:"domainid"`
-	Domainpath                  string                                `json:"domainpath"`
-	Egressdefaultpolicy         bool                                  `json:"egressdefaultpolicy"`
-	Externalid                  string                                `json:"externalid"`
-	Gateway                     string                                `json:"gateway"`
-	Hasannotations              bool                                  `json:"hasannotations"`
-	Icon                        interface{}                           `json:"icon"`
-	Id                          string                                `json:"id"`
-	Internetprotocol            string                                `json:"internetprotocol"`
-	Ip4routes                   []interface{}                         `json:"ip4routes"`
-	Ip4routing                  string                                `json:"ip4routing"`
-	Ip6cidr                     string                                `json:"ip6cidr"`
-	Ip6dns1                     string                                `json:"ip6dns1"`
-	Ip6dns2                     string                                `json:"ip6dns2"`
-	Ip6gateway                  string                                `json:"ip6gateway"`
-	Ip6routes                   []interface{}                         `json:"ip6routes"`
-	Ip6routing                  string                                `json:"ip6routing"`
-	Isdefault                   bool                                  `json:"isdefault"`
-	Ispersistent                bool                                  `json:"ispersistent"`
-	Issystem                    bool                                  `json:"issystem"`
-	JobID                       string                                `json:"jobid"`
-	Jobstatus                   int                                   `json:"jobstatus"`
-	Name                        string                                `json:"name"`
-	Netmask                     string                                `json:"netmask"`
-	Networkcidr                 string                                `json:"networkcidr"`
-	Networkdomain               string                                `json:"networkdomain"`
-	Networkofferingavailability string                                `json:"networkofferingavailability"`
-	Networkofferingconservemode bool                                  `json:"networkofferingconservemode"`
-	Networkofferingdisplaytext  string                                `json:"networkofferingdisplaytext"`
-	Networkofferingid           string                                `json:"networkofferingid"`
-	Networkofferingname         string                                `json:"networkofferingname"`
-	Physicalnetworkid           string                                `json:"physicalnetworkid"`
-	Privatemtu                  int                                   `json:"privatemtu"`
-	Project                     string                                `json:"project"`
-	Projectid                   string                                `json:"projectid"`
-	Publicmtu                   int                                   `json:"publicmtu"`
-	Receivedbytes               int64                                 `json:"receivedbytes"`
-	Redundantrouter             bool                                  `json:"redundantrouter"`
-	Related                     string                                `json:"related"`
-	Reservediprange             string                                `json:"reservediprange"`
-	Restartrequired             bool                                  `json:"restartrequired"`
-	Sentbytes                   int64                                 `json:"sentbytes"`
-	Service                     []NetscalerLoadBalancerNetworkService `json:"service"`
-	Specifyipranges             bool                                  `json:"specifyipranges"`
-	State                       string                                `json:"state"`
-	Strechedl2subnet            bool                                  `json:"strechedl2subnet"`
-	Subdomainaccess             bool                                  `json:"subdomainaccess"`
-	Supportsvmautoscaling       bool                                  `json:"supportsvmautoscaling"`
-	Tags                        []Tags                                `json:"tags"`
-	Traffictype                 string                                `json:"traffictype"`
-	Tungstenvirtualrouteruuid   string                                `json:"tungstenvirtualrouteruuid"`
-	Type                        string                                `json:"type"`
-	Vlan                        string                                `json:"vlan"`
-	Vpcid                       string                                `json:"vpcid"`
-	Vpcname                     string                                `json:"vpcname"`
-	Zoneid                      string                                `json:"zoneid"`
-	Zonename                    string                                `json:"zonename"`
-	Zonesnetworkspans           []interface{}                         `json:"zonesnetworkspans"`
-}
-
-type NetscalerLoadBalancerNetworkService struct {
-	Capability []NetscalerLoadBalancerNetworkServiceCapability `json:"capability"`
-	Name       string                                          `json:"name"`
-	Provider   []NetscalerLoadBalancerNetworkServiceProvider   `json:"provider"`
-}
-
-type NetscalerLoadBalancerNetworkServiceProvider struct {
-	Canenableindividualservice   bool     `json:"canenableindividualservice"`
-	Destinationphysicalnetworkid string   `json:"destinationphysicalnetworkid"`
-	Id                           string   `json:"id"`
-	Name                         string   `json:"name"`
-	Physicalnetworkid            string   `json:"physicalnetworkid"`
-	Servicelist                  []string `json:"servicelist"`
-	State                        string   `json:"state"`
-}
-
-type NetscalerLoadBalancerNetworkServiceCapability struct {
-	Canchooseservicecapability bool   `json:"canchooseservicecapability"`
-	Name                       string `json:"name"`
-	Value                      string `json:"value"`
+type Ipv4SubnetsForGuestNetwork struct {
+	Allocated    string `json:"allocated"`
+	Created      string `json:"created"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Networkid    string `json:"networkid"`
+	Networkname  string `json:"networkname"`
+	Parentid     string `json:"parentid"`
+	Parentsubnet string `json:"parentsubnet"`
+	Removed      string `json:"removed"`
+	State        string `json:"state"`
+	Subnet       string `json:"subnet"`
+	Vpcid        string `json:"vpcid"`
+	Vpcname      string `json:"vpcname"`
+	Zoneid       string `json:"zoneid"`
+	Zonename     string `json:"zonename"`
 }
 
 type ListNetworkIsolationMethodsParams struct {
@@ -3386,6 +3781,80 @@ type NetworkIsolationMethod struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Name      string `json:"name"`
+}
+
+type ListNetworkProtocolsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListNetworkProtocolsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["option"]; found {
+		u.Set("option", v.(string))
+	}
+	return u
+}
+
+func (p *ListNetworkProtocolsParams) SetOption(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["option"] = v
+}
+
+func (p *ListNetworkProtocolsParams) ResetOption() {
+	if p.p != nil && p.p["option"] != nil {
+		delete(p.p, "option")
+	}
+}
+
+func (p *ListNetworkProtocolsParams) GetOption() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["option"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListNetworkProtocolsParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkService) NewListNetworkProtocolsParams(option string) *ListNetworkProtocolsParams {
+	p := &ListNetworkProtocolsParams{}
+	p.p = make(map[string]interface{})
+	p.p["option"] = option
+	return p
+}
+
+// Lists details of network protocols
+func (s *NetworkService) ListNetworkProtocols(p *ListNetworkProtocolsParams) (*ListNetworkProtocolsResponse, error) {
+	resp, err := s.cs.newRequest("listNetworkProtocols", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListNetworkProtocolsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListNetworkProtocolsResponse struct {
+	Count            int                `json:"count"`
+	NetworkProtocols []*NetworkProtocol `json:"networkprotocol"`
+}
+
+type NetworkProtocol struct {
+	Description string            `json:"description"`
+	Details     map[string]string `json:"details"`
+	Index       int               `json:"index"`
+	JobID       string            `json:"jobid"`
+	Jobstatus   int               `json:"jobstatus"`
+	Name        string            `json:"name"`
 }
 
 type ListNetworkServiceProvidersParams struct {
@@ -4941,7 +5410,7 @@ func (s *NetworkService) GetOpenDaylightControllerByID(id string, opts ...Option
 	return nil, l.Count, fmt.Errorf("There is more then one result for OpenDaylightController UUID: %s!", id)
 }
 
-// Lists OpenDaylight controllers
+// Lists OpenDyalight controllers
 func (s *NetworkService) ListOpenDaylightControllers(p *ListOpenDaylightControllersParams) (*ListOpenDaylightControllersResponse, error) {
 	resp, err := s.cs.newRequest("listOpenDaylightControllers", p.toURLValues())
 	if err != nil {
@@ -5949,6 +6418,239 @@ type SupportedNetworkServiceProvider struct {
 }
 
 type SupportedNetworkServiceCapability struct {
+	Canchooseservicecapability bool   `json:"canchooseservicecapability"`
+	Name                       string `json:"name"`
+	Value                      string `json:"value"`
+}
+
+type MigrateNetworkParams struct {
+	p map[string]interface{}
+}
+
+func (p *MigrateNetworkParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["networkid"]; found {
+		u.Set("networkid", v.(string))
+	}
+	if v, found := p.p["networkofferingid"]; found {
+		u.Set("networkofferingid", v.(string))
+	}
+	if v, found := p.p["resume"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("resume", vv)
+	}
+	return u
+}
+
+func (p *MigrateNetworkParams) SetNetworkid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkid"] = v
+}
+
+func (p *MigrateNetworkParams) ResetNetworkid() {
+	if p.p != nil && p.p["networkid"] != nil {
+		delete(p.p, "networkid")
+	}
+}
+
+func (p *MigrateNetworkParams) GetNetworkid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkid"].(string)
+	return value, ok
+}
+
+func (p *MigrateNetworkParams) SetNetworkofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["networkofferingid"] = v
+}
+
+func (p *MigrateNetworkParams) ResetNetworkofferingid() {
+	if p.p != nil && p.p["networkofferingid"] != nil {
+		delete(p.p, "networkofferingid")
+	}
+}
+
+func (p *MigrateNetworkParams) GetNetworkofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["networkofferingid"].(string)
+	return value, ok
+}
+
+func (p *MigrateNetworkParams) SetResume(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resume"] = v
+}
+
+func (p *MigrateNetworkParams) ResetResume() {
+	if p.p != nil && p.p["resume"] != nil {
+		delete(p.p, "resume")
+	}
+}
+
+func (p *MigrateNetworkParams) GetResume() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resume"].(bool)
+	return value, ok
+}
+
+// You should always use this function to get a new MigrateNetworkParams instance,
+// as then you are sure you have configured all required params
+func (s *NetworkService) NewMigrateNetworkParams(networkid string, networkofferingid string) *MigrateNetworkParams {
+	p := &MigrateNetworkParams{}
+	p.p = make(map[string]interface{})
+	p.p["networkid"] = networkid
+	p.p["networkofferingid"] = networkofferingid
+	return p
+}
+
+// moves a network to another physical network
+func (s *NetworkService) MigrateNetwork(p *MigrateNetworkParams) (*MigrateNetworkResponse, error) {
+	resp, err := s.cs.newRequest("migrateNetwork", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r MigrateNetworkResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type MigrateNetworkResponse struct {
+	Account                     string                          `json:"account"`
+	Aclid                       string                          `json:"aclid"`
+	Aclname                     string                          `json:"aclname"`
+	Acltype                     string                          `json:"acltype"`
+	Asnumber                    int64                           `json:"asnumber"`
+	Asnumberid                  string                          `json:"asnumberid"`
+	Associatednetwork           string                          `json:"associatednetwork"`
+	Associatednetworkid         string                          `json:"associatednetworkid"`
+	Bgppeers                    []interface{}                   `json:"bgppeers"`
+	Broadcastdomaintype         string                          `json:"broadcastdomaintype"`
+	Broadcasturi                string                          `json:"broadcasturi"`
+	Canusefordeploy             bool                            `json:"canusefordeploy"`
+	Cidr                        string                          `json:"cidr"`
+	Created                     string                          `json:"created"`
+	Details                     map[string]string               `json:"details"`
+	Displaynetwork              bool                            `json:"displaynetwork"`
+	Displaytext                 string                          `json:"displaytext"`
+	Dns1                        string                          `json:"dns1"`
+	Dns2                        string                          `json:"dns2"`
+	Domain                      string                          `json:"domain"`
+	Domainid                    string                          `json:"domainid"`
+	Domainpath                  string                          `json:"domainpath"`
+	Egressdefaultpolicy         bool                            `json:"egressdefaultpolicy"`
+	Externalid                  string                          `json:"externalid"`
+	Gateway                     string                          `json:"gateway"`
+	Hasannotations              bool                            `json:"hasannotations"`
+	Icon                        interface{}                     `json:"icon"`
+	Id                          string                          `json:"id"`
+	Internetprotocol            string                          `json:"internetprotocol"`
+	Ip4routes                   []interface{}                   `json:"ip4routes"`
+	Ip4routing                  string                          `json:"ip4routing"`
+	Ip6cidr                     string                          `json:"ip6cidr"`
+	Ip6dns1                     string                          `json:"ip6dns1"`
+	Ip6dns2                     string                          `json:"ip6dns2"`
+	Ip6gateway                  string                          `json:"ip6gateway"`
+	Ip6routes                   []interface{}                   `json:"ip6routes"`
+	Ip6routing                  string                          `json:"ip6routing"`
+	Isdefault                   bool                            `json:"isdefault"`
+	Ispersistent                bool                            `json:"ispersistent"`
+	Issystem                    bool                            `json:"issystem"`
+	JobID                       string                          `json:"jobid"`
+	Jobstatus                   int                             `json:"jobstatus"`
+	Name                        string                          `json:"name"`
+	Netmask                     string                          `json:"netmask"`
+	Networkcidr                 string                          `json:"networkcidr"`
+	Networkdomain               string                          `json:"networkdomain"`
+	Networkofferingavailability string                          `json:"networkofferingavailability"`
+	Networkofferingconservemode bool                            `json:"networkofferingconservemode"`
+	Networkofferingdisplaytext  string                          `json:"networkofferingdisplaytext"`
+	Networkofferingid           string                          `json:"networkofferingid"`
+	Networkofferingname         string                          `json:"networkofferingname"`
+	Physicalnetworkid           string                          `json:"physicalnetworkid"`
+	Privatemtu                  int                             `json:"privatemtu"`
+	Project                     string                          `json:"project"`
+	Projectid                   string                          `json:"projectid"`
+	Publicmtu                   int                             `json:"publicmtu"`
+	Receivedbytes               int64                           `json:"receivedbytes"`
+	Redundantrouter             bool                            `json:"redundantrouter"`
+	Related                     string                          `json:"related"`
+	Reservediprange             string                          `json:"reservediprange"`
+	Restartrequired             bool                            `json:"restartrequired"`
+	Sentbytes                   int64                           `json:"sentbytes"`
+	Service                     []MigrateNetworkResponseService `json:"service"`
+	Specifyipranges             bool                            `json:"specifyipranges"`
+	State                       string                          `json:"state"`
+	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
+	Subdomainaccess             bool                            `json:"subdomainaccess"`
+	Supportsvmautoscaling       bool                            `json:"supportsvmautoscaling"`
+	Tags                        []Tags                          `json:"tags"`
+	Traffictype                 string                          `json:"traffictype"`
+	Tungstenvirtualrouteruuid   string                          `json:"tungstenvirtualrouteruuid"`
+	Type                        string                          `json:"type"`
+	Vlan                        string                          `json:"vlan"`
+	Vpcid                       string                          `json:"vpcid"`
+	Vpcname                     string                          `json:"vpcname"`
+	Zoneid                      string                          `json:"zoneid"`
+	Zonename                    string                          `json:"zonename"`
+	Zonesnetworkspans           []interface{}                   `json:"zonesnetworkspans"`
+}
+
+type MigrateNetworkResponseService struct {
+	Capability []MigrateNetworkResponseServiceCapability `json:"capability"`
+	Name       string                                    `json:"name"`
+	Provider   []MigrateNetworkResponseServiceProvider   `json:"provider"`
+}
+
+type MigrateNetworkResponseServiceProvider struct {
+	Canenableindividualservice   bool     `json:"canenableindividualservice"`
+	Destinationphysicalnetworkid string   `json:"destinationphysicalnetworkid"`
+	Id                           string   `json:"id"`
+	Name                         string   `json:"name"`
+	Physicalnetworkid            string   `json:"physicalnetworkid"`
+	Servicelist                  []string `json:"servicelist"`
+	State                        string   `json:"state"`
+}
+
+type MigrateNetworkResponseServiceCapability struct {
 	Canchooseservicecapability bool   `json:"canchooseservicecapability"`
 	Name                       string `json:"name"`
 	Value                      string `json:"value"`

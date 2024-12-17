@@ -104,6 +104,21 @@ func TestFirewallService(t *testing.T) {
 	}
 	t.Run("CreatePortForwardingRule", testcreatePortForwardingRule)
 
+	testcreateRoutingFirewallRule := func(t *testing.T) {
+		if _, ok := response["createRoutingFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewCreateRoutingFirewallRuleParams("networkid", "protocol")
+		r, err := client.Firewall.CreateRoutingFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("CreateRoutingFirewallRule", testcreateRoutingFirewallRule)
+
 	testdeleteEgressFirewallRule := func(t *testing.T) {
 		if _, ok := response["deleteEgressFirewallRule"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -152,6 +167,18 @@ func TestFirewallService(t *testing.T) {
 	}
 	t.Run("DeletePortForwardingRule", testdeletePortForwardingRule)
 
+	testdeleteRoutingFirewallRule := func(t *testing.T) {
+		if _, ok := response["deleteRoutingFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewDeleteRoutingFirewallRuleParams("id")
+		_, err := client.Firewall.DeleteRoutingFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteRoutingFirewallRule", testdeleteRoutingFirewallRule)
+
 	testlistEgressFirewallRules := func(t *testing.T) {
 		if _, ok := response["listEgressFirewallRules"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -199,6 +226,18 @@ func TestFirewallService(t *testing.T) {
 		}
 	}
 	t.Run("ListPortForwardingRules", testlistPortForwardingRules)
+
+	testlistRoutingFirewallRules := func(t *testing.T) {
+		if _, ok := response["listRoutingFirewallRules"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewListRoutingFirewallRulesParams()
+		_, err := client.Firewall.ListRoutingFirewallRules(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListRoutingFirewallRules", testlistRoutingFirewallRules)
 
 	testupdateEgressFirewallRule := func(t *testing.T) {
 		if _, ok := response["updateEgressFirewallRule"]; !ok {
@@ -298,5 +337,20 @@ func TestFirewallService(t *testing.T) {
 		}
 	}
 	t.Run("DeleteIpv6FirewallRule", testdeleteIpv6FirewallRule)
+
+	testupdateRoutingFirewallRule := func(t *testing.T) {
+		if _, ok := response["updateRoutingFirewallRule"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Firewall.NewUpdateRoutingFirewallRuleParams("id")
+		r, err := client.Firewall.UpdateRoutingFirewallRule(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateRoutingFirewallRule", testupdateRoutingFirewallRule)
 
 }

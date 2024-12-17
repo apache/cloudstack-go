@@ -83,4 +83,16 @@ func TestAlertService(t *testing.T) {
 	}
 	t.Run("ListAlerts", testlistAlerts)
 
+	testlistAlertTypes := func(t *testing.T) {
+		if _, ok := response["listAlertTypes"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Alert.NewListAlertTypesParams()
+		_, err := client.Alert.ListAlertTypes(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListAlertTypes", testlistAlertTypes)
+
 }

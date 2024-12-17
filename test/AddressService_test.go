@@ -35,6 +35,18 @@ func TestAddressService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
+	testacquirePodIpAddress := func(t *testing.T) {
+		if _, ok := response["acquirePodIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewAcquirePodIpAddressParams("zoneid")
+		_, err := client.Address.AcquirePodIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("AcquirePodIpAddress", testacquirePodIpAddress)
+
 	testassociateIpAddress := func(t *testing.T) {
 		if _, ok := response["associateIpAddress"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -100,5 +112,32 @@ func TestAddressService(t *testing.T) {
 		}
 	}
 	t.Run("ReleaseIpAddress", testreleaseIpAddress)
+
+	testreleasePodIpAddress := func(t *testing.T) {
+		if _, ok := response["releasePodIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewReleasePodIpAddressParams(0)
+		_, err := client.Address.ReleasePodIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ReleasePodIpAddress", testreleasePodIpAddress)
+
+	testreserveIpAddress := func(t *testing.T) {
+		if _, ok := response["reserveIpAddress"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Address.NewReserveIpAddressParams("id")
+		r, err := client.Address.ReserveIpAddress(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("ReserveIpAddress", testreserveIpAddress)
 
 }

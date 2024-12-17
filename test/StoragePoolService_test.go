@@ -50,6 +50,18 @@ func TestStoragePoolService(t *testing.T) {
 	}
 	t.Run("CancelStorageMaintenance", testcancelStorageMaintenance)
 
+	testchangeStoragePoolScope := func(t *testing.T) {
+		if _, ok := response["changeStoragePoolScope"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewChangeStoragePoolScopeParams("id", "scope")
+		_, err := client.StoragePool.ChangeStoragePoolScope(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ChangeStoragePoolScope", testchangeStoragePoolScope)
+
 	testenableStorageMaintenance := func(t *testing.T) {
 		if _, ok := response["enableStorageMaintenance"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -64,6 +76,18 @@ func TestStoragePoolService(t *testing.T) {
 		}
 	}
 	t.Run("EnableStorageMaintenance", testenableStorageMaintenance)
+
+	testlistAffectedVmsForStorageScopeChange := func(t *testing.T) {
+		if _, ok := response["listAffectedVmsForStorageScopeChange"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.StoragePool.NewListAffectedVmsForStorageScopeChangeParams("clusterid", "storageid")
+		_, err := client.StoragePool.ListAffectedVmsForStorageScopeChange(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListAffectedVmsForStorageScopeChange", testlistAffectedVmsForStorageScopeChange)
 
 	testlistStorageProviders := func(t *testing.T) {
 		if _, ok := response["listStorageProviders"]; !ok {

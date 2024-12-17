@@ -28,6 +28,8 @@ import (
 type DiagnosticsServiceIface interface {
 	GetDiagnosticsData(p *GetDiagnosticsDataParams) (*GetDiagnosticsDataResponse, error)
 	NewGetDiagnosticsDataParams(targetid string) *GetDiagnosticsDataParams
+	RunDiagnostics(p *RunDiagnosticsParams) (*RunDiagnosticsResponse, error)
+	NewRunDiagnosticsParams(ipaddress string, targetid string, diagnosticsType string) *RunDiagnosticsParams
 }
 
 type GetDiagnosticsDataParams struct {
@@ -139,4 +141,166 @@ type GetDiagnosticsDataResponse struct {
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Url       string `json:"url"`
+}
+
+type RunDiagnosticsParams struct {
+	p map[string]interface{}
+}
+
+func (p *RunDiagnosticsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["ipaddress"]; found {
+		u.Set("ipaddress", v.(string))
+	}
+	if v, found := p.p["params"]; found {
+		u.Set("params", v.(string))
+	}
+	if v, found := p.p["targetid"]; found {
+		u.Set("targetid", v.(string))
+	}
+	if v, found := p.p["type"]; found {
+		u.Set("type", v.(string))
+	}
+	return u
+}
+
+func (p *RunDiagnosticsParams) SetIpaddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ipaddress"] = v
+}
+
+func (p *RunDiagnosticsParams) ResetIpaddress() {
+	if p.p != nil && p.p["ipaddress"] != nil {
+		delete(p.p, "ipaddress")
+	}
+}
+
+func (p *RunDiagnosticsParams) GetIpaddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddress"].(string)
+	return value, ok
+}
+
+func (p *RunDiagnosticsParams) SetParams(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["params"] = v
+}
+
+func (p *RunDiagnosticsParams) ResetParams() {
+	if p.p != nil && p.p["params"] != nil {
+		delete(p.p, "params")
+	}
+}
+
+func (p *RunDiagnosticsParams) GetParams() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["params"].(string)
+	return value, ok
+}
+
+func (p *RunDiagnosticsParams) SetTargetid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["targetid"] = v
+}
+
+func (p *RunDiagnosticsParams) ResetTargetid() {
+	if p.p != nil && p.p["targetid"] != nil {
+		delete(p.p, "targetid")
+	}
+}
+
+func (p *RunDiagnosticsParams) GetTargetid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["targetid"].(string)
+	return value, ok
+}
+
+func (p *RunDiagnosticsParams) SetType(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["type"] = v
+}
+
+func (p *RunDiagnosticsParams) ResetType() {
+	if p.p != nil && p.p["type"] != nil {
+		delete(p.p, "type")
+	}
+}
+
+func (p *RunDiagnosticsParams) GetType() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["type"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RunDiagnosticsParams instance,
+// as then you are sure you have configured all required params
+func (s *DiagnosticsService) NewRunDiagnosticsParams(ipaddress string, targetid string, diagnosticsType string) *RunDiagnosticsParams {
+	p := &RunDiagnosticsParams{}
+	p.p = make(map[string]interface{})
+	p.p["ipaddress"] = ipaddress
+	p.p["targetid"] = targetid
+	p.p["type"] = diagnosticsType
+	return p
+}
+
+// Execute network-utility command (ping/arping/tracert) on system VMs remotely
+func (s *DiagnosticsService) RunDiagnostics(p *RunDiagnosticsParams) (*RunDiagnosticsResponse, error) {
+	resp, err := s.cs.newRequest("runDiagnostics", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RunDiagnosticsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		b, err = getRawValue(b)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type RunDiagnosticsResponse struct {
+	Exitcode  string `json:"exitcode"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Stderr    string `json:"stderr"`
+	Stdout    string `json:"stdout"`
 }

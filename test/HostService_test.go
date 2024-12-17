@@ -158,6 +158,18 @@ func TestHostService(t *testing.T) {
 	}
 	t.Run("DeleteHost", testdeleteHost)
 
+	testdisableHAForHost := func(t *testing.T) {
+		if _, ok := response["disableHAForHost"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewDisableHAForHostParams("hostid")
+		_, err := client.Host.DisableHAForHost(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DisableHAForHost", testdisableHAForHost)
+
 	testdisableOutOfBandManagementForHost := func(t *testing.T) {
 		if _, ok := response["disableOutOfBandManagementForHost"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -394,12 +406,9 @@ func TestHostService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Host.NewRemoveSecondaryStorageSelectorParams("id")
-		r, err := client.Host.RemoveSecondaryStorageSelector(p)
+		_, err := client.Host.RemoveSecondaryStorageSelector(p)
 		if err != nil {
 			t.Errorf(err.Error())
-		}
-		if r.Id == "" {
-			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("RemoveSecondaryStorageSelector", testremoveSecondaryStorageSelector)

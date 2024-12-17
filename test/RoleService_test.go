@@ -89,6 +89,30 @@ func TestRoleService(t *testing.T) {
 	}
 	t.Run("DeleteRolePermission", testdeleteRolePermission)
 
+	testdisableRole := func(t *testing.T) {
+		if _, ok := response["disableRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Role.NewDisableRoleParams("id")
+		_, err := client.Role.DisableRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DisableRole", testdisableRole)
+
+	testenableRole := func(t *testing.T) {
+		if _, ok := response["enableRole"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Role.NewEnableRoleParams("id")
+		_, err := client.Role.EnableRole(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("EnableRole", testenableRole)
+
 	testimportRole := func(t *testing.T) {
 		if _, ok := response["importRole"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

@@ -77,6 +77,18 @@ func TestPoolService(t *testing.T) {
 	}
 	t.Run("FindStoragePoolsForMigration", testfindStoragePoolsForMigration)
 
+	testlistElastistorPool := func(t *testing.T) {
+		if _, ok := response["listElastistorPool"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewListElastistorPoolParams()
+		_, err := client.Pool.ListElastistorPool(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListElastistorPool", testlistElastistorPool)
+
 	testlistStoragePools := func(t *testing.T) {
 		if _, ok := response["listStoragePools"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
