@@ -39,7 +39,7 @@ import (
 	"strings"
 	"time"
 
-	"go.uber.org/mock/gomock"
+	gomock "go.uber.org/mock/gomock"
 )
 
 // UnlimitedResourceID is a special ID to define an unlimited resource
