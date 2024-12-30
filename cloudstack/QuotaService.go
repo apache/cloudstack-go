@@ -856,6 +856,10 @@ func (p *QuotaTariffCreateParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["position"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("position", vv)
+	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
@@ -954,6 +958,27 @@ func (p *QuotaTariffCreateParams) GetName() (string, bool) {
 	return value, ok
 }
 
+func (p *QuotaTariffCreateParams) SetPosition(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["position"] = v
+}
+
+func (p *QuotaTariffCreateParams) ResetPosition() {
+	if p.p != nil && p.p["position"] != nil {
+		delete(p.p, "position")
+	}
+}
+
+func (p *QuotaTariffCreateParams) GetPosition() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["position"].(int)
+	return value, ok
+}
+
 func (p *QuotaTariffCreateParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1049,9 +1074,11 @@ type QuotaTariffCreateResponse struct {
 	Description          string  `json:"description"`
 	EffectiveDate        string  `json:"effectiveDate"`
 	EndDate              string  `json:"endDate"`
+	Id                   string  `json:"id"`
 	JobID                string  `json:"jobid"`
 	Jobstatus            int     `json:"jobstatus"`
 	Name                 string  `json:"name"`
+	Position             int     `json:"position"`
 	Removed              string  `json:"removed"`
 	TariffValue          float64 `json:"tariffValue"`
 	UsageDiscriminator   string  `json:"usageDiscriminator"`
@@ -1059,7 +1086,6 @@ type QuotaTariffCreateResponse struct {
 	UsageType            int     `json:"usageType"`
 	UsageTypeDescription string  `json:"usageTypeDescription"`
 	UsageUnit            string  `json:"usageUnit"`
-	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaTariffDeleteParams struct {
@@ -1168,12 +1194,19 @@ func (p *QuotaTariffListParams) toURLValues() url.Values {
 	if v, found := p.p["enddate"]; found {
 		u.Set("enddate", v.(string))
 	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
+	}
+	if v, found := p.p["listonlyremoved"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listonlyremoved", vv)
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -1217,6 +1250,27 @@ func (p *QuotaTariffListParams) GetEnddate() (string, bool) {
 	return value, ok
 }
 
+func (p *QuotaTariffListParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *QuotaTariffListParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *QuotaTariffListParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *QuotaTariffListParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1256,6 +1310,27 @@ func (p *QuotaTariffListParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *QuotaTariffListParams) SetListonlyremoved(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listonlyremoved"] = v
+}
+
+func (p *QuotaTariffListParams) ResetListonlyremoved() {
+	if p.p != nil && p.p["listonlyremoved"] != nil {
+		delete(p.p, "listonlyremoved")
+	}
+}
+
+func (p *QuotaTariffListParams) GetListonlyremoved() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listonlyremoved"].(bool)
 	return value, ok
 }
 
@@ -1398,9 +1473,11 @@ type QuotaTariffList struct {
 	Description          string  `json:"description"`
 	EffectiveDate        string  `json:"effectiveDate"`
 	EndDate              string  `json:"endDate"`
+	Id                   string  `json:"id"`
 	JobID                string  `json:"jobid"`
 	Jobstatus            int     `json:"jobstatus"`
 	Name                 string  `json:"name"`
+	Position             int     `json:"position"`
 	Removed              string  `json:"removed"`
 	TariffValue          float64 `json:"tariffValue"`
 	UsageDiscriminator   string  `json:"usageDiscriminator"`
@@ -1408,7 +1485,6 @@ type QuotaTariffList struct {
 	UsageType            int     `json:"usageType"`
 	UsageTypeDescription string  `json:"usageTypeDescription"`
 	UsageUnit            string  `json:"usageUnit"`
-	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaTariffUpdateParams struct {
@@ -1431,6 +1507,10 @@ func (p *QuotaTariffUpdateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["position"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("position", vv)
 	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
@@ -1530,6 +1610,27 @@ func (p *QuotaTariffUpdateParams) GetName() (string, bool) {
 	return value, ok
 }
 
+func (p *QuotaTariffUpdateParams) SetPosition(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["position"] = v
+}
+
+func (p *QuotaTariffUpdateParams) ResetPosition() {
+	if p.p != nil && p.p["position"] != nil {
+		delete(p.p, "position")
+	}
+}
+
+func (p *QuotaTariffUpdateParams) GetPosition() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["position"].(int)
+	return value, ok
+}
+
 func (p *QuotaTariffUpdateParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1623,9 +1724,11 @@ type QuotaTariffUpdateResponse struct {
 	Description          string  `json:"description"`
 	EffectiveDate        string  `json:"effectiveDate"`
 	EndDate              string  `json:"endDate"`
+	Id                   string  `json:"id"`
 	JobID                string  `json:"jobid"`
 	Jobstatus            int     `json:"jobstatus"`
 	Name                 string  `json:"name"`
+	Position             int     `json:"position"`
 	Removed              string  `json:"removed"`
 	TariffValue          float64 `json:"tariffValue"`
 	UsageDiscriminator   string  `json:"usageDiscriminator"`
@@ -1633,7 +1736,6 @@ type QuotaTariffUpdateResponse struct {
 	UsageType            int     `json:"usageType"`
 	UsageTypeDescription string  `json:"usageTypeDescription"`
 	UsageUnit            string  `json:"usageUnit"`
-	Uuid                 string  `json:"uuid"`
 }
 
 type QuotaUpdateParams struct {

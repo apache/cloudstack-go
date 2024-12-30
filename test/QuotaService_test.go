@@ -100,9 +100,12 @@ func TestQuotaService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Quota.NewQuotaTariffCreateParams("name", 0, 0)
-		_, err := client.Quota.QuotaTariffCreate(p)
+		r, err := client.Quota.QuotaTariffCreate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("QuotaTariffCreate", testquotaTariffCreate)
@@ -124,9 +127,12 @@ func TestQuotaService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Quota.NewQuotaTariffListParams()
-		_, err := client.Quota.QuotaTariffList(p)
+		r, err := client.Quota.QuotaTariffList(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("QuotaTariffList", testquotaTariffList)
@@ -136,9 +142,12 @@ func TestQuotaService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.Quota.NewQuotaTariffUpdateParams("name")
-		_, err := client.Quota.QuotaTariffUpdate(p)
+		r, err := client.Quota.QuotaTariffUpdate(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("QuotaTariffUpdate", testquotaTariffUpdate)
