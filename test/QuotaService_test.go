@@ -35,6 +35,30 @@ func TestQuotaService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
+	testquotaBalance := func(t *testing.T) {
+		if _, ok := response["quotaBalance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaBalanceParams("account", "domainid")
+		_, err := client.Quota.QuotaBalance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaBalance", testquotaBalance)
+
+	testquotaCredits := func(t *testing.T) {
+		if _, ok := response["quotaCredits"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaCreditsParams("account", "domainid", 0)
+		_, err := client.Quota.QuotaCredits(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaCredits", testquotaCredits)
+
 	testquotaIsEnabled := func(t *testing.T) {
 		if _, ok := response["quotaIsEnabled"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -46,5 +70,95 @@ func TestQuotaService(t *testing.T) {
 		}
 	}
 	t.Run("QuotaIsEnabled", testquotaIsEnabled)
+
+	testquotaStatement := func(t *testing.T) {
+		if _, ok := response["quotaStatement"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaStatementParams("account", "domainid", "enddate", "startdate")
+		_, err := client.Quota.QuotaStatement(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaStatement", testquotaStatement)
+
+	testquotaSummary := func(t *testing.T) {
+		if _, ok := response["quotaSummary"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaSummaryParams()
+		_, err := client.Quota.QuotaSummary(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaSummary", testquotaSummary)
+
+	testquotaTariffCreate := func(t *testing.T) {
+		if _, ok := response["quotaTariffCreate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaTariffCreateParams("name", 0, 0)
+		r, err := client.Quota.QuotaTariffCreate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("QuotaTariffCreate", testquotaTariffCreate)
+
+	testquotaTariffDelete := func(t *testing.T) {
+		if _, ok := response["quotaTariffDelete"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaTariffDeleteParams("id")
+		_, err := client.Quota.QuotaTariffDelete(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaTariffDelete", testquotaTariffDelete)
+
+	testquotaTariffList := func(t *testing.T) {
+		if _, ok := response["quotaTariffList"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaTariffListParams()
+		_, err := client.Quota.QuotaTariffList(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaTariffList", testquotaTariffList)
+
+	testquotaTariffUpdate := func(t *testing.T) {
+		if _, ok := response["quotaTariffUpdate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaTariffUpdateParams("name")
+		r, err := client.Quota.QuotaTariffUpdate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("QuotaTariffUpdate", testquotaTariffUpdate)
+
+	testquotaUpdate := func(t *testing.T) {
+		if _, ok := response["quotaUpdate"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Quota.NewQuotaUpdateParams()
+		_, err := client.Quota.QuotaUpdate(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("QuotaUpdate", testquotaUpdate)
 
 }

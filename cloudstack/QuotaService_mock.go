@@ -58,6 +58,34 @@ func (m *MockQuotaServiceIface) EXPECT() *MockQuotaServiceIfaceMockRecorder {
 	return m.recorder
 }
 
+// NewQuotaBalanceParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaBalanceParams(account, domainid string) *QuotaBalanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaBalanceParams", account, domainid)
+	ret0, _ := ret[0].(*QuotaBalanceParams)
+	return ret0
+}
+
+// NewQuotaBalanceParams indicates an expected call of NewQuotaBalanceParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaBalanceParams(account, domainid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaBalanceParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaBalanceParams), account, domainid)
+}
+
+// NewQuotaCreditsParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaCreditsParams(account, domainid string, value float64) *QuotaCreditsParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaCreditsParams", account, domainid, value)
+	ret0, _ := ret[0].(*QuotaCreditsParams)
+	return ret0
+}
+
+// NewQuotaCreditsParams indicates an expected call of NewQuotaCreditsParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaCreditsParams(account, domainid, value any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaCreditsParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaCreditsParams), account, domainid, value)
+}
+
 // NewQuotaIsEnabledParams mocks base method.
 func (m *MockQuotaServiceIface) NewQuotaIsEnabledParams() *QuotaIsEnabledParams {
 	m.ctrl.T.Helper()
@@ -70,6 +98,134 @@ func (m *MockQuotaServiceIface) NewQuotaIsEnabledParams() *QuotaIsEnabledParams 
 func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaIsEnabledParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaIsEnabledParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaIsEnabledParams))
+}
+
+// NewQuotaStatementParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaStatementParams(account, domainid, enddate, startdate string) *QuotaStatementParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaStatementParams", account, domainid, enddate, startdate)
+	ret0, _ := ret[0].(*QuotaStatementParams)
+	return ret0
+}
+
+// NewQuotaStatementParams indicates an expected call of NewQuotaStatementParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaStatementParams(account, domainid, enddate, startdate any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaStatementParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaStatementParams), account, domainid, enddate, startdate)
+}
+
+// NewQuotaSummaryParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaSummaryParams() *QuotaSummaryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaSummaryParams")
+	ret0, _ := ret[0].(*QuotaSummaryParams)
+	return ret0
+}
+
+// NewQuotaSummaryParams indicates an expected call of NewQuotaSummaryParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaSummaryParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaSummaryParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaSummaryParams))
+}
+
+// NewQuotaTariffCreateParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaTariffCreateParams(name string, usagetype int, value float64) *QuotaTariffCreateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaTariffCreateParams", name, usagetype, value)
+	ret0, _ := ret[0].(*QuotaTariffCreateParams)
+	return ret0
+}
+
+// NewQuotaTariffCreateParams indicates an expected call of NewQuotaTariffCreateParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaTariffCreateParams(name, usagetype, value any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaTariffCreateParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaTariffCreateParams), name, usagetype, value)
+}
+
+// NewQuotaTariffDeleteParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaTariffDeleteParams", id)
+	ret0, _ := ret[0].(*QuotaTariffDeleteParams)
+	return ret0
+}
+
+// NewQuotaTariffDeleteParams indicates an expected call of NewQuotaTariffDeleteParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaTariffDeleteParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaTariffDeleteParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaTariffDeleteParams), id)
+}
+
+// NewQuotaTariffListParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaTariffListParams() *QuotaTariffListParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaTariffListParams")
+	ret0, _ := ret[0].(*QuotaTariffListParams)
+	return ret0
+}
+
+// NewQuotaTariffListParams indicates an expected call of NewQuotaTariffListParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaTariffListParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaTariffListParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaTariffListParams))
+}
+
+// NewQuotaTariffUpdateParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaTariffUpdateParams", name)
+	ret0, _ := ret[0].(*QuotaTariffUpdateParams)
+	return ret0
+}
+
+// NewQuotaTariffUpdateParams indicates an expected call of NewQuotaTariffUpdateParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaTariffUpdateParams(name any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaTariffUpdateParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaTariffUpdateParams), name)
+}
+
+// NewQuotaUpdateParams mocks base method.
+func (m *MockQuotaServiceIface) NewQuotaUpdateParams() *QuotaUpdateParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewQuotaUpdateParams")
+	ret0, _ := ret[0].(*QuotaUpdateParams)
+	return ret0
+}
+
+// NewQuotaUpdateParams indicates an expected call of NewQuotaUpdateParams.
+func (mr *MockQuotaServiceIfaceMockRecorder) NewQuotaUpdateParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewQuotaUpdateParams", reflect.TypeOf((*MockQuotaServiceIface)(nil).NewQuotaUpdateParams))
+}
+
+// QuotaBalance mocks base method.
+func (m *MockQuotaServiceIface) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaBalance", p)
+	ret0, _ := ret[0].(*QuotaBalanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaBalance indicates an expected call of QuotaBalance.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaBalance(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaBalance", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaBalance), p)
+}
+
+// QuotaCredits mocks base method.
+func (m *MockQuotaServiceIface) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaCredits", p)
+	ret0, _ := ret[0].(*QuotaCreditsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaCredits indicates an expected call of QuotaCredits.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaCredits(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaCredits", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaCredits), p)
 }
 
 // QuotaIsEnabled mocks base method.
@@ -85,4 +241,109 @@ func (m *MockQuotaServiceIface) QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaI
 func (mr *MockQuotaServiceIfaceMockRecorder) QuotaIsEnabled(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaIsEnabled", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaIsEnabled), p)
+}
+
+// QuotaStatement mocks base method.
+func (m *MockQuotaServiceIface) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaStatement", p)
+	ret0, _ := ret[0].(*QuotaStatementResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaStatement indicates an expected call of QuotaStatement.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaStatement(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaStatement", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaStatement), p)
+}
+
+// QuotaSummary mocks base method.
+func (m *MockQuotaServiceIface) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaSummary", p)
+	ret0, _ := ret[0].(*QuotaSummaryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaSummary indicates an expected call of QuotaSummary.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaSummary(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaSummary", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaSummary), p)
+}
+
+// QuotaTariffCreate mocks base method.
+func (m *MockQuotaServiceIface) QuotaTariffCreate(p *QuotaTariffCreateParams) (*QuotaTariffCreateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaTariffCreate", p)
+	ret0, _ := ret[0].(*QuotaTariffCreateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaTariffCreate indicates an expected call of QuotaTariffCreate.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaTariffCreate(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaTariffCreate", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaTariffCreate), p)
+}
+
+// QuotaTariffDelete mocks base method.
+func (m *MockQuotaServiceIface) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaTariffDelete", p)
+	ret0, _ := ret[0].(*QuotaTariffDeleteResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaTariffDelete indicates an expected call of QuotaTariffDelete.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaTariffDelete(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaTariffDelete", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaTariffDelete), p)
+}
+
+// QuotaTariffList mocks base method.
+func (m *MockQuotaServiceIface) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaTariffList", p)
+	ret0, _ := ret[0].(*QuotaTariffListResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaTariffList indicates an expected call of QuotaTariffList.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaTariffList(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaTariffList", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaTariffList), p)
+}
+
+// QuotaTariffUpdate mocks base method.
+func (m *MockQuotaServiceIface) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaTariffUpdate", p)
+	ret0, _ := ret[0].(*QuotaTariffUpdateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaTariffUpdate indicates an expected call of QuotaTariffUpdate.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaTariffUpdate(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaTariffUpdate", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaTariffUpdate), p)
+}
+
+// QuotaUpdate mocks base method.
+func (m *MockQuotaServiceIface) QuotaUpdate(p *QuotaUpdateParams) (*QuotaUpdateResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "QuotaUpdate", p)
+	ret0, _ := ret[0].(*QuotaUpdateResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// QuotaUpdate indicates an expected call of QuotaUpdate.
+func (mr *MockQuotaServiceIfaceMockRecorder) QuotaUpdate(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "QuotaUpdate", reflect.TypeOf((*MockQuotaServiceIface)(nil).QuotaUpdate), p)
 }
