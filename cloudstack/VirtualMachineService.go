@@ -11450,7 +11450,7 @@ func (s *VirtualMachineService) ListVirtualMachinesUsageHistory(p *ListVirtualMa
 
 type ListVirtualMachinesUsageHistoryResponse struct {
 	Count                       int                            `json:"count"`
-	VirtualMachinesUsageHistory []*VirtualMachinesUsageHistory `json:"virtualmachinesusagehistory"`
+	VirtualMachinesUsageHistory []*VirtualMachinesUsageHistory `json:"virtualmachine"`
 }
 
 type VirtualMachinesUsageHistory struct {
