@@ -149,5 +149,13 @@
         "secretkey": "secret-key"
       }
     }
+  },
+  "registerUserKeys": {
+    "registeruserkeysresponse": {
+      "userkeys": {
+        "apikey": "hNfJi2dO5kwD6gTtYoifqu_4CSI3FcTtxc4MydW24PdJalv8mfTGsf425twAdLrIKX5IewfqIfYDEumO6-yRaw",
+        "secretkey": "zV8kAYlyY4H-rEDO-Ot-VVPjKteVcU4haQcdRarte9wuOUhko3uzcnnFqNii8xifcpbe0eWR6IHAXjVGB2m1Hw"
+      }
+    } 
   }
 }
