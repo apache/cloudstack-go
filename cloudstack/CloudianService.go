@@ -51,7 +51,7 @@ func (s *CloudianService) NewCloudianIsEnabledParams() *CloudianIsEnabledParams 
 
 // Checks if the Cloudian Connector is enabled
 func (s *CloudianService) CloudianIsEnabled(p *CloudianIsEnabledParams) (*CloudianIsEnabledResponse, error) {
-	resp, err := s.cs.newRequest("cloudianIsEnabled", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cloudianIsEnabled", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

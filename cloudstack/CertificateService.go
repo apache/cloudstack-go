@@ -194,7 +194,7 @@ func (s *CertificateService) NewIssueCertificateParams() *IssueCertificateParams
 
 // Issues a client certificate using configured or provided CA plugin
 func (s *CertificateService) IssueCertificate(p *IssueCertificateParams) (*IssueCertificateResponse, error) {
-	resp, err := s.cs.newRequest("issueCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("issueCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -710,7 +710,7 @@ func (s *CertificateService) NewProvisionCertificateParams(hostid string) *Provi
 
 // Issues and propagates client certificate on a connected host/agent using configured CA plugin
 func (s *CertificateService) ProvisionCertificate(p *ProvisionCertificateParams) (*ProvisionCertificateResponse, error) {
-	resp, err := s.cs.newRequest("provisionCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("provisionCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -817,7 +817,7 @@ func (s *CertificateService) NewProvisionTemplateDirectDownloadCertificateParams
 
 // Provisions a host with a direct download certificate
 func (s *CertificateService) ProvisionTemplateDirectDownloadCertificate(p *ProvisionTemplateDirectDownloadCertificateParams) (*ProvisionTemplateDirectDownloadCertificateResponse, error) {
-	resp, err := s.cs.newRequest("provisionTemplateDirectDownloadCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("provisionTemplateDirectDownloadCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -934,7 +934,7 @@ func (s *CertificateService) NewRevokeCertificateParams(serial string) *RevokeCe
 
 // Revokes certificate using configured CA plugin
 func (s *CertificateService) RevokeCertificate(p *RevokeCertificateParams) (*RevokeCertificateResponse, error) {
-	resp, err := s.cs.newRequest("revokeCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revokeCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1112,7 +1112,7 @@ func (s *CertificateService) NewRevokeTemplateDirectDownloadCertificateParams(zo
 
 // Revoke a direct download certificate from hosts in a zone
 func (s *CertificateService) RevokeTemplateDirectDownloadCertificate(p *RevokeTemplateDirectDownloadCertificateParams) (*RevokeTemplateDirectDownloadCertificateResponse, error) {
-	resp, err := s.cs.newRequest("revokeTemplateDirectDownloadCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revokeTemplateDirectDownloadCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1279,7 +1279,7 @@ func (s *CertificateService) NewUploadCustomCertificateParams(certificate string
 
 // Uploads a custom certificate for the console proxy VMs to use for SSL. Can be used to upload a single certificate signed by a known CA. Can also be used, through multiple calls, to upload a chain of certificates from CA to the custom certificate itself.
 func (s *CertificateService) UploadCustomCertificate(p *UploadCustomCertificateParams) (*UploadCustomCertificateResponse, error) {
-	resp, err := s.cs.newRequest("uploadCustomCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("uploadCustomCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1464,7 +1464,7 @@ func (s *CertificateService) NewUploadTemplateDirectDownloadCertificateParams(ce
 
 // Upload a certificate for HTTPS direct template download on KVM hosts
 func (s *CertificateService) UploadTemplateDirectDownloadCertificate(p *UploadTemplateDirectDownloadCertificateParams) (*UploadTemplateDirectDownloadCertificateResponse, error) {
-	resp, err := s.cs.newRequest("uploadTemplateDirectDownloadCertificate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("uploadTemplateDirectDownloadCertificate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

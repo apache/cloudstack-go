@@ -307,7 +307,7 @@ func (s *IPQuarantineService) NewRemoveQuarantinedIpParams(removalreason string)
 
 // Removes a public IP address from quarantine. Only IPs in active quarantine can be removed.
 func (s *IPQuarantineService) RemoveQuarantinedIp(p *RemoveQuarantinedIpParams) (*RemoveQuarantinedIpResponse, error) {
-	resp, err := s.cs.newRequest("removeQuarantinedIp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeQuarantinedIp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -429,7 +429,7 @@ func (s *IPQuarantineService) NewUpdateQuarantinedIpParams(enddate string) *Upda
 
 // Updates the quarantine end date for the given public IP address.
 func (s *IPQuarantineService) UpdateQuarantinedIp(p *UpdateQuarantinedIpParams) (*UpdateQuarantinedIpResponse, error) {
-	resp, err := s.cs.newRequest("updateQuarantinedIp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateQuarantinedIp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

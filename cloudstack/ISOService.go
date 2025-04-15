@@ -153,7 +153,7 @@ func (s *ISOService) NewAttachIsoParams(id string, virtualmachineid string) *Att
 
 // Attaches an ISO to a virtual machine.
 func (s *ISOService) AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error) {
-	resp, err := s.cs.newRequest("attachIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("attachIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -474,7 +474,7 @@ func (s *ISOService) NewCopyIsoParams(id string) *CopyIsoParams {
 
 // Copies an iso from one zone to another.
 func (s *ISOService) CopyIso(p *CopyIsoParams) (*CopyIsoResponse, error) {
-	resp, err := s.cs.newRequest("copyIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("copyIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -664,7 +664,7 @@ func (s *ISOService) NewDeleteIsoParams(id string) *DeleteIsoParams {
 
 // Deletes an ISO file.
 func (s *ISOService) DeleteIso(p *DeleteIsoParams) (*DeleteIsoResponse, error) {
-	resp, err := s.cs.newRequest("deleteIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -771,7 +771,7 @@ func (s *ISOService) NewDetachIsoParams(virtualmachineid string) *DetachIsoParam
 
 // Detaches any ISO file (if any) currently attached to a virtual machine.
 func (s *ISOService) DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error) {
-	resp, err := s.cs.newRequest("detachIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("detachIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1092,7 +1092,7 @@ func (s *ISOService) NewExtractIsoParams(id string, mode string) *ExtractIsoPara
 
 // Extracts an ISO
 func (s *ISOService) ExtractIso(p *ExtractIsoParams) (*ExtractIsoResponse, error) {
-	resp, err := s.cs.newRequest("extractIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("extractIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2858,7 +2858,7 @@ func (s *ISOService) NewRegisterIsoParams(displaytext string, name string, url s
 
 // Registers an existing ISO into the CloudStack Cloud.
 func (s *ISOService) RegisterIso(p *RegisterIsoParams) (*RegisterIsoResponse, error) {
-	resp, err := s.cs.newRequest("registerIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3355,7 +3355,7 @@ func (s *ISOService) NewUpdateIsoParams(id string) *UpdateIsoParams {
 
 // Updates an ISO file.
 func (s *ISOService) UpdateIso(p *UpdateIsoParams) (*UpdateIsoResponse, error) {
-	resp, err := s.cs.newRequest("updateIso", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateIso", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3650,7 +3650,7 @@ func (s *ISOService) NewUpdateIsoPermissionsParams(id string) *UpdateIsoPermissi
 
 // Updates ISO permissions
 func (s *ISOService) UpdateIsoPermissions(p *UpdateIsoPermissionsParams) (*UpdateIsoPermissionsResponse, error) {
-	resp, err := s.cs.newRequest("updateIsoPermissions", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateIsoPermissions", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

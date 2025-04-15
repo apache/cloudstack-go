@@ -95,7 +95,7 @@ func (s *ManagementService) NewCancelShutdownParams(managementserverid UUID) *Ca
 
 // Cancels a triggered shutdown
 func (s *ManagementService) CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error) {
-	resp, err := s.cs.newRequest("cancelShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cancelShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -736,7 +736,7 @@ func (s *ManagementService) NewPrepareForShutdownParams(managementserverid UUID)
 
 // Prepares CloudStack for a safe manual shutdown by preventing new jobs from being accepted
 func (s *ManagementService) PrepareForShutdown(p *PrepareForShutdownParams) (*PrepareForShutdownResponse, error) {
-	resp, err := s.cs.newRequest("prepareForShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("prepareForShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -804,7 +804,7 @@ func (s *ManagementService) NewReadyForShutdownParams() *ReadyForShutdownParams 
 
 // Returns the status of CloudStack, whether a shutdown has been triggered and if ready to shutdown
 func (s *ManagementService) ReadyForShutdown(p *ReadyForShutdownParams) (*ReadyForShutdownResponse, error) {
-	resp, err := s.cs.newRequest("readyForShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("readyForShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -876,7 +876,7 @@ func (s *ManagementService) NewTriggerShutdownParams(managementserverid UUID) *T
 
 // Triggers an automatic safe shutdown of CloudStack by not accepting new jobs and shutting down when all pending jobbs have been completed. Triggers an immediate shutdown if forced
 func (s *ManagementService) TriggerShutdown(p *TriggerShutdownParams) (*TriggerShutdownResponse, error) {
-	resp, err := s.cs.newRequest("triggerShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("triggerShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

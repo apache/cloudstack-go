@@ -409,7 +409,7 @@ func (s *UserService) NewDeleteUserParams(id string) *DeleteUserParams {
 
 // Deletes a user for an account
 func (s *UserService) DeleteUser(p *DeleteUserParams) (*DeleteUserResponse, error) {
-	resp, err := s.cs.newRequest("deleteUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -503,7 +503,7 @@ func (s *UserService) NewDisableUserParams(id string) *DisableUserParams {
 
 // Disables a user account
 func (s *UserService) DisableUser(p *DisableUserParams) (*DisableUserResponse, error) {
-	resp, err := s.cs.newRequest("disableUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -612,7 +612,7 @@ func (s *UserService) NewEnableUserParams(id string) *EnableUserParams {
 
 // Enables a user account
 func (s *UserService) EnableUser(p *EnableUserParams) (*EnableUserResponse, error) {
-	resp, err := s.cs.newRequest("enableUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1403,7 +1403,7 @@ func (s *UserService) NewLockUserParams(id string) *LockUserParams {
 
 // Locks a user account
 func (s *UserService) LockUser(p *LockUserParams) (*LockUserResponse, error) {
-	resp, err := s.cs.newRequest("lockUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("lockUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1496,7 +1496,7 @@ func (s *UserService) NewRegisterUserKeysParams(id string) *RegisterUserKeysPara
 
 // This command allows a user to register for the developer API, returning a secret key and an API key. This request is made through the integration API port, so it is a privileged command and must be made on behalf of a user. It is up to the implementer just how the username and password are entered, and then how that translates to an integration API request. Both secret key and API key should be returned to the user
 func (s *UserService) RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUserKeysResponse, error) {
-	resp, err := s.cs.newRequest("registerUserKeys", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerUserKeys", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2353,7 +2353,7 @@ func (s *UserService) NewDeleteUserDataParams(id string) *DeleteUserDataParams {
 
 // Deletes a userdata
 func (s *UserService) DeleteUserData(p *DeleteUserDataParams) (*DeleteUserDataResponse, error) {
-	resp, err := s.cs.newRequest("deleteUserData", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUserData", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2727,7 +2727,7 @@ func (s *UserService) NewMoveUserParams(id string) *MoveUserParams {
 
 // Moves a user to another account in the same domain.
 func (s *UserService) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
-	resp, err := s.cs.newRequest("moveUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("moveUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3133,7 +3133,7 @@ func (s *UserService) NewVerifyOAuthCodeAndGetUserParams(provider string) *Verif
 
 // Verify the OAuth Code and fetch the corresponding user from provider
 func (s *UserService) VerifyOAuthCodeAndGetUser(p *VerifyOAuthCodeAndGetUserParams) (*VerifyOAuthCodeAndGetUserResponse, error) {
-	resp, err := s.cs.newRequest("verifyOAuthCodeAndGetUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("verifyOAuthCodeAndGetUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

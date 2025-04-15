@@ -121,7 +121,7 @@ func (s *ProjectService) NewActivateProjectParams(id string) *ActivateProjectPar
 
 // Activates a project
 func (s *ProjectService) ActivateProject(p *ActivateProjectParams) (*ActivateProjectResponse, error) {
-	resp, err := s.cs.newRequest("activateProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("activateProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -349,7 +349,7 @@ func (s *ProjectService) NewAddAccountToProjectParams(projectid string) *AddAcco
 
 // Adds account to a project
 func (s *ProjectService) AddAccountToProject(p *AddAccountToProjectParams) (*AddAccountToProjectResponse, error) {
-	resp, err := s.cs.newRequest("addAccountToProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addAccountToProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -528,7 +528,7 @@ func (s *ProjectService) NewAddUserToProjectParams(projectid string, username st
 
 // Adds user to a project
 func (s *ProjectService) AddUserToProject(p *AddUserToProjectParams) (*AddUserToProjectResponse, error) {
-	resp, err := s.cs.newRequest("addUserToProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addUserToProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -731,7 +731,7 @@ func (s *ProjectService) NewCreateProjectParams(displaytext string, name string)
 
 // Creates a project
 func (s *ProjectService) CreateProject(p *CreateProjectParams) (*CreateProjectResponse, error) {
-	resp, err := s.cs.newRequest("createProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -888,7 +888,7 @@ func (s *ProjectService) NewDeleteAccountFromProjectParams(account string, proje
 
 // Deletes account from the project
 func (s *ProjectService) DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error) {
-	resp, err := s.cs.newRequest("deleteAccountFromProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteAccountFromProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -995,7 +995,7 @@ func (s *ProjectService) NewDeleteUserFromProjectParams(projectid string, userid
 
 // Deletes user from the project
 func (s *ProjectService) DeleteUserFromProject(p *DeleteUserFromProjectParams) (*DeleteUserFromProjectResponse, error) {
-	resp, err := s.cs.newRequest("deleteUserFromProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUserFromProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1102,7 +1102,7 @@ func (s *ProjectService) NewDeleteProjectParams(id string) *DeleteProjectParams 
 
 // Deletes a project
 func (s *ProjectService) DeleteProject(p *DeleteProjectParams) (*DeleteProjectResponse, error) {
-	resp, err := s.cs.newRequest("deleteProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1184,7 +1184,7 @@ func (s *ProjectService) NewDeleteProjectInvitationParams(id string) *DeleteProj
 
 // Deletes project invitation
 func (s *ProjectService) DeleteProjectInvitation(p *DeleteProjectInvitationParams) (*DeleteProjectInvitationResponse, error) {
-	resp, err := s.cs.newRequest("deleteProjectInvitation", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteProjectInvitation", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2192,7 +2192,7 @@ func (s *ProjectService) NewSuspendProjectParams(id string) *SuspendProjectParam
 
 // Suspends a project
 func (s *ProjectService) SuspendProject(p *SuspendProjectParams) (*SuspendProjectResponse, error) {
-	resp, err := s.cs.newRequest("suspendProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("suspendProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2469,7 +2469,7 @@ func (s *ProjectService) NewUpdateProjectParams(id string) *UpdateProjectParams 
 
 // Updates a project
 func (s *ProjectService) UpdateProject(p *UpdateProjectParams) (*UpdateProjectResponse, error) {
-	resp, err := s.cs.newRequest("updateProject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateProject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2698,7 +2698,7 @@ func (s *ProjectService) NewUpdateProjectInvitationParams(projectid string) *Upd
 
 // Accepts or declines project invitation
 func (s *ProjectService) UpdateProjectInvitation(p *UpdateProjectInvitationParams) (*UpdateProjectInvitationResponse, error) {
-	resp, err := s.cs.newRequest("updateProjectInvitation", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateProjectInvitation", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2980,7 +2980,7 @@ func (s *ProjectService) NewCreateProjectRolePermissionParams(permission string,
 
 // Adds API permissions to a project role
 func (s *ProjectService) CreateProjectRolePermission(p *CreateProjectRolePermissionParams) (*CreateProjectRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("createProjectRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createProjectRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3150,7 +3150,7 @@ func (s *ProjectService) NewUpdateProjectRolePermissionParams(projectid string, 
 
 // Updates a project role permission and/or order
 func (s *ProjectService) UpdateProjectRolePermission(p *UpdateProjectRolePermissionParams) (*UpdateProjectRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("updateProjectRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateProjectRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3269,7 +3269,7 @@ func (s *ProjectService) NewDeleteProjectRolePermissionParams(id string, project
 
 // Deletes a project role permission in the project
 func (s *ProjectService) DeleteProjectRolePermission(p *DeleteProjectRolePermissionParams) (*DeleteProjectRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("deleteProjectRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteProjectRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3412,7 +3412,7 @@ func (s *ProjectService) NewCreateProjectRoleParams(name string, projectid strin
 
 // Creates a Project role
 func (s *ProjectService) CreateProjectRole(p *CreateProjectRoleParams) (*CreateProjectRoleResponse, error) {
-	resp, err := s.cs.newRequest("createProjectRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createProjectRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3558,7 +3558,7 @@ func (s *ProjectService) NewUpdateProjectRoleParams(id string, projectid string)
 
 // Creates a Project role
 func (s *ProjectService) UpdateProjectRole(p *UpdateProjectRoleParams) (*UpdateProjectRoleResponse, error) {
-	resp, err := s.cs.newRequest("updateProjectRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateProjectRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3656,7 +3656,7 @@ func (s *ProjectService) NewDeleteProjectRoleParams(id string, projectid string)
 
 // Delete Project roles in CloudStack
 func (s *ProjectService) DeleteProjectRole(p *DeleteProjectRoleParams) (*DeleteProjectRoleResponse, error) {
-	resp, err := s.cs.newRequest("deleteProjectRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteProjectRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

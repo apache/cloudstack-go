@@ -227,7 +227,7 @@ func (s *RollingMaintenanceService) NewStartRollingMaintenanceParams() *StartRol
 
 // Start rolling maintenance
 func (s *RollingMaintenanceService) StartRollingMaintenance(p *StartRollingMaintenanceParams) (*StartRollingMaintenanceResponse, error) {
-	resp, err := s.cs.newRequest("startRollingMaintenance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startRollingMaintenance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

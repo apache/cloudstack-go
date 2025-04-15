@@ -560,7 +560,7 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("// Execute the request against a CS API. Will return the raw JSON data returned by the API and nil if")
 	pn("// no error occurred. If the API returns an error the result will be nil and the HTTP error code and CS")
 	pn("// error details. If a processing (code) error occurs the result will be nil and the generated error")
-	pn("func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawMessage, error) {")
+	pn("func (cs *CloudStackClient) newPostRequest(api string, params url.Values) (json.RawMessage, error) {")
 	pn("		return cs.newRawRequest(api, false, params)")
 	pn("}")
 	pn("")
@@ -1065,7 +1065,7 @@ func (s *service) GenerateCode() ([]byte, error) {
 		pn("}")
 		pn("")
 		pn("func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result interface{}) error {")
-		pn("	resp, err := s.cs.newRequest(api, p.toURLValues())")
+		pn("	resp, err := s.cs.newPostRequest(api, p.toURLValues())")
 		pn("	if err != nil {")
 		pn("		return err")
 		pn("	}")
@@ -1752,7 +1752,7 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		pn("")
 		pn("	// We should be able to retry on failure as this call is idempotent")
 		pn("	for i := 0; i < 3; i++ {")
-		pn("		resp, err = s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
+		pn("		resp, err = s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
 		pn("		if err == nil {")
 		pn("			break")
 		pn("		}")
@@ -1762,7 +1762,7 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		if requiresPostMethod[a.Name] {
 			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
 		} else {
-			pn("	resp, err := s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
+			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
 		}
 	}
 	pn("	if err != nil {")

@@ -160,7 +160,7 @@ func (s *VMGroupService) NewCreateInstanceGroupParams(name string) *CreateInstan
 
 // Creates a vm group
 func (s *VMGroupService) CreateInstanceGroup(p *CreateInstanceGroupParams) (*CreateInstanceGroupResponse, error) {
-	resp, err := s.cs.newRequest("createInstanceGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createInstanceGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -235,7 +235,7 @@ func (s *VMGroupService) NewDeleteInstanceGroupParams(id string) *DeleteInstance
 
 // Deletes a vm group
 func (s *VMGroupService) DeleteInstanceGroup(p *DeleteInstanceGroupParams) (*DeleteInstanceGroupResponse, error) {
-	resp, err := s.cs.newRequest("deleteInstanceGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteInstanceGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -735,7 +735,7 @@ func (s *VMGroupService) NewUpdateInstanceGroupParams(id string) *UpdateInstance
 
 // Updates a vm group
 func (s *VMGroupService) UpdateInstanceGroup(p *UpdateInstanceGroupParams) (*UpdateInstanceGroupResponse, error) {
-	resp, err := s.cs.newRequest("updateInstanceGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateInstanceGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

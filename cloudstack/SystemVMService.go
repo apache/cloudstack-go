@@ -155,7 +155,7 @@ func (s *SystemVMService) NewChangeServiceForSystemVmParams(id string, serviceof
 
 // Changes the service offering for a system vm (console proxy or secondary storage). The system vm must be in a "Stopped" state for this command to take effect.
 func (s *SystemVMService) ChangeServiceForSystemVm(p *ChangeServiceForSystemVmParams) (*ChangeServiceForSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("changeServiceForSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeServiceForSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -258,7 +258,7 @@ func (s *SystemVMService) NewDestroySystemVmParams(id string) *DestroySystemVmPa
 
 // Destroys a system virtual machine.
 func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySystemVmResponse, error) {
-	resp, err := s.cs.newRequest("destroySystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroySystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1213,7 +1213,7 @@ func (s *SystemVMService) NewMigrateSystemVmParams(virtualmachineid string) *Mig
 
 // Attempts Migration of a system virtual machine to the host specified.
 func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("migrateSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1361,7 +1361,7 @@ func (s *SystemVMService) NewRebootSystemVmParams(id string) *RebootSystemVmPara
 
 // Reboots a system VM.
 func (s *SystemVMService) RebootSystemVm(p *RebootSystemVmParams) (*RebootSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("rebootSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("rebootSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1536,7 +1536,7 @@ func (s *SystemVMService) NewScaleSystemVmParams(id string, serviceofferingid st
 
 // Scale the service offering for a system vm (console proxy or secondary storage). The system vm must be in a "Stopped" state for this command to take effect.
 func (s *SystemVMService) ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("scaleSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("scaleSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1659,7 +1659,7 @@ func (s *SystemVMService) NewStartSystemVmParams(id string) *StartSystemVmParams
 
 // Starts a system virtual machine.
 func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("startSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1807,7 +1807,7 @@ func (s *SystemVMService) NewStopSystemVmParams(id string) *StopSystemVmParams {
 
 // Stops a system VM.
 func (s *SystemVMService) StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("stopSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1954,7 +1954,7 @@ func (s *SystemVMService) NewPatchSystemVmParams() *PatchSystemVmParams {
 
 // Attempts to live patch systemVMs - CPVM, SSVM
 func (s *SystemVMService) PatchSystemVm(p *PatchSystemVmParams) (*PatchSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("patchSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("patchSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
