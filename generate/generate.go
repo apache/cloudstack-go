@@ -560,7 +560,7 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("// Execute the request against a CS API. Will return the raw JSON data returned by the API and nil if")
 	pn("// no error occurred. If the API returns an error the result will be nil and the HTTP error code and CS")
 	pn("// error details. If a processing (code) error occurs the result will be nil and the generated error")
-	pn("func (cs *CloudStackClient) newPostRequest(api string, params url.Values) (json.RawMessage, error) {")
+	pn("func (cs *CloudStackClient) newRequest(api string, params url.Values) (json.RawMessage, error) {")
 	pn("		return cs.newRawRequest(api, false, params)")
 	pn("}")
 	pn("")
