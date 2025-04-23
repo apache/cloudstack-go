@@ -804,7 +804,7 @@ func (s *ManagementService) NewReadyForShutdownParams() *ReadyForShutdownParams 
 
 // Returns the status of CloudStack, whether a shutdown has been triggered and if ready to shutdown
 func (s *ManagementService) ReadyForShutdown(p *ReadyForShutdownParams) (*ReadyForShutdownResponse, error) {
-	resp, err := s.cs.newPostRequest("readyForShutdown", p.toURLValues())
+	resp, err := s.cs.newRequest("readyForShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

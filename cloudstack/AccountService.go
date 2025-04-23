@@ -1104,7 +1104,7 @@ func (s *AccountService) NewIsAccountAllowedToCreateOfferingsWithTagsParams() *I
 
 // Return true if the specified account is allowed to create offerings with tags.
 func (s *AccountService) IsAccountAllowedToCreateOfferingsWithTags(p *IsAccountAllowedToCreateOfferingsWithTagsParams) (*IsAccountAllowedToCreateOfferingsWithTagsResponse, error) {
-	resp, err := s.cs.newPostRequest("isAccountAllowedToCreateOfferingsWithTags", p.toURLValues())
+	resp, err := s.cs.newRequest("isAccountAllowedToCreateOfferingsWithTags", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

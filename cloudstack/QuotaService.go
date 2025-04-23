@@ -192,7 +192,7 @@ func (s *QuotaService) NewQuotaBalanceParams(account string, domainid string) *Q
 
 // Create a quota balance statement
 func (s *QuotaService) QuotaBalance(p *QuotaBalanceParams) (*QuotaBalanceResponse, error) {
-	resp, err := s.cs.newPostRequest("quotaBalance", p.toURLValues())
+	resp, err := s.cs.newRequest("quotaBalance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -408,7 +408,7 @@ func (s *QuotaService) NewQuotaIsEnabledParams() *QuotaIsEnabledParams {
 
 // Return true if the plugin is enabled
 func (s *QuotaService) QuotaIsEnabled(p *QuotaIsEnabledParams) (*QuotaIsEnabledResponse, error) {
-	resp, err := s.cs.newPostRequest("quotaIsEnabled", p.toURLValues())
+	resp, err := s.cs.newRequest("quotaIsEnabled", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -598,7 +598,7 @@ func (s *QuotaService) NewQuotaStatementParams(account string, domainid string, 
 
 // Create a quota statement
 func (s *QuotaService) QuotaStatement(p *QuotaStatementParams) (*QuotaStatementResponse, error) {
-	resp, err := s.cs.newPostRequest("quotaStatement", p.toURLValues())
+	resp, err := s.cs.newRequest("quotaStatement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -801,7 +801,7 @@ func (s *QuotaService) NewQuotaSummaryParams() *QuotaSummaryParams {
 
 // Lists balance and quota usage for all accounts
 func (s *QuotaService) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error) {
-	resp, err := s.cs.newPostRequest("quotaSummary", p.toURLValues())
+	resp, err := s.cs.newRequest("quotaSummary", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1449,7 +1449,7 @@ func (s *QuotaService) NewQuotaTariffListParams() *QuotaTariffListParams {
 
 // Lists all quota tariff plans
 func (s *QuotaService) QuotaTariffList(p *QuotaTariffListParams) (*QuotaTariffListResponse, error) {
-	resp, err := s.cs.newPostRequest("quotaTariffList", p.toURLValues())
+	resp, err := s.cs.newRequest("quotaTariffList", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
