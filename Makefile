@@ -11,6 +11,8 @@ endif
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
+.PHONY: all code mocks test mockgen
+
 all: code mocks test
 
 code:
@@ -26,6 +28,6 @@ test:
 	go test -v github.com/apache/cloudstack-go/v2/test
 
 MOCKGEN := mockgen
-mockgen: ## Download conversion-gen locally if necessary.
+mockgen: ## Install mockgen locally via go install.
 	go install go.uber.org/mock/mockgen@latest
 

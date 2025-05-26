@@ -1,0 +1,98 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+env:
+  CLOUDSTACK_API_URL: http://localhost:8080/client/api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      cloudstack-simulator:
+        image: apache/cloudstack-simulator:4.20.0.0
+        ports:
+          - 8080:5050
+        options: >-
+          --health-cmd "curl -f http://localhost:5050 || exit 1"
+          --health-interval 30s
+          --health-timeout 10s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go Environment & build code & mocks
+        uses: ./.github/actions/setup-go-and-build
+
+      - name: Set up CloudStack
+        id: setup-cloudstack
+        shell: bash
+        run: |
+          set -e
+
+          # Deploy datacenter configuration
+          container_id=$(docker container ls --format=json -l | jq -r .ID)
+          if [ -z "$container_id" ] || [ "$container_id" = "null" ]; then
+            echo "Failed to get CloudStack container ID"
+            exit 1
+          fi
+
+          echo "Deploying CloudStack datacenter configuration..."
+          docker exec "$container_id" python /root/tools/marvin/marvin/deployDataCenter.py -i /root/setup/dev/advanced.cfg
+
+          # Login and get API credentials
+          echo "Logging into CloudStack..."
+          session_key=$(curl -sf --location "${CLOUDSTACK_API_URL}" \
+              --header 'Content-Type: application/x-www-form-urlencoded' \
+              --data-urlencode 'command=login' \
+              --data-urlencode 'username=admin' \
+              --data-urlencode 'password=password' \
+              --data-urlencode 'response=json' \
+              --data-urlencode 'domain=/' -j -c cookies.txt | jq -r ".loginresponse.sessionkey")
+
+
+          echo "::add-mask::$session_key" # Mask the session key
+
+          echo "Retrieving API keys..."
+          CLOUDSTACK_USER_ID=$(curl -fs "${CLOUDSTACK_API_URL}?command=listUsers&response=json&sessionkey=${session_key}" -b cookies.txt | jq -r '.listusersresponse.user[0].id')
+          api_key=$(curl -s "${CLOUDSTACK_API_URL}?command=getUserKeys&id=${CLOUDSTACK_USER_ID}&response=json&sessionkey=${session_key}" -b cookies.txt | jq -r '.getuserkeysresponse.userkeys.apikey')
+          secret_key=$(curl -fs "${CLOUDSTACK_API_URL}?command=getUserKeys&id=${CLOUDSTACK_USER_ID}&response=json&sessionkey=${session_key}" -b cookies.txt | jq -r '.getuserkeysresponse.userkeys.secretkey')
+
+
+          echo "::add-mask::$api_key" # Mask the API key
+          echo "::add-mask::$secret_key" # Mask the secret key
+
+          echo "CLOUDSTACK_API_KEY=$api_key" >> $GITHUB_OUTPUT
+          echo "CLOUDSTACK_SECRET_KEY=$secret_key" >> $GITHUB_OUTPUT
+
+      - name: Run tests
+        run: |
+          go test -v -timeout=30m ./ci/...
+        env:
+          CLOUDSTACK_API_URL: ${{ env.CLOUDSTACK_API_URL }}
+          CLOUDSTACK_API_KEY: ${{ steps.setup-cloudstack.outputs.CLOUDSTACK_API_KEY }}
+          CLOUDSTACK_SECRET_KEY: ${{ steps.setup-cloudstack.outputs.CLOUDSTACK_SECRET_KEY }}
