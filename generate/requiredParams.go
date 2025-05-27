@@ -66,4 +66,7 @@ var requiredParams = map[string][]string{
 	"registerTemplate": {
 		"displaytext",
 	},
+	"updateGuestOs": {
+		"osdisplayname",
+	},
 }
