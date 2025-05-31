@@ -146,7 +146,7 @@ func (s *LDAPService) NewAddLdapConfigurationParams(hostname string, port int) *
 
 // Add a new Ldap Configuration
 func (s *LDAPService) AddLdapConfiguration(p *AddLdapConfigurationParams) (*AddLdapConfigurationResponse, error) {
-	resp, err := s.cs.newRequest("addLdapConfiguration", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addLdapConfiguration", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -263,7 +263,7 @@ func (s *LDAPService) NewDeleteLdapConfigurationParams(hostname string) *DeleteL
 
 // Remove an Ldap Configuration
 func (s *LDAPService) DeleteLdapConfiguration(p *DeleteLdapConfigurationParams) (*DeleteLdapConfigurationResponse, error) {
-	resp, err := s.cs.newRequest("deleteLdapConfiguration", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteLdapConfiguration", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -553,7 +553,7 @@ func (s *LDAPService) NewImportLdapUsersParams() *ImportLdapUsersParams {
 
 // Import LDAP users
 func (s *LDAPService) ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUsersResponse, error) {
-	resp, err := s.cs.newRequest("importLdapUsers", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importLdapUsers", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -843,7 +843,7 @@ func (s *LDAPService) NewLdapConfigParams() *LdapConfigParams {
 
 // (Deprecated, use addLdapConfiguration) Configure the LDAP context for this site.
 func (s *LDAPService) LdapConfig(p *LdapConfigParams) (*LdapConfigResponse, error) {
-	resp, err := s.cs.newRequest("ldapConfig", p.toURLValues())
+	resp, err := s.cs.newPostRequest("ldapConfig", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1136,7 +1136,7 @@ func (s *LDAPService) NewLdapCreateAccountParams(username string) *LdapCreateAcc
 
 // Creates an account from an LDAP user
 func (s *LDAPService) LdapCreateAccount(p *LdapCreateAccountParams) (*LdapCreateAccountResponse, error) {
-	resp, err := s.cs.newRequest("ldapCreateAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("ldapCreateAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1263,7 +1263,7 @@ func (s *LDAPService) NewLdapRemoveParams() *LdapRemoveParams {
 
 // (Deprecated , use deleteLdapConfiguration) Remove the LDAP context for this site.
 func (s *LDAPService) LdapRemove(p *LdapRemoveParams) (*LdapRemoveResponse, error) {
-	resp, err := s.cs.newRequest("ldapRemove", p.toURLValues())
+	resp, err := s.cs.newPostRequest("ldapRemove", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1458,7 +1458,7 @@ func (s *LDAPService) NewLinkDomainToLdapParams(accounttype int, domainid string
 
 // link an existing cloudstack domain to group or OU in ldap
 func (s *LDAPService) LinkDomainToLdap(p *LinkDomainToLdapParams) (*LinkDomainToLdapResponse, error) {
-	resp, err := s.cs.newRequest("linkDomainToLdap", p.toURLValues())
+	resp, err := s.cs.newPostRequest("linkDomainToLdap", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2021,7 +2021,7 @@ func (s *LDAPService) NewSearchLdapParams(query string) *SearchLdapParams {
 
 // Searches LDAP based on the username attribute
 func (s *LDAPService) SearchLdap(p *SearchLdapParams) (*SearchLdapResponse, error) {
-	resp, err := s.cs.newRequest("searchLdap", p.toURLValues())
+	resp, err := s.cs.newPostRequest("searchLdap", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

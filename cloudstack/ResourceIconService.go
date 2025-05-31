@@ -108,7 +108,7 @@ func (s *ResourceIconService) NewDeleteResourceIconParams(resourceids []string, 
 
 // deletes the resource icon from the specified resource(s)
 func (s *ResourceIconService) DeleteResourceIcon(p *DeleteResourceIconParams) (*DeleteResourceIconResponse, error) {
-	resp, err := s.cs.newRequest("deleteResourceIcon", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteResourceIcon", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -352,7 +352,7 @@ func (s *ResourceIconService) NewUploadResourceIconParams(base64image string, re
 
 // Uploads an icon for the specified resource(s)
 func (s *ResourceIconService) UploadResourceIcon(p *UploadResourceIconParams) (*UploadResourceIconResponse, error) {
-	resp, err := s.cs.newRequest("uploadResourceIcon", p.toURLValues())
+	resp, err := s.cs.newPostRequest("uploadResourceIcon", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

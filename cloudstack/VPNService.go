@@ -437,7 +437,7 @@ func (s *VPNService) NewCreateRemoteAccessVpnParams(publicipid string) *CreateRe
 
 // Creates a l2tp/ipsec remote access vpn
 func (s *VPNService) CreateRemoteAccessVpn(p *CreateRemoteAccessVpnParams) (*CreateRemoteAccessVpnResponse, error) {
-	resp, err := s.cs.newRequest("createRemoteAccessVpn", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createRemoteAccessVpn", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -610,7 +610,7 @@ func (s *VPNService) NewCreateVpnConnectionParams(s2scustomergatewayid string, s
 
 // Create site to site vpn connection
 func (s *VPNService) CreateVpnConnection(p *CreateVpnConnectionParams) (*CreateVpnConnectionResponse, error) {
-	resp, err := s.cs.newRequest("createVpnConnection", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVpnConnection", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1066,7 +1066,7 @@ func (s *VPNService) NewCreateVpnCustomerGatewayParams(cidrlist string, esppolic
 
 // Creates site to site vpn customer gateway
 func (s *VPNService) CreateVpnCustomerGateway(p *CreateVpnCustomerGatewayParams) (*CreateVpnCustomerGatewayResponse, error) {
-	resp, err := s.cs.newRequest("createVpnCustomerGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVpnCustomerGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1198,7 +1198,7 @@ func (s *VPNService) NewCreateVpnGatewayParams(vpcid string) *CreateVpnGatewayPa
 
 // Creates site to site vpn local gateway
 func (s *VPNService) CreateVpnGateway(p *CreateVpnGatewayParams) (*CreateVpnGatewayResponse, error) {
-	resp, err := s.cs.newRequest("createVpnGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVpnGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1295,7 +1295,7 @@ func (s *VPNService) NewDeleteRemoteAccessVpnParams(publicipid string) *DeleteRe
 
 // Destroys a l2tp/ipsec remote access vpn
 func (s *VPNService) DeleteRemoteAccessVpn(p *DeleteRemoteAccessVpnParams) (*DeleteRemoteAccessVpnResponse, error) {
-	resp, err := s.cs.newRequest("deleteRemoteAccessVpn", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteRemoteAccessVpn", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1377,7 +1377,7 @@ func (s *VPNService) NewDeleteVpnConnectionParams(id string) *DeleteVpnConnectio
 
 // Delete site to site vpn connection
 func (s *VPNService) DeleteVpnConnection(p *DeleteVpnConnectionParams) (*DeleteVpnConnectionResponse, error) {
-	resp, err := s.cs.newRequest("deleteVpnConnection", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVpnConnection", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1459,7 +1459,7 @@ func (s *VPNService) NewDeleteVpnCustomerGatewayParams(id string) *DeleteVpnCust
 
 // Delete site to site vpn customer gateway
 func (s *VPNService) DeleteVpnCustomerGateway(p *DeleteVpnCustomerGatewayParams) (*DeleteVpnCustomerGatewayResponse, error) {
-	resp, err := s.cs.newRequest("deleteVpnCustomerGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVpnCustomerGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1541,7 +1541,7 @@ func (s *VPNService) NewDeleteVpnGatewayParams(id string) *DeleteVpnGatewayParam
 
 // Delete site to site vpn gateway
 func (s *VPNService) DeleteVpnGateway(p *DeleteVpnGatewayParams) (*DeleteVpnGatewayResponse, error) {
-	resp, err := s.cs.newRequest("deleteVpnGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVpnGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3512,7 +3512,7 @@ func (s *VPNService) NewRemoveVpnUserParams(username string) *RemoveVpnUserParam
 
 // Removes vpn user
 func (s *VPNService) RemoveVpnUser(p *RemoveVpnUserParams) (*RemoveVpnUserResponse, error) {
-	resp, err := s.cs.newRequest("removeVpnUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeVpnUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3642,7 +3642,7 @@ func (s *VPNService) NewResetVpnConnectionParams(id string) *ResetVpnConnectionP
 
 // Reset site to site vpn connection
 func (s *VPNService) ResetVpnConnection(p *ResetVpnConnectionParams) (*ResetVpnConnectionResponse, error) {
-	resp, err := s.cs.newRequest("resetVpnConnection", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetVpnConnection", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3802,7 +3802,7 @@ func (s *VPNService) NewUpdateRemoteAccessVpnParams(id string) *UpdateRemoteAcce
 
 // Updates remote access vpn
 func (s *VPNService) UpdateRemoteAccessVpn(p *UpdateRemoteAccessVpnParams) (*UpdateRemoteAccessVpnResponse, error) {
-	resp, err := s.cs.newRequest("updateRemoteAccessVpn", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateRemoteAccessVpn", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3949,7 +3949,7 @@ func (s *VPNService) NewUpdateVpnConnectionParams(id string) *UpdateVpnConnectio
 
 // Updates site to site vpn connection
 func (s *VPNService) UpdateVpnConnection(p *UpdateVpnConnectionParams) (*UpdateVpnConnectionResponse, error) {
-	resp, err := s.cs.newRequest("updateVpnConnection", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVpnConnection", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4406,7 +4406,7 @@ func (s *VPNService) NewUpdateVpnCustomerGatewayParams(cidrlist string, esppolic
 
 // Update site to site vpn customer gateway
 func (s *VPNService) UpdateVpnCustomerGateway(p *UpdateVpnCustomerGatewayParams) (*UpdateVpnCustomerGatewayResponse, error) {
-	resp, err := s.cs.newRequest("updateVpnCustomerGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVpnCustomerGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4562,7 +4562,7 @@ func (s *VPNService) NewUpdateVpnGatewayParams(id string) *UpdateVpnGatewayParam
 
 // Updates site to site vpn local gateway
 func (s *VPNService) UpdateVpnGateway(p *UpdateVpnGatewayParams) (*UpdateVpnGatewayResponse, error) {
-	resp, err := s.cs.newRequest("updateVpnGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVpnGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

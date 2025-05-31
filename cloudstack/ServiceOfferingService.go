@@ -1257,7 +1257,7 @@ func (s *ServiceOfferingService) NewCreateServiceOfferingParams(displaytext stri
 
 // Creates a service offering.
 func (s *ServiceOfferingService) CreateServiceOffering(p *CreateServiceOfferingParams) (*CreateServiceOfferingResponse, error) {
-	resp, err := s.cs.newRequest("createServiceOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createServiceOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1379,7 +1379,7 @@ func (s *ServiceOfferingService) NewDeleteServiceOfferingParams(id string) *Dele
 
 // Deletes a service offering.
 func (s *ServiceOfferingService) DeleteServiceOffering(p *DeleteServiceOfferingParams) (*DeleteServiceOfferingResponse, error) {
-	resp, err := s.cs.newRequest("deleteServiceOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteServiceOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2385,7 +2385,7 @@ func (s *ServiceOfferingService) NewUpdateServiceOfferingParams(id string) *Upda
 
 // Updates a service offering.
 func (s *ServiceOfferingService) UpdateServiceOffering(p *UpdateServiceOfferingParams) (*UpdateServiceOfferingResponse, error) {
-	resp, err := s.cs.newRequest("updateServiceOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateServiceOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

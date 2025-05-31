@@ -209,7 +209,7 @@ func (s *PortableIPService) NewCreatePortableIpRangeParams(endip string, gateway
 
 // adds a range of portable public IP's to a region
 func (s *PortableIPService) CreatePortableIpRange(p *CreatePortableIpRangeParams) (*CreatePortableIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("createPortableIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createPortableIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -315,7 +315,7 @@ func (s *PortableIPService) NewDeletePortableIpRangeParams(id string) *DeletePor
 
 // deletes a range of portable public IP's associated with a region
 func (s *PortableIPService) DeletePortableIpRange(p *DeletePortableIpRangeParams) (*DeletePortableIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("deletePortableIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePortableIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

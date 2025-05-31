@@ -214,7 +214,7 @@ func (s *NATService) NewCreateIpForwardingRuleParams(ipaddressid string, protoco
 
 // Creates an IP forwarding rule
 func (s *NATService) CreateIpForwardingRule(p *CreateIpForwardingRuleParams) (*CreateIpForwardingRuleResponse, error) {
-	resp, err := s.cs.newRequest("createIpForwardingRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createIpForwardingRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -316,7 +316,7 @@ func (s *NATService) NewDeleteIpForwardingRuleParams(id string) *DeleteIpForward
 
 // Deletes an IP forwarding rule
 func (s *NATService) DeleteIpForwardingRule(p *DeleteIpForwardingRuleParams) (*DeleteIpForwardingRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteIpForwardingRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteIpForwardingRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -398,7 +398,7 @@ func (s *NATService) NewDisableStaticNatParams(ipaddressid string) *DisableStati
 
 // Disables static rule for given IP address
 func (s *NATService) DisableStaticNat(p *DisableStaticNatParams) (*DisableStaticNatResponse, error) {
-	resp, err := s.cs.newRequest("disableStaticNat", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableStaticNat", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -553,7 +553,7 @@ func (s *NATService) NewEnableStaticNatParams(ipaddressid string, virtualmachine
 
 // Enables static NAT for given IP address
 func (s *NATService) EnableStaticNat(p *EnableStaticNatParams) (*EnableStaticNatResponse, error) {
-	resp, err := s.cs.newRequest("enableStaticNat", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableStaticNat", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

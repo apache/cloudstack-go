@@ -400,7 +400,7 @@ func (s *SecurityGroupService) NewAuthorizeSecurityGroupEgressParams() *Authoriz
 
 // Authorizes a particular egress rule for this security group
 func (s *SecurityGroupService) AuthorizeSecurityGroupEgress(p *AuthorizeSecurityGroupEgressParams) (*AuthorizeSecurityGroupEgressResponse, error) {
-	resp, err := s.cs.newRequest("authorizeSecurityGroupEgress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("authorizeSecurityGroupEgress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -772,7 +772,7 @@ func (s *SecurityGroupService) NewAuthorizeSecurityGroupIngressParams() *Authori
 
 // Authorizes a particular ingress rule for this security group
 func (s *SecurityGroupService) AuthorizeSecurityGroupIngress(p *AuthorizeSecurityGroupIngressParams) (*AuthorizeSecurityGroupIngressResponse, error) {
-	resp, err := s.cs.newRequest("authorizeSecurityGroupIngress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("authorizeSecurityGroupIngress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -968,7 +968,7 @@ func (s *SecurityGroupService) NewCreateSecurityGroupParams(name string) *Create
 
 // Creates a security group
 func (s *SecurityGroupService) CreateSecurityGroup(p *CreateSecurityGroupParams) (*CreateSecurityGroupResponse, error) {
-	resp, err := s.cs.newRequest("createSecurityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSecurityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1159,7 +1159,7 @@ func (s *SecurityGroupService) NewDeleteSecurityGroupParams() *DeleteSecurityGro
 
 // Deletes security group
 func (s *SecurityGroupService) DeleteSecurityGroup(p *DeleteSecurityGroupParams) (*DeleteSecurityGroupResponse, error) {
-	resp, err := s.cs.newRequest("deleteSecurityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSecurityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1704,7 +1704,7 @@ func (s *SecurityGroupService) NewRevokeSecurityGroupEgressParams(id string) *Re
 
 // Deletes a particular egress rule from this security group
 func (s *SecurityGroupService) RevokeSecurityGroupEgress(p *RevokeSecurityGroupEgressParams) (*RevokeSecurityGroupEgressResponse, error) {
-	resp, err := s.cs.newRequest("revokeSecurityGroupEgress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revokeSecurityGroupEgress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1786,7 +1786,7 @@ func (s *SecurityGroupService) NewRevokeSecurityGroupIngressParams(id string) *R
 
 // Deletes a particular ingress rule from this security group
 func (s *SecurityGroupService) RevokeSecurityGroupIngress(p *RevokeSecurityGroupIngressParams) (*RevokeSecurityGroupIngressResponse, error) {
-	resp, err := s.cs.newRequest("revokeSecurityGroupIngress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revokeSecurityGroupIngress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1916,7 +1916,7 @@ func (s *SecurityGroupService) NewUpdateSecurityGroupParams(id string) *UpdateSe
 
 // Updates a security group
 func (s *SecurityGroupService) UpdateSecurityGroup(p *UpdateSecurityGroupParams) (*UpdateSecurityGroupResponse, error) {
-	resp, err := s.cs.newRequest("updateSecurityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateSecurityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -117,7 +117,7 @@ func (s *BGPPeerService) NewChangeBgpPeersForVpcParams(vpcid string) *ChangeBgpP
 
 // Change the BGP peers for a VPC.
 func (s *BGPPeerService) ChangeBgpPeersForVpc(p *ChangeBgpPeersForVpcParams) (*ChangeBgpPeersForVpcResponse, error) {
-	resp, err := s.cs.newRequest("changeBgpPeersForVpc", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeBgpPeersForVpc", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -413,7 +413,7 @@ func (s *BGPPeerService) NewCreateBgpPeerParams(asnumber int64, zoneid string) *
 
 // Creates a Bgp Peer for a zone.
 func (s *BGPPeerService) CreateBgpPeer(p *CreateBgpPeerParams) (*CreateBgpPeerResponse, error) {
-	resp, err := s.cs.newRequest("createBgpPeer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createBgpPeer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -584,7 +584,7 @@ func (s *BGPPeerService) NewDedicateBgpPeerParams(id string) *DedicateBgpPeerPar
 
 // Dedicates an existing Bgp Peer to an account or a domain.
 func (s *BGPPeerService) DedicateBgpPeer(p *DedicateBgpPeerParams) (*DedicateBgpPeerResponse, error) {
-	resp, err := s.cs.newRequest("dedicateBgpPeer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicateBgpPeer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -683,7 +683,7 @@ func (s *BGPPeerService) NewDeleteBgpPeerParams(id string) *DeleteBgpPeerParams 
 
 // Deletes an existing Bgp Peer.
 func (s *BGPPeerService) DeleteBgpPeer(p *DeleteBgpPeerParams) (*DeleteBgpPeerResponse, error) {
-	resp, err := s.cs.newRequest("deleteBgpPeer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteBgpPeer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1101,7 +1101,7 @@ func (s *BGPPeerService) NewReleaseBgpPeerParams(id string) *ReleaseBgpPeerParam
 
 // Releases an existing dedicated Bgp Peer.
 func (s *BGPPeerService) ReleaseBgpPeer(p *ReleaseBgpPeerParams) (*ReleaseBgpPeerResponse, error) {
-	resp, err := s.cs.newRequest("releaseBgpPeer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseBgpPeer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1349,7 +1349,7 @@ func (s *BGPPeerService) NewUpdateBgpPeerParams(id string) *UpdateBgpPeerParams 
 
 // Updates an existing Bgp Peer.
 func (s *BGPPeerService) UpdateBgpPeer(p *UpdateBgpPeerParams) (*UpdateBgpPeerResponse, error) {
-	resp, err := s.cs.newRequest("updateBgpPeer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateBgpPeer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

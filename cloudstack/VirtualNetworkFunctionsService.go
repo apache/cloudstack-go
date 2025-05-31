@@ -169,7 +169,7 @@ func (s *VirtualNetworkFunctionsService) NewDeleteVnfTemplateParams(id string) *
 
 // Deletes a VNF template from the system. All virtual machines using the deleted template will not be affected.
 func (s *VirtualNetworkFunctionsService) DeleteVnfTemplate(p *DeleteVnfTemplateParams) (*DeleteVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("deleteVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1522,7 +1522,7 @@ func (s *VirtualNetworkFunctionsService) NewDeployVnfApplianceParams(serviceoffe
 
 // Creates and automatically starts a VNF appliance based on a service offering, disk offering, and template.
 func (s *VirtualNetworkFunctionsService) DeployVnfAppliance(p *DeployVnfApplianceParams) (*DeployVnfApplianceResponse, error) {
-	resp, err := s.cs.newRequest("deployVnfAppliance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deployVnfAppliance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4419,7 +4419,7 @@ func (s *VirtualNetworkFunctionsService) NewRegisterVnfTemplateParams(format str
 
 // Registers an existing VNF template into the CloudStack cloud.
 func (s *VirtualNetworkFunctionsService) RegisterVnfTemplate(p *RegisterVnfTemplateParams) (*RegisterVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("registerVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5066,7 +5066,7 @@ func (s *VirtualNetworkFunctionsService) NewUpdateVnfTemplateParams(id string) *
 
 // Updates a template to VNF template or attributes of a VNF template.
 func (s *VirtualNetworkFunctionsService) UpdateVnfTemplate(p *UpdateVnfTemplateParams) (*UpdateVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("updateVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -840,7 +840,7 @@ func (s *NetworkOfferingService) NewCreateNetworkOfferingParams(displaytext stri
 
 // Creates a network offering.
 func (s *NetworkOfferingService) CreateNetworkOffering(p *CreateNetworkOfferingParams) (*CreateNetworkOfferingResponse, error) {
-	resp, err := s.cs.newRequest("createNetworkOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createNetworkOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -966,7 +966,7 @@ func (s *NetworkOfferingService) NewDeleteNetworkOfferingParams(id string) *Dele
 
 // Deletes a network offering.
 func (s *NetworkOfferingService) DeleteNetworkOffering(p *DeleteNetworkOfferingParams) (*DeleteNetworkOfferingResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetworkOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetworkOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2024,7 +2024,7 @@ func (s *NetworkOfferingService) NewUpdateNetworkOfferingParams() *UpdateNetwork
 
 // Updates a network offering.
 func (s *NetworkOfferingService) UpdateNetworkOffering(p *UpdateNetworkOfferingParams) (*UpdateNetworkOfferingResponse, error) {
-	resp, err := s.cs.newRequest("updateNetworkOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateNetworkOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -160,7 +160,7 @@ func (s *BrocadeVCSService) NewAddBrocadeVcsDeviceParams(hostname string, passwo
 
 // Adds a Brocade VCS Switch
 func (s *BrocadeVCSService) AddBrocadeVcsDevice(p *AddBrocadeVcsDeviceParams) (*AddBrocadeVcsDeviceResponse, error) {
-	resp, err := s.cs.newRequest("addBrocadeVcsDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBrocadeVcsDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -250,7 +250,7 @@ func (s *BrocadeVCSService) NewDeleteBrocadeVcsDeviceParams(vcsdeviceid string) 
 
 // delete a Brocade VCS Switch
 func (s *BrocadeVCSService) DeleteBrocadeVcsDevice(p *DeleteBrocadeVcsDeviceParams) (*DeleteBrocadeVcsDeviceResponse, error) {
-	resp, err := s.cs.newRequest("deleteBrocadeVcsDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteBrocadeVcsDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
