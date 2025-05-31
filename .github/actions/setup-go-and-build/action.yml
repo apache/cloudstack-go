@@ -15,32 +15,44 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: Build Check
+name: 'Setup Go Environment'
+description: 'Set up Go with caching and install required tools'
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+inputs:
+  go-version:
+    description: 'Go version to use'
+    required: false
+    default: '1.23'
 
-permissions:
-  contents: read
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ inputs.go-version }}
+        check-latest: true
 
-jobs:
+    - name: Cache Go modules
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Setup Go Environment
-      uses: ./.github/actions/setup-go-and-build
+    - name: Set up tools
+      shell: bash
+      run: |
+        go install golang.org/x/tools/cmd/goimports@latest
+        go install go.uber.org/mock/mockgen@latest
+    
 
     - name: Build
+      shell: bash
       run: |
         export PATH=$PATH:$(go env GOPATH)/bin
         make code
         make mocks
-
-    - name: Test
-      run: go test -v ./test/... ./examples/...
