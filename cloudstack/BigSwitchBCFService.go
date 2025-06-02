@@ -182,7 +182,7 @@ func (s *BigSwitchBCFService) NewAddBigSwitchBcfDeviceParams(hostname string, na
 
 // Adds a BigSwitch BCF Controller device
 func (s *BigSwitchBCFService) AddBigSwitchBcfDevice(p *AddBigSwitchBcfDeviceParams) (*AddBigSwitchBcfDeviceResponse, error) {
-	resp, err := s.cs.newRequest("addBigSwitchBcfDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBigSwitchBcfDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -275,7 +275,7 @@ func (s *BigSwitchBCFService) NewDeleteBigSwitchBcfDeviceParams(bcfdeviceid stri
 
 // delete a BigSwitch BCF Controller device
 func (s *BigSwitchBCFService) DeleteBigSwitchBcfDevice(p *DeleteBigSwitchBcfDeviceParams) (*DeleteBigSwitchBcfDeviceResponse, error) {
-	resp, err := s.cs.newRequest("deleteBigSwitchBcfDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteBigSwitchBcfDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

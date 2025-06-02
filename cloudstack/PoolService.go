@@ -415,7 +415,7 @@ func (s *PoolService) NewCreateStoragePoolParams(name string, url string, zoneid
 
 // Creates a storage pool.
 func (s *PoolService) CreateStoragePool(p *CreateStoragePoolParams) (*CreateStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("createStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -539,7 +539,7 @@ func (s *PoolService) NewDeleteStoragePoolParams(id string) *DeleteStoragePoolPa
 
 // Deletes a storage pool.
 func (s *PoolService) DeleteStoragePool(p *DeleteStoragePoolParams) (*DeleteStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("deleteStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1376,7 +1376,7 @@ func (s *PoolService) NewSyncStoragePoolParams(id string) *SyncStoragePoolParams
 
 // Sync storage pool with management server (currently supported for Datastore Cluster in VMware and syncs the datastores in it)
 func (s *PoolService) SyncStoragePool(p *SyncStoragePoolParams) (*SyncStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("syncStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("syncStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1691,7 +1691,7 @@ func (s *PoolService) NewUpdateStoragePoolParams(id string) *UpdateStoragePoolPa
 
 // Updates a storage pool.
 func (s *PoolService) UpdateStoragePool(p *UpdateStoragePoolParams) (*UpdateStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("updateStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

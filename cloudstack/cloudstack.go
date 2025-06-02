@@ -39,7 +39,7 @@ import (
 	"strings"
 	"time"
 
-        gomock "go.uber.org/mock/gomock"
+	gomock "go.uber.org/mock/gomock"
 )
 
 // UnlimitedResourceID is a special ID to define an unlimited resource
@@ -529,6 +529,8 @@ func (cs *CloudStackClient) newRawRequest(api string, post bool, params url.Valu
 	params.Set("apiKey", cs.apiKey)
 	params.Set("command", api)
 	params.Set("response", "json")
+	params.Set("signatureversion", "3")
+	params.Set("expires", time.Now().UTC().Add(15*time.Minute).Format(time.RFC3339))
 
 	// Generate signature for API call
 	// * Serialize parameters, URL encoding only values and sort them by key, done by EncodeValues

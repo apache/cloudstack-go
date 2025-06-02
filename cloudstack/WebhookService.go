@@ -315,7 +315,7 @@ func (s *WebhookService) NewCreateWebhookParams(name string, payloadurl string) 
 
 // Creates a Webhook
 func (s *WebhookService) CreateWebhook(p *CreateWebhookParams) (*CreateWebhookResponse, error) {
-	resp, err := s.cs.newRequest("createWebhook", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createWebhook", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -395,7 +395,7 @@ func (s *WebhookService) NewDeleteWebhookParams(id string) *DeleteWebhookParams 
 
 // Deletes a Webhook
 func (s *WebhookService) DeleteWebhook(p *DeleteWebhookParams) (*DeleteWebhookResponse, error) {
-	resp, err := s.cs.newRequest("deleteWebhook", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteWebhook", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -584,7 +584,7 @@ func (s *WebhookService) NewDeleteWebhookDeliveryParams() *DeleteWebhookDelivery
 
 // Deletes Webhook delivery
 func (s *WebhookService) DeleteWebhookDelivery(p *DeleteWebhookDeliveryParams) (*DeleteWebhookDeliveryResponse, error) {
-	resp, err := s.cs.newRequest("deleteWebhookDelivery", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteWebhookDelivery", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -798,7 +798,7 @@ func (s *WebhookService) NewExecuteWebhookDeliveryParams() *ExecuteWebhookDelive
 
 // Executes a Webhook delivery
 func (s *WebhookService) ExecuteWebhookDelivery(p *ExecuteWebhookDeliveryParams) (*ExecuteWebhookDeliveryResponse, error) {
-	resp, err := s.cs.newRequest("executeWebhookDelivery", p.toURLValues())
+	resp, err := s.cs.newPostRequest("executeWebhookDelivery", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1868,7 +1868,7 @@ func (s *WebhookService) NewUpdateWebhookParams(id string) *UpdateWebhookParams 
 
 // Updates a Webhook
 func (s *WebhookService) UpdateWebhook(p *UpdateWebhookParams) (*UpdateWebhookResponse, error) {
-	resp, err := s.cs.newRequest("updateWebhook", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateWebhook", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

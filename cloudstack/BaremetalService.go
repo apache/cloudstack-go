@@ -193,7 +193,7 @@ func (s *BaremetalService) NewAddBaremetalDhcpParams(dhcpservertype string, pass
 
 // adds a baremetal dhcp server
 func (s *BaremetalService) AddBaremetalDhcp(p *AddBaremetalDhcpParams) (*AddBaremetalDhcpResponse, error) {
-	resp, err := s.cs.newRequest("addBaremetalDhcp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBaremetalDhcp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -432,7 +432,7 @@ func (s *BaremetalService) NewAddBaremetalPxeKickStartServerParams(password stri
 
 // add a baremetal pxe server
 func (s *BaremetalService) AddBaremetalPxeKickStartServer(p *AddBaremetalPxeKickStartServerParams) (*AddBaremetalPxeKickStartServerResponse, error) {
-	resp, err := s.cs.newRequest("addBaremetalPxeKickStartServer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBaremetalPxeKickStartServer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -769,7 +769,7 @@ func (s *BaremetalService) NewAddBaremetalPxePingServerParams(password string, p
 
 // add a baremetal ping pxe server
 func (s *BaremetalService) AddBaremetalPxePingServer(p *AddBaremetalPxePingServerParams) (*AddBaremetalPxePingServerResponse, error) {
-	resp, err := s.cs.newRequest("addBaremetalPxePingServer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBaremetalPxePingServer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -861,7 +861,7 @@ func (s *BaremetalService) NewAddBaremetalRctParams(baremetalrcturl string) *Add
 
 // adds baremetal rack configuration text
 func (s *BaremetalService) AddBaremetalRct(p *AddBaremetalRctParams) (*AddBaremetalRctResponse, error) {
-	resp, err := s.cs.newRequest("addBaremetalRct", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addBaremetalRct", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -948,7 +948,7 @@ func (s *BaremetalService) NewDeleteBaremetalRctParams(id string) *DeleteBaremet
 
 // deletes baremetal rack configuration text
 func (s *BaremetalService) DeleteBaremetalRct(p *DeleteBaremetalRctParams) (*DeleteBaremetalRctResponse, error) {
-	resp, err := s.cs.newRequest("deleteBaremetalRct", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteBaremetalRct", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1522,7 +1522,7 @@ func (s *BaremetalService) NewNotifyBaremetalProvisionDoneParams(mac string) *No
 
 // Notify provision has been done on a host. This api is for baremetal virtual router service, not for end user
 func (s *BaremetalService) NotifyBaremetalProvisionDone(p *NotifyBaremetalProvisionDoneParams) (*NotifyBaremetalProvisionDoneResponse, error) {
-	resp, err := s.cs.newRequest("notifyBaremetalProvisionDone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("notifyBaremetalProvisionDone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -165,7 +165,7 @@ func (s *ResourcemetadataService) NewAddResourceDetailParams(details map[string]
 
 // Adds detail for the Resource.
 func (s *ResourcemetadataService) AddResourceDetail(p *AddResourceDetailParams) (*AddResourceDetailResponse, error) {
-	resp, err := s.cs.newRequest("addResourceDetail", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addResourceDetail", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -831,7 +831,7 @@ func (s *ResourcemetadataService) NewRemoveResourceDetailParams(resourceid strin
 
 // Removes detail for the Resource.
 func (s *ResourcemetadataService) RemoveResourceDetail(p *RemoveResourceDetailParams) (*RemoveResourceDetailResponse, error) {
-	resp, err := s.cs.newRequest("removeResourceDetail", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeResourceDetail", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

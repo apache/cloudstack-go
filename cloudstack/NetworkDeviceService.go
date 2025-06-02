@@ -109,7 +109,7 @@ func (s *NetworkDeviceService) NewAddNetworkDeviceParams() *AddNetworkDevicePara
 
 // Adds a network device of one of the following types: ExternalDhcp, ExternalFirewall, ExternalLoadBalancer, PxeServer
 func (s *NetworkDeviceService) AddNetworkDevice(p *AddNetworkDeviceParams) (*AddNetworkDeviceResponse, error) {
-	resp, err := s.cs.newRequest("addNetworkDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNetworkDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +175,7 @@ func (s *NetworkDeviceService) NewDeleteNetworkDeviceParams(id string) *DeleteNe
 
 // Deletes network device.
 func (s *NetworkDeviceService) DeleteNetworkDevice(p *DeleteNetworkDeviceParams) (*DeleteNetworkDeviceResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetworkDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetworkDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

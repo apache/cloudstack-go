@@ -835,7 +835,7 @@ func (s *DiskOfferingService) NewCreateDiskOfferingParams(displaytext string, na
 
 // Creates a disk offering.
 func (s *DiskOfferingService) CreateDiskOffering(p *CreateDiskOfferingParams) (*CreateDiskOfferingResponse, error) {
-	resp, err := s.cs.newRequest("createDiskOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createDiskOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -942,7 +942,7 @@ func (s *DiskOfferingService) NewDeleteDiskOfferingParams(id string) *DeleteDisk
 
 // Updates a disk offering.
 func (s *DiskOfferingService) DeleteDiskOffering(p *DeleteDiskOfferingParams) (*DeleteDiskOfferingResponse, error) {
-	resp, err := s.cs.newRequest("deleteDiskOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteDiskOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2133,7 +2133,7 @@ func (s *DiskOfferingService) NewUpdateDiskOfferingParams(id string) *UpdateDisk
 
 // Updates a disk offering.
 func (s *DiskOfferingService) UpdateDiskOffering(p *UpdateDiskOfferingParams) (*UpdateDiskOfferingResponse, error) {
-	resp, err := s.cs.newRequest("updateDiskOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateDiskOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

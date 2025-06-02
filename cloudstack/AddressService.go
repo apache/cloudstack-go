@@ -118,7 +118,7 @@ func (s *AddressService) NewAcquirePodIpAddressParams(zoneid string) *AcquirePod
 
 // Allocates IP addresses in respective Pod of a Zone
 func (s *AddressService) AcquirePodIpAddress(p *AcquirePodIpAddressParams) (*AcquirePodIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("acquirePodIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("acquirePodIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -408,7 +408,7 @@ func (s *AddressService) NewAssociateIpAddressParams() *AssociateIpAddressParams
 
 // Acquires and associates a public IP to an account.
 func (s *AddressService) AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("associateIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("associateIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -554,7 +554,7 @@ func (s *AddressService) NewDisassociateIpAddressParams(id string) *Disassociate
 
 // Disassociates an IP address from the account.
 func (s *AddressService) DisassociateIpAddress(p *DisassociateIpAddressParams) (*DisassociateIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("disassociateIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disassociateIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1440,7 +1440,7 @@ func (s *AddressService) NewUpdateIpAddressParams(id string) *UpdateIpAddressPar
 
 // Updates an IP address
 func (s *AddressService) UpdateIpAddress(p *UpdateIpAddressParams) (*UpdateIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("updateIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1562,7 +1562,7 @@ func (s *AddressService) NewReleaseIpAddressParams(id string) *ReleaseIpAddressP
 
 // Releases an IP address from the account.
 func (s *AddressService) ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("releaseIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1657,7 +1657,7 @@ func (s *AddressService) NewReleasePodIpAddressParams(id int64) *ReleasePodIpAdd
 
 // Releases a Pod IP back to the Pod
 func (s *AddressService) ReleasePodIpAddress(p *ReleasePodIpAddressParams) (*ReleasePodIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("releasePodIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releasePodIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1848,7 +1848,7 @@ func (s *AddressService) NewReserveIpAddressParams(id string) *ReserveIpAddressP
 
 // Reserve a public IP to an account.
 func (s *AddressService) ReserveIpAddress(p *ReserveIpAddressParams) (*ReserveIpAddressResponse, error) {
-	resp, err := s.cs.newRequest("reserveIpAddress", p.toURLValues())
+	resp, err := s.cs.newPostRequest("reserveIpAddress", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

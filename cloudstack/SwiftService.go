@@ -153,7 +153,7 @@ func (s *SwiftService) NewAddSwiftParams(url string) *AddSwiftParams {
 
 // Adds Swift.
 func (s *SwiftService) AddSwift(p *AddSwiftParams) (*AddSwiftResponse, error) {
-	resp, err := s.cs.newRequest("addSwift", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addSwift", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

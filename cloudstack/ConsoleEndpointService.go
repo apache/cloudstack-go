@@ -101,7 +101,7 @@ func (s *ConsoleEndpointService) NewCreateConsoleEndpointParams(virtualmachineid
 
 // Create a console endpoint to connect to a VM console
 func (s *ConsoleEndpointService) CreateConsoleEndpoint(p *CreateConsoleEndpointParams) (*CreateConsoleEndpointResponse, error) {
-	resp, err := s.cs.newRequest("createConsoleEndpoint", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createConsoleEndpoint", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

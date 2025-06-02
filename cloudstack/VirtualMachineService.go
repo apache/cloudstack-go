@@ -254,7 +254,7 @@ func (s *VirtualMachineService) NewAddNicToVirtualMachineParams(networkid string
 
 // Adds VM to specified network by creating a NIC
 func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachineParams) (*AddNicToVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("addNicToVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNicToVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -624,7 +624,7 @@ func (s *VirtualMachineService) NewAssignVirtualMachineParams(virtualmachineid s
 
 // Change ownership of a VM from one account to another. This API is available for Basic zones with security groups and Advanced zones with guest networks. A root administrator can reassign a VM from any account to any other account in any domain. A domain administrator can reassign a VM to any account in the same domain.
 func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachineParams) (*AssignVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("assignVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1004,7 +1004,7 @@ func (s *VirtualMachineService) NewChangeServiceForVirtualMachineParams(id strin
 
 // (This API is deprecated, use scaleVirtualMachine API)Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect.
 func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("changeServiceForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeServiceForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1207,7 +1207,7 @@ func (s *VirtualMachineService) NewCleanVMReservationsParams() *CleanVMReservati
 
 // Cleanups VM reservations in the database.
 func (s *VirtualMachineService) CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error) {
-	resp, err := s.cs.newRequest("cleanVMReservations", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cleanVMReservations", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2901,7 +2901,7 @@ func (s *VirtualMachineService) NewDestroyVirtualMachineParams(id string) *Destr
 
 // Destroys a virtual machine. Once destroyed, only the administrator can recover it.
 func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("destroyVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroyVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3149,7 +3149,7 @@ func (s *VirtualMachineService) NewExpungeVirtualMachineParams(id string) *Expun
 
 // Expunge a virtual machine. Once expunged, it cannot be recoverd.
 func (s *VirtualMachineService) ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("expungeVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("expungeVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6185,7 +6185,7 @@ func (s *VirtualMachineService) NewMigrateVirtualMachineParams(virtualmachineid 
 
 // Attempts Migration of a VM to a different host or Root volume of the vm to a different storage pool
 func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachineParams) (*MigrateVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("migrateVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6525,7 +6525,7 @@ func (s *VirtualMachineService) NewMigrateVirtualMachineWithVolumeParams(virtual
 
 // Attempts Migration of a VM with its volumes to a different host
 func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtualMachineWithVolumeParams) (*MigrateVirtualMachineWithVolumeResponse, error) {
-	resp, err := s.cs.newRequest("migrateVirtualMachineWithVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVirtualMachineWithVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6823,7 +6823,7 @@ func (s *VirtualMachineService) NewRebootVirtualMachineParams(id string) *Reboot
 
 // Reboots a virtual machine.
 func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachineParams) (*RebootVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("rebootVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("rebootVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7071,7 +7071,7 @@ func (s *VirtualMachineService) NewRecoverVirtualMachineParams(id string) *Recov
 
 // Recovers a virtual machine.
 func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachineParams) (*RecoverVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("recoverVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("recoverVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7324,7 +7324,7 @@ func (s *VirtualMachineService) NewRemoveNicFromVirtualMachineParams(nicid strin
 
 // Removes VM from specified network by deleting a NIC
 func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirtualMachineParams) (*RemoveNicFromVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("removeNicFromVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeNicFromVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7596,7 +7596,7 @@ func (s *VirtualMachineService) NewResetPasswordForVirtualMachineParams(id strin
 
 // Resets the password for virtual machine. The virtual machine must be in a "Stopped" state and the template must already support this feature for this command to take effect. [async]
 func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordForVirtualMachineParams) (*ResetPasswordForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("resetPasswordForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetPasswordForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7992,7 +7992,7 @@ func (s *VirtualMachineService) NewResetUserDataForVirtualMachineParams(id strin
 
 // Resets the UserData for virtual machine. The virtual machine must be in a "Stopped" state.
 func (s *VirtualMachineService) ResetUserDataForVirtualMachine(p *ResetUserDataForVirtualMachineParams) (*ResetUserDataForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("resetUserDataForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetUserDataForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8345,7 +8345,7 @@ func (s *VirtualMachineService) NewRestoreVirtualMachineParams(virtualmachineid 
 
 // Restore a VM to original template/ISO or new template/ISO
 func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachineParams) (*RestoreVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("restoreVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("restoreVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8745,7 +8745,7 @@ func (s *VirtualMachineService) NewScaleVirtualMachineParams(id string, serviceo
 
 // Scales the virtual machine to a new service offering. This command also considers the volume size in the service offering or disk offering linked to the new service offering and apply all characteristics to the root volume.
 func (s *VirtualMachineService) ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("scaleVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("scaleVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8973,7 +8973,7 @@ func (s *VirtualMachineService) NewStartVirtualMachineParams(id string) *StartVi
 
 // Starts a virtual machine.
 func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams) (*StartVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("startVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -9246,7 +9246,7 @@ func (s *VirtualMachineService) NewStopVirtualMachineParams(id string) *StopVirt
 
 // Stops a virtual machine.
 func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) (*StopVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("stopVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -9519,7 +9519,7 @@ func (s *VirtualMachineService) NewUpdateDefaultNicForVirtualMachineParams(nicid
 
 // Changes the default NIC on a VM
 func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefaultNicForVirtualMachineParams) (*UpdateDefaultNicForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("updateDefaultNicForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateDefaultNicForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -11656,7 +11656,7 @@ func (s *VirtualMachineService) NewImportVmParams(clusterid string, hypervisor s
 
 // Import virtual machine from a unmanaged host into CloudStack
 func (s *VirtualMachineService) ImportVm(p *ImportVmParams) (*ImportVmResponse, error) {
-	resp, err := s.cs.newRequest("importVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -11904,7 +11904,7 @@ func (s *VirtualMachineService) NewUnmanageVirtualMachineParams(id string) *Unma
 
 // Unmanage a guest virtual machine.
 func (s *VirtualMachineService) UnmanageVirtualMachine(p *UnmanageVirtualMachineParams) (*UnmanageVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("unmanageVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("unmanageVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -12542,7 +12542,7 @@ func (s *VirtualMachineService) NewImportUnmanagedInstanceParams(clusterid strin
 
 // Import unmanaged virtual machine from a given cluster.
 func (s *VirtualMachineService) ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error) {
-	resp, err := s.cs.newRequest("importUnmanagedInstance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importUnmanagedInstance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -12962,7 +12962,7 @@ func (s *VirtualMachineService) NewCreateVMScheduleParams(action string, schedul
 
 // Create VM Schedule
 func (s *VirtualMachineService) CreateVMSchedule(p *CreateVMScheduleParams) (*CreateVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("createVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -13185,7 +13185,7 @@ func (s *VirtualMachineService) NewUpdateVMScheduleParams(id string) *UpdateVMSc
 
 // Update VM Schedule.
 func (s *VirtualMachineService) UpdateVMSchedule(p *UpdateVMScheduleParams) (*UpdateVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("updateVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -13573,7 +13573,7 @@ func (s *VirtualMachineService) NewDeleteVMScheduleParams(virtualmachineid strin
 
 // Delete VM Schedule.
 func (s *VirtualMachineService) DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("deleteVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

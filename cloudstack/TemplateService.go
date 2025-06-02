@@ -180,7 +180,7 @@ func (s *TemplateService) NewCopyTemplateParams(id string) *CopyTemplateParams {
 
 // Copies a template from one zone to another.
 func (s *TemplateService) CopyTemplate(p *CopyTemplateParams) (*CopyTemplateResponse, error) {
-	resp, err := s.cs.newRequest("copyTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("copyTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -814,7 +814,7 @@ func (s *TemplateService) NewCreateTemplateParams(displaytext string, name strin
 
 // Creates a template of a virtual machine. The virtual machine must be in a STOPPED state. A template created from this command is automatically designated as a private template visible to the account that created it.
 func (s *TemplateService) CreateTemplate(p *CreateTemplateParams) (*CreateTemplateResponse, error) {
-	resp, err := s.cs.newRequest("createTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1054,7 +1054,7 @@ func (s *TemplateService) NewDeleteTemplateParams(id string) *DeleteTemplatePara
 
 // Deletes a template from the system. All virtual machines using the deleted template will not be affected.
 func (s *TemplateService) DeleteTemplate(p *DeleteTemplateParams) (*DeleteTemplateResponse, error) {
-	resp, err := s.cs.newRequest("deleteTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1209,7 +1209,7 @@ func (s *TemplateService) NewExtractTemplateParams(id string, mode string) *Extr
 
 // Extracts a template
 func (s *TemplateService) ExtractTemplate(p *ExtractTemplateParams) (*ExtractTemplateResponse, error) {
-	resp, err := s.cs.newRequest("extractTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("extractTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2910,7 +2910,7 @@ func (s *TemplateService) NewPrepareTemplateParams(templateid string, zoneid str
 
 // load template into primary storage
 func (s *TemplateService) PrepareTemplate(p *PrepareTemplateParams) (*PrepareTemplateResponse, error) {
-	resp, err := s.cs.newRequest("prepareTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("prepareTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3699,7 +3699,7 @@ func (s *TemplateService) NewRegisterTemplateParams(displaytext string, format s
 
 // Registers an existing template into the CloudStack cloud.
 func (s *TemplateService) RegisterTemplate(p *RegisterTemplateParams) (*RegisterTemplateResponse, error) {
-	resp, err := s.cs.newRequest("registerTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4245,7 +4245,7 @@ func (s *TemplateService) NewUpdateTemplateParams(id string) *UpdateTemplatePara
 
 // Updates attributes of a template.
 func (s *TemplateService) UpdateTemplate(p *UpdateTemplateParams) (*UpdateTemplateResponse, error) {
-	resp, err := s.cs.newRequest("updateTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4540,7 +4540,7 @@ func (s *TemplateService) NewUpdateTemplatePermissionsParams(id string) *UpdateT
 
 // Updates a template visibility permissions. A public template is visible to all accounts within the same domain. A private template is visible only to the owner of the template. A privileged template is a private template with account permissions added. Only accounts specified under the template permissions are visible to them.
 func (s *TemplateService) UpdateTemplatePermissions(p *UpdateTemplatePermissionsParams) (*UpdateTemplatePermissionsResponse, error) {
-	resp, err := s.cs.newRequest("updateTemplatePermissions", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateTemplatePermissions", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4753,7 +4753,7 @@ func (s *TemplateService) NewUpgradeRouterTemplateParams() *UpgradeRouterTemplat
 
 // Upgrades router to use newer template
 func (s *TemplateService) UpgradeRouterTemplate(p *UpgradeRouterTemplateParams) (*UpgradeRouterTemplateResponse, error) {
-	resp, err := s.cs.newRequest("upgradeRouterTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("upgradeRouterTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4889,7 +4889,7 @@ func (s *TemplateService) NewLinkUserDataToTemplateParams() *LinkUserDataToTempl
 
 // Link or unlink a userdata to a template.
 func (s *TemplateService) LinkUserDataToTemplate(p *LinkUserDataToTemplateParams) (*LinkUserDataToTemplateResponse, error) {
-	resp, err := s.cs.newRequest("linkUserDataToTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("linkUserDataToTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

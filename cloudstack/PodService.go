@@ -248,7 +248,7 @@ func (s *PodService) NewCreateManagementNetworkIpRangeParams(gateway string, net
 
 // Creates a Management network IP range.
 func (s *PodService) CreateManagementNetworkIpRange(p *CreateManagementNetworkIpRangeParams) (*CreateManagementNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("createManagementNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createManagementNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -517,7 +517,7 @@ func (s *PodService) NewCreatePodParams(name string, zoneid string) *CreatePodPa
 
 // Creates a new Pod.
 func (s *PodService) CreatePod(p *CreatePodParams) (*CreatePodResponse, error) {
-	resp, err := s.cs.newRequest("createPod", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createPod", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -674,7 +674,7 @@ func (s *PodService) NewDedicatePodParams(domainid string, podid string) *Dedica
 
 // Dedicates a Pod.
 func (s *PodService) DedicatePod(p *DedicatePodParams) (*DedicatePodResponse, error) {
-	resp, err := s.cs.newRequest("dedicatePod", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicatePod", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -840,7 +840,7 @@ func (s *PodService) NewDeleteManagementNetworkIpRangeParams(endip string, podid
 
 // Deletes a management network IP range. This action is only allowed when no IPs in this range are allocated.
 func (s *PodService) DeleteManagementNetworkIpRange(p *DeleteManagementNetworkIpRangeParams) (*DeleteManagementNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("deleteManagementNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteManagementNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -922,7 +922,7 @@ func (s *PodService) NewDeletePodParams(id string) *DeletePodParams {
 
 // Deletes a Pod.
 func (s *PodService) DeletePod(p *DeletePodParams) (*DeletePodResponse, error) {
-	resp, err := s.cs.newRequest("deletePod", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePod", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1599,7 +1599,7 @@ func (s *PodService) NewReleaseDedicatedPodParams(podid string) *ReleaseDedicate
 
 // Release the dedication for the pod
 func (s *PodService) ReleaseDedicatedPod(p *ReleaseDedicatedPodParams) (*ReleaseDedicatedPodResponse, error) {
-	resp, err := s.cs.newRequest("releaseDedicatedPod", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseDedicatedPod", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1825,7 +1825,7 @@ func (s *PodService) NewUpdatePodParams(id string) *UpdatePodParams {
 
 // Updates a Pod.
 func (s *PodService) UpdatePod(p *UpdatePodParams) (*UpdatePodResponse, error) {
-	resp, err := s.cs.newRequest("updatePod", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updatePod", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2027,7 +2027,7 @@ func (s *PodService) NewUpdatePodManagementNetworkIpRangeParams(currentendip str
 
 // Updates a management network IP range. Only allowed when no IPs are allocated.
 func (s *PodService) UpdatePodManagementNetworkIpRange(p *UpdatePodManagementNetworkIpRangeParams) (*UpdatePodManagementNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("updatePodManagementNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updatePodManagementNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

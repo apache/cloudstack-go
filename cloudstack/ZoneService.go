@@ -228,7 +228,7 @@ func (s *ZoneService) NewCreateIpv4SubnetForZoneParams(subnet string, zoneid str
 
 // Creates a IPv4 subnet for a zone.
 func (s *ZoneService) CreateIpv4SubnetForZone(p *CreateIpv4SubnetForZoneParams) (*CreateIpv4SubnetForZoneResponse, error) {
-	resp, err := s.cs.newRequest("createIpv4SubnetForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createIpv4SubnetForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -665,7 +665,7 @@ func (s *ZoneService) NewCreateZoneParams(dns1 string, internaldns1 string, name
 
 // Creates a Zone.
 func (s *ZoneService) CreateZone(p *CreateZoneParams) (*CreateZoneResponse, error) {
-	resp, err := s.cs.newRequest("createZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -854,7 +854,7 @@ func (s *ZoneService) NewDedicateIpv4SubnetForZoneParams(id string) *DedicateIpv
 
 // Dedicates an existing IPv4 subnet for a zone to an account or a domain.
 func (s *ZoneService) DedicateIpv4SubnetForZone(p *DedicateIpv4SubnetForZoneParams) (*DedicateIpv4SubnetForZoneResponse, error) {
-	resp, err := s.cs.newRequest("dedicateIpv4SubnetForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicateIpv4SubnetForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -998,7 +998,7 @@ func (s *ZoneService) NewDedicateZoneParams(domainid string, zoneid string) *Ded
 
 // Dedicates a zones.
 func (s *ZoneService) DedicateZone(p *DedicateZoneParams) (*DedicateZoneResponse, error) {
-	resp, err := s.cs.newRequest("dedicateZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicateZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1089,7 +1089,7 @@ func (s *ZoneService) NewDeleteZoneParams(id string) *DeleteZoneParams {
 
 // Deletes a Zone.
 func (s *ZoneService) DeleteZone(p *DeleteZoneParams) (*DeleteZoneResponse, error) {
-	resp, err := s.cs.newRequest("deleteZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1183,7 +1183,7 @@ func (s *ZoneService) NewDeleteIpv4SubnetForZoneParams(id string) *DeleteIpv4Sub
 
 // Deletes an existing IPv4 subnet for a zone.
 func (s *ZoneService) DeleteIpv4SubnetForZone(p *DeleteIpv4SubnetForZoneParams) (*DeleteIpv4SubnetForZoneResponse, error) {
-	resp, err := s.cs.newRequest("deleteIpv4SubnetForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteIpv4SubnetForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1265,7 +1265,7 @@ func (s *ZoneService) NewDisableOutOfBandManagementForZoneParams(zoneid string) 
 
 // Disables out-of-band management for a zone
 func (s *ZoneService) DisableOutOfBandManagementForZone(p *DisableOutOfBandManagementForZoneParams) (*DisableOutOfBandManagementForZoneResponse, error) {
-	resp, err := s.cs.newRequest("disableOutOfBandManagementForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableOutOfBandManagementForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1361,7 +1361,7 @@ func (s *ZoneService) NewEnableOutOfBandManagementForZoneParams(zoneid string) *
 
 // Enables out-of-band management for a zone
 func (s *ZoneService) EnableOutOfBandManagementForZone(p *EnableOutOfBandManagementForZoneParams) (*EnableOutOfBandManagementForZoneResponse, error) {
-	resp, err := s.cs.newRequest("enableOutOfBandManagementForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableOutOfBandManagementForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1457,7 +1457,7 @@ func (s *ZoneService) NewDisableHAForZoneParams(zoneid string) *DisableHAForZone
 
 // Disables HA for a zone
 func (s *ZoneService) DisableHAForZone(p *DisableHAForZoneParams) (*DisableHAForZoneResponse, error) {
-	resp, err := s.cs.newRequest("disableHAForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableHAForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1539,7 +1539,7 @@ func (s *ZoneService) NewEnableHAForZoneParams(zoneid string) *EnableHAForZonePa
 
 // Enables HA for a zone
 func (s *ZoneService) EnableHAForZone(p *EnableHAForZoneParams) (*EnableHAForZoneResponse, error) {
-	resp, err := s.cs.newRequest("enableHAForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableHAForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3114,7 +3114,7 @@ func (s *ZoneService) NewReleaseDedicatedZoneParams(zoneid string) *ReleaseDedic
 
 // Release dedication of zone
 func (s *ZoneService) ReleaseDedicatedZone(p *ReleaseDedicatedZoneParams) (*ReleaseDedicatedZoneResponse, error) {
-	resp, err := s.cs.newRequest("releaseDedicatedZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseDedicatedZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3196,7 +3196,7 @@ func (s *ZoneService) NewReleaseIpv4SubnetForZoneParams(id string) *ReleaseIpv4S
 
 // Releases an existing dedicated IPv4 subnet for a zone.
 func (s *ZoneService) ReleaseIpv4SubnetForZone(p *ReleaseIpv4SubnetForZoneParams) (*ReleaseIpv4SubnetForZoneResponse, error) {
-	resp, err := s.cs.newRequest("releaseIpv4SubnetForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseIpv4SubnetForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3683,7 +3683,7 @@ func (s *ZoneService) NewUpdateZoneParams(id string) *UpdateZoneParams {
 
 // Updates a Zone.
 func (s *ZoneService) UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, error) {
-	resp, err := s.cs.newRequest("updateZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4161,7 +4161,7 @@ func (s *ZoneService) NewAddVmwareDcParams(name string, vcenter string, zoneid s
 
 // Adds a VMware datacenter to specified zone
 func (s *ZoneService) AddVmwareDc(p *AddVmwareDcParams) (*AddVmwareDcResponse, error) {
-	resp, err := s.cs.newRequest("addVmwareDc", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addVmwareDc", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4418,7 +4418,7 @@ func (s *ZoneService) NewRemoveVmwareDcParams(zoneid string) *RemoveVmwareDcPara
 
 // Remove a VMware datacenter from a zone.
 func (s *ZoneService) RemoveVmwareDc(p *RemoveVmwareDcParams) (*RemoveVmwareDcResponse, error) {
-	resp, err := s.cs.newRequest("removeVmwareDc", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeVmwareDc", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4537,7 +4537,7 @@ func (s *ZoneService) NewUpdateIpv4SubnetForZoneParams(id string, subnet string)
 
 // Updates an existing IPv4 subnet for a zone.
 func (s *ZoneService) UpdateIpv4SubnetForZone(p *UpdateIpv4SubnetForZoneParams) (*UpdateIpv4SubnetForZoneResponse, error) {
-	resp, err := s.cs.newRequest("updateIpv4SubnetForZone", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateIpv4SubnetForZone", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4753,7 +4753,7 @@ func (s *ZoneService) NewUpdateVmwareDcParams(zoneid string) *UpdateVmwareDcPara
 
 // Updates a VMware datacenter details for a zone
 func (s *ZoneService) UpdateVmwareDc(p *UpdateVmwareDcParams) (*UpdateVmwareDcResponse, error) {
-	resp, err := s.cs.newRequest("updateVmwareDc", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVmwareDc", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

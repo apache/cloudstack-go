@@ -294,7 +294,7 @@ func (s *NetscalerService) NewAddNetscalerLoadBalancerParams(networkdevicetype s
 
 // Adds a netscaler load balancer device
 func (s *NetscalerService) AddNetscalerLoadBalancer(p *AddNetscalerLoadBalancerParams) (*AddNetscalerLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("addNetscalerLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNetscalerLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -494,7 +494,7 @@ func (s *NetscalerService) NewConfigureNetscalerLoadBalancerParams(lbdeviceid st
 
 // configures a netscaler load balancer device
 func (s *NetscalerService) ConfigureNetscalerLoadBalancer(p *ConfigureNetscalerLoadBalancerParams) (*NetscalerLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("configureNetscalerLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configureNetscalerLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -594,7 +594,7 @@ func (s *NetscalerService) NewDeleteNetscalerControlCenterParams(id string) *Del
 
 // Delete Netscaler Control Center
 func (s *NetscalerService) DeleteNetscalerControlCenter(p *DeleteNetscalerControlCenterParams) (*DeleteNetscalerControlCenterResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetscalerControlCenter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetscalerControlCenter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -688,7 +688,7 @@ func (s *NetscalerService) NewDeleteNetscalerLoadBalancerParams(lbdeviceid strin
 
 // delete a netscaler load balancer device
 func (s *NetscalerService) DeleteNetscalerLoadBalancer(p *DeleteNetscalerLoadBalancerParams) (*DeleteNetscalerLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetscalerLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetscalerLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1431,7 +1431,7 @@ func (s *NetscalerService) NewRegisterNetscalerControlCenterParams(ipaddress str
 
 // Adds a netscaler control center device
 func (s *NetscalerService) RegisterNetscalerControlCenter(p *RegisterNetscalerControlCenterParams) (*RegisterNetscalerControlCenterResponse, error) {
-	resp, err := s.cs.newRequest("registerNetscalerControlCenter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerNetscalerControlCenter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1556,7 +1556,7 @@ func (s *NetscalerService) NewRegisterNetscalerServicePackageParams(description 
 
 // Registers NCC Service Package
 func (s *NetscalerService) RegisterNetscalerServicePackage(p *RegisterNetscalerServicePackageParams) (*RegisterNetscalerServicePackageResponse, error) {
-	resp, err := s.cs.newRequest("registerNetscalerServicePackage", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerNetscalerServicePackage", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -191,7 +191,7 @@ func (s *UCSService) NewAddUcsManagerParams(password string, url string, usernam
 
 // Adds a Ucs manager
 func (s *UCSService) AddUcsManager(p *AddUcsManagerParams) (*AddUcsManagerResponse, error) {
-	resp, err := s.cs.newRequest("addUcsManager", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addUcsManager", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -310,7 +310,7 @@ func (s *UCSService) NewAssociateUcsProfileToBladeParams(bladeid string, profile
 
 // associate a profile to a blade
 func (s *UCSService) AssociateUcsProfileToBlade(p *AssociateUcsProfileToBladeParams) (*AssociateUcsProfileToBladeResponse, error) {
-	resp, err := s.cs.newRequest("associateUcsProfileToBlade", p.toURLValues())
+	resp, err := s.cs.newPostRequest("associateUcsProfileToBlade", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -400,7 +400,7 @@ func (s *UCSService) NewDeleteUcsManagerParams(ucsmanagerid string) *DeleteUcsMa
 
 // Delete a Ucs manager
 func (s *UCSService) DeleteUcsManager(p *DeleteUcsManagerParams) (*DeleteUcsManagerResponse, error) {
-	resp, err := s.cs.newRequest("deleteUcsManager", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUcsManager", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

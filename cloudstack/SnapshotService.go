@@ -114,7 +114,7 @@ func (s *SnapshotService) NewArchiveSnapshotParams(id string) *ArchiveSnapshotPa
 
 // Archives (moves) a snapshot on primary storage to secondary storage
 func (s *SnapshotService) ArchiveSnapshot(p *ArchiveSnapshotParams) (*ArchiveSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("archiveSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("archiveSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -331,7 +331,7 @@ func (s *SnapshotService) NewCopySnapshotParams(id string) *CopySnapshotParams {
 
 // Copies a snapshot from one zone to another.
 func (s *SnapshotService) CopySnapshot(p *CopySnapshotParams) (*CopySnapshotResponse, error) {
-	resp, err := s.cs.newRequest("copySnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("copySnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -698,7 +698,7 @@ func (s *SnapshotService) NewCreateSnapshotParams(volumeid string) *CreateSnapsh
 
 // Creates an instant snapshot of a volume.
 func (s *SnapshotService) CreateSnapshot(p *CreateSnapshotParams) (*CreateSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("createSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -891,7 +891,7 @@ func (s *SnapshotService) NewCreateSnapshotFromVMSnapshotParams(vmsnapshotid str
 
 // Creates an instant snapshot of a volume from existing vm snapshot.
 func (s *SnapshotService) CreateSnapshotFromVMSnapshot(p *CreateSnapshotFromVMSnapshotParams) (*CreateSnapshotFromVMSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("createSnapshotFromVMSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSnapshotFromVMSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1214,7 +1214,7 @@ func (s *SnapshotService) NewCreateSnapshotPolicyParams(intervaltype string, max
 
 // Creates a snapshot policy for the account.
 func (s *SnapshotService) CreateSnapshotPolicy(p *CreateSnapshotPolicyParams) (*CreateSnapshotPolicyResponse, error) {
-	resp, err := s.cs.newRequest("createSnapshotPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSnapshotPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1387,7 +1387,7 @@ func (s *SnapshotService) NewCreateVMSnapshotParams(virtualmachineid string) *Cr
 
 // Creates snapshot for a vm.
 func (s *SnapshotService) CreateVMSnapshot(p *CreateVMSnapshotParams) (*CreateVMSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("createVMSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVMSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1519,7 +1519,7 @@ func (s *SnapshotService) NewDeleteSnapshotParams(id string) *DeleteSnapshotPara
 
 // Deletes a snapshot of a disk volume.
 func (s *SnapshotService) DeleteSnapshot(p *DeleteSnapshotParams) (*DeleteSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("deleteSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1625,7 +1625,7 @@ func (s *SnapshotService) NewDeleteSnapshotPoliciesParams() *DeleteSnapshotPolic
 
 // Deletes snapshot policies for the account.
 func (s *SnapshotService) DeleteSnapshotPolicies(p *DeleteSnapshotPoliciesParams) (*DeleteSnapshotPoliciesResponse, error) {
-	resp, err := s.cs.newRequest("deleteSnapshotPolicies", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSnapshotPolicies", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1719,7 +1719,7 @@ func (s *SnapshotService) NewDeleteVMSnapshotParams(vmsnapshotid string) *Delete
 
 // Deletes a vmsnapshot.
 func (s *SnapshotService) DeleteVMSnapshot(p *DeleteVMSnapshotParams) (*DeleteVMSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("deleteVMSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVMSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1826,7 +1826,7 @@ func (s *SnapshotService) NewExtractSnapshotParams(id string, zoneid string) *Ex
 
 // Returns a download URL for extracting a snapshot. It must be in the Backed Up state.
 func (s *SnapshotService) ExtractSnapshot(p *ExtractSnapshotParams) (*ExtractSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("extractSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("extractSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3286,7 +3286,7 @@ func (s *SnapshotService) NewRevertSnapshotParams(id string) *RevertSnapshotPara
 
 // This is supposed to revert a volume snapshot. This command is only supported with KVM so far
 func (s *SnapshotService) RevertSnapshot(p *RevertSnapshotParams) (*RevertSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("revertSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revertSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3430,7 +3430,7 @@ func (s *SnapshotService) NewRevertToVMSnapshotParams(vmsnapshotid string) *Reve
 
 // Revert VM from a vmsnapshot.
 func (s *SnapshotService) RevertToVMSnapshot(p *RevertToVMSnapshotParams) (*RevertToVMSnapshotResponse, error) {
-	resp, err := s.cs.newRequest("revertToVMSnapshot", p.toURLValues())
+	resp, err := s.cs.newPostRequest("revertToVMSnapshot", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3726,7 +3726,7 @@ func (s *SnapshotService) NewUpdateSnapshotPolicyParams() *UpdateSnapshotPolicyP
 
 // Updates the snapshot policy.
 func (s *SnapshotService) UpdateSnapshotPolicy(p *UpdateSnapshotPolicyParams) (*UpdateSnapshotPolicyResponse, error) {
-	resp, err := s.cs.newRequest("updateSnapshotPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateSnapshotPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

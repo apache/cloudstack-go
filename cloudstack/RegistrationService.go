@@ -221,7 +221,7 @@ func (s *RegistrationService) NewRegisterOauthProviderParams(clientid string, de
 
 // Register the OAuth2 provider in CloudStack
 func (s *RegistrationService) RegisterOauthProvider(p *RegisterOauthProviderParams) (*RegisterOauthProviderResponse, error) {
-	resp, err := s.cs.newRequest("registerOauthProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerOauthProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

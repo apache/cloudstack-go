@@ -309,7 +309,7 @@ func (s *ObjectStoreService) NewCreateBucketParams(name string, objectstorageid 
 
 // Creates a bucket in the specified object storage pool.
 func (s *ObjectStoreService) CreateBucket(p *CreateBucketParams) (*CreateBucketResponse, error) {
-	resp, err := s.cs.newRequest("createBucket", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createBucket", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -418,7 +418,7 @@ func (s *ObjectStoreService) NewDeleteBucketParams(id string) *DeleteBucketParam
 
 // Deletes an empty Bucket.
 func (s *ObjectStoreService) DeleteBucket(p *DeleteBucketParams) (*DeleteBucketResponse, error) {
-	resp, err := s.cs.newRequest("deleteBucket", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteBucket", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -611,7 +611,7 @@ func (s *ObjectStoreService) NewUpdateBucketParams(id string) *UpdateBucketParam
 
 // Updates Bucket properties
 func (s *ObjectStoreService) UpdateBucket(p *UpdateBucketParams) (*UpdateBucketResponse, error) {
-	resp, err := s.cs.newRequest("updateBucket", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateBucket", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

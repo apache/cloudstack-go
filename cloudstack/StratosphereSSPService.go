@@ -201,7 +201,7 @@ func (s *StratosphereSSPService) NewAddStratosphereSspParams(name string, url st
 
 // Adds stratosphere ssp server
 func (s *StratosphereSSPService) AddStratosphereSsp(p *AddStratosphereSspParams) (*AddStratosphereSspResponse, error) {
-	resp, err := s.cs.newRequest("addStratosphereSsp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addStratosphereSsp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -270,7 +270,7 @@ func (s *StratosphereSSPService) NewDeleteStratosphereSspParams(hostid string) *
 
 // Removes stratosphere ssp server
 func (s *StratosphereSSPService) DeleteStratosphereSsp(p *DeleteStratosphereSspParams) (*DeleteStratosphereSspResponse, error) {
-	resp, err := s.cs.newRequest("deleteStratosphereSsp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteStratosphereSsp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
