@@ -33,7 +33,7 @@ type VPCServiceIface interface {
 	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
 	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
 	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
-	NewCreateVPCParams(displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
+	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
 	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
 	NewCreateVPCOfferingParams(displaytext string, name string) *CreateVPCOfferingParams
 	DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error)
@@ -1045,9 +1045,10 @@ func (p *CreateVPCParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateVPCParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCParams(displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
+func (s *VPCService) NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
 	p := &CreateVPCParams{}
 	p.p = make(map[string]interface{})
+	p.p["cidr"] = cidr
 	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["vpcofferingid"] = vpcofferingid

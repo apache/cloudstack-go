@@ -3133,7 +3133,7 @@ func (s *UserService) NewVerifyOAuthCodeAndGetUserParams(provider string) *Verif
 
 // Verify the OAuth Code and fetch the corresponding user from provider
 func (s *UserService) VerifyOAuthCodeAndGetUser(p *VerifyOAuthCodeAndGetUserParams) (*VerifyOAuthCodeAndGetUserResponse, error) {
-	resp, err := s.cs.newPostRequest("verifyOAuthCodeAndGetUser", p.toURLValues())
+	resp, err := s.cs.newRequest("verifyOAuthCodeAndGetUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
