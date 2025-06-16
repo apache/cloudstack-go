@@ -30,6 +30,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"regexp"
 	"sort"
 	"strings"
 	"unicode"
@@ -578,6 +579,8 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("	params.Set(\"apiKey\", cs.apiKey)")
 	pn("	params.Set(\"command\", api)")
 	pn("	params.Set(\"response\", \"json\")")
+	pn("	params.Set(\"signatureversion\", \"3\")")
+	pn("	params.Set(\"expires\", time.Now().UTC().Add(15*time.Minute).Format(time.RFC3339))")
 	pn("")
 	pn("	// Generate signature for API call")
 	pn("	// * Serialize parameters, URL encoding only values and sort them by key, done by EncodeValues")
@@ -1752,17 +1755,22 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		pn("")
 		pn("	// We should be able to retry on failure as this call is idempotent")
 		pn("	for i := 0; i < 3; i++ {")
-		pn("		resp, err = s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
+		pn("		resp, err = s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
 		pn("		if err == nil {")
 		pn("			break")
 		pn("		}")
 		pn("		time.Sleep(500 * time.Millisecond)")
 		pn("	}")
 	} else {
-		if requiresPostMethod[a.Name] {
+		isGetRequest, _ := regexp.MatchString("^(get|list|query|find)(\\w+)+$", strings.ToLower(a.Name))
+		getRequestList := map[string]struct{}{"isaccountallowedtocreateofferingswithtags": {}, "readyforshutdown": {}, "cloudianisenabled": {}, "quotabalance": {},
+			"quotasummary": {}, "quotatarifflist": {}, "quotaisenabled": {}, "quotastatement": {}, "verifyoauthcodeandgetuser": {}}
+		_, isInGetRequestList := getRequestList[strings.ToLower(a.Name)]
+
+		if requiresPostMethod[a.Name] || !(isGetRequest || isInGetRequestList) {
 			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
 		} else {
-			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
+			pn("	resp, err := s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
 		}
 	}
 	pn("	if err != nil {")
