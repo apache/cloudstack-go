@@ -49,10 +49,7 @@ var requiredParams = map[string][]string{
 		"displaytext",
 	},
 	"createVPC": {
-		"name",
 		"displaytext",
-		"vpcofferingid",
-		"zoneid",
 		"cidr",
 	},
 	"createVPCOffering": {
