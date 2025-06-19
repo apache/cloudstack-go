@@ -69,7 +69,7 @@ func TestVPCService(t *testing.T) {
 		if _, ok := response["createVPC"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.VPC.NewCreateVPCParams("displaytext", "name", "vpcofferingid", "zoneid")
+		p := client.VPC.NewCreateVPCParams("cidr", "displaytext", "name", "vpcofferingid", "zoneid")
 		r, err := client.VPC.CreateVPC(p)
 		if err != nil {
 			t.Errorf(err.Error())

@@ -158,7 +158,7 @@ func (s *EventService) NewArchiveEventsParams() *ArchiveEventsParams {
 
 // Archive one or more events.
 func (s *EventService) ArchiveEvents(p *ArchiveEventsParams) (*ArchiveEventsResponse, error) {
-	resp, err := s.cs.newRequest("archiveEvents", p.toURLValues())
+	resp, err := s.cs.newPostRequest("archiveEvents", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -324,7 +324,7 @@ func (s *EventService) NewDeleteEventsParams() *DeleteEventsParams {
 
 // Delete one or more events.
 func (s *EventService) DeleteEvents(p *DeleteEventsParams) (*DeleteEventsResponse, error) {
-	resp, err := s.cs.newRequest("deleteEvents", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteEvents", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

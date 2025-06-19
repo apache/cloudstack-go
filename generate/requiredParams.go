@@ -50,6 +50,7 @@ var requiredParams = map[string][]string{
 	},
 	"createVPC": {
 		"displaytext",
+		"cidr",
 	},
 	"createVPCOffering": {
 		"displaytext",

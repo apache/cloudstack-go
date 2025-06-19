@@ -77,7 +77,7 @@ func (p *CustomServiceParams) GetParam(param string) (interface{}, bool) {
 }
 
 func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result interface{}) error {
-	resp, err := s.cs.newRequest(api, p.toURLValues())
+	resp, err := s.cs.newPostRequest(api, p.toURLValues())
 	if err != nil {
 		return err
 	}

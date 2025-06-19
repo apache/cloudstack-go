@@ -167,7 +167,7 @@ func (s *DomainService) NewCreateDomainParams(name string) *CreateDomainParams {
 
 // Creates a domain
 func (s *DomainService) CreateDomain(p *CreateDomainParams) (*CreateDomainResponse, error) {
-	resp, err := s.cs.newRequest("createDomain", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createDomain", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -311,7 +311,7 @@ func (s *DomainService) NewDeleteDomainParams(id string) *DeleteDomainParams {
 
 // Deletes a specified domain
 func (s *DomainService) DeleteDomain(p *DeleteDomainParams) (*DeleteDomainResponse, error) {
-	resp, err := s.cs.newRequest("deleteDomain", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteDomain", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1217,7 +1217,7 @@ func (s *DomainService) NewMoveDomainParams(domainid string, parentdomainid stri
 
 // Moves a domain and its children to a new parent domain.
 func (s *DomainService) MoveDomain(p *MoveDomainParams) (*MoveDomainResponse, error) {
-	resp, err := s.cs.newRequest("moveDomain", p.toURLValues())
+	resp, err := s.cs.newPostRequest("moveDomain", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1380,7 +1380,7 @@ func (s *DomainService) NewUpdateDomainParams(id string) *UpdateDomainParams {
 
 // Updates a domain with a new name
 func (s *DomainService) UpdateDomain(p *UpdateDomainParams) (*UpdateDomainResponse, error) {
-	resp, err := s.cs.newRequest("updateDomain", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateDomain", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

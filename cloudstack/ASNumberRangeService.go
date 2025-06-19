@@ -133,7 +133,7 @@ func (s *ASNumberRangeService) NewCreateASNRangeParams(endasn int64, startasn in
 
 // Creates a range of Autonomous Systems for BGP Dynamic Routing
 func (s *ASNumberRangeService) CreateASNRange(p *CreateASNRangeParams) (*CreateASNRangeResponse, error) {
-	resp, err := s.cs.newRequest("createASNRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createASNRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -203,7 +203,7 @@ func (s *ASNumberRangeService) NewDeleteASNRangeParams(id string) *DeleteASNRang
 
 // deletes a range of Autonomous Systems for BGP Dynamic Routing
 func (s *ASNumberRangeService) DeleteASNRange(p *DeleteASNRangeParams) (*DeleteASNRangeResponse, error) {
-	resp, err := s.cs.newRequest("deleteASNRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteASNRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

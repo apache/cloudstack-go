@@ -33,7 +33,7 @@ type VPCServiceIface interface {
 	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
 	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
 	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
-	NewCreateVPCParams(displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
+	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
 	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
 	NewCreateVPCOfferingParams(displaytext string, name string) *CreateVPCOfferingParams
 	DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error)
@@ -362,7 +362,7 @@ func (s *VPCService) NewCreatePrivateGatewayParams(gateway string, ipaddress str
 
 // Creates a private gateway
 func (s *VPCService) CreatePrivateGateway(p *CreatePrivateGatewayParams) (*CreatePrivateGatewayResponse, error) {
-	resp, err := s.cs.newRequest("createPrivateGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createPrivateGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -495,7 +495,7 @@ func (s *VPCService) NewCreateStaticRouteParams(cidr string, gatewayid string) *
 
 // Creates a static route
 func (s *VPCService) CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error) {
-	resp, err := s.cs.newRequest("createStaticRoute", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createStaticRoute", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1045,9 +1045,10 @@ func (p *CreateVPCParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new CreateVPCParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateVPCParams(displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
+func (s *VPCService) NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams {
 	p := &CreateVPCParams{}
 	p.p = make(map[string]interface{})
+	p.p["cidr"] = cidr
 	p.p["displaytext"] = displaytext
 	p.p["name"] = name
 	p.p["vpcofferingid"] = vpcofferingid
@@ -1057,7 +1058,7 @@ func (s *VPCService) NewCreateVPCParams(displaytext string, name string, vpcoffe
 
 // Creates a VPC
 func (s *VPCService) CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error) {
-	resp, err := s.cs.newRequest("createVPC", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVPC", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1554,7 +1555,7 @@ func (s *VPCService) NewCreateVPCOfferingParams(displaytext string, name string)
 
 // Creates VPC offering
 func (s *VPCService) CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error) {
-	resp, err := s.cs.newRequest("createVPCOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVPCOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1679,7 +1680,7 @@ func (s *VPCService) NewDeletePrivateGatewayParams(id string) *DeletePrivateGate
 
 // Deletes a Private gateway
 func (s *VPCService) DeletePrivateGateway(p *DeletePrivateGatewayParams) (*DeletePrivateGatewayResponse, error) {
-	resp, err := s.cs.newRequest("deletePrivateGateway", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePrivateGateway", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1761,7 +1762,7 @@ func (s *VPCService) NewDeleteStaticRouteParams(id string) *DeleteStaticRoutePar
 
 // Deletes a static route
 func (s *VPCService) DeleteStaticRoute(p *DeleteStaticRouteParams) (*DeleteStaticRouteResponse, error) {
-	resp, err := s.cs.newRequest("deleteStaticRoute", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteStaticRoute", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1843,7 +1844,7 @@ func (s *VPCService) NewDeleteVPCParams(id string) *DeleteVPCParams {
 
 // Deletes a VPC
 func (s *VPCService) DeleteVPC(p *DeleteVPCParams) (*DeleteVPCResponse, error) {
-	resp, err := s.cs.newRequest("deleteVPC", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVPC", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1925,7 +1926,7 @@ func (s *VPCService) NewDeleteVPCOfferingParams(id string) *DeleteVPCOfferingPar
 
 // Deletes VPC offering
 func (s *VPCService) DeleteVPCOffering(p *DeleteVPCOfferingParams) (*DeleteVPCOfferingResponse, error) {
-	resp, err := s.cs.newRequest("deleteVPCOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVPCOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4028,7 +4029,7 @@ func (s *VPCService) NewMigrateVPCParams(vpcid string, vpcofferingid string) *Mi
 
 // moves a vpc to another physical network
 func (s *VPCService) MigrateVPC(p *MigrateVPCParams) (*MigrateVPCResponse, error) {
-	resp, err := s.cs.newRequest("migrateVPC", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVPC", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4248,7 +4249,7 @@ func (s *VPCService) NewRestartVPCParams(id string) *RestartVPCParams {
 
 // Restarts a VPC
 func (s *VPCService) RestartVPC(p *RestartVPCParams) (*RestartVPCResponse, error) {
-	resp, err := s.cs.newRequest("restartVPC", p.toURLValues())
+	resp, err := s.cs.newPostRequest("restartVPC", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4476,7 +4477,7 @@ func (s *VPCService) NewUpdateVPCParams(id string) *UpdateVPCParams {
 
 // Updates a VPC
 func (s *VPCService) UpdateVPC(p *UpdateVPCParams) (*UpdateVPCResponse, error) {
-	resp, err := s.cs.newRequest("updateVPC", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVPC", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4766,7 +4767,7 @@ func (s *VPCService) NewUpdateVPCOfferingParams(id string) *UpdateVPCOfferingPar
 
 // Updates VPC offering
 func (s *VPCService) UpdateVPCOffering(p *UpdateVPCOfferingParams) (*UpdateVPCOfferingResponse, error) {
-	resp, err := s.cs.newRequest("updateVPCOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVPCOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

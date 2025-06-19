@@ -206,7 +206,7 @@ func (s *GuestOSService) NewAddGuestOsParams(oscategoryid string, osdisplayname 
 
 // Add a new guest OS type
 func (s *GuestOSService) AddGuestOs(p *AddGuestOsParams) (*AddGuestOsResponse, error) {
-	resp, err := s.cs.newRequest("addGuestOs", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addGuestOs", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -446,7 +446,7 @@ func (s *GuestOSService) NewAddGuestOsMappingParams(hypervisor string, hyperviso
 
 // Adds a guest OS name to hypervisor OS name mapping
 func (s *GuestOSService) AddGuestOsMapping(p *AddGuestOsMappingParams) (*AddGuestOsMappingResponse, error) {
-	resp, err := s.cs.newRequest("addGuestOsMapping", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addGuestOsMapping", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1453,7 +1453,7 @@ func (s *GuestOSService) NewRemoveGuestOsParams(id string) *RemoveGuestOsParams 
 
 // Removes a Guest OS from listing.
 func (s *GuestOSService) RemoveGuestOs(p *RemoveGuestOsParams) (*RemoveGuestOsResponse, error) {
-	resp, err := s.cs.newRequest("removeGuestOs", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeGuestOs", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1535,7 +1535,7 @@ func (s *GuestOSService) NewRemoveGuestOsMappingParams(id string) *RemoveGuestOs
 
 // Removes a Guest OS Mapping.
 func (s *GuestOSService) RemoveGuestOsMapping(p *RemoveGuestOsMappingParams) (*RemoveGuestOsMappingResponse, error) {
-	resp, err := s.cs.newRequest("removeGuestOsMapping", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeGuestOsMapping", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1695,7 +1695,7 @@ func (s *GuestOSService) NewUpdateGuestOsParams(id string, osdisplayname string)
 
 // Updates the information about Guest OS
 func (s *GuestOSService) UpdateGuestOs(p *UpdateGuestOsParams) (*UpdateGuestOsResponse, error) {
-	resp, err := s.cs.newRequest("updateGuestOs", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateGuestOs", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1837,7 +1837,7 @@ func (s *GuestOSService) NewUpdateGuestOsMappingParams(id string, osnameforhyper
 
 // Updates the information about Guest OS to Hypervisor specific name mapping
 func (s *GuestOSService) UpdateGuestOsMapping(p *UpdateGuestOsMappingParams) (*UpdateGuestOsMappingResponse, error) {
-	resp, err := s.cs.newRequest("updateGuestOsMapping", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateGuestOsMapping", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

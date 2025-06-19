@@ -478,7 +478,7 @@ func (s *LimitService) NewResetApiLimitParams() *ResetApiLimitParams {
 
 // Reset api count
 func (s *LimitService) ResetApiLimit(p *ResetApiLimitParams) (*ResetApiLimitResponse, error) {
-	resp, err := s.cs.newRequest("resetApiLimit", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetApiLimit", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -669,7 +669,7 @@ func (s *LimitService) NewUpdateResourceCountParams(domainid string) *UpdateReso
 
 // Recalculate and update resource count for an account or domain. This also executes some cleanup tasks before calculating resource counts.
 func (s *LimitService) UpdateResourceCount(p *UpdateResourceCountParams) (*UpdateResourceCountResponse, error) {
-	resp, err := s.cs.newRequest("updateResourceCount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateResourceCount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -866,7 +866,7 @@ func (s *LimitService) NewUpdateResourceLimitParams(resourcetype int) *UpdateRes
 
 // Updates resource limits for an account or domain.
 func (s *LimitService) UpdateResourceLimit(p *UpdateResourceLimitParams) (*UpdateResourceLimitResponse, error) {
-	resp, err := s.cs.newRequest("updateResourceLimit", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateResourceLimit", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

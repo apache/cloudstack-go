@@ -211,7 +211,7 @@ func (s *AuthenticationService) NewLogoutParams() *LogoutParams {
 
 // Logs out the user
 func (s *AuthenticationService) Logout(p *LogoutParams) (*LogoutResponse, error) {
-	resp, err := s.cs.newRequest("logout", p.toURLValues())
+	resp, err := s.cs.newPostRequest("logout", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -375,7 +375,7 @@ func (s *AuthenticationService) NewOauthloginParams(email string, provider strin
 
 // Logs a user into the CloudStack after successful verification of OAuth secret code from the particular provider.A successful login attempt will generate a JSESSIONID cookie value that can be passed in subsequent Query command calls until the "logout" command has been issued or the session has expired.
 func (s *AuthenticationService) Oauthlogin(p *OauthloginParams) (*OauthloginResponse, error) {
-	resp, err := s.cs.newRequest("oauthlogin", p.toURLValues())
+	resp, err := s.cs.newPostRequest("oauthlogin", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

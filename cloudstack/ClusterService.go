@@ -574,7 +574,7 @@ func (s *ClusterService) NewAddClusterParams(clustername string, clustertype str
 
 // Adds a new cluster
 func (s *ClusterService) AddCluster(p *AddClusterParams) (*AddClusterResponse, error) {
-	resp, err := s.cs.newRequest("addCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -725,7 +725,7 @@ func (s *ClusterService) NewDedicateClusterParams(clusterid string, domainid str
 
 // Dedicate an existing cluster
 func (s *ClusterService) DedicateCluster(p *DedicateClusterParams) (*DedicateClusterResponse, error) {
-	resp, err := s.cs.newRequest("dedicateCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicateCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -816,7 +816,7 @@ func (s *ClusterService) NewDeleteClusterParams(id string) *DeleteClusterParams 
 
 // Deletes a cluster.
 func (s *ClusterService) DeleteCluster(p *DeleteClusterParams) (*DeleteClusterResponse, error) {
-	resp, err := s.cs.newRequest("deleteCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -910,7 +910,7 @@ func (s *ClusterService) NewDisableOutOfBandManagementForClusterParams(clusterid
 
 // Disables out-of-band management for a cluster
 func (s *ClusterService) DisableOutOfBandManagementForCluster(p *DisableOutOfBandManagementForClusterParams) (*DisableOutOfBandManagementForClusterResponse, error) {
-	resp, err := s.cs.newRequest("disableOutOfBandManagementForCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableOutOfBandManagementForCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1006,7 +1006,7 @@ func (s *ClusterService) NewEnableOutOfBandManagementForClusterParams(clusterid 
 
 // Enables out-of-band management for a cluster
 func (s *ClusterService) EnableOutOfBandManagementForCluster(p *EnableOutOfBandManagementForClusterParams) (*EnableOutOfBandManagementForClusterResponse, error) {
-	resp, err := s.cs.newRequest("enableOutOfBandManagementForCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableOutOfBandManagementForCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1102,7 +1102,7 @@ func (s *ClusterService) NewEnableHAForClusterParams(clusterid string) *EnableHA
 
 // Enables HA cluster-wide
 func (s *ClusterService) EnableHAForCluster(p *EnableHAForClusterParams) (*EnableHAForClusterResponse, error) {
-	resp, err := s.cs.newRequest("enableHAForCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableHAForCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1212,7 +1212,7 @@ func (s *ClusterService) NewExecuteClusterDrsPlanParams(id string) *ExecuteClust
 
 // Execute DRS for a cluster. If there is another plan in progress for the same cluster, this command will fail.
 func (s *ClusterService) ExecuteClusterDrsPlan(p *ExecuteClusterDrsPlanParams) (*ExecuteClusterDrsPlanResponse, error) {
-	resp, err := s.cs.newRequest("executeClusterDrsPlan", p.toURLValues())
+	resp, err := s.cs.newPostRequest("executeClusterDrsPlan", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1328,7 +1328,7 @@ func (s *ClusterService) NewGenerateClusterDrsPlanParams(id string) *GenerateClu
 
 // Generate DRS plan for a cluster
 func (s *ClusterService) GenerateClusterDrsPlan(p *GenerateClusterDrsPlanParams) (*GenerateClusterDrsPlanResponse, error) {
-	resp, err := s.cs.newRequest("generateClusterDrsPlan", p.toURLValues())
+	resp, err := s.cs.newPostRequest("generateClusterDrsPlan", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1399,7 +1399,7 @@ func (s *ClusterService) NewDisableHAForClusterParams(clusterid string) *Disable
 
 // Disables HA cluster-wide
 func (s *ClusterService) DisableHAForCluster(p *DisableHAForClusterParams) (*DisableHAForClusterResponse, error) {
-	resp, err := s.cs.newRequest("disableHAForCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableHAForCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2831,7 +2831,7 @@ func (s *ClusterService) NewReleaseDedicatedClusterParams(clusterid string) *Rel
 
 // Release the dedication for cluster
 func (s *ClusterService) ReleaseDedicatedCluster(p *ReleaseDedicatedClusterParams) (*ReleaseDedicatedClusterResponse, error) {
-	resp, err := s.cs.newRequest("releaseDedicatedCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseDedicatedCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3057,7 +3057,7 @@ func (s *ClusterService) NewUpdateClusterParams(id string) *UpdateClusterParams 
 
 // Updates an existing cluster
 func (s *ClusterService) UpdateCluster(p *UpdateClusterParams) (*UpdateClusterResponse, error) {
-	resp, err := s.cs.newRequest("updateCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

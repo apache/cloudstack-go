@@ -208,7 +208,7 @@ func (s *ImageStoreService) NewAddImageStoreParams(provider string) *AddImageSto
 
 // Adds backup image store.
 func (s *ImageStoreService) AddImageStore(p *AddImageStoreParams) (*AddImageStoreResponse, error) {
-	resp, err := s.cs.newRequest("addImageStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addImageStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -538,7 +538,7 @@ func (s *ImageStoreService) NewAddImageStoreS3Params(accesskey string, bucket st
 
 // Adds S3 Image Store
 func (s *ImageStoreService) AddImageStoreS3(p *AddImageStoreS3Params) (*AddImageStoreS3Response, error) {
-	resp, err := s.cs.newRequest("addImageStoreS3", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addImageStoreS3", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -715,7 +715,7 @@ func (s *ImageStoreService) NewCreateSecondaryStagingStoreParams(url string) *Cr
 
 // create secondary staging store.
 func (s *ImageStoreService) CreateSecondaryStagingStore(p *CreateSecondaryStagingStoreParams) (*CreateSecondaryStagingStoreResponse, error) {
-	resp, err := s.cs.newRequest("createSecondaryStagingStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSecondaryStagingStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -792,7 +792,7 @@ func (s *ImageStoreService) NewDeleteImageStoreParams(id string) *DeleteImageSto
 
 // Deletes an image store or Secondary Storage.
 func (s *ImageStoreService) DeleteImageStore(p *DeleteImageStoreParams) (*DeleteImageStoreResponse, error) {
-	resp, err := s.cs.newRequest("deleteImageStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteImageStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -886,7 +886,7 @@ func (s *ImageStoreService) NewDeleteSecondaryStagingStoreParams(id string) *Del
 
 // Deletes a secondary staging store .
 func (s *ImageStoreService) DeleteSecondaryStagingStore(p *DeleteSecondaryStagingStoreParams) (*DeleteSecondaryStagingStoreResponse, error) {
-	resp, err := s.cs.newRequest("deleteSecondaryStagingStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSecondaryStagingStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1748,7 +1748,7 @@ func (s *ImageStoreService) NewMigrateResourceToAnotherSecondaryStorageParams(de
 
 // migrates resources from one secondary storage to destination image store
 func (s *ImageStoreService) MigrateResourceToAnotherSecondaryStorage(p *MigrateResourceToAnotherSecondaryStorageParams) (*MigrateResourceToAnotherSecondaryStorageResponse, error) {
-	resp, err := s.cs.newRequest("migrateResourceToAnotherSecondaryStorage", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateResourceToAnotherSecondaryStorage", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1912,7 +1912,7 @@ func (s *ImageStoreService) NewUpdateCloudToUseObjectStoreParams(provider string
 
 // Migrate current NFS secondary storages to use object store.
 func (s *ImageStoreService) UpdateCloudToUseObjectStore(p *UpdateCloudToUseObjectStoreParams) (*UpdateCloudToUseObjectStoreResponse, error) {
-	resp, err := s.cs.newRequest("updateCloudToUseObjectStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateCloudToUseObjectStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2275,7 +2275,7 @@ func (s *ImageStoreService) NewUpdateImageStoreParams(id string) *UpdateImageSto
 
 // Updates image store read-only status
 func (s *ImageStoreService) UpdateImageStore(p *UpdateImageStoreParams) (*UpdateImageStoreResponse, error) {
-	resp, err := s.cs.newRequest("updateImageStore", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateImageStore", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2379,7 +2379,7 @@ func (s *ImageStoreService) NewDownloadImageStoreObjectParams(id string) *Downlo
 
 // Download object at a specified path on an image store.
 func (s *ImageStoreService) DownloadImageStoreObject(p *DownloadImageStoreObjectParams) (*DownloadImageStoreObjectResponse, error) {
-	resp, err := s.cs.newRequest("downloadImageStoreObject", p.toURLValues())
+	resp, err := s.cs.newPostRequest("downloadImageStoreObject", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

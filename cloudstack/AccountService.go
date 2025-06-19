@@ -423,7 +423,7 @@ func (s *AccountService) NewCreateAccountParams(email string, firstname string, 
 
 // Creates an account
 func (s *AccountService) CreateAccount(p *CreateAccountParams) (*CreateAccountResponse, error) {
-	resp, err := s.cs.newRequest("createAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -579,7 +579,7 @@ func (s *AccountService) NewDeleteAccountParams(id string) *DeleteAccountParams 
 
 // Deletes a account, and all users associated with this account
 func (s *AccountService) DeleteAccount(p *DeleteAccountParams) (*DeleteAccountResponse, error) {
-	resp, err := s.cs.newRequest("deleteAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -734,7 +734,7 @@ func (s *AccountService) NewDisableAccountParams(lock bool) *DisableAccountParam
 
 // Disables an account
 func (s *AccountService) DisableAccount(p *DisableAccountParams) (*DisableAccountResponse, error) {
-	resp, err := s.cs.newRequest("disableAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -953,7 +953,7 @@ func (s *AccountService) NewEnableAccountParams() *EnableAccountParams {
 
 // Enables an account
 func (s *AccountService) EnableAccount(p *EnableAccountParams) (*EnableAccountResponse, error) {
-	resp, err := s.cs.newRequest("enableAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1317,7 +1317,7 @@ func (s *AccountService) NewLinkAccountToLdapParams(account string, domainid str
 
 // link a cloudstack account to a group or OU in ldap
 func (s *AccountService) LinkAccountToLdap(p *LinkAccountToLdapParams) (*LinkAccountToLdapResponse, error) {
-	resp, err := s.cs.newRequest("linkAccountToLdap", p.toURLValues())
+	resp, err := s.cs.newPostRequest("linkAccountToLdap", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2310,7 +2310,7 @@ func (s *AccountService) NewLockAccountParams(account string, domainid string) *
 
 // This deprecated function used to locks an account. Look for the API DisableAccount instead
 func (s *AccountService) LockAccount(p *LockAccountParams) (*LockAccountResponse, error) {
-	resp, err := s.cs.newRequest("lockAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("lockAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2512,7 +2512,7 @@ func (s *AccountService) NewMarkDefaultZoneForAccountParams(account string, doma
 
 // Marks a default zone for this account
 func (s *AccountService) MarkDefaultZoneForAccount(p *MarkDefaultZoneForAccountParams) (*MarkDefaultZoneForAccountResponse, error) {
-	resp, err := s.cs.newRequest("markDefaultZoneForAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("markDefaultZoneForAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2830,7 +2830,7 @@ func (s *AccountService) NewUpdateAccountParams() *UpdateAccountParams {
 
 // Updates account information for the authenticated user
 func (s *AccountService) UpdateAccount(p *UpdateAccountParams) (*UpdateAccountResponse, error) {
-	resp, err := s.cs.newRequest("updateAccount", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateAccount", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

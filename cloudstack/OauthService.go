@@ -465,7 +465,7 @@ func (s *OauthService) NewUpdateOauthProviderParams(id string) *UpdateOauthProvi
 
 // Updates the registered OAuth provider details
 func (s *OauthService) UpdateOauthProvider(p *UpdateOauthProviderParams) (*UpdateOauthProviderResponse, error) {
-	resp, err := s.cs.newRequest("updateOauthProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateOauthProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -541,7 +541,7 @@ func (s *OauthService) NewDeleteOauthProviderParams(id string) *DeleteOauthProvi
 
 // Deletes the registered OAuth provider
 func (s *OauthService) DeleteOauthProvider(p *DeleteOauthProviderParams) (*DeleteOauthProviderResponse, error) {
-	resp, err := s.cs.newRequest("deleteOauthProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteOauthProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
