@@ -1039,6 +1039,7 @@ type ListInternalLoadBalancerVMsResponse struct {
 
 type InternalLoadBalancerVM struct {
 	Account             string                                     `json:"account"`
+	Arch                string                                     `json:"arch"`
 	Created             string                                     `json:"created"`
 	Dns1                string                                     `json:"dns1"`
 	Dns2                string                                     `json:"dns2"`
@@ -1186,6 +1187,7 @@ func (s *InternalLBService) StartInternalLoadBalancerVM(p *StartInternalLoadBala
 
 type StartInternalLoadBalancerVMResponse struct {
 	Account             string                                                  `json:"account"`
+	Arch                string                                                  `json:"arch"`
 	Created             string                                                  `json:"created"`
 	Dns1                string                                                  `json:"dns1"`
 	Dns2                string                                                  `json:"dns2"`
@@ -1358,6 +1360,7 @@ func (s *InternalLBService) StopInternalLoadBalancerVM(p *StopInternalLoadBalanc
 
 type StopInternalLoadBalancerVMResponse struct {
 	Account             string                                                 `json:"account"`
+	Arch                string                                                 `json:"arch"`
 	Created             string                                                 `json:"created"`
 	Dns1                string                                                 `json:"dns1"`
 	Dns2                string                                                 `json:"dns2"`

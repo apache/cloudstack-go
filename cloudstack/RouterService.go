@@ -141,6 +141,7 @@ func (s *RouterService) ChangeServiceForRouter(p *ChangeServiceForRouterParams) 
 
 type ChangeServiceForRouterResponse struct {
 	Account             string                                             `json:"account"`
+	Arch                string                                             `json:"arch"`
 	Created             string                                             `json:"created"`
 	Dns1                string                                             `json:"dns1"`
 	Dns2                string                                             `json:"dns2"`
@@ -526,6 +527,7 @@ func (s *RouterService) DestroyRouter(p *DestroyRouterParams) (*DestroyRouterRes
 
 type DestroyRouterResponse struct {
 	Account             string                                    `json:"account"`
+	Arch                string                                    `json:"arch"`
 	Created             string                                    `json:"created"`
 	Dns1                string                                    `json:"dns1"`
 	Dns2                string                                    `json:"dns2"`
@@ -695,6 +697,9 @@ func (p *ListRoutersParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
 	}
@@ -783,6 +788,27 @@ func (p *ListRoutersParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListRoutersParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListRoutersParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListRoutersParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -1319,6 +1345,7 @@ type ListRoutersResponse struct {
 
 type Router struct {
 	Account             string                     `json:"account"`
+	Arch                string                     `json:"arch"`
 	Created             string                     `json:"created"`
 	Dns1                string                     `json:"dns1"`
 	Dns2                string                     `json:"dns2"`
@@ -1725,6 +1752,7 @@ func (s *RouterService) RebootRouter(p *RebootRouterParams) (*RebootRouterRespon
 
 type RebootRouterResponse struct {
 	Account             string                                   `json:"account"`
+	Arch                string                                   `json:"arch"`
 	Created             string                                   `json:"created"`
 	Dns1                string                                   `json:"dns1"`
 	Dns2                string                                   `json:"dns2"`
@@ -1872,6 +1900,7 @@ func (s *RouterService) StartRouter(p *StartRouterParams) (*StartRouterResponse,
 
 type StartRouterResponse struct {
 	Account             string                                  `json:"account"`
+	Arch                string                                  `json:"arch"`
 	Created             string                                  `json:"created"`
 	Dns1                string                                  `json:"dns1"`
 	Dns2                string                                  `json:"dns2"`
@@ -2044,6 +2073,7 @@ func (s *RouterService) StopRouter(p *StopRouterParams) (*StopRouterResponse, er
 
 type StopRouterResponse struct {
 	Account             string                                 `json:"account"`
+	Arch                string                                 `json:"arch"`
 	Created             string                                 `json:"created"`
 	Dns1                string                                 `json:"dns1"`
 	Dns2                string                                 `json:"dns2"`

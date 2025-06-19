@@ -4436,6 +4436,10 @@ func (p *UpdatePortForwardingRuleParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
 	if v, found := p.p["customid"]; found {
 		u.Set("customid", v.(string))
 	}
@@ -4461,6 +4465,27 @@ func (p *UpdatePortForwardingRuleParams) toURLValues() url.Values {
 		u.Set("vmguestip", v.(string))
 	}
 	return u
+}
+
+func (p *UpdatePortForwardingRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *UpdatePortForwardingRuleParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
+}
+
+func (p *UpdatePortForwardingRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
 }
 
 func (p *UpdatePortForwardingRuleParams) SetCustomid(v string) {

@@ -1088,6 +1088,7 @@ type NetscalerLoadBalancerNetwork struct {
 	Sentbytes                   int64                                 `json:"sentbytes"`
 	Service                     []NetscalerLoadBalancerNetworkService `json:"service"`
 	Specifyipranges             bool                                  `json:"specifyipranges"`
+	Specifyvlan                 bool                                  `json:"specifyvlan"`
 	State                       string                                `json:"state"`
 	Strechedl2subnet            bool                                  `json:"strechedl2subnet"`
 	Subdomainaccess             bool                                  `json:"subdomainaccess"`

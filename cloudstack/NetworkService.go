@@ -1850,6 +1850,7 @@ type CreateNetworkResponse struct {
 	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []CreateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
+	Specifyvlan                 bool                           `json:"specifyvlan"`
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`
@@ -4992,6 +4993,7 @@ type Network struct {
 	Sentbytes                   int64                    `json:"sentbytes"`
 	Service                     []NetworkServiceInternal `json:"service"`
 	Specifyipranges             bool                     `json:"specifyipranges"`
+	Specifyvlan                 bool                     `json:"specifyvlan"`
 	State                       string                   `json:"state"`
 	Strechedl2subnet            bool                     `json:"strechedl2subnet"`
 	Subdomainaccess             bool                     `json:"subdomainaccess"`
@@ -5271,6 +5273,7 @@ type NiciraNvpDeviceNetwork struct {
 	Sentbytes                   int64                           `json:"sentbytes"`
 	Service                     []NiciraNvpDeviceNetworkService `json:"service"`
 	Specifyipranges             bool                            `json:"specifyipranges"`
+	Specifyvlan                 bool                            `json:"specifyvlan"`
 	State                       string                          `json:"state"`
 	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
 	Subdomainaccess             bool                            `json:"subdomainaccess"`
@@ -5681,6 +5684,7 @@ type PaloAltoFirewallNetwork struct {
 	Sentbytes                   int64                            `json:"sentbytes"`
 	Service                     []PaloAltoFirewallNetworkService `json:"service"`
 	Specifyipranges             bool                             `json:"specifyipranges"`
+	Specifyvlan                 bool                             `json:"specifyvlan"`
 	State                       string                           `json:"state"`
 	Strechedl2subnet            bool                             `json:"strechedl2subnet"`
 	Subdomainaccess             bool                             `json:"subdomainaccess"`
@@ -6618,6 +6622,7 @@ type MigrateNetworkResponse struct {
 	Sentbytes                   int64                           `json:"sentbytes"`
 	Service                     []MigrateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                            `json:"specifyipranges"`
+	Specifyvlan                 bool                            `json:"specifyvlan"`
 	State                       string                          `json:"state"`
 	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
 	Subdomainaccess             bool                            `json:"subdomainaccess"`
@@ -7491,6 +7496,7 @@ type UpdateNetworkResponse struct {
 	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []UpdateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
+	Specifyvlan                 bool                           `json:"specifyvlan"`
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`

@@ -37,7 +37,7 @@ type AccountServiceIface interface {
 	EnableAccount(p *EnableAccountParams) (*EnableAccountResponse, error)
 	NewEnableAccountParams() *EnableAccountParams
 	IsAccountAllowedToCreateOfferingsWithTags(p *IsAccountAllowedToCreateOfferingsWithTagsParams) (*IsAccountAllowedToCreateOfferingsWithTagsResponse, error)
-	NewIsAccountAllowedToCreateOfferingsWithTagsParams() *IsAccountAllowedToCreateOfferingsWithTagsParams
+	NewIsAccountAllowedToCreateOfferingsWithTagsParams(id string) *IsAccountAllowedToCreateOfferingsWithTagsParams
 	LinkAccountToLdap(p *LinkAccountToLdapParams) (*LinkAccountToLdapResponse, error)
 	NewLinkAccountToLdapParams(account string, domainid string, ldapdomain string) *LinkAccountToLdapParams
 	ListAccounts(p *ListAccountsParams) (*ListAccountsResponse, error)
@@ -443,6 +443,7 @@ func (s *AccountService) CreateAccount(p *CreateAccountParams) (*CreateAccountRe
 type CreateAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
+	Apikeyaccess              string                      `json:"apikeyaccess"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -510,6 +511,7 @@ type CreateAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -770,6 +772,7 @@ func (s *AccountService) DisableAccount(p *DisableAccountParams) (*DisableAccoun
 type DisableAccountResponse struct {
 	Accountdetails            map[string]string            `json:"accountdetails"`
 	Accounttype               int                          `json:"accounttype"`
+	Apikeyaccess              string                       `json:"apikeyaccess"`
 	Cpuavailable              string                       `json:"cpuavailable"`
 	Cpulimit                  string                       `json:"cpulimit"`
 	Cputotal                  int64                        `json:"cputotal"`
@@ -837,6 +840,7 @@ type DisableAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -969,6 +973,7 @@ func (s *AccountService) EnableAccount(p *EnableAccountParams) (*EnableAccountRe
 type EnableAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
+	Apikeyaccess              string                      `json:"apikeyaccess"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -1036,6 +1041,7 @@ type EnableAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -1096,9 +1102,10 @@ func (p *IsAccountAllowedToCreateOfferingsWithTagsParams) GetId() (string, bool)
 
 // You should always use this function to get a new IsAccountAllowedToCreateOfferingsWithTagsParams instance,
 // as then you are sure you have configured all required params
-func (s *AccountService) NewIsAccountAllowedToCreateOfferingsWithTagsParams() *IsAccountAllowedToCreateOfferingsWithTagsParams {
+func (s *AccountService) NewIsAccountAllowedToCreateOfferingsWithTagsParams(id string) *IsAccountAllowedToCreateOfferingsWithTagsParams {
 	p := &IsAccountAllowedToCreateOfferingsWithTagsParams{}
 	p.p = make(map[string]interface{})
+	p.p["id"] = id
 	return p
 }
 
@@ -1354,6 +1361,9 @@ func (p *ListAccountsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("accounttype", vv)
 	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
+	}
 	if v, found := p.p["details"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("details", vv)
@@ -1421,6 +1431,27 @@ func (p *ListAccountsParams) GetAccounttype() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["accounttype"].(int)
+	return value, ok
+}
+
+func (p *ListAccountsParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *ListAccountsParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *ListAccountsParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
 	return value, ok
 }
 
@@ -1811,6 +1842,7 @@ type ListAccountsResponse struct {
 type Account struct {
 	Accountdetails            map[string]string `json:"accountdetails"`
 	Accounttype               int               `json:"accounttype"`
+	Apikeyaccess              string            `json:"apikeyaccess"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
@@ -1878,6 +1910,7 @@ type AccountUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -2326,6 +2359,7 @@ func (s *AccountService) LockAccount(p *LockAccountParams) (*LockAccountResponse
 type LockAccountResponse struct {
 	Accountdetails            map[string]string         `json:"accountdetails"`
 	Accounttype               int                       `json:"accounttype"`
+	Apikeyaccess              string                    `json:"apikeyaccess"`
 	Cpuavailable              string                    `json:"cpuavailable"`
 	Cpulimit                  string                    `json:"cpulimit"`
 	Cputotal                  int64                     `json:"cputotal"`
@@ -2393,6 +2427,7 @@ type LockAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -2548,6 +2583,7 @@ func (s *AccountService) MarkDefaultZoneForAccount(p *MarkDefaultZoneForAccountP
 type MarkDefaultZoneForAccountResponse struct {
 	Accountdetails            map[string]string                       `json:"accountdetails"`
 	Accounttype               int                                     `json:"accounttype"`
+	Apikeyaccess              string                                  `json:"apikeyaccess"`
 	Cpuavailable              string                                  `json:"cpuavailable"`
 	Cpulimit                  string                                  `json:"cpulimit"`
 	Cputotal                  int64                                   `json:"cputotal"`
@@ -2615,6 +2651,7 @@ type MarkDefaultZoneForAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -2654,6 +2691,9 @@ func (p *UpdateAccountParams) toURLValues() url.Values {
 		for _, k := range getSortedKeysFromMap(m) {
 			u.Set(fmt.Sprintf("accountdetails[0].%s", k), m[k])
 		}
+	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
@@ -2712,6 +2752,27 @@ func (p *UpdateAccountParams) GetAccountdetails() (map[string]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["accountdetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *UpdateAccountParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *UpdateAccountParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *UpdateAccountParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
 	return value, ok
 }
 
@@ -2846,6 +2907,7 @@ func (s *AccountService) UpdateAccount(p *UpdateAccountParams) (*UpdateAccountRe
 type UpdateAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
+	Apikeyaccess              string                      `json:"apikeyaccess"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -2913,6 +2975,7 @@ type UpdateAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`

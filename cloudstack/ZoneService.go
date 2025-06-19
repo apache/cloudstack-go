@@ -711,6 +711,7 @@ type CreateZoneResponse struct {
 	Name                         string                       `json:"name"`
 	Networktype                  string                       `json:"networktype"`
 	Resourcedetails              map[string]string            `json:"resourcedetails"`
+	Routedmodeenabled            bool                         `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int                          `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int                          `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool                         `json:"securitygroupsenabled"`
@@ -2551,6 +2552,7 @@ type Zone struct {
 	Name                         string            `json:"name"`
 	Networktype                  string            `json:"networktype"`
 	Resourcedetails              map[string]string `json:"resourcedetails"`
+	Routedmodeenabled            bool              `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int               `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int               `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool              `json:"securitygroupsenabled"`
@@ -3042,6 +3044,7 @@ type ZonesMetric struct {
 	Name                            string                `json:"name"`
 	Networktype                     string                `json:"networktype"`
 	Resourcedetails                 map[string]string     `json:"resourcedetails"`
+	Routedmodeenabled               bool                  `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu    int                   `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu     int                   `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled           bool                  `json:"securitygroupsenabled"`
@@ -3725,6 +3728,7 @@ type UpdateZoneResponse struct {
 	Name                         string                       `json:"name"`
 	Networktype                  string                       `json:"networktype"`
 	Resourcedetails              map[string]string            `json:"resourcedetails"`
+	Routedmodeenabled            bool                         `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int                          `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int                          `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool                         `json:"securitygroupsenabled"`
@@ -3763,6 +3767,12 @@ func (p *ListVmwareDcVmsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["existingvcenterid"]; found {
 		u.Set("existingvcenterid", v.(string))
+	}
+	if v, found := p.p["hostname"]; found {
+		u.Set("hostname", v.(string))
+	}
+	if v, found := p.p["instancename"]; found {
+		u.Set("instancename", v.(string))
 	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
@@ -3826,6 +3836,48 @@ func (p *ListVmwareDcVmsParams) GetExistingvcenterid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["existingvcenterid"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetHostname(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostname"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetHostname() {
+	if p.p != nil && p.p["hostname"] != nil {
+		delete(p.p, "hostname")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetHostname() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
+func (p *ListVmwareDcVmsParams) SetInstancename(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["instancename"] = v
+}
+
+func (p *ListVmwareDcVmsParams) ResetInstancename() {
+	if p.p != nil && p.p["instancename"] != nil {
+		delete(p.p, "instancename")
+	}
+}
+
+func (p *ListVmwareDcVmsParams) GetInstancename() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["instancename"].(string)
 	return value, ok
 }
 
@@ -3984,6 +4036,8 @@ type ListVmwareDcVmsResponse struct {
 }
 
 type VmwareDcVm struct {
+	Bootmode         string           `json:"bootmode"`
+	Boottype         string           `json:"boottype"`
 	Clusterid        string           `json:"clusterid"`
 	Clustername      string           `json:"clustername"`
 	Cpucorepersocket int              `json:"cpucorepersocket"`

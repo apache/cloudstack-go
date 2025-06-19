@@ -2197,60 +2197,90 @@ type FindHostsForMigrationResponse struct {
 }
 
 type HostForMigration struct {
-	Averageload                      int64  `json:"averageload"`
-	Capabilities                     string `json:"capabilities"`
-	Clusterid                        string `json:"clusterid"`
-	Clustername                      string `json:"clustername"`
-	Clustertype                      string `json:"clustertype"`
-	Cpuallocated                     string `json:"cpuallocated"`
-	Cpuallocatedpercentage           string `json:"cpuallocatedpercentage"`
-	Cpuallocatedvalue                int64  `json:"cpuallocatedvalue"`
-	Cpuallocatedwithoverprovisioning string `json:"cpuallocatedwithoverprovisioning"`
-	Cpunumber                        int    `json:"cpunumber"`
-	Cpuspeed                         int64  `json:"cpuspeed"`
-	Cpuused                          string `json:"cpuused"`
-	Cpuwithoverprovisioning          string `json:"cpuwithoverprovisioning"`
-	Created                          string `json:"created"`
-	Disconnected                     string `json:"disconnected"`
-	Disksizeallocated                int64  `json:"disksizeallocated"`
-	Disksizetotal                    int64  `json:"disksizetotal"`
-	Events                           string `json:"events"`
-	Explicithosttags                 string `json:"explicithosttags"`
-	Hahost                           bool   `json:"hahost"`
-	Hasenoughcapacity                bool   `json:"hasenoughcapacity"`
-	Hosttags                         string `json:"hosttags"`
-	Hypervisor                       string `json:"hypervisor"`
-	Hypervisorversion                string `json:"hypervisorversion"`
-	Id                               string `json:"id"`
-	Implicithosttags                 string `json:"implicithosttags"`
-	Ipaddress                        string `json:"ipaddress"`
-	Islocalstorageactive             bool   `json:"islocalstorageactive"`
-	JobID                            string `json:"jobid"`
-	Jobstatus                        int    `json:"jobstatus"`
-	Lastpinged                       string `json:"lastpinged"`
-	Managementserverid               UUID   `json:"managementserverid"`
-	Memoryallocated                  string `json:"memoryallocated"`
-	Memoryallocatedbytes             int64  `json:"memoryallocatedbytes"`
-	Memoryallocatedpercentage        string `json:"memoryallocatedpercentage"`
-	Memorytotal                      int64  `json:"memorytotal"`
-	Memoryused                       int64  `json:"memoryused"`
-	Memorywithoverprovisioning       string `json:"memorywithoverprovisioning"`
-	Name                             string `json:"name"`
-	Networkkbsread                   int64  `json:"networkkbsread"`
-	Networkkbswrite                  int64  `json:"networkkbswrite"`
-	Oscategoryid                     string `json:"oscategoryid"`
-	Oscategoryname                   string `json:"oscategoryname"`
-	Podid                            string `json:"podid"`
-	Podname                          string `json:"podname"`
-	Removed                          string `json:"removed"`
-	RequiresStorageMotion            bool   `json:"requiresStorageMotion"`
-	Resourcestate                    string `json:"resourcestate"`
-	State                            string `json:"state"`
-	Suitableformigration             bool   `json:"suitableformigration"`
-	Type                             string `json:"type"`
-	Version                          string `json:"version"`
-	Zoneid                           string `json:"zoneid"`
-	Zonename                         string `json:"zonename"`
+	Annotation                       string                      `json:"annotation"`
+	Arch                             string                      `json:"arch"`
+	Capabilities                     string                      `json:"capabilities"`
+	Clusterid                        string                      `json:"clusterid"`
+	Clustername                      string                      `json:"clustername"`
+	Clustertype                      string                      `json:"clustertype"`
+	Cpuallocated                     string                      `json:"cpuallocated"`
+	Cpuallocatedpercentage           string                      `json:"cpuallocatedpercentage"`
+	Cpuallocatedvalue                int64                       `json:"cpuallocatedvalue"`
+	Cpuallocatedwithoverprovisioning string                      `json:"cpuallocatedwithoverprovisioning"`
+	Cpuloadaverage                   float64                     `json:"cpuloadaverage"`
+	Cpunumber                        int                         `json:"cpunumber"`
+	Cpusockets                       int                         `json:"cpusockets"`
+	Cpuspeed                         int64                       `json:"cpuspeed"`
+	Cpuused                          string                      `json:"cpuused"`
+	Cpuwithoverprovisioning          string                      `json:"cpuwithoverprovisioning"`
+	Created                          string                      `json:"created"`
+	Details                          map[string]string           `json:"details"`
+	Disconnected                     string                      `json:"disconnected"`
+	Disksizeallocated                int64                       `json:"disksizeallocated"`
+	Disksizetotal                    int64                       `json:"disksizetotal"`
+	Encryptionsupported              bool                        `json:"encryptionsupported"`
+	Events                           string                      `json:"events"`
+	Explicithosttags                 string                      `json:"explicithosttags"`
+	Gpugroup                         []HostForMigrationGpugroup  `json:"gpugroup"`
+	Hahost                           bool                        `json:"hahost"`
+	Hasannotations                   bool                        `json:"hasannotations"`
+	Hasenoughcapacity                bool                        `json:"hasenoughcapacity"`
+	Hostha                           HAForHostResponse           `json:"hostha"`
+	Hosttags                         string                      `json:"hosttags"`
+	Hypervisor                       string                      `json:"hypervisor"`
+	Hypervisorversion                string                      `json:"hypervisorversion"`
+	Id                               string                      `json:"id"`
+	Implicithosttags                 string                      `json:"implicithosttags"`
+	Instanceconversionsupported      bool                        `json:"instanceconversionsupported"`
+	Ipaddress                        string                      `json:"ipaddress"`
+	Islocalstorageactive             bool                        `json:"islocalstorageactive"`
+	Istagarule                       bool                        `json:"istagarule"`
+	JobID                            string                      `json:"jobid"`
+	Jobstatus                        int                         `json:"jobstatus"`
+	Lastannotated                    string                      `json:"lastannotated"`
+	Lastpinged                       string                      `json:"lastpinged"`
+	Managementserverid               UUID                        `json:"managementserverid"`
+	Memoryallocated                  int64                       `json:"memoryallocated"`
+	Memoryallocatedbytes             int64                       `json:"memoryallocatedbytes"`
+	Memoryallocatedpercentage        string                      `json:"memoryallocatedpercentage"`
+	Memorytotal                      int64                       `json:"memorytotal"`
+	Memoryused                       int64                       `json:"memoryused"`
+	Memorywithoverprovisioning       string                      `json:"memorywithoverprovisioning"`
+	Name                             string                      `json:"name"`
+	Networkkbsread                   int64                       `json:"networkkbsread"`
+	Networkkbswrite                  int64                       `json:"networkkbswrite"`
+	Oscategoryid                     string                      `json:"oscategoryid"`
+	Oscategoryname                   string                      `json:"oscategoryname"`
+	Outofbandmanagement              OutOfBandManagementResponse `json:"outofbandmanagement"`
+	Podid                            string                      `json:"podid"`
+	Podname                          string                      `json:"podname"`
+	Removed                          string                      `json:"removed"`
+	RequiresStorageMotion            bool                        `json:"requiresStorageMotion"`
+	Resourcestate                    string                      `json:"resourcestate"`
+	State                            string                      `json:"state"`
+	Suitableformigration             bool                        `json:"suitableformigration"`
+	Type                             string                      `json:"type"`
+	Ueficapability                   bool                        `json:"ueficapability"`
+	Username                         string                      `json:"username"`
+	Version                          string                      `json:"version"`
+	Zoneid                           string                      `json:"zoneid"`
+	Zonename                         string                      `json:"zonename"`
+}
+
+type HostForMigrationGpugroup struct {
+	Gpugroupname string                         `json:"gpugroupname"`
+	Vgpu         []HostForMigrationGpugroupVgpu `json:"vgpu"`
+}
+
+type HostForMigrationGpugroupVgpu struct {
+	Maxcapacity       int64  `json:"maxcapacity"`
+	Maxheads          int64  `json:"maxheads"`
+	Maxresolutionx    int64  `json:"maxresolutionx"`
+	Maxresolutiony    int64  `json:"maxresolutiony"`
+	Maxvgpuperpgpu    int64  `json:"maxvgpuperpgpu"`
+	Remainingcapacity int64  `json:"remainingcapacity"`
+	Vgputype          string `json:"vgputype"`
+	Videoram          int64  `json:"videoram"`
 }
 
 type ListDedicatedHostsParams struct {
@@ -2642,6 +2672,9 @@ func (p *ListHostsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
 	}
@@ -2699,6 +2732,27 @@ func (p *ListHostsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListHostsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListHostsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListHostsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListHostsParams) SetClusterid(v string) {
@@ -3264,6 +3318,9 @@ func (p *ListHostsMetricsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
 	}
@@ -3321,6 +3378,27 @@ func (p *ListHostsMetricsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListHostsMetricsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListHostsMetricsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListHostsMetricsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListHostsMetricsParams) SetClusterid(v string) {

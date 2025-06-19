@@ -171,6 +171,7 @@ type CancelStorageMaintenanceResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -417,6 +418,7 @@ type EnableStorageMaintenanceResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -2169,6 +2171,7 @@ type StoragePoolsMetric struct {
 	Suitableformigration             bool              `json:"suitableformigration"`
 	Tags                             string            `json:"tags"`
 	Type                             string            `json:"type"`
+	Usediops                         int64             `json:"usediops"`
 	Zoneid                           string            `json:"zoneid"`
 	Zonename                         string            `json:"zonename"`
 }

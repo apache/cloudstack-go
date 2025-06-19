@@ -594,6 +594,7 @@ func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpRespon
 type UpdateVmNicIpResponse struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []UpdateVmNicIpResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                               `json:"arch"`
 	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`
