@@ -93,7 +93,7 @@ func TestFirewallService(t *testing.T) {
 		if _, ok := response["createPortForwardingRule"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Firewall.NewCreatePortForwardingRuleParams("ipaddressid", 0, "protocol", 0, "virtualmachineid")
+		p := client.Firewall.NewCreatePortForwardingRuleParams("ipaddressid", 0, 0, "protocol", 0, 0, "virtualmachineid")
 		r, err := client.Firewall.CreatePortForwardingRule(p)
 		if err != nil {
 			t.Errorf(err.Error())

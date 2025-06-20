@@ -519,17 +519,17 @@ func (mr *MockFirewallServiceIfaceMockRecorder) NewCreateIpv6FirewallRuleParams(
 }
 
 // NewCreatePortForwardingRuleParams mocks base method.
-func (m *MockFirewallServiceIface) NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams {
+func (m *MockFirewallServiceIface) NewCreatePortForwardingRuleParams(ipaddressid string, privateendport, privateport int, protocol string, publicendport, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreatePortForwardingRuleParams", ipaddressid, privateport, protocol, publicport, virtualmachineid)
+	ret := m.ctrl.Call(m, "NewCreatePortForwardingRuleParams", ipaddressid, privateendport, privateport, protocol, publicendport, publicport, virtualmachineid)
 	ret0, _ := ret[0].(*CreatePortForwardingRuleParams)
 	return ret0
 }
 
 // NewCreatePortForwardingRuleParams indicates an expected call of NewCreatePortForwardingRuleParams.
-func (mr *MockFirewallServiceIfaceMockRecorder) NewCreatePortForwardingRuleParams(ipaddressid, privateport, protocol, publicport, virtualmachineid any) *gomock.Call {
+func (mr *MockFirewallServiceIfaceMockRecorder) NewCreatePortForwardingRuleParams(ipaddressid, privateendport, privateport, protocol, publicendport, publicport, virtualmachineid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePortForwardingRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewCreatePortForwardingRuleParams), ipaddressid, privateport, protocol, publicport, virtualmachineid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreatePortForwardingRuleParams", reflect.TypeOf((*MockFirewallServiceIface)(nil).NewCreatePortForwardingRuleParams), ipaddressid, privateendport, privateport, protocol, publicendport, publicport, virtualmachineid)
 }
 
 // NewCreateRoutingFirewallRuleParams mocks base method.

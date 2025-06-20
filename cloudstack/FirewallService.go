@@ -87,7 +87,7 @@ type FirewallServiceIface interface {
 	CreateFirewallRule(p *CreateFirewallRuleParams) (*CreateFirewallRuleResponse, error)
 	NewCreateFirewallRuleParams(ipaddressid string, protocol string) *CreateFirewallRuleParams
 	CreatePortForwardingRule(p *CreatePortForwardingRuleParams) (*CreatePortForwardingRuleResponse, error)
-	NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams
+	NewCreatePortForwardingRuleParams(ipaddressid string, privateendport int, privateport int, protocol string, publicendport int, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams
 	CreateRoutingFirewallRule(p *CreateRoutingFirewallRuleParams) (*CreateRoutingFirewallRuleResponse, error)
 	NewCreateRoutingFirewallRuleParams(networkid string, protocol string) *CreateRoutingFirewallRuleParams
 	DeleteEgressFirewallRule(p *DeleteEgressFirewallRuleParams) (*DeleteEgressFirewallRuleResponse, error)
@@ -1412,12 +1412,14 @@ func (p *CreatePortForwardingRuleParams) GetVmguestip() (string, bool) {
 
 // You should always use this function to get a new CreatePortForwardingRuleParams instance,
 // as then you are sure you have configured all required params
-func (s *FirewallService) NewCreatePortForwardingRuleParams(ipaddressid string, privateport int, protocol string, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams {
+func (s *FirewallService) NewCreatePortForwardingRuleParams(ipaddressid string, privateendport int, privateport int, protocol string, publicendport int, publicport int, virtualmachineid string) *CreatePortForwardingRuleParams {
 	p := &CreatePortForwardingRuleParams{}
 	p.p = make(map[string]interface{})
 	p.p["ipaddressid"] = ipaddressid
+	p.p["privateendport"] = privateendport
 	p.p["privateport"] = privateport
 	p.p["protocol"] = protocol
+	p.p["publicendport"] = publicendport
 	p.p["publicport"] = publicport
 	p.p["virtualmachineid"] = virtualmachineid
 	return p
