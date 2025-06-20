@@ -463,6 +463,7 @@ type CreateStoragePoolResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -751,6 +752,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -1325,6 +1327,7 @@ type StoragePool struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -1440,6 +1443,7 @@ type SyncStoragePoolResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -1735,6 +1739,7 @@ type UpdateStoragePoolResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }

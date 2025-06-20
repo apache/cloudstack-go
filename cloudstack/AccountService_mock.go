@@ -349,17 +349,17 @@ func (mr *MockAccountServiceIfaceMockRecorder) NewEnableAccountParams() *gomock.
 }
 
 // NewIsAccountAllowedToCreateOfferingsWithTagsParams mocks base method.
-func (m *MockAccountServiceIface) NewIsAccountAllowedToCreateOfferingsWithTagsParams() *IsAccountAllowedToCreateOfferingsWithTagsParams {
+func (m *MockAccountServiceIface) NewIsAccountAllowedToCreateOfferingsWithTagsParams(id string) *IsAccountAllowedToCreateOfferingsWithTagsParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewIsAccountAllowedToCreateOfferingsWithTagsParams")
+	ret := m.ctrl.Call(m, "NewIsAccountAllowedToCreateOfferingsWithTagsParams", id)
 	ret0, _ := ret[0].(*IsAccountAllowedToCreateOfferingsWithTagsParams)
 	return ret0
 }
 
 // NewIsAccountAllowedToCreateOfferingsWithTagsParams indicates an expected call of NewIsAccountAllowedToCreateOfferingsWithTagsParams.
-func (mr *MockAccountServiceIfaceMockRecorder) NewIsAccountAllowedToCreateOfferingsWithTagsParams() *gomock.Call {
+func (mr *MockAccountServiceIfaceMockRecorder) NewIsAccountAllowedToCreateOfferingsWithTagsParams(id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewIsAccountAllowedToCreateOfferingsWithTagsParams", reflect.TypeOf((*MockAccountServiceIface)(nil).NewIsAccountAllowedToCreateOfferingsWithTagsParams))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewIsAccountAllowedToCreateOfferingsWithTagsParams", reflect.TypeOf((*MockAccountServiceIface)(nil).NewIsAccountAllowedToCreateOfferingsWithTagsParams), id)
 }
 
 // NewLinkAccountToLdapParams mocks base method.

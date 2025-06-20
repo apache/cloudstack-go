@@ -5850,6 +5850,7 @@ func (s *LoadBalancerService) StopNetScalerVpx(p *StopNetScalerVpxParams) (*Stop
 
 type StopNetScalerVpxResponse struct {
 	Account             string                                       `json:"account"`
+	Arch                string                                       `json:"arch"`
 	Created             string                                       `json:"created"`
 	Dns1                string                                       `json:"dns1"`
 	Dns2                string                                       `json:"dns2"`

@@ -1131,6 +1131,7 @@ func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupPar
 type UpdateVMAffinityGroupResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []UpdateVMAffinityGroupResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`

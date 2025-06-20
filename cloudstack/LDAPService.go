@@ -1152,6 +1152,7 @@ func (s *LDAPService) LdapCreateAccount(p *LdapCreateAccountParams) (*LdapCreate
 type LdapCreateAccountResponse struct {
 	Accountdetails            map[string]string               `json:"accountdetails"`
 	Accounttype               int                             `json:"accounttype"`
+	Apikeyaccess              string                          `json:"apikeyaccess"`
 	Cpuavailable              string                          `json:"cpuavailable"`
 	Cpulimit                  string                          `json:"cpulimit"`
 	Cputotal                  int64                           `json:"cputotal"`
@@ -1219,6 +1220,7 @@ type LdapCreateAccountResponseUser struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`

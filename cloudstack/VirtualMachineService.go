@@ -290,6 +290,7 @@ func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachine
 type AddNicToVirtualMachineResponse struct {
 	Account               string                                        `json:"account"`
 	Affinitygroup         []AddNicToVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                        `json:"arch"`
 	Autoscalevmgroupid    string                                        `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                        `json:"backupofferingid"`
@@ -640,6 +641,7 @@ func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachinePara
 type AssignVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []AssignVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -1020,6 +1022,7 @@ func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceF
 type ChangeServiceForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ChangeServiceForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -2639,6 +2642,7 @@ func (s *VirtualMachineService) DeployVirtualMachine(p *DeployVirtualMachinePara
 type DeployVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []DeployVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -2937,6 +2941,7 @@ func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachinePa
 type DestroyVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []DestroyVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -3269,6 +3274,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["autoscalevmgroupid"]; found {
 		u.Set("autoscalevmgroupid", v.(string))
 	}
@@ -3388,6 +3396,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("userdata", vv)
 	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -3460,6 +3471,27 @@ func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -4177,6 +4209,27 @@ func (p *ListVirtualMachinesParams) GetUserdata() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4354,6 +4407,7 @@ type ListVirtualMachinesResponse struct {
 type VirtualMachine struct {
 	Account               string                        `json:"account"`
 	Affinitygroup         []VirtualMachineAffinitygroup `json:"affinitygroup"`
+	Arch                  string                        `json:"arch"`
 	Autoscalevmgroupid    string                        `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                        `json:"backupofferingid"`
@@ -4538,6 +4592,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["autoscalevmgroupid"]; found {
 		u.Set("autoscalevmgroupid", v.(string))
 	}
@@ -4657,6 +4714,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("userdata", vv)
 	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -4729,6 +4789,27 @@ func (p *ListVirtualMachinesMetricsParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -5446,6 +5527,27 @@ func (p *ListVirtualMachinesMetricsParams) GetUserdata() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -5623,6 +5725,7 @@ type ListVirtualMachinesMetricsResponse struct {
 type VirtualMachinesMetric struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []VirtualMachinesMetricAffinitygroup `json:"affinitygroup"`
+	Arch                  string                               `json:"arch"`
 	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`
@@ -6033,6 +6136,8 @@ type ListVmsForImportResponse struct {
 }
 
 type VmsForImport struct {
+	Bootmode         string             `json:"bootmode"`
+	Boottype         string             `json:"boottype"`
 	Clusterid        string             `json:"clusterid"`
 	Clustername      string             `json:"clustername"`
 	Cpucorepersocket int                `json:"cpucorepersocket"`
@@ -6221,6 +6326,7 @@ func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachinePa
 type MigrateVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -6561,6 +6667,7 @@ func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtua
 type MigrateVirtualMachineWithVolumeResponse struct {
 	Account               string                                                 `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineWithVolumeResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                 `json:"arch"`
 	Autoscalevmgroupid    string                                                 `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                 `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                 `json:"backupofferingid"`
@@ -6859,6 +6966,7 @@ func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachinePara
 type RebootVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []RebootVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -7087,6 +7195,7 @@ func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachinePa
 type RecoverVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RecoverVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -7360,6 +7469,7 @@ func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirt
 type RemoveNicFromVirtualMachineResponse struct {
 	Account               string                                             `json:"account"`
 	Affinitygroup         []RemoveNicFromVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                             `json:"arch"`
 	Autoscalevmgroupid    string                                             `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                             `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                             `json:"backupofferingid"`
@@ -7632,6 +7742,7 @@ func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordF
 type ResetPasswordForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetPasswordForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -8008,6 +8119,7 @@ func (s *VirtualMachineService) ResetUserDataForVirtualMachine(p *ResetUserDataF
 type ResetUserDataForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetUserDataForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -8381,6 +8493,7 @@ func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachinePa
 type RestoreVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RestoreVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -9009,6 +9122,7 @@ func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams
 type StartVirtualMachineResponse struct {
 	Account               string                                     `json:"account"`
 	Affinitygroup         []StartVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                     `json:"arch"`
 	Autoscalevmgroupid    string                                     `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                     `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                     `json:"backupofferingid"`
@@ -9282,6 +9396,7 @@ func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) 
 type StopVirtualMachineResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []StopVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`
@@ -9555,6 +9670,7 @@ func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefau
 type UpdateDefaultNicForVirtualMachineResponse struct {
 	Account               string                                                   `json:"account"`
 	Affinitygroup         []UpdateDefaultNicForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                   `json:"arch"`
 	Autoscalevmgroupid    string                                                   `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                   `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                   `json:"backupofferingid"`
@@ -10272,6 +10388,7 @@ func (s *VirtualMachineService) UpdateVirtualMachine(p *UpdateVirtualMachinePara
 type UpdateVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []UpdateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -10840,6 +10957,9 @@ func (p *ImportVmParams) toURLValues() url.Values {
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
+	if v, found := p.p["importinstancehostid"]; found {
+		u.Set("importinstancehostid", v.(string))
+	}
 	if v, found := p.p["importsource"]; found {
 		u.Set("importsource", v.(string))
 	}
@@ -11311,6 +11431,27 @@ func (p *ImportVmParams) GetHypervisor() (string, bool) {
 	return value, ok
 }
 
+func (p *ImportVmParams) SetImportinstancehostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["importinstancehostid"] = v
+}
+
+func (p *ImportVmParams) ResetImportinstancehostid() {
+	if p.p != nil && p.p["importinstancehostid"] != nil {
+		delete(p.p, "importinstancehostid")
+	}
+}
+
+func (p *ImportVmParams) GetImportinstancehostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["importinstancehostid"].(string)
+	return value, ok
+}
+
 func (p *ImportVmParams) SetImportsource(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -11692,6 +11833,7 @@ func (s *VirtualMachineService) ImportVm(p *ImportVmParams) (*ImportVmResponse, 
 type ImportVmResponse struct {
 	Account               string                          `json:"account"`
 	Affinitygroup         []ImportVmResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                          `json:"arch"`
 	Autoscalevmgroupid    string                          `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                          `json:"autoscalevmgroupname"`
 	Backupofferingid      string                          `json:"backupofferingid"`
@@ -12108,6 +12250,8 @@ type ListUnmanagedInstancesResponse struct {
 }
 
 type UnmanagedInstance struct {
+	Bootmode         string                  `json:"bootmode"`
+	Boottype         string                  `json:"boottype"`
 	Clusterid        string                  `json:"clusterid"`
 	Clustername      string                  `json:"clustername"`
 	Cpucorepersocket int                     `json:"cpucorepersocket"`
@@ -12578,6 +12722,7 @@ func (s *VirtualMachineService) ImportUnmanagedInstance(p *ImportUnmanagedInstan
 type ImportUnmanagedInstanceResponse struct {
 	Account               string                                         `json:"account"`
 	Affinitygroup         []ImportUnmanagedInstanceResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                         `json:"arch"`
 	Autoscalevmgroupid    string                                         `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                         `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                         `json:"backupofferingid"`

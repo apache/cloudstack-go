@@ -171,6 +171,7 @@ func (s *SystemVMService) ChangeServiceForSystemVm(p *ChangeServiceForSystemVmPa
 type ChangeServiceForSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -294,6 +295,7 @@ func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySys
 type DestroySystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -343,6 +345,9 @@ func (p *ListSystemVmsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
 	}
@@ -379,6 +384,27 @@ func (p *ListSystemVmsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListSystemVmsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListSystemVmsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListSystemVmsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListSystemVmsParams) SetHostid(v string) {
@@ -726,6 +752,7 @@ type ListSystemVmsResponse struct {
 type SystemVm struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1249,6 +1276,7 @@ func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSys
 type MigrateSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1397,6 +1425,7 @@ func (s *SystemVMService) RebootSystemVm(p *RebootSystemVmParams) (*RebootSystem
 type RebootSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1572,6 +1601,7 @@ func (s *SystemVMService) ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmR
 type ScaleSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1695,6 +1725,7 @@ func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmR
 type StartSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1843,6 +1874,7 @@ func (s *SystemVMService) StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResp
 type StopSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`

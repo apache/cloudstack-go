@@ -189,6 +189,7 @@ func (s *ISOService) AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error) {
 type AttachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []AttachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                           `json:"arch"`
 	Autoscalevmgroupid    string                           `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                           `json:"autoscalevmgroupname"`
 	Backupofferingid      string                           `json:"backupofferingid"`
@@ -807,6 +808,7 @@ func (s *ISOService) DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error) {
 type DetachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []DetachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                           `json:"arch"`
 	Autoscalevmgroupid    string                           `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                           `json:"autoscalevmgroupname"`
 	Backupofferingid      string                           `json:"backupofferingid"`

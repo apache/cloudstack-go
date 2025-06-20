@@ -3466,6 +3466,7 @@ func (s *SnapshotService) RevertToVMSnapshot(p *RevertToVMSnapshotParams) (*Reve
 type RevertToVMSnapshotResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []RevertToVMSnapshotResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`

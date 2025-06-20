@@ -2097,8 +2097,19 @@ func (s *service) recusiveGenerateResponseType(aName string, tn string, resp API
 	customMarshal := false
 	found := make(map[string]bool)
 
+	// Only apply custom response type name if the current tn is not already a custom type
 	if val, ok := customResponseStructTypes[aName]; ok {
-		tn = val
+		// Don't override if tn is already a custom-generated nested type (contains the custom name)
+		isNestedType := false
+		for _, customType := range customResponseStructTypes {
+			if strings.Contains(tn, customType) && tn != customType {
+				isNestedType = true
+				break
+			}
+		}
+		if !isNestedType {
+			tn = val
+		}
 	}
 
 	pn("type %s struct {", tn)

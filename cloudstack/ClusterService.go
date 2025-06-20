@@ -1446,6 +1446,9 @@ func (p *ListClustersParams) toURLValues() url.Values {
 	if v, found := p.p["allocationstate"]; found {
 		u.Set("allocationstate", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clustertype"]; found {
 		u.Set("clustertype", v.(string))
 	}
@@ -1503,6 +1506,27 @@ func (p *ListClustersParams) GetAllocationstate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
+func (p *ListClustersParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListClustersParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListClustersParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -2104,6 +2128,9 @@ func (p *ListClustersMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["allocationstate"]; found {
 		u.Set("allocationstate", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clustertype"]; found {
 		u.Set("clustertype", v.(string))
 	}
@@ -2161,6 +2188,27 @@ func (p *ListClustersMetricsParams) GetAllocationstate() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["allocationstate"].(string)
+	return value, ok
+}
+
+func (p *ListClustersMetricsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListClustersMetricsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListClustersMetricsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 

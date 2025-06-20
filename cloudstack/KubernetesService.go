@@ -326,6 +326,7 @@ func (s *KubernetesService) AddKubernetesSupportedVersion(p *AddKubernetesSuppor
 }
 
 type AddKubernetesSupportedVersionResponse struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
@@ -1656,6 +1657,9 @@ func (p *ListKubernetesSupportedVersionsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1680,6 +1684,27 @@ func (p *ListKubernetesSupportedVersionsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListKubernetesSupportedVersionsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListKubernetesSupportedVersionsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListKubernetesSupportedVersionsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListKubernetesSupportedVersionsParams) SetId(v string) {
@@ -1941,6 +1966,7 @@ type ListKubernetesSupportedVersionsResponse struct {
 }
 
 type KubernetesSupportedVersion struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
@@ -2519,6 +2545,7 @@ func (s *KubernetesService) UpdateKubernetesSupportedVersion(p *UpdateKubernetes
 }
 
 type UpdateKubernetesSupportedVersionResponse struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`

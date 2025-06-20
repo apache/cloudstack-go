@@ -338,6 +338,7 @@ type CreateUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -541,6 +542,7 @@ type DisableUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -634,6 +636,7 @@ type EnableUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -723,6 +726,7 @@ type GetUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -812,10 +816,11 @@ func (s *UserService) GetUserKeys(p *GetUserKeysParams) (*GetUserKeysResponse, e
 }
 
 type GetUserKeysResponse struct {
-	Apikey    string `json:"apikey"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Secretkey string `json:"secretkey"`
+	Apikey       string `json:"apikey"`
+	Apikeyaccess bool   `json:"apikeyaccess"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Secretkey    string `json:"secretkey"`
 }
 
 type GetVirtualMachineUserDataParams struct {
@@ -976,6 +981,9 @@ func (p *ListUsersParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("accounttype", vv)
 	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -1053,6 +1061,27 @@ func (p *ListUsersParams) GetAccounttype() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["accounttype"].(int)
+	return value, ok
+}
+
+func (p *ListUsersParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *ListUsersParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *ListUsersParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
 	return value, ok
 }
 
@@ -1332,6 +1361,7 @@ type User struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -1425,6 +1455,7 @@ type LockUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -1514,10 +1545,11 @@ func (s *UserService) RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUser
 }
 
 type RegisterUserKeysResponse struct {
-	Apikey    string `json:"apikey"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Secretkey string `json:"secretkey"`
+	Apikey       string `json:"apikey"`
+	Apikeyaccess bool   `json:"apikeyaccess"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Secretkey    string `json:"secretkey"`
 }
 
 type UpdateUserParams struct {
@@ -1528,6 +1560,9 @@ func (p *UpdateUserParams) toURLValues() url.Values {
 	u := url.Values{}
 	if p.p == nil {
 		return u
+	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
 	}
 	if v, found := p.p["currentpassword"]; found {
 		u.Set("currentpassword", v.(string))
@@ -1564,6 +1599,27 @@ func (p *UpdateUserParams) toURLValues() url.Values {
 		u.Set("usersecretkey", v.(string))
 	}
 	return u
+}
+
+func (p *UpdateUserParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *UpdateUserParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *UpdateUserParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetCurrentpassword(v string) {
@@ -1826,6 +1882,7 @@ type UpdateUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`

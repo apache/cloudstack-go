@@ -4920,6 +4920,10 @@ func (p *ResizeVolumeParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["automigrate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("automigrate", vv)
+	}
 	if v, found := p.p["diskofferingid"]; found {
 		u.Set("diskofferingid", v.(string))
 	}
@@ -4943,6 +4947,27 @@ func (p *ResizeVolumeParams) toURLValues() url.Values {
 		u.Set("size", vv)
 	}
 	return u
+}
+
+func (p *ResizeVolumeParams) SetAutomigrate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["automigrate"] = v
+}
+
+func (p *ResizeVolumeParams) ResetAutomigrate() {
+	if p.p != nil && p.p["automigrate"] != nil {
+		delete(p.p, "automigrate")
+	}
+}
+
+func (p *ResizeVolumeParams) GetAutomigrate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["automigrate"].(bool)
+	return value, ok
 }
 
 func (p *ResizeVolumeParams) SetDiskofferingid(v string) {

@@ -1144,6 +1144,7 @@ func (s *SSHService) ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachin
 type ResetSSHKeyForVirtualMachineResponse struct {
 	Account               string                                              `json:"account"`
 	Affinitygroup         []ResetSSHKeyForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                              `json:"arch"`
 	Autoscalevmgroupid    string                                              `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                              `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                              `json:"backupofferingid"`
