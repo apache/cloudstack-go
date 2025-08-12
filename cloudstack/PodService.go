@@ -1393,6 +1393,10 @@ func (s *PodService) UpdatePod(p *UpdatePodParams) (*UpdatePodResponse, error) {
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdatePodResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err

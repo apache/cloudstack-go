@@ -2810,6 +2810,10 @@ func (s *ZoneService) UpdateZone(p *UpdateZoneParams) (*UpdateZoneResponse, erro
 		return nil, err
 	}
 
+	if resp, err = getRawValue(resp); err != nil {
+		return nil, err
+	}
+
 	var r UpdateZoneResponse
 	if err := json.Unmarshal(resp, &r); err != nil {
 		return nil, err
