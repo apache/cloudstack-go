@@ -107,7 +107,7 @@ func (s *StoragePoolService) NewCancelStorageMaintenanceParams(id string) *Cance
 
 // Cancels maintenance for primary storage
 func (s *StoragePoolService) CancelStorageMaintenance(p *CancelStorageMaintenanceParams) (*CancelStorageMaintenanceResponse, error) {
-	resp, err := s.cs.newRequest("cancelStorageMaintenance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cancelStorageMaintenance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -171,6 +171,7 @@ type CancelStorageMaintenanceResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -271,7 +272,7 @@ func (s *StoragePoolService) NewChangeStoragePoolScopeParams(id string, scope st
 
 // Changes the scope of a storage pool when the pool is in Disabled state.This feature is officially tested and supported for Hypervisors: KVM and VMware, Protocols: NFS and Ceph, and Storage Provider: DefaultPrimary. There might be extra steps involved to make this work for other hypervisors and storage options.
 func (s *StoragePoolService) ChangeStoragePoolScope(p *ChangeStoragePoolScopeParams) (*ChangeStoragePoolScopeResponse, error) {
-	resp, err := s.cs.newRequest("changeStoragePoolScope", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeStoragePoolScope", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -353,7 +354,7 @@ func (s *StoragePoolService) NewEnableStorageMaintenanceParams(id string) *Enabl
 
 // Puts storage pool into maintenance state
 func (s *StoragePoolService) EnableStorageMaintenance(p *EnableStorageMaintenanceParams) (*EnableStorageMaintenanceResponse, error) {
-	resp, err := s.cs.newRequest("enableStorageMaintenance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableStorageMaintenance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -417,6 +418,7 @@ type EnableStorageMaintenanceResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }
@@ -1369,7 +1371,7 @@ func (s *StoragePoolService) NewUpdateObjectStoragePoolParams(id string) *Update
 
 // Updates object storage pool
 func (s *StoragePoolService) UpdateObjectStoragePool(p *UpdateObjectStoragePoolParams) (*UpdateObjectStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("updateObjectStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateObjectStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1546,7 +1548,7 @@ func (s *StoragePoolService) NewAddObjectStoragePoolParams(name string, provider
 
 // Adds a object storage pool
 func (s *StoragePoolService) AddObjectStoragePool(p *AddObjectStoragePoolParams) (*AddObjectStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("addObjectStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addObjectStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1621,7 +1623,7 @@ func (s *StoragePoolService) NewDeleteObjectStoragePoolParams(id string) *Delete
 
 // Deletes an Object Storage Pool
 func (s *StoragePoolService) DeleteObjectStoragePool(p *DeleteObjectStoragePoolParams) (*DeleteObjectStoragePoolResponse, error) {
-	resp, err := s.cs.newRequest("deleteObjectStoragePool", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteObjectStoragePool", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2169,6 +2171,7 @@ type StoragePoolsMetric struct {
 	Suitableformigration             bool              `json:"suitableformigration"`
 	Tags                             string            `json:"tags"`
 	Type                             string            `json:"type"`
+	Usediops                         int64             `json:"usediops"`
 	Zoneid                           string            `json:"zoneid"`
 	Zonename                         string            `json:"zonename"`
 }

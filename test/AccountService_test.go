@@ -96,7 +96,7 @@ func TestAccountService(t *testing.T) {
 		if _, ok := response["isAccountAllowedToCreateOfferingsWithTags"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Account.NewIsAccountAllowedToCreateOfferingsWithTagsParams()
+		p := client.Account.NewIsAccountAllowedToCreateOfferingsWithTagsParams("id")
 		_, err := client.Account.IsAccountAllowedToCreateOfferingsWithTags(p)
 		if err != nil {
 			t.Errorf(err.Error())

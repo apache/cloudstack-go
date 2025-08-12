@@ -185,7 +185,7 @@ func (s *VolumeService) NewAttachVolumeParams(id string, virtualmachineid string
 
 // Attaches a disk volume to a virtual machine.
 func (s *VolumeService) AttachVolume(p *AttachVolumeParams) (*AttachVolumeResponse, error) {
-	resp, err := s.cs.newRequest("attachVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("attachVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -491,7 +491,7 @@ func (s *VolumeService) NewChangeOfferingForVolumeParams(diskofferingid string, 
 
 // Change disk offering of the volume and also an option to auto migrate if required to apply the new disk offering
 func (s *VolumeService) ChangeOfferingForVolume(p *ChangeOfferingForVolumeParams) (*ChangeOfferingForVolumeResponse, error) {
-	resp, err := s.cs.newRequest("changeOfferingForVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeOfferingForVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -671,7 +671,7 @@ func (s *VolumeService) NewCheckVolumeParams(id string) *CheckVolumeParams {
 
 // Check the volume for any errors or leaks and also repairs when repair parameter is passed, this is currently supported for KVM only
 func (s *VolumeService) CheckVolume(p *CheckVolumeParams) (*CheckVolumeResponse, error) {
-	resp, err := s.cs.newRequest("checkVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("checkVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1118,7 +1118,7 @@ func (s *VolumeService) NewCreateVolumeParams() *CreateVolumeParams {
 
 // Creates a disk volume from a disk offering. This disk volume must still be attached to a virtual machine to make use of it.
 func (s *VolumeService) CreateVolume(p *CreateVolumeParams) (*CreateVolumeResponse, error) {
-	resp, err := s.cs.newRequest("createVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1274,7 +1274,7 @@ func (s *VolumeService) NewDeleteVolumeParams(id string) *DeleteVolumeParams {
 
 // Deletes a detached disk volume.
 func (s *VolumeService) DeleteVolume(p *DeleteVolumeParams) (*DeleteVolumeResponse, error) {
-	resp, err := s.cs.newRequest("deleteVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1393,7 +1393,7 @@ func (s *VolumeService) NewDestroyVolumeParams(id string) *DestroyVolumeParams {
 
 // Destroys a Volume.
 func (s *VolumeService) DestroyVolume(p *DestroyVolumeParams) (*DestroyVolumeResponse, error) {
-	resp, err := s.cs.newRequest("destroyVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroyVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1597,7 +1597,7 @@ func (s *VolumeService) NewDetachVolumeParams() *DetachVolumeParams {
 
 // Detaches a disk volume from a virtual machine.
 func (s *VolumeService) DetachVolume(p *DetachVolumeParams) (*DetachVolumeResponse, error) {
-	resp, err := s.cs.newRequest("detachVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("detachVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1827,7 +1827,7 @@ func (s *VolumeService) NewExtractVolumeParams(id string, mode string, zoneid st
 
 // Extracts volume
 func (s *VolumeService) ExtractVolume(p *ExtractVolumeParams) (*ExtractVolumeResponse, error) {
-	resp, err := s.cs.newRequest("extractVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("extractVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2473,7 +2473,7 @@ func (s *VolumeService) NewImportVolumeParams(path string, storageid string) *Im
 
 // Import an unmanaged volume from a storage pool on a host into CloudStack
 func (s *VolumeService) ImportVolume(p *ImportVolumeParams) (*ImportVolumeResponse, error) {
-	resp, err := s.cs.newRequest("importVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4666,7 +4666,7 @@ func (s *VolumeService) NewMigrateVolumeParams(storageid string, volumeid string
 
 // Migrate volume
 func (s *VolumeService) MigrateVolume(p *MigrateVolumeParams) (*MigrateVolumeResponse, error) {
-	resp, err := s.cs.newRequest("migrateVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4822,7 +4822,7 @@ func (s *VolumeService) NewRecoverVolumeParams(id string) *RecoverVolumeParams {
 
 // Recovers a Destroy volume.
 func (s *VolumeService) RecoverVolume(p *RecoverVolumeParams) (*RecoverVolumeResponse, error) {
-	resp, err := s.cs.newRequest("recoverVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("recoverVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4920,6 +4920,10 @@ func (p *ResizeVolumeParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["automigrate"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("automigrate", vv)
+	}
 	if v, found := p.p["diskofferingid"]; found {
 		u.Set("diskofferingid", v.(string))
 	}
@@ -4943,6 +4947,27 @@ func (p *ResizeVolumeParams) toURLValues() url.Values {
 		u.Set("size", vv)
 	}
 	return u
+}
+
+func (p *ResizeVolumeParams) SetAutomigrate(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["automigrate"] = v
+}
+
+func (p *ResizeVolumeParams) ResetAutomigrate() {
+	if p.p != nil && p.p["automigrate"] != nil {
+		delete(p.p, "automigrate")
+	}
+}
+
+func (p *ResizeVolumeParams) GetAutomigrate() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["automigrate"].(bool)
+	return value, ok
 }
 
 func (p *ResizeVolumeParams) SetDiskofferingid(v string) {
@@ -5082,7 +5107,7 @@ func (s *VolumeService) NewResizeVolumeParams(id string) *ResizeVolumeParams {
 
 // Resizes a volume
 func (s *VolumeService) ResizeVolume(p *ResizeVolumeParams) (*ResizeVolumeResponse, error) {
-	resp, err := s.cs.newRequest("resizeVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resizeVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5238,7 +5263,7 @@ func (s *VolumeService) NewUnmanageVolumeParams(id string) *UnmanageVolumeParams
 
 // Unmanage a volume on storage pool.
 func (s *VolumeService) UnmanageVolume(p *UnmanageVolumeParams) (*UnmanageVolumeResponse, error) {
-	resp, err := s.cs.newRequest("unmanageVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("unmanageVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5513,7 +5538,7 @@ func (s *VolumeService) NewUpdateVolumeParams() *UpdateVolumeParams {
 
 // Updates the volume.
 func (s *VolumeService) UpdateVolume(p *UpdateVolumeParams) (*UpdateVolumeResponse, error) {
-	resp, err := s.cs.newRequest("updateVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5888,7 +5913,7 @@ func (s *VolumeService) NewUploadVolumeParams(format string, name string, url st
 
 // Uploads a data disk.
 func (s *VolumeService) UploadVolume(p *UploadVolumeParams) (*UploadVolumeResponse, error) {
-	resp, err := s.cs.newRequest("uploadVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("uploadVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6418,7 +6443,7 @@ func (s *VolumeService) NewAssignVolumeParams(volumeid string) *AssignVolumePara
 
 // Changes ownership of a Volume from one account to another.
 func (s *VolumeService) AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error) {
-	resp, err := s.cs.newRequest("assignVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

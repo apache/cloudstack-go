@@ -254,7 +254,7 @@ func (s *VirtualMachineService) NewAddNicToVirtualMachineParams(networkid string
 
 // Adds VM to specified network by creating a NIC
 func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachineParams) (*AddNicToVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("addNicToVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNicToVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -290,6 +290,7 @@ func (s *VirtualMachineService) AddNicToVirtualMachine(p *AddNicToVirtualMachine
 type AddNicToVirtualMachineResponse struct {
 	Account               string                                        `json:"account"`
 	Affinitygroup         []AddNicToVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                        `json:"arch"`
 	Autoscalevmgroupid    string                                        `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                        `json:"backupofferingid"`
@@ -624,7 +625,7 @@ func (s *VirtualMachineService) NewAssignVirtualMachineParams(virtualmachineid s
 
 // Change ownership of a VM from one account to another. This API is available for Basic zones with security groups and Advanced zones with guest networks. A root administrator can reassign a VM from any account to any other account in any domain. A domain administrator can reassign a VM to any account in the same domain.
 func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachineParams) (*AssignVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("assignVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -640,6 +641,7 @@ func (s *VirtualMachineService) AssignVirtualMachine(p *AssignVirtualMachinePara
 type AssignVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []AssignVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -1004,7 +1006,7 @@ func (s *VirtualMachineService) NewChangeServiceForVirtualMachineParams(id strin
 
 // (This API is deprecated, use scaleVirtualMachine API)Changes the service offering for a virtual machine. The virtual machine must be in a "Stopped" state for this command to take effect.
 func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("changeServiceForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeServiceForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1020,6 +1022,7 @@ func (s *VirtualMachineService) ChangeServiceForVirtualMachine(p *ChangeServiceF
 type ChangeServiceForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ChangeServiceForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -1207,7 +1210,7 @@ func (s *VirtualMachineService) NewCleanVMReservationsParams() *CleanVMReservati
 
 // Cleanups VM reservations in the database.
 func (s *VirtualMachineService) CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error) {
-	resp, err := s.cs.newRequest("cleanVMReservations", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cleanVMReservations", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2639,6 +2642,7 @@ func (s *VirtualMachineService) DeployVirtualMachine(p *DeployVirtualMachinePara
 type DeployVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []DeployVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -2901,7 +2905,7 @@ func (s *VirtualMachineService) NewDestroyVirtualMachineParams(id string) *Destr
 
 // Destroys a virtual machine. Once destroyed, only the administrator can recover it.
 func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("destroyVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroyVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2937,6 +2941,7 @@ func (s *VirtualMachineService) DestroyVirtualMachine(p *DestroyVirtualMachinePa
 type DestroyVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []DestroyVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -3149,7 +3154,7 @@ func (s *VirtualMachineService) NewExpungeVirtualMachineParams(id string) *Expun
 
 // Expunge a virtual machine. Once expunged, it cannot be recoverd.
 func (s *VirtualMachineService) ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("expungeVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("expungeVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3268,6 +3273,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
+	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
 	}
 	if v, found := p.p["autoscalevmgroupid"]; found {
 		u.Set("autoscalevmgroupid", v.(string))
@@ -3388,6 +3396,9 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("userdata", vv)
 	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -3460,6 +3471,27 @@ func (p *ListVirtualMachinesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -4177,6 +4209,27 @@ func (p *ListVirtualMachinesParams) GetUserdata() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4354,6 +4407,7 @@ type ListVirtualMachinesResponse struct {
 type VirtualMachine struct {
 	Account               string                        `json:"account"`
 	Affinitygroup         []VirtualMachineAffinitygroup `json:"affinitygroup"`
+	Arch                  string                        `json:"arch"`
 	Autoscalevmgroupid    string                        `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                        `json:"autoscalevmgroupname"`
 	Backupofferingid      string                        `json:"backupofferingid"`
@@ -4538,6 +4592,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["autoscalevmgroupid"]; found {
 		u.Set("autoscalevmgroupid", v.(string))
 	}
@@ -4657,6 +4714,9 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("userdata", vv)
 	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -4729,6 +4789,27 @@ func (p *ListVirtualMachinesMetricsParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -5446,6 +5527,27 @@ func (p *ListVirtualMachinesMetricsParams) GetUserdata() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -5623,6 +5725,7 @@ type ListVirtualMachinesMetricsResponse struct {
 type VirtualMachinesMetric struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []VirtualMachinesMetricAffinitygroup `json:"affinitygroup"`
+	Arch                  string                               `json:"arch"`
 	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`
@@ -6033,6 +6136,8 @@ type ListVmsForImportResponse struct {
 }
 
 type VmsForImport struct {
+	Bootmode         string             `json:"bootmode"`
+	Boottype         string             `json:"boottype"`
 	Clusterid        string             `json:"clusterid"`
 	Clustername      string             `json:"clustername"`
 	Cpucorepersocket int                `json:"cpucorepersocket"`
@@ -6185,7 +6290,7 @@ func (s *VirtualMachineService) NewMigrateVirtualMachineParams(virtualmachineid 
 
 // Attempts Migration of a VM to a different host or Root volume of the vm to a different storage pool
 func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachineParams) (*MigrateVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("migrateVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6221,6 +6326,7 @@ func (s *VirtualMachineService) MigrateVirtualMachine(p *MigrateVirtualMachinePa
 type MigrateVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -6525,7 +6631,7 @@ func (s *VirtualMachineService) NewMigrateVirtualMachineWithVolumeParams(virtual
 
 // Attempts Migration of a VM with its volumes to a different host
 func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtualMachineWithVolumeParams) (*MigrateVirtualMachineWithVolumeResponse, error) {
-	resp, err := s.cs.newRequest("migrateVirtualMachineWithVolume", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateVirtualMachineWithVolume", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6561,6 +6667,7 @@ func (s *VirtualMachineService) MigrateVirtualMachineWithVolume(p *MigrateVirtua
 type MigrateVirtualMachineWithVolumeResponse struct {
 	Account               string                                                 `json:"account"`
 	Affinitygroup         []MigrateVirtualMachineWithVolumeResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                 `json:"arch"`
 	Autoscalevmgroupid    string                                                 `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                 `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                 `json:"backupofferingid"`
@@ -6823,7 +6930,7 @@ func (s *VirtualMachineService) NewRebootVirtualMachineParams(id string) *Reboot
 
 // Reboots a virtual machine.
 func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachineParams) (*RebootVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("rebootVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("rebootVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6859,6 +6966,7 @@ func (s *VirtualMachineService) RebootVirtualMachine(p *RebootVirtualMachinePara
 type RebootVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []RebootVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -7071,7 +7179,7 @@ func (s *VirtualMachineService) NewRecoverVirtualMachineParams(id string) *Recov
 
 // Recovers a virtual machine.
 func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachineParams) (*RecoverVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("recoverVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("recoverVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7087,6 +7195,7 @@ func (s *VirtualMachineService) RecoverVirtualMachine(p *RecoverVirtualMachinePa
 type RecoverVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RecoverVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -7324,7 +7433,7 @@ func (s *VirtualMachineService) NewRemoveNicFromVirtualMachineParams(nicid strin
 
 // Removes VM from specified network by deleting a NIC
 func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirtualMachineParams) (*RemoveNicFromVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("removeNicFromVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeNicFromVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7360,6 +7469,7 @@ func (s *VirtualMachineService) RemoveNicFromVirtualMachine(p *RemoveNicFromVirt
 type RemoveNicFromVirtualMachineResponse struct {
 	Account               string                                             `json:"account"`
 	Affinitygroup         []RemoveNicFromVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                             `json:"arch"`
 	Autoscalevmgroupid    string                                             `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                             `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                             `json:"backupofferingid"`
@@ -7596,7 +7706,7 @@ func (s *VirtualMachineService) NewResetPasswordForVirtualMachineParams(id strin
 
 // Resets the password for virtual machine. The virtual machine must be in a "Stopped" state and the template must already support this feature for this command to take effect. [async]
 func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordForVirtualMachineParams) (*ResetPasswordForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("resetPasswordForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetPasswordForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7632,6 +7742,7 @@ func (s *VirtualMachineService) ResetPasswordForVirtualMachine(p *ResetPasswordF
 type ResetPasswordForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetPasswordForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -7992,7 +8103,7 @@ func (s *VirtualMachineService) NewResetUserDataForVirtualMachineParams(id strin
 
 // Resets the UserData for virtual machine. The virtual machine must be in a "Stopped" state.
 func (s *VirtualMachineService) ResetUserDataForVirtualMachine(p *ResetUserDataForVirtualMachineParams) (*ResetUserDataForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("resetUserDataForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetUserDataForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8008,6 +8119,7 @@ func (s *VirtualMachineService) ResetUserDataForVirtualMachine(p *ResetUserDataF
 type ResetUserDataForVirtualMachineResponse struct {
 	Account               string                                                `json:"account"`
 	Affinitygroup         []ResetUserDataForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                `json:"arch"`
 	Autoscalevmgroupid    string                                                `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                `json:"backupofferingid"`
@@ -8345,7 +8457,7 @@ func (s *VirtualMachineService) NewRestoreVirtualMachineParams(virtualmachineid 
 
 // Restore a VM to original template/ISO or new template/ISO
 func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachineParams) (*RestoreVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("restoreVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("restoreVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8381,6 +8493,7 @@ func (s *VirtualMachineService) RestoreVirtualMachine(p *RestoreVirtualMachinePa
 type RestoreVirtualMachineResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []RestoreVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`
@@ -8745,7 +8858,7 @@ func (s *VirtualMachineService) NewScaleVirtualMachineParams(id string, serviceo
 
 // Scales the virtual machine to a new service offering. This command also considers the volume size in the service offering or disk offering linked to the new service offering and apply all characteristics to the root volume.
 func (s *VirtualMachineService) ScaleVirtualMachine(p *ScaleVirtualMachineParams) (*ScaleVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("scaleVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("scaleVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8973,7 +9086,7 @@ func (s *VirtualMachineService) NewStartVirtualMachineParams(id string) *StartVi
 
 // Starts a virtual machine.
 func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams) (*StartVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("startVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -9009,6 +9122,7 @@ func (s *VirtualMachineService) StartVirtualMachine(p *StartVirtualMachineParams
 type StartVirtualMachineResponse struct {
 	Account               string                                     `json:"account"`
 	Affinitygroup         []StartVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                     `json:"arch"`
 	Autoscalevmgroupid    string                                     `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                     `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                     `json:"backupofferingid"`
@@ -9246,7 +9360,7 @@ func (s *VirtualMachineService) NewStopVirtualMachineParams(id string) *StopVirt
 
 // Stops a virtual machine.
 func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) (*StopVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("stopVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -9282,6 +9396,7 @@ func (s *VirtualMachineService) StopVirtualMachine(p *StopVirtualMachineParams) 
 type StopVirtualMachineResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []StopVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`
@@ -9519,7 +9634,7 @@ func (s *VirtualMachineService) NewUpdateDefaultNicForVirtualMachineParams(nicid
 
 // Changes the default NIC on a VM
 func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefaultNicForVirtualMachineParams) (*UpdateDefaultNicForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("updateDefaultNicForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateDefaultNicForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -9555,6 +9670,7 @@ func (s *VirtualMachineService) UpdateDefaultNicForVirtualMachine(p *UpdateDefau
 type UpdateDefaultNicForVirtualMachineResponse struct {
 	Account               string                                                   `json:"account"`
 	Affinitygroup         []UpdateDefaultNicForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                                   `json:"arch"`
 	Autoscalevmgroupid    string                                                   `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                                   `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                                   `json:"backupofferingid"`
@@ -10272,6 +10388,7 @@ func (s *VirtualMachineService) UpdateVirtualMachine(p *UpdateVirtualMachinePara
 type UpdateVirtualMachineResponse struct {
 	Account               string                                      `json:"account"`
 	Affinitygroup         []UpdateVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                      `json:"arch"`
 	Autoscalevmgroupid    string                                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                      `json:"backupofferingid"`
@@ -10840,6 +10957,9 @@ func (p *ImportVmParams) toURLValues() url.Values {
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
+	if v, found := p.p["importinstancehostid"]; found {
+		u.Set("importinstancehostid", v.(string))
+	}
 	if v, found := p.p["importsource"]; found {
 		u.Set("importsource", v.(string))
 	}
@@ -11311,6 +11431,27 @@ func (p *ImportVmParams) GetHypervisor() (string, bool) {
 	return value, ok
 }
 
+func (p *ImportVmParams) SetImportinstancehostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["importinstancehostid"] = v
+}
+
+func (p *ImportVmParams) ResetImportinstancehostid() {
+	if p.p != nil && p.p["importinstancehostid"] != nil {
+		delete(p.p, "importinstancehostid")
+	}
+}
+
+func (p *ImportVmParams) GetImportinstancehostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["importinstancehostid"].(string)
+	return value, ok
+}
+
 func (p *ImportVmParams) SetImportsource(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -11656,7 +11797,7 @@ func (s *VirtualMachineService) NewImportVmParams(clusterid string, hypervisor s
 
 // Import virtual machine from a unmanaged host into CloudStack
 func (s *VirtualMachineService) ImportVm(p *ImportVmParams) (*ImportVmResponse, error) {
-	resp, err := s.cs.newRequest("importVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -11692,6 +11833,7 @@ func (s *VirtualMachineService) ImportVm(p *ImportVmParams) (*ImportVmResponse, 
 type ImportVmResponse struct {
 	Account               string                          `json:"account"`
 	Affinitygroup         []ImportVmResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                          `json:"arch"`
 	Autoscalevmgroupid    string                          `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                          `json:"autoscalevmgroupname"`
 	Backupofferingid      string                          `json:"backupofferingid"`
@@ -11904,7 +12046,7 @@ func (s *VirtualMachineService) NewUnmanageVirtualMachineParams(id string) *Unma
 
 // Unmanage a guest virtual machine.
 func (s *VirtualMachineService) UnmanageVirtualMachine(p *UnmanageVirtualMachineParams) (*UnmanageVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("unmanageVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("unmanageVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -12108,6 +12250,8 @@ type ListUnmanagedInstancesResponse struct {
 }
 
 type UnmanagedInstance struct {
+	Bootmode         string                  `json:"bootmode"`
+	Boottype         string                  `json:"boottype"`
 	Clusterid        string                  `json:"clusterid"`
 	Clustername      string                  `json:"clustername"`
 	Cpucorepersocket int                     `json:"cpucorepersocket"`
@@ -12542,7 +12686,7 @@ func (s *VirtualMachineService) NewImportUnmanagedInstanceParams(clusterid strin
 
 // Import unmanaged virtual machine from a given cluster.
 func (s *VirtualMachineService) ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error) {
-	resp, err := s.cs.newRequest("importUnmanagedInstance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importUnmanagedInstance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -12578,6 +12722,7 @@ func (s *VirtualMachineService) ImportUnmanagedInstance(p *ImportUnmanagedInstan
 type ImportUnmanagedInstanceResponse struct {
 	Account               string                                         `json:"account"`
 	Affinitygroup         []ImportUnmanagedInstanceResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                         `json:"arch"`
 	Autoscalevmgroupid    string                                         `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                         `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                         `json:"backupofferingid"`
@@ -12962,7 +13107,7 @@ func (s *VirtualMachineService) NewCreateVMScheduleParams(action string, schedul
 
 // Create VM Schedule
 func (s *VirtualMachineService) CreateVMSchedule(p *CreateVMScheduleParams) (*CreateVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("createVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -13185,7 +13330,7 @@ func (s *VirtualMachineService) NewUpdateVMScheduleParams(id string) *UpdateVMSc
 
 // Update VM Schedule.
 func (s *VirtualMachineService) UpdateVMSchedule(p *UpdateVMScheduleParams) (*UpdateVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("updateVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -13573,7 +13718,7 @@ func (s *VirtualMachineService) NewDeleteVMScheduleParams(virtualmachineid strin
 
 // Delete VM Schedule.
 func (s *VirtualMachineService) DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error) {
-	resp, err := s.cs.newRequest("deleteVMSchedule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVMSchedule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

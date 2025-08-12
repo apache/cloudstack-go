@@ -176,7 +176,7 @@ func (s *UsageService) NewAddTrafficMonitorParams(url string, zoneid string) *Ad
 
 // Adds Traffic Monitor Host for Direct Network Usage
 func (s *UsageService) AddTrafficMonitor(p *AddTrafficMonitorParams) (*AddTrafficMonitorResponse, error) {
-	resp, err := s.cs.newRequest("addTrafficMonitor", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addTrafficMonitor", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -439,7 +439,7 @@ func (s *UsageService) NewAddTrafficTypeParams(physicalnetworkid string, traffic
 
 // Adds traffic type to a physical network
 func (s *UsageService) AddTrafficType(p *AddTrafficTypeParams) (*AddTrafficTypeResponse, error) {
-	resp, err := s.cs.newRequest("addTrafficType", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addTrafficType", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -532,7 +532,7 @@ func (s *UsageService) NewDeleteTrafficMonitorParams(id string) *DeleteTrafficMo
 
 // Deletes an traffic monitor host.
 func (s *UsageService) DeleteTrafficMonitor(p *DeleteTrafficMonitorParams) (*DeleteTrafficMonitorResponse, error) {
-	resp, err := s.cs.newRequest("deleteTrafficMonitor", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteTrafficMonitor", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -626,7 +626,7 @@ func (s *UsageService) NewDeleteTrafficTypeParams(id string) *DeleteTrafficTypeP
 
 // Deletes traffic type of a physical network
 func (s *UsageService) DeleteTrafficType(p *DeleteTrafficTypeParams) (*DeleteTrafficTypeResponse, error) {
-	resp, err := s.cs.newRequest("deleteTrafficType", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteTrafficType", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -755,7 +755,7 @@ func (s *UsageService) NewGenerateUsageRecordsParams() *GenerateUsageRecordsPara
 
 // Generates usage records. This will generate records only if there any records to be generated, i.e if the scheduled usage job was not run or failed
 func (s *UsageService) GenerateUsageRecords(p *GenerateUsageRecordsParams) (*GenerateUsageRecordsResponse, error) {
-	resp, err := s.cs.newRequest("generateUsageRecords", p.toURLValues())
+	resp, err := s.cs.newPostRequest("generateUsageRecords", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1832,7 +1832,7 @@ func (s *UsageService) NewRemoveRawUsageRecordsParams(interval int) *RemoveRawUs
 
 // Safely removes raw records from cloud_usage table
 func (s *UsageService) RemoveRawUsageRecords(p *RemoveRawUsageRecordsParams) (*RemoveRawUsageRecordsResponse, error) {
-	resp, err := s.cs.newRequest("removeRawUsageRecords", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeRawUsageRecords", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2046,7 +2046,7 @@ func (s *UsageService) NewUpdateTrafficTypeParams(id string) *UpdateTrafficTypeP
 
 // Updates traffic type of a physical network
 func (s *UsageService) UpdateTrafficType(p *UpdateTrafficTypeParams) (*UpdateTrafficTypeResponse, error) {
-	resp, err := s.cs.newRequest("updateTrafficType", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateTrafficType", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

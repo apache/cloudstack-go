@@ -95,7 +95,7 @@ func (s *ManagementService) NewCancelShutdownParams(managementserverid UUID) *Ca
 
 // Cancels a triggered shutdown
 func (s *ManagementService) CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error) {
-	resp, err := s.cs.newRequest("cancelShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("cancelShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -142,6 +142,10 @@ func (p *ListManagementServersParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["peers"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("peers", vv)
 	}
 	return u
 }
@@ -248,6 +252,27 @@ func (p *ListManagementServersParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListManagementServersParams) SetPeers(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["peers"] = v
+}
+
+func (p *ListManagementServersParams) ResetPeers() {
+	if p.p != nil && p.p["peers"] != nil {
+		delete(p.p, "peers")
+	}
+}
+
+func (p *ListManagementServersParams) GetPeers() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["peers"].(bool)
 	return value, ok
 }
 
@@ -363,20 +388,22 @@ type ListManagementServersResponse struct {
 }
 
 type ManagementServer struct {
-	Id               string `json:"id"`
-	Javadistribution string `json:"javadistribution"`
-	Javaversion      string `json:"javaversion"`
-	JobID            string `json:"jobid"`
-	Jobstatus        int    `json:"jobstatus"`
-	Kernelversion    string `json:"kernelversion"`
-	Lastboottime     string `json:"lastboottime"`
-	Lastserverstart  string `json:"lastserverstart"`
-	Lastserverstop   string `json:"lastserverstop"`
-	Name             string `json:"name"`
-	Osdistribution   string `json:"osdistribution"`
-	Serviceip        string `json:"serviceip"`
-	State            string `json:"state"`
-	Version          string `json:"version"`
+	Id               string   `json:"id"`
+	Ipaddress        string   `json:"ipaddress"`
+	Javadistribution string   `json:"javadistribution"`
+	Javaversion      string   `json:"javaversion"`
+	JobID            string   `json:"jobid"`
+	Jobstatus        int      `json:"jobstatus"`
+	Kernelversion    string   `json:"kernelversion"`
+	Lastboottime     string   `json:"lastboottime"`
+	Lastserverstart  string   `json:"lastserverstart"`
+	Lastserverstop   string   `json:"lastserverstop"`
+	Name             string   `json:"name"`
+	Osdistribution   string   `json:"osdistribution"`
+	Peers            []string `json:"peers"`
+	Serviceip        string   `json:"serviceip"`
+	State            string   `json:"state"`
+	Version          string   `json:"version"`
 }
 
 type ListManagementServersMetricsParams struct {
@@ -404,6 +431,10 @@ func (p *ListManagementServersMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["pagesize"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["peers"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("peers", vv)
 	}
 	if v, found := p.p["system"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -514,6 +545,27 @@ func (p *ListManagementServersMetricsParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListManagementServersMetricsParams) SetPeers(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["peers"] = v
+}
+
+func (p *ListManagementServersMetricsParams) ResetPeers() {
+	if p.p != nil && p.p["peers"] != nil {
+		delete(p.p, "peers")
+	}
+}
+
+func (p *ListManagementServersMetricsParams) GetPeers() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["peers"].(bool)
 	return value, ok
 }
 
@@ -658,6 +710,7 @@ type ManagementServersMetric struct {
 	Heapmemorytotal         int64     `json:"heapmemorytotal"`
 	Heapmemoryused          int64     `json:"heapmemoryused"`
 	Id                      string    `json:"id"`
+	Ipaddress               string    `json:"ipaddress"`
 	Javadistribution        string    `json:"javadistribution"`
 	Javaversion             string    `json:"javaversion"`
 	JobID                   string    `json:"jobid"`
@@ -669,6 +722,7 @@ type ManagementServersMetric struct {
 	Loginfo                 string    `json:"loginfo"`
 	Name                    string    `json:"name"`
 	Osdistribution          string    `json:"osdistribution"`
+	Peers                   []string  `json:"peers"`
 	Serviceip               string    `json:"serviceip"`
 	Sessions                int64     `json:"sessions"`
 	State                   string    `json:"state"`
@@ -736,7 +790,7 @@ func (s *ManagementService) NewPrepareForShutdownParams(managementserverid UUID)
 
 // Prepares CloudStack for a safe manual shutdown by preventing new jobs from being accepted
 func (s *ManagementService) PrepareForShutdown(p *PrepareForShutdownParams) (*PrepareForShutdownResponse, error) {
-	resp, err := s.cs.newRequest("prepareForShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("prepareForShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -876,7 +930,7 @@ func (s *ManagementService) NewTriggerShutdownParams(managementserverid UUID) *T
 
 // Triggers an automatic safe shutdown of CloudStack by not accepting new jobs and shutting down when all pending jobbs have been completed. Triggers an immediate shutdown if forced
 func (s *ManagementService) TriggerShutdown(p *TriggerShutdownParams) (*TriggerShutdownResponse, error) {
-	resp, err := s.cs.newRequest("triggerShutdown", p.toURLValues())
+	resp, err := s.cs.newPostRequest("triggerShutdown", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

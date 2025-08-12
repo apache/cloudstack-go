@@ -162,7 +162,7 @@ func (s *AlertService) NewArchiveAlertsParams() *ArchiveAlertsParams {
 
 // Archive one or more alerts.
 func (s *AlertService) ArchiveAlerts(p *ArchiveAlertsParams) (*ArchiveAlertsResponse, error) {
-	resp, err := s.cs.newRequest("archiveAlerts", p.toURLValues())
+	resp, err := s.cs.newPostRequest("archiveAlerts", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -328,7 +328,7 @@ func (s *AlertService) NewDeleteAlertsParams() *DeleteAlertsParams {
 
 // Delete one or more alerts.
 func (s *AlertService) DeleteAlerts(p *DeleteAlertsParams) (*DeleteAlertsResponse, error) {
-	resp, err := s.cs.newRequest("deleteAlerts", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteAlerts", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -521,7 +521,7 @@ func (s *AlertService) NewGenerateAlertParams(description string, name string, a
 
 // Generates an alert
 func (s *AlertService) GenerateAlert(p *GenerateAlertParams) (*GenerateAlertResponse, error) {
-	resp, err := s.cs.newRequest("generateAlert", p.toURLValues())
+	resp, err := s.cs.newPostRequest("generateAlert", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

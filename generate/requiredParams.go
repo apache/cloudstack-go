@@ -50,6 +50,7 @@ var requiredParams = map[string][]string{
 	},
 	"createVPC": {
 		"displaytext",
+		"cidr",
 	},
 	"createVPCOffering": {
 		"displaytext",
@@ -65,5 +66,8 @@ var requiredParams = map[string][]string{
 	},
 	"registerTemplate": {
 		"displaytext",
+	},
+	"updateGuestOs": {
+		"osdisplayname",
 	},
 }

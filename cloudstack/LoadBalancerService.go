@@ -183,7 +183,7 @@ func (s *LoadBalancerService) NewAssignCertToLoadBalancerParams(certid string, l
 
 // Assigns a certificate to a load balancer rule
 func (s *LoadBalancerService) AssignCertToLoadBalancer(p *AssignCertToLoadBalancerParams) (*AssignCertToLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("assignCertToLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignCertToLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -319,7 +319,7 @@ func (s *LoadBalancerService) NewAssignToGlobalLoadBalancerRuleParams(id string,
 
 // Assign load balancer rule or list of load balancer rules to a global load balancer rules.
 func (s *LoadBalancerService) AssignToGlobalLoadBalancerRule(p *AssignToGlobalLoadBalancerRuleParams) (*AssignToGlobalLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("assignToGlobalLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignToGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -454,7 +454,7 @@ func (s *LoadBalancerService) NewAssignToLoadBalancerRuleParams(id string) *Assi
 
 // Assigns virtual machine or a list of virtual machines to a load balancer rule.
 func (s *LoadBalancerService) AssignToLoadBalancerRule(p *AssignToLoadBalancerRuleParams) (*AssignToLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("assignToLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("assignToLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -732,7 +732,7 @@ func (s *LoadBalancerService) NewCreateGlobalLoadBalancerRuleParams(gslbdomainna
 
 // Creates a global load balancer rule
 func (s *LoadBalancerService) CreateGlobalLoadBalancerRule(p *CreateGlobalLoadBalancerRuleParams) (*CreateGlobalLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("createGlobalLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1030,7 +1030,7 @@ func (s *LoadBalancerService) NewCreateLBHealthCheckPolicyParams(lbruleid string
 
 // Creates a load balancer health check policy
 func (s *LoadBalancerService) CreateLBHealthCheckPolicy(p *CreateLBHealthCheckPolicyParams) (*CreateLBHealthCheckPolicyResponse, error) {
-	resp, err := s.cs.newRequest("createLBHealthCheckPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createLBHealthCheckPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1260,7 +1260,7 @@ func (s *LoadBalancerService) NewCreateLBStickinessPolicyParams(lbruleid string,
 
 // Creates a load balancer stickiness policy
 func (s *LoadBalancerService) CreateLBStickinessPolicy(p *CreateLBStickinessPolicyParams) (*CreateLBStickinessPolicyResponse, error) {
-	resp, err := s.cs.newRequest("createLBStickinessPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createLBStickinessPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1589,7 +1589,7 @@ func (s *LoadBalancerService) NewCreateLoadBalancerParams(algorithm string, inst
 
 // Creates an internal load balancer
 func (s *LoadBalancerService) CreateLoadBalancer(p *CreateLoadBalancerParams) (*CreateLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("createLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2024,7 +2024,7 @@ func (s *LoadBalancerService) NewCreateLoadBalancerRuleParams(algorithm string, 
 
 // Creates a load balancer rule
 func (s *LoadBalancerService) CreateLoadBalancerRule(p *CreateLoadBalancerRuleParams) (*CreateLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("createLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2131,7 +2131,7 @@ func (s *LoadBalancerService) NewDeleteGlobalLoadBalancerRuleParams(id string) *
 
 // Deletes a global load balancer rule.
 func (s *LoadBalancerService) DeleteGlobalLoadBalancerRule(p *DeleteGlobalLoadBalancerRuleParams) (*DeleteGlobalLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteGlobalLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2213,7 +2213,7 @@ func (s *LoadBalancerService) NewDeleteLBHealthCheckPolicyParams(id string) *Del
 
 // Deletes a load balancer health check policy.
 func (s *LoadBalancerService) DeleteLBHealthCheckPolicy(p *DeleteLBHealthCheckPolicyParams) (*DeleteLBHealthCheckPolicyResponse, error) {
-	resp, err := s.cs.newRequest("deleteLBHealthCheckPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteLBHealthCheckPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2295,7 +2295,7 @@ func (s *LoadBalancerService) NewDeleteLBStickinessPolicyParams(id string) *Dele
 
 // Deletes a load balancer stickiness policy.
 func (s *LoadBalancerService) DeleteLBStickinessPolicy(p *DeleteLBStickinessPolicyParams) (*DeleteLBStickinessPolicyResponse, error) {
-	resp, err := s.cs.newRequest("deleteLBStickinessPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteLBStickinessPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2377,7 +2377,7 @@ func (s *LoadBalancerService) NewDeleteLoadBalancerParams(id string) *DeleteLoad
 
 // Deletes an internal load balancer
 func (s *LoadBalancerService) DeleteLoadBalancer(p *DeleteLoadBalancerParams) (*DeleteLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("deleteLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2459,7 +2459,7 @@ func (s *LoadBalancerService) NewDeleteLoadBalancerRuleParams(id string) *Delete
 
 // Deletes a load balancer rule.
 func (s *LoadBalancerService) DeleteLoadBalancerRule(p *DeleteLoadBalancerRuleParams) (*DeleteLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2541,7 +2541,7 @@ func (s *LoadBalancerService) NewDeleteServicePackageOfferingParams(id string) *
 
 // Delete Service Package
 func (s *LoadBalancerService) DeleteServicePackageOffering(p *DeleteServicePackageOfferingParams) (*DeleteServicePackageOfferingResponse, error) {
-	resp, err := s.cs.newRequest("deleteServicePackageOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteServicePackageOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2635,7 +2635,7 @@ func (s *LoadBalancerService) NewDeleteSslCertParams(id string) *DeleteSslCertPa
 
 // Delete a certificate to CloudStack
 func (s *LoadBalancerService) DeleteSslCert(p *DeleteSslCertParams) (*DeleteSslCertResponse, error) {
-	resp, err := s.cs.newRequest("deleteSslCert", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSslCert", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2803,7 +2803,7 @@ func (s *LoadBalancerService) NewDeployNetscalerVpxParams(serviceofferingid stri
 
 // Creates new NS Vpx
 func (s *LoadBalancerService) DeployNetscalerVpx(p *DeployNetscalerVpxParams) (*DeployNetscalerVpxResponse, error) {
-	resp, err := s.cs.newRequest("deployNetscalerVpx", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deployNetscalerVpx", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5465,7 +5465,7 @@ func (s *LoadBalancerService) NewRemoveCertFromLoadBalancerParams(lbruleid strin
 
 // Removes a certificate from a load balancer rule
 func (s *LoadBalancerService) RemoveCertFromLoadBalancer(p *RemoveCertFromLoadBalancerParams) (*RemoveCertFromLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("removeCertFromLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeCertFromLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5573,7 +5573,7 @@ func (s *LoadBalancerService) NewRemoveFromGlobalLoadBalancerRuleParams(id strin
 
 // Removes a load balancer rule association with global load balancer rule
 func (s *LoadBalancerService) RemoveFromGlobalLoadBalancerRule(p *RemoveFromGlobalLoadBalancerRuleParams) (*RemoveFromGlobalLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("removeFromGlobalLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeFromGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5708,7 +5708,7 @@ func (s *LoadBalancerService) NewRemoveFromLoadBalancerRuleParams(id string) *Re
 
 // Removes a virtual machine or a list of virtual machines from a load balancer rule.
 func (s *LoadBalancerService) RemoveFromLoadBalancerRule(p *RemoveFromLoadBalancerRuleParams) (*RemoveFromLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("removeFromLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeFromLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5815,7 +5815,7 @@ func (s *LoadBalancerService) NewStopNetScalerVpxParams(id string) *StopNetScale
 
 // Stops a NetScalervm.
 func (s *LoadBalancerService) StopNetScalerVpx(p *StopNetScalerVpxParams) (*StopNetScalerVpxResponse, error) {
-	resp, err := s.cs.newRequest("stopNetScalerVpx", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopNetScalerVpx", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5850,6 +5850,7 @@ func (s *LoadBalancerService) StopNetScalerVpx(p *StopNetScalerVpxParams) (*Stop
 
 type StopNetScalerVpxResponse struct {
 	Account             string                                       `json:"account"`
+	Arch                string                                       `json:"arch"`
 	Created             string                                       `json:"created"`
 	Dns1                string                                       `json:"dns1"`
 	Dns2                string                                       `json:"dns2"`
@@ -6034,7 +6035,7 @@ func (s *LoadBalancerService) NewUpdateGlobalLoadBalancerRuleParams(id string) *
 
 // update global load balancer rules.
 func (s *LoadBalancerService) UpdateGlobalLoadBalancerRule(p *UpdateGlobalLoadBalancerRuleParams) (*UpdateGlobalLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateGlobalLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6208,7 +6209,7 @@ func (s *LoadBalancerService) NewUpdateLBHealthCheckPolicyParams(id string) *Upd
 
 // Updates load balancer health check policy
 func (s *LoadBalancerService) UpdateLBHealthCheckPolicy(p *UpdateLBHealthCheckPolicyParams) (*UpdateLBHealthCheckPolicyResponse, error) {
-	resp, err := s.cs.newRequest("updateLBHealthCheckPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateLBHealthCheckPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6360,7 +6361,7 @@ func (s *LoadBalancerService) NewUpdateLBStickinessPolicyParams(id string) *Upda
 
 // Updates load balancer stickiness policy
 func (s *LoadBalancerService) UpdateLBStickinessPolicy(p *UpdateLBStickinessPolicyParams) (*UpdateLBStickinessPolicyResponse, error) {
-	resp, err := s.cs.newRequest("updateLBStickinessPolicy", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateLBStickinessPolicy", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6513,7 +6514,7 @@ func (s *LoadBalancerService) NewUpdateLoadBalancerParams(id string) *UpdateLoad
 
 // Updates an internal load balancer
 func (s *LoadBalancerService) UpdateLoadBalancer(p *UpdateLoadBalancerParams) (*UpdateLoadBalancerResponse, error) {
-	resp, err := s.cs.newRequest("updateLoadBalancer", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateLoadBalancer", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6773,7 +6774,7 @@ func (s *LoadBalancerService) NewUpdateLoadBalancerRuleParams(id string) *Update
 
 // Updates load balancer
 func (s *LoadBalancerService) UpdateLoadBalancerRule(p *UpdateLoadBalancerRuleParams) (*UpdateLoadBalancerRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateLoadBalancerRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateLoadBalancerRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7075,7 +7076,7 @@ func (s *LoadBalancerService) NewUploadSslCertParams(certificate string, name st
 
 // Upload a certificate to CloudStack
 func (s *LoadBalancerService) UploadSslCert(p *UploadSslCertParams) (*UploadSslCertResponse, error) {
-	resp, err := s.cs.newRequest("uploadSslCert", p.toURLValues())
+	resp, err := s.cs.newPostRequest("uploadSslCert", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

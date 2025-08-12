@@ -108,7 +108,7 @@ func (s *OvsElementService) NewConfigureOvsElementParams(enabled bool, id string
 
 // Configures an ovs element.
 func (s *OvsElementService) ConfigureOvsElement(p *ConfigureOvsElementParams) (*OvsElementResponse, error) {
-	resp, err := s.cs.newRequest("configureOvsElement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configureOvsElement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

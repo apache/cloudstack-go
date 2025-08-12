@@ -162,7 +162,7 @@ func (s *SSHService) NewCreateSSHKeyPairParams(name string) *CreateSSHKeyPairPar
 
 // Create a new keypair and returns the private key
 func (s *SSHService) CreateSSHKeyPair(p *CreateSSHKeyPairParams) (*CreateSSHKeyPairResponse, error) {
-	resp, err := s.cs.newRequest("createSSHKeyPair", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSSHKeyPair", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -313,7 +313,7 @@ func (s *SSHService) NewDeleteSSHKeyPairParams(name string) *DeleteSSHKeyPairPar
 
 // Deletes a keypair by name
 func (s *SSHService) DeleteSSHKeyPair(p *DeleteSSHKeyPairParams) (*DeleteSSHKeyPairResponse, error) {
-	resp, err := s.cs.newRequest("deleteSSHKeyPair", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteSSHKeyPair", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -909,7 +909,7 @@ func (s *SSHService) NewRegisterSSHKeyPairParams(name string, publickey string) 
 
 // Register a public key in a keypair under a certain name
 func (s *SSHService) RegisterSSHKeyPair(p *RegisterSSHKeyPairParams) (*RegisterSSHKeyPairResponse, error) {
-	resp, err := s.cs.newRequest("registerSSHKeyPair", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerSSHKeyPair", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1108,7 +1108,7 @@ func (s *SSHService) NewResetSSHKeyForVirtualMachineParams(id string) *ResetSSHK
 
 // Resets the SSH Key for virtual machine. The virtual machine must be in a "Stopped" state. [async]
 func (s *SSHService) ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachineParams) (*ResetSSHKeyForVirtualMachineResponse, error) {
-	resp, err := s.cs.newRequest("resetSSHKeyForVirtualMachine", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetSSHKeyForVirtualMachine", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1144,6 +1144,7 @@ func (s *SSHService) ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachin
 type ResetSSHKeyForVirtualMachineResponse struct {
 	Account               string                                              `json:"account"`
 	Affinitygroup         []ResetSSHKeyForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                              `json:"arch"`
 	Autoscalevmgroupid    string                                              `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                              `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                              `json:"backupofferingid"`

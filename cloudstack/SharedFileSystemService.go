@@ -203,7 +203,7 @@ func (s *SharedFileSystemService) NewChangeSharedFileSystemDiskOfferingParams(id
 
 // Change Disk offering of a Shared FileSystem
 func (s *SharedFileSystemService) ChangeSharedFileSystemDiskOffering(p *ChangeSharedFileSystemDiskOfferingParams) (*ChangeSharedFileSystemDiskOfferingResponse, error) {
-	resp, err := s.cs.newRequest("changeSharedFileSystemDiskOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeSharedFileSystemDiskOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -355,7 +355,7 @@ func (s *SharedFileSystemService) NewChangeSharedFileSystemServiceOfferingParams
 
 // Change Service offering of a Shared FileSystem
 func (s *SharedFileSystemService) ChangeSharedFileSystemServiceOffering(p *ChangeSharedFileSystemServiceOfferingParams) (*ChangeSharedFileSystemServiceOfferingResponse, error) {
-	resp, err := s.cs.newRequest("changeSharedFileSystemServiceOffering", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeSharedFileSystemServiceOffering", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -802,7 +802,7 @@ func (s *SharedFileSystemService) NewCreateSharedFileSystemParams(diskofferingid
 
 // Create a new Shared File System of specified size and disk offering, attached to the given network
 func (s *SharedFileSystemService) CreateSharedFileSystem(p *CreateSharedFileSystemParams) (*CreateSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("createSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -978,7 +978,7 @@ func (s *SharedFileSystemService) NewDestroySharedFileSystemParams() *DestroySha
 
 // Destroy a Shared FileSystem by id
 func (s *SharedFileSystemService) DestroySharedFileSystem(p *DestroySharedFileSystemParams) (*DestroySharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("destroySharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroySharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1059,7 +1059,7 @@ func (s *SharedFileSystemService) NewExpungeSharedFileSystemParams() *ExpungeSha
 
 // Expunge a Shared FileSystem by id
 func (s *SharedFileSystemService) ExpungeSharedFileSystem(p *ExpungeSharedFileSystemParams) (*ExpungeSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("expungeSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("expungeSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1823,7 +1823,7 @@ func (s *SharedFileSystemService) NewRecoverSharedFileSystemParams() *RecoverSha
 
 // Recover a Shared FileSystem by id
 func (s *SharedFileSystemService) RecoverSharedFileSystem(p *RecoverSharedFileSystemParams) (*RecoverSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("recoverSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("recoverSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1942,7 +1942,7 @@ func (s *SharedFileSystemService) NewRestartSharedFileSystemParams(id string) *R
 
 // Restart a Shared FileSystem
 func (s *SharedFileSystemService) RestartSharedFileSystem(p *RestartSharedFileSystemParams) (*RestartSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("restartSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("restartSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2024,7 +2024,7 @@ func (s *SharedFileSystemService) NewStartSharedFileSystemParams(id string) *Sta
 
 // Start a Shared FileSystem
 func (s *SharedFileSystemService) StartSharedFileSystem(p *StartSharedFileSystemParams) (*StartSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("startSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2176,7 +2176,7 @@ func (s *SharedFileSystemService) NewStopSharedFileSystemParams(id string) *Stop
 
 // Stop a Shared FileSystem
 func (s *SharedFileSystemService) StopSharedFileSystem(p *StopSharedFileSystemParams) (*StopSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("stopSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2351,7 +2351,7 @@ func (s *SharedFileSystemService) NewUpdateSharedFileSystemParams(id string) *Up
 
 // Update a Shared FileSystem
 func (s *SharedFileSystemService) UpdateSharedFileSystem(p *UpdateSharedFileSystemParams) (*UpdateSharedFileSystemResponse, error) {
-	resp, err := s.cs.newRequest("updateSharedFileSystem", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateSharedFileSystem", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

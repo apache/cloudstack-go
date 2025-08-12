@@ -529,7 +529,7 @@ func (s *VLANService) NewCreateVlanIpRangeParams() *CreateVlanIpRangeParams {
 
 // Creates a VLAN IP range.
 func (s *VLANService) CreateVlanIpRange(p *CreateVlanIpRangeParams) (*CreateVlanIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("createVlanIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVlanIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -721,7 +721,7 @@ func (s *VLANService) NewDedicateGuestVlanRangeParams(physicalnetworkid string, 
 
 // Dedicates a guest vlan range to an account
 func (s *VLANService) DedicateGuestVlanRange(p *DedicateGuestVlanRangeParams) (*DedicateGuestVlanRangeResponse, error) {
-	resp, err := s.cs.newRequest("dedicateGuestVlanRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicateGuestVlanRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -800,7 +800,7 @@ func (s *VLANService) NewDeleteVlanIpRangeParams(id string) *DeleteVlanIpRangePa
 
 // Deletes a VLAN IP range.
 func (s *VLANService) DeleteVlanIpRange(p *DeleteVlanIpRangeParams) (*DeleteVlanIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("deleteVlanIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVlanIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1643,7 +1643,7 @@ func (s *VLANService) NewReleaseDedicatedGuestVlanRangeParams(id string) *Releas
 
 // Releases a dedicated guest vlan range to the system
 func (s *VLANService) ReleaseDedicatedGuestVlanRange(p *ReleaseDedicatedGuestVlanRangeParams) (*ReleaseDedicatedGuestVlanRangeResponse, error) {
-	resp, err := s.cs.newRequest("releaseDedicatedGuestVlanRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseDedicatedGuestVlanRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2199,7 +2199,7 @@ func (s *VLANService) NewUpdateVlanIpRangeParams(id string) *UpdateVlanIpRangePa
 
 // Updates a VLAN IP range.
 func (s *VLANService) UpdateVlanIpRange(p *UpdateVlanIpRangeParams) (*UpdateVlanIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("updateVlanIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVlanIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

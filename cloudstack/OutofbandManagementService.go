@@ -105,7 +105,7 @@ func (s *OutofbandManagementService) NewChangeOutOfBandManagementPasswordParams(
 
 // Changes out-of-band management interface password on the host and updates the interface configuration in CloudStack if the operation succeeds, else reverts the old password
 func (s *OutofbandManagementService) ChangeOutOfBandManagementPassword(p *ChangeOutOfBandManagementPasswordParams) (*ChangeOutOfBandManagementPasswordResponse, error) {
-	resp, err := s.cs.newRequest("changeOutOfBandManagementPassword", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeOutOfBandManagementPassword", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -326,7 +326,7 @@ func (s *OutofbandManagementService) NewConfigureOutOfBandManagementParams(addre
 
 // Configures a host's out-of-band management interface
 func (s *OutofbandManagementService) ConfigureOutOfBandManagement(p *ConfigureOutOfBandManagementParams) (*OutOfBandManagementResponse, error) {
-	resp, err := s.cs.newRequest("configureOutOfBandManagement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configureOutOfBandManagement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -452,7 +452,7 @@ func (s *OutofbandManagementService) NewIssueOutOfBandManagementPowerActionParam
 
 // Initiates the specified power action to the host's out-of-band management interface
 func (s *OutofbandManagementService) IssueOutOfBandManagementPowerAction(p *IssueOutOfBandManagementPowerActionParams) (*IssueOutOfBandManagementPowerActionResponse, error) {
-	resp, err := s.cs.newRequest("issueOutOfBandManagementPowerAction", p.toURLValues())
+	resp, err := s.cs.newPostRequest("issueOutOfBandManagementPowerAction", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -338,6 +338,7 @@ type CreateUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -409,7 +410,7 @@ func (s *UserService) NewDeleteUserParams(id string) *DeleteUserParams {
 
 // Deletes a user for an account
 func (s *UserService) DeleteUser(p *DeleteUserParams) (*DeleteUserResponse, error) {
-	resp, err := s.cs.newRequest("deleteUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -503,7 +504,7 @@ func (s *UserService) NewDisableUserParams(id string) *DisableUserParams {
 
 // Disables a user account
 func (s *UserService) DisableUser(p *DisableUserParams) (*DisableUserResponse, error) {
-	resp, err := s.cs.newRequest("disableUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -541,6 +542,7 @@ type DisableUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -612,7 +614,7 @@ func (s *UserService) NewEnableUserParams(id string) *EnableUserParams {
 
 // Enables a user account
 func (s *UserService) EnableUser(p *EnableUserParams) (*EnableUserResponse, error) {
-	resp, err := s.cs.newRequest("enableUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -634,6 +636,7 @@ type EnableUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -723,6 +726,7 @@ type GetUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -812,10 +816,11 @@ func (s *UserService) GetUserKeys(p *GetUserKeysParams) (*GetUserKeysResponse, e
 }
 
 type GetUserKeysResponse struct {
-	Apikey    string `json:"apikey"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Secretkey string `json:"secretkey"`
+	Apikey       string `json:"apikey"`
+	Apikeyaccess bool   `json:"apikeyaccess"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Secretkey    string `json:"secretkey"`
 }
 
 type GetVirtualMachineUserDataParams struct {
@@ -976,6 +981,9 @@ func (p *ListUsersParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("accounttype", vv)
 	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
+	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
@@ -1053,6 +1061,27 @@ func (p *ListUsersParams) GetAccounttype() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["accounttype"].(int)
+	return value, ok
+}
+
+func (p *ListUsersParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *ListUsersParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *ListUsersParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
 	return value, ok
 }
 
@@ -1332,6 +1361,7 @@ type User struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -1403,7 +1433,7 @@ func (s *UserService) NewLockUserParams(id string) *LockUserParams {
 
 // Locks a user account
 func (s *UserService) LockUser(p *LockUserParams) (*LockUserResponse, error) {
-	resp, err := s.cs.newRequest("lockUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("lockUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1425,6 +1455,7 @@ type LockUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -1496,7 +1527,7 @@ func (s *UserService) NewRegisterUserKeysParams(id string) *RegisterUserKeysPara
 
 // This command allows a user to register for the developer API, returning a secret key and an API key. This request is made through the integration API port, so it is a privileged command and must be made on behalf of a user. It is up to the implementer just how the username and password are entered, and then how that translates to an integration API request. Both secret key and API key should be returned to the user
 func (s *UserService) RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUserKeysResponse, error) {
-	resp, err := s.cs.newRequest("registerUserKeys", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerUserKeys", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1514,10 +1545,11 @@ func (s *UserService) RegisterUserKeys(p *RegisterUserKeysParams) (*RegisterUser
 }
 
 type RegisterUserKeysResponse struct {
-	Apikey    string `json:"apikey"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Secretkey string `json:"secretkey"`
+	Apikey       string `json:"apikey"`
+	Apikeyaccess bool   `json:"apikeyaccess"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Secretkey    string `json:"secretkey"`
 }
 
 type UpdateUserParams struct {
@@ -1528,6 +1560,9 @@ func (p *UpdateUserParams) toURLValues() url.Values {
 	u := url.Values{}
 	if p.p == nil {
 		return u
+	}
+	if v, found := p.p["apikeyaccess"]; found {
+		u.Set("apikeyaccess", v.(string))
 	}
 	if v, found := p.p["currentpassword"]; found {
 		u.Set("currentpassword", v.(string))
@@ -1564,6 +1599,27 @@ func (p *UpdateUserParams) toURLValues() url.Values {
 		u.Set("usersecretkey", v.(string))
 	}
 	return u
+}
+
+func (p *UpdateUserParams) SetApikeyaccess(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["apikeyaccess"] = v
+}
+
+func (p *UpdateUserParams) ResetApikeyaccess() {
+	if p.p != nil && p.p["apikeyaccess"] != nil {
+		delete(p.p, "apikeyaccess")
+	}
+}
+
+func (p *UpdateUserParams) GetApikeyaccess() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["apikeyaccess"].(string)
+	return value, ok
 }
 
 func (p *UpdateUserParams) SetCurrentpassword(v string) {
@@ -1826,6 +1882,7 @@ type UpdateUserResponse struct {
 	Accountid           string      `json:"accountid"`
 	Accounttype         int         `json:"accounttype"`
 	Apikey              string      `json:"apikey"`
+	Apikeyaccess        string      `json:"apikeyaccess"`
 	Created             string      `json:"created"`
 	Domain              string      `json:"domain"`
 	Domainid            string      `json:"domainid"`
@@ -2353,7 +2410,7 @@ func (s *UserService) NewDeleteUserDataParams(id string) *DeleteUserDataParams {
 
 // Deletes a userdata
 func (s *UserService) DeleteUserData(p *DeleteUserDataParams) (*DeleteUserDataResponse, error) {
-	resp, err := s.cs.newRequest("deleteUserData", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteUserData", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2727,7 +2784,7 @@ func (s *UserService) NewMoveUserParams(id string) *MoveUserParams {
 
 // Moves a user to another account in the same domain.
 func (s *UserService) MoveUser(p *MoveUserParams) (*MoveUserResponse, error) {
-	resp, err := s.cs.newRequest("moveUser", p.toURLValues())
+	resp, err := s.cs.newPostRequest("moveUser", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

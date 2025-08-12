@@ -264,7 +264,7 @@ func (s *DiagnosticsService) NewRunDiagnosticsParams(ipaddress string, targetid 
 
 // Execute network-utility command (ping/arping/tracert) on system VMs remotely
 func (s *DiagnosticsService) RunDiagnostics(p *RunDiagnosticsParams) (*RunDiagnosticsResponse, error) {
-	resp, err := s.cs.newRequest("runDiagnostics", p.toURLValues())
+	resp, err := s.cs.newPostRequest("runDiagnostics", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

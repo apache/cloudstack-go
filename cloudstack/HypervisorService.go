@@ -560,7 +560,7 @@ func (s *HypervisorService) NewUpdateHypervisorCapabilitiesParams() *UpdateHyper
 
 // Updates a hypervisor capabilities.
 func (s *HypervisorService) UpdateHypervisorCapabilities(p *UpdateHypervisorCapabilitiesParams) (*UpdateHypervisorCapabilitiesResponse, error) {
-	resp, err := s.cs.newRequest("updateHypervisorCapabilities", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateHypervisorCapabilities", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

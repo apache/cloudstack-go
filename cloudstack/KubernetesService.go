@@ -308,7 +308,7 @@ func (s *KubernetesService) NewAddKubernetesSupportedVersionParams(mincpunumber 
 
 // Add a supported Kubernetes version
 func (s *KubernetesService) AddKubernetesSupportedVersion(p *AddKubernetesSupportedVersionParams) (*AddKubernetesSupportedVersionResponse, error) {
-	resp, err := s.cs.newRequest("addKubernetesSupportedVersion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addKubernetesSupportedVersion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -326,6 +326,7 @@ func (s *KubernetesService) AddKubernetesSupportedVersion(p *AddKubernetesSuppor
 }
 
 type AddKubernetesSupportedVersionResponse struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
@@ -833,7 +834,7 @@ func (s *KubernetesService) NewCreateKubernetesClusterParams(description string,
 
 // Creates a Kubernetes cluster
 func (s *KubernetesService) CreateKubernetesCluster(p *CreateKubernetesClusterParams) (*CreateKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("createKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1004,7 +1005,7 @@ func (s *KubernetesService) NewDeleteKubernetesClusterParams(id string) *DeleteK
 
 // Deletes a Kubernetes cluster
 func (s *KubernetesService) DeleteKubernetesCluster(p *DeleteKubernetesClusterParams) (*DeleteKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("deleteKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1086,7 +1087,7 @@ func (s *KubernetesService) NewDeleteKubernetesSupportedVersionParams(id string)
 
 // Deletes a Kubernetes cluster
 func (s *KubernetesService) DeleteKubernetesSupportedVersion(p *DeleteKubernetesSupportedVersionParams) (*DeleteKubernetesSupportedVersionResponse, error) {
-	resp, err := s.cs.newRequest("deleteKubernetesSupportedVersion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteKubernetesSupportedVersion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1656,6 +1657,9 @@ func (p *ListKubernetesSupportedVersionsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1680,6 +1684,27 @@ func (p *ListKubernetesSupportedVersionsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListKubernetesSupportedVersionsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListKubernetesSupportedVersionsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListKubernetesSupportedVersionsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListKubernetesSupportedVersionsParams) SetId(v string) {
@@ -1941,6 +1966,7 @@ type ListKubernetesSupportedVersionsResponse struct {
 }
 
 type KubernetesSupportedVersion struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
@@ -2156,7 +2182,7 @@ func (s *KubernetesService) NewScaleKubernetesClusterParams(id string) *ScaleKub
 
 // Scales a created, running or stopped CloudManaged Kubernetes cluster
 func (s *KubernetesService) ScaleKubernetesCluster(p *ScaleKubernetesClusterParams) (*ScaleKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("scaleKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("scaleKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2277,7 +2303,7 @@ func (s *KubernetesService) NewStartKubernetesClusterParams(id string) *StartKub
 
 // Starts a stopped CloudManaged Kubernetes cluster
 func (s *KubernetesService) StartKubernetesCluster(p *StartKubernetesClusterParams) (*StartKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("startKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2398,7 +2424,7 @@ func (s *KubernetesService) NewStopKubernetesClusterParams(id string) *StopKuber
 
 // Stops a running CloudManaged Kubernetes cluster
 func (s *KubernetesService) StopKubernetesCluster(p *StopKubernetesClusterParams) (*StopKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("stopKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2505,7 +2531,7 @@ func (s *KubernetesService) NewUpdateKubernetesSupportedVersionParams(id string,
 
 // Update a supported Kubernetes version
 func (s *KubernetesService) UpdateKubernetesSupportedVersion(p *UpdateKubernetesSupportedVersionParams) (*UpdateKubernetesSupportedVersionResponse, error) {
-	resp, err := s.cs.newRequest("updateKubernetesSupportedVersion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateKubernetesSupportedVersion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2519,6 +2545,7 @@ func (s *KubernetesService) UpdateKubernetesSupportedVersion(p *UpdateKubernetes
 }
 
 type UpdateKubernetesSupportedVersionResponse struct {
+	Arch                string `json:"arch"`
 	Created             string `json:"created"`
 	Directdownload      bool   `json:"directdownload"`
 	Id                  string `json:"id"`
@@ -2610,7 +2637,7 @@ func (s *KubernetesService) NewUpgradeKubernetesClusterParams(id string, kuberne
 
 // Upgrades a running CloudManaged Kubernetes cluster
 func (s *KubernetesService) UpgradeKubernetesCluster(p *UpgradeKubernetesClusterParams) (*UpgradeKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("upgradeKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("upgradeKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2782,7 +2809,7 @@ func (s *KubernetesService) NewAddVirtualMachinesToKubernetesClusterParams(id st
 
 // Add VMs to an ExternalManaged kubernetes cluster. Not applicable for CloudManaged kubernetes clusters.
 func (s *KubernetesService) AddVirtualMachinesToKubernetesCluster(p *AddVirtualMachinesToKubernetesClusterParams) (*AddVirtualMachinesToKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("addVirtualMachinesToKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addVirtualMachinesToKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2976,7 +3003,7 @@ func (s *KubernetesService) NewRemoveVirtualMachinesFromKubernetesClusterParams(
 
 // Remove VMs from an ExternalManaged kubernetes cluster. Not applicable for CloudManaged kubernetes clusters.
 func (s *KubernetesService) RemoveVirtualMachinesFromKubernetesCluster(p *RemoveVirtualMachinesFromKubernetesClusterParams) (*RemoveVirtualMachinesFromKubernetesClusterResponse, error) {
-	resp, err := s.cs.newRequest("removeVirtualMachinesFromKubernetesCluster", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeVirtualMachinesFromKubernetesCluster", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

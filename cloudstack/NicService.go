@@ -107,7 +107,7 @@ func (s *NicService) NewAddIpToNicParams(nicid string) *AddIpToNicParams {
 
 // Assigns secondary IP to NIC
 func (s *NicService) AddIpToNic(p *AddIpToNicParams) (*AddIpToNicResponse, error) {
-	resp, err := s.cs.newRequest("addIpToNic", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addIpToNic", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -452,7 +452,7 @@ func (s *NicService) NewRemoveIpFromNicParams(id string) *RemoveIpFromNicParams 
 
 // Removes secondary IP from the NIC.
 func (s *NicService) RemoveIpFromNic(p *RemoveIpFromNicParams) (*RemoveIpFromNicResponse, error) {
-	resp, err := s.cs.newRequest("removeIpFromNic", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeIpFromNic", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -558,7 +558,7 @@ func (s *NicService) NewUpdateVmNicIpParams(nicid string) *UpdateVmNicIpParams {
 
 // Update the default Ip of a VM Nic
 func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpResponse, error) {
-	resp, err := s.cs.newRequest("updateVmNicIp", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVmNicIp", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -594,6 +594,7 @@ func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpRespon
 type UpdateVmNicIpResponse struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []UpdateVmNicIpResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                               `json:"arch"`
 	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`
 	Backupofferingid      string                               `json:"backupofferingid"`

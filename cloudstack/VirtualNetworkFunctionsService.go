@@ -169,7 +169,7 @@ func (s *VirtualNetworkFunctionsService) NewDeleteVnfTemplateParams(id string) *
 
 // Deletes a VNF template from the system. All virtual machines using the deleted template will not be affected.
 func (s *VirtualNetworkFunctionsService) DeleteVnfTemplate(p *DeleteVnfTemplateParams) (*DeleteVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("deleteVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1522,7 +1522,7 @@ func (s *VirtualNetworkFunctionsService) NewDeployVnfApplianceParams(serviceoffe
 
 // Creates and automatically starts a VNF appliance based on a service offering, disk offering, and template.
 func (s *VirtualNetworkFunctionsService) DeployVnfAppliance(p *DeployVnfApplianceParams) (*DeployVnfApplianceResponse, error) {
-	resp, err := s.cs.newRequest("deployVnfAppliance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deployVnfAppliance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1558,6 +1558,7 @@ func (s *VirtualNetworkFunctionsService) DeployVnfAppliance(p *DeployVnfApplianc
 type DeployVnfApplianceResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []DeployVnfApplianceResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                    `json:"backupofferingid"`
@@ -1742,6 +1743,9 @@ func (p *ListVnfAppliancesParams) toURLValues() url.Values {
 	if v, found := p.p["affinitygroupid"]; found {
 		u.Set("affinitygroupid", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["autoscalevmgroupid"]; found {
 		u.Set("autoscalevmgroupid", v.(string))
 	}
@@ -1849,6 +1853,9 @@ func (p *ListVnfAppliancesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("userdata", vv)
 	}
+	if v, found := p.p["userdataid"]; found {
+		u.Set("userdataid", v.(string))
+	}
 	if v, found := p.p["userid"]; found {
 		u.Set("userid", v.(string))
 	}
@@ -1921,6 +1928,27 @@ func (p *ListVnfAppliancesParams) GetAffinitygroupid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["affinitygroupid"].(string)
+	return value, ok
+}
+
+func (p *ListVnfAppliancesParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListVnfAppliancesParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListVnfAppliancesParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -2554,6 +2582,27 @@ func (p *ListVnfAppliancesParams) GetUserdata() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListVnfAppliancesParams) SetUserdataid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userdataid"] = v
+}
+
+func (p *ListVnfAppliancesParams) ResetUserdataid() {
+	if p.p != nil && p.p["userdataid"] != nil {
+		delete(p.p, "userdataid")
+	}
+}
+
+func (p *ListVnfAppliancesParams) GetUserdataid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userdataid"].(string)
+	return value, ok
+}
+
 func (p *ListVnfAppliancesParams) SetUserid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2731,6 +2780,7 @@ type ListVnfAppliancesResponse struct {
 type VnfAppliance struct {
 	Account               string                      `json:"account"`
 	Affinitygroup         []VnfApplianceAffinitygroup `json:"affinitygroup"`
+	Arch                  string                      `json:"arch"`
 	Autoscalevmgroupid    string                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                      `json:"autoscalevmgroupname"`
 	Backupofferingid      string                      `json:"backupofferingid"`
@@ -4419,7 +4469,7 @@ func (s *VirtualNetworkFunctionsService) NewRegisterVnfTemplateParams(format str
 
 // Registers an existing VNF template into the CloudStack cloud.
 func (s *VirtualNetworkFunctionsService) RegisterVnfTemplate(p *RegisterVnfTemplateParams) (*RegisterVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("registerVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("registerVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5066,7 +5116,7 @@ func (s *VirtualNetworkFunctionsService) NewUpdateVnfTemplateParams(id string) *
 
 // Updates a template to VNF template or attributes of a VNF template.
 func (s *VirtualNetworkFunctionsService) UpdateVnfTemplate(p *UpdateVnfTemplateParams) (*UpdateVnfTemplateResponse, error) {
-	resp, err := s.cs.newRequest("updateVnfTemplate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVnfTemplate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

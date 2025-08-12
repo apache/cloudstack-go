@@ -280,7 +280,7 @@ func (s *FirewallService) NewAddPaloAltoFirewallParams(networkdevicetype string,
 
 // Adds a Palo Alto firewall device
 func (s *FirewallService) AddPaloAltoFirewall(p *AddPaloAltoFirewallParams) (*AddPaloAltoFirewallResponse, error) {
-	resp, err := s.cs.newRequest("addPaloAltoFirewall", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addPaloAltoFirewall", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -411,7 +411,7 @@ func (s *FirewallService) NewConfigurePaloAltoFirewallParams(fwdeviceid string) 
 
 // Configures a Palo Alto firewall device
 func (s *FirewallService) ConfigurePaloAltoFirewall(p *ConfigurePaloAltoFirewallParams) (*PaloAltoFirewallResponse, error) {
-	resp, err := s.cs.newRequest("configurePaloAltoFirewall", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configurePaloAltoFirewall", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -741,7 +741,7 @@ func (s *FirewallService) NewCreateEgressFirewallRuleParams(networkid string, pr
 
 // Creates a egress firewall rule for a given network
 func (s *FirewallService) CreateEgressFirewallRule(p *CreateEgressFirewallRuleParams) (*CreateEgressFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("createEgressFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createEgressFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1045,7 +1045,7 @@ func (s *FirewallService) NewCreateFirewallRuleParams(ipaddressid string, protoc
 
 // Creates a firewall rule for a given IP address
 func (s *FirewallService) CreateFirewallRule(p *CreateFirewallRuleParams) (*CreateFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("createFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1425,7 +1425,7 @@ func (s *FirewallService) NewCreatePortForwardingRuleParams(ipaddressid string, 
 
 // Creates a port forwarding rule
 func (s *FirewallService) CreatePortForwardingRule(p *CreatePortForwardingRuleParams) (*CreatePortForwardingRuleResponse, error) {
-	resp, err := s.cs.newRequest("createPortForwardingRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createPortForwardingRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1756,7 +1756,7 @@ func (s *FirewallService) NewCreateRoutingFirewallRuleParams(networkid string, p
 
 // Creates a routing firewall rule in the given network in ROUTED mode
 func (s *FirewallService) CreateRoutingFirewallRule(p *CreateRoutingFirewallRuleParams) (*CreateRoutingFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("createRoutingFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createRoutingFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1863,7 +1863,7 @@ func (s *FirewallService) NewDeleteEgressFirewallRuleParams(id string) *DeleteEg
 
 // Deletes an egress firewall rule
 func (s *FirewallService) DeleteEgressFirewallRule(p *DeleteEgressFirewallRuleParams) (*DeleteEgressFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteEgressFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteEgressFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1950,7 +1950,7 @@ func (s *FirewallService) NewDeleteFirewallRuleParams(id string) *DeleteFirewall
 
 // Deletes a firewall rule
 func (s *FirewallService) DeleteFirewallRule(p *DeleteFirewallRuleParams) (*DeleteFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2037,7 +2037,7 @@ func (s *FirewallService) NewDeletePaloAltoFirewallParams(fwdeviceid string) *De
 
 // delete a Palo Alto firewall device
 func (s *FirewallService) DeletePaloAltoFirewall(p *DeletePaloAltoFirewallParams) (*DeletePaloAltoFirewallResponse, error) {
-	resp, err := s.cs.newRequest("deletePaloAltoFirewall", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePaloAltoFirewall", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2124,7 +2124,7 @@ func (s *FirewallService) NewDeletePortForwardingRuleParams(id string) *DeletePo
 
 // Deletes a port forwarding rule
 func (s *FirewallService) DeletePortForwardingRule(p *DeletePortForwardingRuleParams) (*DeletePortForwardingRuleResponse, error) {
-	resp, err := s.cs.newRequest("deletePortForwardingRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePortForwardingRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2211,7 +2211,7 @@ func (s *FirewallService) NewDeleteRoutingFirewallRuleParams(id string) *DeleteR
 
 // Deletes a routing firewall rule
 func (s *FirewallService) DeleteRoutingFirewallRule(p *DeleteRoutingFirewallRuleParams) (*DeleteRoutingFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteRoutingFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteRoutingFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4215,7 +4215,7 @@ func (s *FirewallService) NewUpdateEgressFirewallRuleParams(id string) *UpdateEg
 
 // Updates egress firewall rule
 func (s *FirewallService) UpdateEgressFirewallRule(p *UpdateEgressFirewallRuleParams) (*UpdateEgressFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateEgressFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateEgressFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4369,7 +4369,7 @@ func (s *FirewallService) NewUpdateFirewallRuleParams(id string) *UpdateFirewall
 
 // Updates firewall rule
 func (s *FirewallService) UpdateFirewallRule(p *UpdateFirewallRuleParams) (*UpdateFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4436,6 +4436,10 @@ func (p *UpdatePortForwardingRuleParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
 	if v, found := p.p["customid"]; found {
 		u.Set("customid", v.(string))
 	}
@@ -4461,6 +4465,27 @@ func (p *UpdatePortForwardingRuleParams) toURLValues() url.Values {
 		u.Set("vmguestip", v.(string))
 	}
 	return u
+}
+
+func (p *UpdatePortForwardingRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *UpdatePortForwardingRuleParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
+}
+
+func (p *UpdatePortForwardingRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
+	return value, ok
 }
 
 func (p *UpdatePortForwardingRuleParams) SetCustomid(v string) {
@@ -4621,7 +4646,7 @@ func (s *FirewallService) NewUpdatePortForwardingRuleParams(id string) *UpdatePo
 
 // Updates a port forwarding rule. Only the private port and the virtual machine can be updated.
 func (s *FirewallService) UpdatePortForwardingRule(p *UpdatePortForwardingRuleParams) (*UpdatePortForwardingRuleResponse, error) {
-	resp, err := s.cs.newRequest("updatePortForwardingRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updatePortForwardingRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5373,7 +5398,7 @@ func (s *FirewallService) NewCreateIpv6FirewallRuleParams(networkid string, prot
 
 // Creates an Ipv6 firewall rule in the given network (the network must not belong to VPC)
 func (s *FirewallService) CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("createIpv6FirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createIpv6FirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5702,7 +5727,7 @@ func (s *FirewallService) NewUpdateIpv6FirewallRuleParams(id string) *UpdateIpv6
 
 // Updates Ipv6 firewall rule with specified ID
 func (s *FirewallService) UpdateIpv6FirewallRule(p *UpdateIpv6FirewallRuleParams) (*UpdateIpv6FirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateIpv6FirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateIpv6FirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5809,7 +5834,7 @@ func (s *FirewallService) NewDeleteIpv6FirewallRuleParams(id string) *DeleteIpv6
 
 // Deletes a IPv6 firewall rule
 func (s *FirewallService) DeleteIpv6FirewallRule(p *DeleteIpv6FirewallRuleParams) (*DeleteIpv6FirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("deleteIpv6FirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteIpv6FirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -5945,7 +5970,7 @@ func (s *FirewallService) NewUpdateRoutingFirewallRuleParams(id string) *UpdateR
 
 // Updates Routing firewall rule with specified ID
 func (s *FirewallService) UpdateRoutingFirewallRule(p *UpdateRoutingFirewallRuleParams) (*UpdateRoutingFirewallRuleResponse, error) {
-	resp, err := s.cs.newRequest("updateRoutingFirewallRule", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateRoutingFirewallRule", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

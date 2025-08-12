@@ -134,7 +134,7 @@ func (s *RegionService) NewAddRegionParams(endpoint string, id int, name string)
 
 // Adds a Region
 func (s *RegionService) AddRegion(p *AddRegionParams) (*AddRegionResponse, error) {
-	resp, err := s.cs.newRequest("addRegion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addRegion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -378,7 +378,7 @@ func (s *RegionService) NewRemoveRegionParams(id int) *RemoveRegionParams {
 
 // Removes specified region
 func (s *RegionService) RemoveRegion(p *RemoveRegionParams) (*RemoveRegionResponse, error) {
-	resp, err := s.cs.newRequest("removeRegion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeRegion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -521,7 +521,7 @@ func (s *RegionService) NewUpdateRegionParams(id int) *UpdateRegionParams {
 
 // Updates a region
 func (s *RegionService) UpdateRegion(p *UpdateRegionParams) (*UpdateRegionResponse, error) {
-	resp, err := s.cs.newRequest("updateRegion", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateRegion", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -30,6 +30,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"regexp"
 	"sort"
 	"strings"
 	"unicode"
@@ -578,6 +579,8 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("	params.Set(\"apiKey\", cs.apiKey)")
 	pn("	params.Set(\"command\", api)")
 	pn("	params.Set(\"response\", \"json\")")
+	pn("	params.Set(\"signatureversion\", \"3\")")
+	pn("	params.Set(\"expires\", time.Now().UTC().Add(15*time.Minute).Format(time.RFC3339))")
 	pn("")
 	pn("	// Generate signature for API call")
 	pn("	// * Serialize parameters, URL encoding only values and sort them by key, done by EncodeValues")
@@ -1065,7 +1068,7 @@ func (s *service) GenerateCode() ([]byte, error) {
 		pn("}")
 		pn("")
 		pn("func (s *CustomService) CustomRequest(api string, p *CustomServiceParams, result interface{}) error {")
-		pn("	resp, err := s.cs.newRequest(api, p.toURLValues())")
+		pn("	resp, err := s.cs.newPostRequest(api, p.toURLValues())")
 		pn("	if err != nil {")
 		pn("		return err")
 		pn("	}")
@@ -1759,7 +1762,12 @@ func (s *service) generateNewAPICallFunc(a *API) {
 		pn("		time.Sleep(500 * time.Millisecond)")
 		pn("	}")
 	} else {
-		if requiresPostMethod[a.Name] {
+		isGetRequest, _ := regexp.MatchString("^(get|list|query|find)(\\w+)+$", strings.ToLower(a.Name))
+		getRequestList := map[string]struct{}{"isaccountallowedtocreateofferingswithtags": {}, "readyforshutdown": {}, "cloudianisenabled": {}, "quotabalance": {},
+			"quotasummary": {}, "quotatarifflist": {}, "quotaisenabled": {}, "quotastatement": {}, "verifyoauthcodeandgetuser": {}}
+		_, isInGetRequestList := getRequestList[strings.ToLower(a.Name)]
+
+		if requiresPostMethod[a.Name] || !(isGetRequest || isInGetRequestList) {
 			pn("	resp, err := s.cs.newPostRequest(\"%s\", p.toURLValues())", a.Name)
 		} else {
 			pn("	resp, err := s.cs.newRequest(\"%s\", p.toURLValues())", a.Name)
@@ -2089,8 +2097,19 @@ func (s *service) recusiveGenerateResponseType(aName string, tn string, resp API
 	customMarshal := false
 	found := make(map[string]bool)
 
+	// Only apply custom response type name if the current tn is not already a custom type
 	if val, ok := customResponseStructTypes[aName]; ok {
-		tn = val
+		// Don't override if tn is already a custom-generated nested type (contains the custom name)
+		isNestedType := false
+		for _, customType := range customResponseStructTypes {
+			if strings.Contains(tn, customType) && tn != customType {
+				isNestedType = true
+				break
+			}
+		}
+		if !isNestedType {
+			tn = val
+		}
 	}
 
 	pn("type %s struct {", tn)

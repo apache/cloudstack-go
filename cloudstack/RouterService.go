@@ -126,7 +126,7 @@ func (s *RouterService) NewChangeServiceForRouterParams(id string, serviceofferi
 
 // Upgrades domain router to a new service offering
 func (s *RouterService) ChangeServiceForRouter(p *ChangeServiceForRouterParams) (*ChangeServiceForRouterResponse, error) {
-	resp, err := s.cs.newRequest("changeServiceForRouter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeServiceForRouter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +141,7 @@ func (s *RouterService) ChangeServiceForRouter(p *ChangeServiceForRouterParams) 
 
 type ChangeServiceForRouterResponse struct {
 	Account             string                                             `json:"account"`
+	Arch                string                                             `json:"arch"`
 	Created             string                                             `json:"created"`
 	Dns1                string                                             `json:"dns1"`
 	Dns2                string                                             `json:"dns2"`
@@ -279,7 +280,7 @@ func (s *RouterService) NewConfigureVirtualRouterElementParams(enabled bool, id 
 
 // Configures a virtual router element.
 func (s *RouterService) ConfigureVirtualRouterElement(p *ConfigureVirtualRouterElementParams) (*VirtualRouterElementResponse, error) {
-	resp, err := s.cs.newRequest("configureVirtualRouterElement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configureVirtualRouterElement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -397,7 +398,7 @@ func (s *RouterService) NewCreateVirtualRouterElementParams(nspid string) *Creat
 
 // Create a virtual router element.
 func (s *RouterService) CreateVirtualRouterElement(p *CreateVirtualRouterElementParams) (*CreateVirtualRouterElementResponse, error) {
-	resp, err := s.cs.newRequest("createVirtualRouterElement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createVirtualRouterElement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -491,7 +492,7 @@ func (s *RouterService) NewDestroyRouterParams(id string) *DestroyRouterParams {
 
 // Destroys a router.
 func (s *RouterService) DestroyRouter(p *DestroyRouterParams) (*DestroyRouterResponse, error) {
-	resp, err := s.cs.newRequest("destroyRouter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroyRouter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -526,6 +527,7 @@ func (s *RouterService) DestroyRouter(p *DestroyRouterParams) (*DestroyRouterRes
 
 type DestroyRouterResponse struct {
 	Account             string                                    `json:"account"`
+	Arch                string                                    `json:"arch"`
 	Created             string                                    `json:"created"`
 	Dns1                string                                    `json:"dns1"`
 	Dns2                string                                    `json:"dns2"`
@@ -695,6 +697,9 @@ func (p *ListRoutersParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["clusterid"]; found {
 		u.Set("clusterid", v.(string))
 	}
@@ -783,6 +788,27 @@ func (p *ListRoutersParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListRoutersParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListRoutersParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListRoutersParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -1319,6 +1345,7 @@ type ListRoutersResponse struct {
 
 type Router struct {
 	Account             string                     `json:"account"`
+	Arch                string                     `json:"arch"`
 	Created             string                     `json:"created"`
 	Dns1                string                     `json:"dns1"`
 	Dns2                string                     `json:"dns2"`
@@ -1690,7 +1717,7 @@ func (s *RouterService) NewRebootRouterParams(id string) *RebootRouterParams {
 
 // Starts a router.
 func (s *RouterService) RebootRouter(p *RebootRouterParams) (*RebootRouterResponse, error) {
-	resp, err := s.cs.newRequest("rebootRouter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("rebootRouter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1725,6 +1752,7 @@ func (s *RouterService) RebootRouter(p *RebootRouterParams) (*RebootRouterRespon
 
 type RebootRouterResponse struct {
 	Account             string                                   `json:"account"`
+	Arch                string                                   `json:"arch"`
 	Created             string                                   `json:"created"`
 	Dns1                string                                   `json:"dns1"`
 	Dns2                string                                   `json:"dns2"`
@@ -1837,7 +1865,7 @@ func (s *RouterService) NewStartRouterParams(id string) *StartRouterParams {
 
 // Starts a router.
 func (s *RouterService) StartRouter(p *StartRouterParams) (*StartRouterResponse, error) {
-	resp, err := s.cs.newRequest("startRouter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startRouter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1872,6 +1900,7 @@ func (s *RouterService) StartRouter(p *StartRouterParams) (*StartRouterResponse,
 
 type StartRouterResponse struct {
 	Account             string                                  `json:"account"`
+	Arch                string                                  `json:"arch"`
 	Created             string                                  `json:"created"`
 	Dns1                string                                  `json:"dns1"`
 	Dns2                string                                  `json:"dns2"`
@@ -2009,7 +2038,7 @@ func (s *RouterService) NewStopRouterParams(id string) *StopRouterParams {
 
 // Stops a router.
 func (s *RouterService) StopRouter(p *StopRouterParams) (*StopRouterResponse, error) {
-	resp, err := s.cs.newRequest("stopRouter", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopRouter", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2044,6 +2073,7 @@ func (s *RouterService) StopRouter(p *StopRouterParams) (*StopRouterResponse, er
 
 type StopRouterResponse struct {
 	Account             string                                 `json:"account"`
+	Arch                string                                 `json:"arch"`
 	Created             string                                 `json:"created"`
 	Dns1                string                                 `json:"dns1"`
 	Dns2                string                                 `json:"dns2"`

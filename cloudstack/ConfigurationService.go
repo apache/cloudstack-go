@@ -999,7 +999,7 @@ func (s *ConfigurationService) NewUpdateConfigurationParams(name string) *Update
 
 // Updates a configuration.
 func (s *ConfigurationService) UpdateConfiguration(p *UpdateConfigurationParams) (*UpdateConfigurationResponse, error) {
-	resp, err := s.cs.newRequest("updateConfiguration", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateConfiguration", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1227,7 +1227,7 @@ func (s *ConfigurationService) NewResetConfigurationParams(name string) *ResetCo
 
 // Resets a configuration. The configuration will be set to default value for global setting, and removed from account_details or domain_details for Account/Domain settings
 func (s *ConfigurationService) ResetConfiguration(p *ResetConfigurationParams) (*ResetConfigurationResponse, error) {
-	resp, err := s.cs.newRequest("resetConfiguration", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetConfiguration", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1307,7 +1307,7 @@ func (s *ConfigurationService) NewUpdateStorageCapabilitiesParams(id string) *Up
 
 // Syncs capabilities of storage pools
 func (s *ConfigurationService) UpdateStorageCapabilities(p *UpdateStorageCapabilitiesParams) (*UpdateStorageCapabilitiesResponse, error) {
-	resp, err := s.cs.newRequest("updateStorageCapabilities", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateStorageCapabilities", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1351,6 +1351,7 @@ type UpdateStorageCapabilitiesResponse struct {
 	Suitableformigration bool              `json:"suitableformigration"`
 	Tags                 string            `json:"tags"`
 	Type                 string            `json:"type"`
+	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
 }

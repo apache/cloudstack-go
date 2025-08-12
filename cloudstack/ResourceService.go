@@ -149,7 +149,7 @@ func (s *ResourceService) NewPurgeExpungedResourcesParams() *PurgeExpungedResour
 
 // Purge expunged resources
 func (s *ResourceService) PurgeExpungedResources(p *PurgeExpungedResourcesParams) (*PurgeExpungedResourcesResponse, error) {
-	resp, err := s.cs.newRequest("purgeExpungedResources", p.toURLValues())
+	resp, err := s.cs.newPostRequest("purgeExpungedResources", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

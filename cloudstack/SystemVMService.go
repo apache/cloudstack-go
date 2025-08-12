@@ -155,7 +155,7 @@ func (s *SystemVMService) NewChangeServiceForSystemVmParams(id string, serviceof
 
 // Changes the service offering for a system vm (console proxy or secondary storage). The system vm must be in a "Stopped" state for this command to take effect.
 func (s *SystemVMService) ChangeServiceForSystemVm(p *ChangeServiceForSystemVmParams) (*ChangeServiceForSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("changeServiceForSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeServiceForSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -171,6 +171,7 @@ func (s *SystemVMService) ChangeServiceForSystemVm(p *ChangeServiceForSystemVmPa
 type ChangeServiceForSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -258,7 +259,7 @@ func (s *SystemVMService) NewDestroySystemVmParams(id string) *DestroySystemVmPa
 
 // Destroys a system virtual machine.
 func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySystemVmResponse, error) {
-	resp, err := s.cs.newRequest("destroySystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("destroySystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -294,6 +295,7 @@ func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySys
 type DestroySystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -343,6 +345,9 @@ func (p *ListSystemVmsParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["hostid"]; found {
 		u.Set("hostid", v.(string))
 	}
@@ -379,6 +384,27 @@ func (p *ListSystemVmsParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *ListSystemVmsParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListSystemVmsParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListSystemVmsParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListSystemVmsParams) SetHostid(v string) {
@@ -726,6 +752,7 @@ type ListSystemVmsResponse struct {
 type SystemVm struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1213,7 +1240,7 @@ func (s *SystemVMService) NewMigrateSystemVmParams(virtualmachineid string) *Mig
 
 // Attempts Migration of a system virtual machine to the host specified.
 func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("migrateSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1249,6 +1276,7 @@ func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSys
 type MigrateSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1361,7 +1389,7 @@ func (s *SystemVMService) NewRebootSystemVmParams(id string) *RebootSystemVmPara
 
 // Reboots a system VM.
 func (s *SystemVMService) RebootSystemVm(p *RebootSystemVmParams) (*RebootSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("rebootSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("rebootSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1397,6 +1425,7 @@ func (s *SystemVMService) RebootSystemVm(p *RebootSystemVmParams) (*RebootSystem
 type RebootSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1536,7 +1565,7 @@ func (s *SystemVMService) NewScaleSystemVmParams(id string, serviceofferingid st
 
 // Scale the service offering for a system vm (console proxy or secondary storage). The system vm must be in a "Stopped" state for this command to take effect.
 func (s *SystemVMService) ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("scaleSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("scaleSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1572,6 +1601,7 @@ func (s *SystemVMService) ScaleSystemVm(p *ScaleSystemVmParams) (*ScaleSystemVmR
 type ScaleSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1659,7 +1689,7 @@ func (s *SystemVMService) NewStartSystemVmParams(id string) *StartSystemVmParams
 
 // Starts a system virtual machine.
 func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("startSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1695,6 +1725,7 @@ func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmR
 type StartSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1807,7 +1838,7 @@ func (s *SystemVMService) NewStopSystemVmParams(id string) *StopSystemVmParams {
 
 // Stops a system VM.
 func (s *SystemVMService) StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("stopSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1843,6 +1874,7 @@ func (s *SystemVMService) StopSystemVm(p *StopSystemVmParams) (*StopSystemVmResp
 type StopSystemVmResponse struct {
 	Activeviewersessions  int      `json:"activeviewersessions"`
 	Agentstate            string   `json:"agentstate"`
+	Arch                  string   `json:"arch"`
 	Created               string   `json:"created"`
 	Disconnected          string   `json:"disconnected"`
 	Dns1                  string   `json:"dns1"`
@@ -1954,7 +1986,7 @@ func (s *SystemVMService) NewPatchSystemVmParams() *PatchSystemVmParams {
 
 // Attempts to live patch systemVMs - CPVM, SSVM
 func (s *SystemVMService) PatchSystemVm(p *PatchSystemVmParams) (*PatchSystemVmResponse, error) {
-	resp, err := s.cs.newRequest("patchSystemVm", p.toURLValues())
+	resp, err := s.cs.newPostRequest("patchSystemVm", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

@@ -119,7 +119,7 @@ func (s *InternalLBService) NewConfigureInternalLoadBalancerElementParams(enable
 
 // Configures an Internal Load Balancer element.
 func (s *InternalLBService) ConfigureInternalLoadBalancerElement(p *ConfigureInternalLoadBalancerElementParams) (*InternalLoadBalancerElementResponse, error) {
-	resp, err := s.cs.newRequest("configureInternalLoadBalancerElement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("configureInternalLoadBalancerElement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ func (s *InternalLBService) NewCreateInternalLoadBalancerElementParams(nspid str
 
 // Create an Internal Load Balancer element.
 func (s *InternalLBService) CreateInternalLoadBalancerElement(p *CreateInternalLoadBalancerElementParams) (*CreateInternalLoadBalancerElementResponse, error) {
-	resp, err := s.cs.newRequest("createInternalLoadBalancerElement", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createInternalLoadBalancerElement", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1039,6 +1039,7 @@ type ListInternalLoadBalancerVMsResponse struct {
 
 type InternalLoadBalancerVM struct {
 	Account             string                                     `json:"account"`
+	Arch                string                                     `json:"arch"`
 	Created             string                                     `json:"created"`
 	Dns1                string                                     `json:"dns1"`
 	Dns2                string                                     `json:"dns2"`
@@ -1151,7 +1152,7 @@ func (s *InternalLBService) NewStartInternalLoadBalancerVMParams(id string) *Sta
 
 // Starts an existing internal lb vm.
 func (s *InternalLBService) StartInternalLoadBalancerVM(p *StartInternalLoadBalancerVMParams) (*StartInternalLoadBalancerVMResponse, error) {
-	resp, err := s.cs.newRequest("startInternalLoadBalancerVM", p.toURLValues())
+	resp, err := s.cs.newPostRequest("startInternalLoadBalancerVM", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1186,6 +1187,7 @@ func (s *InternalLBService) StartInternalLoadBalancerVM(p *StartInternalLoadBala
 
 type StartInternalLoadBalancerVMResponse struct {
 	Account             string                                                  `json:"account"`
+	Arch                string                                                  `json:"arch"`
 	Created             string                                                  `json:"created"`
 	Dns1                string                                                  `json:"dns1"`
 	Dns2                string                                                  `json:"dns2"`
@@ -1323,7 +1325,7 @@ func (s *InternalLBService) NewStopInternalLoadBalancerVMParams(id string) *Stop
 
 // Stops an Internal LB vm.
 func (s *InternalLBService) StopInternalLoadBalancerVM(p *StopInternalLoadBalancerVMParams) (*StopInternalLoadBalancerVMResponse, error) {
-	resp, err := s.cs.newRequest("stopInternalLoadBalancerVM", p.toURLValues())
+	resp, err := s.cs.newPostRequest("stopInternalLoadBalancerVM", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1358,6 +1360,7 @@ func (s *InternalLBService) StopInternalLoadBalancerVM(p *StopInternalLoadBalanc
 
 type StopInternalLoadBalancerVMResponse struct {
 	Account             string                                                 `json:"account"`
+	Arch                string                                                 `json:"arch"`
 	Created             string                                                 `json:"created"`
 	Dns1                string                                                 `json:"dns1"`
 	Dns2                string                                                 `json:"dns2"`

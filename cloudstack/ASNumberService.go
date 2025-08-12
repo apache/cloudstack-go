@@ -435,7 +435,7 @@ func (s *ASNumberService) NewReleaseASNumberParams(asnumber int64, zoneid string
 
 // Releases an AS Number back to the pool
 func (s *ASNumberService) ReleaseASNumber(p *ReleaseASNumberParams) (*ReleaseASNumberResponse, error) {
-	resp, err := s.cs.newRequest("releaseASNumber", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releaseASNumber", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

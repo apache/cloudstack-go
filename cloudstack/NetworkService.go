@@ -244,7 +244,7 @@ func (s *NetworkService) NewAddNetworkServiceProviderParams(name string, physica
 
 // Adds a network serviceProvider to a physical network
 func (s *NetworkService) AddNetworkServiceProvider(p *AddNetworkServiceProviderParams) (*AddNetworkServiceProviderResponse, error) {
-	resp, err := s.cs.newRequest("addNetworkServiceProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNetworkServiceProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -411,7 +411,7 @@ func (s *NetworkService) NewAddOpenDaylightControllerParams(password string, phy
 
 // Adds an OpenDyalight controler
 func (s *NetworkService) AddOpenDaylightController(p *AddOpenDaylightControllerParams) (*AddOpenDaylightControllerResponse, error) {
-	resp, err := s.cs.newRequest("addOpenDaylightController", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addOpenDaylightController", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -526,7 +526,7 @@ func (s *NetworkService) NewChangeBgpPeersForNetworkParams(networkid string) *Ch
 
 // Change the BGP peers for a network.
 func (s *NetworkService) ChangeBgpPeersForNetwork(p *ChangeBgpPeersForNetworkParams) (*ChangeBgpPeersForNetworkResponse, error) {
-	resp, err := s.cs.newRequest("changeBgpPeersForNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("changeBgpPeersForNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -674,7 +674,7 @@ func (s *NetworkService) NewCreateIpv4SubnetForGuestNetworkParams(parentid strin
 
 // Creates a IPv4 subnet for guest networks.
 func (s *NetworkService) CreateIpv4SubnetForGuestNetwork(p *CreateIpv4SubnetForGuestNetworkParams) (*CreateIpv4SubnetForGuestNetworkResponse, error) {
-	resp, err := s.cs.newRequest("createIpv4SubnetForGuestNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createIpv4SubnetForGuestNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1768,7 +1768,7 @@ func (s *NetworkService) NewCreateNetworkParams(name string, networkofferingid s
 
 // Creates a network
 func (s *NetworkService) CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error) {
-	resp, err := s.cs.newRequest("createNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1850,6 +1850,7 @@ type CreateNetworkResponse struct {
 	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []CreateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
+	Specifyvlan                 bool                           `json:"specifyvlan"`
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`
@@ -2106,7 +2107,7 @@ func (s *NetworkService) NewCreatePhysicalNetworkParams(name string, zoneid stri
 
 // Creates a physical network
 func (s *NetworkService) CreatePhysicalNetwork(p *CreatePhysicalNetworkParams) (*CreatePhysicalNetworkResponse, error) {
-	resp, err := s.cs.newRequest("createPhysicalNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createPhysicalNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2399,7 +2400,7 @@ func (s *NetworkService) NewCreateServiceInstanceParams(leftnetworkid string, na
 
 // Creates a system virtual-machine that implements network services
 func (s *NetworkService) CreateServiceInstance(p *CreateServiceInstanceParams) (*CreateServiceInstanceResponse, error) {
-	resp, err := s.cs.newRequest("createServiceInstance", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createServiceInstance", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2617,7 +2618,7 @@ func (s *NetworkService) NewCreateStorageNetworkIpRangeParams(gateway string, ne
 
 // Creates a Storage network IP range.
 func (s *NetworkService) CreateStorageNetworkIpRange(p *CreateStorageNetworkIpRangeParams) (*CreateStorageNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("createStorageNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createStorageNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2784,7 +2785,7 @@ func (s *NetworkService) NewDedicatePublicIpRangeParams(domainid string, id stri
 
 // Dedicates a Public IP range to an account
 func (s *NetworkService) DedicatePublicIpRange(p *DedicatePublicIpRangeParams) (*DedicatePublicIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("dedicatePublicIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("dedicatePublicIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2875,7 +2876,7 @@ func (s *NetworkService) NewDeleteIpv4SubnetForGuestNetworkParams(id string) *De
 
 // Deletes an existing IPv4 subnet for guest network.
 func (s *NetworkService) DeleteIpv4SubnetForGuestNetwork(p *DeleteIpv4SubnetForGuestNetworkParams) (*DeleteIpv4SubnetForGuestNetworkResponse, error) {
-	resp, err := s.cs.newRequest("deleteIpv4SubnetForGuestNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteIpv4SubnetForGuestNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -2982,7 +2983,7 @@ func (s *NetworkService) NewDeleteNetworkParams(id string) *DeleteNetworkParams 
 
 // Deletes a network
 func (s *NetworkService) DeleteNetwork(p *DeleteNetworkParams) (*DeleteNetworkResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3064,7 +3065,7 @@ func (s *NetworkService) NewDeleteNetworkServiceProviderParams(id string) *Delet
 
 // Deletes a Network Service Provider.
 func (s *NetworkService) DeleteNetworkServiceProvider(p *DeleteNetworkServiceProviderParams) (*DeleteNetworkServiceProviderResponse, error) {
-	resp, err := s.cs.newRequest("deleteNetworkServiceProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNetworkServiceProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3146,7 +3147,7 @@ func (s *NetworkService) NewDeleteOpenDaylightControllerParams(id string) *Delet
 
 // Removes an OpenDyalight controler
 func (s *NetworkService) DeleteOpenDaylightController(p *DeleteOpenDaylightControllerParams) (*DeleteOpenDaylightControllerResponse, error) {
-	resp, err := s.cs.newRequest("deleteOpenDaylightController", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteOpenDaylightController", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3236,7 +3237,7 @@ func (s *NetworkService) NewDeletePhysicalNetworkParams(id string) *DeletePhysic
 
 // Deletes a Physical Network.
 func (s *NetworkService) DeletePhysicalNetwork(p *DeletePhysicalNetworkParams) (*DeletePhysicalNetworkResponse, error) {
-	resp, err := s.cs.newRequest("deletePhysicalNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deletePhysicalNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -3318,7 +3319,7 @@ func (s *NetworkService) NewDeleteStorageNetworkIpRangeParams(id string) *Delete
 
 // Deletes a storage network IP Range.
 func (s *NetworkService) DeleteStorageNetworkIpRange(p *DeleteStorageNetworkIpRangeParams) (*DeleteStorageNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("deleteStorageNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteStorageNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -4992,6 +4993,7 @@ type Network struct {
 	Sentbytes                   int64                    `json:"sentbytes"`
 	Service                     []NetworkServiceInternal `json:"service"`
 	Specifyipranges             bool                     `json:"specifyipranges"`
+	Specifyvlan                 bool                     `json:"specifyvlan"`
 	State                       string                   `json:"state"`
 	Strechedl2subnet            bool                     `json:"strechedl2subnet"`
 	Subdomainaccess             bool                     `json:"subdomainaccess"`
@@ -5271,6 +5273,7 @@ type NiciraNvpDeviceNetwork struct {
 	Sentbytes                   int64                           `json:"sentbytes"`
 	Service                     []NiciraNvpDeviceNetworkService `json:"service"`
 	Specifyipranges             bool                            `json:"specifyipranges"`
+	Specifyvlan                 bool                            `json:"specifyvlan"`
 	State                       string                          `json:"state"`
 	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
 	Subdomainaccess             bool                            `json:"subdomainaccess"`
@@ -5681,6 +5684,7 @@ type PaloAltoFirewallNetwork struct {
 	Sentbytes                   int64                            `json:"sentbytes"`
 	Service                     []PaloAltoFirewallNetworkService `json:"service"`
 	Specifyipranges             bool                             `json:"specifyipranges"`
+	Specifyvlan                 bool                             `json:"specifyvlan"`
 	State                       string                           `json:"state"`
 	Strechedl2subnet            bool                             `json:"strechedl2subnet"`
 	Subdomainaccess             bool                             `json:"subdomainaccess"`
@@ -6520,7 +6524,7 @@ func (s *NetworkService) NewMigrateNetworkParams(networkid string, networkofferi
 
 // moves a network to another physical network
 func (s *NetworkService) MigrateNetwork(p *MigrateNetworkParams) (*MigrateNetworkResponse, error) {
-	resp, err := s.cs.newRequest("migrateNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("migrateNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6618,6 +6622,7 @@ type MigrateNetworkResponse struct {
 	Sentbytes                   int64                           `json:"sentbytes"`
 	Service                     []MigrateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                            `json:"specifyipranges"`
+	Specifyvlan                 bool                            `json:"specifyvlan"`
 	State                       string                          `json:"state"`
 	Strechedl2subnet            bool                            `json:"strechedl2subnet"`
 	Subdomainaccess             bool                            `json:"subdomainaccess"`
@@ -6703,7 +6708,7 @@ func (s *NetworkService) NewReleasePublicIpRangeParams(id string) *ReleasePublic
 
 // Releases a Public IP range back to the system pool
 func (s *NetworkService) ReleasePublicIpRange(p *ReleasePublicIpRangeParams) (*ReleasePublicIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("releasePublicIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("releasePublicIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -6872,7 +6877,7 @@ func (s *NetworkService) NewRestartNetworkParams(id string) *RestartNetworkParam
 
 // Restarts the network; includes 1) restarting network elements - virtual routers, DHCP servers 2) reapplying all public IPs 3) reapplying loadBalancing/portForwarding rules
 func (s *NetworkService) RestartNetwork(p *RestartNetworkParams) (*RestartNetworkResponse, error) {
-	resp, err := s.cs.newRequest("restartNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("restartNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7393,7 +7398,7 @@ func (s *NetworkService) NewUpdateNetworkParams(id string) *UpdateNetworkParams 
 
 // Updates a network
 func (s *NetworkService) UpdateNetwork(p *UpdateNetworkParams) (*UpdateNetworkResponse, error) {
-	resp, err := s.cs.newRequest("updateNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7491,6 +7496,7 @@ type UpdateNetworkResponse struct {
 	Sentbytes                   int64                          `json:"sentbytes"`
 	Service                     []UpdateNetworkResponseService `json:"service"`
 	Specifyipranges             bool                           `json:"specifyipranges"`
+	Specifyvlan                 bool                           `json:"specifyvlan"`
 	State                       string                         `json:"state"`
 	Strechedl2subnet            bool                           `json:"strechedl2subnet"`
 	Subdomainaccess             bool                           `json:"subdomainaccess"`
@@ -7625,7 +7631,7 @@ func (s *NetworkService) NewUpdateNetworkServiceProviderParams(id string) *Updat
 
 // Updates a network serviceProvider of a physical network
 func (s *NetworkService) UpdateNetworkServiceProvider(p *UpdateNetworkServiceProviderParams) (*UpdateNetworkServiceProviderResponse, error) {
-	resp, err := s.cs.newRequest("updateNetworkServiceProvider", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateNetworkServiceProvider", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -7814,7 +7820,7 @@ func (s *NetworkService) NewUpdatePhysicalNetworkParams(id string) *UpdatePhysic
 
 // Updates a physical network
 func (s *NetworkService) UpdatePhysicalNetwork(p *UpdatePhysicalNetworkParams) (*UpdatePhysicalNetworkResponse, error) {
-	resp, err := s.cs.newRequest("updatePhysicalNetwork", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updatePhysicalNetwork", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8007,7 +8013,7 @@ func (s *NetworkService) NewUpdateStorageNetworkIpRangeParams(id string) *Update
 
 // Update a Storage network IP range, only allowed when no IPs in this range have been allocated.
 func (s *NetworkService) UpdateStorageNetworkIpRange(p *UpdateStorageNetworkIpRangeParams) (*UpdateStorageNetworkIpRangeResponse, error) {
-	resp, err := s.cs.newRequest("updateStorageNetworkIpRange", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateStorageNetworkIpRange", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8101,7 +8107,7 @@ func (s *NetworkService) NewDeleteGuestNetworkIpv6PrefixParams(id string) *Delet
 
 // Deletes an existing guest network IPv6 prefix.
 func (s *NetworkService) DeleteGuestNetworkIpv6Prefix(p *DeleteGuestNetworkIpv6PrefixParams) (*DeleteGuestNetworkIpv6PrefixResponse, error) {
-	resp, err := s.cs.newRequest("deleteGuestNetworkIpv6Prefix", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteGuestNetworkIpv6Prefix", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8208,7 +8214,7 @@ func (s *NetworkService) NewCreateGuestNetworkIpv6PrefixParams(prefix string, zo
 
 // Creates a guest network IPv6 prefix.
 func (s *NetworkService) CreateGuestNetworkIpv6Prefix(p *CreateGuestNetworkIpv6PrefixParams) (*CreateGuestNetworkIpv6PrefixResponse, error) {
-	resp, err := s.cs.newRequest("createGuestNetworkIpv6Prefix", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createGuestNetworkIpv6Prefix", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8582,7 +8588,7 @@ func (s *NetworkService) NewCreateNetworkPermissionsParams(networkid string) *Cr
 
 // Updates network permissions.
 func (s *NetworkService) CreateNetworkPermissions(p *CreateNetworkPermissionsParams) (*CreateNetworkPermissionsResponse, error) {
-	resp, err := s.cs.newRequest("createNetworkPermissions", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createNetworkPermissions", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8676,7 +8682,7 @@ func (s *NetworkService) NewResetNetworkPermissionsParams(networkid string) *Res
 
 // Resets network permissions.
 func (s *NetworkService) ResetNetworkPermissions(p *ResetNetworkPermissionsParams) (*ResetNetworkPermissionsResponse, error) {
-	resp, err := s.cs.newRequest("resetNetworkPermissions", p.toURLValues())
+	resp, err := s.cs.newPostRequest("resetNetworkPermissions", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -8922,7 +8928,7 @@ func (s *NetworkService) NewRemoveNetworkPermissionsParams(networkid string) *Re
 
 // Removes network permissions.
 func (s *NetworkService) RemoveNetworkPermissions(p *RemoveNetworkPermissionsParams) (*RemoveNetworkPermissionsResponse, error) {
-	resp, err := s.cs.newRequest("removeNetworkPermissions", p.toURLValues())
+	resp, err := s.cs.newPostRequest("removeNetworkPermissions", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

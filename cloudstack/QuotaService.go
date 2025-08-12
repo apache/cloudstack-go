@@ -364,7 +364,7 @@ func (s *QuotaService) NewQuotaCreditsParams(account string, domainid string, va
 
 // Add +-credits to an account
 func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error) {
-	resp, err := s.cs.newRequest("quotaCredits", p.toURLValues())
+	resp, err := s.cs.newPostRequest("quotaCredits", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1135,7 +1135,7 @@ func (s *QuotaService) NewQuotaTariffDeleteParams(id string) *QuotaTariffDeleteP
 
 // Marks a quota tariff as removed.
 func (s *QuotaService) QuotaTariffDelete(p *QuotaTariffDeleteParams) (*QuotaTariffDeleteResponse, error) {
-	resp, err := s.cs.newRequest("quotaTariffDelete", p.toURLValues())
+	resp, err := s.cs.newPostRequest("quotaTariffDelete", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1705,7 +1705,7 @@ func (s *QuotaService) NewQuotaTariffUpdateParams(name string) *QuotaTariffUpdat
 
 // Update the tariff plan for a resource
 func (s *QuotaService) QuotaTariffUpdate(p *QuotaTariffUpdateParams) (*QuotaTariffUpdateResponse, error) {
-	resp, err := s.cs.newRequest("quotaTariffUpdate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("quotaTariffUpdate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1760,7 +1760,7 @@ func (s *QuotaService) NewQuotaUpdateParams() *QuotaUpdateParams {
 
 // Update quota calculations, alerts and statements
 func (s *QuotaService) QuotaUpdate(p *QuotaUpdateParams) (*QuotaUpdateResponse, error) {
-	resp, err := s.cs.newRequest("quotaUpdate", p.toURLValues())
+	resp, err := s.cs.newPostRequest("quotaUpdate", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

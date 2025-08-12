@@ -211,7 +211,7 @@ func (s *AffinityGroupService) NewCreateAffinityGroupParams(name string, affinit
 
 // Creates an affinity/anti-affinity group
 func (s *AffinityGroupService) CreateAffinityGroup(p *CreateAffinityGroupParams) (*CreateAffinityGroupResponse, error) {
-	resp, err := s.cs.newRequest("createAffinityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createAffinityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -403,7 +403,7 @@ func (s *AffinityGroupService) NewDeleteAffinityGroupParams() *DeleteAffinityGro
 
 // Deletes affinity group
 func (s *AffinityGroupService) DeleteAffinityGroup(p *DeleteAffinityGroupParams) (*DeleteAffinityGroupResponse, error) {
-	resp, err := s.cs.newRequest("deleteAffinityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteAffinityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1095,7 +1095,7 @@ func (s *AffinityGroupService) NewUpdateVMAffinityGroupParams(id string) *Update
 
 // Updates the affinity/anti-affinity group associations of a virtual machine. The VM has to be stopped and restarted for the new properties to take effect.
 func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupParams) (*UpdateVMAffinityGroupResponse, error) {
-	resp, err := s.cs.newRequest("updateVMAffinityGroup", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateVMAffinityGroup", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1131,6 +1131,7 @@ func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupPar
 type UpdateVMAffinityGroupResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []UpdateVMAffinityGroupResponseAffinitygroup `json:"affinitygroup"`
+	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`
 	Backupofferingid      string                                       `json:"backupofferingid"`

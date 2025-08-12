@@ -202,7 +202,7 @@ func (s *RoleService) NewCreateRoleParams(name string) *CreateRoleParams {
 
 // Creates a role
 func (s *RoleService) CreateRole(p *CreateRoleParams) (*CreateRoleResponse, error) {
-	resp, err := s.cs.newRequest("createRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -351,7 +351,7 @@ func (s *RoleService) NewCreateRolePermissionParams(permission string, roleid st
 
 // Adds an API permission to a role
 func (s *RoleService) CreateRolePermission(p *CreateRolePermissionParams) (*CreateRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("createRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("createRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -425,7 +425,7 @@ func (s *RoleService) NewDeleteRoleParams(id string) *DeleteRoleParams {
 
 // Deletes a role
 func (s *RoleService) DeleteRole(p *DeleteRoleParams) (*DeleteRoleResponse, error) {
-	resp, err := s.cs.newRequest("deleteRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -519,7 +519,7 @@ func (s *RoleService) NewDeleteRolePermissionParams(id string) *DeleteRolePermis
 
 // Deletes a role permission
 func (s *RoleService) DeleteRolePermission(p *DeleteRolePermissionParams) (*DeleteRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("deleteRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -613,7 +613,7 @@ func (s *RoleService) NewDisableRoleParams(id string) *DisableRoleParams {
 
 // Disables a role
 func (s *RoleService) DisableRole(p *DisableRoleParams) (*DisableRoleResponse, error) {
-	resp, err := s.cs.newRequest("disableRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("disableRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -707,7 +707,7 @@ func (s *RoleService) NewEnableRoleParams(id string) *EnableRoleParams {
 
 // Enables a role
 func (s *RoleService) EnableRole(p *EnableRoleParams) (*EnableRoleResponse, error) {
-	resp, err := s.cs.newRequest("enableRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("enableRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -928,7 +928,7 @@ func (s *RoleService) NewImportRoleParams(name string, rules map[string]string) 
 
 // Imports a role based on provided map of rule permissions
 func (s *RoleService) ImportRole(p *ImportRoleParams) (*ImportRoleResponse, error) {
-	resp, err := s.cs.newRequest("importRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("importRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1480,7 +1480,7 @@ func (s *RoleService) NewUpdateRoleParams(id string) *UpdateRoleParams {
 
 // Updates a role
 func (s *RoleService) UpdateRole(p *UpdateRoleParams) (*UpdateRoleResponse, error) {
-	resp, err := s.cs.newRequest("updateRole", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateRole", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -1625,7 +1625,7 @@ func (s *RoleService) NewUpdateRolePermissionParams(roleid string) *UpdateRolePe
 
 // Updates a role permission order
 func (s *RoleService) UpdateRolePermission(p *UpdateRolePermissionParams) (*UpdateRolePermissionResponse, error) {
-	resp, err := s.cs.newRequest("updateRolePermission", p.toURLValues())
+	resp, err := s.cs.newPostRequest("updateRolePermission", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}

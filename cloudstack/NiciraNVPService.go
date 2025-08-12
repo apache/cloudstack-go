@@ -229,7 +229,7 @@ func (s *NiciraNVPService) NewAddNiciraNvpDeviceParams(hostname string, password
 
 // Adds a Nicira NVP device
 func (s *NiciraNVPService) AddNiciraNvpDevice(p *AddNiciraNvpDeviceParams) (*AddNiciraNvpDeviceResponse, error) {
-	resp, err := s.cs.newRequest("addNiciraNvpDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("addNiciraNvpDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
@@ -322,7 +322,7 @@ func (s *NiciraNVPService) NewDeleteNiciraNvpDeviceParams(nvpdeviceid string) *D
 
 // delete a nicira nvp device
 func (s *NiciraNVPService) DeleteNiciraNvpDevice(p *DeleteNiciraNvpDeviceParams) (*DeleteNiciraNvpDeviceResponse, error) {
-	resp, err := s.cs.newRequest("deleteNiciraNvpDevice", p.toURLValues())
+	resp, err := s.cs.newPostRequest("deleteNiciraNvpDevice", p.toURLValues())
 	if err != nil {
 		return nil, err
 	}
