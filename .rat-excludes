@@ -1,0 +1,3 @@
+.rat-excludes
+go.mod
+go.sum
