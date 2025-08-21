@@ -64,8 +64,13 @@ The `listAPIs.json` file holds the output of `listApis` command for a specific r
 ```
 # Run it via the Makefile
 make all
-
 ```
+
+### Prerequisites
+
+* `goimports`: Install by running `go install golang.org/x/tools/cmd/goimports@latest`
+
+* `mockgen`: Install by running `go install go.uber.org/mock/mockgen@latest`
 
 ## Getting Help
 
