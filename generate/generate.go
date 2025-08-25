@@ -1404,6 +1404,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "datadiskofferinglist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].disk\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].diskOffering\", i), m[k])", name)
+		case "otherdeployparams":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		default:
 			if zeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)

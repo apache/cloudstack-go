@@ -632,7 +632,7 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["otherdeployparams"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("otherdeployparams[%d].key", i), k)
+			u.Set(fmt.Sprintf("otherdeployparams[%d].name", i), k)
 			u.Set(fmt.Sprintf("otherdeployparams[%d].value", i), m[k])
 		}
 	}
@@ -4693,7 +4693,7 @@ func (p *UpdateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["otherdeployparams"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("otherdeployparams[%d].key", i), k)
+			u.Set(fmt.Sprintf("otherdeployparams[%d].name", i), k)
 			u.Set(fmt.Sprintf("otherdeployparams[%d].value", i), m[k])
 		}
 	}
