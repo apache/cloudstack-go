@@ -1,0 +1,5 @@
+.rat-excludes
+go.mod
+go.sum
+rat-report.txt
+apache-rat-0.16.1
