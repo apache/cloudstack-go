@@ -54,10 +54,23 @@ var detailsRequireKeyValue = map[string]bool{
 // detailsRequireZeroIndex is a prefilled map with a list of details
 // that need to be encoded using zero indexing
 var detailsRequireZeroIndex = map[string]bool{
-	"registerTemplate": true,
-	"updateTemplate":   true,
-	"createAccount":    true,
-	"updateAccount":    true,
+	"registerTemplate":     true,
+	"updateTemplate":       true,
+	"createAccount":        true,
+	"updateAccount":        true,
+	"updateVirtualMachine": true,
+}
+
+// parametersRequireIndexing contains map parameters that always need
+// index variables (i) even when the command uses zero indexing
+var parametersRequireIndexing = map[string]bool{
+	"userdatadetails":       true,
+	"serviceproviderlist":   true,
+	"usersecuritygrouplist": true,
+	"tags":                  true,
+	"nicnetworklist":        true,
+	"nicipaddresslist":      true,
+	"datadiskofferinglist":  true,
 }
 
 // requiresPost is a prefilled set of API names that require POST
@@ -1363,7 +1376,11 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	case "map[string]string":
 		pn("m := v.(map[string]string)")
 		zeroIndex := detailsRequireZeroIndex[cmd]
-		if zeroIndex {
+		needsIndex := parametersRequireIndexing[name]
+
+		shouldUseStaticZeroIndex := zeroIndex && !needsIndex
+
+		if shouldUseStaticZeroIndex {
 			pn("for _, k := range getSortedKeysFromMap(m) {")
 		} else {
 			pn("for i, k := range getSortedKeysFromMap(m) {")
@@ -1408,7 +1425,7 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		default:
-			if zeroIndex && !detailsRequireKeyValue[cmd] {
+			if shouldUseStaticZeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
 			} else {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
