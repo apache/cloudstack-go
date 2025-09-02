@@ -1378,8 +1378,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		zeroIndex := detailsRequireZeroIndex[cmd]
 		needsIndex := parametersRequireIndexing[name]
 
-		// Use index variable if parameter requires it or command doesn't use zero indexing
-		if zeroIndex && !needsIndex {
+		shouldUseStaticZeroIndex := zeroIndex && !needsIndex
+
+		if shouldUseStaticZeroIndex {
 			pn("for _, k := range getSortedKeysFromMap(m) {")
 		} else {
 			pn("for i, k := range getSortedKeysFromMap(m) {")
@@ -1424,7 +1425,7 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		default:
-			if zeroIndex && !detailsRequireKeyValue[cmd] && !needsIndex {
+			if shouldUseStaticZeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)
 			} else {
 				pn("	u.Set(fmt.Sprintf(\"%s[%%d].key\", i), k)", name)
