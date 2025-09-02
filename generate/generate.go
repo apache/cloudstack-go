@@ -2309,6 +2309,10 @@ func mapType(aName string, pName string, pType string) string {
 		pType = "UUID"
 	}
 
+	if pName == "counter" {
+		return "*Counter"
+	}
+
 	switch pType {
 	case "UUID":
 		return "UUID"
@@ -2328,6 +2332,12 @@ func mapType(aName string, pName string, pType string) string {
 		}
 		if pName == "virtualmachines" {
 			return "[]*VirtualMachine"
+		}
+		if pName == "conditions" {
+			return "[]*Condition"
+		}
+		if pName == "scaledownpolicies" || pName == "scaleuppolicies" {
+			return "[]*AutoScalePolicy"
 		}
 		return "[]string"
 	case "map":
