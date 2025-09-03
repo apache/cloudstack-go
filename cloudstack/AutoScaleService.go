@@ -265,20 +265,20 @@ func (s *AutoScaleService) CreateAutoScalePolicy(p *CreateAutoScalePolicyParams)
 }
 
 type CreateAutoScalePolicyResponse struct {
-	Account    string   `json:"account"`
-	Action     string   `json:"action"`
-	Conditions []string `json:"conditions"`
-	Domain     string   `json:"domain"`
-	Domainid   string   `json:"domainid"`
-	Domainpath string   `json:"domainpath"`
-	Duration   int      `json:"duration"`
-	Id         string   `json:"id"`
-	JobID      string   `json:"jobid"`
-	Jobstatus  int      `json:"jobstatus"`
-	Name       string   `json:"name"`
-	Project    string   `json:"project"`
-	Projectid  string   `json:"projectid"`
-	Quiettime  int      `json:"quiettime"`
+	Account    string       `json:"account"`
+	Action     string       `json:"action"`
+	Conditions []*Condition `json:"conditions"`
+	Domain     string       `json:"domain"`
+	Domainid   string       `json:"domainid"`
+	Domainpath string       `json:"domainpath"`
+	Duration   int          `json:"duration"`
+	Id         string       `json:"id"`
+	JobID      string       `json:"jobid"`
+	Jobstatus  int          `json:"jobstatus"`
+	Name       string       `json:"name"`
+	Project    string       `json:"project"`
+	Projectid  string       `json:"projectid"`
+	Quiettime  int          `json:"quiettime"`
 }
 
 type CreateAutoScaleVmGroupParams struct {
@@ -565,35 +565,35 @@ func (s *AutoScaleService) CreateAutoScaleVmGroup(p *CreateAutoScaleVmGroupParam
 }
 
 type CreateAutoScaleVmGroupResponse struct {
-	Account                      string   `json:"account"`
-	Associatednetworkid          string   `json:"associatednetworkid"`
-	Associatednetworkname        string   `json:"associatednetworkname"`
-	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
-	Created                      string   `json:"created"`
-	Domain                       string   `json:"domain"`
-	Domainid                     string   `json:"domainid"`
-	Domainpath                   string   `json:"domainpath"`
-	Fordisplay                   bool     `json:"fordisplay"`
-	Hasannotations               bool     `json:"hasannotations"`
-	Id                           string   `json:"id"`
-	Interval                     int      `json:"interval"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Lbprovider                   string   `json:"lbprovider"`
-	Lbruleid                     string   `json:"lbruleid"`
-	Maxmembers                   int      `json:"maxmembers"`
-	Minmembers                   int      `json:"minmembers"`
-	Name                         string   `json:"name"`
-	Privateport                  string   `json:"privateport"`
-	Project                      string   `json:"project"`
-	Projectid                    string   `json:"projectid"`
-	Publicip                     string   `json:"publicip"`
-	Publicipid                   string   `json:"publicipid"`
-	Publicport                   string   `json:"publicport"`
-	Scaledownpolicies            []string `json:"scaledownpolicies"`
-	Scaleuppolicies              []string `json:"scaleuppolicies"`
-	State                        string   `json:"state"`
-	Vmprofileid                  string   `json:"vmprofileid"`
+	Account                      string             `json:"account"`
+	Associatednetworkid          string             `json:"associatednetworkid"`
+	Associatednetworkname        string             `json:"associatednetworkname"`
+	Availablevirtualmachinecount int                `json:"availablevirtualmachinecount"`
+	Created                      string             `json:"created"`
+	Domain                       string             `json:"domain"`
+	Domainid                     string             `json:"domainid"`
+	Domainpath                   string             `json:"domainpath"`
+	Fordisplay                   bool               `json:"fordisplay"`
+	Hasannotations               bool               `json:"hasannotations"`
+	Id                           string             `json:"id"`
+	Interval                     int                `json:"interval"`
+	JobID                        string             `json:"jobid"`
+	Jobstatus                    int                `json:"jobstatus"`
+	Lbprovider                   string             `json:"lbprovider"`
+	Lbruleid                     string             `json:"lbruleid"`
+	Maxmembers                   int                `json:"maxmembers"`
+	Minmembers                   int                `json:"minmembers"`
+	Name                         string             `json:"name"`
+	Privateport                  string             `json:"privateport"`
+	Project                      string             `json:"project"`
+	Projectid                    string             `json:"projectid"`
+	Publicip                     string             `json:"publicip"`
+	Publicipid                   string             `json:"publicipid"`
+	Publicport                   string             `json:"publicport"`
+	Scaledownpolicies            []*AutoScalePolicy `json:"scaledownpolicies"`
+	Scaleuppolicies              []*AutoScalePolicy `json:"scaleuppolicies"`
+	State                        string             `json:"state"`
+	Vmprofileid                  string             `json:"vmprofileid"`
 }
 
 type CreateAutoScaleVmProfileParams struct {
@@ -1232,21 +1232,21 @@ func (s *AutoScaleService) CreateCondition(p *CreateConditionParams) (*CreateCon
 }
 
 type CreateConditionResponse struct {
-	Account            string `json:"account"`
-	Counter            string `json:"counter"`
-	Counterid          string `json:"counterid"`
-	Countername        string `json:"countername"`
-	Domain             string `json:"domain"`
-	Domainid           string `json:"domainid"`
-	Domainpath         string `json:"domainpath"`
-	Id                 string `json:"id"`
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Project            string `json:"project"`
-	Projectid          string `json:"projectid"`
-	Relationaloperator string `json:"relationaloperator"`
-	Threshold          int64  `json:"threshold"`
-	Zoneid             string `json:"zoneid"`
+	Account            string   `json:"account"`
+	Counter            *Counter `json:"counter"`
+	Counterid          string   `json:"counterid"`
+	Countername        string   `json:"countername"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	JobID              string   `json:"jobid"`
+	Jobstatus          int      `json:"jobstatus"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Relationaloperator string   `json:"relationaloperator"`
+	Threshold          int64    `json:"threshold"`
+	Zoneid             string   `json:"zoneid"`
 }
 
 type CreateCounterParams struct {
@@ -1931,35 +1931,35 @@ func (s *AutoScaleService) DisableAutoScaleVmGroup(p *DisableAutoScaleVmGroupPar
 }
 
 type DisableAutoScaleVmGroupResponse struct {
-	Account                      string   `json:"account"`
-	Associatednetworkid          string   `json:"associatednetworkid"`
-	Associatednetworkname        string   `json:"associatednetworkname"`
-	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
-	Created                      string   `json:"created"`
-	Domain                       string   `json:"domain"`
-	Domainid                     string   `json:"domainid"`
-	Domainpath                   string   `json:"domainpath"`
-	Fordisplay                   bool     `json:"fordisplay"`
-	Hasannotations               bool     `json:"hasannotations"`
-	Id                           string   `json:"id"`
-	Interval                     int      `json:"interval"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Lbprovider                   string   `json:"lbprovider"`
-	Lbruleid                     string   `json:"lbruleid"`
-	Maxmembers                   int      `json:"maxmembers"`
-	Minmembers                   int      `json:"minmembers"`
-	Name                         string   `json:"name"`
-	Privateport                  string   `json:"privateport"`
-	Project                      string   `json:"project"`
-	Projectid                    string   `json:"projectid"`
-	Publicip                     string   `json:"publicip"`
-	Publicipid                   string   `json:"publicipid"`
-	Publicport                   string   `json:"publicport"`
-	Scaledownpolicies            []string `json:"scaledownpolicies"`
-	Scaleuppolicies              []string `json:"scaleuppolicies"`
-	State                        string   `json:"state"`
-	Vmprofileid                  string   `json:"vmprofileid"`
+	Account                      string             `json:"account"`
+	Associatednetworkid          string             `json:"associatednetworkid"`
+	Associatednetworkname        string             `json:"associatednetworkname"`
+	Availablevirtualmachinecount int                `json:"availablevirtualmachinecount"`
+	Created                      string             `json:"created"`
+	Domain                       string             `json:"domain"`
+	Domainid                     string             `json:"domainid"`
+	Domainpath                   string             `json:"domainpath"`
+	Fordisplay                   bool               `json:"fordisplay"`
+	Hasannotations               bool               `json:"hasannotations"`
+	Id                           string             `json:"id"`
+	Interval                     int                `json:"interval"`
+	JobID                        string             `json:"jobid"`
+	Jobstatus                    int                `json:"jobstatus"`
+	Lbprovider                   string             `json:"lbprovider"`
+	Lbruleid                     string             `json:"lbruleid"`
+	Maxmembers                   int                `json:"maxmembers"`
+	Minmembers                   int                `json:"minmembers"`
+	Name                         string             `json:"name"`
+	Privateport                  string             `json:"privateport"`
+	Project                      string             `json:"project"`
+	Projectid                    string             `json:"projectid"`
+	Publicip                     string             `json:"publicip"`
+	Publicipid                   string             `json:"publicipid"`
+	Publicport                   string             `json:"publicport"`
+	Scaledownpolicies            []*AutoScalePolicy `json:"scaledownpolicies"`
+	Scaleuppolicies              []*AutoScalePolicy `json:"scaleuppolicies"`
+	State                        string             `json:"state"`
+	Vmprofileid                  string             `json:"vmprofileid"`
 }
 
 type EnableAutoScaleVmGroupParams struct {
@@ -2043,35 +2043,35 @@ func (s *AutoScaleService) EnableAutoScaleVmGroup(p *EnableAutoScaleVmGroupParam
 }
 
 type EnableAutoScaleVmGroupResponse struct {
-	Account                      string   `json:"account"`
-	Associatednetworkid          string   `json:"associatednetworkid"`
-	Associatednetworkname        string   `json:"associatednetworkname"`
-	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
-	Created                      string   `json:"created"`
-	Domain                       string   `json:"domain"`
-	Domainid                     string   `json:"domainid"`
-	Domainpath                   string   `json:"domainpath"`
-	Fordisplay                   bool     `json:"fordisplay"`
-	Hasannotations               bool     `json:"hasannotations"`
-	Id                           string   `json:"id"`
-	Interval                     int      `json:"interval"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Lbprovider                   string   `json:"lbprovider"`
-	Lbruleid                     string   `json:"lbruleid"`
-	Maxmembers                   int      `json:"maxmembers"`
-	Minmembers                   int      `json:"minmembers"`
-	Name                         string   `json:"name"`
-	Privateport                  string   `json:"privateport"`
-	Project                      string   `json:"project"`
-	Projectid                    string   `json:"projectid"`
-	Publicip                     string   `json:"publicip"`
-	Publicipid                   string   `json:"publicipid"`
-	Publicport                   string   `json:"publicport"`
-	Scaledownpolicies            []string `json:"scaledownpolicies"`
-	Scaleuppolicies              []string `json:"scaleuppolicies"`
-	State                        string   `json:"state"`
-	Vmprofileid                  string   `json:"vmprofileid"`
+	Account                      string             `json:"account"`
+	Associatednetworkid          string             `json:"associatednetworkid"`
+	Associatednetworkname        string             `json:"associatednetworkname"`
+	Availablevirtualmachinecount int                `json:"availablevirtualmachinecount"`
+	Created                      string             `json:"created"`
+	Domain                       string             `json:"domain"`
+	Domainid                     string             `json:"domainid"`
+	Domainpath                   string             `json:"domainpath"`
+	Fordisplay                   bool               `json:"fordisplay"`
+	Hasannotations               bool               `json:"hasannotations"`
+	Id                           string             `json:"id"`
+	Interval                     int                `json:"interval"`
+	JobID                        string             `json:"jobid"`
+	Jobstatus                    int                `json:"jobstatus"`
+	Lbprovider                   string             `json:"lbprovider"`
+	Lbruleid                     string             `json:"lbruleid"`
+	Maxmembers                   int                `json:"maxmembers"`
+	Minmembers                   int                `json:"minmembers"`
+	Name                         string             `json:"name"`
+	Privateport                  string             `json:"privateport"`
+	Project                      string             `json:"project"`
+	Projectid                    string             `json:"projectid"`
+	Publicip                     string             `json:"publicip"`
+	Publicipid                   string             `json:"publicipid"`
+	Publicport                   string             `json:"publicport"`
+	Scaledownpolicies            []*AutoScalePolicy `json:"scaledownpolicies"`
+	Scaleuppolicies              []*AutoScalePolicy `json:"scaleuppolicies"`
+	State                        string             `json:"state"`
+	Vmprofileid                  string             `json:"vmprofileid"`
 }
 
 type ListAutoScalePoliciesParams struct {
@@ -2514,20 +2514,20 @@ type ListAutoScalePoliciesResponse struct {
 }
 
 type AutoScalePolicy struct {
-	Account    string   `json:"account"`
-	Action     string   `json:"action"`
-	Conditions []string `json:"conditions"`
-	Domain     string   `json:"domain"`
-	Domainid   string   `json:"domainid"`
-	Domainpath string   `json:"domainpath"`
-	Duration   int      `json:"duration"`
-	Id         string   `json:"id"`
-	JobID      string   `json:"jobid"`
-	Jobstatus  int      `json:"jobstatus"`
-	Name       string   `json:"name"`
-	Project    string   `json:"project"`
-	Projectid  string   `json:"projectid"`
-	Quiettime  int      `json:"quiettime"`
+	Account    string       `json:"account"`
+	Action     string       `json:"action"`
+	Conditions []*Condition `json:"conditions"`
+	Domain     string       `json:"domain"`
+	Domainid   string       `json:"domainid"`
+	Domainpath string       `json:"domainpath"`
+	Duration   int          `json:"duration"`
+	Id         string       `json:"id"`
+	JobID      string       `json:"jobid"`
+	Jobstatus  int          `json:"jobstatus"`
+	Name       string       `json:"name"`
+	Project    string       `json:"project"`
+	Projectid  string       `json:"projectid"`
+	Quiettime  int          `json:"quiettime"`
 }
 
 type ListAutoScaleVmGroupsParams struct {
@@ -3019,35 +3019,35 @@ type ListAutoScaleVmGroupsResponse struct {
 }
 
 type AutoScaleVmGroup struct {
-	Account                      string   `json:"account"`
-	Associatednetworkid          string   `json:"associatednetworkid"`
-	Associatednetworkname        string   `json:"associatednetworkname"`
-	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
-	Created                      string   `json:"created"`
-	Domain                       string   `json:"domain"`
-	Domainid                     string   `json:"domainid"`
-	Domainpath                   string   `json:"domainpath"`
-	Fordisplay                   bool     `json:"fordisplay"`
-	Hasannotations               bool     `json:"hasannotations"`
-	Id                           string   `json:"id"`
-	Interval                     int      `json:"interval"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Lbprovider                   string   `json:"lbprovider"`
-	Lbruleid                     string   `json:"lbruleid"`
-	Maxmembers                   int      `json:"maxmembers"`
-	Minmembers                   int      `json:"minmembers"`
-	Name                         string   `json:"name"`
-	Privateport                  string   `json:"privateport"`
-	Project                      string   `json:"project"`
-	Projectid                    string   `json:"projectid"`
-	Publicip                     string   `json:"publicip"`
-	Publicipid                   string   `json:"publicipid"`
-	Publicport                   string   `json:"publicport"`
-	Scaledownpolicies            []string `json:"scaledownpolicies"`
-	Scaleuppolicies              []string `json:"scaleuppolicies"`
-	State                        string   `json:"state"`
-	Vmprofileid                  string   `json:"vmprofileid"`
+	Account                      string             `json:"account"`
+	Associatednetworkid          string             `json:"associatednetworkid"`
+	Associatednetworkname        string             `json:"associatednetworkname"`
+	Availablevirtualmachinecount int                `json:"availablevirtualmachinecount"`
+	Created                      string             `json:"created"`
+	Domain                       string             `json:"domain"`
+	Domainid                     string             `json:"domainid"`
+	Domainpath                   string             `json:"domainpath"`
+	Fordisplay                   bool               `json:"fordisplay"`
+	Hasannotations               bool               `json:"hasannotations"`
+	Id                           string             `json:"id"`
+	Interval                     int                `json:"interval"`
+	JobID                        string             `json:"jobid"`
+	Jobstatus                    int                `json:"jobstatus"`
+	Lbprovider                   string             `json:"lbprovider"`
+	Lbruleid                     string             `json:"lbruleid"`
+	Maxmembers                   int                `json:"maxmembers"`
+	Minmembers                   int                `json:"minmembers"`
+	Name                         string             `json:"name"`
+	Privateport                  string             `json:"privateport"`
+	Project                      string             `json:"project"`
+	Projectid                    string             `json:"projectid"`
+	Publicip                     string             `json:"publicip"`
+	Publicipid                   string             `json:"publicipid"`
+	Publicport                   string             `json:"publicport"`
+	Scaledownpolicies            []*AutoScalePolicy `json:"scaledownpolicies"`
+	Scaleuppolicies              []*AutoScalePolicy `json:"scaleuppolicies"`
+	State                        string             `json:"state"`
+	Vmprofileid                  string             `json:"vmprofileid"`
 }
 
 type ListAutoScaleVmProfilesParams struct {
@@ -3830,21 +3830,21 @@ type ListConditionsResponse struct {
 }
 
 type Condition struct {
-	Account            string `json:"account"`
-	Counter            string `json:"counter"`
-	Counterid          string `json:"counterid"`
-	Countername        string `json:"countername"`
-	Domain             string `json:"domain"`
-	Domainid           string `json:"domainid"`
-	Domainpath         string `json:"domainpath"`
-	Id                 string `json:"id"`
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Project            string `json:"project"`
-	Projectid          string `json:"projectid"`
-	Relationaloperator string `json:"relationaloperator"`
-	Threshold          int64  `json:"threshold"`
-	Zoneid             string `json:"zoneid"`
+	Account            string   `json:"account"`
+	Counter            *Counter `json:"counter"`
+	Counterid          string   `json:"counterid"`
+	Countername        string   `json:"countername"`
+	Domain             string   `json:"domain"`
+	Domainid           string   `json:"domainid"`
+	Domainpath         string   `json:"domainpath"`
+	Id                 string   `json:"id"`
+	JobID              string   `json:"jobid"`
+	Jobstatus          int      `json:"jobstatus"`
+	Project            string   `json:"project"`
+	Projectid          string   `json:"projectid"`
+	Relationaloperator string   `json:"relationaloperator"`
+	Threshold          int64    `json:"threshold"`
+	Zoneid             string   `json:"zoneid"`
 }
 
 type ListCountersParams struct {
@@ -4331,20 +4331,20 @@ func (s *AutoScaleService) UpdateAutoScalePolicy(p *UpdateAutoScalePolicyParams)
 }
 
 type UpdateAutoScalePolicyResponse struct {
-	Account    string   `json:"account"`
-	Action     string   `json:"action"`
-	Conditions []string `json:"conditions"`
-	Domain     string   `json:"domain"`
-	Domainid   string   `json:"domainid"`
-	Domainpath string   `json:"domainpath"`
-	Duration   int      `json:"duration"`
-	Id         string   `json:"id"`
-	JobID      string   `json:"jobid"`
-	Jobstatus  int      `json:"jobstatus"`
-	Name       string   `json:"name"`
-	Project    string   `json:"project"`
-	Projectid  string   `json:"projectid"`
-	Quiettime  int      `json:"quiettime"`
+	Account    string       `json:"account"`
+	Action     string       `json:"action"`
+	Conditions []*Condition `json:"conditions"`
+	Domain     string       `json:"domain"`
+	Domainid   string       `json:"domainid"`
+	Domainpath string       `json:"domainpath"`
+	Duration   int          `json:"duration"`
+	Id         string       `json:"id"`
+	JobID      string       `json:"jobid"`
+	Jobstatus  int          `json:"jobstatus"`
+	Name       string       `json:"name"`
+	Project    string       `json:"project"`
+	Projectid  string       `json:"projectid"`
+	Quiettime  int          `json:"quiettime"`
 }
 
 type UpdateAutoScaleVmGroupParams struct {
@@ -4626,35 +4626,35 @@ func (s *AutoScaleService) UpdateAutoScaleVmGroup(p *UpdateAutoScaleVmGroupParam
 }
 
 type UpdateAutoScaleVmGroupResponse struct {
-	Account                      string   `json:"account"`
-	Associatednetworkid          string   `json:"associatednetworkid"`
-	Associatednetworkname        string   `json:"associatednetworkname"`
-	Availablevirtualmachinecount int      `json:"availablevirtualmachinecount"`
-	Created                      string   `json:"created"`
-	Domain                       string   `json:"domain"`
-	Domainid                     string   `json:"domainid"`
-	Domainpath                   string   `json:"domainpath"`
-	Fordisplay                   bool     `json:"fordisplay"`
-	Hasannotations               bool     `json:"hasannotations"`
-	Id                           string   `json:"id"`
-	Interval                     int      `json:"interval"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Lbprovider                   string   `json:"lbprovider"`
-	Lbruleid                     string   `json:"lbruleid"`
-	Maxmembers                   int      `json:"maxmembers"`
-	Minmembers                   int      `json:"minmembers"`
-	Name                         string   `json:"name"`
-	Privateport                  string   `json:"privateport"`
-	Project                      string   `json:"project"`
-	Projectid                    string   `json:"projectid"`
-	Publicip                     string   `json:"publicip"`
-	Publicipid                   string   `json:"publicipid"`
-	Publicport                   string   `json:"publicport"`
-	Scaledownpolicies            []string `json:"scaledownpolicies"`
-	Scaleuppolicies              []string `json:"scaleuppolicies"`
-	State                        string   `json:"state"`
-	Vmprofileid                  string   `json:"vmprofileid"`
+	Account                      string             `json:"account"`
+	Associatednetworkid          string             `json:"associatednetworkid"`
+	Associatednetworkname        string             `json:"associatednetworkname"`
+	Availablevirtualmachinecount int                `json:"availablevirtualmachinecount"`
+	Created                      string             `json:"created"`
+	Domain                       string             `json:"domain"`
+	Domainid                     string             `json:"domainid"`
+	Domainpath                   string             `json:"domainpath"`
+	Fordisplay                   bool               `json:"fordisplay"`
+	Hasannotations               bool               `json:"hasannotations"`
+	Id                           string             `json:"id"`
+	Interval                     int                `json:"interval"`
+	JobID                        string             `json:"jobid"`
+	Jobstatus                    int                `json:"jobstatus"`
+	Lbprovider                   string             `json:"lbprovider"`
+	Lbruleid                     string             `json:"lbruleid"`
+	Maxmembers                   int                `json:"maxmembers"`
+	Minmembers                   int                `json:"minmembers"`
+	Name                         string             `json:"name"`
+	Privateport                  string             `json:"privateport"`
+	Project                      string             `json:"project"`
+	Projectid                    string             `json:"projectid"`
+	Publicip                     string             `json:"publicip"`
+	Publicipid                   string             `json:"publicipid"`
+	Publicport                   string             `json:"publicport"`
+	Scaledownpolicies            []*AutoScalePolicy `json:"scaledownpolicies"`
+	Scaleuppolicies              []*AutoScalePolicy `json:"scaleuppolicies"`
+	State                        string             `json:"state"`
+	Vmprofileid                  string             `json:"vmprofileid"`
 }
 
 type UpdateAutoScaleVmProfileParams struct {
