@@ -96,7 +96,7 @@ func TestVirtualMachineService(t *testing.T) {
 		if _, ok := response["deployVirtualMachine"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.VirtualMachine.NewDeployVirtualMachineParams("serviceofferingid", "zoneid")
+		p := client.VirtualMachine.NewDeployVirtualMachineParams("serviceofferingid", "templateid", "zoneid")
 		r, err := client.VirtualMachine.DeployVirtualMachine(p)
 		if err != nil {
 			t.Errorf(err.Error())

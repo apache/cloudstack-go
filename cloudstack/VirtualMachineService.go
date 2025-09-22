@@ -37,7 +37,7 @@ type VirtualMachineServiceIface interface {
 	CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error)
 	NewCleanVMReservationsParams() *CleanVMReservationsParams
 	DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error)
-	NewDeployVirtualMachineParams(serviceofferingid string, zoneid string) *DeployVirtualMachineParams
+	NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams
 	DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error)
 	NewDestroyVirtualMachineParams(id string) *DestroyVirtualMachineParams
 	ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error)
@@ -2784,10 +2784,11 @@ func (p *DeployVirtualMachineParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new DeployVirtualMachineParams instance,
 // as then you are sure you have configured all required params
-func (s *VirtualMachineService) NewDeployVirtualMachineParams(serviceofferingid string, zoneid string) *DeployVirtualMachineParams {
+func (s *VirtualMachineService) NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams {
 	p := &DeployVirtualMachineParams{}
 	p.p = make(map[string]interface{})
 	p.p["serviceofferingid"] = serviceofferingid
+	p.p["templateid"] = templateid
 	p.p["zoneid"] = zoneid
 	return p
 }
