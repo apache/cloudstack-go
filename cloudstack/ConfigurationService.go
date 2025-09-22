@@ -96,6 +96,9 @@ type Capability struct {
 	Customhypervisordisplayname                  string `json:"customhypervisordisplayname"`
 	Defaultuipagesize                            int64  `json:"defaultuipagesize"`
 	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
+	Dynamicscalingenabled                        bool   `json:"dynamicscalingenabled"`
+	Extensionspath                               string `json:"extensionspath"`
+	Instanceleaseenabled                         bool   `json:"instanceleaseenabled"`
 	Instancesdisksstatsretentionenabled          bool   `json:"instancesdisksstatsretentionenabled"`
 	Instancesdisksstatsretentiontime             int    `json:"instancesdisksstatsretentiontime"`
 	Instancesstatsretentiontime                  int    `json:"instancesstatsretentiontime"`
@@ -1326,6 +1329,7 @@ type UpdateStorageCapabilitiesResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -1346,6 +1350,7 @@ type UpdateStorageCapabilitiesResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`

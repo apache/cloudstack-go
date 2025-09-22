@@ -37,7 +37,7 @@ type VirtualMachineServiceIface interface {
 	CleanVMReservations(p *CleanVMReservationsParams) (*CleanVMReservationsResponse, error)
 	NewCleanVMReservationsParams() *CleanVMReservationsParams
 	DeployVirtualMachine(p *DeployVirtualMachineParams) (*DeployVirtualMachineResponse, error)
-	NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams
+	NewDeployVirtualMachineParams(serviceofferingid string, zoneid string) *DeployVirtualMachineParams
 	DestroyVirtualMachine(p *DestroyVirtualMachineParams) (*DestroyVirtualMachineResponse, error)
 	NewDestroyVirtualMachineParams(id string) *DestroyVirtualMachineParams
 	ExpungeVirtualMachine(p *ExpungeVirtualMachineParams) (*ExpungeVirtualMachineResponse, error)
@@ -315,6 +315,9 @@ type AddNicToVirtualMachineResponse struct {
 	Domainid              string                                        `json:"domainid"`
 	Domainpath            string                                        `json:"domainpath"`
 	Forvirtualnetwork     bool                                          `json:"forvirtualnetwork"`
+	Gpucardid             string                                        `json:"gpucardid"`
+	Gpucardname           string                                        `json:"gpucardname"`
+	Gpucount              int                                           `json:"gpucount"`
 	Group                 string                                        `json:"group"`
 	Groupid               string                                        `json:"groupid"`
 	Guestosid             string                                        `json:"guestosid"`
@@ -336,6 +339,12 @@ type AddNicToVirtualMachineResponse struct {
 	Jobstatus             int                                           `json:"jobstatus"`
 	Keypairs              string                                        `json:"keypairs"`
 	Lastupdated           string                                        `json:"lastupdated"`
+	Leaseduration         int                                           `json:"leaseduration"`
+	Leaseexpiryaction     string                                        `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                        `json:"leaseexpirydate"`
+	Maxheads              int64                                         `json:"maxheads"`
+	Maxresolutionx        int64                                         `json:"maxresolutionx"`
+	Maxresolutiony        int64                                         `json:"maxresolutiony"`
 	Memory                int                                           `json:"memory"`
 	Memoryintfreekbs      int64                                         `json:"memoryintfreekbs"`
 	Memorykbs             int64                                         `json:"memorykbs"`
@@ -377,6 +386,9 @@ type AddNicToVirtualMachineResponse struct {
 	Userid                string                                        `json:"userid"`
 	Username              string                                        `json:"username"`
 	Vgpu                  string                                        `json:"vgpu"`
+	Vgpuprofileid         string                                        `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                        `json:"vgpuprofilename"`
+	Videoram              int64                                         `json:"videoram"`
 	Vmtype                string                                        `json:"vmtype"`
 	Vnfdetails            map[string]string                             `json:"vnfdetails"`
 	Vnfnics               []string                                      `json:"vnfnics"`
@@ -666,6 +678,9 @@ type AssignVirtualMachineResponse struct {
 	Domainid              string                                      `json:"domainid"`
 	Domainpath            string                                      `json:"domainpath"`
 	Forvirtualnetwork     bool                                        `json:"forvirtualnetwork"`
+	Gpucardid             string                                      `json:"gpucardid"`
+	Gpucardname           string                                      `json:"gpucardname"`
+	Gpucount              int                                         `json:"gpucount"`
 	Group                 string                                      `json:"group"`
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
@@ -687,6 +702,12 @@ type AssignVirtualMachineResponse struct {
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
+	Leaseduration         int                                         `json:"leaseduration"`
+	Leaseexpiryaction     string                                      `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                      `json:"leaseexpirydate"`
+	Maxheads              int64                                       `json:"maxheads"`
+	Maxresolutionx        int64                                       `json:"maxresolutionx"`
+	Maxresolutiony        int64                                       `json:"maxresolutiony"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -728,6 +749,9 @@ type AssignVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vgpuprofileid         string                                      `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                      `json:"vgpuprofilename"`
+	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
 	Vnfnics               []string                                    `json:"vnfnics"`
@@ -1047,6 +1071,9 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Domainid              string                                                `json:"domainid"`
 	Domainpath            string                                                `json:"domainpath"`
 	Forvirtualnetwork     bool                                                  `json:"forvirtualnetwork"`
+	Gpucardid             string                                                `json:"gpucardid"`
+	Gpucardname           string                                                `json:"gpucardname"`
+	Gpucount              int                                                   `json:"gpucount"`
 	Group                 string                                                `json:"group"`
 	Groupid               string                                                `json:"groupid"`
 	Guestosid             string                                                `json:"guestosid"`
@@ -1068,6 +1095,12 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Jobstatus             int                                                   `json:"jobstatus"`
 	Keypairs              string                                                `json:"keypairs"`
 	Lastupdated           string                                                `json:"lastupdated"`
+	Leaseduration         int                                                   `json:"leaseduration"`
+	Leaseexpiryaction     string                                                `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                                `json:"leaseexpirydate"`
+	Maxheads              int64                                                 `json:"maxheads"`
+	Maxresolutionx        int64                                                 `json:"maxresolutionx"`
+	Maxresolutiony        int64                                                 `json:"maxresolutiony"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                 `json:"memorykbs"`
@@ -1109,6 +1142,9 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
+	Vgpuprofileid         string                                                `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                                `json:"vgpuprofilename"`
+	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
 	Vnfnics               []string                                              `json:"vnfnics"`
@@ -1292,6 +1328,13 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("datadiskofferinglist[%d].diskOffering", i), m[k])
 		}
 	}
+	if v, found := p.p["datadisksdetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("datadisksdetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("datadisksdetails[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["deploymentplanner"]; found {
 		u.Set("deploymentplanner", v.(string))
 	}
@@ -1325,6 +1368,13 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["dynamicscalingenabled"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("dynamicscalingenabled", vv)
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
 	}
 	if v, found := p.p["extraconfig"]; found {
 		u.Set("extraconfig", v.(string))
@@ -1368,6 +1418,13 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["keypairs"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("keypairs", vv)
+	}
+	if v, found := p.p["leaseduration"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("leaseduration", vv)
+	}
+	if v, found := p.p["leaseexpiryaction"]; found {
+		u.Set("leaseexpiryaction", v.(string))
 	}
 	if v, found := p.p["macaddress"]; found {
 		u.Set("macaddress", v.(string))
@@ -1433,6 +1490,9 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("size", vv)
 	}
+	if v, found := p.p["snapshotid"]; found {
+		u.Set("snapshotid", v.(string))
+	}
 	if v, found := p.p["startvm"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("startvm", vv)
@@ -1452,6 +1512,9 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["userdataid"]; found {
 		u.Set("userdataid", v.(string))
+	}
+	if v, found := p.p["volumeid"]; found {
+		u.Set("volumeid", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -1669,6 +1732,27 @@ func (p *DeployVirtualMachineParams) GetDatadiskofferinglist() (map[string]strin
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetDatadisksdetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["datadisksdetails"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetDatadisksdetails() {
+	if p.p != nil && p.p["datadisksdetails"] != nil {
+		delete(p.p, "datadisksdetails")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetDatadisksdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["datadisksdetails"].(map[string]string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetDeploymentplanner(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1848,6 +1932,27 @@ func (p *DeployVirtualMachineParams) GetDynamicscalingenabled() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["dynamicscalingenabled"].(bool)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
 	return value, ok
 }
 
@@ -2114,6 +2219,48 @@ func (p *DeployVirtualMachineParams) GetKeypairs() ([]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keypairs"].([]string)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetLeaseduration(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseduration"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetLeaseduration() {
+	if p.p != nil && p.p["leaseduration"] != nil {
+		delete(p.p, "leaseduration")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetLeaseduration() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseduration"].(int)
+	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) SetLeaseexpiryaction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseexpiryaction"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetLeaseexpiryaction() {
+	if p.p != nil && p.p["leaseexpiryaction"] != nil {
+		delete(p.p, "leaseexpiryaction")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetLeaseexpiryaction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseexpiryaction"].(string)
 	return value, ok
 }
 
@@ -2467,6 +2614,27 @@ func (p *DeployVirtualMachineParams) GetSize() (int64, bool) {
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetSnapshotid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["snapshotid"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetSnapshotid() {
+	if p.p != nil && p.p["snapshotid"] != nil {
+		delete(p.p, "snapshotid")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetSnapshotid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["snapshotid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetStartvm(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2572,6 +2740,27 @@ func (p *DeployVirtualMachineParams) GetUserdataid() (string, bool) {
 	return value, ok
 }
 
+func (p *DeployVirtualMachineParams) SetVolumeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["volumeid"] = v
+}
+
+func (p *DeployVirtualMachineParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
+func (p *DeployVirtualMachineParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
+}
+
 func (p *DeployVirtualMachineParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2595,11 +2784,10 @@ func (p *DeployVirtualMachineParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new DeployVirtualMachineParams instance,
 // as then you are sure you have configured all required params
-func (s *VirtualMachineService) NewDeployVirtualMachineParams(serviceofferingid string, templateid string, zoneid string) *DeployVirtualMachineParams {
+func (s *VirtualMachineService) NewDeployVirtualMachineParams(serviceofferingid string, zoneid string) *DeployVirtualMachineParams {
 	p := &DeployVirtualMachineParams{}
 	p.p = make(map[string]interface{})
 	p.p["serviceofferingid"] = serviceofferingid
-	p.p["templateid"] = templateid
 	p.p["zoneid"] = zoneid
 	return p
 }
@@ -2667,6 +2855,9 @@ type DeployVirtualMachineResponse struct {
 	Domainid              string                                      `json:"domainid"`
 	Domainpath            string                                      `json:"domainpath"`
 	Forvirtualnetwork     bool                                        `json:"forvirtualnetwork"`
+	Gpucardid             string                                      `json:"gpucardid"`
+	Gpucardname           string                                      `json:"gpucardname"`
+	Gpucount              int                                         `json:"gpucount"`
 	Group                 string                                      `json:"group"`
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
@@ -2688,6 +2879,12 @@ type DeployVirtualMachineResponse struct {
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
+	Leaseduration         int                                         `json:"leaseduration"`
+	Leaseexpiryaction     string                                      `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                      `json:"leaseexpirydate"`
+	Maxheads              int64                                       `json:"maxheads"`
+	Maxresolutionx        int64                                       `json:"maxresolutionx"`
+	Maxresolutiony        int64                                       `json:"maxresolutiony"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -2729,6 +2926,9 @@ type DeployVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vgpuprofileid         string                                      `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                      `json:"vgpuprofilename"`
+	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
 	Vnfnics               []string                                    `json:"vnfnics"`
@@ -2966,6 +3166,9 @@ type DestroyVirtualMachineResponse struct {
 	Domainid              string                                       `json:"domainid"`
 	Domainpath            string                                       `json:"domainpath"`
 	Forvirtualnetwork     bool                                         `json:"forvirtualnetwork"`
+	Gpucardid             string                                       `json:"gpucardid"`
+	Gpucardname           string                                       `json:"gpucardname"`
+	Gpucount              int                                          `json:"gpucount"`
 	Group                 string                                       `json:"group"`
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
@@ -2987,6 +3190,12 @@ type DestroyVirtualMachineResponse struct {
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
+	Leaseduration         int                                          `json:"leaseduration"`
+	Leaseexpiryaction     string                                       `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                       `json:"leaseexpirydate"`
+	Maxheads              int64                                        `json:"maxheads"`
+	Maxresolutionx        int64                                        `json:"maxresolutionx"`
+	Maxresolutiony        int64                                        `json:"maxresolutiony"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -3028,6 +3237,9 @@ type DestroyVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vgpuprofileid         string                                       `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                       `json:"vgpuprofilename"`
+	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
 	Vnfnics               []string                                     `json:"vnfnics"`
@@ -3297,9 +3509,16 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
 	if v, found := p.p["forvirtualnetwork"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvirtualnetwork", vv)
+	}
+	if v, found := p.p["gpuenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("gpuenabled", vv)
 	}
 	if v, found := p.p["groupid"]; found {
 		u.Set("groupid", v.(string))
@@ -3337,6 +3556,10 @@ func (p *ListVirtualMachinesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["leased"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("leased", vv)
 	}
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -3621,6 +3844,27 @@ func (p *ListVirtualMachinesParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesParams) SetForvirtualnetwork(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3639,6 +3883,27 @@ func (p *ListVirtualMachinesParams) GetForvirtualnetwork() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["forvirtualnetwork"].(bool)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetGpuenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpuenabled"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetGpuenabled() {
+	if p.p != nil && p.p["gpuenabled"] != nil {
+		delete(p.p, "gpuenabled")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetGpuenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpuenabled"].(bool)
 	return value, ok
 }
 
@@ -3870,6 +4135,27 @@ func (p *ListVirtualMachinesParams) GetKeyword() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesParams) SetLeased(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leased"] = v
+}
+
+func (p *ListVirtualMachinesParams) ResetLeased() {
+	if p.p != nil && p.p["leased"] != nil {
+		delete(p.p, "leased")
+	}
+}
+
+func (p *ListVirtualMachinesParams) GetLeased() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leased"].(bool)
 	return value, ok
 }
 
@@ -4432,6 +4718,9 @@ type VirtualMachine struct {
 	Domainid              string                        `json:"domainid"`
 	Domainpath            string                        `json:"domainpath"`
 	Forvirtualnetwork     bool                          `json:"forvirtualnetwork"`
+	Gpucardid             string                        `json:"gpucardid"`
+	Gpucardname           string                        `json:"gpucardname"`
+	Gpucount              int                           `json:"gpucount"`
 	Group                 string                        `json:"group"`
 	Groupid               string                        `json:"groupid"`
 	Guestosid             string                        `json:"guestosid"`
@@ -4453,6 +4742,12 @@ type VirtualMachine struct {
 	Jobstatus             int                           `json:"jobstatus"`
 	Keypairs              string                        `json:"keypairs"`
 	Lastupdated           string                        `json:"lastupdated"`
+	Leaseduration         int                           `json:"leaseduration"`
+	Leaseexpiryaction     string                        `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                        `json:"leaseexpirydate"`
+	Maxheads              int64                         `json:"maxheads"`
+	Maxresolutionx        int64                         `json:"maxresolutionx"`
+	Maxresolutiony        int64                         `json:"maxresolutiony"`
 	Memory                int                           `json:"memory"`
 	Memoryintfreekbs      int64                         `json:"memoryintfreekbs"`
 	Memorykbs             int64                         `json:"memorykbs"`
@@ -4494,6 +4789,9 @@ type VirtualMachine struct {
 	Userid                string                        `json:"userid"`
 	Username              string                        `json:"username"`
 	Vgpu                  string                        `json:"vgpu"`
+	Vgpuprofileid         string                        `json:"vgpuprofileid"`
+	Vgpuprofilename       string                        `json:"vgpuprofilename"`
+	Videoram              int64                         `json:"videoram"`
 	Vmtype                string                        `json:"vmtype"`
 	Vnfdetails            map[string]string             `json:"vnfdetails"`
 	Vnfnics               []string                      `json:"vnfnics"`
@@ -4615,9 +4913,16 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
 	if v, found := p.p["forvirtualnetwork"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvirtualnetwork", vv)
+	}
+	if v, found := p.p["gpuenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("gpuenabled", vv)
 	}
 	if v, found := p.p["groupid"]; found {
 		u.Set("groupid", v.(string))
@@ -4655,6 +4960,10 @@ func (p *ListVirtualMachinesMetricsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["leased"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("leased", vv)
 	}
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -4939,6 +5248,27 @@ func (p *ListVirtualMachinesMetricsParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVirtualMachinesMetricsParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
 func (p *ListVirtualMachinesMetricsParams) SetForvirtualnetwork(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -4957,6 +5287,27 @@ func (p *ListVirtualMachinesMetricsParams) GetForvirtualnetwork() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["forvirtualnetwork"].(bool)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetGpuenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpuenabled"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetGpuenabled() {
+	if p.p != nil && p.p["gpuenabled"] != nil {
+		delete(p.p, "gpuenabled")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetGpuenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpuenabled"].(bool)
 	return value, ok
 }
 
@@ -5188,6 +5539,27 @@ func (p *ListVirtualMachinesMetricsParams) GetKeyword() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVirtualMachinesMetricsParams) SetLeased(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leased"] = v
+}
+
+func (p *ListVirtualMachinesMetricsParams) ResetLeased() {
+	if p.p != nil && p.p["leased"] != nil {
+		delete(p.p, "leased")
+	}
+}
+
+func (p *ListVirtualMachinesMetricsParams) GetLeased() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leased"].(bool)
 	return value, ok
 }
 
@@ -5754,6 +6126,9 @@ type VirtualMachinesMetric struct {
 	Domainid              string                               `json:"domainid"`
 	Domainpath            string                               `json:"domainpath"`
 	Forvirtualnetwork     bool                                 `json:"forvirtualnetwork"`
+	Gpucardid             string                               `json:"gpucardid"`
+	Gpucardname           string                               `json:"gpucardname"`
+	Gpucount              int                                  `json:"gpucount"`
 	Group                 string                               `json:"group"`
 	Groupid               string                               `json:"groupid"`
 	Guestosid             string                               `json:"guestosid"`
@@ -5775,6 +6150,12 @@ type VirtualMachinesMetric struct {
 	Jobstatus             int                                  `json:"jobstatus"`
 	Keypairs              string                               `json:"keypairs"`
 	Lastupdated           string                               `json:"lastupdated"`
+	Leaseduration         int                                  `json:"leaseduration"`
+	Leaseexpiryaction     string                               `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                               `json:"leaseexpirydate"`
+	Maxheads              int64                                `json:"maxheads"`
+	Maxresolutionx        int64                                `json:"maxresolutionx"`
+	Maxresolutiony        int64                                `json:"maxresolutiony"`
 	Memory                int                                  `json:"memory"`
 	Memoryintfreekbs      int64                                `json:"memoryintfreekbs"`
 	Memorykbs             int64                                `json:"memorykbs"`
@@ -5819,6 +6200,9 @@ type VirtualMachinesMetric struct {
 	Userid                string                               `json:"userid"`
 	Username              string                               `json:"username"`
 	Vgpu                  string                               `json:"vgpu"`
+	Vgpuprofileid         string                               `json:"vgpuprofileid"`
+	Vgpuprofilename       string                               `json:"vgpuprofilename"`
+	Videoram              int64                                `json:"videoram"`
 	Vmtype                string                               `json:"vmtype"`
 	Vnfdetails            map[string]string                    `json:"vnfdetails"`
 	Vnfnics               []string                             `json:"vnfnics"`
@@ -6351,6 +6735,9 @@ type MigrateVirtualMachineResponse struct {
 	Domainid              string                                       `json:"domainid"`
 	Domainpath            string                                       `json:"domainpath"`
 	Forvirtualnetwork     bool                                         `json:"forvirtualnetwork"`
+	Gpucardid             string                                       `json:"gpucardid"`
+	Gpucardname           string                                       `json:"gpucardname"`
+	Gpucount              int                                          `json:"gpucount"`
 	Group                 string                                       `json:"group"`
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
@@ -6372,6 +6759,12 @@ type MigrateVirtualMachineResponse struct {
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
+	Leaseduration         int                                          `json:"leaseduration"`
+	Leaseexpiryaction     string                                       `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                       `json:"leaseexpirydate"`
+	Maxheads              int64                                        `json:"maxheads"`
+	Maxresolutionx        int64                                        `json:"maxresolutionx"`
+	Maxresolutiony        int64                                        `json:"maxresolutiony"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -6413,6 +6806,9 @@ type MigrateVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vgpuprofileid         string                                       `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                       `json:"vgpuprofilename"`
+	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
 	Vnfnics               []string                                     `json:"vnfnics"`
@@ -6692,6 +7088,9 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Domainid              string                                                 `json:"domainid"`
 	Domainpath            string                                                 `json:"domainpath"`
 	Forvirtualnetwork     bool                                                   `json:"forvirtualnetwork"`
+	Gpucardid             string                                                 `json:"gpucardid"`
+	Gpucardname           string                                                 `json:"gpucardname"`
+	Gpucount              int                                                    `json:"gpucount"`
 	Group                 string                                                 `json:"group"`
 	Groupid               string                                                 `json:"groupid"`
 	Guestosid             string                                                 `json:"guestosid"`
@@ -6713,6 +7112,12 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Jobstatus             int                                                    `json:"jobstatus"`
 	Keypairs              string                                                 `json:"keypairs"`
 	Lastupdated           string                                                 `json:"lastupdated"`
+	Leaseduration         int                                                    `json:"leaseduration"`
+	Leaseexpiryaction     string                                                 `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                                 `json:"leaseexpirydate"`
+	Maxheads              int64                                                  `json:"maxheads"`
+	Maxresolutionx        int64                                                  `json:"maxresolutionx"`
+	Maxresolutiony        int64                                                  `json:"maxresolutiony"`
 	Memory                int                                                    `json:"memory"`
 	Memoryintfreekbs      int64                                                  `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                  `json:"memorykbs"`
@@ -6754,6 +7159,9 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Userid                string                                                 `json:"userid"`
 	Username              string                                                 `json:"username"`
 	Vgpu                  string                                                 `json:"vgpu"`
+	Vgpuprofileid         string                                                 `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                                 `json:"vgpuprofilename"`
+	Videoram              int64                                                  `json:"videoram"`
 	Vmtype                string                                                 `json:"vmtype"`
 	Vnfdetails            map[string]string                                      `json:"vnfdetails"`
 	Vnfnics               []string                                               `json:"vnfnics"`
@@ -6991,6 +7399,9 @@ type RebootVirtualMachineResponse struct {
 	Domainid              string                                      `json:"domainid"`
 	Domainpath            string                                      `json:"domainpath"`
 	Forvirtualnetwork     bool                                        `json:"forvirtualnetwork"`
+	Gpucardid             string                                      `json:"gpucardid"`
+	Gpucardname           string                                      `json:"gpucardname"`
+	Gpucount              int                                         `json:"gpucount"`
 	Group                 string                                      `json:"group"`
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
@@ -7012,6 +7423,12 @@ type RebootVirtualMachineResponse struct {
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
+	Leaseduration         int                                         `json:"leaseduration"`
+	Leaseexpiryaction     string                                      `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                      `json:"leaseexpirydate"`
+	Maxheads              int64                                       `json:"maxheads"`
+	Maxresolutionx        int64                                       `json:"maxresolutionx"`
+	Maxresolutiony        int64                                       `json:"maxresolutiony"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -7053,6 +7470,9 @@ type RebootVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vgpuprofileid         string                                      `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                      `json:"vgpuprofilename"`
+	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
 	Vnfnics               []string                                    `json:"vnfnics"`
@@ -7220,6 +7640,9 @@ type RecoverVirtualMachineResponse struct {
 	Domainid              string                                       `json:"domainid"`
 	Domainpath            string                                       `json:"domainpath"`
 	Forvirtualnetwork     bool                                         `json:"forvirtualnetwork"`
+	Gpucardid             string                                       `json:"gpucardid"`
+	Gpucardname           string                                       `json:"gpucardname"`
+	Gpucount              int                                          `json:"gpucount"`
 	Group                 string                                       `json:"group"`
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
@@ -7241,6 +7664,12 @@ type RecoverVirtualMachineResponse struct {
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
+	Leaseduration         int                                          `json:"leaseduration"`
+	Leaseexpiryaction     string                                       `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                       `json:"leaseexpirydate"`
+	Maxheads              int64                                        `json:"maxheads"`
+	Maxresolutionx        int64                                        `json:"maxresolutionx"`
+	Maxresolutiony        int64                                        `json:"maxresolutiony"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -7282,6 +7711,9 @@ type RecoverVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vgpuprofileid         string                                       `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                       `json:"vgpuprofilename"`
+	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
 	Vnfnics               []string                                     `json:"vnfnics"`
@@ -7494,6 +7926,9 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Domainid              string                                             `json:"domainid"`
 	Domainpath            string                                             `json:"domainpath"`
 	Forvirtualnetwork     bool                                               `json:"forvirtualnetwork"`
+	Gpucardid             string                                             `json:"gpucardid"`
+	Gpucardname           string                                             `json:"gpucardname"`
+	Gpucount              int                                                `json:"gpucount"`
 	Group                 string                                             `json:"group"`
 	Groupid               string                                             `json:"groupid"`
 	Guestosid             string                                             `json:"guestosid"`
@@ -7515,6 +7950,12 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Jobstatus             int                                                `json:"jobstatus"`
 	Keypairs              string                                             `json:"keypairs"`
 	Lastupdated           string                                             `json:"lastupdated"`
+	Leaseduration         int                                                `json:"leaseduration"`
+	Leaseexpiryaction     string                                             `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                             `json:"leaseexpirydate"`
+	Maxheads              int64                                              `json:"maxheads"`
+	Maxresolutionx        int64                                              `json:"maxresolutionx"`
+	Maxresolutiony        int64                                              `json:"maxresolutiony"`
 	Memory                int                                                `json:"memory"`
 	Memoryintfreekbs      int64                                              `json:"memoryintfreekbs"`
 	Memorykbs             int64                                              `json:"memorykbs"`
@@ -7556,6 +7997,9 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Userid                string                                             `json:"userid"`
 	Username              string                                             `json:"username"`
 	Vgpu                  string                                             `json:"vgpu"`
+	Vgpuprofileid         string                                             `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                             `json:"vgpuprofilename"`
+	Videoram              int64                                              `json:"videoram"`
 	Vmtype                string                                             `json:"vmtype"`
 	Vnfdetails            map[string]string                                  `json:"vnfdetails"`
 	Vnfnics               []string                                           `json:"vnfnics"`
@@ -7767,6 +8211,9 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Domainid              string                                                `json:"domainid"`
 	Domainpath            string                                                `json:"domainpath"`
 	Forvirtualnetwork     bool                                                  `json:"forvirtualnetwork"`
+	Gpucardid             string                                                `json:"gpucardid"`
+	Gpucardname           string                                                `json:"gpucardname"`
+	Gpucount              int                                                   `json:"gpucount"`
 	Group                 string                                                `json:"group"`
 	Groupid               string                                                `json:"groupid"`
 	Guestosid             string                                                `json:"guestosid"`
@@ -7788,6 +8235,12 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Jobstatus             int                                                   `json:"jobstatus"`
 	Keypairs              string                                                `json:"keypairs"`
 	Lastupdated           string                                                `json:"lastupdated"`
+	Leaseduration         int                                                   `json:"leaseduration"`
+	Leaseexpiryaction     string                                                `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                                `json:"leaseexpirydate"`
+	Maxheads              int64                                                 `json:"maxheads"`
+	Maxresolutionx        int64                                                 `json:"maxresolutionx"`
+	Maxresolutiony        int64                                                 `json:"maxresolutiony"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                 `json:"memorykbs"`
@@ -7829,6 +8282,9 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
+	Vgpuprofileid         string                                                `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                                `json:"vgpuprofilename"`
+	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
 	Vnfnics               []string                                              `json:"vnfnics"`
@@ -8144,6 +8600,9 @@ type ResetUserDataForVirtualMachineResponse struct {
 	Domainid              string                                                `json:"domainid"`
 	Domainpath            string                                                `json:"domainpath"`
 	Forvirtualnetwork     bool                                                  `json:"forvirtualnetwork"`
+	Gpucardid             string                                                `json:"gpucardid"`
+	Gpucardname           string                                                `json:"gpucardname"`
+	Gpucount              int                                                   `json:"gpucount"`
 	Group                 string                                                `json:"group"`
 	Groupid               string                                                `json:"groupid"`
 	Guestosid             string                                                `json:"guestosid"`
@@ -8165,6 +8624,12 @@ type ResetUserDataForVirtualMachineResponse struct {
 	Jobstatus             int                                                   `json:"jobstatus"`
 	Keypairs              string                                                `json:"keypairs"`
 	Lastupdated           string                                                `json:"lastupdated"`
+	Leaseduration         int                                                   `json:"leaseduration"`
+	Leaseexpiryaction     string                                                `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                                `json:"leaseexpirydate"`
+	Maxheads              int64                                                 `json:"maxheads"`
+	Maxresolutionx        int64                                                 `json:"maxresolutionx"`
+	Maxresolutiony        int64                                                 `json:"maxresolutiony"`
 	Memory                int                                                   `json:"memory"`
 	Memoryintfreekbs      int64                                                 `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                 `json:"memorykbs"`
@@ -8206,6 +8671,9 @@ type ResetUserDataForVirtualMachineResponse struct {
 	Userid                string                                                `json:"userid"`
 	Username              string                                                `json:"username"`
 	Vgpu                  string                                                `json:"vgpu"`
+	Vgpuprofileid         string                                                `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                                `json:"vgpuprofilename"`
+	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
 	Vnfnics               []string                                              `json:"vnfnics"`
@@ -8518,6 +8986,9 @@ type RestoreVirtualMachineResponse struct {
 	Domainid              string                                       `json:"domainid"`
 	Domainpath            string                                       `json:"domainpath"`
 	Forvirtualnetwork     bool                                         `json:"forvirtualnetwork"`
+	Gpucardid             string                                       `json:"gpucardid"`
+	Gpucardname           string                                       `json:"gpucardname"`
+	Gpucount              int                                          `json:"gpucount"`
 	Group                 string                                       `json:"group"`
 	Groupid               string                                       `json:"groupid"`
 	Guestosid             string                                       `json:"guestosid"`
@@ -8539,6 +9010,12 @@ type RestoreVirtualMachineResponse struct {
 	Jobstatus             int                                          `json:"jobstatus"`
 	Keypairs              string                                       `json:"keypairs"`
 	Lastupdated           string                                       `json:"lastupdated"`
+	Leaseduration         int                                          `json:"leaseduration"`
+	Leaseexpiryaction     string                                       `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                       `json:"leaseexpirydate"`
+	Maxheads              int64                                        `json:"maxheads"`
+	Maxresolutionx        int64                                        `json:"maxresolutionx"`
+	Maxresolutiony        int64                                        `json:"maxresolutiony"`
 	Memory                int                                          `json:"memory"`
 	Memoryintfreekbs      int64                                        `json:"memoryintfreekbs"`
 	Memorykbs             int64                                        `json:"memorykbs"`
@@ -8580,6 +9057,9 @@ type RestoreVirtualMachineResponse struct {
 	Userid                string                                       `json:"userid"`
 	Username              string                                       `json:"username"`
 	Vgpu                  string                                       `json:"vgpu"`
+	Vgpuprofileid         string                                       `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                       `json:"vgpuprofilename"`
+	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
 	Vnfnics               []string                                     `json:"vnfnics"`
@@ -9147,6 +9627,9 @@ type StartVirtualMachineResponse struct {
 	Domainid              string                                     `json:"domainid"`
 	Domainpath            string                                     `json:"domainpath"`
 	Forvirtualnetwork     bool                                       `json:"forvirtualnetwork"`
+	Gpucardid             string                                     `json:"gpucardid"`
+	Gpucardname           string                                     `json:"gpucardname"`
+	Gpucount              int                                        `json:"gpucount"`
 	Group                 string                                     `json:"group"`
 	Groupid               string                                     `json:"groupid"`
 	Guestosid             string                                     `json:"guestosid"`
@@ -9168,6 +9651,12 @@ type StartVirtualMachineResponse struct {
 	Jobstatus             int                                        `json:"jobstatus"`
 	Keypairs              string                                     `json:"keypairs"`
 	Lastupdated           string                                     `json:"lastupdated"`
+	Leaseduration         int                                        `json:"leaseduration"`
+	Leaseexpiryaction     string                                     `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                     `json:"leaseexpirydate"`
+	Maxheads              int64                                      `json:"maxheads"`
+	Maxresolutionx        int64                                      `json:"maxresolutionx"`
+	Maxresolutiony        int64                                      `json:"maxresolutiony"`
 	Memory                int                                        `json:"memory"`
 	Memoryintfreekbs      int64                                      `json:"memoryintfreekbs"`
 	Memorykbs             int64                                      `json:"memorykbs"`
@@ -9209,6 +9698,9 @@ type StartVirtualMachineResponse struct {
 	Userid                string                                     `json:"userid"`
 	Username              string                                     `json:"username"`
 	Vgpu                  string                                     `json:"vgpu"`
+	Vgpuprofileid         string                                     `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                     `json:"vgpuprofilename"`
+	Videoram              int64                                      `json:"videoram"`
 	Vmtype                string                                     `json:"vmtype"`
 	Vnfdetails            map[string]string                          `json:"vnfdetails"`
 	Vnfnics               []string                                   `json:"vnfnics"`
@@ -9421,6 +9913,9 @@ type StopVirtualMachineResponse struct {
 	Domainid              string                                    `json:"domainid"`
 	Domainpath            string                                    `json:"domainpath"`
 	Forvirtualnetwork     bool                                      `json:"forvirtualnetwork"`
+	Gpucardid             string                                    `json:"gpucardid"`
+	Gpucardname           string                                    `json:"gpucardname"`
+	Gpucount              int                                       `json:"gpucount"`
 	Group                 string                                    `json:"group"`
 	Groupid               string                                    `json:"groupid"`
 	Guestosid             string                                    `json:"guestosid"`
@@ -9442,6 +9937,12 @@ type StopVirtualMachineResponse struct {
 	Jobstatus             int                                       `json:"jobstatus"`
 	Keypairs              string                                    `json:"keypairs"`
 	Lastupdated           string                                    `json:"lastupdated"`
+	Leaseduration         int                                       `json:"leaseduration"`
+	Leaseexpiryaction     string                                    `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                    `json:"leaseexpirydate"`
+	Maxheads              int64                                     `json:"maxheads"`
+	Maxresolutionx        int64                                     `json:"maxresolutionx"`
+	Maxresolutiony        int64                                     `json:"maxresolutiony"`
 	Memory                int                                       `json:"memory"`
 	Memoryintfreekbs      int64                                     `json:"memoryintfreekbs"`
 	Memorykbs             int64                                     `json:"memorykbs"`
@@ -9483,6 +9984,9 @@ type StopVirtualMachineResponse struct {
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
+	Vgpuprofileid         string                                    `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                    `json:"vgpuprofilename"`
+	Videoram              int64                                     `json:"videoram"`
 	Vmtype                string                                    `json:"vmtype"`
 	Vnfdetails            map[string]string                         `json:"vnfdetails"`
 	Vnfnics               []string                                  `json:"vnfnics"`
@@ -9695,6 +10199,9 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Domainid              string                                                   `json:"domainid"`
 	Domainpath            string                                                   `json:"domainpath"`
 	Forvirtualnetwork     bool                                                     `json:"forvirtualnetwork"`
+	Gpucardid             string                                                   `json:"gpucardid"`
+	Gpucardname           string                                                   `json:"gpucardname"`
+	Gpucount              int                                                      `json:"gpucount"`
 	Group                 string                                                   `json:"group"`
 	Groupid               string                                                   `json:"groupid"`
 	Guestosid             string                                                   `json:"guestosid"`
@@ -9716,6 +10223,12 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Jobstatus             int                                                      `json:"jobstatus"`
 	Keypairs              string                                                   `json:"keypairs"`
 	Lastupdated           string                                                   `json:"lastupdated"`
+	Leaseduration         int                                                      `json:"leaseduration"`
+	Leaseexpiryaction     string                                                   `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                                   `json:"leaseexpirydate"`
+	Maxheads              int64                                                    `json:"maxheads"`
+	Maxresolutionx        int64                                                    `json:"maxresolutionx"`
+	Maxresolutiony        int64                                                    `json:"maxresolutiony"`
 	Memory                int                                                      `json:"memory"`
 	Memoryintfreekbs      int64                                                    `json:"memoryintfreekbs"`
 	Memorykbs             int64                                                    `json:"memorykbs"`
@@ -9757,6 +10270,9 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Userid                string                                                   `json:"userid"`
 	Username              string                                                   `json:"username"`
 	Vgpu                  string                                                   `json:"vgpu"`
+	Vgpuprofileid         string                                                   `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                                   `json:"vgpuprofilename"`
+	Videoram              int64                                                    `json:"videoram"`
 	Vmtype                string                                                   `json:"vmtype"`
 	Vnfdetails            map[string]string                                        `json:"vnfdetails"`
 	Vnfnics               []string                                                 `json:"vnfnics"`
@@ -9896,6 +10412,13 @@ func (p *UpdateVirtualMachineParams) toURLValues() url.Values {
 	if v, found := p.p["isdynamicallyscalable"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("isdynamicallyscalable", vv)
+	}
+	if v, found := p.p["leaseduration"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("leaseduration", vv)
+	}
+	if v, found := p.p["leaseexpiryaction"]; found {
+		u.Set("leaseexpiryaction", v.(string))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -10214,6 +10737,48 @@ func (p *UpdateVirtualMachineParams) GetIsdynamicallyscalable() (bool, bool) {
 	return value, ok
 }
 
+func (p *UpdateVirtualMachineParams) SetLeaseduration(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseduration"] = v
+}
+
+func (p *UpdateVirtualMachineParams) ResetLeaseduration() {
+	if p.p != nil && p.p["leaseduration"] != nil {
+		delete(p.p, "leaseduration")
+	}
+}
+
+func (p *UpdateVirtualMachineParams) GetLeaseduration() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseduration"].(int)
+	return value, ok
+}
+
+func (p *UpdateVirtualMachineParams) SetLeaseexpiryaction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseexpiryaction"] = v
+}
+
+func (p *UpdateVirtualMachineParams) ResetLeaseexpiryaction() {
+	if p.p != nil && p.p["leaseexpiryaction"] != nil {
+		delete(p.p, "leaseexpiryaction")
+	}
+}
+
+func (p *UpdateVirtualMachineParams) GetLeaseexpiryaction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseexpiryaction"].(string)
+	return value, ok
+}
+
 func (p *UpdateVirtualMachineParams) SetName(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -10413,6 +10978,9 @@ type UpdateVirtualMachineResponse struct {
 	Domainid              string                                      `json:"domainid"`
 	Domainpath            string                                      `json:"domainpath"`
 	Forvirtualnetwork     bool                                        `json:"forvirtualnetwork"`
+	Gpucardid             string                                      `json:"gpucardid"`
+	Gpucardname           string                                      `json:"gpucardname"`
+	Gpucount              int                                         `json:"gpucount"`
 	Group                 string                                      `json:"group"`
 	Groupid               string                                      `json:"groupid"`
 	Guestosid             string                                      `json:"guestosid"`
@@ -10434,6 +11002,12 @@ type UpdateVirtualMachineResponse struct {
 	Jobstatus             int                                         `json:"jobstatus"`
 	Keypairs              string                                      `json:"keypairs"`
 	Lastupdated           string                                      `json:"lastupdated"`
+	Leaseduration         int                                         `json:"leaseduration"`
+	Leaseexpiryaction     string                                      `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                      `json:"leaseexpirydate"`
+	Maxheads              int64                                       `json:"maxheads"`
+	Maxresolutionx        int64                                       `json:"maxresolutionx"`
+	Maxresolutiony        int64                                       `json:"maxresolutiony"`
 	Memory                int                                         `json:"memory"`
 	Memoryintfreekbs      int64                                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                                       `json:"memorykbs"`
@@ -10475,6 +11049,9 @@ type UpdateVirtualMachineResponse struct {
 	Userid                string                                      `json:"userid"`
 	Username              string                                      `json:"username"`
 	Vgpu                  string                                      `json:"vgpu"`
+	Vgpuprofileid         string                                      `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                      `json:"vgpuprofilename"`
+	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
 	Vnfnics               []string                                    `json:"vnfnics"`
@@ -11858,6 +12435,9 @@ type ImportVmResponse struct {
 	Domainid              string                          `json:"domainid"`
 	Domainpath            string                          `json:"domainpath"`
 	Forvirtualnetwork     bool                            `json:"forvirtualnetwork"`
+	Gpucardid             string                          `json:"gpucardid"`
+	Gpucardname           string                          `json:"gpucardname"`
+	Gpucount              int                             `json:"gpucount"`
 	Group                 string                          `json:"group"`
 	Groupid               string                          `json:"groupid"`
 	Guestosid             string                          `json:"guestosid"`
@@ -11879,6 +12459,12 @@ type ImportVmResponse struct {
 	Jobstatus             int                             `json:"jobstatus"`
 	Keypairs              string                          `json:"keypairs"`
 	Lastupdated           string                          `json:"lastupdated"`
+	Leaseduration         int                             `json:"leaseduration"`
+	Leaseexpiryaction     string                          `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                          `json:"leaseexpirydate"`
+	Maxheads              int64                           `json:"maxheads"`
+	Maxresolutionx        int64                           `json:"maxresolutionx"`
+	Maxresolutiony        int64                           `json:"maxresolutiony"`
 	Memory                int                             `json:"memory"`
 	Memoryintfreekbs      int64                           `json:"memoryintfreekbs"`
 	Memorykbs             int64                           `json:"memorykbs"`
@@ -11920,6 +12506,9 @@ type ImportVmResponse struct {
 	Userid                string                          `json:"userid"`
 	Username              string                          `json:"username"`
 	Vgpu                  string                          `json:"vgpu"`
+	Vgpuprofileid         string                          `json:"vgpuprofileid"`
+	Vgpuprofilename       string                          `json:"vgpuprofilename"`
+	Videoram              int64                           `json:"videoram"`
 	Vmtype                string                          `json:"vmtype"`
 	Vnfdetails            map[string]string               `json:"vnfdetails"`
 	Vnfnics               []string                        `json:"vnfnics"`
@@ -12747,6 +13336,9 @@ type ImportUnmanagedInstanceResponse struct {
 	Domainid              string                                         `json:"domainid"`
 	Domainpath            string                                         `json:"domainpath"`
 	Forvirtualnetwork     bool                                           `json:"forvirtualnetwork"`
+	Gpucardid             string                                         `json:"gpucardid"`
+	Gpucardname           string                                         `json:"gpucardname"`
+	Gpucount              int                                            `json:"gpucount"`
 	Group                 string                                         `json:"group"`
 	Groupid               string                                         `json:"groupid"`
 	Guestosid             string                                         `json:"guestosid"`
@@ -12768,6 +13360,12 @@ type ImportUnmanagedInstanceResponse struct {
 	Jobstatus             int                                            `json:"jobstatus"`
 	Keypairs              string                                         `json:"keypairs"`
 	Lastupdated           string                                         `json:"lastupdated"`
+	Leaseduration         int                                            `json:"leaseduration"`
+	Leaseexpiryaction     string                                         `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                         `json:"leaseexpirydate"`
+	Maxheads              int64                                          `json:"maxheads"`
+	Maxresolutionx        int64                                          `json:"maxresolutionx"`
+	Maxresolutiony        int64                                          `json:"maxresolutiony"`
 	Memory                int                                            `json:"memory"`
 	Memoryintfreekbs      int64                                          `json:"memoryintfreekbs"`
 	Memorykbs             int64                                          `json:"memorykbs"`
@@ -12809,6 +13407,9 @@ type ImportUnmanagedInstanceResponse struct {
 	Userid                string                                         `json:"userid"`
 	Username              string                                         `json:"username"`
 	Vgpu                  string                                         `json:"vgpu"`
+	Vgpuprofileid         string                                         `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                         `json:"vgpuprofilename"`
+	Videoram              int64                                          `json:"videoram"`
 	Vmtype                string                                         `json:"vmtype"`
 	Vnfdetails            map[string]string                              `json:"vnfdetails"`
 	Vnfnics               []string                                       `json:"vnfnics"`

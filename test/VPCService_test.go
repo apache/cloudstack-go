@@ -54,7 +54,7 @@ func TestVPCService(t *testing.T) {
 		if _, ok := response["createStaticRoute"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.VPC.NewCreateStaticRouteParams("cidr", "gatewayid")
+		p := client.VPC.NewCreateStaticRouteParams("cidr")
 		r, err := client.VPC.CreateStaticRoute(p)
 		if err != nil {
 			t.Errorf(err.Error())

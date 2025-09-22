@@ -31,7 +31,7 @@ type VirtualNetworkFunctionsServiceIface interface {
 	DeleteVnfTemplate(p *DeleteVnfTemplateParams) (*DeleteVnfTemplateResponse, error)
 	NewDeleteVnfTemplateParams(id string) *DeleteVnfTemplateParams
 	DeployVnfAppliance(p *DeployVnfApplianceParams) (*DeployVnfApplianceResponse, error)
-	NewDeployVnfApplianceParams(serviceofferingid string, templateid string, zoneid string) *DeployVnfApplianceParams
+	NewDeployVnfApplianceParams(serviceofferingid string, zoneid string) *DeployVnfApplianceParams
 	ListVnfAppliances(p *ListVnfAppliancesParams) (*ListVnfAppliancesResponse, error)
 	NewListVnfAppliancesParams() *ListVnfAppliancesParams
 	GetVnfApplianceID(name string, opts ...OptionFunc) (string, int, error)
@@ -248,6 +248,13 @@ func (p *DeployVnfApplianceParams) toURLValues() url.Values {
 			u.Set(fmt.Sprintf("datadiskofferinglist[%d].diskOffering", i), m[k])
 		}
 	}
+	if v, found := p.p["datadisksdetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("datadisksdetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("datadisksdetails[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["deploymentplanner"]; found {
 		u.Set("deploymentplanner", v.(string))
 	}
@@ -280,6 +287,13 @@ func (p *DeployVnfApplianceParams) toURLValues() url.Values {
 	if v, found := p.p["dynamicscalingenabled"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("dynamicscalingenabled", vv)
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
 	}
 	if v, found := p.p["extraconfig"]; found {
 		u.Set("extraconfig", v.(string))
@@ -322,6 +336,13 @@ func (p *DeployVnfApplianceParams) toURLValues() url.Values {
 	if v, found := p.p["keypairs"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("keypairs", vv)
+	}
+	if v, found := p.p["leaseduration"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("leaseduration", vv)
+	}
+	if v, found := p.p["leaseexpiryaction"]; found {
+		u.Set("leaseexpiryaction", v.(string))
 	}
 	if v, found := p.p["macaddress"]; found {
 		u.Set("macaddress", v.(string))
@@ -383,6 +404,9 @@ func (p *DeployVnfApplianceParams) toURLValues() url.Values {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("size", vv)
 	}
+	if v, found := p.p["snapshotid"]; found {
+		u.Set("snapshotid", v.(string))
+	}
 	if v, found := p.p["startvm"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("startvm", vv)
@@ -410,6 +434,9 @@ func (p *DeployVnfApplianceParams) toURLValues() url.Values {
 	if v, found := p.p["vnfconfiguremanagement"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("vnfconfiguremanagement", vv)
+	}
+	if v, found := p.p["volumeid"]; found {
+		u.Set("volumeid", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -606,6 +633,27 @@ func (p *DeployVnfApplianceParams) GetDatadiskofferinglist() (map[string]string,
 	return value, ok
 }
 
+func (p *DeployVnfApplianceParams) SetDatadisksdetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["datadisksdetails"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetDatadisksdetails() {
+	if p.p != nil && p.p["datadisksdetails"] != nil {
+		delete(p.p, "datadisksdetails")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetDatadisksdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["datadisksdetails"].(map[string]string)
+	return value, ok
+}
+
 func (p *DeployVnfApplianceParams) SetDeploymentplanner(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -771,6 +819,27 @@ func (p *DeployVnfApplianceParams) GetDynamicscalingenabled() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["dynamicscalingenabled"].(bool)
+	return value, ok
+}
+
+func (p *DeployVnfApplianceParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
 	return value, ok
 }
 
@@ -1023,6 +1092,48 @@ func (p *DeployVnfApplianceParams) GetKeypairs() ([]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keypairs"].([]string)
+	return value, ok
+}
+
+func (p *DeployVnfApplianceParams) SetLeaseduration(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseduration"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetLeaseduration() {
+	if p.p != nil && p.p["leaseduration"] != nil {
+		delete(p.p, "leaseduration")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetLeaseduration() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseduration"].(int)
+	return value, ok
+}
+
+func (p *DeployVnfApplianceParams) SetLeaseexpiryaction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseexpiryaction"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetLeaseexpiryaction() {
+	if p.p != nil && p.p["leaseexpiryaction"] != nil {
+		delete(p.p, "leaseexpiryaction")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetLeaseexpiryaction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseexpiryaction"].(string)
 	return value, ok
 }
 
@@ -1341,6 +1452,27 @@ func (p *DeployVnfApplianceParams) GetSize() (int64, bool) {
 	return value, ok
 }
 
+func (p *DeployVnfApplianceParams) SetSnapshotid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["snapshotid"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetSnapshotid() {
+	if p.p != nil && p.p["snapshotid"] != nil {
+		delete(p.p, "snapshotid")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetSnapshotid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["snapshotid"].(string)
+	return value, ok
+}
+
 func (p *DeployVnfApplianceParams) SetStartvm(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1488,6 +1620,27 @@ func (p *DeployVnfApplianceParams) GetVnfconfiguremanagement() (bool, bool) {
 	return value, ok
 }
 
+func (p *DeployVnfApplianceParams) SetVolumeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["volumeid"] = v
+}
+
+func (p *DeployVnfApplianceParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
+func (p *DeployVnfApplianceParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
+}
+
 func (p *DeployVnfApplianceParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1511,11 +1664,10 @@ func (p *DeployVnfApplianceParams) GetZoneid() (string, bool) {
 
 // You should always use this function to get a new DeployVnfApplianceParams instance,
 // as then you are sure you have configured all required params
-func (s *VirtualNetworkFunctionsService) NewDeployVnfApplianceParams(serviceofferingid string, templateid string, zoneid string) *DeployVnfApplianceParams {
+func (s *VirtualNetworkFunctionsService) NewDeployVnfApplianceParams(serviceofferingid string, zoneid string) *DeployVnfApplianceParams {
 	p := &DeployVnfApplianceParams{}
 	p.p = make(map[string]interface{})
 	p.p["serviceofferingid"] = serviceofferingid
-	p.p["templateid"] = templateid
 	p.p["zoneid"] = zoneid
 	return p
 }
@@ -1583,6 +1735,9 @@ type DeployVnfApplianceResponse struct {
 	Domainid              string                                    `json:"domainid"`
 	Domainpath            string                                    `json:"domainpath"`
 	Forvirtualnetwork     bool                                      `json:"forvirtualnetwork"`
+	Gpucardid             string                                    `json:"gpucardid"`
+	Gpucardname           string                                    `json:"gpucardname"`
+	Gpucount              int                                       `json:"gpucount"`
 	Group                 string                                    `json:"group"`
 	Groupid               string                                    `json:"groupid"`
 	Guestosid             string                                    `json:"guestosid"`
@@ -1604,6 +1759,12 @@ type DeployVnfApplianceResponse struct {
 	Jobstatus             int                                       `json:"jobstatus"`
 	Keypairs              string                                    `json:"keypairs"`
 	Lastupdated           string                                    `json:"lastupdated"`
+	Leaseduration         int                                       `json:"leaseduration"`
+	Leaseexpiryaction     string                                    `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                    `json:"leaseexpirydate"`
+	Maxheads              int64                                     `json:"maxheads"`
+	Maxresolutionx        int64                                     `json:"maxresolutionx"`
+	Maxresolutiony        int64                                     `json:"maxresolutiony"`
 	Memory                int                                       `json:"memory"`
 	Memoryintfreekbs      int64                                     `json:"memoryintfreekbs"`
 	Memorykbs             int64                                     `json:"memorykbs"`
@@ -1645,6 +1806,9 @@ type DeployVnfApplianceResponse struct {
 	Userid                string                                    `json:"userid"`
 	Username              string                                    `json:"username"`
 	Vgpu                  string                                    `json:"vgpu"`
+	Vgpuprofileid         string                                    `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                    `json:"vgpuprofilename"`
+	Videoram              int64                                     `json:"videoram"`
 	Vmtype                string                                    `json:"vmtype"`
 	Vnfdetails            map[string]string                         `json:"vnfdetails"`
 	Vnfnics               []string                                  `json:"vnfnics"`
@@ -1763,9 +1927,16 @@ func (p *ListVnfAppliancesParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
 	if v, found := p.p["forvirtualnetwork"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forvirtualnetwork", vv)
+	}
+	if v, found := p.p["gpuenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("gpuenabled", vv)
 	}
 	if v, found := p.p["groupid"]; found {
 		u.Set("groupid", v.(string))
@@ -1800,6 +1971,10 @@ func (p *ListVnfAppliancesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["leased"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("leased", vv)
 	}
 	if v, found := p.p["listall"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -2057,6 +2232,27 @@ func (p *ListVnfAppliancesParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVnfAppliancesParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *ListVnfAppliancesParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *ListVnfAppliancesParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
 func (p *ListVnfAppliancesParams) SetForvirtualnetwork(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2075,6 +2271,27 @@ func (p *ListVnfAppliancesParams) GetForvirtualnetwork() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["forvirtualnetwork"].(bool)
+	return value, ok
+}
+
+func (p *ListVnfAppliancesParams) SetGpuenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpuenabled"] = v
+}
+
+func (p *ListVnfAppliancesParams) ResetGpuenabled() {
+	if p.p != nil && p.p["gpuenabled"] != nil {
+		delete(p.p, "gpuenabled")
+	}
+}
+
+func (p *ListVnfAppliancesParams) GetGpuenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpuenabled"].(bool)
 	return value, ok
 }
 
@@ -2285,6 +2502,27 @@ func (p *ListVnfAppliancesParams) GetKeyword() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListVnfAppliancesParams) SetLeased(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leased"] = v
+}
+
+func (p *ListVnfAppliancesParams) ResetLeased() {
+	if p.p != nil && p.p["leased"] != nil {
+		delete(p.p, "leased")
+	}
+}
+
+func (p *ListVnfAppliancesParams) GetLeased() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leased"].(bool)
 	return value, ok
 }
 
@@ -2805,6 +3043,9 @@ type VnfAppliance struct {
 	Domainid              string                      `json:"domainid"`
 	Domainpath            string                      `json:"domainpath"`
 	Forvirtualnetwork     bool                        `json:"forvirtualnetwork"`
+	Gpucardid             string                      `json:"gpucardid"`
+	Gpucardname           string                      `json:"gpucardname"`
+	Gpucount              int                         `json:"gpucount"`
 	Group                 string                      `json:"group"`
 	Groupid               string                      `json:"groupid"`
 	Guestosid             string                      `json:"guestosid"`
@@ -2826,6 +3067,12 @@ type VnfAppliance struct {
 	Jobstatus             int                         `json:"jobstatus"`
 	Keypairs              string                      `json:"keypairs"`
 	Lastupdated           string                      `json:"lastupdated"`
+	Leaseduration         int                         `json:"leaseduration"`
+	Leaseexpiryaction     string                      `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                      `json:"leaseexpirydate"`
+	Maxheads              int64                       `json:"maxheads"`
+	Maxresolutionx        int64                       `json:"maxresolutionx"`
+	Maxresolutiony        int64                       `json:"maxresolutiony"`
 	Memory                int                         `json:"memory"`
 	Memoryintfreekbs      int64                       `json:"memoryintfreekbs"`
 	Memorykbs             int64                       `json:"memorykbs"`
@@ -2867,6 +3114,9 @@ type VnfAppliance struct {
 	Userid                string                      `json:"userid"`
 	Username              string                      `json:"username"`
 	Vgpu                  string                      `json:"vgpu"`
+	Vgpuprofileid         string                      `json:"vgpuprofileid"`
+	Vgpuprofilename       string                      `json:"vgpuprofilename"`
+	Videoram              int64                       `json:"videoram"`
 	Vmtype                string                      `json:"vmtype"`
 	Vnfdetails            map[string]string           `json:"vnfdetails"`
 	Vnfnics               []string                    `json:"vnfnics"`
@@ -2968,6 +3218,13 @@ func (p *ListVnfTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
+	}
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
@@ -2977,6 +3234,10 @@ func (p *ListVnfTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["ids"]; found {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("ids", vv)
+	}
+	if v, found := p.p["isready"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isready", vv)
 	}
 	if v, found := p.p["isrecursive"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -2995,6 +3256,9 @@ func (p *ListVnfTemplatesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["oscategoryid"]; found {
+		u.Set("oscategoryid", v.(string))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -3125,6 +3389,48 @@ func (p *ListVnfTemplatesParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListVnfTemplatesParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *ListVnfTemplatesParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *ListVnfTemplatesParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
+func (p *ListVnfTemplatesParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *ListVnfTemplatesParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *ListVnfTemplatesParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
+	return value, ok
+}
+
 func (p *ListVnfTemplatesParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3185,6 +3491,27 @@ func (p *ListVnfTemplatesParams) GetIds() ([]string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["ids"].([]string)
+	return value, ok
+}
+
+func (p *ListVnfTemplatesParams) SetIsready(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isready"] = v
+}
+
+func (p *ListVnfTemplatesParams) ResetIsready() {
+	if p.p != nil && p.p["isready"] != nil {
+		delete(p.p, "isready")
+	}
+}
+
+func (p *ListVnfTemplatesParams) GetIsready() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isready"].(bool)
 	return value, ok
 }
 
@@ -3290,6 +3617,27 @@ func (p *ListVnfTemplatesParams) GetName() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListVnfTemplatesParams) SetOscategoryid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["oscategoryid"] = v
+}
+
+func (p *ListVnfTemplatesParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
+func (p *ListVnfTemplatesParams) GetOscategoryid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oscategoryid"].(string)
 	return value, ok
 }
 
@@ -3657,6 +4005,9 @@ type VnfTemplate struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -3765,6 +4116,20 @@ func (p *RegisterVnfTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
 	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
@@ -4032,6 +4397,69 @@ func (p *RegisterVnfTemplateParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *RegisterVnfTemplateParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *RegisterVnfTemplateParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *RegisterVnfTemplateParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
+func (p *RegisterVnfTemplateParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *RegisterVnfTemplateParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *RegisterVnfTemplateParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *RegisterVnfTemplateParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *RegisterVnfTemplateParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *RegisterVnfTemplateParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
 	return value, ok
 }
 
@@ -4501,6 +4929,9 @@ type RegisterVnfTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -4604,6 +5035,14 @@ func (p *UpdateVnfTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
+	}
+	if v, found := p.p["forceupdateostype"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forceupdateostype", vv)
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
 	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
@@ -4808,6 +5247,48 @@ func (p *UpdateVnfTemplateParams) GetDisplaytext() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["displaytext"].(string)
+	return value, ok
+}
+
+func (p *UpdateVnfTemplateParams) SetForceupdateostype(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forceupdateostype"] = v
+}
+
+func (p *UpdateVnfTemplateParams) ResetForceupdateostype() {
+	if p.p != nil && p.p["forceupdateostype"] != nil {
+		delete(p.p, "forceupdateostype")
+	}
+}
+
+func (p *UpdateVnfTemplateParams) GetForceupdateostype() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceupdateostype"].(bool)
+	return value, ok
+}
+
+func (p *UpdateVnfTemplateParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *UpdateVnfTemplateParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *UpdateVnfTemplateParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
 	return value, ok
 }
 
@@ -5148,6 +5629,9 @@ type UpdateVnfTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`

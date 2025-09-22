@@ -1019,6 +1019,9 @@ func (p *ListUsersParams) toURLValues() url.Values {
 	if v, found := p.p["username"]; found {
 		u.Set("username", v.(string))
 	}
+	if v, found := p.p["usersource"]; found {
+		u.Set("usersource", v.(string))
+	}
 	return u
 }
 
@@ -1292,6 +1295,27 @@ func (p *ListUsersParams) GetUsername() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["username"].(string)
+	return value, ok
+}
+
+func (p *ListUsersParams) SetUsersource(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["usersource"] = v
+}
+
+func (p *ListUsersParams) ResetUsersource() {
+	if p.p != nil && p.p["usersource"] != nil {
+		delete(p.p, "usersource")
+	}
+}
+
+func (p *ListUsersParams) GetUsersource() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["usersource"].(string)
 	return value, ok
 }
 
@@ -2623,7 +2647,7 @@ func (s *UserService) NewRegisterUserDataParams(name string, userdata string) *R
 	return p
 }
 
-// Register a new userdata.
+// Register a new User Data.
 func (s *UserService) RegisterUserData(p *RegisterUserDataParams) (*RegisterUserDataResponse, error) {
 	resp, err := s.cs.newPostRequest("registerUserData", p.toURLValues())
 	if err != nil {

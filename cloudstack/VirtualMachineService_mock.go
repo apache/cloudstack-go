@@ -653,17 +653,17 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewDeleteVMScheduleParams(
 }
 
 // NewDeployVirtualMachineParams mocks base method.
-func (m *MockVirtualMachineServiceIface) NewDeployVirtualMachineParams(serviceofferingid, templateid, zoneid string) *DeployVirtualMachineParams {
+func (m *MockVirtualMachineServiceIface) NewDeployVirtualMachineParams(serviceofferingid, zoneid string) *DeployVirtualMachineParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewDeployVirtualMachineParams", serviceofferingid, templateid, zoneid)
+	ret := m.ctrl.Call(m, "NewDeployVirtualMachineParams", serviceofferingid, zoneid)
 	ret0, _ := ret[0].(*DeployVirtualMachineParams)
 	return ret0
 }
 
 // NewDeployVirtualMachineParams indicates an expected call of NewDeployVirtualMachineParams.
-func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewDeployVirtualMachineParams(serviceofferingid, templateid, zoneid any) *gomock.Call {
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewDeployVirtualMachineParams(serviceofferingid, zoneid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeployVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewDeployVirtualMachineParams), serviceofferingid, templateid, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeployVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewDeployVirtualMachineParams), serviceofferingid, zoneid)
 }
 
 // NewDestroyVirtualMachineParams mocks base method.

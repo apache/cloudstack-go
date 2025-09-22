@@ -1139,6 +1139,9 @@ func (p *CreateVpnGatewayParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("fordisplay", vv)
 	}
+	if v, found := p.p["ipaddressid"]; found {
+		u.Set("ipaddressid", v.(string))
+	}
 	if v, found := p.p["vpcid"]; found {
 		u.Set("vpcid", v.(string))
 	}
@@ -1163,6 +1166,27 @@ func (p *CreateVpnGatewayParams) GetFordisplay() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["fordisplay"].(bool)
+	return value, ok
+}
+
+func (p *CreateVpnGatewayParams) SetIpaddressid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ipaddressid"] = v
+}
+
+func (p *CreateVpnGatewayParams) ResetIpaddressid() {
+	if p.p != nil && p.p["ipaddressid"] != nil {
+		delete(p.p, "ipaddressid")
+	}
+}
+
+func (p *CreateVpnGatewayParams) GetIpaddressid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ipaddressid"].(string)
 	return value, ok
 }
 

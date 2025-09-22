@@ -436,17 +436,17 @@ func (mr *MockVPCServiceIfaceMockRecorder) NewCreatePrivateGatewayParams(gateway
 }
 
 // NewCreateStaticRouteParams mocks base method.
-func (m *MockVPCServiceIface) NewCreateStaticRouteParams(cidr, gatewayid string) *CreateStaticRouteParams {
+func (m *MockVPCServiceIface) NewCreateStaticRouteParams(cidr string) *CreateStaticRouteParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateStaticRouteParams", cidr, gatewayid)
+	ret := m.ctrl.Call(m, "NewCreateStaticRouteParams", cidr)
 	ret0, _ := ret[0].(*CreateStaticRouteParams)
 	return ret0
 }
 
 // NewCreateStaticRouteParams indicates an expected call of NewCreateStaticRouteParams.
-func (mr *MockVPCServiceIfaceMockRecorder) NewCreateStaticRouteParams(cidr, gatewayid any) *gomock.Call {
+func (mr *MockVPCServiceIfaceMockRecorder) NewCreateStaticRouteParams(cidr any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateStaticRouteParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateStaticRouteParams), cidr, gatewayid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateStaticRouteParams", reflect.TypeOf((*MockVPCServiceIface)(nil).NewCreateStaticRouteParams), cidr)
 }
 
 // NewCreateVPCOfferingParams mocks base method.

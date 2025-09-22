@@ -146,6 +146,7 @@ type CancelStorageMaintenanceResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -166,6 +167,7 @@ type CancelStorageMaintenanceResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -393,6 +395,7 @@ type EnableStorageMaintenanceResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -413,6 +416,7 @@ type EnableStorageMaintenanceResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -1053,15 +1057,16 @@ type ListObjectStoragePoolsResponse struct {
 }
 
 type ObjectStoragePool struct {
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Name           string `json:"name"`
-	Providername   string `json:"providername"`
-	Storagetotal   int64  `json:"storagetotal"`
-	Storageused    int64  `json:"storageused"`
-	Url            string `json:"url"`
+	Hasannotations   bool   `json:"hasannotations"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Providername     string `json:"providername"`
+	Storageallocated int64  `json:"storageallocated"`
+	Storagetotal     int64  `json:"storagetotal"`
+	Storageused      int64  `json:"storageused"`
+	Url              string `json:"url"`
 }
 
 type ListStoragePoolObjectsParams struct {
@@ -1291,6 +1296,10 @@ func (p *UpdateObjectStoragePoolParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["size"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("size", vv)
+	}
 	if v, found := p.p["url"]; found {
 		u.Set("url", v.(string))
 	}
@@ -1336,6 +1345,27 @@ func (p *UpdateObjectStoragePoolParams) GetName() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *UpdateObjectStoragePoolParams) SetSize(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["size"] = v
+}
+
+func (p *UpdateObjectStoragePoolParams) ResetSize() {
+	if p.p != nil && p.p["size"] != nil {
+		delete(p.p, "size")
+	}
+}
+
+func (p *UpdateObjectStoragePoolParams) GetSize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["size"].(int64)
 	return value, ok
 }
 
@@ -1388,15 +1418,16 @@ func (s *StoragePoolService) UpdateObjectStoragePool(p *UpdateObjectStoragePoolP
 }
 
 type UpdateObjectStoragePoolResponse struct {
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Name           string `json:"name"`
-	Providername   string `json:"providername"`
-	Storagetotal   int64  `json:"storagetotal"`
-	Storageused    int64  `json:"storageused"`
-	Url            string `json:"url"`
+	Hasannotations   bool   `json:"hasannotations"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Providername     string `json:"providername"`
+	Storageallocated int64  `json:"storageallocated"`
+	Storagetotal     int64  `json:"storagetotal"`
+	Storageused      int64  `json:"storageused"`
+	Url              string `json:"url"`
 }
 
 type AddObjectStoragePoolParams struct {
@@ -1420,6 +1451,10 @@ func (p *AddObjectStoragePoolParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["provider"]; found {
 		u.Set("provider", v.(string))
+	}
+	if v, found := p.p["size"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("size", vv)
 	}
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
@@ -1490,6 +1525,27 @@ func (p *AddObjectStoragePoolParams) GetProvider() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["provider"].(string)
+	return value, ok
+}
+
+func (p *AddObjectStoragePoolParams) SetSize(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["size"] = v
+}
+
+func (p *AddObjectStoragePoolParams) ResetSize() {
+	if p.p != nil && p.p["size"] != nil {
+		delete(p.p, "size")
+	}
+}
+
+func (p *AddObjectStoragePoolParams) GetSize() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["size"].(int64)
 	return value, ok
 }
 
@@ -1565,15 +1621,16 @@ func (s *StoragePoolService) AddObjectStoragePool(p *AddObjectStoragePoolParams)
 }
 
 type AddObjectStoragePoolResponse struct {
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Name           string `json:"name"`
-	Providername   string `json:"providername"`
-	Storagetotal   int64  `json:"storagetotal"`
-	Storageused    int64  `json:"storageused"`
-	Url            string `json:"url"`
+	Hasannotations   bool   `json:"hasannotations"`
+	Id               string `json:"id"`
+	JobID            string `json:"jobid"`
+	Jobstatus        int    `json:"jobstatus"`
+	Name             string `json:"name"`
+	Providername     string `json:"providername"`
+	Storageallocated int64  `json:"storageallocated"`
+	Storagetotal     int64  `json:"storagetotal"`
+	Storageused      int64  `json:"storageused"`
+	Url              string `json:"url"`
 }
 
 type DeleteObjectStoragePoolParams struct {
@@ -1716,6 +1773,9 @@ func (p *ListStoragePoolsMetricsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["status"]; found {
 		u.Set("status", v.(string))
+	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
 	}
 	if v, found := p.p["storagecustomstats"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -1979,6 +2039,27 @@ func (p *ListStoragePoolsMetricsParams) GetStatus() (string, bool) {
 	return value, ok
 }
 
+func (p *ListStoragePoolsMetricsParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListStoragePoolsMetricsParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListStoragePoolsMetricsParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListStoragePoolsMetricsParams) SetStoragecustomstats(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2138,6 +2219,7 @@ type StoragePoolsMetric struct {
 	Clusterid                        string            `json:"clusterid"`
 	Clustername                      string            `json:"clustername"`
 	Created                          string            `json:"created"`
+	Details                          map[string]string `json:"details"`
 	Disksizeallocated                int64             `json:"disksizeallocated"`
 	Disksizeallocatedgb              string            `json:"disksizeallocatedgb"`
 	Disksizetotal                    int64             `json:"disksizetotal"`
@@ -2162,6 +2244,7 @@ type StoragePoolsMetric struct {
 	Provider                         string            `json:"provider"`
 	Scope                            string            `json:"scope"`
 	State                            string            `json:"state"`
+	Storageaccessgroups              string            `json:"storageaccessgroups"`
 	Storageallocateddisablethreshold bool              `json:"storageallocateddisablethreshold"`
 	Storageallocatedthreshold        bool              `json:"storageallocatedthreshold"`
 	Storagecapabilities              map[string]string `json:"storagecapabilities"`

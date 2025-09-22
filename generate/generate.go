@@ -1424,6 +1424,14 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "otherdeployparams":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+		case "nodeofferings":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].node\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].offering\", i), m[k])", name)
+		case "nodetemplates":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].node\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].template\", i), m[k])", name)
+		case "cniconfigdetails":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
 		default:
 			if shouldUseStaticZeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)

@@ -232,6 +232,9 @@ type CopyTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -310,6 +313,9 @@ func (p *CreateTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
+	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
 	}
 	if v, found := p.p["bits"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -399,6 +405,27 @@ func (p *CreateTemplateParams) GetAccount() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *CreateTemplateParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *CreateTemplateParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *CreateTemplateParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
 	return value, ok
 }
 
@@ -866,6 +893,9 @@ type CreateTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -1299,6 +1329,10 @@ func (p *GetUploadParamsForTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
+	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
 	}
@@ -1520,6 +1554,27 @@ func (p *GetUploadParamsForTemplateParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForTemplateParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *GetUploadParamsForTemplateParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
 	return value, ok
 }
 
@@ -2009,6 +2064,13 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
+	}
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
@@ -2021,6 +2083,10 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["imagestoreid"]; found {
 		u.Set("imagestoreid", v.(string))
+	}
+	if v, found := p.p["isready"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isready", vv)
 	}
 	if v, found := p.p["isrecursive"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -2039,6 +2105,9 @@ func (p *ListTemplatesParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
+	}
+	if v, found := p.p["oscategoryid"]; found {
+		u.Set("oscategoryid", v.(string))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -2172,6 +2241,48 @@ func (p *ListTemplatesParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListTemplatesParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *ListTemplatesParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *ListTemplatesParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
+func (p *ListTemplatesParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *ListTemplatesParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *ListTemplatesParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
+	return value, ok
+}
+
 func (p *ListTemplatesParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2253,6 +2364,27 @@ func (p *ListTemplatesParams) GetImagestoreid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["imagestoreid"].(string)
+	return value, ok
+}
+
+func (p *ListTemplatesParams) SetIsready(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isready"] = v
+}
+
+func (p *ListTemplatesParams) ResetIsready() {
+	if p.p != nil && p.p["isready"] != nil {
+		delete(p.p, "isready")
+	}
+}
+
+func (p *ListTemplatesParams) GetIsready() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isready"].(bool)
 	return value, ok
 }
 
@@ -2358,6 +2490,27 @@ func (p *ListTemplatesParams) GetName() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListTemplatesParams) SetOscategoryid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["oscategoryid"] = v
+}
+
+func (p *ListTemplatesParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
+func (p *ListTemplatesParams) GetOscategoryid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oscategoryid"].(string)
 	return value, ok
 }
 
@@ -2747,6 +2900,9 @@ type Template struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -2942,6 +3098,9 @@ type PrepareTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -3050,6 +3209,19 @@ func (p *RegisterTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for _, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[0].%s", k), m[k])
+		}
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
 	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
@@ -3303,6 +3475,69 @@ func (p *RegisterTemplateParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *RegisterTemplateParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *RegisterTemplateParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *RegisterTemplateParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
+func (p *RegisterTemplateParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *RegisterTemplateParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *RegisterTemplateParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *RegisterTemplateParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *RegisterTemplateParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *RegisterTemplateParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
 	return value, ok
 }
 
@@ -3736,6 +3971,9 @@ type RegisterTemplate struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -3831,6 +4069,14 @@ func (p *UpdateTemplateParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
+	}
+	if v, found := p.p["forceupdateostype"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forceupdateostype", vv)
+	}
+	if v, found := p.p["forcks"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forcks", vv)
 	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
@@ -3979,6 +4225,48 @@ func (p *UpdateTemplateParams) GetDisplaytext() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["displaytext"].(string)
+	return value, ok
+}
+
+func (p *UpdateTemplateParams) SetForceupdateostype(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forceupdateostype"] = v
+}
+
+func (p *UpdateTemplateParams) ResetForceupdateostype() {
+	if p.p != nil && p.p["forceupdateostype"] != nil {
+		delete(p.p, "forceupdateostype")
+	}
+}
+
+func (p *UpdateTemplateParams) GetForceupdateostype() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceupdateostype"].(bool)
+	return value, ok
+}
+
+func (p *UpdateTemplateParams) SetForcks(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forcks"] = v
+}
+
+func (p *UpdateTemplateParams) ResetForcks() {
+	if p.p != nil && p.p["forcks"] != nil {
+		delete(p.p, "forcks")
+	}
+}
+
+func (p *UpdateTemplateParams) GetForcks() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forcks"].(bool)
 	return value, ok
 }
 
@@ -4277,6 +4565,9 @@ type UpdateTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -4924,6 +5215,9 @@ type LinkUserDataToTemplateResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`

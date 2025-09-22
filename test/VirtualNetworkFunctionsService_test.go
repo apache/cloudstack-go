@@ -51,7 +51,7 @@ func TestVirtualNetworkFunctionsService(t *testing.T) {
 		if _, ok := response["deployVnfAppliance"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.VirtualNetworkFunctions.NewDeployVnfApplianceParams("serviceofferingid", "templateid", "zoneid")
+		p := client.VirtualNetworkFunctions.NewDeployVnfApplianceParams("serviceofferingid", "zoneid")
 		r, err := client.VirtualNetworkFunctions.DeployVnfAppliance(p)
 		if err != nil {
 			t.Errorf(err.Error())

@@ -286,17 +286,17 @@ func (mr *MockManagementServiceIfaceMockRecorder) NewPrepareForShutdownParams(ma
 }
 
 // NewReadyForShutdownParams mocks base method.
-func (m *MockManagementServiceIface) NewReadyForShutdownParams() *ReadyForShutdownParams {
+func (m *MockManagementServiceIface) NewReadyForShutdownParams(managementserverid UUID) *ReadyForShutdownParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewReadyForShutdownParams")
+	ret := m.ctrl.Call(m, "NewReadyForShutdownParams", managementserverid)
 	ret0, _ := ret[0].(*ReadyForShutdownParams)
 	return ret0
 }
 
 // NewReadyForShutdownParams indicates an expected call of NewReadyForShutdownParams.
-func (mr *MockManagementServiceIfaceMockRecorder) NewReadyForShutdownParams() *gomock.Call {
+func (mr *MockManagementServiceIfaceMockRecorder) NewReadyForShutdownParams(managementserverid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReadyForShutdownParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewReadyForShutdownParams))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReadyForShutdownParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewReadyForShutdownParams), managementserverid)
 }
 
 // NewTriggerShutdownParams mocks base method.

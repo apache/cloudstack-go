@@ -1169,6 +1169,9 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Domainid              string                                              `json:"domainid"`
 	Domainpath            string                                              `json:"domainpath"`
 	Forvirtualnetwork     bool                                                `json:"forvirtualnetwork"`
+	Gpucardid             string                                              `json:"gpucardid"`
+	Gpucardname           string                                              `json:"gpucardname"`
+	Gpucount              int                                                 `json:"gpucount"`
 	Group                 string                                              `json:"group"`
 	Groupid               string                                              `json:"groupid"`
 	Guestosid             string                                              `json:"guestosid"`
@@ -1190,6 +1193,12 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Jobstatus             int                                                 `json:"jobstatus"`
 	Keypairs              string                                              `json:"keypairs"`
 	Lastupdated           string                                              `json:"lastupdated"`
+	Leaseduration         int                                                 `json:"leaseduration"`
+	Leaseexpiryaction     string                                              `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                                              `json:"leaseexpirydate"`
+	Maxheads              int64                                               `json:"maxheads"`
+	Maxresolutionx        int64                                               `json:"maxresolutionx"`
+	Maxresolutiony        int64                                               `json:"maxresolutiony"`
 	Memory                int                                                 `json:"memory"`
 	Memoryintfreekbs      int64                                               `json:"memoryintfreekbs"`
 	Memorykbs             int64                                               `json:"memorykbs"`
@@ -1231,6 +1240,9 @@ type ResetSSHKeyForVirtualMachineResponse struct {
 	Userid                string                                              `json:"userid"`
 	Username              string                                              `json:"username"`
 	Vgpu                  string                                              `json:"vgpu"`
+	Vgpuprofileid         string                                              `json:"vgpuprofileid"`
+	Vgpuprofilename       string                                              `json:"vgpuprofilename"`
+	Videoram              int64                                               `json:"videoram"`
 	Vmtype                string                                              `json:"vmtype"`
 	Vnfdetails            map[string]string                                   `json:"vnfdetails"`
 	Vnfnics               []string                                            `json:"vnfnics"`

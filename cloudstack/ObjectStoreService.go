@@ -29,7 +29,7 @@ import (
 
 type ObjectStoreServiceIface interface {
 	CreateBucket(p *CreateBucketParams) (*CreateBucketResponse, error)
-	NewCreateBucketParams(name string, objectstorageid string) *CreateBucketParams
+	NewCreateBucketParams(name string, objectstorageid string, quota int) *CreateBucketParams
 	DeleteBucket(p *DeleteBucketParams) (*DeleteBucketResponse, error)
 	NewDeleteBucketParams(id string) *DeleteBucketParams
 	UpdateBucket(p *UpdateBucketParams) (*UpdateBucketResponse, error)
@@ -299,11 +299,12 @@ func (p *CreateBucketParams) GetVersioning() (bool, bool) {
 
 // You should always use this function to get a new CreateBucketParams instance,
 // as then you are sure you have configured all required params
-func (s *ObjectStoreService) NewCreateBucketParams(name string, objectstorageid string) *CreateBucketParams {
+func (s *ObjectStoreService) NewCreateBucketParams(name string, objectstorageid string, quota int) *CreateBucketParams {
 	p := &CreateBucketParams{}
 	p.p = make(map[string]interface{})
 	p.p["name"] = name
 	p.p["objectstorageid"] = objectstorageid
+	p.p["quota"] = quota
 	return p
 }
 

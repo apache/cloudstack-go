@@ -333,6 +333,10 @@ func (p *CreateZoneParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("securitygroupenabled", vv)
 	}
+	if v, found := p.p["storageaccessgroups"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("storageaccessgroups", vv)
+	}
 	return u
 }
 
@@ -651,6 +655,27 @@ func (p *CreateZoneParams) GetSecuritygroupenabled() (bool, bool) {
 	return value, ok
 }
 
+func (p *CreateZoneParams) SetStorageaccessgroups(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroups"] = v
+}
+
+func (p *CreateZoneParams) ResetStorageaccessgroups() {
+	if p.p != nil && p.p["storageaccessgroups"] != nil {
+		delete(p.p, "storageaccessgroups")
+	}
+}
+
+func (p *CreateZoneParams) GetStorageaccessgroups() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroups"].([]string)
+	return value, ok
+}
+
 // You should always use this function to get a new CreateZoneParams instance,
 // as then you are sure you have configured all required params
 func (s *ZoneService) NewCreateZoneParams(dns1 string, internaldns1 string, name string, networktype string) *CreateZoneParams {
@@ -695,6 +720,8 @@ type CreateZoneResponse struct {
 	Domain                       string                       `json:"domain"`
 	Domainid                     string                       `json:"domainid"`
 	Domainname                   string                       `json:"domainname"`
+	Gputotal                     int64                        `json:"gputotal"`
+	Gpuused                      int64                        `json:"gpuused"`
 	Guestcidraddress             string                       `json:"guestcidraddress"`
 	Hasannotations               bool                         `json:"hasannotations"`
 	Icon                         interface{}                  `json:"icon"`
@@ -710,11 +737,13 @@ type CreateZoneResponse struct {
 	Localstorageenabled          bool                         `json:"localstorageenabled"`
 	Name                         string                       `json:"name"`
 	Networktype                  string                       `json:"networktype"`
+	Provider                     string                       `json:"provider"`
 	Resourcedetails              map[string]string            `json:"resourcedetails"`
 	Routedmodeenabled            bool                         `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int                          `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int                          `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool                         `json:"securitygroupsenabled"`
+	Storageaccessgroups          string                       `json:"storageaccessgroups"`
 	Tags                         []Tags                       `json:"tags"`
 	Type                         string                       `json:"type"`
 	Zonetoken                    string                       `json:"zonetoken"`
@@ -2150,6 +2179,9 @@ func (p *ListZonesParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showicon", vv)
 	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
+	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -2391,6 +2423,27 @@ func (p *ListZonesParams) GetShowicon() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListZonesParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListZonesParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListZonesParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListZonesParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2536,6 +2589,8 @@ type Zone struct {
 	Domain                       string            `json:"domain"`
 	Domainid                     string            `json:"domainid"`
 	Domainname                   string            `json:"domainname"`
+	Gputotal                     int64             `json:"gputotal"`
+	Gpuused                      int64             `json:"gpuused"`
 	Guestcidraddress             string            `json:"guestcidraddress"`
 	Hasannotations               bool              `json:"hasannotations"`
 	Icon                         interface{}       `json:"icon"`
@@ -2551,11 +2606,13 @@ type Zone struct {
 	Localstorageenabled          bool              `json:"localstorageenabled"`
 	Name                         string            `json:"name"`
 	Networktype                  string            `json:"networktype"`
+	Provider                     string            `json:"provider"`
 	Resourcedetails              map[string]string `json:"resourcedetails"`
 	Routedmodeenabled            bool              `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int               `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int               `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool              `json:"securitygroupsenabled"`
+	Storageaccessgroups          string            `json:"storageaccessgroups"`
 	Tags                         []Tags            `json:"tags"`
 	Type                         string            `json:"type"`
 	Zonetoken                    string            `json:"zonetoken"`
@@ -2624,6 +2681,9 @@ func (p *ListZonesMetricsParams) toURLValues() url.Values {
 	if v, found := p.p["showicon"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showicon", vv)
+	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
 	}
 	if v, found := p.p["tags"]; found {
 		m := v.(map[string]string)
@@ -2866,6 +2926,27 @@ func (p *ListZonesMetricsParams) GetShowicon() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListZonesMetricsParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListZonesMetricsParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListZonesMetricsParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListZonesMetricsParams) SetTags(v map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3020,6 +3101,8 @@ type ZonesMetric struct {
 	Domain                          string                `json:"domain"`
 	Domainid                        string                `json:"domainid"`
 	Domainname                      string                `json:"domainname"`
+	Gputotal                        int64                 `json:"gputotal"`
+	Gpuused                         int64                 `json:"gpuused"`
 	Guestcidraddress                string                `json:"guestcidraddress"`
 	Hasannotations                  bool                  `json:"hasannotations"`
 	Icon                            interface{}           `json:"icon"`
@@ -3043,12 +3126,14 @@ type ZonesMetric struct {
 	Memoryused                      string                `json:"memoryused"`
 	Name                            string                `json:"name"`
 	Networktype                     string                `json:"networktype"`
+	Provider                        string                `json:"provider"`
 	Resourcedetails                 map[string]string     `json:"resourcedetails"`
 	Routedmodeenabled               bool                  `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu    int                   `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu     int                   `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled           bool                  `json:"securitygroupsenabled"`
 	State                           string                `json:"state"`
+	Storageaccessgroups             string                `json:"storageaccessgroups"`
 	Tags                            []Tags                `json:"tags"`
 	Type                            string                `json:"type"`
 	Zonetoken                       string                `json:"zonetoken"`
@@ -3716,6 +3801,8 @@ type UpdateZoneResponse struct {
 	Domain                       string                       `json:"domain"`
 	Domainid                     string                       `json:"domainid"`
 	Domainname                   string                       `json:"domainname"`
+	Gputotal                     int64                        `json:"gputotal"`
+	Gpuused                      int64                        `json:"gpuused"`
 	Guestcidraddress             string                       `json:"guestcidraddress"`
 	Hasannotations               bool                         `json:"hasannotations"`
 	Icon                         interface{}                  `json:"icon"`
@@ -3731,11 +3818,13 @@ type UpdateZoneResponse struct {
 	Localstorageenabled          bool                         `json:"localstorageenabled"`
 	Name                         string                       `json:"name"`
 	Networktype                  string                       `json:"networktype"`
+	Provider                     string                       `json:"provider"`
 	Resourcedetails              map[string]string            `json:"resourcedetails"`
 	Routedmodeenabled            bool                         `json:"routedmodeenabled"`
 	Routerprivateinterfacemaxmtu int                          `json:"routerprivateinterfacemaxmtu"`
 	Routerpublicinterfacemaxmtu  int                          `json:"routerpublicinterfacemaxmtu"`
 	Securitygroupsenabled        bool                         `json:"securitygroupsenabled"`
+	Storageaccessgroups          string                       `json:"storageaccessgroups"`
 	Tags                         []Tags                       `json:"tags"`
 	Type                         string                       `json:"type"`
 	Zonetoken                    string                       `json:"zonetoken"`

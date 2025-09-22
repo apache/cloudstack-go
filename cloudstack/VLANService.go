@@ -69,10 +69,6 @@ func (p *CreateVlanIpRangeParams) toURLValues() url.Values {
 	if v, found := p.p["endipv6"]; found {
 		u.Set("endipv6", v.(string))
 	}
-	if v, found := p.p["fornsx"]; found {
-		vv := strconv.FormatBool(v.(bool))
-		u.Set("fornsx", vv)
-	}
 	if v, found := p.p["forsystemvms"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("forsystemvms", vv)
@@ -104,6 +100,9 @@ func (p *CreateVlanIpRangeParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
 	}
 	if v, found := p.p["startip"]; found {
 		u.Set("startip", v.(string))
@@ -201,27 +200,6 @@ func (p *CreateVlanIpRangeParams) GetEndipv6() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["endipv6"].(string)
-	return value, ok
-}
-
-func (p *CreateVlanIpRangeParams) SetFornsx(v bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["fornsx"] = v
-}
-
-func (p *CreateVlanIpRangeParams) ResetFornsx() {
-	if p.p != nil && p.p["fornsx"] != nil {
-		delete(p.p, "fornsx")
-	}
-}
-
-func (p *CreateVlanIpRangeParams) GetFornsx() (bool, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["fornsx"].(bool)
 	return value, ok
 }
 
@@ -435,6 +413,27 @@ func (p *CreateVlanIpRangeParams) GetProjectid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateVlanIpRangeParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *CreateVlanIpRangeParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *CreateVlanIpRangeParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
+	return value, ok
+}
+
 func (p *CreateVlanIpRangeParams) SetStartip(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -555,7 +554,6 @@ type CreateVlanIpRangeResponse struct {
 	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
-	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -571,6 +569,7 @@ type CreateVlanIpRangeResponse struct {
 	Podname           string `json:"podname"`
 	Project           string `json:"project"`
 	Projectid         string `json:"projectid"`
+	Provider          string `json:"provider"`
 	Startip           string `json:"startip"`
 	Startipv6         string `json:"startipv6"`
 	Vlan              string `json:"vlan"`
@@ -1574,7 +1573,6 @@ type VlanIpRange struct {
 	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
-	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -1590,6 +1588,7 @@ type VlanIpRange struct {
 	Podname           string `json:"podname"`
 	Project           string `json:"project"`
 	Projectid         string `json:"projectid"`
+	Provider          string `json:"provider"`
 	Startip           string `json:"startip"`
 	Startipv6         string `json:"startipv6"`
 	Vlan              string `json:"vlan"`
@@ -2225,7 +2224,6 @@ type UpdateVlanIpRangeResponse struct {
 	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
-	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -2241,6 +2239,7 @@ type UpdateVlanIpRangeResponse struct {
 	Podname           string `json:"podname"`
 	Project           string `json:"project"`
 	Projectid         string `json:"projectid"`
+	Provider          string `json:"provider"`
 	Startip           string `json:"startip"`
 	Startipv6         string `json:"startipv6"`
 	Vlan              string `json:"vlan"`

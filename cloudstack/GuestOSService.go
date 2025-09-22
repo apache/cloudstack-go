@@ -857,8 +857,23 @@ func (p *ListOsCategoriesParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["arch"]; found {
+		u.Set("arch", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isfeatured"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isfeatured", vv)
+	}
+	if v, found := p.p["isiso"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isiso", vv)
+	}
+	if v, found := p.p["isvnf"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isvnf", vv)
 	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
@@ -874,7 +889,35 @@ func (p *ListOsCategoriesParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["showicon"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("showicon", vv)
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
 	return u
+}
+
+func (p *ListOsCategoriesParams) SetArch(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["arch"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetArch() {
+	if p.p != nil && p.p["arch"] != nil {
+		delete(p.p, "arch")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetArch() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["arch"].(string)
+	return value, ok
 }
 
 func (p *ListOsCategoriesParams) SetId(v string) {
@@ -895,6 +938,69 @@ func (p *ListOsCategoriesParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListOsCategoriesParams) SetIsfeatured(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isfeatured"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetIsfeatured() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isfeatured"].(bool)
+	return value, ok
+}
+
+func (p *ListOsCategoriesParams) SetIsiso(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isiso"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetIsiso() {
+	if p.p != nil && p.p["isiso"] != nil {
+		delete(p.p, "isiso")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetIsiso() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isiso"].(bool)
+	return value, ok
+}
+
+func (p *ListOsCategoriesParams) SetIsvnf(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isvnf"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetIsvnf() {
+	if p.p != nil && p.p["isvnf"] != nil {
+		delete(p.p, "isvnf")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetIsvnf() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isvnf"].(bool)
 	return value, ok
 }
 
@@ -979,6 +1085,48 @@ func (p *ListOsCategoriesParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListOsCategoriesParams) SetShowicon(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["showicon"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetShowicon() {
+	if p.p != nil && p.p["showicon"] != nil {
+		delete(p.p, "showicon")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetShowicon() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["showicon"].(bool)
+	return value, ok
+}
+
+func (p *ListOsCategoriesParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListOsCategoriesParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ListOsCategoriesParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
 	return value, ok
 }
 
@@ -1094,10 +1242,13 @@ type ListOsCategoriesResponse struct {
 }
 
 type OsCategory struct {
-	Id        string `json:"id"`
-	JobID     string `json:"jobid"`
-	Jobstatus int    `json:"jobstatus"`
-	Name      string `json:"name"`
+	Created    string      `json:"created"`
+	Icon       interface{} `json:"icon"`
+	Id         string      `json:"id"`
+	Isfeatured bool        `json:"isfeatured"`
+	JobID      string      `json:"jobid"`
+	Jobstatus  int         `json:"jobstatus"`
+	Name       string      `json:"name"`
 }
 
 type ListOsTypesParams struct {
@@ -1593,6 +1744,9 @@ func (p *UpdateGuestOsParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["oscategoryid"]; found {
+		u.Set("oscategoryid", v.(string))
+	}
 	if v, found := p.p["osdisplayname"]; found {
 		u.Set("osdisplayname", v.(string))
 	}
@@ -1659,6 +1813,27 @@ func (p *UpdateGuestOsParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateGuestOsParams) SetOscategoryid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["oscategoryid"] = v
+}
+
+func (p *UpdateGuestOsParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
+func (p *UpdateGuestOsParams) GetOscategoryid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oscategoryid"].(string)
 	return value, ok
 }
 

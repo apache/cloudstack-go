@@ -118,6 +118,21 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("encryptroot", vv)
 	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
+	}
+	if v, found := p.p["gpucount"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("gpucount", vv)
+	}
+	if v, found := p.p["gpudisplay"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("gpudisplay", vv)
+	}
 	if v, found := p.p["hosttags"]; found {
 		u.Set("hosttags", v.(string))
 	}
@@ -156,6 +171,13 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["isvolatile"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("isvolatile", vv)
+	}
+	if v, found := p.p["leaseduration"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("leaseduration", vv)
+	}
+	if v, found := p.p["leaseexpiryaction"]; found {
+		u.Set("leaseexpiryaction", v.(string))
 	}
 	if v, found := p.p["limitcpuuse"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -229,6 +251,9 @@ func (p *CreateServiceOfferingParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
+	}
+	if v, found := p.p["vgpuprofileid"]; found {
+		u.Set("vgpuprofileid", v.(string))
 	}
 	if v, found := p.p["zoneid"]; found {
 		vv := strings.Join(v.([]string), ",")
@@ -615,6 +640,69 @@ func (p *CreateServiceOfferingParams) GetEncryptroot() (bool, bool) {
 	return value, ok
 }
 
+func (p *CreateServiceOfferingParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetGpucount(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpucount"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetGpucount() {
+	if p.p != nil && p.p["gpucount"] != nil {
+		delete(p.p, "gpucount")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetGpucount() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpucount"].(int)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetGpudisplay(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpudisplay"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetGpudisplay() {
+	if p.p != nil && p.p["gpudisplay"] != nil {
+		delete(p.p, "gpudisplay")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetGpudisplay() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpudisplay"].(bool)
+	return value, ok
+}
+
 func (p *CreateServiceOfferingParams) SetHosttags(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -822,6 +910,48 @@ func (p *CreateServiceOfferingParams) GetIsvolatile() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["isvolatile"].(bool)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetLeaseduration(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseduration"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetLeaseduration() {
+	if p.p != nil && p.p["leaseduration"] != nil {
+		delete(p.p, "leaseduration")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetLeaseduration() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseduration"].(int)
+	return value, ok
+}
+
+func (p *CreateServiceOfferingParams) SetLeaseexpiryaction(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["leaseexpiryaction"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetLeaseexpiryaction() {
+	if p.p != nil && p.p["leaseexpiryaction"] != nil {
+		delete(p.p, "leaseexpiryaction")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetLeaseexpiryaction() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["leaseexpiryaction"].(string)
 	return value, ok
 }
 
@@ -1224,6 +1354,27 @@ func (p *CreateServiceOfferingParams) GetTags() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateServiceOfferingParams) SetVgpuprofileid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vgpuprofileid"] = v
+}
+
+func (p *CreateServiceOfferingParams) ResetVgpuprofileid() {
+	if p.p != nil && p.p["vgpuprofileid"] != nil {
+		delete(p.p, "vgpuprofileid")
+	}
+}
+
+func (p *CreateServiceOfferingParams) GetVgpuprofileid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vgpuprofileid"].(string)
+	return value, ok
+}
+
 func (p *CreateServiceOfferingParams) SetZoneid(v []string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1302,6 +1453,10 @@ type CreateServiceOfferingResponse struct {
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
 	Encryptroot                 bool              `json:"encryptroot"`
+	Gpucardid                   string            `json:"gpucardid"`
+	Gpucardname                 string            `json:"gpucardname"`
+	Gpucount                    int               `json:"gpucount"`
+	Gpudisplay                  bool              `json:"gpudisplay"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
@@ -1312,8 +1467,13 @@ type CreateServiceOfferingResponse struct {
 	Isvolatile                  bool              `json:"isvolatile"`
 	JobID                       string            `json:"jobid"`
 	Jobstatus                   int               `json:"jobstatus"`
+	Leaseduration               int               `json:"leaseduration"`
+	Leaseexpiryaction           string            `json:"leaseexpiryaction"`
 	Limitcpuuse                 bool              `json:"limitcpuuse"`
+	Maxheads                    int64             `json:"maxheads"`
 	Maxiops                     int64             `json:"maxiops"`
+	Maxresolutionx              int64             `json:"maxresolutionx"`
+	Maxresolutiony              int64             `json:"maxresolutiony"`
 	Memory                      int               `json:"memory"`
 	Miniops                     int64             `json:"miniops"`
 	Name                        string            `json:"name"`
@@ -1327,6 +1487,9 @@ type CreateServiceOfferingResponse struct {
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
+	Vgpuprofileid               string            `json:"vgpuprofileid"`
+	Vgpuprofilename             string            `json:"vgpuprofilename"`
+	Videoram                    int64             `json:"videoram"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`
@@ -1453,6 +1616,10 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("encryptroot", vv)
 	}
+	if v, found := p.p["gpuenabled"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("gpuenabled", vv)
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
@@ -1500,6 +1667,9 @@ func (p *ListServiceOfferingsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["templateid"]; found {
 		u.Set("templateid", v.(string))
+	}
+	if v, found := p.p["vgpuprofileid"]; found {
+		u.Set("vgpuprofileid", v.(string))
 	}
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
@@ -1612,6 +1782,27 @@ func (p *ListServiceOfferingsParams) GetEncryptroot() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["encryptroot"].(bool)
+	return value, ok
+}
+
+func (p *ListServiceOfferingsParams) SetGpuenabled(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["gpuenabled"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetGpuenabled() {
+	if p.p != nil && p.p["gpuenabled"] != nil {
+		delete(p.p, "gpuenabled")
+	}
+}
+
+func (p *ListServiceOfferingsParams) GetGpuenabled() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["gpuenabled"].(bool)
 	return value, ok
 }
 
@@ -1909,6 +2100,27 @@ func (p *ListServiceOfferingsParams) GetTemplateid() (string, bool) {
 	return value, ok
 }
 
+func (p *ListServiceOfferingsParams) SetVgpuprofileid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vgpuprofileid"] = v
+}
+
+func (p *ListServiceOfferingsParams) ResetVgpuprofileid() {
+	if p.p != nil && p.p["vgpuprofileid"] != nil {
+		delete(p.p, "vgpuprofileid")
+	}
+}
+
+func (p *ListServiceOfferingsParams) GetVgpuprofileid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vgpuprofileid"].(string)
+	return value, ok
+}
+
 func (p *ListServiceOfferingsParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2090,6 +2302,10 @@ type ServiceOffering struct {
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
 	Encryptroot                 bool              `json:"encryptroot"`
+	Gpucardid                   string            `json:"gpucardid"`
+	Gpucardname                 string            `json:"gpucardname"`
+	Gpucount                    int               `json:"gpucount"`
+	Gpudisplay                  bool              `json:"gpudisplay"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
@@ -2100,8 +2316,13 @@ type ServiceOffering struct {
 	Isvolatile                  bool              `json:"isvolatile"`
 	JobID                       string            `json:"jobid"`
 	Jobstatus                   int               `json:"jobstatus"`
+	Leaseduration               int               `json:"leaseduration"`
+	Leaseexpiryaction           string            `json:"leaseexpiryaction"`
 	Limitcpuuse                 bool              `json:"limitcpuuse"`
+	Maxheads                    int64             `json:"maxheads"`
 	Maxiops                     int64             `json:"maxiops"`
+	Maxresolutionx              int64             `json:"maxresolutionx"`
+	Maxresolutiony              int64             `json:"maxresolutiony"`
 	Memory                      int               `json:"memory"`
 	Miniops                     int64             `json:"miniops"`
 	Name                        string            `json:"name"`
@@ -2115,6 +2336,9 @@ type ServiceOffering struct {
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
+	Vgpuprofileid               string            `json:"vgpuprofileid"`
+	Vgpuprofilename             string            `json:"vgpuprofilename"`
+	Videoram                    int64             `json:"videoram"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`
@@ -2134,6 +2358,13 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
 	}
 	if v, found := p.p["hosttags"]; found {
 		u.Set("hosttags", v.(string))
@@ -2203,6 +2434,27 @@ func (p *UpdateServiceOfferingParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *UpdateServiceOfferingParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *UpdateServiceOfferingParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
 	return value, ok
 }
 
@@ -2430,6 +2682,10 @@ type UpdateServiceOfferingResponse struct {
 	Domainid                    string            `json:"domainid"`
 	Dynamicscalingenabled       bool              `json:"dynamicscalingenabled"`
 	Encryptroot                 bool              `json:"encryptroot"`
+	Gpucardid                   string            `json:"gpucardid"`
+	Gpucardname                 string            `json:"gpucardname"`
+	Gpucount                    int               `json:"gpucount"`
+	Gpudisplay                  bool              `json:"gpudisplay"`
 	Hasannotations              bool              `json:"hasannotations"`
 	Hosttags                    string            `json:"hosttags"`
 	Hypervisorsnapshotreserve   int               `json:"hypervisorsnapshotreserve"`
@@ -2440,8 +2696,13 @@ type UpdateServiceOfferingResponse struct {
 	Isvolatile                  bool              `json:"isvolatile"`
 	JobID                       string            `json:"jobid"`
 	Jobstatus                   int               `json:"jobstatus"`
+	Leaseduration               int               `json:"leaseduration"`
+	Leaseexpiryaction           string            `json:"leaseexpiryaction"`
 	Limitcpuuse                 bool              `json:"limitcpuuse"`
+	Maxheads                    int64             `json:"maxheads"`
 	Maxiops                     int64             `json:"maxiops"`
+	Maxresolutionx              int64             `json:"maxresolutionx"`
+	Maxresolutiony              int64             `json:"maxresolutiony"`
 	Memory                      int               `json:"memory"`
 	Miniops                     int64             `json:"miniops"`
 	Name                        string            `json:"name"`
@@ -2455,6 +2716,9 @@ type UpdateServiceOfferingResponse struct {
 	Storagetags                 string            `json:"storagetags"`
 	Storagetype                 string            `json:"storagetype"`
 	Systemvmtype                string            `json:"systemvmtype"`
+	Vgpuprofileid               string            `json:"vgpuprofileid"`
+	Vgpuprofilename             string            `json:"vgpuprofilename"`
+	Videoram                    int64             `json:"videoram"`
 	Vspherestoragepolicy        string            `json:"vspherestoragepolicy"`
 	Zone                        string            `json:"zone"`
 	Zoneid                      string            `json:"zoneid"`

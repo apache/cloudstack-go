@@ -358,8 +358,21 @@ func (p *CreateKubernetesClusterParams) toURLValues() url.Values {
 	if v, found := p.p["account"]; found {
 		u.Set("account", v.(string))
 	}
+	if v, found := p.p["asnumber"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("asnumber", vv)
+	}
 	if v, found := p.p["clustertype"]; found {
 		u.Set("clustertype", v.(string))
+	}
+	if v, found := p.p["cniconfigdetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("cniconfigdetails[%d].%s", i, k), m[k])
+		}
+	}
+	if v, found := p.p["cniconfigurationid"]; found {
+		u.Set("cniconfigurationid", v.(string))
 	}
 	if v, found := p.p["controlnodes"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
@@ -380,8 +393,15 @@ func (p *CreateKubernetesClusterParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["etcdnodes"]; found {
+		vv := strconv.FormatInt(v.(int64), 10)
+		u.Set("etcdnodes", vv)
+	}
 	if v, found := p.p["externalloadbalanceripaddress"]; found {
 		u.Set("externalloadbalanceripaddress", v.(string))
+	}
+	if v, found := p.p["hypervisor"]; found {
+		u.Set("hypervisor", v.(string))
 	}
 	if v, found := p.p["keypair"]; found {
 		u.Set("keypair", v.(string))
@@ -399,9 +419,23 @@ func (p *CreateKubernetesClusterParams) toURLValues() url.Values {
 	if v, found := p.p["networkid"]; found {
 		u.Set("networkid", v.(string))
 	}
+	if v, found := p.p["nodeofferings"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nodeofferings[%d].node", i), k)
+			u.Set(fmt.Sprintf("nodeofferings[%d].offering", i), m[k])
+		}
+	}
 	if v, found := p.p["noderootdisksize"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("noderootdisksize", vv)
+	}
+	if v, found := p.p["nodetemplates"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nodetemplates[%d].node", i), k)
+			u.Set(fmt.Sprintf("nodetemplates[%d].template", i), m[k])
+		}
 	}
 	if v, found := p.p["projectid"]; found {
 		u.Set("projectid", v.(string))
@@ -440,6 +474,27 @@ func (p *CreateKubernetesClusterParams) GetAccount() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateKubernetesClusterParams) SetAsnumber(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["asnumber"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetAsnumber() {
+	if p.p != nil && p.p["asnumber"] != nil {
+		delete(p.p, "asnumber")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetAsnumber() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["asnumber"].(int64)
+	return value, ok
+}
+
 func (p *CreateKubernetesClusterParams) SetClustertype(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -458,6 +513,48 @@ func (p *CreateKubernetesClusterParams) GetClustertype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["clustertype"].(string)
+	return value, ok
+}
+
+func (p *CreateKubernetesClusterParams) SetCniconfigdetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cniconfigdetails"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetCniconfigdetails() {
+	if p.p != nil && p.p["cniconfigdetails"] != nil {
+		delete(p.p, "cniconfigdetails")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetCniconfigdetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cniconfigdetails"].(map[string]string)
+	return value, ok
+}
+
+func (p *CreateKubernetesClusterParams) SetCniconfigurationid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cniconfigurationid"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetCniconfigurationid() {
+	if p.p != nil && p.p["cniconfigurationid"] != nil {
+		delete(p.p, "cniconfigurationid")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetCniconfigurationid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cniconfigurationid"].(string)
 	return value, ok
 }
 
@@ -587,6 +684,27 @@ func (p *CreateKubernetesClusterParams) GetDomainid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateKubernetesClusterParams) SetEtcdnodes(v int64) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["etcdnodes"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetEtcdnodes() {
+	if p.p != nil && p.p["etcdnodes"] != nil {
+		delete(p.p, "etcdnodes")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetEtcdnodes() (int64, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["etcdnodes"].(int64)
+	return value, ok
+}
+
 func (p *CreateKubernetesClusterParams) SetExternalloadbalanceripaddress(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -605,6 +723,27 @@ func (p *CreateKubernetesClusterParams) GetExternalloadbalanceripaddress() (stri
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["externalloadbalanceripaddress"].(string)
+	return value, ok
+}
+
+func (p *CreateKubernetesClusterParams) SetHypervisor(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hypervisor"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetHypervisor() {
+	if p.p != nil && p.p["hypervisor"] != nil {
+		delete(p.p, "hypervisor")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetHypervisor() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hypervisor"].(string)
 	return value, ok
 }
 
@@ -713,6 +852,27 @@ func (p *CreateKubernetesClusterParams) GetNetworkid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateKubernetesClusterParams) SetNodeofferings(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nodeofferings"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetNodeofferings() {
+	if p.p != nil && p.p["nodeofferings"] != nil {
+		delete(p.p, "nodeofferings")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetNodeofferings() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nodeofferings"].(map[string]string)
+	return value, ok
+}
+
 func (p *CreateKubernetesClusterParams) SetNoderootdisksize(v int64) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -731,6 +891,27 @@ func (p *CreateKubernetesClusterParams) GetNoderootdisksize() (int64, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["noderootdisksize"].(int64)
+	return value, ok
+}
+
+func (p *CreateKubernetesClusterParams) SetNodetemplates(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nodetemplates"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetNodetemplates() {
+	if p.p != nil && p.p["nodetemplates"] != nil {
+		delete(p.p, "nodetemplates")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetNodetemplates() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nodetemplates"].(map[string]string)
 	return value, ok
 }
 
@@ -872,8 +1053,12 @@ type CreateKubernetesClusterResponse struct {
 	Associatednetworkname string            `json:"associatednetworkname"`
 	Autoscalingenabled    bool              `json:"autoscalingenabled"`
 	Clustertype           string            `json:"clustertype"`
+	Cniconfigname         string            `json:"cniconfigname"`
+	Cniconfigurationid    string            `json:"cniconfigurationid"`
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
+	Controlofferingid     string            `json:"controlofferingid"`
+	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
 	Description           string            `json:"description"`
@@ -881,6 +1066,10 @@ type CreateKubernetesClusterResponse struct {
 	Domainid              string            `json:"domainid"`
 	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
+	Etcdips               map[string]string `json:"etcdips"`
+	Etcdnodes             int64             `json:"etcdnodes"`
+	Etcdofferingid        string            `json:"etcdofferingid"`
+	Etcdofferingname      string            `json:"etcdofferingname"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
 	Ipaddress             string            `json:"ipaddress"`
@@ -904,6 +1093,8 @@ type CreateKubernetesClusterResponse struct {
 	State                 string            `json:"state"`
 	Templateid            string            `json:"templateid"`
 	Virtualmachines       []*VirtualMachine `json:"virtualmachines"`
+	Workerofferingid      string            `json:"workerofferingid"`
+	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -1612,8 +1803,12 @@ type KubernetesCluster struct {
 	Associatednetworkname string            `json:"associatednetworkname"`
 	Autoscalingenabled    bool              `json:"autoscalingenabled"`
 	Clustertype           string            `json:"clustertype"`
+	Cniconfigname         string            `json:"cniconfigname"`
+	Cniconfigurationid    string            `json:"cniconfigurationid"`
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
+	Controlofferingid     string            `json:"controlofferingid"`
+	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
 	Description           string            `json:"description"`
@@ -1621,6 +1816,10 @@ type KubernetesCluster struct {
 	Domainid              string            `json:"domainid"`
 	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
+	Etcdips               map[string]string `json:"etcdips"`
+	Etcdnodes             int64             `json:"etcdnodes"`
+	Etcdofferingid        string            `json:"etcdofferingid"`
+	Etcdofferingname      string            `json:"etcdofferingname"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
 	Ipaddress             string            `json:"ipaddress"`
@@ -1644,6 +1843,8 @@ type KubernetesCluster struct {
 	State                 string            `json:"state"`
 	Templateid            string            `json:"templateid"`
 	Virtualmachines       []*VirtualMachine `json:"virtualmachines"`
+	Workerofferingid      string            `json:"workerofferingid"`
+	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -2014,6 +2215,13 @@ func (p *ScaleKubernetesClusterParams) toURLValues() url.Values {
 		vv := strings.Join(v.([]string), ",")
 		u.Set("nodeids", vv)
 	}
+	if v, found := p.p["nodeofferings"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("nodeofferings[%d].node", i), k)
+			u.Set(fmt.Sprintf("nodeofferings[%d].offering", i), m[k])
+		}
+	}
 	if v, found := p.p["serviceofferingid"]; found {
 		u.Set("serviceofferingid", v.(string))
 	}
@@ -2129,6 +2337,27 @@ func (p *ScaleKubernetesClusterParams) GetNodeids() ([]string, bool) {
 	return value, ok
 }
 
+func (p *ScaleKubernetesClusterParams) SetNodeofferings(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nodeofferings"] = v
+}
+
+func (p *ScaleKubernetesClusterParams) ResetNodeofferings() {
+	if p.p != nil && p.p["nodeofferings"] != nil {
+		delete(p.p, "nodeofferings")
+	}
+}
+
+func (p *ScaleKubernetesClusterParams) GetNodeofferings() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nodeofferings"].(map[string]string)
+	return value, ok
+}
+
 func (p *ScaleKubernetesClusterParams) SetServiceofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2220,8 +2449,12 @@ type ScaleKubernetesClusterResponse struct {
 	Associatednetworkname string            `json:"associatednetworkname"`
 	Autoscalingenabled    bool              `json:"autoscalingenabled"`
 	Clustertype           string            `json:"clustertype"`
+	Cniconfigname         string            `json:"cniconfigname"`
+	Cniconfigurationid    string            `json:"cniconfigurationid"`
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
+	Controlofferingid     string            `json:"controlofferingid"`
+	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
 	Description           string            `json:"description"`
@@ -2229,6 +2462,10 @@ type ScaleKubernetesClusterResponse struct {
 	Domainid              string            `json:"domainid"`
 	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
+	Etcdips               map[string]string `json:"etcdips"`
+	Etcdnodes             int64             `json:"etcdnodes"`
+	Etcdofferingid        string            `json:"etcdofferingid"`
+	Etcdofferingname      string            `json:"etcdofferingname"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
 	Ipaddress             string            `json:"ipaddress"`
@@ -2252,6 +2489,8 @@ type ScaleKubernetesClusterResponse struct {
 	State                 string            `json:"state"`
 	Templateid            string            `json:"templateid"`
 	Virtualmachines       []*VirtualMachine `json:"virtualmachines"`
+	Workerofferingid      string            `json:"workerofferingid"`
+	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -2341,8 +2580,12 @@ type StartKubernetesClusterResponse struct {
 	Associatednetworkname string            `json:"associatednetworkname"`
 	Autoscalingenabled    bool              `json:"autoscalingenabled"`
 	Clustertype           string            `json:"clustertype"`
+	Cniconfigname         string            `json:"cniconfigname"`
+	Cniconfigurationid    string            `json:"cniconfigurationid"`
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
+	Controlofferingid     string            `json:"controlofferingid"`
+	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
 	Description           string            `json:"description"`
@@ -2350,6 +2593,10 @@ type StartKubernetesClusterResponse struct {
 	Domainid              string            `json:"domainid"`
 	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
+	Etcdips               map[string]string `json:"etcdips"`
+	Etcdnodes             int64             `json:"etcdnodes"`
+	Etcdofferingid        string            `json:"etcdofferingid"`
+	Etcdofferingname      string            `json:"etcdofferingname"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
 	Ipaddress             string            `json:"ipaddress"`
@@ -2373,6 +2620,8 @@ type StartKubernetesClusterResponse struct {
 	State                 string            `json:"state"`
 	Templateid            string            `json:"templateid"`
 	Virtualmachines       []*VirtualMachine `json:"virtualmachines"`
+	Workerofferingid      string            `json:"workerofferingid"`
+	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }
@@ -2675,8 +2924,12 @@ type UpgradeKubernetesClusterResponse struct {
 	Associatednetworkname string            `json:"associatednetworkname"`
 	Autoscalingenabled    bool              `json:"autoscalingenabled"`
 	Clustertype           string            `json:"clustertype"`
+	Cniconfigname         string            `json:"cniconfigname"`
+	Cniconfigurationid    string            `json:"cniconfigurationid"`
 	Consoleendpoint       string            `json:"consoleendpoint"`
 	Controlnodes          int64             `json:"controlnodes"`
+	Controlofferingid     string            `json:"controlofferingid"`
+	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
 	Description           string            `json:"description"`
@@ -2684,6 +2937,10 @@ type UpgradeKubernetesClusterResponse struct {
 	Domainid              string            `json:"domainid"`
 	Domainpath            string            `json:"domainpath"`
 	Endpoint              string            `json:"endpoint"`
+	Etcdips               map[string]string `json:"etcdips"`
+	Etcdnodes             int64             `json:"etcdnodes"`
+	Etcdofferingid        string            `json:"etcdofferingid"`
+	Etcdofferingname      string            `json:"etcdofferingname"`
 	Hasannotations        bool              `json:"hasannotations"`
 	Id                    string            `json:"id"`
 	Ipaddress             string            `json:"ipaddress"`
@@ -2707,6 +2964,8 @@ type UpgradeKubernetesClusterResponse struct {
 	State                 string            `json:"state"`
 	Templateid            string            `json:"templateid"`
 	Virtualmachines       []*VirtualMachine `json:"virtualmachines"`
+	Workerofferingid      string            `json:"workerofferingid"`
+	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
 }

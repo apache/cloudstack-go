@@ -31,7 +31,7 @@ type VPCServiceIface interface {
 	CreatePrivateGateway(p *CreatePrivateGatewayParams) (*CreatePrivateGatewayResponse, error)
 	NewCreatePrivateGatewayParams(gateway string, ipaddress string, netmask string, vpcid string) *CreatePrivateGatewayParams
 	CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStaticRouteResponse, error)
-	NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams
+	NewCreateStaticRouteParams(cidr string) *CreateStaticRouteParams
 	CreateVPC(p *CreateVPCParams) (*CreateVPCResponse, error)
 	NewCreateVPCParams(cidr string, displaytext string, name string, vpcofferingid string, zoneid string) *CreateVPCParams
 	CreateVPCOffering(p *CreateVPCOfferingParams) (*CreateVPCOfferingResponse, error)
@@ -438,6 +438,12 @@ func (p *CreateStaticRouteParams) toURLValues() url.Values {
 	if v, found := p.p["gatewayid"]; found {
 		u.Set("gatewayid", v.(string))
 	}
+	if v, found := p.p["nexthop"]; found {
+		u.Set("nexthop", v.(string))
+	}
+	if v, found := p.p["vpcid"]; found {
+		u.Set("vpcid", v.(string))
+	}
 	return u
 }
 
@@ -483,13 +489,54 @@ func (p *CreateStaticRouteParams) GetGatewayid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateStaticRouteParams) SetNexthop(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["nexthop"] = v
+}
+
+func (p *CreateStaticRouteParams) ResetNexthop() {
+	if p.p != nil && p.p["nexthop"] != nil {
+		delete(p.p, "nexthop")
+	}
+}
+
+func (p *CreateStaticRouteParams) GetNexthop() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["nexthop"].(string)
+	return value, ok
+}
+
+func (p *CreateStaticRouteParams) SetVpcid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vpcid"] = v
+}
+
+func (p *CreateStaticRouteParams) ResetVpcid() {
+	if p.p != nil && p.p["vpcid"] != nil {
+		delete(p.p, "vpcid")
+	}
+}
+
+func (p *CreateStaticRouteParams) GetVpcid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vpcid"].(string)
+	return value, ok
+}
+
 // You should always use this function to get a new CreateStaticRouteParams instance,
 // as then you are sure you have configured all required params
-func (s *VPCService) NewCreateStaticRouteParams(cidr string, gatewayid string) *CreateStaticRouteParams {
+func (s *VPCService) NewCreateStaticRouteParams(cidr string) *CreateStaticRouteParams {
 	p := &CreateStaticRouteParams{}
 	p.p = make(map[string]interface{})
 	p.p["cidr"] = cidr
-	p.p["gatewayid"] = gatewayid
 	return p
 }
 
@@ -529,20 +576,22 @@ func (s *VPCService) CreateStaticRoute(p *CreateStaticRouteParams) (*CreateStati
 }
 
 type CreateStaticRouteResponse struct {
-	Account    string `json:"account"`
-	Cidr       string `json:"cidr"`
-	Domain     string `json:"domain"`
-	Domainid   string `json:"domainid"`
-	Domainpath string `json:"domainpath"`
-	Gatewayid  string `json:"gatewayid"`
-	Id         string `json:"id"`
-	JobID      string `json:"jobid"`
-	Jobstatus  int    `json:"jobstatus"`
-	Project    string `json:"project"`
-	Projectid  string `json:"projectid"`
-	State      string `json:"state"`
-	Tags       []Tags `json:"tags"`
-	Vpcid      string `json:"vpcid"`
+	Account      string `json:"account"`
+	Cidr         string `json:"cidr"`
+	Domain       string `json:"domain"`
+	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Nexthop      string `json:"nexthop"`
+	Project      string `json:"project"`
+	Projectid    string `json:"projectid"`
+	State        string `json:"state"`
+	Tags         []Tags `json:"tags"`
+	Vpcgatewayid string `json:"vpcgatewayid"`
+	Vpcgatewayip string `json:"vpcgatewayip"`
+	Vpcid        string `json:"vpcid"`
 }
 
 type CreateVPCParams struct {
@@ -613,6 +662,10 @@ func (p *CreateVPCParams) toURLValues() url.Values {
 	if v, found := p.p["start"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("start", vv)
+	}
+	if v, found := p.p["userouteripresolver"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("userouteripresolver", vv)
 	}
 	if v, found := p.p["vpcofferingid"]; found {
 		u.Set("vpcofferingid", v.(string))
@@ -1001,6 +1054,27 @@ func (p *CreateVPCParams) GetStart() (bool, bool) {
 	return value, ok
 }
 
+func (p *CreateVPCParams) SetUserouteripresolver(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["userouteripresolver"] = v
+}
+
+func (p *CreateVPCParams) ResetUserouteripresolver() {
+	if p.p != nil && p.p["userouteripresolver"] != nil {
+		delete(p.p, "userouteripresolver")
+	}
+}
+
+func (p *CreateVPCParams) GetUserouteripresolver() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["userouteripresolver"].(bool)
+	return value, ok
+}
+
 func (p *CreateVPCParams) SetVpcofferingid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1192,6 +1266,9 @@ func (p *CreateVPCOfferingParams) toURLValues() url.Values {
 	if v, found := p.p["nsxsupportlb"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("nsxsupportlb", vv)
+	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
 	}
 	if v, found := p.p["routingmode"]; found {
 		u.Set("routingmode", v.(string))
@@ -1393,6 +1470,27 @@ func (p *CreateVPCOfferingParams) GetNsxsupportlb() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["nsxsupportlb"].(bool)
+	return value, ok
+}
+
+func (p *CreateVPCOfferingParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *CreateVPCOfferingParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *CreateVPCOfferingParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
 	return value, ok
 }
 
@@ -2772,20 +2870,22 @@ type ListStaticRoutesResponse struct {
 }
 
 type StaticRoute struct {
-	Account    string `json:"account"`
-	Cidr       string `json:"cidr"`
-	Domain     string `json:"domain"`
-	Domainid   string `json:"domainid"`
-	Domainpath string `json:"domainpath"`
-	Gatewayid  string `json:"gatewayid"`
-	Id         string `json:"id"`
-	JobID      string `json:"jobid"`
-	Jobstatus  int    `json:"jobstatus"`
-	Project    string `json:"project"`
-	Projectid  string `json:"projectid"`
-	State      string `json:"state"`
-	Tags       []Tags `json:"tags"`
-	Vpcid      string `json:"vpcid"`
+	Account      string `json:"account"`
+	Cidr         string `json:"cidr"`
+	Domain       string `json:"domain"`
+	Domainid     string `json:"domainid"`
+	Domainpath   string `json:"domainpath"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Nexthop      string `json:"nexthop"`
+	Project      string `json:"project"`
+	Projectid    string `json:"projectid"`
+	State        string `json:"state"`
+	Tags         []Tags `json:"tags"`
+	Vpcgatewayid string `json:"vpcgatewayid"`
+	Vpcgatewayip string `json:"vpcgatewayip"`
+	Vpcid        string `json:"vpcid"`
 }
 
 type ListVPCOfferingsParams struct {

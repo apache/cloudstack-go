@@ -282,22 +282,24 @@ func (s *PodService) CreateManagementNetworkIpRange(p *CreateManagementNetworkIp
 }
 
 type CreateManagementNetworkIpRangeResponse struct {
-	Allocationstate string                                           `json:"allocationstate"`
-	Capacity        []CreateManagementNetworkIpRangeResponseCapacity `json:"capacity"`
-	Endip           []string                                         `json:"endip"`
-	Forsystemvms    []string                                         `json:"forsystemvms"`
-	Gateway         string                                           `json:"gateway"`
-	Hasannotations  bool                                             `json:"hasannotations"`
-	Id              string                                           `json:"id"`
-	Ipranges        []CreateManagementNetworkIpRangeResponseIpranges `json:"ipranges"`
-	JobID           string                                           `json:"jobid"`
-	Jobstatus       int                                              `json:"jobstatus"`
-	Name            string                                           `json:"name"`
-	Netmask         string                                           `json:"netmask"`
-	Startip         []string                                         `json:"startip"`
-	Vlanid          []string                                         `json:"vlanid"`
-	Zoneid          string                                           `json:"zoneid"`
-	Zonename        string                                           `json:"zonename"`
+	Allocationstate         string                                           `json:"allocationstate"`
+	Capacity                []CreateManagementNetworkIpRangeResponseCapacity `json:"capacity"`
+	Endip                   []string                                         `json:"endip"`
+	Forsystemvms            []string                                         `json:"forsystemvms"`
+	Gateway                 string                                           `json:"gateway"`
+	Hasannotations          bool                                             `json:"hasannotations"`
+	Id                      string                                           `json:"id"`
+	Ipranges                []CreateManagementNetworkIpRangeResponseIpranges `json:"ipranges"`
+	JobID                   string                                           `json:"jobid"`
+	Jobstatus               int                                              `json:"jobstatus"`
+	Name                    string                                           `json:"name"`
+	Netmask                 string                                           `json:"netmask"`
+	Startip                 []string                                         `json:"startip"`
+	Storageaccessgroups     string                                           `json:"storageaccessgroups"`
+	Vlanid                  []string                                         `json:"vlanid"`
+	Zoneid                  string                                           `json:"zoneid"`
+	Zonename                string                                           `json:"zonename"`
+	Zonestorageaccessgroups string                                           `json:"zonestorageaccessgroups"`
 }
 
 type CreateManagementNetworkIpRangeResponseIpranges struct {
@@ -351,6 +353,10 @@ func (p *CreatePodParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["startip"]; found {
 		u.Set("startip", v.(string))
+	}
+	if v, found := p.p["storageaccessgroups"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("storageaccessgroups", vv)
 	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
@@ -484,6 +490,27 @@ func (p *CreatePodParams) GetStartip() (string, bool) {
 	return value, ok
 }
 
+func (p *CreatePodParams) SetStorageaccessgroups(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroups"] = v
+}
+
+func (p *CreatePodParams) ResetStorageaccessgroups() {
+	if p.p != nil && p.p["storageaccessgroups"] != nil {
+		delete(p.p, "storageaccessgroups")
+	}
+}
+
+func (p *CreatePodParams) GetStorageaccessgroups() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroups"].([]string)
+	return value, ok
+}
+
 func (p *CreatePodParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -535,22 +562,24 @@ func (s *PodService) CreatePod(p *CreatePodParams) (*CreatePodResponse, error) {
 }
 
 type CreatePodResponse struct {
-	Allocationstate string                      `json:"allocationstate"`
-	Capacity        []CreatePodResponseCapacity `json:"capacity"`
-	Endip           []string                    `json:"endip"`
-	Forsystemvms    []string                    `json:"forsystemvms"`
-	Gateway         string                      `json:"gateway"`
-	Hasannotations  bool                        `json:"hasannotations"`
-	Id              string                      `json:"id"`
-	Ipranges        []CreatePodResponseIpranges `json:"ipranges"`
-	JobID           string                      `json:"jobid"`
-	Jobstatus       int                         `json:"jobstatus"`
-	Name            string                      `json:"name"`
-	Netmask         string                      `json:"netmask"`
-	Startip         []string                    `json:"startip"`
-	Vlanid          []string                    `json:"vlanid"`
-	Zoneid          string                      `json:"zoneid"`
-	Zonename        string                      `json:"zonename"`
+	Allocationstate         string                      `json:"allocationstate"`
+	Capacity                []CreatePodResponseCapacity `json:"capacity"`
+	Endip                   []string                    `json:"endip"`
+	Forsystemvms            []string                    `json:"forsystemvms"`
+	Gateway                 string                      `json:"gateway"`
+	Hasannotations          bool                        `json:"hasannotations"`
+	Id                      string                      `json:"id"`
+	Ipranges                []CreatePodResponseIpranges `json:"ipranges"`
+	JobID                   string                      `json:"jobid"`
+	Jobstatus               int                         `json:"jobstatus"`
+	Name                    string                      `json:"name"`
+	Netmask                 string                      `json:"netmask"`
+	Startip                 []string                    `json:"startip"`
+	Storageaccessgroups     string                      `json:"storageaccessgroups"`
+	Vlanid                  []string                    `json:"vlanid"`
+	Zoneid                  string                      `json:"zoneid"`
+	Zonename                string                      `json:"zonename"`
+	Zonestorageaccessgroups string                      `json:"zonestorageaccessgroups"`
 }
 
 type CreatePodResponseIpranges struct {
@@ -1223,6 +1252,9 @@ func (p *ListPodsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showcapacities", vv)
 	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -1376,6 +1408,27 @@ func (p *ListPodsParams) GetShowcapacities() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListPodsParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListPodsParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListPodsParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListPodsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1509,22 +1562,24 @@ type ListPodsResponse struct {
 }
 
 type Pod struct {
-	Allocationstate string        `json:"allocationstate"`
-	Capacity        []PodCapacity `json:"capacity"`
-	Endip           []string      `json:"endip"`
-	Forsystemvms    []string      `json:"forsystemvms"`
-	Gateway         string        `json:"gateway"`
-	Hasannotations  bool          `json:"hasannotations"`
-	Id              string        `json:"id"`
-	Ipranges        []PodIpranges `json:"ipranges"`
-	JobID           string        `json:"jobid"`
-	Jobstatus       int           `json:"jobstatus"`
-	Name            string        `json:"name"`
-	Netmask         string        `json:"netmask"`
-	Startip         []string      `json:"startip"`
-	Vlanid          []string      `json:"vlanid"`
-	Zoneid          string        `json:"zoneid"`
-	Zonename        string        `json:"zonename"`
+	Allocationstate         string        `json:"allocationstate"`
+	Capacity                []PodCapacity `json:"capacity"`
+	Endip                   []string      `json:"endip"`
+	Forsystemvms            []string      `json:"forsystemvms"`
+	Gateway                 string        `json:"gateway"`
+	Hasannotations          bool          `json:"hasannotations"`
+	Id                      string        `json:"id"`
+	Ipranges                []PodIpranges `json:"ipranges"`
+	JobID                   string        `json:"jobid"`
+	Jobstatus               int           `json:"jobstatus"`
+	Name                    string        `json:"name"`
+	Netmask                 string        `json:"netmask"`
+	Startip                 []string      `json:"startip"`
+	Storageaccessgroups     string        `json:"storageaccessgroups"`
+	Vlanid                  []string      `json:"vlanid"`
+	Zoneid                  string        `json:"zoneid"`
+	Zonename                string        `json:"zonename"`
+	Zonestorageaccessgroups string        `json:"zonestorageaccessgroups"`
 }
 
 type PodIpranges struct {
@@ -1843,22 +1898,24 @@ func (s *PodService) UpdatePod(p *UpdatePodParams) (*UpdatePodResponse, error) {
 }
 
 type UpdatePodResponse struct {
-	Allocationstate string                      `json:"allocationstate"`
-	Capacity        []UpdatePodResponseCapacity `json:"capacity"`
-	Endip           []string                    `json:"endip"`
-	Forsystemvms    []string                    `json:"forsystemvms"`
-	Gateway         string                      `json:"gateway"`
-	Hasannotations  bool                        `json:"hasannotations"`
-	Id              string                      `json:"id"`
-	Ipranges        []UpdatePodResponseIpranges `json:"ipranges"`
-	JobID           string                      `json:"jobid"`
-	Jobstatus       int                         `json:"jobstatus"`
-	Name            string                      `json:"name"`
-	Netmask         string                      `json:"netmask"`
-	Startip         []string                    `json:"startip"`
-	Vlanid          []string                    `json:"vlanid"`
-	Zoneid          string                      `json:"zoneid"`
-	Zonename        string                      `json:"zonename"`
+	Allocationstate         string                      `json:"allocationstate"`
+	Capacity                []UpdatePodResponseCapacity `json:"capacity"`
+	Endip                   []string                    `json:"endip"`
+	Forsystemvms            []string                    `json:"forsystemvms"`
+	Gateway                 string                      `json:"gateway"`
+	Hasannotations          bool                        `json:"hasannotations"`
+	Id                      string                      `json:"id"`
+	Ipranges                []UpdatePodResponseIpranges `json:"ipranges"`
+	JobID                   string                      `json:"jobid"`
+	Jobstatus               int                         `json:"jobstatus"`
+	Name                    string                      `json:"name"`
+	Netmask                 string                      `json:"netmask"`
+	Startip                 []string                    `json:"startip"`
+	Storageaccessgroups     string                      `json:"storageaccessgroups"`
+	Vlanid                  []string                    `json:"vlanid"`
+	Zoneid                  string                      `json:"zoneid"`
+	Zonename                string                      `json:"zonename"`
+	Zonestorageaccessgroups string                      `json:"zonestorageaccessgroups"`
 }
 
 type UpdatePodResponseIpranges struct {

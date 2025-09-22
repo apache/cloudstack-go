@@ -39,7 +39,7 @@ func TestObjectStoreService(t *testing.T) {
 		if _, ok := response["createBucket"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.ObjectStore.NewCreateBucketParams("name", "objectstorageid")
+		p := client.ObjectStore.NewCreateBucketParams("name", "objectstorageid", 0)
 		r, err := client.ObjectStore.CreateBucket(p)
 		if err != nil {
 			t.Errorf(err.Error())
