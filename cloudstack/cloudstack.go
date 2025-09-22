@@ -111,6 +111,7 @@ type CloudStackClient struct {
 	Authentication          AuthenticationServiceIface
 	AutoScale               AutoScaleServiceIface
 	BGPPeer                 BGPPeerServiceIface
+	Backup                  BackupServiceIface
 	Baremetal               BaremetalServiceIface
 	BigSwitchBCF            BigSwitchBCFServiceIface
 	BrocadeVCS              BrocadeVCSServiceIface
@@ -238,6 +239,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Authentication = NewAuthenticationService(cs)
 	cs.AutoScale = NewAutoScaleService(cs)
 	cs.BGPPeer = NewBGPPeerService(cs)
+	cs.Backup = NewBackupService(cs)
 	cs.Baremetal = NewBaremetalService(cs)
 	cs.BigSwitchBCF = NewBigSwitchBCFService(cs)
 	cs.BrocadeVCS = NewBrocadeVCSService(cs)
@@ -338,6 +340,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Authentication = NewMockAuthenticationServiceIface(ctrl)
 	cs.AutoScale = NewMockAutoScaleServiceIface(ctrl)
 	cs.BGPPeer = NewMockBGPPeerServiceIface(ctrl)
+	cs.Backup = NewMockBackupServiceIface(ctrl)
 	cs.Baremetal = NewMockBaremetalServiceIface(ctrl)
 	cs.BigSwitchBCF = NewMockBigSwitchBCFServiceIface(ctrl)
 	cs.BrocadeVCS = NewMockBrocadeVCSServiceIface(ctrl)
@@ -898,6 +901,14 @@ type BGPPeerService struct {
 
 func NewBGPPeerService(cs *CloudStackClient) BGPPeerServiceIface {
 	return &BGPPeerService{cs: cs}
+}
+
+type BackupService struct {
+	cs *CloudStackClient
+}
+
+func NewBackupService(cs *CloudStackClient) BackupServiceIface {
+	return &BackupService{cs: cs}
 }
 
 type BaremetalService struct {

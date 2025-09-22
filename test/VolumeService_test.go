@@ -365,4 +365,16 @@ func TestVolumeService(t *testing.T) {
 	}
 	t.Run("AssignVolume", testassignVolume)
 
+	testrestoreVolumeFromBackupAndAttachToVM := func(t *testing.T) {
+		if _, ok := response["restoreVolumeFromBackupAndAttachToVM"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Volume.NewRestoreVolumeFromBackupAndAttachToVMParams("backupid", "virtualmachineid", "volumeid")
+		_, err := client.Volume.RestoreVolumeFromBackupAndAttachToVM(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RestoreVolumeFromBackupAndAttachToVM", testrestoreVolumeFromBackupAndAttachToVM)
+
 }
