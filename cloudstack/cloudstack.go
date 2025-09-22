@@ -126,6 +126,7 @@ type CloudStackClient struct {
 	Domain                  DomainServiceIface
 	Event                   EventServiceIface
 	Firewall                FirewallServiceIface
+	GPU                     GPUServiceIface
 	GuestOS                 GuestOSServiceIface
 	Host                    HostServiceIface
 	Hypervisor              HypervisorServiceIface
@@ -253,6 +254,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Domain = NewDomainService(cs)
 	cs.Event = NewEventService(cs)
 	cs.Firewall = NewFirewallService(cs)
+	cs.GPU = NewGPUService(cs)
 	cs.GuestOS = NewGuestOSService(cs)
 	cs.Host = NewHostService(cs)
 	cs.Hypervisor = NewHypervisorService(cs)
@@ -353,6 +355,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Domain = NewMockDomainServiceIface(ctrl)
 	cs.Event = NewMockEventServiceIface(ctrl)
 	cs.Firewall = NewMockFirewallServiceIface(ctrl)
+	cs.GPU = NewMockGPUServiceIface(ctrl)
 	cs.GuestOS = NewMockGuestOSServiceIface(ctrl)
 	cs.Host = NewMockHostServiceIface(ctrl)
 	cs.Hypervisor = NewMockHypervisorServiceIface(ctrl)
@@ -1018,6 +1021,14 @@ type FirewallService struct {
 
 func NewFirewallService(cs *CloudStackClient) FirewallServiceIface {
 	return &FirewallService{cs: cs}
+}
+
+type GPUService struct {
+	cs *CloudStackClient
+}
+
+func NewGPUService(cs *CloudStackClient) GPUServiceIface {
+	return &GPUService{cs: cs}
 }
 
 type GuestOSService struct {
