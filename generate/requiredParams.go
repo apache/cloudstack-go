@@ -55,6 +55,9 @@ var requiredParams = map[string][]string{
 	"createVPCOffering": {
 		"displaytext",
 	},
+	"deployVirtualMachine": {
+		"templateid",
+	},
 	"disassociateIpAddress": {
 		"id",
 	},
