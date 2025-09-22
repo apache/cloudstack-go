@@ -88,6 +88,21 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) AssignVirtualMachine(p any
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AssignVirtualMachine", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).AssignVirtualMachine), p)
 }
 
+// AssignVirtualMachineToBackupOffering mocks base method.
+func (m *MockVirtualMachineServiceIface) AssignVirtualMachineToBackupOffering(p *AssignVirtualMachineToBackupOfferingParams) (*AssignVirtualMachineToBackupOfferingResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AssignVirtualMachineToBackupOffering", p)
+	ret0, _ := ret[0].(*AssignVirtualMachineToBackupOfferingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AssignVirtualMachineToBackupOffering indicates an expected call of AssignVirtualMachineToBackupOffering.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) AssignVirtualMachineToBackupOffering(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AssignVirtualMachineToBackupOffering", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).AssignVirtualMachineToBackupOffering), p)
+}
+
 // ChangeServiceForVirtualMachine mocks base method.
 func (m *MockVirtualMachineServiceIface) ChangeServiceForVirtualMachine(p *ChangeServiceForVirtualMachineParams) (*ChangeServiceForVirtualMachineResponse, error) {
 	m.ctrl.T.Helper()
@@ -596,6 +611,20 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewAssignVirtualMachinePar
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAssignVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewAssignVirtualMachineParams), virtualmachineid)
 }
 
+// NewAssignVirtualMachineToBackupOfferingParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewAssignVirtualMachineToBackupOfferingParams(backupofferingid, virtualmachineid string) *AssignVirtualMachineToBackupOfferingParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewAssignVirtualMachineToBackupOfferingParams", backupofferingid, virtualmachineid)
+	ret0, _ := ret[0].(*AssignVirtualMachineToBackupOfferingParams)
+	return ret0
+}
+
+// NewAssignVirtualMachineToBackupOfferingParams indicates an expected call of NewAssignVirtualMachineToBackupOfferingParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewAssignVirtualMachineToBackupOfferingParams(backupofferingid, virtualmachineid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAssignVirtualMachineToBackupOfferingParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewAssignVirtualMachineToBackupOfferingParams), backupofferingid, virtualmachineid)
+}
+
 // NewChangeServiceForVirtualMachineParams mocks base method.
 func (m *MockVirtualMachineServiceIface) NewChangeServiceForVirtualMachineParams(id, serviceofferingid string) *ChangeServiceForVirtualMachineParams {
 	m.ctrl.T.Helper()
@@ -890,6 +919,20 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewRemoveNicFromVirtualMac
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveNicFromVirtualMachineParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewRemoveNicFromVirtualMachineParams), nicid, virtualmachineid)
 }
 
+// NewRemoveVirtualMachineFromBackupOfferingParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewRemoveVirtualMachineFromBackupOfferingParams(virtualmachineid string) *RemoveVirtualMachineFromBackupOfferingParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveVirtualMachineFromBackupOfferingParams", virtualmachineid)
+	ret0, _ := ret[0].(*RemoveVirtualMachineFromBackupOfferingParams)
+	return ret0
+}
+
+// NewRemoveVirtualMachineFromBackupOfferingParams indicates an expected call of NewRemoveVirtualMachineFromBackupOfferingParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewRemoveVirtualMachineFromBackupOfferingParams(virtualmachineid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveVirtualMachineFromBackupOfferingParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewRemoveVirtualMachineFromBackupOfferingParams), virtualmachineid)
+}
+
 // NewResetPasswordForVirtualMachineParams mocks base method.
 func (m *MockVirtualMachineServiceIface) NewResetPasswordForVirtualMachineParams(id string) *ResetPasswordForVirtualMachineParams {
 	m.ctrl.T.Helper()
@@ -1073,6 +1116,21 @@ func (m *MockVirtualMachineServiceIface) RemoveNicFromVirtualMachine(p *RemoveNi
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) RemoveNicFromVirtualMachine(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveNicFromVirtualMachine", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).RemoveNicFromVirtualMachine), p)
+}
+
+// RemoveVirtualMachineFromBackupOffering mocks base method.
+func (m *MockVirtualMachineServiceIface) RemoveVirtualMachineFromBackupOffering(p *RemoveVirtualMachineFromBackupOfferingParams) (*RemoveVirtualMachineFromBackupOfferingResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveVirtualMachineFromBackupOffering", p)
+	ret0, _ := ret[0].(*RemoveVirtualMachineFromBackupOfferingResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveVirtualMachineFromBackupOffering indicates an expected call of RemoveVirtualMachineFromBackupOffering.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) RemoveVirtualMachineFromBackupOffering(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveVirtualMachineFromBackupOffering", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).RemoveVirtualMachineFromBackupOffering), p)
 }
 
 // ResetPasswordForVirtualMachine mocks base method.

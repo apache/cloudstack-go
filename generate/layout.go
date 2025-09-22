@@ -141,6 +141,8 @@ var layout = apiInfo{
 		"updateVMSchedule",
 		"listVMSchedule",
 		"deleteVMSchedule",
+		"assignVirtualMachineToBackupOffering",
+		"removeVirtualMachineFromBackupOffering",
 	},
 	"VPNService": {
 		"addVpnUser",
