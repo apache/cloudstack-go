@@ -142,6 +142,7 @@ type CloudStackClient struct {
 	Metrics                 MetricsServiceIface
 	Misc                    MiscServiceIface
 	NAT                     NATServiceIface
+	Netris                  NetrisServiceIface
 	Netscaler               NetscalerServiceIface
 	NetworkACL              NetworkACLServiceIface
 	NetworkDevice           NetworkDeviceServiceIface
@@ -149,6 +150,7 @@ type CloudStackClient struct {
 	Network                 NetworkServiceIface
 	Nic                     NicServiceIface
 	NiciraNVP               NiciraNVPServiceIface
+	Nsx                     NsxServiceIface
 	Oauth                   OauthServiceIface
 	ObjectStore             ObjectStoreServiceIface
 	OutofbandManagement     OutofbandManagementServiceIface
@@ -269,6 +271,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Metrics = NewMetricsService(cs)
 	cs.Misc = NewMiscService(cs)
 	cs.NAT = NewNATService(cs)
+	cs.Netris = NewNetrisService(cs)
 	cs.Netscaler = NewNetscalerService(cs)
 	cs.NetworkACL = NewNetworkACLService(cs)
 	cs.NetworkDevice = NewNetworkDeviceService(cs)
@@ -276,6 +279,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
+	cs.Nsx = NewNsxService(cs)
 	cs.Oauth = NewOauthService(cs)
 	cs.ObjectStore = NewObjectStoreService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
@@ -369,6 +373,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Metrics = NewMockMetricsServiceIface(ctrl)
 	cs.Misc = NewMockMiscServiceIface(ctrl)
 	cs.NAT = NewMockNATServiceIface(ctrl)
+	cs.Netris = NewMockNetrisServiceIface(ctrl)
 	cs.Netscaler = NewMockNetscalerServiceIface(ctrl)
 	cs.NetworkACL = NewMockNetworkACLServiceIface(ctrl)
 	cs.NetworkDevice = NewMockNetworkDeviceServiceIface(ctrl)
@@ -376,6 +381,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Network = NewMockNetworkServiceIface(ctrl)
 	cs.Nic = NewMockNicServiceIface(ctrl)
 	cs.NiciraNVP = NewMockNiciraNVPServiceIface(ctrl)
+	cs.Nsx = NewMockNsxServiceIface(ctrl)
 	cs.Oauth = NewMockOauthServiceIface(ctrl)
 	cs.ObjectStore = NewMockObjectStoreServiceIface(ctrl)
 	cs.OutofbandManagement = NewMockOutofbandManagementServiceIface(ctrl)
@@ -1148,6 +1154,14 @@ func NewNATService(cs *CloudStackClient) NATServiceIface {
 	return &NATService{cs: cs}
 }
 
+type NetrisService struct {
+	cs *CloudStackClient
+}
+
+func NewNetrisService(cs *CloudStackClient) NetrisServiceIface {
+	return &NetrisService{cs: cs}
+}
+
 type NetscalerService struct {
 	cs *CloudStackClient
 }
@@ -1202,6 +1216,14 @@ type NiciraNVPService struct {
 
 func NewNiciraNVPService(cs *CloudStackClient) NiciraNVPServiceIface {
 	return &NiciraNVPService{cs: cs}
+}
+
+type NsxService struct {
+	cs *CloudStackClient
+}
+
+func NewNsxService(cs *CloudStackClient) NsxServiceIface {
+	return &NsxService{cs: cs}
 }
 
 type OauthService struct {
