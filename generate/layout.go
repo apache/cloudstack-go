@@ -744,6 +744,9 @@ var layout = apiInfo{
 		"updateConfiguration",
 		"resetConfiguration",
 		"updateStorageCapabilities",
+		"registerCniConfiguration",
+		"listCniConfiguration",
+		"deleteCniConfiguration",
 	},
 	"BrocadeVCSService": {
 		"addBrocadeVcsDevice",
@@ -869,6 +872,8 @@ var layout = apiInfo{
 		"upgradeKubernetesCluster",
 		"addVirtualMachinesToKubernetesCluster",
 		"removeVirtualMachinesFromKubernetesCluster",
+		"addNodesToKubernetesCluster",
+		"removeNodesFromKubernetesCluster",
 	},
 	"InfrastructureUsageService": {
 		"listDbMetrics",
@@ -920,6 +925,11 @@ var layout = apiInfo{
 	"MiscService": {
 		"listElastistorInterface",
 	},
+	"NetrisService": {
+		"addNetrisProvider",
+		"deleteNetrisProvider",
+		"listNetrisProviders",
+	},
 	"NetscalerService": {
 		"addNetscalerLoadBalancer",
 		"configureNetscalerLoadBalancer",
@@ -930,6 +940,11 @@ var layout = apiInfo{
 		"listNetscalerLoadBalancers",
 		"registerNetscalerControlCenter",
 		"registerNetscalerServicePackage",
+	},
+	"NsxService": {
+		"addNsxController",
+		"deleteNsxController",
+		"listNsxControllers",
 	},
 	"ResourceIconService": {
 		"deleteResourceIcon",
