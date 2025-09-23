@@ -88,6 +88,16 @@ func (p *AddClusterParams) toURLValues() url.Values {
 	if v, found := p.p["clustertype"]; found {
 		u.Set("clustertype", v.(string))
 	}
+	if v, found := p.p["extensionid"]; found {
+		u.Set("extensionid", v.(string))
+	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["guestvswitchname"]; found {
 		u.Set("guestvswitchname", v.(string))
 	}
@@ -117,6 +127,10 @@ func (p *AddClusterParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["publicvswitchtype"]; found {
 		u.Set("publicvswitchtype", v.(string))
+	}
+	if v, found := p.p["storageaccessgroups"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("storageaccessgroups", vv)
 	}
 	if v, found := p.p["url"]; found {
 		u.Set("url", v.(string))
@@ -220,6 +234,48 @@ func (p *AddClusterParams) GetClustertype() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["clustertype"].(string)
+	return value, ok
+}
+
+func (p *AddClusterParams) SetExtensionid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extensionid"] = v
+}
+
+func (p *AddClusterParams) ResetExtensionid() {
+	if p.p != nil && p.p["extensionid"] != nil {
+		delete(p.p, "extensionid")
+	}
+}
+
+func (p *AddClusterParams) GetExtensionid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extensionid"].(string)
+	return value, ok
+}
+
+func (p *AddClusterParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *AddClusterParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *AddClusterParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
 	return value, ok
 }
 
@@ -433,6 +489,27 @@ func (p *AddClusterParams) GetPublicvswitchtype() (string, bool) {
 	return value, ok
 }
 
+func (p *AddClusterParams) SetStorageaccessgroups(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroups"] = v
+}
+
+func (p *AddClusterParams) ResetStorageaccessgroups() {
+	if p.p != nil && p.p["storageaccessgroups"] != nil {
+		delete(p.p, "storageaccessgroups")
+	}
+}
+
+func (p *AddClusterParams) GetStorageaccessgroups() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroups"].([]string)
+	return value, ok
+}
+
 func (p *AddClusterParams) SetUrl(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -592,25 +669,30 @@ func (s *ClusterService) AddCluster(p *AddClusterParams) (*AddClusterResponse, e
 }
 
 type AddClusterResponse struct {
-	Allocationstate       string                       `json:"allocationstate"`
-	Arch                  string                       `json:"arch"`
-	Capacity              []AddClusterResponseCapacity `json:"capacity"`
-	Clustertype           string                       `json:"clustertype"`
-	Cpuovercommitratio    string                       `json:"cpuovercommitratio"`
-	Hasannotations        bool                         `json:"hasannotations"`
-	Hypervisortype        string                       `json:"hypervisortype"`
-	Id                    string                       `json:"id"`
-	JobID                 string                       `json:"jobid"`
-	Jobstatus             int                          `json:"jobstatus"`
-	Managedstate          string                       `json:"managedstate"`
-	Memoryovercommitratio string                       `json:"memoryovercommitratio"`
-	Name                  string                       `json:"name"`
-	Ovm3vip               string                       `json:"ovm3vip"`
-	Podid                 string                       `json:"podid"`
-	Podname               string                       `json:"podname"`
-	Resourcedetails       map[string]string            `json:"resourcedetails"`
-	Zoneid                string                       `json:"zoneid"`
-	Zonename              string                       `json:"zonename"`
+	Allocationstate         string                       `json:"allocationstate"`
+	Arch                    string                       `json:"arch"`
+	Capacity                []AddClusterResponseCapacity `json:"capacity"`
+	Clustertype             string                       `json:"clustertype"`
+	Cpuovercommitratio      string                       `json:"cpuovercommitratio"`
+	Extensionid             string                       `json:"extensionid"`
+	Extensionname           string                       `json:"extensionname"`
+	Hasannotations          bool                         `json:"hasannotations"`
+	Hypervisortype          string                       `json:"hypervisortype"`
+	Id                      string                       `json:"id"`
+	JobID                   string                       `json:"jobid"`
+	Jobstatus               int                          `json:"jobstatus"`
+	Managedstate            string                       `json:"managedstate"`
+	Memoryovercommitratio   string                       `json:"memoryovercommitratio"`
+	Name                    string                       `json:"name"`
+	Ovm3vip                 string                       `json:"ovm3vip"`
+	Podid                   string                       `json:"podid"`
+	Podname                 string                       `json:"podname"`
+	Podstorageaccessgroups  string                       `json:"podstorageaccessgroups"`
+	Resourcedetails         map[string]string            `json:"resourcedetails"`
+	Storageaccessgroups     string                       `json:"storageaccessgroups"`
+	Zoneid                  string                       `json:"zoneid"`
+	Zonename                string                       `json:"zonename"`
+	Zonestorageaccessgroups string                       `json:"zonestorageaccessgroups"`
 }
 
 type AddClusterResponseCapacity struct {
@@ -1482,6 +1564,9 @@ func (p *ListClustersParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showcapacities", vv)
 	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -1740,6 +1825,27 @@ func (p *ListClustersParams) GetShowcapacities() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListClustersParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListClustersParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListClustersParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListClustersParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1873,25 +1979,30 @@ type ListClustersResponse struct {
 }
 
 type Cluster struct {
-	Allocationstate       string            `json:"allocationstate"`
-	Arch                  string            `json:"arch"`
-	Capacity              []ClusterCapacity `json:"capacity"`
-	Clustertype           string            `json:"clustertype"`
-	Cpuovercommitratio    string            `json:"cpuovercommitratio"`
-	Hasannotations        bool              `json:"hasannotations"`
-	Hypervisortype        string            `json:"hypervisortype"`
-	Id                    string            `json:"id"`
-	JobID                 string            `json:"jobid"`
-	Jobstatus             int               `json:"jobstatus"`
-	Managedstate          string            `json:"managedstate"`
-	Memoryovercommitratio string            `json:"memoryovercommitratio"`
-	Name                  string            `json:"name"`
-	Ovm3vip               string            `json:"ovm3vip"`
-	Podid                 string            `json:"podid"`
-	Podname               string            `json:"podname"`
-	Resourcedetails       map[string]string `json:"resourcedetails"`
-	Zoneid                string            `json:"zoneid"`
-	Zonename              string            `json:"zonename"`
+	Allocationstate         string            `json:"allocationstate"`
+	Arch                    string            `json:"arch"`
+	Capacity                []ClusterCapacity `json:"capacity"`
+	Clustertype             string            `json:"clustertype"`
+	Cpuovercommitratio      string            `json:"cpuovercommitratio"`
+	Extensionid             string            `json:"extensionid"`
+	Extensionname           string            `json:"extensionname"`
+	Hasannotations          bool              `json:"hasannotations"`
+	Hypervisortype          string            `json:"hypervisortype"`
+	Id                      string            `json:"id"`
+	JobID                   string            `json:"jobid"`
+	Jobstatus               int               `json:"jobstatus"`
+	Managedstate            string            `json:"managedstate"`
+	Memoryovercommitratio   string            `json:"memoryovercommitratio"`
+	Name                    string            `json:"name"`
+	Ovm3vip                 string            `json:"ovm3vip"`
+	Podid                   string            `json:"podid"`
+	Podname                 string            `json:"podname"`
+	Podstorageaccessgroups  string            `json:"podstorageaccessgroups"`
+	Resourcedetails         map[string]string `json:"resourcedetails"`
+	Storageaccessgroups     string            `json:"storageaccessgroups"`
+	Zoneid                  string            `json:"zoneid"`
+	Zonename                string            `json:"zonename"`
+	Zonestorageaccessgroups string            `json:"zonestorageaccessgroups"`
 }
 
 type ClusterCapacity struct {
@@ -2164,6 +2275,9 @@ func (p *ListClustersMetricsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("showcapacities", vv)
 	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -2422,6 +2536,27 @@ func (p *ListClustersMetricsParams) GetShowcapacities() (bool, bool) {
 	return value, ok
 }
 
+func (p *ListClustersMetricsParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListClustersMetricsParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListClustersMetricsParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListClustersMetricsParams) SetZoneid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2569,6 +2704,8 @@ type ClustersMetric struct {
 	Cputotal                        string                   `json:"cputotal"`
 	Cpuused                         string                   `json:"cpuused"`
 	Drsimbalance                    string                   `json:"drsimbalance"`
+	Extensionid                     string                   `json:"extensionid"`
+	Extensionname                   string                   `json:"extensionname"`
 	Hasannotations                  bool                     `json:"hasannotations"`
 	Hosts                           string                   `json:"hosts"`
 	Hypervisortype                  string                   `json:"hypervisortype"`
@@ -2589,10 +2726,13 @@ type ClustersMetric struct {
 	Ovm3vip                         string                   `json:"ovm3vip"`
 	Podid                           string                   `json:"podid"`
 	Podname                         string                   `json:"podname"`
+	Podstorageaccessgroups          string                   `json:"podstorageaccessgroups"`
 	Resourcedetails                 map[string]string        `json:"resourcedetails"`
 	State                           string                   `json:"state"`
+	Storageaccessgroups             string                   `json:"storageaccessgroups"`
 	Zoneid                          string                   `json:"zoneid"`
 	Zonename                        string                   `json:"zonename"`
+	Zonestorageaccessgroups         string                   `json:"zonestorageaccessgroups"`
 }
 
 type ClustersMetricCapacity struct {
@@ -2935,6 +3075,13 @@ func (p *UpdateClusterParams) toURLValues() url.Values {
 	if v, found := p.p["clustertype"]; found {
 		u.Set("clustertype", v.(string))
 	}
+	if v, found := p.p["externaldetails"]; found {
+		m := v.(map[string]string)
+		for i, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("externaldetails[%d].key", i), k)
+			u.Set(fmt.Sprintf("externaldetails[%d].value", i), m[k])
+		}
+	}
 	if v, found := p.p["hypervisor"]; found {
 		u.Set("hypervisor", v.(string))
 	}
@@ -3031,6 +3178,27 @@ func (p *UpdateClusterParams) GetClustertype() (string, bool) {
 	return value, ok
 }
 
+func (p *UpdateClusterParams) SetExternaldetails(v map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["externaldetails"] = v
+}
+
+func (p *UpdateClusterParams) ResetExternaldetails() {
+	if p.p != nil && p.p["externaldetails"] != nil {
+		delete(p.p, "externaldetails")
+	}
+}
+
+func (p *UpdateClusterParams) GetExternaldetails() (map[string]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["externaldetails"].(map[string]string)
+	return value, ok
+}
+
 func (p *UpdateClusterParams) SetHypervisor(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -3123,25 +3291,30 @@ func (s *ClusterService) UpdateCluster(p *UpdateClusterParams) (*UpdateClusterRe
 }
 
 type UpdateClusterResponse struct {
-	Allocationstate       string                          `json:"allocationstate"`
-	Arch                  string                          `json:"arch"`
-	Capacity              []UpdateClusterResponseCapacity `json:"capacity"`
-	Clustertype           string                          `json:"clustertype"`
-	Cpuovercommitratio    string                          `json:"cpuovercommitratio"`
-	Hasannotations        bool                            `json:"hasannotations"`
-	Hypervisortype        string                          `json:"hypervisortype"`
-	Id                    string                          `json:"id"`
-	JobID                 string                          `json:"jobid"`
-	Jobstatus             int                             `json:"jobstatus"`
-	Managedstate          string                          `json:"managedstate"`
-	Memoryovercommitratio string                          `json:"memoryovercommitratio"`
-	Name                  string                          `json:"name"`
-	Ovm3vip               string                          `json:"ovm3vip"`
-	Podid                 string                          `json:"podid"`
-	Podname               string                          `json:"podname"`
-	Resourcedetails       map[string]string               `json:"resourcedetails"`
-	Zoneid                string                          `json:"zoneid"`
-	Zonename              string                          `json:"zonename"`
+	Allocationstate         string                          `json:"allocationstate"`
+	Arch                    string                          `json:"arch"`
+	Capacity                []UpdateClusterResponseCapacity `json:"capacity"`
+	Clustertype             string                          `json:"clustertype"`
+	Cpuovercommitratio      string                          `json:"cpuovercommitratio"`
+	Extensionid             string                          `json:"extensionid"`
+	Extensionname           string                          `json:"extensionname"`
+	Hasannotations          bool                            `json:"hasannotations"`
+	Hypervisortype          string                          `json:"hypervisortype"`
+	Id                      string                          `json:"id"`
+	JobID                   string                          `json:"jobid"`
+	Jobstatus               int                             `json:"jobstatus"`
+	Managedstate            string                          `json:"managedstate"`
+	Memoryovercommitratio   string                          `json:"memoryovercommitratio"`
+	Name                    string                          `json:"name"`
+	Ovm3vip                 string                          `json:"ovm3vip"`
+	Podid                   string                          `json:"podid"`
+	Podname                 string                          `json:"podname"`
+	Podstorageaccessgroups  string                          `json:"podstorageaccessgroups"`
+	Resourcedetails         map[string]string               `json:"resourcedetails"`
+	Storageaccessgroups     string                          `json:"storageaccessgroups"`
+	Zoneid                  string                          `json:"zoneid"`
+	Zonename                string                          `json:"zonename"`
+	Zonestorageaccessgroups string                          `json:"zonestorageaccessgroups"`
 }
 
 type UpdateClusterResponseCapacity struct {

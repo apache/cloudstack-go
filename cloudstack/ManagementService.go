@@ -43,7 +43,7 @@ type ManagementServiceIface interface {
 	PrepareForShutdown(p *PrepareForShutdownParams) (*PrepareForShutdownResponse, error)
 	NewPrepareForShutdownParams(managementserverid UUID) *PrepareForShutdownParams
 	ReadyForShutdown(p *ReadyForShutdownParams) (*ReadyForShutdownResponse, error)
-	NewReadyForShutdownParams() *ReadyForShutdownParams
+	NewReadyForShutdownParams(managementserverid UUID) *ReadyForShutdownParams
 	TriggerShutdown(p *TriggerShutdownParams) (*TriggerShutdownResponse, error)
 	NewTriggerShutdownParams(managementserverid UUID) *TriggerShutdownParams
 }
@@ -109,12 +109,16 @@ func (s *ManagementService) CancelShutdown(p *CancelShutdownParams) (*CancelShut
 }
 
 type CancelShutdownResponse struct {
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Managementserverid UUID   `json:"managementserverid"`
-	Pendingjobscount   int64  `json:"pendingjobscount"`
-	Readyforshutdown   bool   `json:"readyforshutdown"`
-	Shutdowntriggered  bool   `json:"shutdowntriggered"`
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }
 
 type ListManagementServersParams struct {
@@ -388,6 +392,8 @@ type ListManagementServersResponse struct {
 }
 
 type ManagementServer struct {
+	Agents           []string `json:"agents"`
+	Agentscount      int64    `json:"agentscount"`
 	Id               string   `json:"id"`
 	Ipaddress        string   `json:"ipaddress"`
 	Javadistribution string   `json:"javadistribution"`
@@ -395,12 +401,14 @@ type ManagementServer struct {
 	JobID            string   `json:"jobid"`
 	Jobstatus        int      `json:"jobstatus"`
 	Kernelversion    string   `json:"kernelversion"`
+	Lastagents       []string `json:"lastagents"`
 	Lastboottime     string   `json:"lastboottime"`
 	Lastserverstart  string   `json:"lastserverstart"`
 	Lastserverstop   string   `json:"lastserverstop"`
 	Name             string   `json:"name"`
 	Osdistribution   string   `json:"osdistribution"`
 	Peers            []string `json:"peers"`
+	Pendingjobscount int64    `json:"pendingjobscount"`
 	Serviceip        string   `json:"serviceip"`
 	State            string   `json:"state"`
 	Version          string   `json:"version"`
@@ -703,6 +711,8 @@ type ListManagementServersMetricsResponse struct {
 
 type ManagementServersMetric struct {
 	Agentcount              int       `json:"agentcount"`
+	Agents                  []string  `json:"agents"`
+	Agentscount             int64     `json:"agentscount"`
 	Availableprocessors     int       `json:"availableprocessors"`
 	Collectiontime          string    `json:"collectiontime"`
 	Cpuload                 string    `json:"cpuload"`
@@ -716,6 +726,7 @@ type ManagementServersMetric struct {
 	JobID                   string    `json:"jobid"`
 	Jobstatus               int       `json:"jobstatus"`
 	Kernelversion           string    `json:"kernelversion"`
+	Lastagents              []string  `json:"lastagents"`
 	Lastboottime            string    `json:"lastboottime"`
 	Lastserverstart         string    `json:"lastserverstart"`
 	Lastserverstop          string    `json:"lastserverstop"`
@@ -723,6 +734,7 @@ type ManagementServersMetric struct {
 	Name                    string    `json:"name"`
 	Osdistribution          string    `json:"osdistribution"`
 	Peers                   []string  `json:"peers"`
+	Pendingjobscount        int64     `json:"pendingjobscount"`
 	Serviceip               string    `json:"serviceip"`
 	Sessions                int64     `json:"sessions"`
 	State                   string    `json:"state"`
@@ -804,12 +816,16 @@ func (s *ManagementService) PrepareForShutdown(p *PrepareForShutdownParams) (*Pr
 }
 
 type PrepareForShutdownResponse struct {
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Managementserverid UUID   `json:"managementserverid"`
-	Pendingjobscount   int64  `json:"pendingjobscount"`
-	Readyforshutdown   bool   `json:"readyforshutdown"`
-	Shutdowntriggered  bool   `json:"shutdowntriggered"`
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }
 
 type ReadyForShutdownParams struct {
@@ -850,9 +866,10 @@ func (p *ReadyForShutdownParams) GetManagementserverid() (UUID, bool) {
 
 // You should always use this function to get a new ReadyForShutdownParams instance,
 // as then you are sure you have configured all required params
-func (s *ManagementService) NewReadyForShutdownParams() *ReadyForShutdownParams {
+func (s *ManagementService) NewReadyForShutdownParams(managementserverid UUID) *ReadyForShutdownParams {
 	p := &ReadyForShutdownParams{}
 	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
 	return p
 }
 
@@ -875,12 +892,16 @@ func (s *ManagementService) ReadyForShutdown(p *ReadyForShutdownParams) (*ReadyF
 }
 
 type ReadyForShutdownResponse struct {
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Managementserverid UUID   `json:"managementserverid"`
-	Pendingjobscount   int64  `json:"pendingjobscount"`
-	Readyforshutdown   bool   `json:"readyforshutdown"`
-	Shutdowntriggered  bool   `json:"shutdowntriggered"`
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }
 
 type TriggerShutdownParams struct {
@@ -928,7 +949,7 @@ func (s *ManagementService) NewTriggerShutdownParams(managementserverid UUID) *T
 	return p
 }
 
-// Triggers an automatic safe shutdown of CloudStack by not accepting new jobs and shutting down when all pending jobbs have been completed. Triggers an immediate shutdown if forced
+// Triggers an automatic safe shutdown of CloudStack by not accepting new jobs and shutting down when all pending jobs have been completed.
 func (s *ManagementService) TriggerShutdown(p *TriggerShutdownParams) (*TriggerShutdownResponse, error) {
 	resp, err := s.cs.newPostRequest("triggerShutdown", p.toURLValues())
 	if err != nil {
@@ -944,10 +965,14 @@ func (s *ManagementService) TriggerShutdown(p *TriggerShutdownParams) (*TriggerS
 }
 
 type TriggerShutdownResponse struct {
-	JobID              string `json:"jobid"`
-	Jobstatus          int    `json:"jobstatus"`
-	Managementserverid UUID   `json:"managementserverid"`
-	Pendingjobscount   int64  `json:"pendingjobscount"`
-	Readyforshutdown   bool   `json:"readyforshutdown"`
-	Shutdowntriggered  bool   `json:"shutdowntriggered"`
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }

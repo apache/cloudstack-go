@@ -169,24 +169,25 @@ func (s *AuthenticationService) Login(p *LoginParams) (*LoginResponse, error) {
 }
 
 type LoginResponse struct {
-	Account        string `json:"account"`
-	Domainid       string `json:"domainid"`
-	Firstname      string `json:"firstname"`
-	Is2faenabled   string `json:"is2faenabled"`
-	Is2faverified  string `json:"is2faverified"`
-	Issuerfor2fa   string `json:"issuerfor2fa"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Lastname       string `json:"lastname"`
-	Providerfor2fa string `json:"providerfor2fa"`
-	Registered     string `json:"registered"`
-	Sessionkey     string `json:"sessionkey"`
-	Timeout        int    `json:"timeout"`
-	Timezone       string `json:"timezone"`
-	Timezoneoffset string `json:"timezoneoffset"`
-	Type           string `json:"type"`
-	Userid         string `json:"userid"`
-	Username       string `json:"username"`
+	Account            string `json:"account"`
+	Domainid           string `json:"domainid"`
+	Firstname          string `json:"firstname"`
+	Is2faenabled       string `json:"is2faenabled"`
+	Is2faverified      string `json:"is2faverified"`
+	Issuerfor2fa       string `json:"issuerfor2fa"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Lastname           string `json:"lastname"`
+	Managementserverid UUID   `json:"managementserverid"`
+	Providerfor2fa     string `json:"providerfor2fa"`
+	Registered         string `json:"registered"`
+	Sessionkey         string `json:"sessionkey"`
+	Timeout            int    `json:"timeout"`
+	Timezone           string `json:"timezone"`
+	Timezoneoffset     string `json:"timezoneoffset"`
+	Type               string `json:"type"`
+	Userid             string `json:"userid"`
+	Username           string `json:"username"`
 }
 
 type LogoutParams struct {
@@ -389,22 +390,23 @@ func (s *AuthenticationService) Oauthlogin(p *OauthloginParams) (*OauthloginResp
 }
 
 type OauthloginResponse struct {
-	Account        string `json:"account"`
-	Domainid       string `json:"domainid"`
-	Firstname      string `json:"firstname"`
-	Is2faenabled   string `json:"is2faenabled"`
-	Is2faverified  string `json:"is2faverified"`
-	Issuerfor2fa   string `json:"issuerfor2fa"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Lastname       string `json:"lastname"`
-	Providerfor2fa string `json:"providerfor2fa"`
-	Registered     string `json:"registered"`
-	Sessionkey     string `json:"sessionkey"`
-	Timeout        int    `json:"timeout"`
-	Timezone       string `json:"timezone"`
-	Timezoneoffset string `json:"timezoneoffset"`
-	Type           string `json:"type"`
-	Userid         string `json:"userid"`
-	Username       string `json:"username"`
+	Account            string `json:"account"`
+	Domainid           string `json:"domainid"`
+	Firstname          string `json:"firstname"`
+	Is2faenabled       string `json:"is2faenabled"`
+	Is2faverified      string `json:"is2faverified"`
+	Issuerfor2fa       string `json:"issuerfor2fa"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Lastname           string `json:"lastname"`
+	Managementserverid UUID   `json:"managementserverid"`
+	Providerfor2fa     string `json:"providerfor2fa"`
+	Registered         string `json:"registered"`
+	Sessionkey         string `json:"sessionkey"`
+	Timeout            int    `json:"timeout"`
+	Timezone           string `json:"timezone"`
+	Timezoneoffset     string `json:"timezoneoffset"`
+	Type               string `json:"type"`
+	Userid             string `json:"userid"`
+	Username           string `json:"username"`
 }

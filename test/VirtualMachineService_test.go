@@ -494,4 +494,28 @@ func TestVirtualMachineService(t *testing.T) {
 	}
 	t.Run("DeleteVMSchedule", testdeleteVMSchedule)
 
+	testassignVirtualMachineToBackupOffering := func(t *testing.T) {
+		if _, ok := response["assignVirtualMachineToBackupOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewAssignVirtualMachineToBackupOfferingParams("backupofferingid", "virtualmachineid")
+		_, err := client.VirtualMachine.AssignVirtualMachineToBackupOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("AssignVirtualMachineToBackupOffering", testassignVirtualMachineToBackupOffering)
+
+	testremoveVirtualMachineFromBackupOffering := func(t *testing.T) {
+		if _, ok := response["removeVirtualMachineFromBackupOffering"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewRemoveVirtualMachineFromBackupOfferingParams("virtualmachineid")
+		_, err := client.VirtualMachine.RemoveVirtualMachineFromBackupOffering(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RemoveVirtualMachineFromBackupOffering", testremoveVirtualMachineFromBackupOffering)
+
 }

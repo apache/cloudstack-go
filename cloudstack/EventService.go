@@ -487,6 +487,9 @@ func (p *ListEventsParams) toURLValues() url.Values {
 	if v, found := p.p["startid"]; found {
 		u.Set("startid", v.(string))
 	}
+	if v, found := p.p["state"]; found {
+		u.Set("state", v.(string))
+	}
 	if v, found := p.p["type"]; found {
 		u.Set("type", v.(string))
 	}
@@ -868,6 +871,27 @@ func (p *ListEventsParams) GetStartid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["startid"].(string)
+	return value, ok
+}
+
+func (p *ListEventsParams) SetState(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["state"] = v
+}
+
+func (p *ListEventsParams) ResetState() {
+	if p.p != nil && p.p["state"] != nil {
+		delete(p.p, "state")
+	}
+}
+
+func (p *ListEventsParams) GetState() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["state"].(string)
 	return value, ok
 }
 

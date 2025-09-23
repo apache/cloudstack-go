@@ -21,8 +21,10 @@ package cloudstack
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type ConfigurationServiceIface interface {
@@ -40,6 +42,15 @@ type ConfigurationServiceIface interface {
 	NewResetConfigurationParams(name string) *ResetConfigurationParams
 	UpdateStorageCapabilities(p *UpdateStorageCapabilitiesParams) (*UpdateStorageCapabilitiesResponse, error)
 	NewUpdateStorageCapabilitiesParams(id string) *UpdateStorageCapabilitiesParams
+	RegisterCniConfiguration(p *RegisterCniConfigurationParams) (*RegisterCniConfigurationResponse, error)
+	NewRegisterCniConfigurationParams(name string) *RegisterCniConfigurationParams
+	ListCniConfiguration(p *ListCniConfigurationParams) (*ListCniConfigurationResponse, error)
+	NewListCniConfigurationParams() *ListCniConfigurationParams
+	GetCniConfigurationID(name string, opts ...OptionFunc) (string, int, error)
+	GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error)
+	GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error)
+	DeleteCniConfiguration(p *DeleteCniConfigurationParams) (*DeleteCniConfigurationResponse, error)
+	NewDeleteCniConfigurationParams(id string) *DeleteCniConfigurationParams
 }
 
 type ListCapabilitiesParams struct {
@@ -96,6 +107,9 @@ type Capability struct {
 	Customhypervisordisplayname                  string `json:"customhypervisordisplayname"`
 	Defaultuipagesize                            int64  `json:"defaultuipagesize"`
 	Dynamicrolesenabled                          bool   `json:"dynamicrolesenabled"`
+	Dynamicscalingenabled                        bool   `json:"dynamicscalingenabled"`
+	Extensionspath                               string `json:"extensionspath"`
+	Instanceleaseenabled                         bool   `json:"instanceleaseenabled"`
 	Instancesdisksstatsretentionenabled          bool   `json:"instancesdisksstatsretentionenabled"`
 	Instancesdisksstatsretentiontime             int    `json:"instancesdisksstatsretentiontime"`
 	Instancesstatsretentiontime                  int    `json:"instancesstatsretentiontime"`
@@ -1326,6 +1340,7 @@ type UpdateStorageCapabilitiesResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -1346,6 +1361,7 @@ type UpdateStorageCapabilitiesResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -1354,4 +1370,768 @@ type UpdateStorageCapabilitiesResponse struct {
 	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
+}
+
+type RegisterCniConfigurationParams struct {
+	p map[string]interface{}
+}
+
+func (p *RegisterCniConfigurationParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["cniconfig"]; found {
+		u.Set("cniconfig", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["params"]; found {
+		u.Set("params", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	return u
+}
+
+func (p *RegisterCniConfigurationParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *RegisterCniConfigurationParams) SetCniconfig(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cniconfig"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetCniconfig() {
+	if p.p != nil && p.p["cniconfig"] != nil {
+		delete(p.p, "cniconfig")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetCniconfig() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cniconfig"].(string)
+	return value, ok
+}
+
+func (p *RegisterCniConfigurationParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *RegisterCniConfigurationParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *RegisterCniConfigurationParams) SetParams(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["params"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetParams() {
+	if p.p != nil && p.p["params"] != nil {
+		delete(p.p, "params")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetParams() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["params"].(string)
+	return value, ok
+}
+
+func (p *RegisterCniConfigurationParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *RegisterCniConfigurationParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *RegisterCniConfigurationParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RegisterCniConfigurationParams instance,
+// as then you are sure you have configured all required params
+func (s *ConfigurationService) NewRegisterCniConfigurationParams(name string) *RegisterCniConfigurationParams {
+	p := &RegisterCniConfigurationParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	return p
+}
+
+// Register a CNI Configuration to be used with CKS cluster
+func (s *ConfigurationService) RegisterCniConfiguration(p *RegisterCniConfigurationParams) (*RegisterCniConfigurationResponse, error) {
+	resp, err := s.cs.newPostRequest("registerCniConfiguration", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RegisterCniConfigurationResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type RegisterCniConfigurationResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *RegisterCniConfigurationResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias RegisterCniConfigurationResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ListCniConfigurationParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListCniConfigurationParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	return u
+}
+
+func (p *ListCniConfigurationParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListCniConfigurationParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListCniConfigurationParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ListCniConfigurationParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListCniConfigurationParams instance,
+// as then you are sure you have configured all required params
+func (s *ConfigurationService) NewListCniConfigurationParams() *ListCniConfigurationParams {
+	p := &ListCniConfigurationParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ConfigurationService) GetCniConfigurationID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListCniConfigurationParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListCniConfiguration(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.CniConfiguration[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.CniConfiguration {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ConfigurationService) GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+	id, count, err := s.GetCniConfigurationID(name, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+
+	r, count, err := s.GetCniConfigurationByID(id, opts...)
+	if err != nil {
+		return nil, count, err
+	}
+	return r, count, nil
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *ConfigurationService) GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+	p := &ListCniConfigurationParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListCniConfiguration(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.CniConfiguration[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for CniConfiguration UUID: %s!", id)
+}
+
+// List user data for CNI plugins
+func (s *ConfigurationService) ListCniConfiguration(p *ListCniConfigurationParams) (*ListCniConfigurationResponse, error) {
+	resp, err := s.cs.newRequest("listCniConfiguration", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListCniConfigurationResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListCniConfigurationResponse struct {
+	Count            int                 `json:"count"`
+	CniConfiguration []*CniConfiguration `json:"cniconfiguration"`
+}
+
+type CniConfiguration struct {
+	Account        string `json:"account"`
+	Accountid      string `json:"accountid"`
+	Domain         string `json:"domain"`
+	Domainid       string `json:"domainid"`
+	Domainpath     string `json:"domainpath"`
+	Hasannotations bool   `json:"hasannotations"`
+	Id             string `json:"id"`
+	JobID          string `json:"jobid"`
+	Jobstatus      int    `json:"jobstatus"`
+	Name           string `json:"name"`
+	Params         string `json:"params"`
+	Project        string `json:"project"`
+	Projectid      string `json:"projectid"`
+	Userdata       string `json:"userdata"`
+}
+
+type DeleteCniConfigurationParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteCniConfigurationParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteCniConfigurationParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *DeleteCniConfigurationParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *DeleteCniConfigurationParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *DeleteCniConfigurationParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *DeleteCniConfigurationParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *DeleteCniConfigurationParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *DeleteCniConfigurationParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteCniConfigurationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteCniConfigurationParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *DeleteCniConfigurationParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *DeleteCniConfigurationParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *DeleteCniConfigurationParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteCniConfigurationParams instance,
+// as then you are sure you have configured all required params
+func (s *ConfigurationService) NewDeleteCniConfigurationParams(id string) *DeleteCniConfigurationParams {
+	p := &DeleteCniConfigurationParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Deletes a CNI Configuration
+func (s *ConfigurationService) DeleteCniConfiguration(p *DeleteCniConfigurationParams) (*DeleteCniConfigurationResponse, error) {
+	resp, err := s.cs.newPostRequest("deleteCniConfiguration", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteCniConfigurationResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type DeleteCniConfigurationResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *DeleteCniConfigurationResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias DeleteCniConfigurationResponse
+	return json.Unmarshal(b, (*alias)(r))
 }

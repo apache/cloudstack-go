@@ -111,6 +111,7 @@ type CloudStackClient struct {
 	Authentication          AuthenticationServiceIface
 	AutoScale               AutoScaleServiceIface
 	BGPPeer                 BGPPeerServiceIface
+	Backup                  BackupServiceIface
 	Baremetal               BaremetalServiceIface
 	BigSwitchBCF            BigSwitchBCFServiceIface
 	BrocadeVCS              BrocadeVCSServiceIface
@@ -125,7 +126,9 @@ type CloudStackClient struct {
 	DiskOffering            DiskOfferingServiceIface
 	Domain                  DomainServiceIface
 	Event                   EventServiceIface
+	Extension               ExtensionServiceIface
 	Firewall                FirewallServiceIface
+	GPU                     GPUServiceIface
 	GuestOS                 GuestOSServiceIface
 	Host                    HostServiceIface
 	Hypervisor              HypervisorServiceIface
@@ -142,6 +145,7 @@ type CloudStackClient struct {
 	Metrics                 MetricsServiceIface
 	Misc                    MiscServiceIface
 	NAT                     NATServiceIface
+	Netris                  NetrisServiceIface
 	Netscaler               NetscalerServiceIface
 	NetworkACL              NetworkACLServiceIface
 	NetworkDevice           NetworkDeviceServiceIface
@@ -149,6 +153,7 @@ type CloudStackClient struct {
 	Network                 NetworkServiceIface
 	Nic                     NicServiceIface
 	NiciraNVP               NiciraNVPServiceIface
+	Nsx                     NsxServiceIface
 	Oauth                   OauthServiceIface
 	ObjectStore             ObjectStoreServiceIface
 	OutofbandManagement     OutofbandManagementServiceIface
@@ -238,6 +243,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Authentication = NewAuthenticationService(cs)
 	cs.AutoScale = NewAutoScaleService(cs)
 	cs.BGPPeer = NewBGPPeerService(cs)
+	cs.Backup = NewBackupService(cs)
 	cs.Baremetal = NewBaremetalService(cs)
 	cs.BigSwitchBCF = NewBigSwitchBCFService(cs)
 	cs.BrocadeVCS = NewBrocadeVCSService(cs)
@@ -252,7 +258,9 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.DiskOffering = NewDiskOfferingService(cs)
 	cs.Domain = NewDomainService(cs)
 	cs.Event = NewEventService(cs)
+	cs.Extension = NewExtensionService(cs)
 	cs.Firewall = NewFirewallService(cs)
+	cs.GPU = NewGPUService(cs)
 	cs.GuestOS = NewGuestOSService(cs)
 	cs.Host = NewHostService(cs)
 	cs.Hypervisor = NewHypervisorService(cs)
@@ -269,6 +277,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Metrics = NewMetricsService(cs)
 	cs.Misc = NewMiscService(cs)
 	cs.NAT = NewNATService(cs)
+	cs.Netris = NewNetrisService(cs)
 	cs.Netscaler = NewNetscalerService(cs)
 	cs.NetworkACL = NewNetworkACLService(cs)
 	cs.NetworkDevice = NewNetworkDeviceService(cs)
@@ -276,6 +285,7 @@ func newClient(apiurl string, apikey string, secret string, async bool, verifyss
 	cs.Network = NewNetworkService(cs)
 	cs.Nic = NewNicService(cs)
 	cs.NiciraNVP = NewNiciraNVPService(cs)
+	cs.Nsx = NewNsxService(cs)
 	cs.Oauth = NewOauthService(cs)
 	cs.ObjectStore = NewObjectStoreService(cs)
 	cs.OutofbandManagement = NewOutofbandManagementService(cs)
@@ -338,6 +348,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Authentication = NewMockAuthenticationServiceIface(ctrl)
 	cs.AutoScale = NewMockAutoScaleServiceIface(ctrl)
 	cs.BGPPeer = NewMockBGPPeerServiceIface(ctrl)
+	cs.Backup = NewMockBackupServiceIface(ctrl)
 	cs.Baremetal = NewMockBaremetalServiceIface(ctrl)
 	cs.BigSwitchBCF = NewMockBigSwitchBCFServiceIface(ctrl)
 	cs.BrocadeVCS = NewMockBrocadeVCSServiceIface(ctrl)
@@ -352,7 +363,9 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.DiskOffering = NewMockDiskOfferingServiceIface(ctrl)
 	cs.Domain = NewMockDomainServiceIface(ctrl)
 	cs.Event = NewMockEventServiceIface(ctrl)
+	cs.Extension = NewMockExtensionServiceIface(ctrl)
 	cs.Firewall = NewMockFirewallServiceIface(ctrl)
+	cs.GPU = NewMockGPUServiceIface(ctrl)
 	cs.GuestOS = NewMockGuestOSServiceIface(ctrl)
 	cs.Host = NewMockHostServiceIface(ctrl)
 	cs.Hypervisor = NewMockHypervisorServiceIface(ctrl)
@@ -369,6 +382,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Metrics = NewMockMetricsServiceIface(ctrl)
 	cs.Misc = NewMockMiscServiceIface(ctrl)
 	cs.NAT = NewMockNATServiceIface(ctrl)
+	cs.Netris = NewMockNetrisServiceIface(ctrl)
 	cs.Netscaler = NewMockNetscalerServiceIface(ctrl)
 	cs.NetworkACL = NewMockNetworkACLServiceIface(ctrl)
 	cs.NetworkDevice = NewMockNetworkDeviceServiceIface(ctrl)
@@ -376,6 +390,7 @@ func newMockClient(ctrl *gomock.Controller) *CloudStackClient {
 	cs.Network = NewMockNetworkServiceIface(ctrl)
 	cs.Nic = NewMockNicServiceIface(ctrl)
 	cs.NiciraNVP = NewMockNiciraNVPServiceIface(ctrl)
+	cs.Nsx = NewMockNsxServiceIface(ctrl)
 	cs.Oauth = NewMockOauthServiceIface(ctrl)
 	cs.ObjectStore = NewMockObjectStoreServiceIface(ctrl)
 	cs.OutofbandManagement = NewMockOutofbandManagementServiceIface(ctrl)
@@ -900,6 +915,14 @@ func NewBGPPeerService(cs *CloudStackClient) BGPPeerServiceIface {
 	return &BGPPeerService{cs: cs}
 }
 
+type BackupService struct {
+	cs *CloudStackClient
+}
+
+func NewBackupService(cs *CloudStackClient) BackupServiceIface {
+	return &BackupService{cs: cs}
+}
+
 type BaremetalService struct {
 	cs *CloudStackClient
 }
@@ -1012,12 +1035,28 @@ func NewEventService(cs *CloudStackClient) EventServiceIface {
 	return &EventService{cs: cs}
 }
 
+type ExtensionService struct {
+	cs *CloudStackClient
+}
+
+func NewExtensionService(cs *CloudStackClient) ExtensionServiceIface {
+	return &ExtensionService{cs: cs}
+}
+
 type FirewallService struct {
 	cs *CloudStackClient
 }
 
 func NewFirewallService(cs *CloudStackClient) FirewallServiceIface {
 	return &FirewallService{cs: cs}
+}
+
+type GPUService struct {
+	cs *CloudStackClient
+}
+
+func NewGPUService(cs *CloudStackClient) GPUServiceIface {
+	return &GPUService{cs: cs}
 }
 
 type GuestOSService struct {
@@ -1148,6 +1187,14 @@ func NewNATService(cs *CloudStackClient) NATServiceIface {
 	return &NATService{cs: cs}
 }
 
+type NetrisService struct {
+	cs *CloudStackClient
+}
+
+func NewNetrisService(cs *CloudStackClient) NetrisServiceIface {
+	return &NetrisService{cs: cs}
+}
+
 type NetscalerService struct {
 	cs *CloudStackClient
 }
@@ -1202,6 +1249,14 @@ type NiciraNVPService struct {
 
 func NewNiciraNVPService(cs *CloudStackClient) NiciraNVPServiceIface {
 	return &NiciraNVPService{cs: cs}
+}
+
+type NsxService struct {
+	cs *CloudStackClient
+}
+
+func NewNsxService(cs *CloudStackClient) NsxServiceIface {
+	return &NsxService{cs: cs}
 }
 
 type OauthService struct {

@@ -1153,6 +1153,15 @@ type LdapCreateAccountResponse struct {
 	Accountdetails            map[string]string               `json:"accountdetails"`
 	Accounttype               int                             `json:"accounttype"`
 	Apikeyaccess              string                          `json:"apikeyaccess"`
+	Backupavailable           string                          `json:"backupavailable"`
+	Backuplimit               string                          `json:"backuplimit"`
+	Backupstorageavailable    string                          `json:"backupstorageavailable"`
+	Backupstoragelimit        string                          `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                           `json:"backupstoragetotal"`
+	Backuptotal               int64                           `json:"backuptotal"`
+	Bucketavailable           string                          `json:"bucketavailable"`
+	Bucketlimit               string                          `json:"bucketlimit"`
+	Buckettotal               int64                           `json:"buckettotal"`
 	Cpuavailable              string                          `json:"cpuavailable"`
 	Cpulimit                  string                          `json:"cpulimit"`
 	Cputotal                  int64                           `json:"cputotal"`
@@ -1161,6 +1170,9 @@ type LdapCreateAccountResponse struct {
 	Domain                    string                          `json:"domain"`
 	Domainid                  string                          `json:"domainid"`
 	Domainpath                string                          `json:"domainpath"`
+	Gpuavailable              string                          `json:"gpuavailable"`
+	Gpulimit                  string                          `json:"gpulimit"`
+	Gputotal                  int64                           `json:"gputotal"`
 	Groups                    []string                        `json:"groups"`
 	Icon                      interface{}                     `json:"icon"`
 	Id                        string                          `json:"id"`
@@ -1179,6 +1191,9 @@ type LdapCreateAccountResponse struct {
 	Networkdomain             string                          `json:"networkdomain"`
 	Networklimit              string                          `json:"networklimit"`
 	Networktotal              int64                           `json:"networktotal"`
+	Objectstorageavailable    string                          `json:"objectstorageavailable"`
+	Objectstoragelimit        string                          `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                           `json:"objectstoragetotal"`
 	Primarystorageavailable   string                          `json:"primarystorageavailable"`
 	Primarystoragelimit       string                          `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                           `json:"primarystoragetotal"`

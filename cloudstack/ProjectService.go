@@ -155,6 +155,15 @@ func (s *ProjectService) ActivateProject(p *ActivateProjectParams) (*ActivatePro
 }
 
 type ActivateProjectResponse struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -162,6 +171,9 @@ type ActivateProjectResponse struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -176,6 +188,9 @@ type ActivateProjectResponse struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`
@@ -765,6 +780,15 @@ func (s *ProjectService) CreateProject(p *CreateProjectParams) (*CreateProjectRe
 }
 
 type CreateProjectResponse struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -772,6 +796,9 @@ type CreateProjectResponse struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -786,6 +813,9 @@ type CreateProjectResponse struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`
@@ -2094,6 +2124,15 @@ type ListProjectsResponse struct {
 }
 
 type Project struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -2101,6 +2140,9 @@ type Project struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -2115,6 +2157,9 @@ type Project struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`
@@ -2226,6 +2271,15 @@ func (s *ProjectService) SuspendProject(p *SuspendProjectParams) (*SuspendProjec
 }
 
 type SuspendProjectResponse struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -2233,6 +2287,9 @@ type SuspendProjectResponse struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -2247,6 +2304,9 @@ type SuspendProjectResponse struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`
@@ -2503,6 +2563,15 @@ func (s *ProjectService) UpdateProject(p *UpdateProjectParams) (*UpdateProjectRe
 }
 
 type UpdateProjectResponse struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -2510,6 +2579,9 @@ type UpdateProjectResponse struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -2524,6 +2596,9 @@ type UpdateProjectResponse struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`

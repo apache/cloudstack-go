@@ -2807,7 +2807,6 @@ type DedicatePublicIpRangeResponse struct {
 	Domainpath        string `json:"domainpath"`
 	Endip             string `json:"endip"`
 	Endipv6           string `json:"endipv6"`
-	Fornsx            bool   `json:"fornsx"`
 	Forsystemvms      bool   `json:"forsystemvms"`
 	Forvirtualnetwork bool   `json:"forvirtualnetwork"`
 	Gateway           string `json:"gateway"`
@@ -2823,6 +2822,7 @@ type DedicatePublicIpRangeResponse struct {
 	Podname           string `json:"podname"`
 	Project           string `json:"project"`
 	Projectid         string `json:"projectid"`
+	Provider          string `json:"provider"`
 	Startip           string `json:"startip"`
 	Startipv6         string `json:"startipv6"`
 	Vlan              string `json:"vlan"`

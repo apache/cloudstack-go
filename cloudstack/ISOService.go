@@ -214,6 +214,9 @@ type AttachIsoResponse struct {
 	Domainid              string                           `json:"domainid"`
 	Domainpath            string                           `json:"domainpath"`
 	Forvirtualnetwork     bool                             `json:"forvirtualnetwork"`
+	Gpucardid             string                           `json:"gpucardid"`
+	Gpucardname           string                           `json:"gpucardname"`
+	Gpucount              int                              `json:"gpucount"`
 	Group                 string                           `json:"group"`
 	Groupid               string                           `json:"groupid"`
 	Guestosid             string                           `json:"guestosid"`
@@ -235,6 +238,12 @@ type AttachIsoResponse struct {
 	Jobstatus             int                              `json:"jobstatus"`
 	Keypairs              string                           `json:"keypairs"`
 	Lastupdated           string                           `json:"lastupdated"`
+	Leaseduration         int                              `json:"leaseduration"`
+	Leaseexpiryaction     string                           `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                           `json:"leaseexpirydate"`
+	Maxheads              int64                            `json:"maxheads"`
+	Maxresolutionx        int64                            `json:"maxresolutionx"`
+	Maxresolutiony        int64                            `json:"maxresolutiony"`
 	Memory                int                              `json:"memory"`
 	Memoryintfreekbs      int64                            `json:"memoryintfreekbs"`
 	Memorykbs             int64                            `json:"memorykbs"`
@@ -276,6 +285,9 @@ type AttachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vgpuprofileid         string                           `json:"vgpuprofileid"`
+	Vgpuprofilename       string                           `json:"vgpuprofilename"`
+	Videoram              int64                            `json:"videoram"`
 	Vmtype                string                           `json:"vmtype"`
 	Vnfdetails            map[string]string                `json:"vnfdetails"`
 	Vnfnics               []string                         `json:"vnfnics"`
@@ -527,6 +539,9 @@ type CopyIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -833,6 +848,9 @@ type DetachIsoResponse struct {
 	Domainid              string                           `json:"domainid"`
 	Domainpath            string                           `json:"domainpath"`
 	Forvirtualnetwork     bool                             `json:"forvirtualnetwork"`
+	Gpucardid             string                           `json:"gpucardid"`
+	Gpucardname           string                           `json:"gpucardname"`
+	Gpucount              int                              `json:"gpucount"`
 	Group                 string                           `json:"group"`
 	Groupid               string                           `json:"groupid"`
 	Guestosid             string                           `json:"guestosid"`
@@ -854,6 +872,12 @@ type DetachIsoResponse struct {
 	Jobstatus             int                              `json:"jobstatus"`
 	Keypairs              string                           `json:"keypairs"`
 	Lastupdated           string                           `json:"lastupdated"`
+	Leaseduration         int                              `json:"leaseduration"`
+	Leaseexpiryaction     string                           `json:"leaseexpiryaction"`
+	Leaseexpirydate       string                           `json:"leaseexpirydate"`
+	Maxheads              int64                            `json:"maxheads"`
+	Maxresolutionx        int64                            `json:"maxresolutionx"`
+	Maxresolutiony        int64                            `json:"maxresolutiony"`
 	Memory                int                              `json:"memory"`
 	Memoryintfreekbs      int64                            `json:"memoryintfreekbs"`
 	Memorykbs             int64                            `json:"memorykbs"`
@@ -895,6 +919,9 @@ type DetachIsoResponse struct {
 	Userid                string                           `json:"userid"`
 	Username              string                           `json:"username"`
 	Vgpu                  string                           `json:"vgpu"`
+	Vgpuprofileid         string                           `json:"vgpuprofileid"`
+	Vgpuprofilename       string                           `json:"vgpuprofilename"`
+	Videoram              int64                            `json:"videoram"`
 	Vmtype                string                           `json:"vmtype"`
 	Vnfdetails            map[string]string                `json:"vnfdetails"`
 	Vnfnics               []string                         `json:"vnfnics"`
@@ -1674,6 +1701,9 @@ func (p *ListIsosParams) toURLValues() url.Values {
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
 	}
+	if v, found := p.p["oscategoryid"]; found {
+		u.Set("oscategoryid", v.(string))
+	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
 		u.Set("page", vv)
@@ -2007,6 +2037,27 @@ func (p *ListIsosParams) GetName() (string, bool) {
 	return value, ok
 }
 
+func (p *ListIsosParams) SetOscategoryid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["oscategoryid"] = v
+}
+
+func (p *ListIsosParams) ResetOscategoryid() {
+	if p.p != nil && p.p["oscategoryid"] != nil {
+		delete(p.p, "oscategoryid")
+	}
+}
+
+func (p *ListIsosParams) GetOscategoryid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["oscategoryid"].(string)
+	return value, ok
+}
+
 func (p *ListIsosParams) SetPage(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2328,6 +2379,9 @@ type Iso struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -2896,6 +2950,9 @@ type RegisterIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`
@@ -2991,6 +3048,10 @@ func (p *UpdateIsoParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
+	}
+	if v, found := p.p["forceupdateostype"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forceupdateostype", vv)
 	}
 	if v, found := p.p["format"]; found {
 		u.Set("format", v.(string))
@@ -3133,6 +3194,27 @@ func (p *UpdateIsoParams) GetDisplaytext() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["displaytext"].(string)
+	return value, ok
+}
+
+func (p *UpdateIsoParams) SetForceupdateostype(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forceupdateostype"] = v
+}
+
+func (p *UpdateIsoParams) ResetForceupdateostype() {
+	if p.p != nil && p.p["forceupdateostype"] != nil {
+		delete(p.p, "forceupdateostype")
+	}
+}
+
+func (p *UpdateIsoParams) GetForceupdateostype() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceupdateostype"].(bool)
 	return value, ok
 }
 
@@ -3389,6 +3471,9 @@ type UpdateIsoResponse struct {
 	Domainid              string              `json:"domainid"`
 	Domainpath            string              `json:"domainpath"`
 	Downloaddetails       []map[string]string `json:"downloaddetails"`
+	Extensionid           string              `json:"extensionid"`
+	Extensionname         string              `json:"extensionname"`
+	Forcks                bool                `json:"forcks"`
 	Format                string              `json:"format"`
 	Hasannotations        bool                `json:"hasannotations"`
 	Hostid                string              `json:"hostid"`

@@ -87,7 +87,7 @@ func TestManagementService(t *testing.T) {
 		if _, ok := response["readyForShutdown"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Management.NewReadyForShutdownParams()
+		p := client.Management.NewReadyForShutdownParams("managementserverid")
 		_, err := client.Management.ReadyForShutdown(p)
 		if err != nil {
 			t.Errorf(err.Error())

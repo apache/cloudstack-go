@@ -259,17 +259,17 @@ func (mr *MockVirtualNetworkFunctionsServiceIfaceMockRecorder) NewDeleteVnfTempl
 }
 
 // NewDeployVnfApplianceParams mocks base method.
-func (m *MockVirtualNetworkFunctionsServiceIface) NewDeployVnfApplianceParams(serviceofferingid, templateid, zoneid string) *DeployVnfApplianceParams {
+func (m *MockVirtualNetworkFunctionsServiceIface) NewDeployVnfApplianceParams(serviceofferingid, zoneid string) *DeployVnfApplianceParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewDeployVnfApplianceParams", serviceofferingid, templateid, zoneid)
+	ret := m.ctrl.Call(m, "NewDeployVnfApplianceParams", serviceofferingid, zoneid)
 	ret0, _ := ret[0].(*DeployVnfApplianceParams)
 	return ret0
 }
 
 // NewDeployVnfApplianceParams indicates an expected call of NewDeployVnfApplianceParams.
-func (mr *MockVirtualNetworkFunctionsServiceIfaceMockRecorder) NewDeployVnfApplianceParams(serviceofferingid, templateid, zoneid any) *gomock.Call {
+func (mr *MockVirtualNetworkFunctionsServiceIfaceMockRecorder) NewDeployVnfApplianceParams(serviceofferingid, zoneid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeployVnfApplianceParams", reflect.TypeOf((*MockVirtualNetworkFunctionsServiceIface)(nil).NewDeployVnfApplianceParams), serviceofferingid, templateid, zoneid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeployVnfApplianceParams", reflect.TypeOf((*MockVirtualNetworkFunctionsServiceIface)(nil).NewDeployVnfApplianceParams), serviceofferingid, zoneid)
 }
 
 // NewListVnfAppliancesParams mocks base method.

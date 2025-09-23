@@ -847,6 +847,20 @@ func (mr *MockVolumeServiceIfaceMockRecorder) NewResizeVolumeParams(id any) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewResizeVolumeParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewResizeVolumeParams), id)
 }
 
+// NewRestoreVolumeFromBackupAndAttachToVMParams mocks base method.
+func (m *MockVolumeServiceIface) NewRestoreVolumeFromBackupAndAttachToVMParams(backupid, virtualmachineid, volumeid string) *RestoreVolumeFromBackupAndAttachToVMParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRestoreVolumeFromBackupAndAttachToVMParams", backupid, virtualmachineid, volumeid)
+	ret0, _ := ret[0].(*RestoreVolumeFromBackupAndAttachToVMParams)
+	return ret0
+}
+
+// NewRestoreVolumeFromBackupAndAttachToVMParams indicates an expected call of NewRestoreVolumeFromBackupAndAttachToVMParams.
+func (mr *MockVolumeServiceIfaceMockRecorder) NewRestoreVolumeFromBackupAndAttachToVMParams(backupid, virtualmachineid, volumeid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRestoreVolumeFromBackupAndAttachToVMParams", reflect.TypeOf((*MockVolumeServiceIface)(nil).NewRestoreVolumeFromBackupAndAttachToVMParams), backupid, virtualmachineid, volumeid)
+}
+
 // NewUnmanageVolumeParams mocks base method.
 func (m *MockVolumeServiceIface) NewUnmanageVolumeParams(id string) *UnmanageVolumeParams {
 	m.ctrl.T.Helper()
@@ -917,6 +931,21 @@ func (m *MockVolumeServiceIface) ResizeVolume(p *ResizeVolumeParams) (*ResizeVol
 func (mr *MockVolumeServiceIfaceMockRecorder) ResizeVolume(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResizeVolume", reflect.TypeOf((*MockVolumeServiceIface)(nil).ResizeVolume), p)
+}
+
+// RestoreVolumeFromBackupAndAttachToVM mocks base method.
+func (m *MockVolumeServiceIface) RestoreVolumeFromBackupAndAttachToVM(p *RestoreVolumeFromBackupAndAttachToVMParams) (*RestoreVolumeFromBackupAndAttachToVMResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RestoreVolumeFromBackupAndAttachToVM", p)
+	ret0, _ := ret[0].(*RestoreVolumeFromBackupAndAttachToVMResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RestoreVolumeFromBackupAndAttachToVM indicates an expected call of RestoreVolumeFromBackupAndAttachToVM.
+func (mr *MockVolumeServiceIfaceMockRecorder) RestoreVolumeFromBackupAndAttachToVM(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RestoreVolumeFromBackupAndAttachToVM", reflect.TypeOf((*MockVolumeServiceIface)(nil).RestoreVolumeFromBackupAndAttachToVM), p)
 }
 
 // UnmanageVolume mocks base method.

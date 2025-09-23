@@ -167,17 +167,17 @@ func (mr *MockObjectStoreServiceIfaceMockRecorder) ListBuckets(p any) *gomock.Ca
 }
 
 // NewCreateBucketParams mocks base method.
-func (m *MockObjectStoreServiceIface) NewCreateBucketParams(name, objectstorageid string) *CreateBucketParams {
+func (m *MockObjectStoreServiceIface) NewCreateBucketParams(name, objectstorageid string, quota int) *CreateBucketParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewCreateBucketParams", name, objectstorageid)
+	ret := m.ctrl.Call(m, "NewCreateBucketParams", name, objectstorageid, quota)
 	ret0, _ := ret[0].(*CreateBucketParams)
 	return ret0
 }
 
 // NewCreateBucketParams indicates an expected call of NewCreateBucketParams.
-func (mr *MockObjectStoreServiceIfaceMockRecorder) NewCreateBucketParams(name, objectstorageid any) *gomock.Call {
+func (mr *MockObjectStoreServiceIfaceMockRecorder) NewCreateBucketParams(name, objectstorageid, quota any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateBucketParams", reflect.TypeOf((*MockObjectStoreServiceIface)(nil).NewCreateBucketParams), name, objectstorageid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCreateBucketParams", reflect.TypeOf((*MockObjectStoreServiceIface)(nil).NewCreateBucketParams), name, objectstorageid, quota)
 }
 
 // NewDeleteBucketParams mocks base method.

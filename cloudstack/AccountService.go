@@ -444,6 +444,15 @@ type CreateAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
 	Apikeyaccess              string                      `json:"apikeyaccess"`
+	Backupavailable           string                      `json:"backupavailable"`
+	Backuplimit               string                      `json:"backuplimit"`
+	Backupstorageavailable    string                      `json:"backupstorageavailable"`
+	Backupstoragelimit        string                      `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                       `json:"backupstoragetotal"`
+	Backuptotal               int64                       `json:"backuptotal"`
+	Bucketavailable           string                      `json:"bucketavailable"`
+	Bucketlimit               string                      `json:"bucketlimit"`
+	Buckettotal               int64                       `json:"buckettotal"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -452,6 +461,9 @@ type CreateAccountResponse struct {
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
+	Gpuavailable              string                      `json:"gpuavailable"`
+	Gpulimit                  string                      `json:"gpulimit"`
+	Gputotal                  int64                       `json:"gputotal"`
 	Groups                    []string                    `json:"groups"`
 	Icon                      interface{}                 `json:"icon"`
 	Id                        string                      `json:"id"`
@@ -470,6 +482,9 @@ type CreateAccountResponse struct {
 	Networkdomain             string                      `json:"networkdomain"`
 	Networklimit              string                      `json:"networklimit"`
 	Networktotal              int64                       `json:"networktotal"`
+	Objectstorageavailable    string                      `json:"objectstorageavailable"`
+	Objectstoragelimit        string                      `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                       `json:"objectstoragetotal"`
 	Primarystorageavailable   string                      `json:"primarystorageavailable"`
 	Primarystoragelimit       string                      `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                       `json:"primarystoragetotal"`
@@ -773,6 +788,15 @@ type DisableAccountResponse struct {
 	Accountdetails            map[string]string            `json:"accountdetails"`
 	Accounttype               int                          `json:"accounttype"`
 	Apikeyaccess              string                       `json:"apikeyaccess"`
+	Backupavailable           string                       `json:"backupavailable"`
+	Backuplimit               string                       `json:"backuplimit"`
+	Backupstorageavailable    string                       `json:"backupstorageavailable"`
+	Backupstoragelimit        string                       `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                        `json:"backupstoragetotal"`
+	Backuptotal               int64                        `json:"backuptotal"`
+	Bucketavailable           string                       `json:"bucketavailable"`
+	Bucketlimit               string                       `json:"bucketlimit"`
+	Buckettotal               int64                        `json:"buckettotal"`
 	Cpuavailable              string                       `json:"cpuavailable"`
 	Cpulimit                  string                       `json:"cpulimit"`
 	Cputotal                  int64                        `json:"cputotal"`
@@ -781,6 +805,9 @@ type DisableAccountResponse struct {
 	Domain                    string                       `json:"domain"`
 	Domainid                  string                       `json:"domainid"`
 	Domainpath                string                       `json:"domainpath"`
+	Gpuavailable              string                       `json:"gpuavailable"`
+	Gpulimit                  string                       `json:"gpulimit"`
+	Gputotal                  int64                        `json:"gputotal"`
 	Groups                    []string                     `json:"groups"`
 	Icon                      interface{}                  `json:"icon"`
 	Id                        string                       `json:"id"`
@@ -799,6 +826,9 @@ type DisableAccountResponse struct {
 	Networkdomain             string                       `json:"networkdomain"`
 	Networklimit              string                       `json:"networklimit"`
 	Networktotal              int64                        `json:"networktotal"`
+	Objectstorageavailable    string                       `json:"objectstorageavailable"`
+	Objectstoragelimit        string                       `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                        `json:"objectstoragetotal"`
 	Primarystorageavailable   string                       `json:"primarystorageavailable"`
 	Primarystoragelimit       string                       `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                        `json:"primarystoragetotal"`
@@ -974,6 +1004,15 @@ type EnableAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
 	Apikeyaccess              string                      `json:"apikeyaccess"`
+	Backupavailable           string                      `json:"backupavailable"`
+	Backuplimit               string                      `json:"backuplimit"`
+	Backupstorageavailable    string                      `json:"backupstorageavailable"`
+	Backupstoragelimit        string                      `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                       `json:"backupstoragetotal"`
+	Backuptotal               int64                       `json:"backuptotal"`
+	Bucketavailable           string                      `json:"bucketavailable"`
+	Bucketlimit               string                      `json:"bucketlimit"`
+	Buckettotal               int64                       `json:"buckettotal"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -982,6 +1021,9 @@ type EnableAccountResponse struct {
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
+	Gpuavailable              string                      `json:"gpuavailable"`
+	Gpulimit                  string                      `json:"gpulimit"`
+	Gputotal                  int64                       `json:"gputotal"`
 	Groups                    []string                    `json:"groups"`
 	Icon                      interface{}                 `json:"icon"`
 	Id                        string                      `json:"id"`
@@ -1000,6 +1042,9 @@ type EnableAccountResponse struct {
 	Networkdomain             string                      `json:"networkdomain"`
 	Networklimit              string                      `json:"networklimit"`
 	Networktotal              int64                       `json:"networktotal"`
+	Objectstorageavailable    string                      `json:"objectstorageavailable"`
+	Objectstoragelimit        string                      `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                       `json:"objectstoragetotal"`
 	Primarystorageavailable   string                      `json:"primarystorageavailable"`
 	Primarystoragelimit       string                      `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                       `json:"primarystoragetotal"`
@@ -1843,6 +1888,15 @@ type Account struct {
 	Accountdetails            map[string]string `json:"accountdetails"`
 	Accounttype               int               `json:"accounttype"`
 	Apikeyaccess              string            `json:"apikeyaccess"`
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
@@ -1851,6 +1905,9 @@ type Account struct {
 	Domain                    string            `json:"domain"`
 	Domainid                  string            `json:"domainid"`
 	Domainpath                string            `json:"domainpath"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Groups                    []string          `json:"groups"`
 	Icon                      interface{}       `json:"icon"`
 	Id                        string            `json:"id"`
@@ -1869,6 +1926,9 @@ type Account struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Primarystorageavailable   string            `json:"primarystorageavailable"`
 	Primarystoragelimit       string            `json:"primarystoragelimit"`
 	Primarystoragetotal       int64             `json:"primarystoragetotal"`
@@ -2206,6 +2266,15 @@ type ListProjectAccountsResponse struct {
 }
 
 type ProjectAccount struct {
+	Backupavailable           string              `json:"backupavailable"`
+	Backuplimit               string              `json:"backuplimit"`
+	Backupstorageavailable    string              `json:"backupstorageavailable"`
+	Backupstoragelimit        string              `json:"backupstoragelimit"`
+	Backupstoragetotal        int64               `json:"backupstoragetotal"`
+	Backuptotal               int64               `json:"backuptotal"`
+	Bucketavailable           string              `json:"bucketavailable"`
+	Bucketlimit               string              `json:"bucketlimit"`
+	Buckettotal               int64               `json:"buckettotal"`
 	Cpuavailable              string              `json:"cpuavailable"`
 	Cpulimit                  string              `json:"cpulimit"`
 	Cputotal                  int64               `json:"cputotal"`
@@ -2213,6 +2282,9 @@ type ProjectAccount struct {
 	Displaytext               string              `json:"displaytext"`
 	Domain                    string              `json:"domain"`
 	Domainid                  string              `json:"domainid"`
+	Gpuavailable              string              `json:"gpuavailable"`
+	Gpulimit                  string              `json:"gpulimit"`
+	Gputotal                  int64               `json:"gputotal"`
 	Icon                      interface{}         `json:"icon"`
 	Id                        string              `json:"id"`
 	Ipavailable               string              `json:"ipavailable"`
@@ -2227,6 +2299,9 @@ type ProjectAccount struct {
 	Networkavailable          string              `json:"networkavailable"`
 	Networklimit              string              `json:"networklimit"`
 	Networktotal              int64               `json:"networktotal"`
+	Objectstorageavailable    string              `json:"objectstorageavailable"`
+	Objectstoragelimit        string              `json:"objectstoragelimit"`
+	Objectstoragetotal        int64               `json:"objectstoragetotal"`
 	Owner                     []map[string]string `json:"owner"`
 	Primarystorageavailable   string              `json:"primarystorageavailable"`
 	Primarystoragelimit       string              `json:"primarystoragelimit"`
@@ -2360,6 +2435,15 @@ type LockAccountResponse struct {
 	Accountdetails            map[string]string         `json:"accountdetails"`
 	Accounttype               int                       `json:"accounttype"`
 	Apikeyaccess              string                    `json:"apikeyaccess"`
+	Backupavailable           string                    `json:"backupavailable"`
+	Backuplimit               string                    `json:"backuplimit"`
+	Backupstorageavailable    string                    `json:"backupstorageavailable"`
+	Backupstoragelimit        string                    `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                     `json:"backupstoragetotal"`
+	Backuptotal               int64                     `json:"backuptotal"`
+	Bucketavailable           string                    `json:"bucketavailable"`
+	Bucketlimit               string                    `json:"bucketlimit"`
+	Buckettotal               int64                     `json:"buckettotal"`
 	Cpuavailable              string                    `json:"cpuavailable"`
 	Cpulimit                  string                    `json:"cpulimit"`
 	Cputotal                  int64                     `json:"cputotal"`
@@ -2368,6 +2452,9 @@ type LockAccountResponse struct {
 	Domain                    string                    `json:"domain"`
 	Domainid                  string                    `json:"domainid"`
 	Domainpath                string                    `json:"domainpath"`
+	Gpuavailable              string                    `json:"gpuavailable"`
+	Gpulimit                  string                    `json:"gpulimit"`
+	Gputotal                  int64                     `json:"gputotal"`
 	Groups                    []string                  `json:"groups"`
 	Icon                      interface{}               `json:"icon"`
 	Id                        string                    `json:"id"`
@@ -2386,6 +2473,9 @@ type LockAccountResponse struct {
 	Networkdomain             string                    `json:"networkdomain"`
 	Networklimit              string                    `json:"networklimit"`
 	Networktotal              int64                     `json:"networktotal"`
+	Objectstorageavailable    string                    `json:"objectstorageavailable"`
+	Objectstoragelimit        string                    `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                     `json:"objectstoragetotal"`
 	Primarystorageavailable   string                    `json:"primarystorageavailable"`
 	Primarystoragelimit       string                    `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                     `json:"primarystoragetotal"`
@@ -2584,6 +2674,15 @@ type MarkDefaultZoneForAccountResponse struct {
 	Accountdetails            map[string]string                       `json:"accountdetails"`
 	Accounttype               int                                     `json:"accounttype"`
 	Apikeyaccess              string                                  `json:"apikeyaccess"`
+	Backupavailable           string                                  `json:"backupavailable"`
+	Backuplimit               string                                  `json:"backuplimit"`
+	Backupstorageavailable    string                                  `json:"backupstorageavailable"`
+	Backupstoragelimit        string                                  `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                                   `json:"backupstoragetotal"`
+	Backuptotal               int64                                   `json:"backuptotal"`
+	Bucketavailable           string                                  `json:"bucketavailable"`
+	Bucketlimit               string                                  `json:"bucketlimit"`
+	Buckettotal               int64                                   `json:"buckettotal"`
 	Cpuavailable              string                                  `json:"cpuavailable"`
 	Cpulimit                  string                                  `json:"cpulimit"`
 	Cputotal                  int64                                   `json:"cputotal"`
@@ -2592,6 +2691,9 @@ type MarkDefaultZoneForAccountResponse struct {
 	Domain                    string                                  `json:"domain"`
 	Domainid                  string                                  `json:"domainid"`
 	Domainpath                string                                  `json:"domainpath"`
+	Gpuavailable              string                                  `json:"gpuavailable"`
+	Gpulimit                  string                                  `json:"gpulimit"`
+	Gputotal                  int64                                   `json:"gputotal"`
 	Groups                    []string                                `json:"groups"`
 	Icon                      interface{}                             `json:"icon"`
 	Id                        string                                  `json:"id"`
@@ -2610,6 +2712,9 @@ type MarkDefaultZoneForAccountResponse struct {
 	Networkdomain             string                                  `json:"networkdomain"`
 	Networklimit              string                                  `json:"networklimit"`
 	Networktotal              int64                                   `json:"networktotal"`
+	Objectstorageavailable    string                                  `json:"objectstorageavailable"`
+	Objectstoragelimit        string                                  `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                                   `json:"objectstoragetotal"`
 	Primarystorageavailable   string                                  `json:"primarystorageavailable"`
 	Primarystoragelimit       string                                  `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                                   `json:"primarystoragetotal"`
@@ -2908,6 +3013,15 @@ type UpdateAccountResponse struct {
 	Accountdetails            map[string]string           `json:"accountdetails"`
 	Accounttype               int                         `json:"accounttype"`
 	Apikeyaccess              string                      `json:"apikeyaccess"`
+	Backupavailable           string                      `json:"backupavailable"`
+	Backuplimit               string                      `json:"backuplimit"`
+	Backupstorageavailable    string                      `json:"backupstorageavailable"`
+	Backupstoragelimit        string                      `json:"backupstoragelimit"`
+	Backupstoragetotal        int64                       `json:"backupstoragetotal"`
+	Backuptotal               int64                       `json:"backuptotal"`
+	Bucketavailable           string                      `json:"bucketavailable"`
+	Bucketlimit               string                      `json:"bucketlimit"`
+	Buckettotal               int64                       `json:"buckettotal"`
 	Cpuavailable              string                      `json:"cpuavailable"`
 	Cpulimit                  string                      `json:"cpulimit"`
 	Cputotal                  int64                       `json:"cputotal"`
@@ -2916,6 +3030,9 @@ type UpdateAccountResponse struct {
 	Domain                    string                      `json:"domain"`
 	Domainid                  string                      `json:"domainid"`
 	Domainpath                string                      `json:"domainpath"`
+	Gpuavailable              string                      `json:"gpuavailable"`
+	Gpulimit                  string                      `json:"gpulimit"`
+	Gputotal                  int64                       `json:"gputotal"`
 	Groups                    []string                    `json:"groups"`
 	Icon                      interface{}                 `json:"icon"`
 	Id                        string                      `json:"id"`
@@ -2934,6 +3051,9 @@ type UpdateAccountResponse struct {
 	Networkdomain             string                      `json:"networkdomain"`
 	Networklimit              string                      `json:"networklimit"`
 	Networktotal              int64                       `json:"networktotal"`
+	Objectstorageavailable    string                      `json:"objectstorageavailable"`
+	Objectstoragelimit        string                      `json:"objectstoragelimit"`
+	Objectstoragetotal        int64                       `json:"objectstoragetotal"`
 	Primarystorageavailable   string                      `json:"primarystorageavailable"`
 	Primarystoragelimit       string                      `json:"primarystoragelimit"`
 	Primarystoragetotal       int64                       `json:"primarystoragetotal"`

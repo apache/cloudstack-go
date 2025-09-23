@@ -126,6 +126,9 @@ func (p *CreateNetworkOfferingParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("nsxsupportsinternallb", vv)
 	}
+	if v, found := p.p["provider"]; found {
+		u.Set("provider", v.(string))
+	}
 	if v, found := p.p["routingmode"]; found {
 		u.Set("routingmode", v.(string))
 	}
@@ -592,6 +595,27 @@ func (p *CreateNetworkOfferingParams) GetNsxsupportsinternallb() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["nsxsupportsinternallb"].(bool)
+	return value, ok
+}
+
+func (p *CreateNetworkOfferingParams) SetProvider(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["provider"] = v
+}
+
+func (p *CreateNetworkOfferingParams) ResetProvider() {
+	if p.p != nil && p.p["provider"] != nil {
+		delete(p.p, "provider")
+	}
+}
+
+func (p *CreateNetworkOfferingParams) GetProvider() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["provider"].(string)
 	return value, ok
 }
 

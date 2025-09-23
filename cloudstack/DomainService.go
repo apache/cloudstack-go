@@ -185,11 +185,23 @@ func (s *DomainService) CreateDomain(p *CreateDomainParams) (*CreateDomainRespon
 }
 
 type CreateDomainResponse struct {
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
 	Created                   string            `json:"created"`
 	Domaindetails             map[string]string `json:"domaindetails"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
 	Icon                      interface{}       `json:"icon"`
@@ -208,6 +220,9 @@ type CreateDomainResponse struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Parentdomainid            string            `json:"parentdomainid"`
 	Parentdomainname          string            `json:"parentdomainname"`
 	Path                      string            `json:"path"`
@@ -667,11 +682,23 @@ type ListDomainChildrenResponse struct {
 }
 
 type DomainChildren struct {
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
 	Created                   string            `json:"created"`
 	Domaindetails             map[string]string `json:"domaindetails"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
 	Icon                      interface{}       `json:"icon"`
@@ -690,6 +717,9 @@ type DomainChildren struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Parentdomainid            string            `json:"parentdomainid"`
 	Parentdomainname          string            `json:"parentdomainname"`
 	Path                      string            `json:"path"`
@@ -1091,11 +1121,23 @@ type ListDomainsResponse struct {
 }
 
 type Domain struct {
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
 	Created                   string            `json:"created"`
 	Domaindetails             map[string]string `json:"domaindetails"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
 	Icon                      interface{}       `json:"icon"`
@@ -1114,6 +1156,9 @@ type Domain struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Parentdomainid            string            `json:"parentdomainid"`
 	Parentdomainname          string            `json:"parentdomainname"`
 	Path                      string            `json:"path"`
@@ -1231,11 +1276,23 @@ func (s *DomainService) MoveDomain(p *MoveDomainParams) (*MoveDomainResponse, er
 }
 
 type MoveDomainResponse struct {
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
 	Created                   string            `json:"created"`
 	Domaindetails             map[string]string `json:"domaindetails"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
 	Icon                      interface{}       `json:"icon"`
@@ -1254,6 +1311,9 @@ type MoveDomainResponse struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Parentdomainid            string            `json:"parentdomainid"`
 	Parentdomainname          string            `json:"parentdomainname"`
 	Path                      string            `json:"path"`
@@ -1398,11 +1458,23 @@ func (s *DomainService) UpdateDomain(p *UpdateDomainParams) (*UpdateDomainRespon
 }
 
 type UpdateDomainResponse struct {
+	Backupavailable           string            `json:"backupavailable"`
+	Backuplimit               string            `json:"backuplimit"`
+	Backupstorageavailable    string            `json:"backupstorageavailable"`
+	Backupstoragelimit        string            `json:"backupstoragelimit"`
+	Backupstoragetotal        int64             `json:"backupstoragetotal"`
+	Backuptotal               int64             `json:"backuptotal"`
+	Bucketavailable           string            `json:"bucketavailable"`
+	Bucketlimit               string            `json:"bucketlimit"`
+	Buckettotal               int64             `json:"buckettotal"`
 	Cpuavailable              string            `json:"cpuavailable"`
 	Cpulimit                  string            `json:"cpulimit"`
 	Cputotal                  int64             `json:"cputotal"`
 	Created                   string            `json:"created"`
 	Domaindetails             map[string]string `json:"domaindetails"`
+	Gpuavailable              string            `json:"gpuavailable"`
+	Gpulimit                  string            `json:"gpulimit"`
+	Gputotal                  int64             `json:"gputotal"`
 	Hasannotations            bool              `json:"hasannotations"`
 	Haschild                  bool              `json:"haschild"`
 	Icon                      interface{}       `json:"icon"`
@@ -1421,6 +1493,9 @@ type UpdateDomainResponse struct {
 	Networkdomain             string            `json:"networkdomain"`
 	Networklimit              string            `json:"networklimit"`
 	Networktotal              int64             `json:"networktotal"`
+	Objectstorageavailable    string            `json:"objectstorageavailable"`
+	Objectstoragelimit        string            `json:"objectstoragelimit"`
+	Objectstoragetotal        int64             `json:"objectstoragetotal"`
 	Parentdomainid            string            `json:"parentdomainid"`
 	Parentdomainname          string            `json:"parentdomainname"`
 	Path                      string            `json:"path"`

@@ -58,6 +58,84 @@ func (m *MockConfigurationServiceIface) EXPECT() *MockConfigurationServiceIfaceM
 	return m.recorder
 }
 
+// DeleteCniConfiguration mocks base method.
+func (m *MockConfigurationServiceIface) DeleteCniConfiguration(p *DeleteCniConfigurationParams) (*DeleteCniConfigurationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteCniConfiguration", p)
+	ret0, _ := ret[0].(*DeleteCniConfigurationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteCniConfiguration indicates an expected call of DeleteCniConfiguration.
+func (mr *MockConfigurationServiceIfaceMockRecorder) DeleteCniConfiguration(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteCniConfiguration", reflect.TypeOf((*MockConfigurationServiceIface)(nil).DeleteCniConfiguration), p)
+}
+
+// GetCniConfigurationByID mocks base method.
+func (m *MockConfigurationServiceIface) GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCniConfigurationByID", varargs...)
+	ret0, _ := ret[0].(*CniConfiguration)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetCniConfigurationByID indicates an expected call of GetCniConfigurationByID.
+func (mr *MockConfigurationServiceIfaceMockRecorder) GetCniConfigurationByID(id any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCniConfigurationByID", reflect.TypeOf((*MockConfigurationServiceIface)(nil).GetCniConfigurationByID), varargs...)
+}
+
+// GetCniConfigurationByName mocks base method.
+func (m *MockConfigurationServiceIface) GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCniConfigurationByName", varargs...)
+	ret0, _ := ret[0].(*CniConfiguration)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetCniConfigurationByName indicates an expected call of GetCniConfigurationByName.
+func (mr *MockConfigurationServiceIfaceMockRecorder) GetCniConfigurationByName(name any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCniConfigurationByName", reflect.TypeOf((*MockConfigurationServiceIface)(nil).GetCniConfigurationByName), varargs...)
+}
+
+// GetCniConfigurationID mocks base method.
+func (m *MockConfigurationServiceIface) GetCniConfigurationID(name string, opts ...OptionFunc) (string, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{name}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetCniConfigurationID", varargs...)
+	ret0, _ := ret[0].(string)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetCniConfigurationID indicates an expected call of GetCniConfigurationID.
+func (mr *MockConfigurationServiceIfaceMockRecorder) GetCniConfigurationID(name any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{name}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCniConfigurationID", reflect.TypeOf((*MockConfigurationServiceIface)(nil).GetCniConfigurationID), varargs...)
+}
+
 // ListCapabilities mocks base method.
 func (m *MockConfigurationServiceIface) ListCapabilities(p *ListCapabilitiesParams) (*ListCapabilitiesResponse, error) {
 	m.ctrl.T.Helper()
@@ -71,6 +149,21 @@ func (m *MockConfigurationServiceIface) ListCapabilities(p *ListCapabilitiesPara
 func (mr *MockConfigurationServiceIfaceMockRecorder) ListCapabilities(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCapabilities", reflect.TypeOf((*MockConfigurationServiceIface)(nil).ListCapabilities), p)
+}
+
+// ListCniConfiguration mocks base method.
+func (m *MockConfigurationServiceIface) ListCniConfiguration(p *ListCniConfigurationParams) (*ListCniConfigurationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCniConfiguration", p)
+	ret0, _ := ret[0].(*ListCniConfigurationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCniConfiguration indicates an expected call of ListCniConfiguration.
+func (mr *MockConfigurationServiceIfaceMockRecorder) ListCniConfiguration(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCniConfiguration", reflect.TypeOf((*MockConfigurationServiceIface)(nil).ListCniConfiguration), p)
 }
 
 // ListConfigurationGroups mocks base method.
@@ -118,6 +211,20 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) ListDeploymentPlanners(p an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDeploymentPlanners", reflect.TypeOf((*MockConfigurationServiceIface)(nil).ListDeploymentPlanners), p)
 }
 
+// NewDeleteCniConfigurationParams mocks base method.
+func (m *MockConfigurationServiceIface) NewDeleteCniConfigurationParams(id string) *DeleteCniConfigurationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteCniConfigurationParams", id)
+	ret0, _ := ret[0].(*DeleteCniConfigurationParams)
+	return ret0
+}
+
+// NewDeleteCniConfigurationParams indicates an expected call of NewDeleteCniConfigurationParams.
+func (mr *MockConfigurationServiceIfaceMockRecorder) NewDeleteCniConfigurationParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteCniConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewDeleteCniConfigurationParams), id)
+}
+
 // NewListCapabilitiesParams mocks base method.
 func (m *MockConfigurationServiceIface) NewListCapabilitiesParams() *ListCapabilitiesParams {
 	m.ctrl.T.Helper()
@@ -130,6 +237,20 @@ func (m *MockConfigurationServiceIface) NewListCapabilitiesParams() *ListCapabil
 func (mr *MockConfigurationServiceIfaceMockRecorder) NewListCapabilitiesParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListCapabilitiesParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewListCapabilitiesParams))
+}
+
+// NewListCniConfigurationParams mocks base method.
+func (m *MockConfigurationServiceIface) NewListCniConfigurationParams() *ListCniConfigurationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListCniConfigurationParams")
+	ret0, _ := ret[0].(*ListCniConfigurationParams)
+	return ret0
+}
+
+// NewListCniConfigurationParams indicates an expected call of NewListCniConfigurationParams.
+func (mr *MockConfigurationServiceIfaceMockRecorder) NewListCniConfigurationParams() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListCniConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewListCniConfigurationParams))
 }
 
 // NewListConfigurationGroupsParams mocks base method.
@@ -174,6 +295,20 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) NewListDeploymentPlannersPa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListDeploymentPlannersParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewListDeploymentPlannersParams))
 }
 
+// NewRegisterCniConfigurationParams mocks base method.
+func (m *MockConfigurationServiceIface) NewRegisterCniConfigurationParams(name string) *RegisterCniConfigurationParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRegisterCniConfigurationParams", name)
+	ret0, _ := ret[0].(*RegisterCniConfigurationParams)
+	return ret0
+}
+
+// NewRegisterCniConfigurationParams indicates an expected call of NewRegisterCniConfigurationParams.
+func (mr *MockConfigurationServiceIfaceMockRecorder) NewRegisterCniConfigurationParams(name any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRegisterCniConfigurationParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewRegisterCniConfigurationParams), name)
+}
+
 // NewResetConfigurationParams mocks base method.
 func (m *MockConfigurationServiceIface) NewResetConfigurationParams(name string) *ResetConfigurationParams {
 	m.ctrl.T.Helper()
@@ -214,6 +349,21 @@ func (m *MockConfigurationServiceIface) NewUpdateStorageCapabilitiesParams(id st
 func (mr *MockConfigurationServiceIfaceMockRecorder) NewUpdateStorageCapabilitiesParams(id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateStorageCapabilitiesParams", reflect.TypeOf((*MockConfigurationServiceIface)(nil).NewUpdateStorageCapabilitiesParams), id)
+}
+
+// RegisterCniConfiguration mocks base method.
+func (m *MockConfigurationServiceIface) RegisterCniConfiguration(p *RegisterCniConfigurationParams) (*RegisterCniConfigurationResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterCniConfiguration", p)
+	ret0, _ := ret[0].(*RegisterCniConfigurationResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RegisterCniConfiguration indicates an expected call of RegisterCniConfiguration.
+func (mr *MockConfigurationServiceIfaceMockRecorder) RegisterCniConfiguration(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterCniConfiguration", reflect.TypeOf((*MockConfigurationServiceIface)(nil).RegisterCniConfiguration), p)
 }
 
 // ResetConfiguration mocks base method.

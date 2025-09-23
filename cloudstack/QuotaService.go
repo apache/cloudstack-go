@@ -378,12 +378,13 @@ func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsRespons
 }
 
 type QuotaCreditsResponse struct {
-	Credits    float64 `json:"credits"`
-	Currency   string  `json:"currency"`
-	JobID      string  `json:"jobid"`
-	Jobstatus  int     `json:"jobstatus"`
-	Updated_by string  `json:"updated_by"`
-	Updated_on string  `json:"updated_on"`
+	Credit           float64 `json:"credit"`
+	Creditedon       string  `json:"creditedon"`
+	Creditoruserid   string  `json:"creditoruserid"`
+	Creditorusername string  `json:"creditorusername"`
+	Currency         string  `json:"currency"`
+	JobID            string  `json:"jobid"`
+	Jobstatus        int     `json:"jobstatus"`
 }
 
 type QuotaIsEnabledParams struct {

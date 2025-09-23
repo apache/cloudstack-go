@@ -96,6 +96,9 @@ func (p *CreateStoragePoolParams) toURLValues() url.Values {
 	if v, found := p.p["scope"]; found {
 		u.Set("scope", v.(string))
 	}
+	if v, found := p.p["storageaccessgroups"]; found {
+		u.Set("storageaccessgroups", v.(string))
+	}
 	if v, found := p.p["tags"]; found {
 		u.Set("tags", v.(string))
 	}
@@ -339,6 +342,27 @@ func (p *CreateStoragePoolParams) GetScope() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateStoragePoolParams) SetStorageaccessgroups(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroups"] = v
+}
+
+func (p *CreateStoragePoolParams) ResetStorageaccessgroups() {
+	if p.p != nil && p.p["storageaccessgroups"] != nil {
+		delete(p.p, "storageaccessgroups")
+	}
+}
+
+func (p *CreateStoragePoolParams) GetStorageaccessgroups() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroups"].(string)
+	return value, ok
+}
+
 func (p *CreateStoragePoolParams) SetTags(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -438,6 +462,7 @@ type CreateStoragePoolResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -458,6 +483,7 @@ type CreateStoragePoolResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -727,6 +753,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -747,6 +774,7 @@ type FindStoragePoolsForMigrationResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -880,6 +908,9 @@ func (p *ListStoragePoolsParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["status"]; found {
 		u.Set("status", v.(string))
+	}
+	if v, found := p.p["storageaccessgroup"]; found {
+		u.Set("storageaccessgroup", v.(string))
 	}
 	if v, found := p.p["storagecustomstats"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -1143,6 +1174,27 @@ func (p *ListStoragePoolsParams) GetStatus() (string, bool) {
 	return value, ok
 }
 
+func (p *ListStoragePoolsParams) SetStorageaccessgroup(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroup"] = v
+}
+
+func (p *ListStoragePoolsParams) ResetStorageaccessgroup() {
+	if p.p != nil && p.p["storageaccessgroup"] != nil {
+		delete(p.p, "storageaccessgroup")
+	}
+}
+
+func (p *ListStoragePoolsParams) GetStorageaccessgroup() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroup"].(string)
+	return value, ok
+}
+
 func (p *ListStoragePoolsParams) SetStoragecustomstats(v bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1302,6 +1354,7 @@ type StoragePool struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -1322,6 +1375,7 @@ type StoragePool struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -1418,6 +1472,7 @@ type SyncStoragePoolResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -1438,6 +1493,7 @@ type SyncStoragePoolResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
@@ -1714,6 +1770,7 @@ type UpdateStoragePoolResponse struct {
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
 	Created              string            `json:"created"`
+	Details              map[string]string `json:"details"`
 	Disksizeallocated    int64             `json:"disksizeallocated"`
 	Disksizetotal        int64             `json:"disksizetotal"`
 	Disksizeused         int64             `json:"disksizeused"`
@@ -1734,6 +1791,7 @@ type UpdateStoragePoolResponse struct {
 	Provider             string            `json:"provider"`
 	Scope                string            `json:"scope"`
 	State                string            `json:"state"`
+	Storageaccessgroups  string            `json:"storageaccessgroups"`
 	Storagecapabilities  map[string]string `json:"storagecapabilities"`
 	Storagecustomstats   map[string]string `json:"storagecustomstats"`
 	Suitableformigration bool              `json:"suitableformigration"`
