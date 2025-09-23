@@ -86,6 +86,8 @@ type VolumeServiceIface interface {
 	GetVolumesUsageHistoryByID(id string, opts ...OptionFunc) (*VolumesUsageHistory, int, error)
 	AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error)
 	NewAssignVolumeParams(volumeid string) *AssignVolumeParams
+	RestoreVolumeFromBackupAndAttachToVM(p *RestoreVolumeFromBackupAndAttachToVMParams) (*RestoreVolumeFromBackupAndAttachToVMResponse, error)
+	NewRestoreVolumeFromBackupAndAttachToVMParams(backupid string, virtualmachineid string, volumeid string) *RestoreVolumeFromBackupAndAttachToVMParams
 }
 
 type AttachVolumeParams struct {
@@ -6533,4 +6535,136 @@ type AssignVolumeResponse struct {
 	Volumerepairresult         map[string]string `json:"volumerepairresult"`
 	Zoneid                     string            `json:"zoneid"`
 	Zonename                   string            `json:"zonename"`
+}
+
+type RestoreVolumeFromBackupAndAttachToVMParams struct {
+	p map[string]interface{}
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["backupid"]; found {
+		u.Set("backupid", v.(string))
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	if v, found := p.p["volumeid"]; found {
+		u.Set("volumeid", v.(string))
+	}
+	return u
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) SetBackupid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["backupid"] = v
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) ResetBackupid() {
+	if p.p != nil && p.p["backupid"] != nil {
+		delete(p.p, "backupid")
+	}
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) GetBackupid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["backupid"].(string)
+	return value, ok
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) SetVolumeid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["volumeid"] = v
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) ResetVolumeid() {
+	if p.p != nil && p.p["volumeid"] != nil {
+		delete(p.p, "volumeid")
+	}
+}
+
+func (p *RestoreVolumeFromBackupAndAttachToVMParams) GetVolumeid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["volumeid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RestoreVolumeFromBackupAndAttachToVMParams instance,
+// as then you are sure you have configured all required params
+func (s *VolumeService) NewRestoreVolumeFromBackupAndAttachToVMParams(backupid string, virtualmachineid string, volumeid string) *RestoreVolumeFromBackupAndAttachToVMParams {
+	p := &RestoreVolumeFromBackupAndAttachToVMParams{}
+	p.p = make(map[string]interface{})
+	p.p["backupid"] = backupid
+	p.p["virtualmachineid"] = virtualmachineid
+	p.p["volumeid"] = volumeid
+	return p
+}
+
+// Restore and attach a backed up volume to VM
+func (s *VolumeService) RestoreVolumeFromBackupAndAttachToVM(p *RestoreVolumeFromBackupAndAttachToVMParams) (*RestoreVolumeFromBackupAndAttachToVMResponse, error) {
+	resp, err := s.cs.newPostRequest("restoreVolumeFromBackupAndAttachToVM", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RestoreVolumeFromBackupAndAttachToVMResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type RestoreVolumeFromBackupAndAttachToVMResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }

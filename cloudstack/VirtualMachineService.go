@@ -104,6 +104,10 @@ type VirtualMachineServiceIface interface {
 	GetVMScheduleByID(id string, virtualmachineid string, opts ...OptionFunc) (*VMSchedule, int, error)
 	DeleteVMSchedule(p *DeleteVMScheduleParams) (*DeleteVMScheduleResponse, error)
 	NewDeleteVMScheduleParams(virtualmachineid string) *DeleteVMScheduleParams
+	AssignVirtualMachineToBackupOffering(p *AssignVirtualMachineToBackupOfferingParams) (*AssignVirtualMachineToBackupOfferingResponse, error)
+	NewAssignVirtualMachineToBackupOfferingParams(backupofferingid string, virtualmachineid string) *AssignVirtualMachineToBackupOfferingParams
+	RemoveVirtualMachineFromBackupOffering(p *RemoveVirtualMachineFromBackupOfferingParams) (*RemoveVirtualMachineFromBackupOfferingResponse, error)
+	NewRemoveVirtualMachineFromBackupOfferingParams(virtualmachineid string) *RemoveVirtualMachineFromBackupOfferingParams
 }
 
 type AddNicToVirtualMachineParams struct {
@@ -14365,4 +14369,218 @@ func (r *DeleteVMScheduleResponse) UnmarshalJSON(b []byte) error {
 
 	type alias DeleteVMScheduleResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type AssignVirtualMachineToBackupOfferingParams struct {
+	p map[string]interface{}
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["backupofferingid"]; found {
+		u.Set("backupofferingid", v.(string))
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	return u
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) SetBackupofferingid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["backupofferingid"] = v
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) ResetBackupofferingid() {
+	if p.p != nil && p.p["backupofferingid"] != nil {
+		delete(p.p, "backupofferingid")
+	}
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) GetBackupofferingid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["backupofferingid"].(string)
+	return value, ok
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *AssignVirtualMachineToBackupOfferingParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new AssignVirtualMachineToBackupOfferingParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewAssignVirtualMachineToBackupOfferingParams(backupofferingid string, virtualmachineid string) *AssignVirtualMachineToBackupOfferingParams {
+	p := &AssignVirtualMachineToBackupOfferingParams{}
+	p.p = make(map[string]interface{})
+	p.p["backupofferingid"] = backupofferingid
+	p.p["virtualmachineid"] = virtualmachineid
+	return p
+}
+
+// Assigns a VM to a backup offering
+func (s *VirtualMachineService) AssignVirtualMachineToBackupOffering(p *AssignVirtualMachineToBackupOfferingParams) (*AssignVirtualMachineToBackupOfferingResponse, error) {
+	resp, err := s.cs.newPostRequest("assignVirtualMachineToBackupOffering", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r AssignVirtualMachineToBackupOfferingResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type AssignVirtualMachineToBackupOfferingResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+type RemoveVirtualMachineFromBackupOfferingParams struct {
+	p map[string]interface{}
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["virtualmachineid"]; found {
+		u.Set("virtualmachineid", v.(string))
+	}
+	return u
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) SetVirtualmachineid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["virtualmachineid"] = v
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) ResetVirtualmachineid() {
+	if p.p != nil && p.p["virtualmachineid"] != nil {
+		delete(p.p, "virtualmachineid")
+	}
+}
+
+func (p *RemoveVirtualMachineFromBackupOfferingParams) GetVirtualmachineid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["virtualmachineid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RemoveVirtualMachineFromBackupOfferingParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewRemoveVirtualMachineFromBackupOfferingParams(virtualmachineid string) *RemoveVirtualMachineFromBackupOfferingParams {
+	p := &RemoveVirtualMachineFromBackupOfferingParams{}
+	p.p = make(map[string]interface{})
+	p.p["virtualmachineid"] = virtualmachineid
+	return p
+}
+
+// Removes a VM from any existing backup offering
+func (s *VirtualMachineService) RemoveVirtualMachineFromBackupOffering(p *RemoveVirtualMachineFromBackupOfferingParams) (*RemoveVirtualMachineFromBackupOfferingResponse, error) {
+	resp, err := s.cs.newPostRequest("removeVirtualMachineFromBackupOffering", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RemoveVirtualMachineFromBackupOfferingResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type RemoveVirtualMachineFromBackupOfferingResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
 }
