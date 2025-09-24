@@ -1302,7 +1302,11 @@ func (s *service) generateInterfaceType() {
 					if parseSingular(ln) == "Template" || parseSingular(ln) == "Iso" {
 						p("zoneid string, ")
 					}
-					pn("opts ...OptionFunc) (*%s, int, error)", parseSingular(ln))
+					if parseSingular(ln) == "CniConfiguration" {
+						pn("opts ...OptionFunc) (*UserData, int, error)")
+					} else {
+						pn("opts ...OptionFunc) (*%s, int, error)", parseSingular(ln))
+					}
 				}
 			}
 
@@ -1318,6 +1322,8 @@ func (s *service) generateInterfaceType() {
 				}
 				if ln == "LoadBalancerRuleInstances" {
 					pn("opts ...OptionFunc) (*VirtualMachine, int, error)")
+				} else if ln == "CniConfiguration" {
+					pn("opts ...OptionFunc) (*UserData, int, error)")
 				} else {
 					pn("opts ...OptionFunc) (*%s, int, error)", parseSingular(ln))
 				}
@@ -1630,7 +1636,11 @@ func (s *service) generateHelperFuncs(a *API) {
 				if parseSingular(ln) == "Template" || parseSingular(ln) == "Iso" {
 					p("zoneid string, ")
 				}
-				pn("opts ...OptionFunc) (*%s, int, error) {", parseSingular(ln))
+				if parseSingular(ln) == "CniConfiguration" {
+					pn("opts ...OptionFunc) (*UserData, int, error) {")
+				} else {
+					pn("opts ...OptionFunc) (*%s, int, error) {", parseSingular(ln))
+				}
 
 				// Generate the function body
 				p("  id, count, err := s.Get%sID(name, ", parseSingular(ln))
@@ -1679,6 +1689,8 @@ func (s *service) generateHelperFuncs(a *API) {
 			}
 			if ln == "LoadBalancerRuleInstances" {
 				pn("opts ...OptionFunc) (*VirtualMachine, int, error) {")
+			} else if ln == "CniConfiguration" {
+				pn("opts ...OptionFunc) (*UserData, int, error) {")
 			} else {
 				pn("opts ...OptionFunc) (*%s, int, error) {", parseSingular(ln))
 			}
@@ -1978,6 +1990,14 @@ func (s *service) generateResponseType(a *API) {
 		pn("")
 		return
 	}
+	if a.Name == "listCniConfiguration" {
+		pn("type ListCniConfigurationResponse struct {")
+		pn("    Count            int        `json:\"count\"`")
+		pn("    CniConfiguration []*UserData `json:\"cniconfig\"`")
+		pn("}")
+		pn("")
+		return
+	}
 
 	ln := capitalize(strings.TrimPrefix(a.Name, "list"))
 
@@ -1985,7 +2005,7 @@ func (s *service) generateResponseType(a *API) {
 	// types of responses that also need a separate list struct, so checking on exact matches
 	// for those once.
 	if strings.HasPrefix(a.Name, "list") || a.Name == "registerTemplate" || a.Name == "findHostsForMigration" || a.Name == "registerUserData" ||
-		a.Name == "quotaBalance" || a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
+		a.Name == "registerCniConfiguration" || a.Name == "quotaBalance" || a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
 		pn("type %s struct {", tn)
 
 		// This nasty check is for some specific response that do not behave consistent
@@ -2034,6 +2054,8 @@ func (s *service) generateResponseType(a *API) {
 			pn("    Name string `json:\"name\"`")
 			pn("    Params string `json:\"params\"`")
 			pn("    Userdata string `json:\"userdata\"`")
+		case "registerCniConfiguration":
+			pn("    CniConfiguration *UserData `json:\"cniconfig\"`")
 		case "listObjectStoragePools":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "objectstore")
