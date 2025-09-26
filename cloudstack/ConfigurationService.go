@@ -47,8 +47,8 @@ type ConfigurationServiceIface interface {
 	ListCniConfiguration(p *ListCniConfigurationParams) (*ListCniConfigurationResponse, error)
 	NewListCniConfigurationParams() *ListCniConfigurationParams
 	GetCniConfigurationID(name string, opts ...OptionFunc) (string, int, error)
-	GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error)
-	GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error)
+	GetCniConfigurationByName(name string, opts ...OptionFunc) (*UserData, int, error)
+	GetCniConfigurationByID(id string, opts ...OptionFunc) (*UserData, int, error)
 	DeleteCniConfiguration(p *DeleteCniConfigurationParams) (*DeleteCniConfigurationResponse, error)
 	NewDeleteCniConfigurationParams(id string) *DeleteCniConfigurationParams
 }
@@ -1553,13 +1553,17 @@ func (s *ConfigurationService) RegisterCniConfiguration(p *RegisterCniConfigurat
 }
 
 type RegisterCniConfigurationResponse struct {
+	CniConfiguration *UserData `json:"cniconfig"`
+}
+
+type RegisterCniConfiguration struct {
 	Displaytext string `json:"displaytext"`
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
 }
 
-func (r *RegisterCniConfigurationResponse) UnmarshalJSON(b []byte) error {
+func (r *RegisterCniConfiguration) UnmarshalJSON(b []byte) error {
 	var m map[string]interface{}
 	err := json.Unmarshal(b, &m)
 	if err != nil {
@@ -1582,7 +1586,7 @@ func (r *RegisterCniConfigurationResponse) UnmarshalJSON(b []byte) error {
 		}
 	}
 
-	type alias RegisterCniConfigurationResponse
+	type alias RegisterCniConfiguration
 	return json.Unmarshal(b, (*alias)(r))
 }
 
@@ -1887,7 +1891,7 @@ func (s *ConfigurationService) GetCniConfigurationID(name string, opts ...Option
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
-func (s *ConfigurationService) GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+func (s *ConfigurationService) GetCniConfigurationByName(name string, opts ...OptionFunc) (*UserData, int, error) {
 	id, count, err := s.GetCniConfigurationID(name, opts...)
 	if err != nil {
 		return nil, count, err
@@ -1901,7 +1905,7 @@ func (s *ConfigurationService) GetCniConfigurationByName(name string, opts ...Op
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
-func (s *ConfigurationService) GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+func (s *ConfigurationService) GetCniConfigurationByID(id string, opts ...OptionFunc) (*UserData, int, error) {
 	p := &ListCniConfigurationParams{}
 	p.p = make(map[string]interface{})
 
@@ -1949,25 +1953,8 @@ func (s *ConfigurationService) ListCniConfiguration(p *ListCniConfigurationParam
 }
 
 type ListCniConfigurationResponse struct {
-	Count            int                 `json:"count"`
-	CniConfiguration []*CniConfiguration `json:"cniconfiguration"`
-}
-
-type CniConfiguration struct {
-	Account        string `json:"account"`
-	Accountid      string `json:"accountid"`
-	Domain         string `json:"domain"`
-	Domainid       string `json:"domainid"`
-	Domainpath     string `json:"domainpath"`
-	Hasannotations bool   `json:"hasannotations"`
-	Id             string `json:"id"`
-	JobID          string `json:"jobid"`
-	Jobstatus      int    `json:"jobstatus"`
-	Name           string `json:"name"`
-	Params         string `json:"params"`
-	Project        string `json:"project"`
-	Projectid      string `json:"projectid"`
-	Userdata       string `json:"userdata"`
+	Count            int         `json:"count"`
+	CniConfiguration []*UserData `json:"cniconfig"`
 }
 
 type DeleteCniConfigurationParams struct {

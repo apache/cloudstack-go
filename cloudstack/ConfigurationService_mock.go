@@ -74,14 +74,14 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) DeleteCniConfiguration(p an
 }
 
 // GetCniConfigurationByID mocks base method.
-func (m *MockConfigurationServiceIface) GetCniConfigurationByID(id string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+func (m *MockConfigurationServiceIface) GetCniConfigurationByID(id string, opts ...OptionFunc) (*UserData, int, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{id}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetCniConfigurationByID", varargs...)
-	ret0, _ := ret[0].(*CniConfiguration)
+	ret0, _ := ret[0].(*UserData)
 	ret1, _ := ret[1].(int)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
@@ -95,14 +95,14 @@ func (mr *MockConfigurationServiceIfaceMockRecorder) GetCniConfigurationByID(id 
 }
 
 // GetCniConfigurationByName mocks base method.
-func (m *MockConfigurationServiceIface) GetCniConfigurationByName(name string, opts ...OptionFunc) (*CniConfiguration, int, error) {
+func (m *MockConfigurationServiceIface) GetCniConfigurationByName(name string, opts ...OptionFunc) (*UserData, int, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{name}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetCniConfigurationByName", varargs...)
-	ret0, _ := ret[0].(*CniConfiguration)
+	ret0, _ := ret[0].(*UserData)
 	ret1, _ := ret[1].(int)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
