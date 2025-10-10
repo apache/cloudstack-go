@@ -73,4 +73,8 @@ var requiredParams = map[string][]string{
 	"updateGuestOs": {
 		"osdisplayname",
 	},
+        "createPortForwardingRule": {
+		"privateendport",
+		"publicendport",
+	},
 }
