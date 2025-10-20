@@ -133,27 +133,6 @@ func (mr *MockUsageServiceIfaceMockRecorder) GenerateUsageRecords(p any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GenerateUsageRecords", reflect.TypeOf((*MockUsageServiceIface)(nil).GenerateUsageRecords), p)
 }
 
-// GetTrafficTypeID mocks base method.
-func (m *MockUsageServiceIface) GetTrafficTypeID(keyword, physicalnetworkid string, opts ...OptionFunc) (string, int, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{keyword, physicalnetworkid}
-	for _, a := range opts {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "GetTrafficTypeID", varargs...)
-	ret0, _ := ret[0].(string)
-	ret1, _ := ret[1].(int)
-	ret2, _ := ret[2].(error)
-	return ret0, ret1, ret2
-}
-
-// GetTrafficTypeID indicates an expected call of GetTrafficTypeID.
-func (mr *MockUsageServiceIfaceMockRecorder) GetTrafficTypeID(keyword, physicalnetworkid any, opts ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{keyword, physicalnetworkid}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTrafficTypeID", reflect.TypeOf((*MockUsageServiceIface)(nil).GetTrafficTypeID), varargs...)
-}
-
 // ListTrafficMonitors mocks base method.
 func (m *MockUsageServiceIface) ListTrafficMonitors(p *ListTrafficMonitorsParams) (*ListTrafficMonitorsResponse, error) {
 	m.ctrl.T.Helper()

@@ -397,6 +397,10 @@ func (p *CreateKubernetesClusterParams) toURLValues() url.Values {
 	if v, found := p.p["domainid"]; found {
 		u.Set("domainid", v.(string))
 	}
+	if v, found := p.p["enablecsi"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("enablecsi", vv)
+	}
 	if v, found := p.p["etcdnodes"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("etcdnodes", vv)
@@ -685,6 +689,27 @@ func (p *CreateKubernetesClusterParams) GetDomainid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *CreateKubernetesClusterParams) SetEnablecsi(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["enablecsi"] = v
+}
+
+func (p *CreateKubernetesClusterParams) ResetEnablecsi() {
+	if p.p != nil && p.p["enablecsi"] != nil {
+		delete(p.p, "enablecsi")
+	}
+}
+
+func (p *CreateKubernetesClusterParams) GetEnablecsi() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["enablecsi"].(bool)
 	return value, ok
 }
 
@@ -1065,6 +1090,7 @@ type CreateKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -1815,6 +1841,7 @@ type KubernetesCluster struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -2461,6 +2488,7 @@ type ScaleKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -2592,6 +2620,7 @@ type StartKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -2936,6 +2965,7 @@ type UpgradeKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -3483,6 +3513,7 @@ type AddNodesToKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`
@@ -3640,6 +3671,7 @@ type RemoveNodesFromKubernetesClusterResponse struct {
 	Controlofferingname   string            `json:"controlofferingname"`
 	Cpunumber             string            `json:"cpunumber"`
 	Created               string            `json:"created"`
+	Csienabled            bool              `json:"csienabled"`
 	Description           string            `json:"description"`
 	Domain                string            `json:"domain"`
 	Domainid              string            `json:"domainid"`

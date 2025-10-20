@@ -88,6 +88,27 @@ func (mr *MockLDAPServiceIfaceMockRecorder) DeleteLdapConfiguration(p any) *gomo
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteLdapConfiguration", reflect.TypeOf((*MockLDAPServiceIface)(nil).DeleteLdapConfiguration), p)
 }
 
+// GetLdapConfigurationByID mocks base method.
+func (m *MockLDAPServiceIface) GetLdapConfigurationByID(id string, opts ...OptionFunc) (*LdapConfiguration, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetLdapConfigurationByID", varargs...)
+	ret0, _ := ret[0].(*LdapConfiguration)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetLdapConfigurationByID indicates an expected call of GetLdapConfigurationByID.
+func (mr *MockLDAPServiceIfaceMockRecorder) GetLdapConfigurationByID(id any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLdapConfigurationByID", reflect.TypeOf((*MockLDAPServiceIface)(nil).GetLdapConfigurationByID), varargs...)
+}
+
 // ImportLdapUsers mocks base method.
 func (m *MockLDAPServiceIface) ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUsersResponse, error) {
 	m.ctrl.T.Helper()
@@ -208,17 +229,17 @@ func (mr *MockLDAPServiceIfaceMockRecorder) NewAddLdapConfigurationParams(hostna
 }
 
 // NewDeleteLdapConfigurationParams mocks base method.
-func (m *MockLDAPServiceIface) NewDeleteLdapConfigurationParams(hostname string) *DeleteLdapConfigurationParams {
+func (m *MockLDAPServiceIface) NewDeleteLdapConfigurationParams() *DeleteLdapConfigurationParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewDeleteLdapConfigurationParams", hostname)
+	ret := m.ctrl.Call(m, "NewDeleteLdapConfigurationParams")
 	ret0, _ := ret[0].(*DeleteLdapConfigurationParams)
 	return ret0
 }
 
 // NewDeleteLdapConfigurationParams indicates an expected call of NewDeleteLdapConfigurationParams.
-func (mr *MockLDAPServiceIfaceMockRecorder) NewDeleteLdapConfigurationParams(hostname any) *gomock.Call {
+func (mr *MockLDAPServiceIfaceMockRecorder) NewDeleteLdapConfigurationParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteLdapConfigurationParams", reflect.TypeOf((*MockLDAPServiceIface)(nil).NewDeleteLdapConfigurationParams), hostname)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteLdapConfigurationParams", reflect.TypeOf((*MockLDAPServiceIface)(nil).NewDeleteLdapConfigurationParams))
 }
 
 // NewImportLdapUsersParams mocks base method.

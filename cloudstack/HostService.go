@@ -4767,6 +4767,10 @@ func (p *UpdateHostParams) toURLValues() url.Values {
 	if v, found := p.p["annotation"]; found {
 		u.Set("annotation", v.(string))
 	}
+	if v, found := p.p["cleanupexternaldetails"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("cleanupexternaldetails", vv)
+	}
 	if v, found := p.p["externaldetails"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
@@ -4836,6 +4840,27 @@ func (p *UpdateHostParams) GetAnnotation() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["annotation"].(string)
+	return value, ok
+}
+
+func (p *UpdateHostParams) SetCleanupexternaldetails(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cleanupexternaldetails"] = v
+}
+
+func (p *UpdateHostParams) ResetCleanupexternaldetails() {
+	if p.p != nil && p.p["cleanupexternaldetails"] != nil {
+		delete(p.p, "cleanupexternaldetails")
+	}
+}
+
+func (p *UpdateHostParams) GetCleanupexternaldetails() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cleanupexternaldetails"].(bool)
 	return value, ok
 }
 

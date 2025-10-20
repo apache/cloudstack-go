@@ -207,7 +207,7 @@ func TestBackupService(t *testing.T) {
 		if _, ok := response["listBackupSchedule"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.Backup.NewListBackupScheduleParams("virtualmachineid")
+		p := client.Backup.NewListBackupScheduleParams()
 		_, err := client.Backup.ListBackupSchedule(p)
 		if err != nil {
 			t.Errorf(err.Error())
