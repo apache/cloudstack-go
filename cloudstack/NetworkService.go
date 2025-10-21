@@ -70,7 +70,7 @@ type NetworkServiceIface interface {
 	GetNetworkServiceProviderID(name string, opts ...OptionFunc) (string, int, error)
 	ListNetworks(p *ListNetworksParams) (*ListNetworksResponse, error)
 	NewListNetworksParams() *ListNetworksParams
-	GetNetworkID(keyword string, opts ...OptionFunc) (string, int, error)
+	GetNetworkID(name string, opts ...OptionFunc) (string, int, error)
 	GetNetworkByName(name string, opts ...OptionFunc) (*Network, int, error)
 	GetNetworkByID(id string, opts ...OptionFunc) (*Network, int, error)
 	ListNiciraNvpDeviceNetworks(p *ListNiciraNvpDeviceNetworksParams) (*ListNiciraNvpDeviceNetworksResponse, error)
@@ -4143,6 +4143,9 @@ func (p *ListNetworksParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("listall", vv)
 	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
 	if v, found := p.p["networkfilter"]; found {
 		u.Set("networkfilter", v.(string))
 	}
@@ -4457,6 +4460,27 @@ func (p *ListNetworksParams) GetListall() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListNetworksParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListNetworksParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListNetworksParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
 	return value, ok
 }
 
@@ -4826,11 +4850,11 @@ func (s *NetworkService) NewListNetworksParams() *ListNetworksParams {
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!
-func (s *NetworkService) GetNetworkID(keyword string, opts ...OptionFunc) (string, int, error) {
+func (s *NetworkService) GetNetworkID(name string, opts ...OptionFunc) (string, int, error) {
 	p := &ListNetworksParams{}
 	p.p = make(map[string]interface{})
 
-	p.p["keyword"] = keyword
+	p.p["name"] = name
 
 	for _, fn := range append(s.cs.options, opts...) {
 		if err := fn(s.cs, p); err != nil {
@@ -4844,7 +4868,7 @@ func (s *NetworkService) GetNetworkID(keyword string, opts ...OptionFunc) (strin
 	}
 
 	if l.Count == 0 {
-		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
 	}
 
 	if l.Count == 1 {
@@ -4853,12 +4877,12 @@ func (s *NetworkService) GetNetworkID(keyword string, opts ...OptionFunc) (strin
 
 	if l.Count > 1 {
 		for _, v := range l.Networks {
-			if v.Name == keyword {
+			if v.Name == name {
 				return v.Id, l.Count, nil
 			}
 		}
 	}
-	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
 }
 
 // This is a courtesy helper function, which in some cases may not work as expected!

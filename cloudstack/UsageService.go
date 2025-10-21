@@ -21,7 +21,6 @@ package cloudstack
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -43,7 +42,6 @@ type UsageServiceIface interface {
 	NewListTrafficTypeImplementorsParams() *ListTrafficTypeImplementorsParams
 	ListTrafficTypes(p *ListTrafficTypesParams) (*ListTrafficTypesResponse, error)
 	NewListTrafficTypesParams(physicalnetworkid string) *ListTrafficTypesParams
-	GetTrafficTypeID(keyword string, physicalnetworkid string, opts ...OptionFunc) (string, int, error)
 	ListUsageRecords(p *ListUsageRecordsParams) (*ListUsageRecordsResponse, error)
 	NewListUsageRecordsParams(enddate string, startdate string) *ListUsageRecordsParams
 	ListUsageTypes(p *ListUsageTypesParams) (*ListUsageTypesResponse, error)
@@ -1215,43 +1213,6 @@ func (s *UsageService) NewListTrafficTypesParams(physicalnetworkid string) *List
 	return p
 }
 
-// This is a courtesy helper function, which in some cases may not work as expected!
-func (s *UsageService) GetTrafficTypeID(keyword string, physicalnetworkid string, opts ...OptionFunc) (string, int, error) {
-	p := &ListTrafficTypesParams{}
-	p.p = make(map[string]interface{})
-
-	p.p["keyword"] = keyword
-	p.p["physicalnetworkid"] = physicalnetworkid
-
-	for _, fn := range append(s.cs.options, opts...) {
-		if err := fn(s.cs, p); err != nil {
-			return "", -1, err
-		}
-	}
-
-	l, err := s.ListTrafficTypes(p)
-	if err != nil {
-		return "", -1, err
-	}
-
-	if l.Count == 0 {
-		return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
-	}
-
-	if l.Count == 1 {
-		return l.TrafficTypes[0].Id, l.Count, nil
-	}
-
-	if l.Count > 1 {
-		for _, v := range l.TrafficTypes {
-			if v.Name == keyword {
-				return v.Id, l.Count, nil
-			}
-		}
-	}
-	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
-}
-
 // Lists traffic types of a given physical network.
 func (s *UsageService) ListTrafficTypes(p *ListTrafficTypesParams) (*ListTrafficTypesResponse, error) {
 	resp, err := s.cs.newRequest("listTrafficTypes", p.toURLValues())
@@ -1273,15 +1234,16 @@ type ListTrafficTypesResponse struct {
 }
 
 type TrafficType struct {
-	Canenableindividualservice   bool     `json:"canenableindividualservice"`
-	Destinationphysicalnetworkid string   `json:"destinationphysicalnetworkid"`
-	Id                           string   `json:"id"`
-	JobID                        string   `json:"jobid"`
-	Jobstatus                    int      `json:"jobstatus"`
-	Name                         string   `json:"name"`
-	Physicalnetworkid            string   `json:"physicalnetworkid"`
-	Servicelist                  []string `json:"servicelist"`
-	State                        string   `json:"state"`
+	Hypervnetworklabel string `json:"hypervnetworklabel"`
+	Id                 string `json:"id"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Kvmnetworklabel    string `json:"kvmnetworklabel"`
+	Ovm3networklabel   string `json:"ovm3networklabel"`
+	Physicalnetworkid  string `json:"physicalnetworkid"`
+	Traffictype        string `json:"traffictype"`
+	Vmwarenetworklabel string `json:"vmwarenetworklabel"`
+	Xennetworklabel    string `json:"xennetworklabel"`
 }
 
 type ListUsageRecordsParams struct {

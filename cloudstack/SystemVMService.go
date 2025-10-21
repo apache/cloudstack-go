@@ -1112,12 +1112,29 @@ type ListSystemVmsUsageHistoryResponse struct {
 }
 
 type SystemVmsUsageHistory struct {
-	Displayname string   `json:"displayname"`
-	Id          string   `json:"id"`
-	JobID       string   `json:"jobid"`
-	Jobstatus   int      `json:"jobstatus"`
-	Name        string   `json:"name"`
-	Stats       []string `json:"stats"`
+	Displayname string                       `json:"displayname"`
+	Id          string                       `json:"id"`
+	JobID       string                       `json:"jobid"`
+	Jobstatus   int                          `json:"jobstatus"`
+	Name        string                       `json:"name"`
+	Stats       []SystemVmsUsageHistoryStats `json:"stats"`
+}
+
+type SystemVmsUsageHistoryStats struct {
+	Cpuused          string `json:"cpuused"`
+	Diskiopstotal    int64  `json:"diskiopstotal"`
+	Diskioread       int64  `json:"diskioread"`
+	Diskiowrite      int64  `json:"diskiowrite"`
+	Diskkbsread      int64  `json:"diskkbsread"`
+	Diskkbswrite     int64  `json:"diskkbswrite"`
+	Memoryintfreekbs int64  `json:"memoryintfreekbs"`
+	Memorykbs        int64  `json:"memorykbs"`
+	Memorytargetkbs  int64  `json:"memorytargetkbs"`
+	Networkkbsread   int64  `json:"networkkbsread"`
+	Networkkbswrite  int64  `json:"networkkbswrite"`
+	Networkread      string `json:"networkread"`
+	Networkwrite     string `json:"networkwrite"`
+	Timestamp        string `json:"timestamp"`
 }
 
 type MigrateSystemVmParams struct {

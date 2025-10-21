@@ -70,19 +70,20 @@ type ListInfrastructureResponse struct {
 }
 
 type Infrastructure struct {
-	Alerts            int    `json:"alerts"`
-	Clusters          int    `json:"clusters"`
-	Cpusockets        int    `json:"cpusockets"`
-	Hosts             int    `json:"hosts"`
-	Ilbvms            int    `json:"ilbvms"`
-	Imagestores       int    `json:"imagestores"`
-	JobID             string `json:"jobid"`
-	Jobstatus         int    `json:"jobstatus"`
-	Managementservers int    `json:"managementservers"`
-	Objectstores      int    `json:"objectstores"`
-	Pods              int    `json:"pods"`
-	Routers           int    `json:"routers"`
-	Storagepools      int    `json:"storagepools"`
-	Systemvms         int    `json:"systemvms"`
-	Zones             int    `json:"zones"`
+	Alerts             int    `json:"alerts"`
+	Backuprepositories int    `json:"backuprepositories"`
+	Clusters           int    `json:"clusters"`
+	Cpusockets         int    `json:"cpusockets"`
+	Hosts              int    `json:"hosts"`
+	Ilbvms             int    `json:"ilbvms"`
+	Imagestores        int    `json:"imagestores"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Managementservers  int    `json:"managementservers"`
+	Objectstores       int    `json:"objectstores"`
+	Pods               int    `json:"pods"`
+	Routers            int    `json:"routers"`
+	Storagepools       int    `json:"storagepools"`
+	Systemvms          int    `json:"systemvms"`
+	Zones              int    `json:"zones"`
 }

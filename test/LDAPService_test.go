@@ -40,9 +40,12 @@ func TestLDAPService(t *testing.T) {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
 		p := client.LDAP.NewAddLdapConfigurationParams("hostname", 0)
-		_, err := client.LDAP.AddLdapConfiguration(p)
+		r, err := client.LDAP.AddLdapConfiguration(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("AddLdapConfiguration", testaddLdapConfiguration)
@@ -51,10 +54,13 @@ func TestLDAPService(t *testing.T) {
 		if _, ok := response["deleteLdapConfiguration"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
 		}
-		p := client.LDAP.NewDeleteLdapConfigurationParams("hostname")
-		_, err := client.LDAP.DeleteLdapConfiguration(p)
+		p := client.LDAP.NewDeleteLdapConfigurationParams()
+		r, err := client.LDAP.DeleteLdapConfiguration(p)
 		if err != nil {
 			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
 		}
 	}
 	t.Run("DeleteLdapConfiguration", testdeleteLdapConfiguration)

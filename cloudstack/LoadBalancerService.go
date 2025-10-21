@@ -123,6 +123,10 @@ func (p *AssignCertToLoadBalancerParams) toURLValues() url.Values {
 	if v, found := p.p["certid"]; found {
 		u.Set("certid", v.(string))
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
 	if v, found := p.p["lbruleid"]; found {
 		u.Set("lbruleid", v.(string))
 	}
@@ -147,6 +151,27 @@ func (p *AssignCertToLoadBalancerParams) GetCertid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["certid"].(string)
+	return value, ok
+}
+
+func (p *AssignCertToLoadBalancerParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *AssignCertToLoadBalancerParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *AssignCertToLoadBalancerParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
 	return value, ok
 }
 
@@ -5913,6 +5938,7 @@ type StopNetScalerVpxResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -6594,6 +6620,10 @@ func (p *UpdateLoadBalancerRuleParams) toURLValues() url.Values {
 	if v, found := p.p["algorithm"]; found {
 		u.Set("algorithm", v.(string))
 	}
+	if v, found := p.p["cidrlist"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("cidrlist", vv)
+	}
 	if v, found := p.p["customid"]; found {
 		u.Set("customid", v.(string))
 	}
@@ -6634,6 +6664,27 @@ func (p *UpdateLoadBalancerRuleParams) GetAlgorithm() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["algorithm"].(string)
+	return value, ok
+}
+
+func (p *UpdateLoadBalancerRuleParams) SetCidrlist(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cidrlist"] = v
+}
+
+func (p *UpdateLoadBalancerRuleParams) ResetCidrlist() {
+	if p.p != nil && p.p["cidrlist"] != nil {
+		delete(p.p, "cidrlist")
+	}
+}
+
+func (p *UpdateLoadBalancerRuleParams) GetCidrlist() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cidrlist"].([]string)
 	return value, ok
 }
 

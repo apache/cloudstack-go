@@ -1102,6 +1102,7 @@ type InternalLoadBalancerVMHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -1250,6 +1251,7 @@ type StartInternalLoadBalancerVMResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -1423,5 +1425,6 @@ type StopInternalLoadBalancerVMResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
