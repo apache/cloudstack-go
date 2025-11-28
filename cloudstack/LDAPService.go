@@ -24,13 +24,14 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type LDAPServiceIface interface {
 	AddLdapConfiguration(p *AddLdapConfigurationParams) (*AddLdapConfigurationResponse, error)
 	NewAddLdapConfigurationParams(hostname string, port int) *AddLdapConfigurationParams
 	DeleteLdapConfiguration(p *DeleteLdapConfigurationParams) (*DeleteLdapConfigurationResponse, error)
-	NewDeleteLdapConfigurationParams(hostname string) *DeleteLdapConfigurationParams
+	NewDeleteLdapConfigurationParams() *DeleteLdapConfigurationParams
 	ImportLdapUsers(p *ImportLdapUsersParams) (*ImportLdapUsersResponse, error)
 	NewImportLdapUsersParams() *ImportLdapUsersParams
 	LdapConfig(p *LdapConfigParams) (*LdapConfigResponse, error)
@@ -43,6 +44,7 @@ type LDAPServiceIface interface {
 	NewLinkDomainToLdapParams(accounttype int, domainid string, lDAPType string) *LinkDomainToLdapParams
 	ListLdapConfigurations(p *ListLdapConfigurationsParams) (*ListLdapConfigurationsResponse, error)
 	NewListLdapConfigurationsParams() *ListLdapConfigurationsParams
+	GetLdapConfigurationByID(id string, opts ...OptionFunc) (*LdapConfiguration, int, error)
 	ListLdapUsers(p *ListLdapUsersParams) (*ListLdapUsersResponse, error)
 	NewListLdapUsersParams() *ListLdapUsersParams
 	SearchLdap(p *SearchLdapParams) (*SearchLdapResponse, error)
@@ -162,6 +164,7 @@ func (s *LDAPService) AddLdapConfiguration(p *AddLdapConfigurationParams) (*AddL
 type AddLdapConfigurationResponse struct {
 	Domainid  string `json:"domainid"`
 	Hostname  string `json:"hostname"`
+	Id        string `json:"id"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Port      int    `json:"port"`
@@ -181,6 +184,9 @@ func (p *DeleteLdapConfigurationParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["hostname"]; found {
 		u.Set("hostname", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
 	}
 	if v, found := p.p["port"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -231,6 +237,27 @@ func (p *DeleteLdapConfigurationParams) GetHostname() (string, bool) {
 	return value, ok
 }
 
+func (p *DeleteLdapConfigurationParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteLdapConfigurationParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteLdapConfigurationParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
 func (p *DeleteLdapConfigurationParams) SetPort(v int) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -254,10 +281,9 @@ func (p *DeleteLdapConfigurationParams) GetPort() (int, bool) {
 
 // You should always use this function to get a new DeleteLdapConfigurationParams instance,
 // as then you are sure you have configured all required params
-func (s *LDAPService) NewDeleteLdapConfigurationParams(hostname string) *DeleteLdapConfigurationParams {
+func (s *LDAPService) NewDeleteLdapConfigurationParams() *DeleteLdapConfigurationParams {
 	p := &DeleteLdapConfigurationParams{}
 	p.p = make(map[string]interface{})
-	p.p["hostname"] = hostname
 	return p
 }
 
@@ -279,6 +305,7 @@ func (s *LDAPService) DeleteLdapConfiguration(p *DeleteLdapConfigurationParams) 
 type DeleteLdapConfigurationResponse struct {
 	Domainid  string `json:"domainid"`
 	Hostname  string `json:"hostname"`
+	Id        string `json:"id"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Port      int    `json:"port"`
@@ -1514,6 +1541,9 @@ func (p *ListLdapConfigurationsParams) toURLValues() url.Values {
 	if v, found := p.p["hostname"]; found {
 		u.Set("hostname", v.(string))
 	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
@@ -1575,6 +1605,27 @@ func (p *ListLdapConfigurationsParams) GetHostname() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["hostname"].(string)
+	return value, ok
+}
+
+func (p *ListLdapConfigurationsParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListLdapConfigurationsParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListLdapConfigurationsParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
 	return value, ok
 }
 
@@ -1691,6 +1742,39 @@ func (s *LDAPService) NewListLdapConfigurationsParams() *ListLdapConfigurationsP
 	return p
 }
 
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *LDAPService) GetLdapConfigurationByID(id string, opts ...OptionFunc) (*LdapConfiguration, int, error) {
+	p := &ListLdapConfigurationsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListLdapConfigurations(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.LdapConfigurations[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for LdapConfiguration UUID: %s!", id)
+}
+
 // Lists all LDAP configurations
 func (s *LDAPService) ListLdapConfigurations(p *ListLdapConfigurationsParams) (*ListLdapConfigurationsResponse, error) {
 	resp, err := s.cs.newRequest("listLdapConfigurations", p.toURLValues())
@@ -1714,6 +1798,7 @@ type ListLdapConfigurationsResponse struct {
 type LdapConfiguration struct {
 	Domainid  string `json:"domainid"`
 	Hostname  string `json:"hostname"`
+	Id        string `json:"id"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Port      int    `json:"port"`

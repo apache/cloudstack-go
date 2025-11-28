@@ -1383,6 +1383,9 @@ func (p *GetUploadParamsForTemplateParams) toURLValues() url.Values {
 	if v, found := p.p["templatetag"]; found {
 		u.Set("templatetag", v.(string))
 	}
+	if v, found := p.p["templatetype"]; found {
+		u.Set("templatetype", v.(string))
+	}
 	if v, found := p.p["zoneid"]; found {
 		u.Set("zoneid", v.(string))
 	}
@@ -1869,6 +1872,27 @@ func (p *GetUploadParamsForTemplateParams) GetTemplatetag() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["templatetag"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForTemplateParams) SetTemplatetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["templatetype"] = v
+}
+
+func (p *GetUploadParamsForTemplateParams) ResetTemplatetype() {
+	if p.p != nil && p.p["templatetype"] != nil {
+		delete(p.p, "templatetype")
+	}
+}
+
+func (p *GetUploadParamsForTemplateParams) GetTemplatetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["templatetype"].(string)
 	return value, ok
 }
 

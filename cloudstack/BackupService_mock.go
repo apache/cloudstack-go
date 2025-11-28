@@ -388,6 +388,27 @@ func (mr *MockBackupServiceIfaceMockRecorder) GetBackupRepositoryID(name any, op
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBackupRepositoryID", reflect.TypeOf((*MockBackupServiceIface)(nil).GetBackupRepositoryID), varargs...)
 }
 
+// GetBackupScheduleByID mocks base method.
+func (m *MockBackupServiceIface) GetBackupScheduleByID(id string, opts ...OptionFunc) (*BackupSchedule, int, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{id}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetBackupScheduleByID", varargs...)
+	ret0, _ := ret[0].(*BackupSchedule)
+	ret1, _ := ret[1].(int)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
+}
+
+// GetBackupScheduleByID indicates an expected call of GetBackupScheduleByID.
+func (mr *MockBackupServiceIfaceMockRecorder) GetBackupScheduleByID(id any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{id}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBackupScheduleByID", reflect.TypeOf((*MockBackupServiceIface)(nil).GetBackupScheduleByID), varargs...)
+}
+
 // ImportBackupOffering mocks base method.
 func (m *MockBackupServiceIface) ImportBackupOffering(p *ImportBackupOfferingParams) (*ImportBackupOfferingResponse, error) {
 	m.ctrl.T.Helper()
@@ -676,17 +697,17 @@ func (mr *MockBackupServiceIfaceMockRecorder) NewListBackupRepositoriesParams() 
 }
 
 // NewListBackupScheduleParams mocks base method.
-func (m *MockBackupServiceIface) NewListBackupScheduleParams(virtualmachineid string) *ListBackupScheduleParams {
+func (m *MockBackupServiceIface) NewListBackupScheduleParams() *ListBackupScheduleParams {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "NewListBackupScheduleParams", virtualmachineid)
+	ret := m.ctrl.Call(m, "NewListBackupScheduleParams")
 	ret0, _ := ret[0].(*ListBackupScheduleParams)
 	return ret0
 }
 
 // NewListBackupScheduleParams indicates an expected call of NewListBackupScheduleParams.
-func (mr *MockBackupServiceIfaceMockRecorder) NewListBackupScheduleParams(virtualmachineid any) *gomock.Call {
+func (mr *MockBackupServiceIfaceMockRecorder) NewListBackupScheduleParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListBackupScheduleParams", reflect.TypeOf((*MockBackupServiceIface)(nil).NewListBackupScheduleParams), virtualmachineid)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListBackupScheduleParams", reflect.TypeOf((*MockBackupServiceIface)(nil).NewListBackupScheduleParams))
 }
 
 // NewListBackupsParams mocks base method.

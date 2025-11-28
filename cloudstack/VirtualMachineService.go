@@ -11455,12 +11455,29 @@ type ListVirtualMachinesUsageHistoryResponse struct {
 }
 
 type VirtualMachinesUsageHistory struct {
-	Displayname string   `json:"displayname"`
-	Id          string   `json:"id"`
-	JobID       string   `json:"jobid"`
-	Jobstatus   int      `json:"jobstatus"`
-	Name        string   `json:"name"`
-	Stats       []string `json:"stats"`
+	Displayname string                             `json:"displayname"`
+	Id          string                             `json:"id"`
+	JobID       string                             `json:"jobid"`
+	Jobstatus   int                                `json:"jobstatus"`
+	Name        string                             `json:"name"`
+	Stats       []VirtualMachinesUsageHistoryStats `json:"stats"`
+}
+
+type VirtualMachinesUsageHistoryStats struct {
+	Cpuused          string `json:"cpuused"`
+	Diskiopstotal    int64  `json:"diskiopstotal"`
+	Diskioread       int64  `json:"diskioread"`
+	Diskiowrite      int64  `json:"diskiowrite"`
+	Diskkbsread      int64  `json:"diskkbsread"`
+	Diskkbswrite     int64  `json:"diskkbswrite"`
+	Memoryintfreekbs int64  `json:"memoryintfreekbs"`
+	Memorykbs        int64  `json:"memorykbs"`
+	Memorytargetkbs  int64  `json:"memorytargetkbs"`
+	Networkkbsread   int64  `json:"networkkbsread"`
+	Networkkbswrite  int64  `json:"networkkbswrite"`
+	Networkread      string `json:"networkread"`
+	Networkwrite     string `json:"networkwrite"`
+	Timestamp        string `json:"timestamp"`
 }
 
 type ImportVmParams struct {
@@ -11515,6 +11532,13 @@ func (p *ImportVmParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["existingvcenterid"]; found {
 		u.Set("existingvcenterid", v.(string))
+	}
+	if v, found := p.p["extraparams"]; found {
+		u.Set("extraparams", v.(string))
+	}
+	if v, found := p.p["forceconverttopool"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forceconverttopool", vv)
 	}
 	if v, found := p.p["forced"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -11863,6 +11887,48 @@ func (p *ImportVmParams) GetExistingvcenterid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["existingvcenterid"].(string)
+	return value, ok
+}
+
+func (p *ImportVmParams) SetExtraparams(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extraparams"] = v
+}
+
+func (p *ImportVmParams) ResetExtraparams() {
+	if p.p != nil && p.p["extraparams"] != nil {
+		delete(p.p, "extraparams")
+	}
+}
+
+func (p *ImportVmParams) GetExtraparams() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extraparams"].(string)
+	return value, ok
+}
+
+func (p *ImportVmParams) SetForceconverttopool(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forceconverttopool"] = v
+}
+
+func (p *ImportVmParams) ResetForceconverttopool() {
+	if p.p != nil && p.p["forceconverttopool"] != nil {
+		delete(p.p, "forceconverttopool")
+	}
+}
+
+func (p *ImportVmParams) GetForceconverttopool() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceconverttopool"].(bool)
 	return value, ok
 }
 
@@ -12602,10 +12668,59 @@ func (p *UnmanageVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *UnmanageVirtualMachineParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *UnmanageVirtualMachineParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *UnmanageVirtualMachineParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *UnmanageVirtualMachineParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *UnmanageVirtualMachineParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *UnmanageVirtualMachineParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *UnmanageVirtualMachineParams) SetId(v string) {
@@ -12675,6 +12790,7 @@ func (s *VirtualMachineService) UnmanageVirtualMachine(p *UnmanageVirtualMachine
 
 type UnmanageVirtualMachineResponse struct {
 	Details   string `json:"details"`
+	Hostid    string `json:"hostid"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Success   bool   `json:"success"`

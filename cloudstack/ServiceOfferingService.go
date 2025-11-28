@@ -2353,6 +2353,10 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["cleanupexternaldetails"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("cleanupexternaldetails", vv)
+	}
 	if v, found := p.p["displaytext"]; found {
 		u.Set("displaytext", v.(string))
 	}
@@ -2393,6 +2397,27 @@ func (p *UpdateServiceOfferingParams) toURLValues() url.Values {
 		u.Set("zoneid", v.(string))
 	}
 	return u
+}
+
+func (p *UpdateServiceOfferingParams) SetCleanupexternaldetails(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["cleanupexternaldetails"] = v
+}
+
+func (p *UpdateServiceOfferingParams) ResetCleanupexternaldetails() {
+	if p.p != nil && p.p["cleanupexternaldetails"] != nil {
+		delete(p.p, "cleanupexternaldetails")
+	}
+}
+
+func (p *UpdateServiceOfferingParams) GetCleanupexternaldetails() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["cleanupexternaldetails"].(bool)
+	return value, ok
 }
 
 func (p *UpdateServiceOfferingParams) SetDisplaytext(v string) {

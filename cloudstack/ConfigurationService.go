@@ -93,6 +93,7 @@ type ListCapabilitiesResponse struct {
 }
 
 type Capability struct {
+	Additionalconfigenabled                      bool   `json:"additionalconfigenabled"`
 	Allowusercreateprojects                      bool   `json:"allowusercreateprojects"`
 	Allowuserexpungerecovervm                    bool   `json:"allowuserexpungerecovervm"`
 	Allowuserexpungerecovervolume                bool   `json:"allowuserexpungerecovervolume"`
@@ -1336,6 +1337,7 @@ func (s *ConfigurationService) UpdateStorageCapabilities(p *UpdateStorageCapabil
 
 type UpdateStorageCapabilitiesResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`

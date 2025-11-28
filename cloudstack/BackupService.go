@@ -62,7 +62,8 @@ type BackupServiceIface interface {
 	GetBackupRepositoryByName(name string, opts ...OptionFunc) (*BackupRepository, int, error)
 	GetBackupRepositoryByID(id string, opts ...OptionFunc) (*BackupRepository, int, error)
 	ListBackupSchedule(p *ListBackupScheduleParams) (*ListBackupScheduleResponse, error)
-	NewListBackupScheduleParams(virtualmachineid string) *ListBackupScheduleParams
+	NewListBackupScheduleParams() *ListBackupScheduleParams
+	GetBackupScheduleByID(id string, opts ...OptionFunc) (*BackupSchedule, int, error)
 	ListBackups(p *ListBackupsParams) (*ListBackupsResponse, error)
 	NewListBackupsParams() *ListBackupsParams
 	GetBackupID(name string, opts ...OptionFunc) (string, int, error)
@@ -91,6 +92,10 @@ func (p *AddBackupRepositoryParams) toURLValues() url.Values {
 	if v, found := p.p["capacitybytes"]; found {
 		vv := strconv.FormatInt(v.(int64), 10)
 		u.Set("capacitybytes", vv)
+	}
+	if v, found := p.p["crosszoneinstancecreation"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("crosszoneinstancecreation", vv)
 	}
 	if v, found := p.p["mountopts"]; found {
 		u.Set("mountopts", v.(string))
@@ -149,6 +154,27 @@ func (p *AddBackupRepositoryParams) GetCapacitybytes() (int64, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["capacitybytes"].(int64)
+	return value, ok
+}
+
+func (p *AddBackupRepositoryParams) SetCrosszoneinstancecreation(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["crosszoneinstancecreation"] = v
+}
+
+func (p *AddBackupRepositoryParams) ResetCrosszoneinstancecreation() {
+	if p.p != nil && p.p["crosszoneinstancecreation"] != nil {
+		delete(p.p, "crosszoneinstancecreation")
+	}
+}
+
+func (p *AddBackupRepositoryParams) GetCrosszoneinstancecreation() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["crosszoneinstancecreation"].(bool)
 	return value, ok
 }
 
@@ -285,17 +311,18 @@ func (s *BackupService) AddBackupRepository(p *AddBackupRepositoryParams) (*AddB
 }
 
 type AddBackupRepositoryResponse struct {
-	Address       string `json:"address"`
-	Capacitybytes int64  `json:"capacitybytes"`
-	Created       string `json:"created"`
-	Id            string `json:"id"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Name          string `json:"name"`
-	Provider      string `json:"provider"`
-	Type          string `json:"type"`
-	Zoneid        string `json:"zoneid"`
-	Zonename      string `json:"zonename"`
+	Address                   string `json:"address"`
+	Capacitybytes             int64  `json:"capacitybytes"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Type                      string `json:"type"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type CreateBackupParams struct {
@@ -650,6 +677,7 @@ type CreateBackupScheduleResponse struct {
 	Externalid              string            `json:"externalid"`
 	Id                      string            `json:"id"`
 	Intervaltype            string            `json:"intervaltype"`
+	Isbackupvmexpunged      bool              `json:"isbackupvmexpunged"`
 	JobID                   string            `json:"jobid"`
 	Jobstatus               int               `json:"jobstatus"`
 	Name                    string            `json:"name"`
@@ -2943,17 +2971,18 @@ func (s *BackupService) ImportBackupOffering(p *ImportBackupOfferingParams) (*Im
 }
 
 type ImportBackupOfferingResponse struct {
-	Allowuserdrivenbackups bool   `json:"allowuserdrivenbackups"`
-	Created                string `json:"created"`
-	Description            string `json:"description"`
-	Externalid             string `json:"externalid"`
-	Id                     string `json:"id"`
-	JobID                  string `json:"jobid"`
-	Jobstatus              int    `json:"jobstatus"`
-	Name                   string `json:"name"`
-	Provider               string `json:"provider"`
-	Zoneid                 string `json:"zoneid"`
-	Zonename               string `json:"zonename"`
+	Allowuserdrivenbackups    bool   `json:"allowuserdrivenbackups"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Description               string `json:"description"`
+	Externalid                string `json:"externalid"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type ListBackupOfferingsParams struct {
@@ -3202,17 +3231,18 @@ type ListBackupOfferingsResponse struct {
 }
 
 type BackupOffering struct {
-	Allowuserdrivenbackups bool   `json:"allowuserdrivenbackups"`
-	Created                string `json:"created"`
-	Description            string `json:"description"`
-	Externalid             string `json:"externalid"`
-	Id                     string `json:"id"`
-	JobID                  string `json:"jobid"`
-	Jobstatus              int    `json:"jobstatus"`
-	Name                   string `json:"name"`
-	Provider               string `json:"provider"`
-	Zoneid                 string `json:"zoneid"`
-	Zonename               string `json:"zonename"`
+	Allowuserdrivenbackups    bool   `json:"allowuserdrivenbackups"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Description               string `json:"description"`
+	Externalid                string `json:"externalid"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type ListBackupProviderOfferingsParams struct {
@@ -3392,17 +3422,18 @@ type ListBackupProviderOfferingsResponse struct {
 }
 
 type BackupProviderOffering struct {
-	Allowuserdrivenbackups bool   `json:"allowuserdrivenbackups"`
-	Created                string `json:"created"`
-	Description            string `json:"description"`
-	Externalid             string `json:"externalid"`
-	Id                     string `json:"id"`
-	JobID                  string `json:"jobid"`
-	Jobstatus              int    `json:"jobstatus"`
-	Name                   string `json:"name"`
-	Provider               string `json:"provider"`
-	Zoneid                 string `json:"zoneid"`
-	Zonename               string `json:"zonename"`
+	Allowuserdrivenbackups    bool   `json:"allowuserdrivenbackups"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Description               string `json:"description"`
+	Externalid                string `json:"externalid"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type ListBackupProvidersParams struct {
@@ -3770,17 +3801,18 @@ type ListBackupRepositoriesResponse struct {
 }
 
 type BackupRepository struct {
-	Address       string `json:"address"`
-	Capacitybytes int64  `json:"capacitybytes"`
-	Created       string `json:"created"`
-	Id            string `json:"id"`
-	JobID         string `json:"jobid"`
-	Jobstatus     int    `json:"jobstatus"`
-	Name          string `json:"name"`
-	Provider      string `json:"provider"`
-	Type          string `json:"type"`
-	Zoneid        string `json:"zoneid"`
-	Zonename      string `json:"zonename"`
+	Address                   string `json:"address"`
+	Capacitybytes             int64  `json:"capacitybytes"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Type                      string `json:"type"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type ListBackupScheduleParams struct {
@@ -3792,10 +3824,230 @@ func (p *ListBackupScheduleParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
 	}
 	return u
+}
+
+func (p *ListBackupScheduleParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListBackupScheduleParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListBackupScheduleParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ListBackupScheduleParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
 }
 
 func (p *ListBackupScheduleParams) SetVirtualmachineid(v string) {
@@ -3821,11 +4073,43 @@ func (p *ListBackupScheduleParams) GetVirtualmachineid() (string, bool) {
 
 // You should always use this function to get a new ListBackupScheduleParams instance,
 // as then you are sure you have configured all required params
-func (s *BackupService) NewListBackupScheduleParams(virtualmachineid string) *ListBackupScheduleParams {
+func (s *BackupService) NewListBackupScheduleParams() *ListBackupScheduleParams {
 	p := &ListBackupScheduleParams{}
 	p.p = make(map[string]interface{})
-	p.p["virtualmachineid"] = virtualmachineid
 	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *BackupService) GetBackupScheduleByID(id string, opts ...OptionFunc) (*BackupSchedule, int, error) {
+	p := &ListBackupScheduleParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["id"] = id
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return nil, -1, err
+		}
+	}
+
+	l, err := s.ListBackupSchedule(p)
+	if err != nil {
+		if strings.Contains(err.Error(), fmt.Sprintf(
+			"Invalid parameter id value=%s due to incorrect long value format, "+
+				"or entity does not exist", id)) {
+			return nil, 0, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
+		return nil, -1, err
+	}
+
+	if l.Count == 0 {
+		return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+	}
+
+	if l.Count == 1 {
+		return l.BackupSchedule[0], l.Count, nil
+	}
+	return nil, l.Count, fmt.Errorf("There is more then one result for BackupSchedule UUID: %s!", id)
 }
 
 // List backup schedule of a VM
@@ -4337,6 +4621,7 @@ type Backup struct {
 	Externalid              string            `json:"externalid"`
 	Id                      string            `json:"id"`
 	Intervaltype            string            `json:"intervaltype"`
+	Isbackupvmexpunged      bool              `json:"isbackupvmexpunged"`
 	JobID                   string            `json:"jobid"`
 	Jobstatus               int               `json:"jobstatus"`
 	Name                    string            `json:"name"`
@@ -4569,17 +4854,18 @@ func (s *BackupService) UpdateBackupOffering(p *UpdateBackupOfferingParams) (*Up
 }
 
 type UpdateBackupOfferingResponse struct {
-	Allowuserdrivenbackups bool   `json:"allowuserdrivenbackups"`
-	Created                string `json:"created"`
-	Description            string `json:"description"`
-	Externalid             string `json:"externalid"`
-	Id                     string `json:"id"`
-	JobID                  string `json:"jobid"`
-	Jobstatus              int    `json:"jobstatus"`
-	Name                   string `json:"name"`
-	Provider               string `json:"provider"`
-	Zoneid                 string `json:"zoneid"`
-	Zonename               string `json:"zonename"`
+	Allowuserdrivenbackups    bool   `json:"allowuserdrivenbackups"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Description               string `json:"description"`
+	Externalid                string `json:"externalid"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type UpdateBackupScheduleParams struct {
@@ -4779,6 +5065,7 @@ type UpdateBackupScheduleResponse struct {
 	Externalid              string            `json:"externalid"`
 	Id                      string            `json:"id"`
 	Intervaltype            string            `json:"intervaltype"`
+	Isbackupvmexpunged      bool              `json:"isbackupvmexpunged"`
 	JobID                   string            `json:"jobid"`
 	Jobstatus               int               `json:"jobstatus"`
 	Name                    string            `json:"name"`
