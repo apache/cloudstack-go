@@ -505,5 +505,67 @@
       "completed": "2021-10-13T04:54:56+0000",
       "jobid": "f9a9af61-47ea-4fb7-acc9-93ea50f12042"
     }
+  },
+  "listVirtualMachinesUsageHistory": {
+    "listvirtualmachinesusagehistoryresponse": {
+      "count": 1,
+      "virtualmachine": [
+        {
+          "id": "4f6d7879-8e9d-40cb-9390-28924a31df78",
+          "name": "i-5-39-VM",
+          "displayname": "ubuntu-01",
+          "stats": [
+            {
+              "timestamp": "2024-12-31T17:54:37+0600",
+              "cpuused": "55.56%",
+              "diskioread": 0,
+              "diskiowrite": 0,
+              "diskiopstotal": 0,
+              "diskkbsread": 0,
+              "diskkbswrite": 0,
+              "memoryintfreekbs": 182168,
+              "memorykbs": 1048576,
+              "memorytargetkbs": 1048576,
+              "networkkbsread": 0,
+              "networkkbswrite": 0,
+              "networkread": "0.00 MiB",
+              "networkwrite": "0.00 MiB"
+            },
+            {
+              "timestamp": "2024-12-31T17:54:37+0600",
+              "cpuused": "0.2%",
+              "diskioread": 0,
+              "diskiowrite": 0,
+              "diskiopstotal": 0,
+              "diskkbsread": 0,
+              "diskkbswrite": 0,
+              "memoryintfreekbs": 182168,
+              "memorykbs": 1048576,
+              "memorytargetkbs": 1048576,
+              "networkkbsread": 0,
+              "networkkbswrite": 0,
+              "networkread": "0.00 MiB",
+              "networkwrite": "0.00 MiB"
+            },
+            {
+              "timestamp": "2024-12-31T17:54:37+0600",
+              "cpuused": "11.43%",
+              "diskioread": 0,
+              "diskiowrite": 0,
+              "diskiopstotal": 0,
+              "diskkbsread": 0,
+              "diskkbswrite": 0,
+              "memoryintfreekbs": 182168,
+              "memorykbs": 1048576,
+              "memorytargetkbs": 1048576,
+              "networkkbsread": 0,
+              "networkkbswrite": 0,
+              "networkread": "0.00 MiB",
+              "networkwrite": "0.00 MiB"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

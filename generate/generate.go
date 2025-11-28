@@ -2076,6 +2076,9 @@ func (s *service) generateResponseType(a *API) {
 		case "listSecondaryStorageSelectors":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "heuristics")
+		case "listVirtualMachinesUsageHistory":
+			pn("    Count                       int                            `json:\"count\"`")
+			pn("    VirtualMachinesUsageHistory []*VirtualMachinesUsageHistory `json:\"virtualmachine\"`")
 		case "listHostHAResources":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hostha")
