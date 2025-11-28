@@ -440,6 +440,18 @@ func TestVirtualMachineService(t *testing.T) {
 	}
 	t.Run("ImportUnmanagedInstance", testimportUnmanagedInstance)
 
+	testlistImportVmTasks := func(t *testing.T) {
+		if _, ok := response["listImportVmTasks"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.VirtualMachine.NewListImportVmTasksParams("zoneid")
+		_, err := client.VirtualMachine.ListImportVmTasks(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListImportVmTasks", testlistImportVmTasks)
+
 	testcreateVMSchedule := func(t *testing.T) {
 		if _, ok := response["createVMSchedule"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")

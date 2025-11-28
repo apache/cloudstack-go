@@ -752,6 +752,20 @@ func (mr *MockBackupServiceIfaceMockRecorder) NewUpdateBackupOfferingParams(id a
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateBackupOfferingParams", reflect.TypeOf((*MockBackupServiceIface)(nil).NewUpdateBackupOfferingParams), id)
 }
 
+// NewUpdateBackupRepositoryParams mocks base method.
+func (m *MockBackupServiceIface) NewUpdateBackupRepositoryParams(id string) *UpdateBackupRepositoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateBackupRepositoryParams", id)
+	ret0, _ := ret[0].(*UpdateBackupRepositoryParams)
+	return ret0
+}
+
+// NewUpdateBackupRepositoryParams indicates an expected call of NewUpdateBackupRepositoryParams.
+func (mr *MockBackupServiceIfaceMockRecorder) NewUpdateBackupRepositoryParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateBackupRepositoryParams", reflect.TypeOf((*MockBackupServiceIface)(nil).NewUpdateBackupRepositoryParams), id)
+}
+
 // NewUpdateBackupScheduleParams mocks base method.
 func (m *MockBackupServiceIface) NewUpdateBackupScheduleParams(intervaltype, schedule, timezone, virtualmachineid string) *UpdateBackupScheduleParams {
 	m.ctrl.T.Helper()
@@ -794,6 +808,21 @@ func (m *MockBackupServiceIface) UpdateBackupOffering(p *UpdateBackupOfferingPar
 func (mr *MockBackupServiceIfaceMockRecorder) UpdateBackupOffering(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBackupOffering", reflect.TypeOf((*MockBackupServiceIface)(nil).UpdateBackupOffering), p)
+}
+
+// UpdateBackupRepository mocks base method.
+func (m *MockBackupServiceIface) UpdateBackupRepository(p *UpdateBackupRepositoryParams) (*UpdateBackupRepositoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateBackupRepository", p)
+	ret0, _ := ret[0].(*UpdateBackupRepositoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateBackupRepository indicates an expected call of UpdateBackupRepository.
+func (mr *MockBackupServiceIfaceMockRecorder) UpdateBackupRepository(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateBackupRepository", reflect.TypeOf((*MockBackupServiceIface)(nil).UpdateBackupRepository), p)
 }
 
 // UpdateBackupSchedule mocks base method.

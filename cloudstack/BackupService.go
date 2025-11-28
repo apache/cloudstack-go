@@ -71,6 +71,8 @@ type BackupServiceIface interface {
 	GetBackupByID(id string, opts ...OptionFunc) (*Backup, int, error)
 	RestoreBackup(p *RestoreBackupParams) (*RestoreBackupResponse, error)
 	NewRestoreBackupParams(id string) *RestoreBackupParams
+	UpdateBackupRepository(p *UpdateBackupRepositoryParams) (*UpdateBackupRepositoryResponse, error)
+	NewUpdateBackupRepositoryParams(id string) *UpdateBackupRepositoryParams
 	UpdateBackupOffering(p *UpdateBackupOfferingParams) (*UpdateBackupOfferingResponse, error)
 	NewUpdateBackupOfferingParams(id string) *UpdateBackupOfferingParams
 	UpdateBackupSchedule(p *UpdateBackupScheduleParams) (*UpdateBackupScheduleResponse, error)
@@ -4718,6 +4720,178 @@ type RestoreBackupResponse struct {
 	JobID       string `json:"jobid"`
 	Jobstatus   int    `json:"jobstatus"`
 	Success     bool   `json:"success"`
+}
+
+type UpdateBackupRepositoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateBackupRepositoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["address"]; found {
+		u.Set("address", v.(string))
+	}
+	if v, found := p.p["crosszoneinstancecreation"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("crosszoneinstancecreation", vv)
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["mountopts"]; found {
+		u.Set("mountopts", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	return u
+}
+
+func (p *UpdateBackupRepositoryParams) SetAddress(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["address"] = v
+}
+
+func (p *UpdateBackupRepositoryParams) ResetAddress() {
+	if p.p != nil && p.p["address"] != nil {
+		delete(p.p, "address")
+	}
+}
+
+func (p *UpdateBackupRepositoryParams) GetAddress() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["address"].(string)
+	return value, ok
+}
+
+func (p *UpdateBackupRepositoryParams) SetCrosszoneinstancecreation(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["crosszoneinstancecreation"] = v
+}
+
+func (p *UpdateBackupRepositoryParams) ResetCrosszoneinstancecreation() {
+	if p.p != nil && p.p["crosszoneinstancecreation"] != nil {
+		delete(p.p, "crosszoneinstancecreation")
+	}
+}
+
+func (p *UpdateBackupRepositoryParams) GetCrosszoneinstancecreation() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["crosszoneinstancecreation"].(bool)
+	return value, ok
+}
+
+func (p *UpdateBackupRepositoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateBackupRepositoryParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateBackupRepositoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateBackupRepositoryParams) SetMountopts(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["mountopts"] = v
+}
+
+func (p *UpdateBackupRepositoryParams) ResetMountopts() {
+	if p.p != nil && p.p["mountopts"] != nil {
+		delete(p.p, "mountopts")
+	}
+}
+
+func (p *UpdateBackupRepositoryParams) GetMountopts() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["mountopts"].(string)
+	return value, ok
+}
+
+func (p *UpdateBackupRepositoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateBackupRepositoryParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *UpdateBackupRepositoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateBackupRepositoryParams instance,
+// as then you are sure you have configured all required params
+func (s *BackupService) NewUpdateBackupRepositoryParams(id string) *UpdateBackupRepositoryParams {
+	p := &UpdateBackupRepositoryParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Update a backup repository
+func (s *BackupService) UpdateBackupRepository(p *UpdateBackupRepositoryParams) (*UpdateBackupRepositoryResponse, error) {
+	resp, err := s.cs.newPostRequest("updateBackupRepository", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r UpdateBackupRepositoryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type UpdateBackupRepositoryResponse struct {
+	Address                   string `json:"address"`
+	Capacitybytes             int64  `json:"capacitybytes"`
+	Created                   string `json:"created"`
+	Crosszoneinstancecreation bool   `json:"crosszoneinstancecreation"`
+	Id                        string `json:"id"`
+	JobID                     string `json:"jobid"`
+	Jobstatus                 int    `json:"jobstatus"`
+	Name                      string `json:"name"`
+	Provider                  string `json:"provider"`
+	Type                      string `json:"type"`
+	Zoneid                    string `json:"zoneid"`
+	Zonename                  string `json:"zonename"`
 }
 
 type UpdateBackupOfferingParams struct {

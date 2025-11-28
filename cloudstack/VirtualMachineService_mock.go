@@ -463,6 +463,21 @@ func (mr *MockVirtualMachineServiceIfaceMockRecorder) ImportVm(p any) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ImportVm", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ImportVm), p)
 }
 
+// ListImportVmTasks mocks base method.
+func (m *MockVirtualMachineServiceIface) ListImportVmTasks(p *ListImportVmTasksParams) (*ListImportVmTasksResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListImportVmTasks", p)
+	ret0, _ := ret[0].(*ListImportVmTasksResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListImportVmTasks indicates an expected call of ListImportVmTasks.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) ListImportVmTasks(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListImportVmTasks", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).ListImportVmTasks), p)
+}
+
 // ListUnmanagedInstances mocks base method.
 func (m *MockVirtualMachineServiceIface) ListUnmanagedInstances(p *ListUnmanagedInstancesParams) (*ListUnmanagedInstancesResponse, error) {
 	m.ctrl.T.Helper()
@@ -763,6 +778,20 @@ func (m *MockVirtualMachineServiceIface) NewImportVmParams(clusterid, hypervisor
 func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewImportVmParams(clusterid, hypervisor, importsource, name, serviceofferingid, zoneid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewImportVmParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewImportVmParams), clusterid, hypervisor, importsource, name, serviceofferingid, zoneid)
+}
+
+// NewListImportVmTasksParams mocks base method.
+func (m *MockVirtualMachineServiceIface) NewListImportVmTasksParams(zoneid string) *ListImportVmTasksParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewListImportVmTasksParams", zoneid)
+	ret0, _ := ret[0].(*ListImportVmTasksParams)
+	return ret0
+}
+
+// NewListImportVmTasksParams indicates an expected call of NewListImportVmTasksParams.
+func (mr *MockVirtualMachineServiceIfaceMockRecorder) NewListImportVmTasksParams(zoneid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListImportVmTasksParams", reflect.TypeOf((*MockVirtualMachineServiceIface)(nil).NewListImportVmTasksParams), zoneid)
 }
 
 // NewListUnmanagedInstancesParams mocks base method.
