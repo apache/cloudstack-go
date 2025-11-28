@@ -1380,6 +1380,8 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 					pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
 				}
 			}
+		case "userdatadetails":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
 		case "serviceproviderlist":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].service\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].provider\", i), m[k])", name)

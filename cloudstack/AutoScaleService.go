@@ -651,8 +651,7 @@ func (p *CreateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["userdatadetails"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+			u.Set(fmt.Sprintf("userdatadetails[%d].%s", i, k), m[k])
 		}
 	}
 	if v, found := p.p["userdataid"]; found {
@@ -4709,8 +4708,7 @@ func (p *UpdateAutoScaleVmProfileParams) toURLValues() url.Values {
 	if v, found := p.p["userdatadetails"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("userdatadetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("userdatadetails[%d].value", i), m[k])
+			u.Set(fmt.Sprintf("userdatadetails[%d].%s", i, k), m[k])
 		}
 	}
 	if v, found := p.p["userdataid"]; found {
