@@ -142,6 +142,7 @@ func (s *StoragePoolService) CancelStorageMaintenance(p *CancelStorageMaintenanc
 
 type CancelStorageMaintenanceResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -391,6 +392,7 @@ func (s *StoragePoolService) EnableStorageMaintenance(p *EnableStorageMaintenanc
 
 type EnableStorageMaintenanceResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -2215,6 +2217,7 @@ type ListStoragePoolsMetricsResponse struct {
 
 type StoragePoolsMetric struct {
 	Allocatediops                    int64             `json:"allocatediops"`
+	Capacitybytes                    int64             `json:"capacitybytes"`
 	Capacityiops                     int64             `json:"capacityiops"`
 	Clusterid                        string            `json:"clusterid"`
 	Clustername                      string            `json:"clustername"`

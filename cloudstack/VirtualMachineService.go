@@ -95,6 +95,8 @@ type VirtualMachineServiceIface interface {
 	NewListUnmanagedInstancesParams(clusterid string) *ListUnmanagedInstancesParams
 	ImportUnmanagedInstance(p *ImportUnmanagedInstanceParams) (*ImportUnmanagedInstanceResponse, error)
 	NewImportUnmanagedInstanceParams(clusterid string, name string, serviceofferingid string) *ImportUnmanagedInstanceParams
+	ListImportVmTasks(p *ListImportVmTasksParams) (*ListImportVmTasksResponse, error)
+	NewListImportVmTasksParams(zoneid string) *ListImportVmTasksParams
 	CreateVMSchedule(p *CreateVMScheduleParams) (*CreateVMScheduleResponse, error)
 	NewCreateVMScheduleParams(action string, schedule string, timezone string, virtualmachineid string) *CreateVMScheduleParams
 	UpdateVMSchedule(p *UpdateVMScheduleParams) (*UpdateVMScheduleResponse, error)
@@ -11455,12 +11457,29 @@ type ListVirtualMachinesUsageHistoryResponse struct {
 }
 
 type VirtualMachinesUsageHistory struct {
-	Displayname string   `json:"displayname"`
-	Id          string   `json:"id"`
-	JobID       string   `json:"jobid"`
-	Jobstatus   int      `json:"jobstatus"`
-	Name        string   `json:"name"`
-	Stats       []string `json:"stats"`
+	Displayname string                             `json:"displayname"`
+	Id          string                             `json:"id"`
+	JobID       string                             `json:"jobid"`
+	Jobstatus   int                                `json:"jobstatus"`
+	Name        string                             `json:"name"`
+	Stats       []VirtualMachinesUsageHistoryStats `json:"stats"`
+}
+
+type VirtualMachinesUsageHistoryStats struct {
+	Cpuused          string `json:"cpuused"`
+	Diskiopstotal    int64  `json:"diskiopstotal"`
+	Diskioread       int64  `json:"diskioread"`
+	Diskiowrite      int64  `json:"diskiowrite"`
+	Diskkbsread      int64  `json:"diskkbsread"`
+	Diskkbswrite     int64  `json:"diskkbswrite"`
+	Memoryintfreekbs int64  `json:"memoryintfreekbs"`
+	Memorykbs        int64  `json:"memorykbs"`
+	Memorytargetkbs  int64  `json:"memorytargetkbs"`
+	Networkkbsread   int64  `json:"networkkbsread"`
+	Networkkbswrite  int64  `json:"networkkbswrite"`
+	Networkread      string `json:"networkread"`
+	Networkwrite     string `json:"networkwrite"`
+	Timestamp        string `json:"timestamp"`
 }
 
 type ImportVmParams struct {
@@ -11515,6 +11534,13 @@ func (p *ImportVmParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["existingvcenterid"]; found {
 		u.Set("existingvcenterid", v.(string))
+	}
+	if v, found := p.p["extraparams"]; found {
+		u.Set("extraparams", v.(string))
+	}
+	if v, found := p.p["forceconverttopool"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forceconverttopool", vv)
 	}
 	if v, found := p.p["forced"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -11863,6 +11889,48 @@ func (p *ImportVmParams) GetExistingvcenterid() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["existingvcenterid"].(string)
+	return value, ok
+}
+
+func (p *ImportVmParams) SetExtraparams(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["extraparams"] = v
+}
+
+func (p *ImportVmParams) ResetExtraparams() {
+	if p.p != nil && p.p["extraparams"] != nil {
+		delete(p.p, "extraparams")
+	}
+}
+
+func (p *ImportVmParams) GetExtraparams() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["extraparams"].(string)
+	return value, ok
+}
+
+func (p *ImportVmParams) SetForceconverttopool(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forceconverttopool"] = v
+}
+
+func (p *ImportVmParams) ResetForceconverttopool() {
+	if p.p != nil && p.p["forceconverttopool"] != nil {
+		delete(p.p, "forceconverttopool")
+	}
+}
+
+func (p *ImportVmParams) GetForceconverttopool() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forceconverttopool"].(bool)
 	return value, ok
 }
 
@@ -12602,10 +12670,59 @@ func (p *UnmanageVirtualMachineParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
 	return u
+}
+
+func (p *UnmanageVirtualMachineParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *UnmanageVirtualMachineParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *UnmanageVirtualMachineParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *UnmanageVirtualMachineParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *UnmanageVirtualMachineParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *UnmanageVirtualMachineParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
 }
 
 func (p *UnmanageVirtualMachineParams) SetId(v string) {
@@ -12675,6 +12792,7 @@ func (s *VirtualMachineService) UnmanageVirtualMachine(p *UnmanageVirtualMachine
 
 type UnmanageVirtualMachineResponse struct {
 	Details   string `json:"details"`
+	Hostid    string `json:"hostid"`
 	JobID     string `json:"jobid"`
 	Jobstatus int    `json:"jobstatus"`
 	Success   bool   `json:"success"`
@@ -13492,6 +13610,265 @@ func (r *ImportUnmanagedInstanceResponse) UnmarshalJSON(b []byte) error {
 
 	type alias ImportUnmanagedInstanceResponse
 	return json.Unmarshal(b, (*alias)(r))
+}
+
+type ListImportVmTasksParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListImportVmTasksParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["accountid"]; found {
+		u.Set("accountid", v.(string))
+	}
+	if v, found := p.p["convertinstancehostid"]; found {
+		u.Set("convertinstancehostid", v.(string))
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	if v, found := p.p["tasksfilter"]; found {
+		u.Set("tasksfilter", v.(string))
+	}
+	if v, found := p.p["vcenter"]; found {
+		u.Set("vcenter", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ListImportVmTasksParams) SetAccountid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["accountid"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetAccountid() {
+	if p.p != nil && p.p["accountid"] != nil {
+		delete(p.p, "accountid")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetAccountid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["accountid"].(string)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetConvertinstancehostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["convertinstancehostid"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetConvertinstancehostid() {
+	if p.p != nil && p.p["convertinstancehostid"] != nil {
+		delete(p.p, "convertinstancehostid")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetConvertinstancehostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["convertinstancehostid"].(string)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetTasksfilter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["tasksfilter"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetTasksfilter() {
+	if p.p != nil && p.p["tasksfilter"] != nil {
+		delete(p.p, "tasksfilter")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetTasksfilter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["tasksfilter"].(string)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetVcenter(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["vcenter"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetVcenter() {
+	if p.p != nil && p.p["vcenter"] != nil {
+		delete(p.p, "vcenter")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetVcenter() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["vcenter"].(string)
+	return value, ok
+}
+
+func (p *ListImportVmTasksParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ListImportVmTasksParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ListImportVmTasksParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ListImportVmTasksParams instance,
+// as then you are sure you have configured all required params
+func (s *VirtualMachineService) NewListImportVmTasksParams(zoneid string) *ListImportVmTasksParams {
+	p := &ListImportVmTasksParams{}
+	p.p = make(map[string]interface{})
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// List running import virtual machine tasks from a unmanaged hosts into CloudStack
+func (s *VirtualMachineService) ListImportVmTasks(p *ListImportVmTasksParams) (*ListImportVmTasksResponse, error) {
+	resp, err := s.cs.newRequest("listImportVmTasks", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListImportVmTasksResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListImportVmTasksResponse struct {
+	Count         int             `json:"count"`
+	ImportVmTasks []*ImportVmTask `json:"importvmtask"`
+}
+
+type ImportVmTask struct {
+	Account                 string `json:"account"`
+	Accountid               string `json:"accountid"`
+	Convertinstancehostid   string `json:"convertinstancehostid"`
+	Convertinstancehostname string `json:"convertinstancehostname"`
+	Created                 string `json:"created"`
+	Datacentername          string `json:"datacentername"`
+	Description             string `json:"description"`
+	Displayname             string `json:"displayname"`
+	Duration                string `json:"duration"`
+	Id                      string `json:"id"`
+	JobID                   string `json:"jobid"`
+	Jobstatus               int    `json:"jobstatus"`
+	Lastupdated             string `json:"lastupdated"`
+	Sourcevmname            string `json:"sourcevmname"`
+	State                   string `json:"state"`
+	Step                    string `json:"step"`
+	Stepduration            string `json:"stepduration"`
+	Vcenter                 string `json:"vcenter"`
+	Virtualmachineid        string `json:"virtualmachineid"`
+	Zoneid                  string `json:"zoneid"`
+	Zonename                string `json:"zonename"`
 }
 
 type CreateVMScheduleParams struct {

@@ -413,9 +413,9 @@ func (mr *MockNetworkServiceIfaceMockRecorder) GetNetworkByName(name any, opts .
 }
 
 // GetNetworkID mocks base method.
-func (m *MockNetworkServiceIface) GetNetworkID(keyword string, opts ...OptionFunc) (string, int, error) {
+func (m *MockNetworkServiceIface) GetNetworkID(name string, opts ...OptionFunc) (string, int, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{keyword}
+	varargs := []any{name}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
@@ -427,9 +427,9 @@ func (m *MockNetworkServiceIface) GetNetworkID(keyword string, opts ...OptionFun
 }
 
 // GetNetworkID indicates an expected call of GetNetworkID.
-func (mr *MockNetworkServiceIfaceMockRecorder) GetNetworkID(keyword any, opts ...any) *gomock.Call {
+func (mr *MockNetworkServiceIfaceMockRecorder) GetNetworkID(name any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{keyword}, opts...)
+	varargs := append([]any{name}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetNetworkID", reflect.TypeOf((*MockNetworkServiceIface)(nil).GetNetworkID), varargs...)
 }
 

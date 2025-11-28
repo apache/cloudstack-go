@@ -458,6 +458,7 @@ func (s *PoolService) CreateStoragePool(p *CreateStoragePoolParams) (*CreateStor
 
 type CreateStoragePoolResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -749,6 +750,7 @@ func (s *PoolService) FindStoragePoolsForMigration(p *FindStoragePoolsForMigrati
 
 type FindStoragePoolsForMigrationResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -1350,6 +1352,7 @@ type ListStoragePoolsResponse struct {
 
 type StoragePool struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -1468,6 +1471,7 @@ func (s *PoolService) SyncStoragePool(p *SyncStoragePoolParams) (*SyncStoragePoo
 
 type SyncStoragePoolResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`
@@ -1766,6 +1770,7 @@ func (s *PoolService) UpdateStoragePool(p *UpdateStoragePoolParams) (*UpdateStor
 
 type UpdateStoragePoolResponse struct {
 	Allocatediops        int64             `json:"allocatediops"`
+	Capacitybytes        int64             `json:"capacitybytes"`
 	Capacityiops         int64             `json:"capacityiops"`
 	Clusterid            string            `json:"clusterid"`
 	Clustername          string            `json:"clustername"`

@@ -204,6 +204,7 @@ type ChangeServiceForRouterResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -590,6 +591,7 @@ type DestroyRouterResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -1408,6 +1410,7 @@ type RouterHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -1815,6 +1818,7 @@ type RebootRouterResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -1963,6 +1967,7 @@ type StartRouterResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }
 
@@ -2136,5 +2141,6 @@ type StopRouterResponseHealthcheckresults struct {
 	Checktype   string `json:"checktype"`
 	Details     string `json:"details"`
 	Lastupdated string `json:"lastupdated"`
+	Status      string `json:"status"`
 	Success     bool   `json:"success"`
 }

@@ -1394,6 +1394,7 @@ type CreateSnapshotPolicyResponse struct {
 	Tags           []Tags        `json:"tags"`
 	Timezone       string        `json:"timezone"`
 	Volumeid       string        `json:"volumeid"`
+	Volumename     string        `json:"volumename"`
 	Zone           []interface{} `json:"zone"`
 }
 
@@ -2042,6 +2043,12 @@ func (p *ListSnapshotPoliciesParams) toURLValues() url.Values {
 	if p.p == nil {
 		return u
 	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
 	if v, found := p.p["fordisplay"]; found {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("fordisplay", vv)
@@ -2049,8 +2056,16 @@ func (p *ListSnapshotPoliciesParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["isrecursive"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isrecursive", vv)
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["listall"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("listall", vv)
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
@@ -2060,10 +2075,55 @@ func (p *ListSnapshotPoliciesParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
 	if v, found := p.p["volumeid"]; found {
 		u.Set("volumeid", v.(string))
 	}
 	return u
+}
+
+func (p *ListSnapshotPoliciesParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *ListSnapshotPoliciesParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *ListSnapshotPoliciesParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *ListSnapshotPoliciesParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
 }
 
 func (p *ListSnapshotPoliciesParams) SetFordisplay(v bool) {
@@ -2108,6 +2168,27 @@ func (p *ListSnapshotPoliciesParams) GetId() (string, bool) {
 	return value, ok
 }
 
+func (p *ListSnapshotPoliciesParams) SetIsrecursive(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isrecursive"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetIsrecursive() {
+	if p.p != nil && p.p["isrecursive"] != nil {
+		delete(p.p, "isrecursive")
+	}
+}
+
+func (p *ListSnapshotPoliciesParams) GetIsrecursive() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isrecursive"].(bool)
+	return value, ok
+}
+
 func (p *ListSnapshotPoliciesParams) SetKeyword(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2126,6 +2207,27 @@ func (p *ListSnapshotPoliciesParams) GetKeyword() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListSnapshotPoliciesParams) SetListall(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["listall"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetListall() {
+	if p.p != nil && p.p["listall"] != nil {
+		delete(p.p, "listall")
+	}
+}
+
+func (p *ListSnapshotPoliciesParams) GetListall() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["listall"].(bool)
 	return value, ok
 }
 
@@ -2168,6 +2270,27 @@ func (p *ListSnapshotPoliciesParams) GetPagesize() (int, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+func (p *ListSnapshotPoliciesParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *ListSnapshotPoliciesParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *ListSnapshotPoliciesParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
 	return value, ok
 }
 
@@ -2266,6 +2389,7 @@ type SnapshotPolicy struct {
 	Tags           []Tags        `json:"tags"`
 	Timezone       string        `json:"timezone"`
 	Volumeid       string        `json:"volumeid"`
+	Volumename     string        `json:"volumename"`
 	Zone           []interface{} `json:"zone"`
 }
 
@@ -3943,5 +4067,6 @@ type UpdateSnapshotPolicyResponse struct {
 	Tags           []Tags        `json:"tags"`
 	Timezone       string        `json:"timezone"`
 	Volumeid       string        `json:"volumeid"`
+	Volumename     string        `json:"volumename"`
 	Zone           []interface{} `json:"zone"`
 }
