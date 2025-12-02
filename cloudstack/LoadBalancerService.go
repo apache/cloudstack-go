@@ -3782,7 +3782,7 @@ func (s *LoadBalancerService) ListLBStickinessPolicies(p *ListLBStickinessPolici
 
 type ListLBStickinessPoliciesResponse struct {
 	Count                int                   `json:"count"`
-	LBStickinessPolicies []*LBStickinessPolicy `json:"lbstickinesspolicy"`
+	LBStickinessPolicies []*LBStickinessPolicy `json:"stickinesspolicies"`
 }
 
 type LBStickinessPolicy struct {

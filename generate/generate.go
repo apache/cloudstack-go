@@ -2099,6 +2099,9 @@ func (s *service) generateResponseType(a *API) {
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "listLBStickinessPolicies":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
