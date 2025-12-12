@@ -28,8 +28,6 @@ import (
 )
 
 type ManagementServiceIface interface {
-	CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error)
-	NewCancelShutdownParams(managementserverid UUID) *CancelShutdownParams
 	ListManagementServers(p *ListManagementServersParams) (*ListManagementServersResponse, error)
 	NewListManagementServersParams() *ListManagementServersParams
 	GetManagementServerID(name string, opts ...OptionFunc) (string, int, error)
@@ -40,85 +38,20 @@ type ManagementServiceIface interface {
 	GetManagementServersMetricID(name string, opts ...OptionFunc) (string, int, error)
 	GetManagementServersMetricByName(name string, opts ...OptionFunc) (*ManagementServersMetric, int, error)
 	GetManagementServersMetricByID(id string, opts ...OptionFunc) (*ManagementServersMetric, int, error)
+	RemoveManagementServer(p *RemoveManagementServerParams) (*RemoveManagementServerResponse, error)
+	NewRemoveManagementServerParams(id string) *RemoveManagementServerParams
+	PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error)
+	NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams
+	CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error)
+	NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams
+	CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error)
+	NewCancelShutdownParams(managementserverid UUID) *CancelShutdownParams
 	PrepareForShutdown(p *PrepareForShutdownParams) (*PrepareForShutdownResponse, error)
 	NewPrepareForShutdownParams(managementserverid UUID) *PrepareForShutdownParams
 	ReadyForShutdown(p *ReadyForShutdownParams) (*ReadyForShutdownResponse, error)
 	NewReadyForShutdownParams(managementserverid UUID) *ReadyForShutdownParams
 	TriggerShutdown(p *TriggerShutdownParams) (*TriggerShutdownResponse, error)
 	NewTriggerShutdownParams(managementserverid UUID) *TriggerShutdownParams
-}
-
-type CancelShutdownParams struct {
-	p map[string]interface{}
-}
-
-func (p *CancelShutdownParams) toURLValues() url.Values {
-	u := url.Values{}
-	if p.p == nil {
-		return u
-	}
-	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
-	}
-	return u
-}
-
-func (p *CancelShutdownParams) SetManagementserverid(v UUID) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	p.p["managementserverid"] = v
-}
-
-func (p *CancelShutdownParams) ResetManagementserverid() {
-	if p.p != nil && p.p["managementserverid"] != nil {
-		delete(p.p, "managementserverid")
-	}
-}
-
-func (p *CancelShutdownParams) GetManagementserverid() (UUID, bool) {
-	if p.p == nil {
-		p.p = make(map[string]interface{})
-	}
-	value, ok := p.p["managementserverid"].(UUID)
-	return value, ok
-}
-
-// You should always use this function to get a new CancelShutdownParams instance,
-// as then you are sure you have configured all required params
-func (s *ManagementService) NewCancelShutdownParams(managementserverid UUID) *CancelShutdownParams {
-	p := &CancelShutdownParams{}
-	p.p = make(map[string]interface{})
-	p.p["managementserverid"] = managementserverid
-	return p
-}
-
-// Cancels a triggered shutdown
-func (s *ManagementService) CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error) {
-	resp, err := s.cs.newPostRequest("cancelShutdown", p.toURLValues())
-	if err != nil {
-		return nil, err
-	}
-
-	var r CancelShutdownResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
-		return nil, err
-	}
-
-	return &r, nil
-}
-
-type CancelShutdownResponse struct {
-	Agents               []string `json:"agents"`
-	Agentscount          int64    `json:"agentscount"`
-	JobID                string   `json:"jobid"`
-	Jobstatus            int      `json:"jobstatus"`
-	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
-	Managementserverid   UUID     `json:"managementserverid"`
-	Pendingjobscount     int64    `json:"pendingjobscount"`
-	Readyforshutdown     bool     `json:"readyforshutdown"`
-	Shutdowntriggered    bool     `json:"shutdowntriggered"`
-	State                string   `json:"state"`
 }
 
 type ListManagementServersParams struct {
@@ -753,6 +686,393 @@ type ManagementServersMetric struct {
 	Threadswaitingcount     int       `json:"threadswaitingcount"`
 	Usageislocal            bool      `json:"usageislocal"`
 	Version                 string    `json:"version"`
+}
+
+type RemoveManagementServerParams struct {
+	p map[string]interface{}
+}
+
+func (p *RemoveManagementServerParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *RemoveManagementServerParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *RemoveManagementServerParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *RemoveManagementServerParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new RemoveManagementServerParams instance,
+// as then you are sure you have configured all required params
+func (s *ManagementService) NewRemoveManagementServerParams(id string) *RemoveManagementServerParams {
+	p := &RemoveManagementServerParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Removes a Management Server.
+func (s *ManagementService) RemoveManagementServer(p *RemoveManagementServerParams) (*RemoveManagementServerResponse, error) {
+	resp, err := s.cs.newPostRequest("removeManagementServer", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r RemoveManagementServerResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type RemoveManagementServerResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *RemoveManagementServerResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias RemoveManagementServerResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type PrepareForMaintenanceParams struct {
+	p map[string]interface{}
+}
+
+func (p *PrepareForMaintenanceParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["algorithm"]; found {
+		u.Set("algorithm", v.(string))
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
+	return u
+}
+
+func (p *PrepareForMaintenanceParams) SetAlgorithm(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["algorithm"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetAlgorithm() {
+	if p.p != nil && p.p["algorithm"] != nil {
+		delete(p.p, "algorithm")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetAlgorithm() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["algorithm"].(string)
+	return value, ok
+}
+
+func (p *PrepareForMaintenanceParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *PrepareForMaintenanceParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
+// You should always use this function to get a new PrepareForMaintenanceParams instance,
+// as then you are sure you have configured all required params
+func (s *ManagementService) NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams {
+	p := &PrepareForMaintenanceParams{}
+	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
+	return p
+}
+
+// Prepares management server for maintenance by preventing new jobs from being accepted after completion of active jobs and migrating the agents
+func (s *ManagementService) PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error) {
+	resp, err := s.cs.newPostRequest("prepareForMaintenance", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r PrepareForMaintenanceResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type PrepareForMaintenanceResponse struct {
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
+}
+
+type CancelMaintenanceParams struct {
+	p map[string]interface{}
+}
+
+func (p *CancelMaintenanceParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
+	if v, found := p.p["rebalance"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("rebalance", vv)
+	}
+	return u
+}
+
+func (p *CancelMaintenanceParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *CancelMaintenanceParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
+}
+
+func (p *CancelMaintenanceParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
+func (p *CancelMaintenanceParams) SetRebalance(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["rebalance"] = v
+}
+
+func (p *CancelMaintenanceParams) ResetRebalance() {
+	if p.p != nil && p.p["rebalance"] != nil {
+		delete(p.p, "rebalance")
+	}
+}
+
+func (p *CancelMaintenanceParams) GetRebalance() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rebalance"].(bool)
+	return value, ok
+}
+
+// You should always use this function to get a new CancelMaintenanceParams instance,
+// as then you are sure you have configured all required params
+func (s *ManagementService) NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams {
+	p := &CancelMaintenanceParams{}
+	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
+	return p
+}
+
+// Cancels maintenance of the management server
+func (s *ManagementService) CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error) {
+	resp, err := s.cs.newPostRequest("cancelMaintenance", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CancelMaintenanceResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type CancelMaintenanceResponse struct {
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
+}
+
+type CancelShutdownParams struct {
+	p map[string]interface{}
+}
+
+func (p *CancelShutdownParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
+	return u
+}
+
+func (p *CancelShutdownParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *CancelShutdownParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
+}
+
+func (p *CancelShutdownParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
+// You should always use this function to get a new CancelShutdownParams instance,
+// as then you are sure you have configured all required params
+func (s *ManagementService) NewCancelShutdownParams(managementserverid UUID) *CancelShutdownParams {
+	p := &CancelShutdownParams{}
+	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
+	return p
+}
+
+// Cancels a triggered shutdown
+func (s *ManagementService) CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error) {
+	resp, err := s.cs.newPostRequest("cancelShutdown", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CancelShutdownResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type CancelShutdownResponse struct {
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }
 
 type PrepareForShutdownParams struct {

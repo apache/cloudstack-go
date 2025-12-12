@@ -35,18 +35,6 @@ func TestManagementService(t *testing.T) {
 	client := cloudstack.NewClient(server.URL, "APIKEY", "SECRETKEY", true)
 	defer server.Close()
 
-	testcancelShutdown := func(t *testing.T) {
-		if _, ok := response["cancelShutdown"]; !ok {
-			t.Skipf("Skipping as no json response is provided in testdata")
-		}
-		p := client.Management.NewCancelShutdownParams("managementserverid")
-		_, err := client.Management.CancelShutdown(p)
-		if err != nil {
-			t.Errorf(err.Error())
-		}
-	}
-	t.Run("CancelShutdown", testcancelShutdown)
-
 	testlistManagementServers := func(t *testing.T) {
 		if _, ok := response["listManagementServers"]; !ok {
 			t.Skipf("Skipping as no json response is provided in testdata")
@@ -70,6 +58,54 @@ func TestManagementService(t *testing.T) {
 		}
 	}
 	t.Run("ListManagementServersMetrics", testlistManagementServersMetrics)
+
+	testremoveManagementServer := func(t *testing.T) {
+		if _, ok := response["removeManagementServer"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Management.NewRemoveManagementServerParams("id")
+		_, err := client.Management.RemoveManagementServer(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("RemoveManagementServer", testremoveManagementServer)
+
+	testprepareForMaintenance := func(t *testing.T) {
+		if _, ok := response["prepareForMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Management.NewPrepareForMaintenanceParams("managementserverid")
+		_, err := client.Management.PrepareForMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("PrepareForMaintenance", testprepareForMaintenance)
+
+	testcancelMaintenance := func(t *testing.T) {
+		if _, ok := response["cancelMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Management.NewCancelMaintenanceParams("managementserverid")
+		_, err := client.Management.CancelMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CancelMaintenance", testcancelMaintenance)
+
+	testcancelShutdown := func(t *testing.T) {
+		if _, ok := response["cancelShutdown"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Management.NewCancelShutdownParams("managementserverid")
+		_, err := client.Management.CancelShutdown(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CancelShutdown", testcancelShutdown)
 
 	testprepareForShutdown := func(t *testing.T) {
 		if _, ok := response["prepareForShutdown"]; !ok {
