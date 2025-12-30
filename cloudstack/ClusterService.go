@@ -2686,7 +2686,7 @@ func (s *ClusterService) ListClustersMetrics(p *ListClustersMetricsParams) (*Lis
 
 type ListClustersMetricsResponse struct {
 	Count           int               `json:"count"`
-	ClustersMetrics []*ClustersMetric `json:"clustersmetric"`
+	ClustersMetrics []*ClustersMetric `json:"cluster"`
 }
 
 type ClustersMetric struct {

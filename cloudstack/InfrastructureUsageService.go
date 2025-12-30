@@ -65,7 +65,7 @@ func (s *InfrastructureUsageService) ListDbMetrics(p *ListDbMetricsParams) (*Lis
 }
 
 type ListDbMetricsResponse struct {
-	DbMetrics DbMetric `json:"dbMetrics"`
+	DbMetrics DbMetric `json:"db"`
 }
 
 type DbMetric struct {

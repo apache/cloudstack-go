@@ -4466,7 +4466,7 @@ func (s *VolumeService) ListVolumesMetrics(p *ListVolumesMetricsParams) (*ListVo
 
 type ListVolumesMetricsResponse struct {
 	Count          int              `json:"count"`
-	VolumesMetrics []*VolumesMetric `json:"volumesmetric"`
+	VolumesMetrics []*VolumesMetric `json:"volume"`
 }
 
 type VolumesMetric struct {
