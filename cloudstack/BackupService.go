@@ -749,8 +749,7 @@ func (p *CreateVMFromBackupParams) toURLValues() url.Values {
 	if v, found := p.p["datadisksdetails"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("datadisksdetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("datadisksdetails[%d].value", i), m[k])
+			u.Set(fmt.Sprintf("datadisksdetails[%d].%s", i, k), m[k])
 		}
 	}
 	if v, found := p.p["deploymentplanner"]; found {

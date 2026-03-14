@@ -93,6 +93,7 @@ var mapRequireList = map[string]map[string]bool{
 		"dhcpoptionsnetworklist": true,
 		"iptonetworklist":        true,
 		"nicnetworklist":         true,
+		"datadisksdetails":       true,
 	},
 	"updateVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
@@ -1440,6 +1441,8 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].template\", i), m[k])", name)
 		case "cniconfigdetails":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
+		case "datadisksdetails":
+			pn("    u.Set(fmt.Sprintf(\"%s[%%d].%%s\", i, k), m[k])", name)
 		default:
 			if shouldUseStaticZeroIndex && !detailsRequireKeyValue[cmd] {
 				pn("	u.Set(fmt.Sprintf(\"%s[0].%%s\", k), m[k])", name)

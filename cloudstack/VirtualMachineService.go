@@ -1335,10 +1335,11 @@ func (p *DeployVirtualMachineParams) toURLValues() url.Values {
 		}
 	}
 	if v, found := p.p["datadisksdetails"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("datadisksdetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("datadisksdetails[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("datadisksdetails[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["deploymentplanner"]; found {
@@ -1737,7 +1738,7 @@ func (p *DeployVirtualMachineParams) GetDatadiskofferinglist() (map[string]strin
 	return value, ok
 }
 
-func (p *DeployVirtualMachineParams) SetDatadisksdetails(v map[string]string) {
+func (p *DeployVirtualMachineParams) SetDatadisksdetails(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1750,12 +1751,26 @@ func (p *DeployVirtualMachineParams) ResetDatadisksdetails() {
 	}
 }
 
-func (p *DeployVirtualMachineParams) GetDatadisksdetails() (map[string]string, bool) {
+func (p *DeployVirtualMachineParams) GetDatadisksdetails() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["datadisksdetails"].(map[string]string)
+	value, ok := p.p["datadisksdetails"].([]map[string]string)
 	return value, ok
+}
+
+func (p *DeployVirtualMachineParams) AddDatadisksdetails(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["datadisksdetails"]
+	if !found {
+		p.p["datadisksdetails"] = []map[string]string{}
+		val = p.p["datadisksdetails"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["datadisksdetails"] = l
 }
 
 func (p *DeployVirtualMachineParams) SetDeploymentplanner(v string) {
