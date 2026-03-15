@@ -95,6 +95,18 @@ var mapRequireList = map[string]map[string]bool{
 		"nicnetworklist":         true,
 		"datadisksdetails":       true,
 	},
+	"deployVnfAppliance": map[string]bool{
+		"dhcpoptionsnetworklist": true,
+		"iptonetworklist":        true,
+		"nicnetworklist":         true,
+		"datadisksdetails":       true,
+	},
+	"createVMFromBackup": map[string]bool{
+		"dhcpoptionsnetworklist": true,
+		"iptonetworklist":        true,
+		"nicnetworklist":         true,
+		"datadisksdetails":       true,
+	},
 	"updateVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
 	},
