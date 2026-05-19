@@ -88,6 +88,36 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) AddGuestOsMapping(p any) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGuestOsMapping", reflect.TypeOf((*MockGuestOSServiceIface)(nil).AddGuestOsMapping), p)
 }
 
+// AddOsCategory mocks base method.
+func (m *MockGuestOSServiceIface) AddOsCategory(p *AddOsCategoryParams) (*AddOsCategoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddOsCategory", p)
+	ret0, _ := ret[0].(*AddOsCategoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddOsCategory indicates an expected call of AddOsCategory.
+func (mr *MockGuestOSServiceIfaceMockRecorder) AddOsCategory(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddOsCategory", reflect.TypeOf((*MockGuestOSServiceIface)(nil).AddOsCategory), p)
+}
+
+// DeleteOsCategory mocks base method.
+func (m *MockGuestOSServiceIface) DeleteOsCategory(p *DeleteOsCategoryParams) (*DeleteOsCategoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteOsCategory", p)
+	ret0, _ := ret[0].(*DeleteOsCategoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteOsCategory indicates an expected call of DeleteOsCategory.
+func (mr *MockGuestOSServiceIfaceMockRecorder) DeleteOsCategory(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOsCategory", reflect.TypeOf((*MockGuestOSServiceIface)(nil).DeleteOsCategory), p)
+}
+
 // GetGuestOsMappingByID mocks base method.
 func (m *MockGuestOSServiceIface) GetGuestOsMappingByID(id string, opts ...OptionFunc) (*GuestOsMapping, int, error) {
 	m.ctrl.T.Helper()
@@ -323,6 +353,34 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddGuestOsParams(oscategoryid,
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewAddGuestOsParams), oscategoryid, osdisplayname)
 }
 
+// NewAddOsCategoryParams mocks base method.
+func (m *MockGuestOSServiceIface) NewAddOsCategoryParams(name string) *AddOsCategoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewAddOsCategoryParams", name)
+	ret0, _ := ret[0].(*AddOsCategoryParams)
+	return ret0
+}
+
+// NewAddOsCategoryParams indicates an expected call of NewAddOsCategoryParams.
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewAddOsCategoryParams(name any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewAddOsCategoryParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewAddOsCategoryParams), name)
+}
+
+// NewDeleteOsCategoryParams mocks base method.
+func (m *MockGuestOSServiceIface) NewDeleteOsCategoryParams(id string) *DeleteOsCategoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewDeleteOsCategoryParams", id)
+	ret0, _ := ret[0].(*DeleteOsCategoryParams)
+	return ret0
+}
+
+// NewDeleteOsCategoryParams indicates an expected call of NewDeleteOsCategoryParams.
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewDeleteOsCategoryParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewDeleteOsCategoryParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewDeleteOsCategoryParams), id)
+}
+
 // NewGetHypervisorGuestOsNamesParams mocks base method.
 func (m *MockGuestOSServiceIface) NewGetHypervisorGuestOsNamesParams(hypervisor, hypervisorversion string) *GetHypervisorGuestOsNamesParams {
 	m.ctrl.T.Helper()
@@ -435,6 +493,20 @@ func (mr *MockGuestOSServiceIfaceMockRecorder) NewUpdateGuestOsParams(id, osdisp
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateGuestOsParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewUpdateGuestOsParams), id, osdisplayname)
 }
 
+// NewUpdateOsCategoryParams mocks base method.
+func (m *MockGuestOSServiceIface) NewUpdateOsCategoryParams(id string) *UpdateOsCategoryParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewUpdateOsCategoryParams", id)
+	ret0, _ := ret[0].(*UpdateOsCategoryParams)
+	return ret0
+}
+
+// NewUpdateOsCategoryParams indicates an expected call of NewUpdateOsCategoryParams.
+func (mr *MockGuestOSServiceIfaceMockRecorder) NewUpdateOsCategoryParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateOsCategoryParams", reflect.TypeOf((*MockGuestOSServiceIface)(nil).NewUpdateOsCategoryParams), id)
+}
+
 // RemoveGuestOs mocks base method.
 func (m *MockGuestOSServiceIface) RemoveGuestOs(p *RemoveGuestOsParams) (*RemoveGuestOsResponse, error) {
 	m.ctrl.T.Helper()
@@ -493,4 +565,19 @@ func (m *MockGuestOSServiceIface) UpdateGuestOsMapping(p *UpdateGuestOsMappingPa
 func (mr *MockGuestOSServiceIfaceMockRecorder) UpdateGuestOsMapping(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateGuestOsMapping", reflect.TypeOf((*MockGuestOSServiceIface)(nil).UpdateGuestOsMapping), p)
+}
+
+// UpdateOsCategory mocks base method.
+func (m *MockGuestOSServiceIface) UpdateOsCategory(p *UpdateOsCategoryParams) (*UpdateOsCategoryResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOsCategory", p)
+	ret0, _ := ret[0].(*UpdateOsCategoryResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateOsCategory indicates an expected call of UpdateOsCategory.
+func (mr *MockGuestOSServiceIfaceMockRecorder) UpdateOsCategory(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOsCategory", reflect.TypeOf((*MockGuestOSServiceIface)(nil).UpdateOsCategory), p)
 }

@@ -167,4 +167,46 @@ func TestGuestOSService(t *testing.T) {
 	}
 	t.Run("GetHypervisorGuestOsNames", testgetHypervisorGuestOsNames)
 
+	testaddOsCategory := func(t *testing.T) {
+		if _, ok := response["addOsCategory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.GuestOS.NewAddOsCategoryParams("name")
+		r, err := client.GuestOS.AddOsCategory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("AddOsCategory", testaddOsCategory)
+
+	testdeleteOsCategory := func(t *testing.T) {
+		if _, ok := response["deleteOsCategory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.GuestOS.NewDeleteOsCategoryParams("id")
+		_, err := client.GuestOS.DeleteOsCategory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("DeleteOsCategory", testdeleteOsCategory)
+
+	testupdateOsCategory := func(t *testing.T) {
+		if _, ok := response["updateOsCategory"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.GuestOS.NewUpdateOsCategoryParams("id")
+		r, err := client.GuestOS.UpdateOsCategory(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+		if r.Id == "" {
+			t.Errorf("Failed to parse response. ID not found")
+		}
+	}
+	t.Run("UpdateOsCategory", testupdateOsCategory)
+
 }
