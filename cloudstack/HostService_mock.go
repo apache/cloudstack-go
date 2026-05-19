@@ -148,6 +148,21 @@ func (mr *MockHostServiceIfaceMockRecorder) CancelHostMaintenance(p any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelHostMaintenance", reflect.TypeOf((*MockHostServiceIface)(nil).CancelHostMaintenance), p)
 }
 
+// CancelMaintenance mocks base method.
+func (m *MockHostServiceIface) CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelMaintenance", p)
+	ret0, _ := ret[0].(*CancelMaintenanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelMaintenance indicates an expected call of CancelMaintenance.
+func (mr *MockHostServiceIfaceMockRecorder) CancelMaintenance(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelMaintenance", reflect.TypeOf((*MockHostServiceIface)(nil).CancelMaintenance), p)
+}
+
 // ConfigureHAForHost mocks base method.
 func (m *MockHostServiceIface) ConfigureHAForHost(p *ConfigureHAForHostParams) (*HAForHostResponse, error) {
 	m.ctrl.T.Helper()
@@ -670,6 +685,20 @@ func (mr *MockHostServiceIfaceMockRecorder) NewCancelHostMaintenanceParams(id an
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCancelHostMaintenanceParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewCancelHostMaintenanceParams), id)
 }
 
+// NewCancelMaintenanceParams mocks base method.
+func (m *MockHostServiceIface) NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCancelMaintenanceParams", managementserverid)
+	ret0, _ := ret[0].(*CancelMaintenanceParams)
+	return ret0
+}
+
+// NewCancelMaintenanceParams indicates an expected call of NewCancelMaintenanceParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewCancelMaintenanceParams(managementserverid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCancelMaintenanceParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewCancelMaintenanceParams), managementserverid)
+}
+
 // NewConfigureHAForHostParams mocks base method.
 func (m *MockHostServiceIface) NewConfigureHAForHostParams(hostid, provider string) *ConfigureHAForHostParams {
 	m.ctrl.T.Helper()
@@ -922,6 +951,20 @@ func (mr *MockHostServiceIfaceMockRecorder) NewMigrateSecondaryStorageDataParams
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewMigrateSecondaryStorageDataParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewMigrateSecondaryStorageDataParams), destpools, srcpool)
 }
 
+// NewPrepareForMaintenanceParams mocks base method.
+func (m *MockHostServiceIface) NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewPrepareForMaintenanceParams", managementserverid)
+	ret0, _ := ret[0].(*PrepareForMaintenanceParams)
+	return ret0
+}
+
+// NewPrepareForMaintenanceParams indicates an expected call of NewPrepareForMaintenanceParams.
+func (mr *MockHostServiceIfaceMockRecorder) NewPrepareForMaintenanceParams(managementserverid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewPrepareForMaintenanceParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewPrepareForMaintenanceParams), managementserverid)
+}
+
 // NewPrepareHostForMaintenanceParams mocks base method.
 func (m *MockHostServiceIface) NewPrepareHostForMaintenanceParams(id string) *PrepareHostForMaintenanceParams {
 	m.ctrl.T.Helper()
@@ -1032,6 +1075,21 @@ func (m *MockHostServiceIface) NewUpdateSecondaryStorageSelectorParams(heuristic
 func (mr *MockHostServiceIfaceMockRecorder) NewUpdateSecondaryStorageSelectorParams(heuristicrule, id any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewUpdateSecondaryStorageSelectorParams", reflect.TypeOf((*MockHostServiceIface)(nil).NewUpdateSecondaryStorageSelectorParams), heuristicrule, id)
+}
+
+// PrepareForMaintenance mocks base method.
+func (m *MockHostServiceIface) PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PrepareForMaintenance", p)
+	ret0, _ := ret[0].(*PrepareForMaintenanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PrepareForMaintenance indicates an expected call of PrepareForMaintenance.
+func (mr *MockHostServiceIfaceMockRecorder) PrepareForMaintenance(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PrepareForMaintenance", reflect.TypeOf((*MockHostServiceIface)(nil).PrepareForMaintenance), p)
 }
 
 // PrepareHostForMaintenance mocks base method.

@@ -262,6 +262,8 @@ var layout = apiInfo{
 		"listHostHAResources",
 		"declareHostAsDegraded",
 		"updateSecondaryStorageSelector",
+		"prepareForMaintenance",
+		"cancelMaintenance",
 	},
 	"VolumeService": {
 		"attachVolume",
