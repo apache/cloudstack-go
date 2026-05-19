@@ -131,4 +131,28 @@ func TestPoolService(t *testing.T) {
 	}
 	t.Run("UpdateStoragePool", testupdateStoragePool)
 
+	testconfigureStorageAccess := func(t *testing.T) {
+		if _, ok := response["configureStorageAccess"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewConfigureStorageAccessParams()
+		_, err := client.Pool.ConfigureStorageAccess(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ConfigureStorageAccess", testconfigureStorageAccess)
+
+	testlistStorageAccessGroups := func(t *testing.T) {
+		if _, ok := response["listStorageAccessGroups"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Pool.NewListStorageAccessGroupsParams()
+		_, err := client.Pool.ListStorageAccessGroups(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("ListStorageAccessGroups", testlistStorageAccessGroups)
+
 }
