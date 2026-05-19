@@ -289,6 +289,21 @@ func (mr *MockKubernetesServiceIfaceMockRecorder) GetKubernetesSupportedVersionI
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetKubernetesSupportedVersionID", reflect.TypeOf((*MockKubernetesServiceIface)(nil).GetKubernetesSupportedVersionID), varargs...)
 }
 
+// GetUploadParamsForKubernetesSupportedVersion mocks base method.
+func (m *MockKubernetesServiceIface) GetUploadParamsForKubernetesSupportedVersion(p *GetUploadParamsForKubernetesSupportedVersionParams) (*GetUploadParamsForKubernetesSupportedVersionResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUploadParamsForKubernetesSupportedVersion", p)
+	ret0, _ := ret[0].(*GetUploadParamsForKubernetesSupportedVersionResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUploadParamsForKubernetesSupportedVersion indicates an expected call of GetUploadParamsForKubernetesSupportedVersion.
+func (mr *MockKubernetesServiceIfaceMockRecorder) GetUploadParamsForKubernetesSupportedVersion(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUploadParamsForKubernetesSupportedVersion", reflect.TypeOf((*MockKubernetesServiceIface)(nil).GetUploadParamsForKubernetesSupportedVersion), p)
+}
+
 // ListKubernetesClusters mocks base method.
 func (m *MockKubernetesServiceIface) ListKubernetesClusters(p *ListKubernetesClustersParams) (*ListKubernetesClustersResponse, error) {
 	m.ctrl.T.Helper()
@@ -415,6 +430,20 @@ func (m *MockKubernetesServiceIface) NewGetKubernetesClusterConfigParams() *GetK
 func (mr *MockKubernetesServiceIfaceMockRecorder) NewGetKubernetesClusterConfigParams() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetKubernetesClusterConfigParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewGetKubernetesClusterConfigParams))
+}
+
+// NewGetUploadParamsForKubernetesSupportedVersionParams mocks base method.
+func (m *MockKubernetesServiceIface) NewGetUploadParamsForKubernetesSupportedVersionParams(format string, mincpunumber, minmemory int, name, semanticversion, zoneid string) *GetUploadParamsForKubernetesSupportedVersionParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewGetUploadParamsForKubernetesSupportedVersionParams", format, mincpunumber, minmemory, name, semanticversion, zoneid)
+	ret0, _ := ret[0].(*GetUploadParamsForKubernetesSupportedVersionParams)
+	return ret0
+}
+
+// NewGetUploadParamsForKubernetesSupportedVersionParams indicates an expected call of NewGetUploadParamsForKubernetesSupportedVersionParams.
+func (mr *MockKubernetesServiceIfaceMockRecorder) NewGetUploadParamsForKubernetesSupportedVersionParams(format, mincpunumber, minmemory, name, semanticversion, zoneid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewGetUploadParamsForKubernetesSupportedVersionParams", reflect.TypeOf((*MockKubernetesServiceIface)(nil).NewGetUploadParamsForKubernetesSupportedVersionParams), format, mincpunumber, minmemory, name, semanticversion, zoneid)
 }
 
 // NewListKubernetesClustersParams mocks base method.

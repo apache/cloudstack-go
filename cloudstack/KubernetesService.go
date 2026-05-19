@@ -66,6 +66,8 @@ type KubernetesServiceIface interface {
 	NewAddNodesToKubernetesClusterParams(id string, nodeids []string) *AddNodesToKubernetesClusterParams
 	RemoveNodesFromKubernetesCluster(p *RemoveNodesFromKubernetesClusterParams) (*RemoveNodesFromKubernetesClusterResponse, error)
 	NewRemoveNodesFromKubernetesClusterParams(id string, nodeids []string) *RemoveNodesFromKubernetesClusterParams
+	GetUploadParamsForKubernetesSupportedVersion(p *GetUploadParamsForKubernetesSupportedVersionParams) (*GetUploadParamsForKubernetesSupportedVersionResponse, error)
+	NewGetUploadParamsForKubernetesSupportedVersionParams(format string, mincpunumber int, minmemory int, name string, semanticversion string, zoneid string) *GetUploadParamsForKubernetesSupportedVersionParams
 }
 
 type AddKubernetesSupportedVersionParams struct {
@@ -3718,4 +3720,312 @@ type RemoveNodesFromKubernetesClusterResponse struct {
 	Workerofferingname    string            `json:"workerofferingname"`
 	Zoneid                string            `json:"zoneid"`
 	Zonename              string            `json:"zonename"`
+}
+
+type GetUploadParamsForKubernetesSupportedVersionParams struct {
+	p map[string]interface{}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["account"]; found {
+		u.Set("account", v.(string))
+	}
+	if v, found := p.p["checksum"]; found {
+		u.Set("checksum", v.(string))
+	}
+	if v, found := p.p["checksum"]; found {
+		u.Set("checksum", v.(string))
+	}
+	if v, found := p.p["domainid"]; found {
+		u.Set("domainid", v.(string))
+	}
+	if v, found := p.p["format"]; found {
+		u.Set("format", v.(string))
+	}
+	if v, found := p.p["mincpunumber"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("mincpunumber", vv)
+	}
+	if v, found := p.p["minmemory"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("minmemory", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["projectid"]; found {
+		u.Set("projectid", v.(string))
+	}
+	if v, found := p.p["semanticversion"]; found {
+		u.Set("semanticversion", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetAccount(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["account"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetAccount() {
+	if p.p != nil && p.p["account"] != nil {
+		delete(p.p, "account")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetAccount() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["account"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetChecksum(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["checksum"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetChecksum() {
+	if p.p != nil && p.p["checksum"] != nil {
+		delete(p.p, "checksum")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetChecksum() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["checksum"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetDomainid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["domainid"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetDomainid() {
+	if p.p != nil && p.p["domainid"] != nil {
+		delete(p.p, "domainid")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetDomainid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["domainid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetFormat(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["format"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetFormat() {
+	if p.p != nil && p.p["format"] != nil {
+		delete(p.p, "format")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetFormat() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["format"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetMincpunumber(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["mincpunumber"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetMincpunumber() {
+	if p.p != nil && p.p["mincpunumber"] != nil {
+		delete(p.p, "mincpunumber")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetMincpunumber() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["mincpunumber"].(int)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetMinmemory(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["minmemory"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetMinmemory() {
+	if p.p != nil && p.p["minmemory"] != nil {
+		delete(p.p, "minmemory")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetMinmemory() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["minmemory"].(int)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetProjectid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["projectid"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetProjectid() {
+	if p.p != nil && p.p["projectid"] != nil {
+		delete(p.p, "projectid")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetProjectid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["projectid"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetSemanticversion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["semanticversion"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetSemanticversion() {
+	if p.p != nil && p.p["semanticversion"] != nil {
+		delete(p.p, "semanticversion")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetSemanticversion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["semanticversion"].(string)
+	return value, ok
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *GetUploadParamsForKubernetesSupportedVersionParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new GetUploadParamsForKubernetesSupportedVersionParams instance,
+// as then you are sure you have configured all required params
+func (s *KubernetesService) NewGetUploadParamsForKubernetesSupportedVersionParams(format string, mincpunumber int, minmemory int, name string, semanticversion string, zoneid string) *GetUploadParamsForKubernetesSupportedVersionParams {
+	p := &GetUploadParamsForKubernetesSupportedVersionParams{}
+	p.p = make(map[string]interface{})
+	p.p["format"] = format
+	p.p["mincpunumber"] = mincpunumber
+	p.p["minmemory"] = minmemory
+	p.p["name"] = name
+	p.p["semanticversion"] = semanticversion
+	p.p["zoneid"] = zoneid
+	return p
+}
+
+// Upload a supported Kubernetes version
+func (s *KubernetesService) GetUploadParamsForKubernetesSupportedVersion(p *GetUploadParamsForKubernetesSupportedVersionParams) (*GetUploadParamsForKubernetesSupportedVersionResponse, error) {
+	resp, err := s.cs.newRequest("getUploadParamsForKubernetesSupportedVersion", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r GetUploadParamsForKubernetesSupportedVersionResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type GetUploadParamsForKubernetesSupportedVersionResponse struct {
+	Arch                string `json:"arch"`
+	Created             string `json:"created"`
+	Directdownload      bool   `json:"directdownload"`
+	Id                  string `json:"id"`
+	Isoid               string `json:"isoid"`
+	Isoname             string `json:"isoname"`
+	Isostate            string `json:"isostate"`
+	Isourl              string `json:"isourl"`
+	JobID               string `json:"jobid"`
+	Jobstatus           int    `json:"jobstatus"`
+	Mincpunumber        int    `json:"mincpunumber"`
+	Minmemory           int    `json:"minmemory"`
+	Name                string `json:"name"`
+	Semanticversion     string `json:"semanticversion"`
+	State               string `json:"state"`
+	Supportsautoscaling bool   `json:"supportsautoscaling"`
+	Supportsha          bool   `json:"supportsha"`
+	Zoneid              string `json:"zoneid"`
+	Zonename            string `json:"zonename"`
 }
