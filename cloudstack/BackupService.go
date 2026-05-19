@@ -320,6 +320,7 @@ type AddBackupRepositoryResponse struct {
 	Id                        string `json:"id"`
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
+	Mountopts                 string `json:"mountopts"`
 	Name                      string `json:"name"`
 	Provider                  string `json:"provider"`
 	Type                      string `json:"type"`
@@ -445,7 +446,7 @@ func (s *BackupService) NewCreateBackupParams(virtualmachineid string) *CreateBa
 	return p
 }
 
-// Create VM backup
+// Create Instance backup
 func (s *BackupService) CreateBackup(p *CreateBackupParams) (*CreateBackupResponse, error) {
 	resp, err := s.cs.newPostRequest("createBackup", p.toURLValues())
 	if err != nil {
@@ -652,7 +653,7 @@ func (s *BackupService) NewCreateBackupScheduleParams(intervaltype string, sched
 	return p
 }
 
-// Creates a user-defined VM backup schedule
+// Creates a User-defined Instance backup schedule
 func (s *BackupService) CreateBackupSchedule(p *CreateBackupScheduleParams) (*CreateBackupScheduleResponse, error) {
 	resp, err := s.cs.newPostRequest("createBackupSchedule", p.toURLValues())
 	if err != nil {
@@ -668,32 +669,16 @@ func (s *BackupService) CreateBackupSchedule(p *CreateBackupScheduleParams) (*Cr
 }
 
 type CreateBackupScheduleResponse struct {
-	Account                 string            `json:"account"`
-	Accountid               string            `json:"accountid"`
-	Backupofferingid        string            `json:"backupofferingid"`
-	Backupofferingname      string            `json:"backupofferingname"`
-	Created                 string            `json:"created"`
-	Description             string            `json:"description"`
-	Domain                  string            `json:"domain"`
-	Domainid                string            `json:"domainid"`
-	Externalid              string            `json:"externalid"`
-	Id                      string            `json:"id"`
-	Intervaltype            string            `json:"intervaltype"`
-	Isbackupvmexpunged      bool              `json:"isbackupvmexpunged"`
-	JobID                   string            `json:"jobid"`
-	Jobstatus               int               `json:"jobstatus"`
-	Name                    string            `json:"name"`
-	Size                    int64             `json:"size"`
-	Status                  string            `json:"status"`
-	Type                    string            `json:"type"`
-	Virtualmachineid        string            `json:"virtualmachineid"`
-	Virtualmachinename      string            `json:"virtualmachinename"`
-	Virtualsize             int64             `json:"virtualsize"`
-	Vmbackupofferingremoved bool              `json:"vmbackupofferingremoved"`
-	Vmdetails               map[string]string `json:"vmdetails"`
-	Volumes                 string            `json:"volumes"`
-	Zone                    string            `json:"zone"`
-	Zoneid                  string            `json:"zoneid"`
+	Id                 string `json:"id"`
+	Intervaltype       string `json:"intervaltype"`
+	JobID              string `json:"jobid"`
+	Jobstatus          int    `json:"jobstatus"`
+	Maxbackups         int    `json:"maxbackups"`
+	Quiescevm          bool   `json:"quiescevm"`
+	Schedule           string `json:"schedule"`
+	Timezone           string `json:"timezone"`
+	Virtualmachineid   string `json:"virtualmachineid"`
+	Virtualmachinename string `json:"virtualmachinename"`
 }
 
 type CreateVMFromBackupParams struct {
@@ -2200,6 +2185,7 @@ func (s *BackupService) CreateVMFromBackup(p *CreateVMFromBackupParams) (*Create
 type CreateVMFromBackupResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []CreateVMFromBackupResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                                    `json:"alloweddetails"`
 	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
@@ -2448,7 +2434,7 @@ func (s *BackupService) NewDeleteBackupParams(id string) *DeleteBackupParams {
 	return p
 }
 
-// Delete VM backup
+// Delete Instance backup
 func (s *BackupService) DeleteBackup(p *DeleteBackupParams) (*DeleteBackupResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteBackup", p.toURLValues())
 	if err != nil {
@@ -2741,7 +2727,7 @@ func (s *BackupService) NewDeleteBackupScheduleParams() *DeleteBackupSchedulePar
 	return p
 }
 
-// Deletes the backup schedule of a VM
+// Deletes the backup schedule of a Instance
 func (s *BackupService) DeleteBackupSchedule(p *DeleteBackupScheduleParams) (*DeleteBackupScheduleResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteBackupSchedule", p.toURLValues())
 	if err != nil {
@@ -3809,6 +3795,7 @@ type BackupRepository struct {
 	Id                        string `json:"id"`
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
+	Mountopts                 string `json:"mountopts"`
 	Name                      string `json:"name"`
 	Provider                  string `json:"provider"`
 	Type                      string `json:"type"`
@@ -4113,7 +4100,7 @@ func (s *BackupService) GetBackupScheduleByID(id string, opts ...OptionFunc) (*B
 	return nil, l.Count, fmt.Errorf("There is more then one result for BackupSchedule UUID: %s!", id)
 }
 
-// List backup schedule of a VM
+// List backup schedule of an Instance
 func (s *BackupService) ListBackupSchedule(p *ListBackupScheduleParams) (*ListBackupScheduleResponse, error) {
 	resp, err := s.cs.newRequest("listBackupSchedule", p.toURLValues())
 	if err != nil {
@@ -4590,7 +4577,7 @@ func (s *BackupService) GetBackupByID(id string, opts ...OptionFunc) (*Backup, i
 	return nil, l.Count, fmt.Errorf("There is more then one result for Backup UUID: %s!", id)
 }
 
-// Lists VM backups
+// Lists Instance backups
 func (s *BackupService) ListBackups(p *ListBackupsParams) (*ListBackupsResponse, error) {
 	resp, err := s.cs.newRequest("listBackups", p.toURLValues())
 	if err != nil {
@@ -4684,7 +4671,7 @@ func (s *BackupService) NewRestoreBackupParams(id string) *RestoreBackupParams {
 	return p
 }
 
-// Restores an existing stopped or deleted VM using a VM backup
+// Restores an existing stopped or deleted Instance using an Instance backup
 func (s *BackupService) RestoreBackup(p *RestoreBackupParams) (*RestoreBackupResponse, error) {
 	resp, err := s.cs.newPostRequest("restoreBackup", p.toURLValues())
 	if err != nil {
@@ -4886,6 +4873,7 @@ type UpdateBackupRepositoryResponse struct {
 	Id                        string `json:"id"`
 	JobID                     string `json:"jobid"`
 	Jobstatus                 int    `json:"jobstatus"`
+	Mountopts                 string `json:"mountopts"`
 	Name                      string `json:"name"`
 	Provider                  string `json:"provider"`
 	Type                      string `json:"type"`
@@ -5211,7 +5199,7 @@ func (s *BackupService) NewUpdateBackupScheduleParams(intervaltype string, sched
 	return p
 }
 
-// Updates a user-defined VM backup schedule
+// Updates a User-defined Instance backup schedule
 func (s *BackupService) UpdateBackupSchedule(p *UpdateBackupScheduleParams) (*UpdateBackupScheduleResponse, error) {
 	resp, err := s.cs.newPostRequest("updateBackupSchedule", p.toURLValues())
 	if err != nil {

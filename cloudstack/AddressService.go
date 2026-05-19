@@ -406,7 +406,7 @@ func (s *AddressService) NewAssociateIpAddressParams() *AssociateIpAddressParams
 	return p
 }
 
-// Acquires and associates a public IP to an account.
+// Acquires and associates a public IP to an Account.
 func (s *AddressService) AssociateIpAddress(p *AssociateIpAddressParams) (*AssociateIpAddressResponse, error) {
 	resp, err := s.cs.newPostRequest("associateIpAddress", p.toURLValues())
 	if err != nil {
@@ -553,7 +553,7 @@ func (s *AddressService) NewDisassociateIpAddressParams(id string) *Disassociate
 	return p
 }
 
-// Disassociates an IP address from the account.
+// Disassociates an IP address from the Account.
 func (s *AddressService) DisassociateIpAddress(p *DisassociateIpAddressParams) (*DisassociateIpAddressResponse, error) {
 	resp, err := s.cs.newPostRequest("disassociateIpAddress", p.toURLValues())
 	if err != nil {
@@ -1308,7 +1308,7 @@ func (s *AddressService) GetPublicIpAddressByID(id string, opts ...OptionFunc) (
 	return nil, l.Count, fmt.Errorf("There is more then one result for PublicIpAddress UUID: %s!", id)
 }
 
-// Lists all public ip addresses
+// Lists all public IP addresses
 func (s *AddressService) ListPublicIpAddresses(p *ListPublicIpAddressesParams) (*ListPublicIpAddressesResponse, error) {
 	resp, err := s.cs.newRequest("listPublicIpAddresses", p.toURLValues())
 	if err != nil {
@@ -1588,7 +1588,7 @@ func (s *AddressService) NewReleaseIpAddressParams(id string) *ReleaseIpAddressP
 	return p
 }
 
-// Releases an IP address from the account.
+// Releases an IP address from the Account.
 func (s *AddressService) ReleaseIpAddress(p *ReleaseIpAddressParams) (*ReleaseIpAddressResponse, error) {
 	resp, err := s.cs.newPostRequest("releaseIpAddress", p.toURLValues())
 	if err != nil {
@@ -1874,7 +1874,7 @@ func (s *AddressService) NewReserveIpAddressParams(id string) *ReserveIpAddressP
 	return p
 }
 
-// Reserve a public IP to an account.
+// Reserve a public IP to an Account.
 func (s *AddressService) ReserveIpAddress(p *ReserveIpAddressParams) (*ReserveIpAddressResponse, error) {
 	resp, err := s.cs.newPostRequest("reserveIpAddress", p.toURLValues())
 	if err != nil {

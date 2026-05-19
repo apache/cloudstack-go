@@ -1017,7 +1017,7 @@ func (s *InternalLBService) GetInternalLoadBalancerVMByID(id string, opts ...Opt
 	return nil, l.Count, fmt.Errorf("There is more then one result for InternalLoadBalancerVM UUID: %s!", id)
 }
 
-// List internal LB VMs.
+// List internal LB Instances.
 func (s *InternalLBService) ListInternalLoadBalancerVMs(p *ListInternalLoadBalancerVMsParams) (*ListInternalLoadBalancerVMsResponse, error) {
 	resp, err := s.cs.newRequest("listInternalLoadBalancerVMs", p.toURLValues())
 	if err != nil {
@@ -1151,7 +1151,7 @@ func (s *InternalLBService) NewStartInternalLoadBalancerVMParams(id string) *Sta
 	return p
 }
 
-// Starts an existing internal lb vm.
+// Starts an existing Internal LB Instance.
 func (s *InternalLBService) StartInternalLoadBalancerVM(p *StartInternalLoadBalancerVMParams) (*StartInternalLoadBalancerVMResponse, error) {
 	resp, err := s.cs.newPostRequest("startInternalLoadBalancerVM", p.toURLValues())
 	if err != nil {
@@ -1325,7 +1325,7 @@ func (s *InternalLBService) NewStopInternalLoadBalancerVMParams(id string) *Stop
 	return p
 }
 
-// Stops an Internal LB vm.
+// Stops an Internal LB Instance.
 func (s *InternalLBService) StopInternalLoadBalancerVM(p *StopInternalLoadBalancerVMParams) (*StopInternalLoadBalancerVMResponse, error) {
 	resp, err := s.cs.newPostRequest("stopInternalLoadBalancerVM", p.toURLValues())
 	if err != nil {

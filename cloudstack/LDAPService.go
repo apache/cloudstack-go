@@ -1500,7 +1500,7 @@ func (s *LDAPService) NewLinkDomainToLdapParams(accounttype int, domainid string
 	return p
 }
 
-// link an existing cloudstack domain to group or OU in ldap
+// Link an existing Cloudstack domain to group or OU in ldap
 func (s *LDAPService) LinkDomainToLdap(p *LinkDomainToLdapParams) (*LinkDomainToLdapResponse, error) {
 	resp, err := s.cs.newPostRequest("linkDomainToLdap", p.toURLValues())
 	if err != nil {

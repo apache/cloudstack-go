@@ -713,7 +713,7 @@ func (s *ImageStoreService) NewCreateSecondaryStagingStoreParams(url string) *Cr
 	return p
 }
 
-// create secondary staging store.
+// Create secondary staging store.
 func (s *ImageStoreService) CreateSecondaryStagingStore(p *CreateSecondaryStagingStoreParams) (*CreateSecondaryStagingStoreResponse, error) {
 	resp, err := s.cs.newPostRequest("createSecondaryStagingStore", p.toURLValues())
 	if err != nil {

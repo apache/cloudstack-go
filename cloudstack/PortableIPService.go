@@ -207,7 +207,7 @@ func (s *PortableIPService) NewCreatePortableIpRangeParams(endip string, gateway
 	return p
 }
 
-// adds a range of portable public IP's to a region
+// Adds a range of portable public IP's to a region
 func (s *PortableIPService) CreatePortableIpRange(p *CreatePortableIpRangeParams) (*CreatePortableIpRangeResponse, error) {
 	resp, err := s.cs.newPostRequest("createPortableIpRange", p.toURLValues())
 	if err != nil {
@@ -313,7 +313,7 @@ func (s *PortableIPService) NewDeletePortableIpRangeParams(id string) *DeletePor
 	return p
 }
 
-// deletes a range of portable public IP's associated with a region
+// Deletes a range of portable public IP's associated with a region
 func (s *PortableIPService) DeletePortableIpRange(p *DeletePortableIpRangeParams) (*DeletePortableIpRangeResponse, error) {
 	resp, err := s.cs.newPostRequest("deletePortableIpRange", p.toURLValues())
 	if err != nil {
@@ -526,7 +526,7 @@ func (s *PortableIPService) GetPortableIpRangeByID(id string, opts ...OptionFunc
 	return nil, l.Count, fmt.Errorf("There is more then one result for PortableIpRange UUID: %s!", id)
 }
 
-// list portable IP ranges
+// List portable IP ranges
 func (s *PortableIPService) ListPortableIpRanges(p *ListPortableIpRangesParams) (*ListPortableIpRangesResponse, error) {
 	resp, err := s.cs.newRequest("listPortableIpRanges", p.toURLValues())
 	if err != nil {

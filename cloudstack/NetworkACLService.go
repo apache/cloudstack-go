@@ -394,7 +394,7 @@ func (s *NetworkACLService) NewCreateNetworkACLParams(protocol string) *CreateNe
 	return p
 }
 
-// Creates a ACL rule in the given network (the network has to belong to VPC)
+// Creates a ACL rule in the given Network (the Network has to belong to VPC)
 func (s *NetworkACLService) CreateNetworkACL(p *CreateNetworkACLParams) (*CreateNetworkACLResponse, error) {
 	resp, err := s.cs.newPostRequest("createNetworkACL", p.toURLValues())
 	if err != nil {
@@ -569,7 +569,7 @@ func (s *NetworkACLService) NewCreateNetworkACLListParams(name string, vpcid str
 	return p
 }
 
-// Creates a network ACL. If no VPC is given, then it creates a global ACL that can be used by everyone.
+// Creates a Network ACL. If no VPC is given, then it creates a global ACL that can be used by everyone.
 func (s *NetworkACLService) CreateNetworkACLList(p *CreateNetworkACLListParams) (*CreateNetworkACLListResponse, error) {
 	resp, err := s.cs.newPostRequest("createNetworkACLList", p.toURLValues())
 	if err != nil {
@@ -660,7 +660,7 @@ func (s *NetworkACLService) NewDeleteNetworkACLParams(id string) *DeleteNetworkA
 	return p
 }
 
-// Deletes a network ACL
+// Deletes a Network ACL
 func (s *NetworkACLService) DeleteNetworkACL(p *DeleteNetworkACLParams) (*DeleteNetworkACLResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteNetworkACL", p.toURLValues())
 	if err != nil {
@@ -1858,7 +1858,7 @@ func (s *NetworkACLService) NewMoveNetworkAclItemParams(id string) *MoveNetworkA
 	return p
 }
 
-// Move an ACL rule to a position bettwen two other ACL rules of the same ACL network list
+// Move an ACL rule to a position between two other ACL rules of the same ACL Network list
 func (s *NetworkACLService) MoveNetworkAclItem(p *MoveNetworkAclItemParams) (*MoveNetworkAclItemResponse, error) {
 	resp, err := s.cs.newPostRequest("moveNetworkAclItem", p.toURLValues())
 	if err != nil {
@@ -2607,7 +2607,7 @@ func (s *NetworkACLService) NewUpdateNetworkACLListParams(id string) *UpdateNetw
 	return p
 }
 
-// Updates network ACL list
+// Updates Network ACL list
 func (s *NetworkACLService) UpdateNetworkACLList(p *UpdateNetworkACLListParams) (*UpdateNetworkACLListResponse, error) {
 	resp, err := s.cs.newPostRequest("updateNetworkACLList", p.toURLValues())
 	if err != nil {

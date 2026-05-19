@@ -489,7 +489,9 @@ func (cs *CloudStackClient) GetAsyncJobResult(jobid string, timeout int64) (json
 	currentTime := time.Now().Unix()
 
 	for {
-		p := cs.Asyncjob.NewQueryAsyncJobResultParams(jobid)
+		p := &QueryAsyncJobResultParams{}
+		p.p = make(map[string]interface{})
+		p.SetJobID(jobid)
 		r, err := cs.Asyncjob.QueryAsyncJobResult(p)
 		if err != nil {
 			return nil, err

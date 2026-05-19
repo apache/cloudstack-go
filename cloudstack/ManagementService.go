@@ -151,6 +151,9 @@ func (p *ListManagementServersParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("peers", vv)
 	}
+	if v, found := p.p["version"]; found {
+		u.Set("version", v.(string))
+	}
 	return u
 }
 
@@ -277,6 +280,27 @@ func (p *ListManagementServersParams) GetPeers() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["peers"].(bool)
+	return value, ok
+}
+
+func (p *ListManagementServersParams) SetVersion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["version"] = v
+}
+
+func (p *ListManagementServersParams) ResetVersion() {
+	if p.p != nil && p.p["version"] != nil {
+		delete(p.p, "version")
+	}
+}
+
+func (p *ListManagementServersParams) GetVersion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["version"].(string)
 	return value, ok
 }
 
@@ -448,6 +472,9 @@ func (p *ListManagementServersMetricsParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("system", vv)
 	}
+	if v, found := p.p["version"]; found {
+		u.Set("version", v.(string))
+	}
 	return u
 }
 
@@ -595,6 +622,27 @@ func (p *ListManagementServersMetricsParams) GetSystem() (bool, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["system"].(bool)
+	return value, ok
+}
+
+func (p *ListManagementServersMetricsParams) SetVersion(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["version"] = v
+}
+
+func (p *ListManagementServersMetricsParams) ResetVersion() {
+	if p.p != nil && p.p["version"] != nil {
+		delete(p.p, "version")
+	}
+}
+
+func (p *ListManagementServersMetricsParams) GetVersion() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["version"].(string)
 	return value, ok
 }
 

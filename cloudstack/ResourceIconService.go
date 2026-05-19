@@ -106,7 +106,7 @@ func (s *ResourceIconService) NewDeleteResourceIconParams(resourceids []string, 
 	return p
 }
 
-// deletes the resource icon from the specified resource(s)
+// Deletes the resource icon from the specified resource(s)
 func (s *ResourceIconService) DeleteResourceIcon(p *DeleteResourceIconParams) (*DeleteResourceIconResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteResourceIcon", p.toURLValues())
 	if err != nil {

@@ -441,7 +441,7 @@ func (s *BrocadeVCSService) GetBrocadeVcsDeviceNetworkID(keyword string, vcsdevi
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// lists network that are using a brocade vcs switch
+// Lists network that are using a brocade vcs switch
 func (s *BrocadeVCSService) ListBrocadeVcsDeviceNetworks(p *ListBrocadeVcsDeviceNetworksParams) (*ListBrocadeVcsDeviceNetworksResponse, error) {
 	resp, err := s.cs.newRequest("listBrocadeVcsDeviceNetworks", p.toURLValues())
 	if err != nil {

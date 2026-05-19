@@ -594,7 +594,7 @@ func (s *AccountService) NewDeleteAccountParams(id string) *DeleteAccountParams 
 	return p
 }
 
-// Deletes a account, and all users associated with this account
+// Deletes an Account and all Users associated with this Account
 func (s *AccountService) DeleteAccount(p *DeleteAccountParams) (*DeleteAccountResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteAccount", p.toURLValues())
 	if err != nil {
@@ -1367,7 +1367,7 @@ func (s *AccountService) NewLinkAccountToLdapParams(account string, domainid str
 	return p
 }
 
-// link a cloudstack account to a group or OU in ldap
+// Link a cloudstack account to a group or OU in ldap
 func (s *AccountService) LinkAccountToLdap(p *LinkAccountToLdapParams) (*LinkAccountToLdapResponse, error) {
 	resp, err := s.cs.newPostRequest("linkAccountToLdap", p.toURLValues())
 	if err != nil {
@@ -1864,7 +1864,7 @@ func (s *AccountService) GetAccountByID(id string, opts ...OptionFunc) (*Account
 	return nil, l.Count, fmt.Errorf("There is more then one result for Account UUID: %s!", id)
 }
 
-// Lists accounts and provides detailed account information for listed accounts
+// Lists Accounts and provides detailed Account information for listed Accounts
 func (s *AccountService) ListAccounts(p *ListAccountsParams) (*ListAccountsResponse, error) {
 	resp, err := s.cs.newRequest("listAccounts", p.toURLValues())
 	if err != nil {
@@ -2245,7 +2245,7 @@ func (s *AccountService) GetProjectAccountID(keyword string, projectid string, o
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// Lists project's accounts
+// Lists project's Accounts
 func (s *AccountService) ListProjectAccounts(p *ListProjectAccountsParams) (*ListProjectAccountsResponse, error) {
 	resp, err := s.cs.newRequest("listProjectAccounts", p.toURLValues())
 	if err != nil {
@@ -2416,7 +2416,7 @@ func (s *AccountService) NewLockAccountParams(account string, domainid string) *
 	return p
 }
 
-// This deprecated function used to locks an account. Look for the API DisableAccount instead
+// This deprecated function used to lock an Account. Look for the API DisableAccount instead
 func (s *AccountService) LockAccount(p *LockAccountParams) (*LockAccountResponse, error) {
 	resp, err := s.cs.newPostRequest("lockAccount", p.toURLValues())
 	if err != nil {
@@ -2994,7 +2994,7 @@ func (s *AccountService) NewUpdateAccountParams() *UpdateAccountParams {
 	return p
 }
 
-// Updates account information for the authenticated user
+// Updates Account information for the authenticated user
 func (s *AccountService) UpdateAccount(p *UpdateAccountParams) (*UpdateAccountResponse, error) {
 	resp, err := s.cs.newPostRequest("updateAccount", p.toURLValues())
 	if err != nil {

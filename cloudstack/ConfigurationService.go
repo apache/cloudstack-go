@@ -125,6 +125,7 @@ type Capability struct {
 	Securitygroupsenabled                        bool   `json:"securitygroupsenabled"`
 	Sharedfsvmmincpucount                        int    `json:"sharedfsvmmincpucount"`
 	Sharedfsvmminramsize                         int    `json:"sharedfsvmminramsize"`
+	Snapshotshowchainsize                        bool   `json:"snapshotshowchainsize"`
 	SupportELB                                   string `json:"supportELB"`
 	Userpublictemplateenabled                    bool   `json:"userpublictemplateenabled"`
 }

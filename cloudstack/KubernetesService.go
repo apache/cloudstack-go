@@ -337,6 +337,7 @@ type AddKubernetesSupportedVersionResponse struct {
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
 	Isostate            string `json:"isostate"`
+	Isourl              string `json:"isourl"`
 	JobID               string `json:"jobid"`
 	Jobstatus           int    `json:"jobstatus"`
 	Mincpunumber        int    `json:"mincpunumber"`
@@ -2207,6 +2208,7 @@ type KubernetesSupportedVersion struct {
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
 	Isostate            string `json:"isostate"`
+	Isourl              string `json:"isourl"`
 	JobID               string `json:"jobid"`
 	Jobstatus           int    `json:"jobstatus"`
 	Mincpunumber        int    `json:"mincpunumber"`
@@ -2838,6 +2840,7 @@ type UpdateKubernetesSupportedVersionResponse struct {
 	Isoid               string `json:"isoid"`
 	Isoname             string `json:"isoname"`
 	Isostate            string `json:"isostate"`
+	Isourl              string `json:"isourl"`
 	JobID               string `json:"jobid"`
 	Jobstatus           int    `json:"jobstatus"`
 	Mincpunumber        int    `json:"mincpunumber"`

@@ -185,7 +185,7 @@ func (s *VolumeService) NewAttachVolumeParams(id string, virtualmachineid string
 	return p
 }
 
-// Attaches a disk volume to a virtual machine.
+// Attaches a disk volume to  an Instance.
 func (s *VolumeService) AttachVolume(p *AttachVolumeParams) (*AttachVolumeResponse, error) {
 	resp, err := s.cs.newPostRequest("attachVolume", p.toURLValues())
 	if err != nil {
@@ -828,6 +828,9 @@ func (p *CreateVolumeParams) toURLValues() url.Values {
 	if v, found := p.p["snapshotid"]; found {
 		u.Set("snapshotid", v.(string))
 	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
+	}
 	if v, found := p.p["virtualmachineid"]; found {
 		u.Set("virtualmachineid", v.(string))
 	}
@@ -1068,6 +1071,27 @@ func (p *CreateVolumeParams) GetSnapshotid() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateVolumeParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *CreateVolumeParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
+func (p *CreateVolumeParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
 func (p *CreateVolumeParams) SetVirtualmachineid(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -1118,7 +1142,7 @@ func (s *VolumeService) NewCreateVolumeParams() *CreateVolumeParams {
 	return p
 }
 
-// Creates a disk volume from a disk offering. This disk volume must still be attached to a virtual machine to make use of it.
+// Creates a disk volume from a disk offering. This disk volume must still be attached to  an Instance to make use of it.
 func (s *VolumeService) CreateVolume(p *CreateVolumeParams) (*CreateVolumeResponse, error) {
 	resp, err := s.cs.newPostRequest("createVolume", p.toURLValues())
 	if err != nil {
@@ -1597,7 +1621,7 @@ func (s *VolumeService) NewDetachVolumeParams() *DetachVolumeParams {
 	return p
 }
 
-// Detaches a disk volume from a virtual machine.
+// Detaches a disk volume from  an Instance.
 func (s *VolumeService) DetachVolume(p *DetachVolumeParams) (*DetachVolumeResponse, error) {
 	resp, err := s.cs.newPostRequest("detachVolume", p.toURLValues())
 	if err != nil {
@@ -6443,7 +6467,7 @@ func (s *VolumeService) NewAssignVolumeParams(volumeid string) *AssignVolumePara
 	return p
 }
 
-// Changes ownership of a Volume from one account to another.
+// Changes ownership of a Volume from one Account to another.
 func (s *VolumeService) AssignVolume(p *AssignVolumeParams) (*AssignVolumeResponse, error) {
 	resp, err := s.cs.newPostRequest("assignVolume", p.toURLValues())
 	if err != nil {
@@ -6632,7 +6656,7 @@ func (s *VolumeService) NewRestoreVolumeFromBackupAndAttachToVMParams(backupid s
 	return p
 }
 
-// Restore and attach a backed up volume to VM
+// Restore and attach a backed up volume to Instance
 func (s *VolumeService) RestoreVolumeFromBackupAndAttachToVM(p *RestoreVolumeFromBackupAndAttachToVMParams) (*RestoreVolumeFromBackupAndAttachToVMResponse, error) {
 	resp, err := s.cs.newPostRequest("restoreVolumeFromBackupAndAttachToVM", p.toURLValues())
 	if err != nil {

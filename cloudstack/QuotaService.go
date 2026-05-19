@@ -362,7 +362,7 @@ func (s *QuotaService) NewQuotaCreditsParams(account string, domainid string, va
 	return p
 }
 
-// Add +-credits to an account
+// Add +-credits to an Account
 func (s *QuotaService) QuotaCredits(p *QuotaCreditsParams) (*QuotaCreditsResponse, error) {
 	resp, err := s.cs.newPostRequest("quotaCredits", p.toURLValues())
 	if err != nil {
@@ -800,7 +800,7 @@ func (s *QuotaService) NewQuotaSummaryParams() *QuotaSummaryParams {
 	return p
 }
 
-// Lists balance and quota usage for all accounts
+// Lists balance and quota usage for all Accounts
 func (s *QuotaService) QuotaSummary(p *QuotaSummaryParams) (*QuotaSummaryResponse, error) {
 	resp, err := s.cs.newRequest("quotaSummary", p.toURLValues())
 	if err != nil {

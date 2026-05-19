@@ -102,7 +102,7 @@ func (s *DiagnosticsService) NewGetDiagnosticsDataParams(targetid string) *GetDi
 	return p
 }
 
-// Get diagnostics and files from system VMs
+// Get diagnostics and files from System VMs
 func (s *DiagnosticsService) GetDiagnosticsData(p *GetDiagnosticsDataParams) (*GetDiagnosticsDataResponse, error) {
 	resp, err := s.cs.newRequest("getDiagnosticsData", p.toURLValues())
 	if err != nil {
@@ -262,7 +262,7 @@ func (s *DiagnosticsService) NewRunDiagnosticsParams(ipaddress string, targetid 
 	return p
 }
 
-// Execute network-utility command (ping/arping/tracert) on system VMs remotely
+// Execute network-utility command (ping/arping/tracert) on System VMs remotely
 func (s *DiagnosticsService) RunDiagnostics(p *RunDiagnosticsParams) (*RunDiagnosticsResponse, error) {
 	resp, err := s.cs.newPostRequest("runDiagnostics", p.toURLValues())
 	if err != nil {

@@ -424,6 +424,9 @@ func (p *CreateExtensionParams) toURLValues() url.Values {
 	if v, found := p.p["path"]; found {
 		u.Set("path", v.(string))
 	}
+	if v, found := p.p["reservedresourcedetails"]; found {
+		u.Set("reservedresourcedetails", v.(string))
+	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
 	}
@@ -538,6 +541,27 @@ func (p *CreateExtensionParams) GetPath() (string, bool) {
 	return value, ok
 }
 
+func (p *CreateExtensionParams) SetReservedresourcedetails(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["reservedresourcedetails"] = v
+}
+
+func (p *CreateExtensionParams) ResetReservedresourcedetails() {
+	if p.p != nil && p.p["reservedresourcedetails"] != nil {
+		delete(p.p, "reservedresourcedetails")
+	}
+}
+
+func (p *CreateExtensionParams) GetReservedresourcedetails() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["reservedresourcedetails"].(string)
+	return value, ok
+}
+
 func (p *CreateExtensionParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -606,20 +630,21 @@ func (s *ExtensionService) CreateExtension(p *CreateExtensionParams) (*CreateExt
 }
 
 type CreateExtensionResponse struct {
-	Created       string                             `json:"created"`
-	Description   string                             `json:"description"`
-	Details       map[string]string                  `json:"details"`
-	Id            string                             `json:"id"`
-	Isuserdefined bool                               `json:"isuserdefined"`
-	JobID         string                             `json:"jobid"`
-	Jobstatus     int                                `json:"jobstatus"`
-	Name          string                             `json:"name"`
-	Path          string                             `json:"path"`
-	Pathready     bool                               `json:"pathready"`
-	Removed       string                             `json:"removed"`
-	Resources     []CreateExtensionResponseResources `json:"resources"`
-	State         string                             `json:"state"`
-	Type          string                             `json:"type"`
+	Created                 string                             `json:"created"`
+	Description             string                             `json:"description"`
+	Details                 map[string]string                  `json:"details"`
+	Id                      string                             `json:"id"`
+	Isuserdefined           bool                               `json:"isuserdefined"`
+	JobID                   string                             `json:"jobid"`
+	Jobstatus               int                                `json:"jobstatus"`
+	Name                    string                             `json:"name"`
+	Path                    string                             `json:"path"`
+	Pathready               bool                               `json:"pathready"`
+	Removed                 string                             `json:"removed"`
+	Reservedresourcedetails string                             `json:"reservedresourcedetails"`
+	Resources               []CreateExtensionResponseResources `json:"resources"`
+	State                   string                             `json:"state"`
+	Type                    string                             `json:"type"`
 }
 
 type CreateExtensionResponseResources struct {
@@ -808,20 +833,21 @@ func (s *ExtensionService) DeleteExtension(p *DeleteExtensionParams) (*DeleteExt
 }
 
 type DeleteExtensionResponse struct {
-	Created       string                             `json:"created"`
-	Description   string                             `json:"description"`
-	Details       map[string]string                  `json:"details"`
-	Id            string                             `json:"id"`
-	Isuserdefined bool                               `json:"isuserdefined"`
-	JobID         string                             `json:"jobid"`
-	Jobstatus     int                                `json:"jobstatus"`
-	Name          string                             `json:"name"`
-	Path          string                             `json:"path"`
-	Pathready     bool                               `json:"pathready"`
-	Removed       string                             `json:"removed"`
-	Resources     []DeleteExtensionResponseResources `json:"resources"`
-	State         string                             `json:"state"`
-	Type          string                             `json:"type"`
+	Created                 string                             `json:"created"`
+	Description             string                             `json:"description"`
+	Details                 map[string]string                  `json:"details"`
+	Id                      string                             `json:"id"`
+	Isuserdefined           bool                               `json:"isuserdefined"`
+	JobID                   string                             `json:"jobid"`
+	Jobstatus               int                                `json:"jobstatus"`
+	Name                    string                             `json:"name"`
+	Path                    string                             `json:"path"`
+	Pathready               bool                               `json:"pathready"`
+	Removed                 string                             `json:"removed"`
+	Reservedresourcedetails string                             `json:"reservedresourcedetails"`
+	Resources               []DeleteExtensionResponseResources `json:"resources"`
+	State                   string                             `json:"state"`
+	Type                    string                             `json:"type"`
 }
 
 type DeleteExtensionResponseResources struct {
@@ -1472,20 +1498,21 @@ type ListExtensionsResponse struct {
 }
 
 type Extension struct {
-	Created       string               `json:"created"`
-	Description   string               `json:"description"`
-	Details       map[string]string    `json:"details"`
-	Id            string               `json:"id"`
-	Isuserdefined bool                 `json:"isuserdefined"`
-	JobID         string               `json:"jobid"`
-	Jobstatus     int                  `json:"jobstatus"`
-	Name          string               `json:"name"`
-	Path          string               `json:"path"`
-	Pathready     bool                 `json:"pathready"`
-	Removed       string               `json:"removed"`
-	Resources     []ExtensionResources `json:"resources"`
-	State         string               `json:"state"`
-	Type          string               `json:"type"`
+	Created                 string               `json:"created"`
+	Description             string               `json:"description"`
+	Details                 map[string]string    `json:"details"`
+	Id                      string               `json:"id"`
+	Isuserdefined           bool                 `json:"isuserdefined"`
+	JobID                   string               `json:"jobid"`
+	Jobstatus               int                  `json:"jobstatus"`
+	Name                    string               `json:"name"`
+	Path                    string               `json:"path"`
+	Pathready               bool                 `json:"pathready"`
+	Removed                 string               `json:"removed"`
+	Reservedresourcedetails string               `json:"reservedresourcedetails"`
+	Resources               []ExtensionResources `json:"resources"`
+	State                   string               `json:"state"`
+	Type                    string               `json:"type"`
 }
 
 type ExtensionResources struct {
@@ -1634,20 +1661,21 @@ func (s *ExtensionService) RegisterExtension(p *RegisterExtensionParams) (*Regis
 }
 
 type RegisterExtensionResponse struct {
-	Created       string                               `json:"created"`
-	Description   string                               `json:"description"`
-	Details       map[string]string                    `json:"details"`
-	Id            string                               `json:"id"`
-	Isuserdefined bool                                 `json:"isuserdefined"`
-	JobID         string                               `json:"jobid"`
-	Jobstatus     int                                  `json:"jobstatus"`
-	Name          string                               `json:"name"`
-	Path          string                               `json:"path"`
-	Pathready     bool                                 `json:"pathready"`
-	Removed       string                               `json:"removed"`
-	Resources     []RegisterExtensionResponseResources `json:"resources"`
-	State         string                               `json:"state"`
-	Type          string                               `json:"type"`
+	Created                 string                               `json:"created"`
+	Description             string                               `json:"description"`
+	Details                 map[string]string                    `json:"details"`
+	Id                      string                               `json:"id"`
+	Isuserdefined           bool                                 `json:"isuserdefined"`
+	JobID                   string                               `json:"jobid"`
+	Jobstatus               int                                  `json:"jobstatus"`
+	Name                    string                               `json:"name"`
+	Path                    string                               `json:"path"`
+	Pathready               bool                                 `json:"pathready"`
+	Removed                 string                               `json:"removed"`
+	Reservedresourcedetails string                               `json:"reservedresourcedetails"`
+	Resources               []RegisterExtensionResponseResources `json:"resources"`
+	State                   string                               `json:"state"`
+	Type                    string                               `json:"type"`
 }
 
 type RegisterExtensionResponseResources struct {
@@ -1935,20 +1963,21 @@ func (s *ExtensionService) UnregisterExtension(p *UnregisterExtensionParams) (*U
 }
 
 type UnregisterExtensionResponse struct {
-	Created       string                                 `json:"created"`
-	Description   string                                 `json:"description"`
-	Details       map[string]string                      `json:"details"`
-	Id            string                                 `json:"id"`
-	Isuserdefined bool                                   `json:"isuserdefined"`
-	JobID         string                                 `json:"jobid"`
-	Jobstatus     int                                    `json:"jobstatus"`
-	Name          string                                 `json:"name"`
-	Path          string                                 `json:"path"`
-	Pathready     bool                                   `json:"pathready"`
-	Removed       string                                 `json:"removed"`
-	Resources     []UnregisterExtensionResponseResources `json:"resources"`
-	State         string                                 `json:"state"`
-	Type          string                                 `json:"type"`
+	Created                 string                                 `json:"created"`
+	Description             string                                 `json:"description"`
+	Details                 map[string]string                      `json:"details"`
+	Id                      string                                 `json:"id"`
+	Isuserdefined           bool                                   `json:"isuserdefined"`
+	JobID                   string                                 `json:"jobid"`
+	Jobstatus               int                                    `json:"jobstatus"`
+	Name                    string                                 `json:"name"`
+	Path                    string                                 `json:"path"`
+	Pathready               bool                                   `json:"pathready"`
+	Removed                 string                                 `json:"removed"`
+	Reservedresourcedetails string                                 `json:"reservedresourcedetails"`
+	Resources               []UnregisterExtensionResponseResources `json:"resources"`
+	State                   string                                 `json:"state"`
+	Type                    string                                 `json:"type"`
 }
 
 type UnregisterExtensionResponseResources struct {
@@ -2358,6 +2387,9 @@ func (p *UpdateExtensionParams) toURLValues() url.Values {
 		vv := strconv.FormatBool(v.(bool))
 		u.Set("orchestratorrequirespreparevm", vv)
 	}
+	if v, found := p.p["reservedresourcedetails"]; found {
+		u.Set("reservedresourcedetails", v.(string))
+	}
 	if v, found := p.p["state"]; found {
 		u.Set("state", v.(string))
 	}
@@ -2469,6 +2501,27 @@ func (p *UpdateExtensionParams) GetOrchestratorrequirespreparevm() (bool, bool) 
 	return value, ok
 }
 
+func (p *UpdateExtensionParams) SetReservedresourcedetails(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["reservedresourcedetails"] = v
+}
+
+func (p *UpdateExtensionParams) ResetReservedresourcedetails() {
+	if p.p != nil && p.p["reservedresourcedetails"] != nil {
+		delete(p.p, "reservedresourcedetails")
+	}
+}
+
+func (p *UpdateExtensionParams) GetReservedresourcedetails() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["reservedresourcedetails"].(string)
+	return value, ok
+}
+
 func (p *UpdateExtensionParams) SetState(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -2515,20 +2568,21 @@ func (s *ExtensionService) UpdateExtension(p *UpdateExtensionParams) (*UpdateExt
 }
 
 type UpdateExtensionResponse struct {
-	Created       string                             `json:"created"`
-	Description   string                             `json:"description"`
-	Details       map[string]string                  `json:"details"`
-	Id            string                             `json:"id"`
-	Isuserdefined bool                               `json:"isuserdefined"`
-	JobID         string                             `json:"jobid"`
-	Jobstatus     int                                `json:"jobstatus"`
-	Name          string                             `json:"name"`
-	Path          string                             `json:"path"`
-	Pathready     bool                               `json:"pathready"`
-	Removed       string                             `json:"removed"`
-	Resources     []UpdateExtensionResponseResources `json:"resources"`
-	State         string                             `json:"state"`
-	Type          string                             `json:"type"`
+	Created                 string                             `json:"created"`
+	Description             string                             `json:"description"`
+	Details                 map[string]string                  `json:"details"`
+	Id                      string                             `json:"id"`
+	Isuserdefined           bool                               `json:"isuserdefined"`
+	JobID                   string                             `json:"jobid"`
+	Jobstatus               int                                `json:"jobstatus"`
+	Name                    string                             `json:"name"`
+	Path                    string                             `json:"path"`
+	Pathready               bool                               `json:"pathready"`
+	Removed                 string                             `json:"removed"`
+	Reservedresourcedetails string                             `json:"reservedresourcedetails"`
+	Resources               []UpdateExtensionResponseResources `json:"resources"`
+	State                   string                             `json:"state"`
+	Type                    string                             `json:"type"`
 }
 
 type UpdateExtensionResponseResources struct {

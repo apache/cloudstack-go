@@ -49,7 +49,7 @@ func (s *InfrastructureUsageService) NewListDbMetricsParams() *ListDbMetricsPara
 	return p
 }
 
-// list the db hosts and statistics
+// List the db hosts and statistics
 func (s *InfrastructureUsageService) ListDbMetrics(p *ListDbMetricsParams) (*ListDbMetricsResponse, error) {
 	resp, err := s.cs.newRequest("listDbMetrics", p.toURLValues())
 	if err != nil {

@@ -362,7 +362,7 @@ func (s *ProjectService) NewAddAccountToProjectParams(projectid string) *AddAcco
 	return p
 }
 
-// Adds account to a project
+// Adds Account to a project
 func (s *ProjectService) AddAccountToProject(p *AddAccountToProjectParams) (*AddAccountToProjectResponse, error) {
 	resp, err := s.cs.newPostRequest("addAccountToProject", p.toURLValues())
 	if err != nil {
@@ -541,7 +541,7 @@ func (s *ProjectService) NewAddUserToProjectParams(projectid string, username st
 	return p
 }
 
-// Adds user to a project
+// Adds User to a project
 func (s *ProjectService) AddUserToProject(p *AddUserToProjectParams) (*AddUserToProjectResponse, error) {
 	resp, err := s.cs.newPostRequest("addUserToProject", p.toURLValues())
 	if err != nil {
@@ -916,7 +916,7 @@ func (s *ProjectService) NewDeleteAccountFromProjectParams(account string, proje
 	return p
 }
 
-// Deletes account from the project
+// Deletes Account from the project
 func (s *ProjectService) DeleteAccountFromProject(p *DeleteAccountFromProjectParams) (*DeleteAccountFromProjectResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteAccountFromProject", p.toURLValues())
 	if err != nil {
@@ -1023,7 +1023,7 @@ func (s *ProjectService) NewDeleteUserFromProjectParams(projectid string, userid
 	return p
 }
 
-// Deletes user from the project
+// Deletes User from the project
 func (s *ProjectService) DeleteUserFromProject(p *DeleteUserFromProjectParams) (*DeleteUserFromProjectResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteUserFromProject", p.toURLValues())
 	if err != nil {
