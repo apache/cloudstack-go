@@ -59,6 +59,7 @@ var detailsRequireZeroIndex = map[string]bool{
 	"createAccount":        true,
 	"updateAccount":        true,
 	"updateVirtualMachine": true,
+	"importVm":             true,
 }
 
 // parametersRequireIndexing contains map parameters that always need
