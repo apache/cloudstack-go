@@ -653,6 +653,9 @@ func getRawValue(b json.RawMessage) (json.RawMessage, error) {
 				if err := json.Unmarshal(v, &resp); err != nil {
 					return nil, err
 				}
+				if len(resp) == 0 {
+					return nil, fmt.Errorf("Unable to extract raw value: empty array for key %q in:\n\n%s\n\n", k, string(b))
+				}
 				return resp[0], nil
 			}
 		}

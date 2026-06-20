@@ -8475,7 +8475,7 @@ func (s *NetworkService) ListGuestNetworkIpv6Prefixes(p *ListGuestNetworkIpv6Pre
 
 type ListGuestNetworkIpv6PrefixesResponse struct {
 	Count                    int                        `json:"count"`
-	GuestNetworkIpv6Prefixes []*GuestNetworkIpv6Prefixe `json:"guestnetworkipv6prefixe"`
+	GuestNetworkIpv6Prefixes []*GuestNetworkIpv6Prefixe `json:"guestnetworkipv6prefix"`
 }
 
 type GuestNetworkIpv6Prefixe struct {

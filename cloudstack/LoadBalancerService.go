@@ -3539,7 +3539,7 @@ func (s *LoadBalancerService) ListLBHealthCheckPolicies(p *ListLBHealthCheckPoli
 
 type ListLBHealthCheckPoliciesResponse struct {
 	Count                 int                    `json:"count"`
-	LBHealthCheckPolicies []*LBHealthCheckPolicy `json:"lbhealthcheckpolicy"`
+	LBHealthCheckPolicies []*LBHealthCheckPolicy `json:"healthcheckpolicies"`
 }
 
 type LBHealthCheckPolicy struct {
@@ -3782,7 +3782,7 @@ func (s *LoadBalancerService) ListLBStickinessPolicies(p *ListLBStickinessPolici
 
 type ListLBStickinessPoliciesResponse struct {
 	Count                int                   `json:"count"`
-	LBStickinessPolicies []*LBStickinessPolicy `json:"lbstickinesspolicy"`
+	LBStickinessPolicies []*LBStickinessPolicy `json:"stickinesspolicies"`
 }
 
 type LBStickinessPolicy struct {
