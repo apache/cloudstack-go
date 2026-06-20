@@ -1265,6 +1265,9 @@ func (s *RouterService) GetRouterID(name string, opts ...OptionFunc) (string, in
 	}
 
 	if l.Count == 1 {
+		if len(l.Routers) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Routers[0].Id, l.Count, nil
 	}
 
@@ -1320,6 +1323,9 @@ func (s *RouterService) GetRouterByID(id string, opts ...OptionFunc) (*Router, i
 	}
 
 	if l.Count == 1 {
+		if len(l.Routers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Routers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Router UUID: %s!", id)
@@ -1609,6 +1615,9 @@ func (s *RouterService) GetVirtualRouterElementByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualRouterElements) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VirtualRouterElements[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VirtualRouterElement UUID: %s!", id)

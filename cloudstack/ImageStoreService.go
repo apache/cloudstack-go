@@ -1195,6 +1195,9 @@ func (s *ImageStoreService) GetImageStoreID(name string, opts ...OptionFunc) (st
 	}
 
 	if l.Count == 1 {
+		if len(l.ImageStores) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ImageStores[0].Id, l.Count, nil
 	}
 
@@ -1250,6 +1253,9 @@ func (s *ImageStoreService) GetImageStoreByID(id string, opts ...OptionFunc) (*I
 	}
 
 	if l.Count == 1 {
+		if len(l.ImageStores) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ImageStores[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ImageStore UUID: %s!", id)
@@ -1529,6 +1535,9 @@ func (s *ImageStoreService) GetSecondaryStagingStoreID(name string, opts ...Opti
 	}
 
 	if l.Count == 1 {
+		if len(l.SecondaryStagingStores) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.SecondaryStagingStores[0].Id, l.Count, nil
 	}
 
@@ -1584,6 +1593,9 @@ func (s *ImageStoreService) GetSecondaryStagingStoreByID(id string, opts ...Opti
 	}
 
 	if l.Count == 1 {
+		if len(l.SecondaryStagingStores) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.SecondaryStagingStores[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for SecondaryStagingStore UUID: %s!", id)
@@ -2113,6 +2125,9 @@ func (s *ImageStoreService) GetImageStoreObjectByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.ImageStoreObjects) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ImageStoreObjects[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ImageStoreObject UUID: %s!", id)

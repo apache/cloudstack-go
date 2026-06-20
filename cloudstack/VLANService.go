@@ -1136,6 +1136,9 @@ func (s *VLANService) GetDedicatedGuestVlanRangeByID(id string, opts ...OptionFu
 	}
 
 	if l.Count == 1 {
+		if len(l.DedicatedGuestVlanRanges) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.DedicatedGuestVlanRanges[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for DedicatedGuestVlanRange UUID: %s!", id)
@@ -1539,6 +1542,9 @@ func (s *VLANService) GetVlanIpRangeByID(id string, opts ...OptionFunc) (*VlanIp
 	}
 
 	if l.Count == 1 {
+		if len(l.VlanIpRanges) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VlanIpRanges[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VlanIpRange UUID: %s!", id)

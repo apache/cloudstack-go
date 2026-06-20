@@ -3197,6 +3197,9 @@ func (s *LoadBalancerService) GetGlobalLoadBalancerRuleID(keyword string, opts .
 	}
 
 	if l.Count == 1 {
+		if len(l.GlobalLoadBalancerRules) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.GlobalLoadBalancerRules[0].Id, l.Count, nil
 	}
 
@@ -3252,6 +3255,9 @@ func (s *LoadBalancerService) GetGlobalLoadBalancerRuleByID(id string, opts ...O
 	}
 
 	if l.Count == 1 {
+		if len(l.GlobalLoadBalancerRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.GlobalLoadBalancerRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for GlobalLoadBalancerRule UUID: %s!", id)
@@ -3517,6 +3523,9 @@ func (s *LoadBalancerService) GetLBHealthCheckPolicyByID(id string, opts ...Opti
 	}
 
 	if l.Count == 1 {
+		if len(l.LBHealthCheckPolicies) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LBHealthCheckPolicies[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LBHealthCheckPolicy UUID: %s!", id)
@@ -3760,6 +3769,9 @@ func (s *LoadBalancerService) GetLBStickinessPolicyByID(id string, opts ...Optio
 	}
 
 	if l.Count == 1 {
+		if len(l.LBStickinessPolicies) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LBStickinessPolicies[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LBStickinessPolicy UUID: %s!", id)
@@ -4006,6 +4018,9 @@ func (s *LoadBalancerService) GetLoadBalancerRuleInstanceByID(id string, opts ..
 	}
 
 	if l.Count == 1 {
+		if len(l.LoadBalancerRuleInstances) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LoadBalancerRuleInstances[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LoadBalancerRuleInstance UUID: %s!", id)
@@ -4475,6 +4490,9 @@ func (s *LoadBalancerService) GetLoadBalancerRuleID(name string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.LoadBalancerRules) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.LoadBalancerRules[0].Id, l.Count, nil
 	}
 
@@ -4530,6 +4548,9 @@ func (s *LoadBalancerService) GetLoadBalancerRuleByID(id string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.LoadBalancerRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LoadBalancerRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LoadBalancerRule UUID: %s!", id)
@@ -5018,6 +5039,9 @@ func (s *LoadBalancerService) GetLoadBalancerID(name string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.LoadBalancers) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.LoadBalancers[0].Id, l.Count, nil
 	}
 
@@ -5073,6 +5097,9 @@ func (s *LoadBalancerService) GetLoadBalancerByID(id string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.LoadBalancers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LoadBalancers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LoadBalancer UUID: %s!", id)
@@ -5250,6 +5277,9 @@ func (s *LoadBalancerService) GetRegisteredServicePackageID(keyword string, opts
 	}
 
 	if l.Count == 1 {
+		if len(l.RegisteredServicePackages) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.RegisteredServicePackages[0].Id, l.Count, nil
 	}
 

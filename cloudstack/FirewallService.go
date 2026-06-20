@@ -2620,6 +2620,9 @@ func (s *FirewallService) GetEgressFirewallRuleByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.EgressFirewallRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.EgressFirewallRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for EgressFirewallRule UUID: %s!", id)
@@ -3039,6 +3042,9 @@ func (s *FirewallService) GetFirewallRuleByID(id string, opts ...OptionFunc) (*F
 	}
 
 	if l.Count == 1 {
+		if len(l.FirewallRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.FirewallRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for FirewallRule UUID: %s!", id)
@@ -3646,6 +3652,9 @@ func (s *FirewallService) GetPortForwardingRuleByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.PortForwardingRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.PortForwardingRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for PortForwardingRule UUID: %s!", id)
@@ -4067,6 +4076,9 @@ func (s *FirewallService) GetRoutingFirewallRuleByID(id string, opts ...OptionFu
 	}
 
 	if l.Count == 1 {
+		if len(l.RoutingFirewallRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.RoutingFirewallRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for RoutingFirewallRule UUID: %s!", id)
@@ -5075,6 +5087,9 @@ func (s *FirewallService) GetIpv6FirewallRuleByID(id string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.Ipv6FirewallRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Ipv6FirewallRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Ipv6FirewallRule UUID: %s!", id)

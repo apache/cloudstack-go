@@ -2031,6 +2031,9 @@ func (s *TemplateService) GetTemplatePermissionByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.TemplatePermissions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.TemplatePermissions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for TemplatePermission UUID: %s!", id)
@@ -2824,6 +2827,9 @@ func (s *TemplateService) GetTemplateID(name string, templatefilter string, zone
 	}
 
 	if l.Count == 1 {
+		if len(l.Templates) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Templates[0].Id, l.Count, nil
 	}
 
@@ -2880,6 +2886,9 @@ func (s *TemplateService) GetTemplateByID(id string, templatefilter string, opts
 	}
 
 	if l.Count == 1 {
+		if len(l.Templates) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Templates[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Template UUID: %s!", id)

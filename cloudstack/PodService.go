@@ -1481,6 +1481,9 @@ func (s *PodService) GetPodID(name string, opts ...OptionFunc) (string, int, err
 	}
 
 	if l.Count == 1 {
+		if len(l.Pods) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Pods[0].Id, l.Count, nil
 	}
 
@@ -1536,6 +1539,9 @@ func (s *PodService) GetPodByID(id string, opts ...OptionFunc) (*Pod, int, error
 	}
 
 	if l.Count == 1 {
+		if len(l.Pods) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Pods[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Pod UUID: %s!", id)

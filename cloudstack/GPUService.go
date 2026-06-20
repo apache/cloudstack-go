@@ -1444,6 +1444,9 @@ func (s *GPUService) GetGpuCardID(keyword string, opts ...OptionFunc) (string, i
 	}
 
 	if l.Count == 1 {
+		if len(l.GpuCards) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.GpuCards[0].Id, l.Count, nil
 	}
 
@@ -1499,6 +1502,9 @@ func (s *GPUService) GetGpuCardByID(id string, opts ...OptionFunc) (*GpuCard, in
 	}
 
 	if l.Count == 1 {
+		if len(l.GpuCards) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.GpuCards[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for GpuCard UUID: %s!", id)
@@ -1777,6 +1783,9 @@ func (s *GPUService) GetGpuDeviceByID(id string, opts ...OptionFunc) (*GpuDevice
 	}
 
 	if l.Count == 1 {
+		if len(l.GpuDevices) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.GpuDevices[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for GpuDevice UUID: %s!", id)
@@ -2037,6 +2046,9 @@ func (s *GPUService) GetVgpuProfileID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.VgpuProfiles) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VgpuProfiles[0].Id, l.Count, nil
 	}
 
@@ -2092,6 +2104,9 @@ func (s *GPUService) GetVgpuProfileByID(id string, opts ...OptionFunc) (*VgpuPro
 	}
 
 	if l.Count == 1 {
+		if len(l.VgpuProfiles) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VgpuProfiles[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VgpuProfile UUID: %s!", id)

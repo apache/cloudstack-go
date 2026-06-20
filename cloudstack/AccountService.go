@@ -1804,6 +1804,9 @@ func (s *AccountService) GetAccountID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.Accounts) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Accounts[0].Id, l.Count, nil
 	}
 
@@ -1859,6 +1862,9 @@ func (s *AccountService) GetAccountByID(id string, opts ...OptionFunc) (*Account
 	}
 
 	if l.Count == 1 {
+		if len(l.Accounts) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Accounts[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Account UUID: %s!", id)
@@ -2232,6 +2238,9 @@ func (s *AccountService) GetProjectAccountID(keyword string, projectid string, o
 	}
 
 	if l.Count == 1 {
+		if len(l.ProjectAccounts) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.ProjectAccounts[0].Id, l.Count, nil
 	}
 

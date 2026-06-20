@@ -2423,6 +2423,9 @@ func (s *VPCService) GetPrivateGatewayByID(id string, opts ...OptionFunc) (*Priv
 	}
 
 	if l.Count == 1 {
+		if len(l.PrivateGateways) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.PrivateGateways[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for PrivateGateway UUID: %s!", id)
@@ -2844,6 +2847,9 @@ func (s *VPCService) GetStaticRouteByID(id string, opts ...OptionFunc) (*StaticR
 	}
 
 	if l.Count == 1 {
+		if len(l.StaticRoutes) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.StaticRoutes[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for StaticRoute UUID: %s!", id)
@@ -3199,6 +3205,9 @@ func (s *VPCService) GetVPCOfferingID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.VPCOfferings) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VPCOfferings[0].Id, l.Count, nil
 	}
 
@@ -3254,6 +3263,9 @@ func (s *VPCService) GetVPCOfferingByID(id string, opts ...OptionFunc) (*VPCOffe
 	}
 
 	if l.Count == 1 {
+		if len(l.VPCOfferings) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VPCOfferings[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VPCOffering UUID: %s!", id)
@@ -3859,6 +3871,9 @@ func (s *VPCService) GetVPCID(name string, opts ...OptionFunc) (string, int, err
 	}
 
 	if l.Count == 1 {
+		if len(l.VPCs) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VPCs[0].Id, l.Count, nil
 	}
 
@@ -3914,6 +3929,9 @@ func (s *VPCService) GetVPCByID(id string, opts ...OptionFunc) (*VPC, int, error
 	}
 
 	if l.Count == 1 {
+		if len(l.VPCs) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VPCs[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VPC UUID: %s!", id)

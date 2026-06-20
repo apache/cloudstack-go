@@ -325,6 +325,9 @@ func (s *SwiftService) GetSwiftID(keyword string, opts ...OptionFunc) (string, i
 	}
 
 	if l.Count == 1 {
+		if len(l.Swifts) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.Swifts[0].Id, l.Count, nil
 	}
 

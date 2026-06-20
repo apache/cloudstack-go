@@ -1355,6 +1355,9 @@ func (s *UserService) GetUserByID(id string, opts ...OptionFunc) (*User, int, er
 	}
 
 	if l.Count == 1 {
+		if len(l.Users) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Users[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for User UUID: %s!", id)
@@ -2218,6 +2221,9 @@ func (s *UserService) GetUserDataID(name string, opts ...OptionFunc) (string, in
 	}
 
 	if l.Count == 1 {
+		if len(l.UserData) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.UserData[0].Id, l.Count, nil
 	}
 
@@ -2273,6 +2279,9 @@ func (s *UserService) GetUserDataByID(id string, opts ...OptionFunc) (*UserData,
 	}
 
 	if l.Count == 1 {
+		if len(l.UserData) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.UserData[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for UserData UUID: %s!", id)

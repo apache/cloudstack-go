@@ -2657,6 +2657,9 @@ func (s *VolumeService) GetElastistorVolumeByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.ElastistorVolume) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ElastistorVolume[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ElastistorVolume UUID: %s!", id)
@@ -3373,6 +3376,9 @@ func (s *VolumeService) GetVolumeID(name string, opts ...OptionFunc) (string, in
 	}
 
 	if l.Count == 1 {
+		if len(l.Volumes) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Volumes[0].Id, l.Count, nil
 	}
 
@@ -3428,6 +3434,9 @@ func (s *VolumeService) GetVolumeByID(id string, opts ...OptionFunc) (*Volume, i
 	}
 
 	if l.Count == 1 {
+		if len(l.Volumes) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Volumes[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Volume UUID: %s!", id)
@@ -4389,6 +4398,9 @@ func (s *VolumeService) GetVolumesMetricID(name string, opts ...OptionFunc) (str
 	}
 
 	if l.Count == 1 {
+		if len(l.VolumesMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VolumesMetrics[0].Id, l.Count, nil
 	}
 
@@ -4444,6 +4456,9 @@ func (s *VolumeService) GetVolumesMetricByID(id string, opts ...OptionFunc) (*Vo
 	}
 
 	if l.Count == 1 {
+		if len(l.VolumesMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VolumesMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VolumesMetric UUID: %s!", id)
@@ -6262,6 +6277,9 @@ func (s *VolumeService) GetVolumesUsageHistoryID(name string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.VolumesUsageHistory) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VolumesUsageHistory[0].Id, l.Count, nil
 	}
 
@@ -6317,6 +6335,9 @@ func (s *VolumeService) GetVolumesUsageHistoryByID(id string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.VolumesUsageHistory) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VolumesUsageHistory[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VolumesUsageHistory UUID: %s!", id)

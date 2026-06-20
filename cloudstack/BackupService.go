@@ -3151,6 +3151,9 @@ func (s *BackupService) GetBackupOfferingID(keyword string, opts ...OptionFunc) 
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupOfferings) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.BackupOfferings[0].Id, l.Count, nil
 	}
 
@@ -3206,6 +3209,9 @@ func (s *BackupService) GetBackupOfferingByID(id string, opts ...OptionFunc) (*B
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupOfferings) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.BackupOfferings[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for BackupOffering UUID: %s!", id)
@@ -3389,6 +3395,9 @@ func (s *BackupService) GetBackupProviderOfferingID(keyword string, zoneid strin
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupProviderOfferings) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.BackupProviderOfferings[0].Id, l.Count, nil
 	}
 
@@ -3721,6 +3730,9 @@ func (s *BackupService) GetBackupRepositoryID(name string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupRepositories) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.BackupRepositories[0].Id, l.Count, nil
 	}
 
@@ -3776,6 +3788,9 @@ func (s *BackupService) GetBackupRepositoryByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupRepositories) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.BackupRepositories[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for BackupRepository UUID: %s!", id)
@@ -4108,6 +4123,9 @@ func (s *BackupService) GetBackupScheduleByID(id string, opts ...OptionFunc) (*B
 	}
 
 	if l.Count == 1 {
+		if len(l.BackupSchedule) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.BackupSchedule[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for BackupSchedule UUID: %s!", id)
@@ -4530,6 +4548,9 @@ func (s *BackupService) GetBackupID(name string, opts ...OptionFunc) (string, in
 	}
 
 	if l.Count == 1 {
+		if len(l.Backups) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Backups[0].Id, l.Count, nil
 	}
 
@@ -4585,6 +4606,9 @@ func (s *BackupService) GetBackupByID(id string, opts ...OptionFunc) (*Backup, i
 	}
 
 	if l.Count == 1 {
+		if len(l.Backups) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Backups[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Backup UUID: %s!", id)

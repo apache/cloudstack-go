@@ -2091,6 +2091,9 @@ func (s *ZoneService) GetIpv4SubnetsForZoneByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.Ipv4SubnetsForZone) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Ipv4SubnetsForZone[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Ipv4SubnetsForZone UUID: %s!", id)
@@ -2496,6 +2499,9 @@ func (s *ZoneService) GetZoneID(name string, opts ...OptionFunc) (string, int, e
 	}
 
 	if l.Count == 1 {
+		if len(l.Zones) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Zones[0].Id, l.Count, nil
 	}
 
@@ -2551,6 +2557,9 @@ func (s *ZoneService) GetZoneByID(id string, opts ...OptionFunc) (*Zone, int, er
 	}
 
 	if l.Count == 1 {
+		if len(l.Zones) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Zones[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Zone UUID: %s!", id)
@@ -2999,6 +3008,9 @@ func (s *ZoneService) GetZonesMetricID(name string, opts ...OptionFunc) (string,
 	}
 
 	if l.Count == 1 {
+		if len(l.ZonesMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ZonesMetrics[0].Id, l.Count, nil
 	}
 
@@ -3054,6 +3066,9 @@ func (s *ZoneService) GetZonesMetricByID(id string, opts ...OptionFunc) (*ZonesM
 	}
 
 	if l.Count == 1 {
+		if len(l.ZonesMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ZonesMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ZonesMetric UUID: %s!", id)
@@ -4476,6 +4491,9 @@ func (s *ZoneService) GetVmwareDcID(keyword string, zoneid string, opts ...Optio
 	}
 
 	if l.Count == 1 {
+		if len(l.VmwareDcs) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.VmwareDcs[0].Id, l.Count, nil
 	}
 

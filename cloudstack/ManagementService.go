@@ -311,6 +311,9 @@ func (s *ManagementService) GetManagementServerID(name string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.ManagementServers) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ManagementServers[0].Id, l.Count, nil
 	}
 
@@ -366,6 +369,9 @@ func (s *ManagementService) GetManagementServerByID(id string, opts ...OptionFun
 	}
 
 	if l.Count == 1 {
+		if len(l.ManagementServers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ManagementServers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ManagementServer UUID: %s!", id)
@@ -629,6 +635,9 @@ func (s *ManagementService) GetManagementServersMetricID(name string, opts ...Op
 	}
 
 	if l.Count == 1 {
+		if len(l.ManagementServersMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ManagementServersMetrics[0].Id, l.Count, nil
 	}
 
@@ -684,6 +693,9 @@ func (s *ManagementService) GetManagementServersMetricByID(id string, opts ...Op
 	}
 
 	if l.Count == 1 {
+		if len(l.ManagementServersMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ManagementServersMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ManagementServersMetric UUID: %s!", id)

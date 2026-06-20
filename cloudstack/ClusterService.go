@@ -1898,6 +1898,9 @@ func (s *ClusterService) GetClusterID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.Clusters) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Clusters[0].Id, l.Count, nil
 	}
 
@@ -1953,6 +1956,9 @@ func (s *ClusterService) GetClusterByID(id string, opts ...OptionFunc) (*Cluster
 	}
 
 	if l.Count == 1 {
+		if len(l.Clusters) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Clusters[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Cluster UUID: %s!", id)
@@ -2191,6 +2197,9 @@ func (s *ClusterService) GetClusterDrsPlanByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.ClusterDrsPlan) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ClusterDrsPlan[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ClusterDrsPlan UUID: %s!", id)
@@ -2609,6 +2618,9 @@ func (s *ClusterService) GetClustersMetricID(name string, opts ...OptionFunc) (s
 	}
 
 	if l.Count == 1 {
+		if len(l.ClustersMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ClustersMetrics[0].Id, l.Count, nil
 	}
 
@@ -2664,6 +2676,9 @@ func (s *ClusterService) GetClustersMetricByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.ClustersMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ClustersMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ClustersMetric UUID: %s!", id)

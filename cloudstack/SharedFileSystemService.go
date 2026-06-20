@@ -1650,6 +1650,9 @@ func (s *SharedFileSystemService) GetSharedFileSystemID(name string, opts ...Opt
 	}
 
 	if l.Count == 1 {
+		if len(l.SharedFileSystems) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.SharedFileSystems[0].Id, l.Count, nil
 	}
 
@@ -1705,6 +1708,9 @@ func (s *SharedFileSystemService) GetSharedFileSystemByID(id string, opts ...Opt
 	}
 
 	if l.Count == 1 {
+		if len(l.SharedFileSystems) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.SharedFileSystems[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for SharedFileSystem UUID: %s!", id)

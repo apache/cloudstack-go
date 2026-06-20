@@ -2432,6 +2432,9 @@ func (s *AutoScaleService) GetAutoScalePolicyID(name string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.AutoScalePolicies) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.AutoScalePolicies[0].Id, l.Count, nil
 	}
 
@@ -2487,6 +2490,9 @@ func (s *AutoScaleService) GetAutoScalePolicyByID(id string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.AutoScalePolicies) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.AutoScalePolicies[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for AutoScalePolicy UUID: %s!", id)
@@ -2937,6 +2943,9 @@ func (s *AutoScaleService) GetAutoScaleVmGroupID(name string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.AutoScaleVmGroups) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.AutoScaleVmGroups[0].Id, l.Count, nil
 	}
 
@@ -2992,6 +3001,9 @@ func (s *AutoScaleService) GetAutoScaleVmGroupByID(id string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.AutoScaleVmGroups) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.AutoScaleVmGroups[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for AutoScaleVmGroup UUID: %s!", id)
@@ -3438,6 +3450,9 @@ func (s *AutoScaleService) GetAutoScaleVmProfileByID(id string, opts ...OptionFu
 	}
 
 	if l.Count == 1 {
+		if len(l.AutoScaleVmProfiles) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.AutoScaleVmProfiles[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for AutoScaleVmProfile UUID: %s!", id)
@@ -3803,6 +3818,9 @@ func (s *AutoScaleService) GetConditionByID(id string, opts ...OptionFunc) (*Con
 	}
 
 	if l.Count == 1 {
+		if len(l.Conditions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Conditions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Condition UUID: %s!", id)
@@ -4059,6 +4077,9 @@ func (s *AutoScaleService) GetCounterID(name string, opts ...OptionFunc) (string
 	}
 
 	if l.Count == 1 {
+		if len(l.Counters) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Counters[0].Id, l.Count, nil
 	}
 
@@ -4114,6 +4135,9 @@ func (s *AutoScaleService) GetCounterByID(id string, opts ...OptionFunc) (*Count
 	}
 
 	if l.Count == 1 {
+		if len(l.Counters) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Counters[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Counter UUID: %s!", id)

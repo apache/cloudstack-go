@@ -569,6 +569,9 @@ func (s *VMGroupService) GetInstanceGroupID(name string, opts ...OptionFunc) (st
 	}
 
 	if l.Count == 1 {
+		if len(l.InstanceGroups) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.InstanceGroups[0].Id, l.Count, nil
 	}
 
@@ -624,6 +627,9 @@ func (s *VMGroupService) GetInstanceGroupByID(id string, opts ...OptionFunc) (*I
 	}
 
 	if l.Count == 1 {
+		if len(l.InstanceGroups) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.InstanceGroups[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for InstanceGroup UUID: %s!", id)

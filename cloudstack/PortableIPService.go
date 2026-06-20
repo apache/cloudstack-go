@@ -521,6 +521,9 @@ func (s *PortableIPService) GetPortableIpRangeByID(id string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.PortableIpRanges) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.PortableIpRanges[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for PortableIpRange UUID: %s!", id)

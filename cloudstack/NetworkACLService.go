@@ -1139,6 +1139,9 @@ func (s *NetworkACLService) GetNetworkACLListID(name string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.NetworkACLLists) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.NetworkACLLists[0].Id, l.Count, nil
 	}
 
@@ -1194,6 +1197,9 @@ func (s *NetworkACLService) GetNetworkACLListByID(id string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.NetworkACLLists) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.NetworkACLLists[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for NetworkACLList UUID: %s!", id)
@@ -1671,6 +1677,9 @@ func (s *NetworkACLService) GetNetworkACLByID(id string, opts ...OptionFunc) (*N
 	}
 
 	if l.Count == 1 {
+		if len(l.NetworkACLs) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.NetworkACLs[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for NetworkACL UUID: %s!", id)

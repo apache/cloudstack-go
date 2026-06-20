@@ -2767,6 +2767,9 @@ func (s *HostService) GetHostTagID(keyword string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.HostTags) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.HostTags[0].Id, l.Count, nil
 	}
 
@@ -3337,6 +3340,9 @@ func (s *HostService) GetHostID(name string, opts ...OptionFunc) (string, int, e
 	}
 
 	if l.Count == 1 {
+		if len(l.Hosts) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Hosts[0].Id, l.Count, nil
 	}
 
@@ -3392,6 +3398,9 @@ func (s *HostService) GetHostByID(id string, opts ...OptionFunc) (*Host, int, er
 	}
 
 	if l.Count == 1 {
+		if len(l.Hosts) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Hosts[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Host UUID: %s!", id)
@@ -4041,6 +4050,9 @@ func (s *HostService) GetHostsMetricID(name string, opts ...OptionFunc) (string,
 	}
 
 	if l.Count == 1 {
+		if len(l.HostsMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.HostsMetrics[0].Id, l.Count, nil
 	}
 
@@ -4096,6 +4108,9 @@ func (s *HostService) GetHostsMetricByID(id string, opts ...OptionFunc) (*HostsM
 	}
 
 	if l.Count == 1 {
+		if len(l.HostsMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.HostsMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for HostsMetric UUID: %s!", id)
@@ -5904,6 +5919,9 @@ func (s *HostService) GetSecondaryStorageSelectorID(keyword string, zoneid strin
 	}
 
 	if l.Count == 1 {
+		if len(l.SecondaryStorageSelectors) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.SecondaryStorageSelectors[0].Id, l.Count, nil
 	}
 

@@ -428,6 +428,9 @@ func (s *BrocadeVCSService) GetBrocadeVcsDeviceNetworkID(keyword string, vcsdevi
 	}
 
 	if l.Count == 1 {
+		if len(l.BrocadeVcsDeviceNetworks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.BrocadeVcsDeviceNetworks[0].Id, l.Count, nil
 	}
 

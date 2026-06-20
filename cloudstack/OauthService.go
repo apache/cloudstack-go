@@ -204,6 +204,9 @@ func (s *OauthService) GetOauthProviderID(keyword string, opts ...OptionFunc) (s
 	}
 
 	if l.Count == 1 {
+		if len(l.OauthProvider) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.OauthProvider[0].Id, l.Count, nil
 	}
 
@@ -259,6 +262,9 @@ func (s *OauthService) GetOauthProviderByID(id string, opts ...OptionFunc) (*Oau
 	}
 
 	if l.Count == 1 {
+		if len(l.OauthProvider) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.OauthProvider[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for OauthProvider UUID: %s!", id)
