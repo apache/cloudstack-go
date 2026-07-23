@@ -94,6 +94,19 @@ var mapRequireList = map[string]map[string]bool{
 		"iptonetworklist":        true,
 		"nicnetworklist":         true,
 	},
+	"createVPCOffering": map[string]bool{
+		// Each entry needs three columns (service, capabilitytype, capabilityvalue),
+		// which a flat map[string]string can't express - it collapses to generic
+		// "servicecapabilitylist[i].key"/"value" pairs that the API doesn't understand
+		// (it looks for "service"/"capabilitytype"/"capabilityvalue"), so every
+		// createVPCOffering call setting this field fails with
+		// "Invalid capability:null capability value:null".
+		"servicecapabilitylist": true,
+	},
+	"createNetworkOffering": map[string]bool{
+		// Same shape issue as createVPCOffering above.
+		"servicecapabilitylist": true,
+	},
 	"updateVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
 	},
