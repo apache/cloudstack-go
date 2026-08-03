@@ -1432,6 +1432,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "otherdeployparams":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+		case "param":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		case "nodeofferings":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].node\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].offering\", i), m[k])", name)
@@ -2096,6 +2099,9 @@ func (s *service) generateResponseType(a *API) {
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "listLBStickinessPolicies":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
