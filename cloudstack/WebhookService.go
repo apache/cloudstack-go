@@ -458,7 +458,7 @@ func (p *DeleteWebhookDeliveryParams) toURLValues() url.Values {
 		u.Set("id", v.(string))
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
@@ -878,7 +878,7 @@ func (p *ListWebhookDeliveriesParams) toURLValues() url.Values {
 		u.Set("keyword", v.(string))
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
