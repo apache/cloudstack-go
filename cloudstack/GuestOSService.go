@@ -2335,10 +2335,13 @@ func (s *GuestOSService) AddOsCategory(p *AddOsCategoryParams) (*AddOsCategoryRe
 		return nil, err
 	}
 
-	var r AddOsCategoryResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response AddOsCategoryResponse `json:"oscategory"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
@@ -2573,10 +2576,13 @@ func (s *GuestOSService) UpdateOsCategory(p *UpdateOsCategoryParams) (*UpdateOsC
 		return nil, err
 	}
 
-	var r UpdateOsCategoryResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response UpdateOsCategoryResponse `json:"oscategory"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
