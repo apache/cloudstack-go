@@ -1139,7 +1139,7 @@ func (p *CreateLBStickinessPolicyParams) toURLValues() url.Values {
 	if v, found := p.p["param"]; found {
 		m := v.(map[string]string)
 		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("param[%d].key", i), k)
+			u.Set(fmt.Sprintf("param[%d].name", i), k)
 			u.Set(fmt.Sprintf("param[%d].value", i), m[k])
 		}
 	}

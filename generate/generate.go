@@ -1432,6 +1432,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 		case "otherdeployparams":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+		case "param":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		case "nodeofferings":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].node\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].offering\", i), m[k])", name)

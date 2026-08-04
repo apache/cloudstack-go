@@ -26,3 +26,7 @@ github:
     wiki: true
     issues: true
     projects: true
+  copilot_code_review:
+    enabled: true
+    review_drafts: true
+    review_on_push: true
