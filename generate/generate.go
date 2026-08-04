@@ -2032,6 +2032,20 @@ func (s *service) generateResponseType(a *API) {
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "managementserver")
 		case "listDbMetrics":
 			pn("	%s %s `json:\"%s\"`", ln, parseSingular(ln), "dbMetrics")
+		case "listUsageServerMetrics":
+			pn("	%s %s `json:\"%s\"`", ln, parseSingular(ln), "usageMetrics")
+		case "listClustersMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "cluster")
+		case "listHostsMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "host")
+		case "listVolumesMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "volume")
+		case "listZonesMetrics":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "zone")
 		case "registerTemplate":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")

@@ -3076,7 +3076,7 @@ func (s *ZoneService) ListZonesMetrics(p *ListZonesMetricsParams) (*ListZonesMet
 
 type ListZonesMetricsResponse struct {
 	Count        int            `json:"count"`
-	ZonesMetrics []*ZonesMetric `json:"zonesmetric"`
+	ZonesMetrics []*ZonesMetric `json:"zone"`
 }
 
 type ZonesMetric struct {

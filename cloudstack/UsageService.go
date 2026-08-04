@@ -2128,8 +2128,7 @@ func (s *UsageService) ListUsageServerMetrics(p *ListUsageServerMetricsParams) (
 }
 
 type ListUsageServerMetricsResponse struct {
-	Count              int                  `json:"count"`
-	UsageServerMetrics []*UsageServerMetric `json:"usageservermetric"`
+	UsageServerMetrics UsageServerMetric `json:"usageMetrics"`
 }
 
 type UsageServerMetric struct {
