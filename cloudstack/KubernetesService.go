@@ -4000,10 +4000,13 @@ func (s *KubernetesService) GetUploadParamsForKubernetesSupportedVersion(p *GetU
 		return nil, err
 	}
 
-	var r GetUploadParamsForKubernetesSupportedVersionResponse
-	if err := json.Unmarshal(resp, &r); err != nil {
+	var nested struct {
+		Response GetUploadParamsForKubernetesSupportedVersionResponse `json:"getuploadparams"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
 		return nil, err
 	}
+	r := nested.Response
 
 	return &r, nil
 }
