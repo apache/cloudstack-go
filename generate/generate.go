@@ -140,6 +140,8 @@ var nestedResponse = map[string]string{
 	"setupUserTwoFactorAuthentication": "setup2fa",
 	"updateSecondaryStorageSelector":   "heuristics",
 	"createSecondaryStorageSelector":   "heuristics",
+	"addOsCategory":                    "oscategory",
+	"updateOsCategory":                 "oscategory",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
