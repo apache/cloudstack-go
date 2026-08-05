@@ -11516,8 +11516,8 @@ func (p *ImportVmParams) toURLValues() url.Values {
 	}
 	if v, found := p.p["details"]; found {
 		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("details[%d].%s", i, k), m[k])
+		for _, k := range getSortedKeysFromMap(m) {
+			u.Set(fmt.Sprintf("details[0].%s", k), m[k])
 		}
 	}
 	if v, found := p.p["diskpath"]; found {
