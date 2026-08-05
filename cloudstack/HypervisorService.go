@@ -229,7 +229,7 @@ func (s *HypervisorService) ListHypervisorCapabilities(p *ListHypervisorCapabili
 
 type ListHypervisorCapabilitiesResponse struct {
 	Count                  int                     `json:"count"`
-	HypervisorCapabilities []*HypervisorCapability `json:"hypervisorcapability"`
+	HypervisorCapabilities []*HypervisorCapability `json:"hypervisorCapabilities"`
 }
 
 type HypervisorCapability struct {

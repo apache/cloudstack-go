@@ -2111,6 +2111,15 @@ func (s *service) generateResponseType(a *API) {
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "listHypervisorCapabilities":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hypervisorCapabilities")
+		case "listGuestNetworkIpv6Prefixes":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "guestnetworkipv6prefix")
+		case "listLBHealthCheckPolicies":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "healthcheckpolicies")
 		case "listLBStickinessPolicies":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
