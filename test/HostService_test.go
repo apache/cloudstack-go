@@ -455,4 +455,28 @@ func TestHostService(t *testing.T) {
 	}
 	t.Run("UpdateSecondaryStorageSelector", testupdateSecondaryStorageSelector)
 
+	testprepareForMaintenance := func(t *testing.T) {
+		if _, ok := response["prepareForMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewPrepareForMaintenanceParams("managementserverid")
+		_, err := client.Host.PrepareForMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("PrepareForMaintenance", testprepareForMaintenance)
+
+	testcancelMaintenance := func(t *testing.T) {
+		if _, ok := response["cancelMaintenance"]; !ok {
+			t.Skipf("Skipping as no json response is provided in testdata")
+		}
+		p := client.Host.NewCancelMaintenanceParams("managementserverid")
+		_, err := client.Host.CancelMaintenance(p)
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+	}
+	t.Run("CancelMaintenance", testcancelMaintenance)
+
 }

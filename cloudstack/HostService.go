@@ -100,6 +100,10 @@ type HostServiceIface interface {
 	NewDeclareHostAsDegradedParams(id string) *DeclareHostAsDegradedParams
 	UpdateSecondaryStorageSelector(p *UpdateSecondaryStorageSelectorParams) (*UpdateSecondaryStorageSelectorResponse, error)
 	NewUpdateSecondaryStorageSelectorParams(heuristicrule string, id string) *UpdateSecondaryStorageSelectorParams
+	PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error)
+	NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams
+	CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error)
+	NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams
 }
 
 type AddBaremetalHostParams struct {
@@ -6644,4 +6648,224 @@ type UpdateSecondaryStorageSelectorResponse struct {
 	Removed       string `json:"removed"`
 	Type          string `json:"type"`
 	Zoneid        string `json:"zoneid"`
+}
+
+type PrepareForMaintenanceParams struct {
+	p map[string]interface{}
+}
+
+func (p *PrepareForMaintenanceParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["algorithm"]; found {
+		u.Set("algorithm", v.(string))
+	}
+	if v, found := p.p["forced"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("forced", vv)
+	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
+	return u
+}
+
+func (p *PrepareForMaintenanceParams) SetAlgorithm(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["algorithm"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetAlgorithm() {
+	if p.p != nil && p.p["algorithm"] != nil {
+		delete(p.p, "algorithm")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetAlgorithm() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["algorithm"].(string)
+	return value, ok
+}
+
+func (p *PrepareForMaintenanceParams) SetForced(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["forced"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetForced() {
+	if p.p != nil && p.p["forced"] != nil {
+		delete(p.p, "forced")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetForced() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["forced"].(bool)
+	return value, ok
+}
+
+func (p *PrepareForMaintenanceParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *PrepareForMaintenanceParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
+}
+
+func (p *PrepareForMaintenanceParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
+// You should always use this function to get a new PrepareForMaintenanceParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams {
+	p := &PrepareForMaintenanceParams{}
+	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
+	return p
+}
+
+// Prepares management server for maintenance by preventing new jobs from being accepted after completion of active jobs and migrating the agents
+func (s *HostService) PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error) {
+	resp, err := s.cs.newPostRequest("prepareForMaintenance", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r PrepareForMaintenanceResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type PrepareForMaintenanceResponse struct {
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
+}
+
+type CancelMaintenanceParams struct {
+	p map[string]interface{}
+}
+
+func (p *CancelMaintenanceParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["managementserverid"]; found {
+		u.Set("managementserverid", v.(string))
+	}
+	if v, found := p.p["rebalance"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("rebalance", vv)
+	}
+	return u
+}
+
+func (p *CancelMaintenanceParams) SetManagementserverid(v UUID) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["managementserverid"] = v
+}
+
+func (p *CancelMaintenanceParams) ResetManagementserverid() {
+	if p.p != nil && p.p["managementserverid"] != nil {
+		delete(p.p, "managementserverid")
+	}
+}
+
+func (p *CancelMaintenanceParams) GetManagementserverid() (UUID, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["managementserverid"].(UUID)
+	return value, ok
+}
+
+func (p *CancelMaintenanceParams) SetRebalance(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["rebalance"] = v
+}
+
+func (p *CancelMaintenanceParams) ResetRebalance() {
+	if p.p != nil && p.p["rebalance"] != nil {
+		delete(p.p, "rebalance")
+	}
+}
+
+func (p *CancelMaintenanceParams) GetRebalance() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["rebalance"].(bool)
+	return value, ok
+}
+
+// You should always use this function to get a new CancelMaintenanceParams instance,
+// as then you are sure you have configured all required params
+func (s *HostService) NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams {
+	p := &CancelMaintenanceParams{}
+	p.p = make(map[string]interface{})
+	p.p["managementserverid"] = managementserverid
+	return p
+}
+
+// Cancels maintenance of the management server
+func (s *HostService) CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error) {
+	resp, err := s.cs.newPostRequest("cancelMaintenance", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r CancelMaintenanceResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type CancelMaintenanceResponse struct {
+	Agents               []string `json:"agents"`
+	Agentscount          int64    `json:"agentscount"`
+	JobID                string   `json:"jobid"`
+	Jobstatus            int      `json:"jobstatus"`
+	Maintenanceinitiated bool     `json:"maintenanceinitiated"`
+	Managementserverid   UUID     `json:"managementserverid"`
+	Pendingjobscount     int64    `json:"pendingjobscount"`
+	Readyforshutdown     bool     `json:"readyforshutdown"`
+	Shutdowntriggered    bool     `json:"shutdowntriggered"`
+	State                string   `json:"state"`
 }
