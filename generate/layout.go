@@ -504,6 +504,8 @@ var layout = apiInfo{
 		"listStoragePools",
 		"syncStoragePool",
 		"updateStoragePool",
+		"configureStorageAccess",
+		"listStorageAccessGroups",
 	},
 	"NetworkACLService": {
 		"createNetworkACL",
