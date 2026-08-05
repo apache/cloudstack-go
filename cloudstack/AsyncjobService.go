@@ -60,7 +60,7 @@ func (p *ListAsyncJobsParams) toURLValues() url.Values {
 		u.Set("listall", vv)
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["page"]; found {
 		vv := strconv.Itoa(v.(int))
