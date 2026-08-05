@@ -747,10 +747,11 @@ func (p *CreateVMFromBackupParams) toURLValues() url.Values {
 		}
 	}
 	if v, found := p.p["datadisksdetails"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("datadisksdetails[%d].key", i), k)
-			u.Set(fmt.Sprintf("datadisksdetails[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("datadisksdetails[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["deploymentplanner"]; found {
@@ -763,10 +764,11 @@ func (p *CreateVMFromBackupParams) toURLValues() url.Values {
 		}
 	}
 	if v, found := p.p["dhcpoptionsnetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("dhcpoptionsnetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["diskofferingid"]; found {
@@ -819,10 +821,11 @@ func (p *CreateVMFromBackupParams) toURLValues() url.Values {
 		u.Set("ipaddress", v.(string))
 	}
 	if v, found := p.p["iptonetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("iptonetworklist[%d].key", i), k)
-			u.Set(fmt.Sprintf("iptonetworklist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("iptonetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["keyboard"]; found {
@@ -857,10 +860,11 @@ func (p *CreateVMFromBackupParams) toURLValues() url.Values {
 		u.Set("nicmultiqueuenumber", vv)
 	}
 	if v, found := p.p["nicnetworklist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("nicnetworklist[%d].nic", i), k)
-			u.Set(fmt.Sprintf("nicnetworklist[%d].network", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("nicnetworklist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["nicpackedvirtqueuesenabled"]; found {
@@ -1165,7 +1169,7 @@ func (p *CreateVMFromBackupParams) GetDatadiskofferinglist() (map[string]string,
 	return value, ok
 }
 
-func (p *CreateVMFromBackupParams) SetDatadisksdetails(v map[string]string) {
+func (p *CreateVMFromBackupParams) SetDatadisksdetails(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1178,12 +1182,26 @@ func (p *CreateVMFromBackupParams) ResetDatadisksdetails() {
 	}
 }
 
-func (p *CreateVMFromBackupParams) GetDatadisksdetails() (map[string]string, bool) {
+func (p *CreateVMFromBackupParams) GetDatadisksdetails() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["datadisksdetails"].(map[string]string)
+	value, ok := p.p["datadisksdetails"].([]map[string]string)
 	return value, ok
+}
+
+func (p *CreateVMFromBackupParams) AddDatadisksdetails(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["datadisksdetails"]
+	if !found {
+		p.p["datadisksdetails"] = []map[string]string{}
+		val = p.p["datadisksdetails"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["datadisksdetails"] = l
 }
 
 func (p *CreateVMFromBackupParams) SetDeploymentplanner(v string) {
@@ -1228,7 +1246,7 @@ func (p *CreateVMFromBackupParams) GetDetails() (map[string]string, bool) {
 	return value, ok
 }
 
-func (p *CreateVMFromBackupParams) SetDhcpoptionsnetworklist(v map[string]string) {
+func (p *CreateVMFromBackupParams) SetDhcpoptionsnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1241,12 +1259,26 @@ func (p *CreateVMFromBackupParams) ResetDhcpoptionsnetworklist() {
 	}
 }
 
-func (p *CreateVMFromBackupParams) GetDhcpoptionsnetworklist() (map[string]string, bool) {
+func (p *CreateVMFromBackupParams) GetDhcpoptionsnetworklist() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["dhcpoptionsnetworklist"].(map[string]string)
+	value, ok := p.p["dhcpoptionsnetworklist"].([]map[string]string)
 	return value, ok
+}
+
+func (p *CreateVMFromBackupParams) AddDhcpoptionsnetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["dhcpoptionsnetworklist"]
+	if !found {
+		p.p["dhcpoptionsnetworklist"] = []map[string]string{}
+		val = p.p["dhcpoptionsnetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["dhcpoptionsnetworklist"] = l
 }
 
 func (p *CreateVMFromBackupParams) SetDiskofferingid(v string) {
@@ -1543,7 +1575,7 @@ func (p *CreateVMFromBackupParams) GetIpaddress() (string, bool) {
 	return value, ok
 }
 
-func (p *CreateVMFromBackupParams) SetIptonetworklist(v map[string]string) {
+func (p *CreateVMFromBackupParams) SetIptonetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1556,12 +1588,26 @@ func (p *CreateVMFromBackupParams) ResetIptonetworklist() {
 	}
 }
 
-func (p *CreateVMFromBackupParams) GetIptonetworklist() (map[string]string, bool) {
+func (p *CreateVMFromBackupParams) GetIptonetworklist() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["iptonetworklist"].(map[string]string)
+	value, ok := p.p["iptonetworklist"].([]map[string]string)
 	return value, ok
+}
+
+func (p *CreateVMFromBackupParams) AddIptonetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["iptonetworklist"]
+	if !found {
+		p.p["iptonetworklist"] = []map[string]string{}
+		val = p.p["iptonetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["iptonetworklist"] = l
 }
 
 func (p *CreateVMFromBackupParams) SetKeyboard(v string) {
@@ -1753,7 +1799,7 @@ func (p *CreateVMFromBackupParams) GetNicmultiqueuenumber() (int, bool) {
 	return value, ok
 }
 
-func (p *CreateVMFromBackupParams) SetNicnetworklist(v map[string]string) {
+func (p *CreateVMFromBackupParams) SetNicnetworklist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1766,12 +1812,26 @@ func (p *CreateVMFromBackupParams) ResetNicnetworklist() {
 	}
 }
 
-func (p *CreateVMFromBackupParams) GetNicnetworklist() (map[string]string, bool) {
+func (p *CreateVMFromBackupParams) GetNicnetworklist() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["nicnetworklist"].(map[string]string)
+	value, ok := p.p["nicnetworklist"].([]map[string]string)
 	return value, ok
+}
+
+func (p *CreateVMFromBackupParams) AddNicnetworklist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["nicnetworklist"]
+	if !found {
+		p.p["nicnetworklist"] = []map[string]string{}
+		val = p.p["nicnetworklist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["nicnetworklist"] = l
 }
 
 func (p *CreateVMFromBackupParams) SetNicpackedvirtqueuesenabled(v bool) {
