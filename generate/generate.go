@@ -2009,6 +2009,20 @@ func (s *service) generateResponseType(a *API) {
 		pn("")
 		return
 	}
+	if a.Name == "listVnfAppliances" {
+		// The API docs do not describe the shape of the "vnfnics" field, so this
+		// type is hand maintained to mirror org.apache.cloudstack.api.response.VnfNicResponse.
+		pn("type VnfNic struct {")
+		pn("    Deviceid    int64  `json:\"deviceid\"`")
+		pn("    Description string `json:\"description\"`")
+		pn("    Management  bool   `json:\"management\"`")
+		pn("    Name        string `json:\"name\"`")
+		pn("    Networkid   string `json:\"networkid\"`")
+		pn("    Networkname string `json:\"networkname\"`")
+		pn("    Required    bool   `json:\"required\"`")
+		pn("}")
+		pn("")
+	}
 
 	ln := capitalize(strings.TrimPrefix(a.Name, "list"))
 
@@ -2402,6 +2416,9 @@ func mapType(aName string, pName string, pType string) string {
 		}
 		if pName == "scaledownpolicies" || pName == "scaleuppolicies" {
 			return "[]*AutoScalePolicy"
+		}
+		if pName == "vnfnics" {
+			return "[]*VnfNic"
 		}
 		return "[]string"
 	case "map":

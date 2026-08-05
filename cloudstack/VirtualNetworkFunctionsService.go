@@ -1810,7 +1810,7 @@ type DeployVnfApplianceResponse struct {
 	Videoram              int64                                     `json:"videoram"`
 	Vmtype                string                                    `json:"vmtype"`
 	Vnfdetails            map[string]string                         `json:"vnfdetails"`
-	Vnfnics               []string                                  `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                 `json:"vnfnics"`
 	Zoneid                string                                    `json:"zoneid"`
 	Zonename              string                                    `json:"zonename"`
 }
@@ -3009,6 +3009,16 @@ func (s *VirtualNetworkFunctionsService) ListVnfAppliances(p *ListVnfAppliancesP
 	return &r, nil
 }
 
+type VnfNic struct {
+	Deviceid    int64  `json:"deviceid"`
+	Description string `json:"description"`
+	Management  bool   `json:"management"`
+	Name        string `json:"name"`
+	Networkid   string `json:"networkid"`
+	Networkname string `json:"networkname"`
+	Required    bool   `json:"required"`
+}
+
 type ListVnfAppliancesResponse struct {
 	Count         int             `json:"count"`
 	VnfAppliances []*VnfAppliance `json:"vnfappliance"`
@@ -3118,7 +3128,7 @@ type VnfAppliance struct {
 	Videoram              int64                       `json:"videoram"`
 	Vmtype                string                      `json:"vmtype"`
 	Vnfdetails            map[string]string           `json:"vnfdetails"`
-	Vnfnics               []string                    `json:"vnfnics"`
+	Vnfnics               []*VnfNic                   `json:"vnfnics"`
 	Zoneid                string                      `json:"zoneid"`
 	Zonename              string                      `json:"zonename"`
 }
