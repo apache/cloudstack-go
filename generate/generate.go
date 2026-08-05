@@ -901,6 +901,9 @@ func (s *service) WriteGeneratedCode() error {
 			return err
 		}
 		testdir, err := testDir()
+		if err != nil {
+			return err
+		}
 		file := path.Join(testdir, s.name+"_test.go")
 		ioutil.WriteFile(file, tests, 0644)
 	}
