@@ -915,6 +915,7 @@ var layout = apiInfo{
 		"removeVirtualMachinesFromKubernetesCluster",
 		"addNodesToKubernetesCluster",
 		"removeNodesFromKubernetesCluster",
+		"getUploadParamsForKubernetesSupportedVersion",
 	},
 	"InfrastructureUsageService": {
 		"listDbMetrics",
