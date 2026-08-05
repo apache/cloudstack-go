@@ -528,6 +528,9 @@ var layout = apiInfo{
 		"updateGuestOs",
 		"updateGuestOsMapping",
 		"getHypervisorGuestOsNames",
+		"addOsCategory",
+		"deleteOsCategory",
+		"updateOsCategory",
 	},
 	"ClusterService": {
 		"addCluster",

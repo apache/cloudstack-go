@@ -141,6 +141,8 @@ var nestedResponse = map[string]string{
 	"updateSecondaryStorageSelector":               "heuristics",
 	"createSecondaryStorageSelector":               "heuristics",
 	"getUploadParamsForKubernetesSupportedVersion": "getuploadparams",
+	"addOsCategory":                                "oscategory",
+	"updateOsCategory":                             "oscategory",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
