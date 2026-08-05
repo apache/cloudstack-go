@@ -1671,7 +1671,13 @@ func (s *service) generateHelperFuncs(a *API) {
 						p("%s, ", s.parseParamName(ap.Name))
 					}
 				}
-				pn("opts...)")
+				// Constrain the by-ID lookup to the same zone; otherwise a Template/ISO
+				// registered in multiple zones returns multiple rows for one UUID (#87).
+				if parseSingular(ln) == "Template" || parseSingular(ln) == "Iso" {
+					pn("append(opts, WithZone(zoneid))...)")
+				} else {
+					pn("opts...)")
+				}
 				pn("  if err != nil {")
 				pn("    return nil, count, err")
 				pn("  }")

@@ -2300,7 +2300,7 @@ func (s *ISOService) GetIsoByName(name string, isofilter string, zoneid string, 
 		return nil, count, err
 	}
 
-	r, count, err := s.GetIsoByID(id, opts...)
+	r, count, err := s.GetIsoByID(id, append(opts, WithZone(zoneid))...)
 	if err != nil {
 		return nil, count, err
 	}

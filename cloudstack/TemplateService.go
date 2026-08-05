@@ -2844,7 +2844,7 @@ func (s *TemplateService) GetTemplateByName(name string, templatefilter string, 
 		return nil, count, err
 	}
 
-	r, count, err := s.GetTemplateByID(id, templatefilter, opts...)
+	r, count, err := s.GetTemplateByID(id, templatefilter, append(opts, WithZone(zoneid))...)
 	if err != nil {
 		return nil, count, err
 	}
