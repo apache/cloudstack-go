@@ -2842,7 +2842,7 @@ func (p *ListHostsParams) toURLValues() url.Values {
 		u.Set("keyword", v.(string))
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))
@@ -3546,7 +3546,7 @@ func (p *ListHostsMetricsParams) toURLValues() url.Values {
 		u.Set("keyword", v.(string))
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["name"]; found {
 		u.Set("name", v.(string))

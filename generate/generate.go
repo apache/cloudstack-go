@@ -1355,8 +1355,10 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 	pn := s.pn
 
 	switch typ {
-	case "string", "UUID":
+	case "string":
 		pn("u.Set(\"%s\", v.(string))", name)
+	case "UUID":
+		pn("u.Set(\"%s\", string(v.(UUID)))", name)
 	case "int":
 		pn("vv := strconv.Itoa(v.(int))")
 		pn("u.Set(\"%s\", vv)", name)
@@ -1430,6 +1432,9 @@ func (s *service) generateConvertCode(cmd, name, typ string) {
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].disk\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].diskOffering\", i), m[k])", name)
 		case "otherdeployparams":
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
+			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
+		case "param":
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].name\", i), k)", name)
 			pn("	u.Set(fmt.Sprintf(\"%s[%%d].value\", i), m[k])", name)
 		case "nodeofferings":
@@ -1668,7 +1673,13 @@ func (s *service) generateHelperFuncs(a *API) {
 						p("%s, ", s.parseParamName(ap.Name))
 					}
 				}
-				pn("opts...)")
+				// Constrain the by-ID lookup to the same zone; otherwise a Template/ISO
+				// registered in multiple zones returns multiple rows for one UUID (#87).
+				if parseSingular(ln) == "Template" || parseSingular(ln) == "Iso" {
+					pn("append(opts, WithZone(zoneid))...)")
+				} else {
+					pn("opts...)")
+				}
 				pn("  if err != nil {")
 				pn("    return nil, count, err")
 				pn("  }")
@@ -2096,6 +2107,9 @@ func (s *service) generateResponseType(a *API) {
 		case "quotaSummary":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
+		case "listLBStickinessPolicies":
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

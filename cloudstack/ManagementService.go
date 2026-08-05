@@ -1085,7 +1085,7 @@ func (p *PrepareForShutdownParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	return u
 }
@@ -1158,7 +1158,7 @@ func (p *ReadyForShutdownParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	return u
 }
@@ -1234,7 +1234,7 @@ func (p *TriggerShutdownParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	return u
 }
