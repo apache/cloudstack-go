@@ -1959,6 +1959,19 @@ func (s *service) generateResponseType(a *API) {
 	tn := capitalize(strings.TrimPrefix(a.Name, "configure") + "Response")
 
 	// add custom response types for some specific API calls
+	if a.Name == "getUploadParamsForKubernetesSupportedVersion" {
+		pn("type GetUploadParamsForKubernetesSupportedVersionResponse struct {")
+		pn("    Expires   string `json:\"expires\"`")
+		pn("    Id        string `json:\"id\"`")
+		pn("    JobID     string `json:\"jobid\"`")
+		pn("    Jobstatus int    `json:\"jobstatus\"`")
+		pn("    Metadata  string `json:\"metadata\"`")
+		pn("    PostURL   string `json:\"postURL\"`")
+		pn("    Signature string `json:\"signature\"`")
+		pn("}")
+		pn("")
+		return
+	}
 	if a.Name == "quotaBalance" {
 		pn("type QuotaBalanceResponse struct {")
 		pn("    Statement QuotaBalanceResponseType `json:\"balance\"`")

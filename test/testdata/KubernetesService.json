@@ -372,5 +372,16 @@
           "configdata": "some config data"
         }
       }
+    },
+    "getUploadParamsForKubernetesSupportedVersion": {
+      "getuploadparamsforkubernetessupportedversionresponse": {
+        "getuploadparams": {
+          "id": "f9607d48-1444-490f-8eda-4c07234587e3",
+          "postURL": "https://10.0.55.22/upload/f9607d48-1444-490f-8eda-4c07234587e3",
+          "metadata": "some-metadata",
+          "expires": "2026-08-03T17:42:59.400Z",
+          "signature": "some-signature"
+        }
+      }
     }
   }

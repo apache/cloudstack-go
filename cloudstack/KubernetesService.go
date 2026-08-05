@@ -4012,23 +4012,11 @@ func (s *KubernetesService) GetUploadParamsForKubernetesSupportedVersion(p *GetU
 }
 
 type GetUploadParamsForKubernetesSupportedVersionResponse struct {
-	Arch                string `json:"arch"`
-	Created             string `json:"created"`
-	Directdownload      bool   `json:"directdownload"`
-	Id                  string `json:"id"`
-	Isoid               string `json:"isoid"`
-	Isoname             string `json:"isoname"`
-	Isostate            string `json:"isostate"`
-	Isourl              string `json:"isourl"`
-	JobID               string `json:"jobid"`
-	Jobstatus           int    `json:"jobstatus"`
-	Mincpunumber        int    `json:"mincpunumber"`
-	Minmemory           int    `json:"minmemory"`
-	Name                string `json:"name"`
-	Semanticversion     string `json:"semanticversion"`
-	State               string `json:"state"`
-	Supportsautoscaling bool   `json:"supportsautoscaling"`
-	Supportsha          bool   `json:"supportsha"`
-	Zoneid              string `json:"zoneid"`
-	Zonename            string `json:"zonename"`
+	Expires   string `json:"expires"`
+	Id        string `json:"id"`
+	JobID     string `json:"jobid"`
+	Jobstatus int    `json:"jobstatus"`
+	Metadata  string `json:"metadata"`
+	PostURL   string `json:"postURL"`
+	Signature string `json:"signature"`
 }
