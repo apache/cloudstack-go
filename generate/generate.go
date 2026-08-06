@@ -2297,7 +2297,7 @@ func logMissingApis(ai map[string]*API, as *allServices) {
 	for apiName, _ := range ai {
 		_, found := asMap[apiName]
 		if !found {
-			log.Printf("Api missing in layout: %s", apiName)
+			log.Printf("API missing in layout: %s", apiName)
 		}
 	}
 }

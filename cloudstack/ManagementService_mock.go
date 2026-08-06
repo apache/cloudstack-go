@@ -58,6 +58,21 @@ func (m *MockManagementServiceIface) EXPECT() *MockManagementServiceIfaceMockRec
 	return m.recorder
 }
 
+// CancelMaintenance mocks base method.
+func (m *MockManagementServiceIface) CancelMaintenance(p *CancelMaintenanceParams) (*CancelMaintenanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CancelMaintenance", p)
+	ret0, _ := ret[0].(*CancelMaintenanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CancelMaintenance indicates an expected call of CancelMaintenance.
+func (mr *MockManagementServiceIfaceMockRecorder) CancelMaintenance(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CancelMaintenance", reflect.TypeOf((*MockManagementServiceIface)(nil).CancelMaintenance), p)
+}
+
 // CancelShutdown mocks base method.
 func (m *MockManagementServiceIface) CancelShutdown(p *CancelShutdownParams) (*CancelShutdownResponse, error) {
 	m.ctrl.T.Helper()
@@ -229,6 +244,20 @@ func (mr *MockManagementServiceIfaceMockRecorder) ListManagementServersMetrics(p
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListManagementServersMetrics", reflect.TypeOf((*MockManagementServiceIface)(nil).ListManagementServersMetrics), p)
 }
 
+// NewCancelMaintenanceParams mocks base method.
+func (m *MockManagementServiceIface) NewCancelMaintenanceParams(managementserverid UUID) *CancelMaintenanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewCancelMaintenanceParams", managementserverid)
+	ret0, _ := ret[0].(*CancelMaintenanceParams)
+	return ret0
+}
+
+// NewCancelMaintenanceParams indicates an expected call of NewCancelMaintenanceParams.
+func (mr *MockManagementServiceIfaceMockRecorder) NewCancelMaintenanceParams(managementserverid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewCancelMaintenanceParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewCancelMaintenanceParams), managementserverid)
+}
+
 // NewCancelShutdownParams mocks base method.
 func (m *MockManagementServiceIface) NewCancelShutdownParams(managementserverid UUID) *CancelShutdownParams {
 	m.ctrl.T.Helper()
@@ -271,6 +300,20 @@ func (mr *MockManagementServiceIfaceMockRecorder) NewListManagementServersParams
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewListManagementServersParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewListManagementServersParams))
 }
 
+// NewPrepareForMaintenanceParams mocks base method.
+func (m *MockManagementServiceIface) NewPrepareForMaintenanceParams(managementserverid UUID) *PrepareForMaintenanceParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewPrepareForMaintenanceParams", managementserverid)
+	ret0, _ := ret[0].(*PrepareForMaintenanceParams)
+	return ret0
+}
+
+// NewPrepareForMaintenanceParams indicates an expected call of NewPrepareForMaintenanceParams.
+func (mr *MockManagementServiceIfaceMockRecorder) NewPrepareForMaintenanceParams(managementserverid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewPrepareForMaintenanceParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewPrepareForMaintenanceParams), managementserverid)
+}
+
 // NewPrepareForShutdownParams mocks base method.
 func (m *MockManagementServiceIface) NewPrepareForShutdownParams(managementserverid UUID) *PrepareForShutdownParams {
 	m.ctrl.T.Helper()
@@ -299,6 +342,20 @@ func (mr *MockManagementServiceIfaceMockRecorder) NewReadyForShutdownParams(mana
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewReadyForShutdownParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewReadyForShutdownParams), managementserverid)
 }
 
+// NewRemoveManagementServerParams mocks base method.
+func (m *MockManagementServiceIface) NewRemoveManagementServerParams(id string) *RemoveManagementServerParams {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NewRemoveManagementServerParams", id)
+	ret0, _ := ret[0].(*RemoveManagementServerParams)
+	return ret0
+}
+
+// NewRemoveManagementServerParams indicates an expected call of NewRemoveManagementServerParams.
+func (mr *MockManagementServiceIfaceMockRecorder) NewRemoveManagementServerParams(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewRemoveManagementServerParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewRemoveManagementServerParams), id)
+}
+
 // NewTriggerShutdownParams mocks base method.
 func (m *MockManagementServiceIface) NewTriggerShutdownParams(managementserverid UUID) *TriggerShutdownParams {
 	m.ctrl.T.Helper()
@@ -311,6 +368,21 @@ func (m *MockManagementServiceIface) NewTriggerShutdownParams(managementserverid
 func (mr *MockManagementServiceIfaceMockRecorder) NewTriggerShutdownParams(managementserverid any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewTriggerShutdownParams", reflect.TypeOf((*MockManagementServiceIface)(nil).NewTriggerShutdownParams), managementserverid)
+}
+
+// PrepareForMaintenance mocks base method.
+func (m *MockManagementServiceIface) PrepareForMaintenance(p *PrepareForMaintenanceParams) (*PrepareForMaintenanceResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PrepareForMaintenance", p)
+	ret0, _ := ret[0].(*PrepareForMaintenanceResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PrepareForMaintenance indicates an expected call of PrepareForMaintenance.
+func (mr *MockManagementServiceIfaceMockRecorder) PrepareForMaintenance(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PrepareForMaintenance", reflect.TypeOf((*MockManagementServiceIface)(nil).PrepareForMaintenance), p)
 }
 
 // PrepareForShutdown mocks base method.
@@ -341,6 +413,21 @@ func (m *MockManagementServiceIface) ReadyForShutdown(p *ReadyForShutdownParams)
 func (mr *MockManagementServiceIfaceMockRecorder) ReadyForShutdown(p any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadyForShutdown", reflect.TypeOf((*MockManagementServiceIface)(nil).ReadyForShutdown), p)
+}
+
+// RemoveManagementServer mocks base method.
+func (m *MockManagementServiceIface) RemoveManagementServer(p *RemoveManagementServerParams) (*RemoveManagementServerResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveManagementServer", p)
+	ret0, _ := ret[0].(*RemoveManagementServerResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RemoveManagementServer indicates an expected call of RemoveManagementServer.
+func (mr *MockManagementServiceIfaceMockRecorder) RemoveManagementServer(p any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveManagementServer", reflect.TypeOf((*MockManagementServiceIface)(nil).RemoveManagementServer), p)
 }
 
 // TriggerShutdown mocks base method.

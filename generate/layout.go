@@ -953,9 +953,12 @@ var layout = apiInfo{
 		"cloudianIsEnabled",
 	},
 	"ManagementService": {
-		"cancelShutdown",
 		"listManagementServers",
 		"listManagementServersMetrics",
+		"removeManagementServer",
+		"prepareForMaintenance",
+		"cancelMaintenance",
+		"cancelShutdown",
 		"prepareForShutdown",
 		"readyForShutdown",
 		"triggerShutdown",
