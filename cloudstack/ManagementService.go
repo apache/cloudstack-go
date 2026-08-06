@@ -799,7 +799,7 @@ func (p *PrepareForMaintenanceParams) toURLValues() url.Values {
 		u.Set("forced", vv)
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	return u
 }
@@ -914,7 +914,7 @@ func (p *CancelMaintenanceParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	if v, found := p.p["rebalance"]; found {
 		vv := strconv.FormatBool(v.(bool))
@@ -1012,7 +1012,7 @@ func (p *CancelShutdownParams) toURLValues() url.Values {
 		return u
 	}
 	if v, found := p.p["managementserverid"]; found {
-		u.Set("managementserverid", v.(string))
+		u.Set("managementserverid", string(v.(UUID)))
 	}
 	return u
 }
