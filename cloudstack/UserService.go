@@ -868,7 +868,7 @@ func (s *UserService) NewGetVirtualMachineUserDataParams(virtualmachineid string
 	return p
 }
 
-// Returns user data associated with the VM
+// Returns user data associated with the Instance
 func (s *UserService) GetVirtualMachineUserData(p *GetVirtualMachineUserDataParams) (*GetVirtualMachineUserDataResponse, error) {
 	resp, err := s.cs.newRequest("getVirtualMachineUserData", p.toURLValues())
 	if err != nil {

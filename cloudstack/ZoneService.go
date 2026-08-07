@@ -4129,24 +4129,26 @@ type ListVmwareDcVmsResponse struct {
 }
 
 type VmwareDcVm struct {
-	Bootmode         string           `json:"bootmode"`
-	Boottype         string           `json:"boottype"`
-	Clusterid        string           `json:"clusterid"`
-	Clustername      string           `json:"clustername"`
-	Cpucorepersocket int              `json:"cpucorepersocket"`
-	Cpunumber        int              `json:"cpunumber"`
-	Cpuspeed         int              `json:"cpuspeed"`
-	Disk             []VmwareDcVmDisk `json:"disk"`
-	Hostid           string           `json:"hostid"`
-	Hostname         string           `json:"hostname"`
-	JobID            string           `json:"jobid"`
-	Jobstatus        int              `json:"jobstatus"`
-	Memory           int              `json:"memory"`
-	Name             string           `json:"name"`
-	Nic              []Nic            `json:"nic"`
-	Osdisplayname    string           `json:"osdisplayname"`
-	Osid             string           `json:"osid"`
-	Powerstate       string           `json:"powerstate"`
+	Bootmode          string           `json:"bootmode"`
+	Boottype          string           `json:"boottype"`
+	Clusterid         string           `json:"clusterid"`
+	Clustername       string           `json:"clustername"`
+	Cpucorepersocket  int              `json:"cpucorepersocket"`
+	Cpunumber         int              `json:"cpunumber"`
+	Cpuspeed          int              `json:"cpuspeed"`
+	Disk              []VmwareDcVmDisk `json:"disk"`
+	Hostid            string           `json:"hostid"`
+	Hostname          string           `json:"hostname"`
+	Hypervisor        string           `json:"hypervisor"`
+	Hypervisorversion string           `json:"hypervisorversion"`
+	JobID             string           `json:"jobid"`
+	Jobstatus         int              `json:"jobstatus"`
+	Memory            int              `json:"memory"`
+	Name              string           `json:"name"`
+	Nic               []Nic            `json:"nic"`
+	Osdisplayname     string           `json:"osdisplayname"`
+	Osid              string           `json:"osid"`
+	Powerstate        string           `json:"powerstate"`
 }
 
 type VmwareDcVmDisk struct {

@@ -346,7 +346,7 @@ func (s *NicService) NewListNicsParams(virtualmachineid string) *ListNicsParams 
 	return p
 }
 
-// list the vm nics  IP to NIC
+// List the Instance NICs IP to NIC
 func (s *NicService) ListNics(p *ListNicsParams) (*ListNicsResponse, error) {
 	resp, err := s.cs.newRequest("listNics", p.toURLValues())
 	if err != nil {
@@ -556,7 +556,7 @@ func (s *NicService) NewUpdateVmNicIpParams(nicid string) *UpdateVmNicIpParams {
 	return p
 }
 
-// Update the default Ip of a VM Nic
+// Update the default IP of an Instance NIC
 func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpResponse, error) {
 	resp, err := s.cs.newPostRequest("updateVmNicIp", p.toURLValues())
 	if err != nil {
@@ -594,6 +594,7 @@ func (s *NicService) UpdateVmNicIp(p *UpdateVmNicIpParams) (*UpdateVmNicIpRespon
 type UpdateVmNicIpResponse struct {
 	Account               string                               `json:"account"`
 	Affinitygroup         []UpdateVmNicIpResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                               `json:"alloweddetails"`
 	Arch                  string                               `json:"arch"`
 	Autoscalevmgroupid    string                               `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                               `json:"autoscalevmgroupname"`

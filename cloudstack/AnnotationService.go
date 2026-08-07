@@ -156,7 +156,7 @@ func (s *AnnotationService) NewAddAnnotationParams() *AddAnnotationParams {
 	return p
 }
 
-// add an annotation.
+// Add an annotation.
 func (s *AnnotationService) AddAnnotation(p *AddAnnotationParams) (*AddAnnotationResponse, error) {
 	resp, err := s.cs.newPostRequest("addAnnotation", p.toURLValues())
 	if err != nil {
@@ -517,7 +517,7 @@ func (s *AnnotationService) NewRemoveAnnotationParams(id string) *RemoveAnnotati
 	return p
 }
 
-// remove an annotation.
+// Remove an annotation.
 func (s *AnnotationService) RemoveAnnotation(p *RemoveAnnotationParams) (*RemoveAnnotationResponse, error) {
 	resp, err := s.cs.newPostRequest("removeAnnotation", p.toURLValues())
 	if err != nil {
@@ -622,7 +622,7 @@ func (s *AnnotationService) NewUpdateAnnotationVisibilityParams(adminsonly bool,
 	return p
 }
 
-// update an annotation visibility.
+// Update an annotation visibility.
 func (s *AnnotationService) UpdateAnnotationVisibility(p *UpdateAnnotationVisibilityParams) (*UpdateAnnotationVisibilityResponse, error) {
 	resp, err := s.cs.newPostRequest("updateAnnotationVisibility", p.toURLValues())
 	if err != nil {

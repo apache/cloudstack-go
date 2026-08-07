@@ -3231,7 +3231,7 @@ func (s *FirewallService) NewListPaloAltoFirewallsParams() *ListPaloAltoFirewall
 	return p
 }
 
-// lists Palo Alto firewall devices in a physical network
+// Lists Palo Alto firewall devices in a physical Network
 func (s *FirewallService) ListPaloAltoFirewalls(p *ListPaloAltoFirewallsParams) (*ListPaloAltoFirewallsResponse, error) {
 	resp, err := s.cs.newRequest("listPaloAltoFirewalls", p.toURLValues())
 	if err != nil {
@@ -4644,7 +4644,7 @@ func (s *FirewallService) NewUpdatePortForwardingRuleParams(id string) *UpdatePo
 	return p
 }
 
-// Updates a port forwarding rule. Only the private port and the virtual machine can be updated.
+// Updates a port forwarding rule. Only the private port and the  Instance can be updated.
 func (s *FirewallService) UpdatePortForwardingRule(p *UpdatePortForwardingRuleParams) (*UpdatePortForwardingRuleResponse, error) {
 	resp, err := s.cs.newPostRequest("updatePortForwardingRule", p.toURLValues())
 	if err != nil {
@@ -5396,7 +5396,7 @@ func (s *FirewallService) NewCreateIpv6FirewallRuleParams(networkid string, prot
 	return p
 }
 
-// Creates an Ipv6 firewall rule in the given network (the network must not belong to VPC)
+// Creates an IPv6 firewall rule in the given Network (the Network must not belong to VPC)
 func (s *FirewallService) CreateIpv6FirewallRule(p *CreateIpv6FirewallRuleParams) (*CreateIpv6FirewallRuleResponse, error) {
 	resp, err := s.cs.newPostRequest("createIpv6FirewallRule", p.toURLValues())
 	if err != nil {

@@ -55,6 +55,12 @@ type GuestOSServiceIface interface {
 	NewUpdateGuestOsMappingParams(id string, osnameforhypervisor string) *UpdateGuestOsMappingParams
 	GetHypervisorGuestOsNames(p *GetHypervisorGuestOsNamesParams) (*GetHypervisorGuestOsNamesResponse, error)
 	NewGetHypervisorGuestOsNamesParams(hypervisor string, hypervisorversion string) *GetHypervisorGuestOsNamesParams
+	AddOsCategory(p *AddOsCategoryParams) (*AddOsCategoryResponse, error)
+	NewAddOsCategoryParams(name string) *AddOsCategoryParams
+	DeleteOsCategory(p *DeleteOsCategoryParams) (*DeleteOsCategoryResponse, error)
+	NewDeleteOsCategoryParams(id string) *DeleteOsCategoryParams
+	UpdateOsCategory(p *UpdateOsCategoryParams) (*UpdateOsCategoryResponse, error)
+	NewUpdateOsCategoryParams(id string) *UpdateOsCategoryParams
 }
 
 type AddGuestOsParams struct {
@@ -1270,6 +1276,10 @@ func (p *ListOsTypesParams) toURLValues() url.Values {
 	if v, found := p.p["id"]; found {
 		u.Set("id", v.(string))
 	}
+	if v, found := p.p["ids"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("ids", vv)
+	}
 	if v, found := p.p["keyword"]; found {
 		u.Set("keyword", v.(string))
 	}
@@ -1347,6 +1357,27 @@ func (p *ListOsTypesParams) GetId() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *ListOsTypesParams) SetIds(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["ids"] = v
+}
+
+func (p *ListOsTypesParams) ResetIds() {
+	if p.p != nil && p.p["ids"] != nil {
+		delete(p.p, "ids")
+	}
+}
+
+func (p *ListOsTypesParams) GetIds() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["ids"].([]string)
 	return value, ok
 }
 
@@ -2225,4 +2256,343 @@ type GetHypervisorGuestOsNamesResponse struct {
 type GetHypervisorGuestOsNamesResponseGuestoslist struct {
 	Osdisplayname       string `json:"osdisplayname"`
 	Osnameforhypervisor string `json:"osnameforhypervisor"`
+}
+
+type AddOsCategoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *AddOsCategoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["isfeatured"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isfeatured", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	return u
+}
+
+func (p *AddOsCategoryParams) SetIsfeatured(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isfeatured"] = v
+}
+
+func (p *AddOsCategoryParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
+func (p *AddOsCategoryParams) GetIsfeatured() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isfeatured"].(bool)
+	return value, ok
+}
+
+func (p *AddOsCategoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *AddOsCategoryParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *AddOsCategoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new AddOsCategoryParams instance,
+// as then you are sure you have configured all required params
+func (s *GuestOSService) NewAddOsCategoryParams(name string) *AddOsCategoryParams {
+	p := &AddOsCategoryParams{}
+	p.p = make(map[string]interface{})
+	p.p["name"] = name
+	return p
+}
+
+// Adds a new OS category
+func (s *GuestOSService) AddOsCategory(p *AddOsCategoryParams) (*AddOsCategoryResponse, error) {
+	resp, err := s.cs.newPostRequest("addOsCategory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response AddOsCategoryResponse `json:"oscategory"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type AddOsCategoryResponse struct {
+	Created    string      `json:"created"`
+	Icon       interface{} `json:"icon"`
+	Id         string      `json:"id"`
+	Isfeatured bool        `json:"isfeatured"`
+	JobID      string      `json:"jobid"`
+	Jobstatus  int         `json:"jobstatus"`
+	Name       string      `json:"name"`
+}
+
+type DeleteOsCategoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *DeleteOsCategoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	return u
+}
+
+func (p *DeleteOsCategoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *DeleteOsCategoryParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *DeleteOsCategoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new DeleteOsCategoryParams instance,
+// as then you are sure you have configured all required params
+func (s *GuestOSService) NewDeleteOsCategoryParams(id string) *DeleteOsCategoryParams {
+	p := &DeleteOsCategoryParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Deletes an OS category
+func (s *GuestOSService) DeleteOsCategory(p *DeleteOsCategoryParams) (*DeleteOsCategoryResponse, error) {
+	resp, err := s.cs.newPostRequest("deleteOsCategory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r DeleteOsCategoryResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type DeleteOsCategoryResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+func (r *DeleteOsCategoryResponse) UnmarshalJSON(b []byte) error {
+	var m map[string]interface{}
+	err := json.Unmarshal(b, &m)
+	if err != nil {
+		return err
+	}
+
+	if success, ok := m["success"].(string); ok {
+		m["success"] = success == "true"
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	if ostypeid, ok := m["ostypeid"].(float64); ok {
+		m["ostypeid"] = strconv.Itoa(int(ostypeid))
+		b, err = json.Marshal(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	type alias DeleteOsCategoryResponse
+	return json.Unmarshal(b, (*alias)(r))
+}
+
+type UpdateOsCategoryParams struct {
+	p map[string]interface{}
+}
+
+func (p *UpdateOsCategoryParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["id"]; found {
+		u.Set("id", v.(string))
+	}
+	if v, found := p.p["isfeatured"]; found {
+		vv := strconv.FormatBool(v.(bool))
+		u.Set("isfeatured", vv)
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["sortkey"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("sortkey", vv)
+	}
+	return u
+}
+
+func (p *UpdateOsCategoryParams) SetId(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["id"] = v
+}
+
+func (p *UpdateOsCategoryParams) ResetId() {
+	if p.p != nil && p.p["id"] != nil {
+		delete(p.p, "id")
+	}
+}
+
+func (p *UpdateOsCategoryParams) GetId() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["id"].(string)
+	return value, ok
+}
+
+func (p *UpdateOsCategoryParams) SetIsfeatured(v bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["isfeatured"] = v
+}
+
+func (p *UpdateOsCategoryParams) ResetIsfeatured() {
+	if p.p != nil && p.p["isfeatured"] != nil {
+		delete(p.p, "isfeatured")
+	}
+}
+
+func (p *UpdateOsCategoryParams) GetIsfeatured() (bool, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["isfeatured"].(bool)
+	return value, ok
+}
+
+func (p *UpdateOsCategoryParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *UpdateOsCategoryParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *UpdateOsCategoryParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *UpdateOsCategoryParams) SetSortkey(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["sortkey"] = v
+}
+
+func (p *UpdateOsCategoryParams) ResetSortkey() {
+	if p.p != nil && p.p["sortkey"] != nil {
+		delete(p.p, "sortkey")
+	}
+}
+
+func (p *UpdateOsCategoryParams) GetSortkey() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["sortkey"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new UpdateOsCategoryParams instance,
+// as then you are sure you have configured all required params
+func (s *GuestOSService) NewUpdateOsCategoryParams(id string) *UpdateOsCategoryParams {
+	p := &UpdateOsCategoryParams{}
+	p.p = make(map[string]interface{})
+	p.p["id"] = id
+	return p
+}
+
+// Updates an OS category
+func (s *GuestOSService) UpdateOsCategory(p *UpdateOsCategoryParams) (*UpdateOsCategoryResponse, error) {
+	resp, err := s.cs.newPostRequest("updateOsCategory", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var nested struct {
+		Response UpdateOsCategoryResponse `json:"oscategory"`
+	}
+	if err := json.Unmarshal(resp, &nested); err != nil {
+		return nil, err
+	}
+	r := nested.Response
+
+	return &r, nil
+}
+
+type UpdateOsCategoryResponse struct {
+	Created    string      `json:"created"`
+	Icon       interface{} `json:"icon"`
+	Id         string      `json:"id"`
+	Isfeatured bool        `json:"isfeatured"`
+	JobID      string      `json:"jobid"`
+	Jobstatus  int         `json:"jobstatus"`
+	Name       string      `json:"name"`
 }

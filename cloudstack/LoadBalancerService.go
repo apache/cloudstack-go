@@ -477,7 +477,7 @@ func (s *LoadBalancerService) NewAssignToLoadBalancerRuleParams(id string) *Assi
 	return p
 }
 
-// Assigns virtual machine or a list of virtual machines to a load balancer rule.
+// Assigns an Instance or a list of Instances to a load balancer rule.
 func (s *LoadBalancerService) AssignToLoadBalancerRule(p *AssignToLoadBalancerRuleParams) (*AssignToLoadBalancerRuleResponse, error) {
 	resp, err := s.cs.newPostRequest("assignToLoadBalancerRule", p.toURLValues())
 	if err != nil {
@@ -4011,7 +4011,7 @@ func (s *LoadBalancerService) GetLoadBalancerRuleInstanceByID(id string, opts ..
 	return nil, l.Count, fmt.Errorf("There is more then one result for LoadBalancerRuleInstance UUID: %s!", id)
 }
 
-// List all virtual machine instances that are assigned to a load balancer rule.
+// List all Instances that are assigned to a load balancer rule.
 func (s *LoadBalancerService) ListLoadBalancerRuleInstances(p *ListLoadBalancerRuleInstancesParams) (*ListLoadBalancerRuleInstancesResponse, error) {
 	resp, err := s.cs.newRequest("listLoadBalancerRuleInstances", p.toURLValues())
 	if err != nil {
@@ -5263,7 +5263,7 @@ func (s *LoadBalancerService) GetRegisteredServicePackageID(keyword string, opts
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// lists registered service packages
+// Lists registered service packages
 func (s *LoadBalancerService) ListRegisteredServicePackages(p *ListRegisteredServicePackagesParams) (*ListRegisteredServicePackagesResponse, error) {
 	resp, err := s.cs.newRequest("listRegisteredServicePackages", p.toURLValues())
 	if err != nil {
@@ -5731,7 +5731,7 @@ func (s *LoadBalancerService) NewRemoveFromLoadBalancerRuleParams(id string) *Re
 	return p
 }
 
-// Removes a virtual machine or a list of virtual machines from a load balancer rule.
+// Removes an Instance or a list of  Instances from a load balancer rule.
 func (s *LoadBalancerService) RemoveFromLoadBalancerRule(p *RemoveFromLoadBalancerRuleParams) (*RemoveFromLoadBalancerRuleResponse, error) {
 	resp, err := s.cs.newPostRequest("removeFromLoadBalancerRule", p.toURLValues())
 	if err != nil {
@@ -6059,7 +6059,7 @@ func (s *LoadBalancerService) NewUpdateGlobalLoadBalancerRuleParams(id string) *
 	return p
 }
 
-// update global load balancer rules.
+// Update global load balancer rules.
 func (s *LoadBalancerService) UpdateGlobalLoadBalancerRule(p *UpdateGlobalLoadBalancerRuleParams) (*UpdateGlobalLoadBalancerRuleResponse, error) {
 	resp, err := s.cs.newPostRequest("updateGlobalLoadBalancerRule", p.toURLValues())
 	if err != nil {

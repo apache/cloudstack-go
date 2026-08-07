@@ -70,6 +70,12 @@ func (p *ListAsyncJobsParams) toURLValues() url.Values {
 		vv := strconv.Itoa(v.(int))
 		u.Set("pagesize", vv)
 	}
+	if v, found := p.p["resourceid"]; found {
+		u.Set("resourceid", v.(string))
+	}
+	if v, found := p.p["resourcetype"]; found {
+		u.Set("resourcetype", v.(string))
+	}
 	if v, found := p.p["startdate"]; found {
 		u.Set("startdate", v.(string))
 	}
@@ -244,6 +250,48 @@ func (p *ListAsyncJobsParams) GetPagesize() (int, bool) {
 	return value, ok
 }
 
+func (p *ListAsyncJobsParams) SetResourceid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourceid"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetResourceid() {
+	if p.p != nil && p.p["resourceid"] != nil {
+		delete(p.p, "resourceid")
+	}
+}
+
+func (p *ListAsyncJobsParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
+func (p *ListAsyncJobsParams) SetResourcetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourcetype"] = v
+}
+
+func (p *ListAsyncJobsParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
+func (p *ListAsyncJobsParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
+	return value, ok
+}
+
 func (p *ListAsyncJobsParams) SetStartdate(v string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
@@ -273,7 +321,7 @@ func (s *AsyncjobService) NewListAsyncJobsParams() *ListAsyncJobsParams {
 	return p
 }
 
-// Lists all pending asynchronous jobs for the account.
+// Lists all pending asynchronous jobs for the Account.
 func (s *AsyncjobService) ListAsyncJobs(p *ListAsyncJobsParams) (*ListAsyncJobsResponse, error) {
 	resp, err := s.cs.newRequest("listAsyncJobs", p.toURLValues())
 	if err != nil {
@@ -326,6 +374,12 @@ func (p *QueryAsyncJobResultParams) toURLValues() url.Values {
 	if v, found := p.p["jobid"]; found {
 		u.Set("jobid", v.(string))
 	}
+	if v, found := p.p["resourceid"]; found {
+		u.Set("resourceid", v.(string))
+	}
+	if v, found := p.p["resourcetype"]; found {
+		u.Set("resourcetype", v.(string))
+	}
 	return u
 }
 
@@ -347,6 +401,48 @@ func (p *QueryAsyncJobResultParams) GetJobID() (string, bool) {
 		p.p = make(map[string]interface{})
 	}
 	value, ok := p.p["jobid"].(string)
+	return value, ok
+}
+
+func (p *QueryAsyncJobResultParams) SetResourceid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourceid"] = v
+}
+
+func (p *QueryAsyncJobResultParams) ResetResourceid() {
+	if p.p != nil && p.p["resourceid"] != nil {
+		delete(p.p, "resourceid")
+	}
+}
+
+func (p *QueryAsyncJobResultParams) GetResourceid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourceid"].(string)
+	return value, ok
+}
+
+func (p *QueryAsyncJobResultParams) SetResourcetype(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["resourcetype"] = v
+}
+
+func (p *QueryAsyncJobResultParams) ResetResourcetype() {
+	if p.p != nil && p.p["resourcetype"] != nil {
+		delete(p.p, "resourcetype")
+	}
+}
+
+func (p *QueryAsyncJobResultParams) GetResourcetype() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["resourcetype"].(string)
 	return value, ok
 }
 

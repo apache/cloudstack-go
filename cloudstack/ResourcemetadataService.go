@@ -269,7 +269,7 @@ func (s *ResourcemetadataService) NewListDetailOptionsParams(resourcetype string
 	return p
 }
 
-// Lists all possible details and their options for a resource type such as a VM or a template
+// Lists all possible details and their options for a resource type such as an Instance or a Template
 func (s *ResourcemetadataService) ListDetailOptions(p *ListDetailOptionsParams) (*ListDetailOptionsResponse, error) {
 	resp, err := s.cs.newRequest("listDetailOptions", p.toURLValues())
 	if err != nil {

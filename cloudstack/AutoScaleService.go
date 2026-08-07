@@ -229,7 +229,7 @@ func (s *AutoScaleService) NewCreateAutoScalePolicyParams(action string, conditi
 	return p
 }
 
-// Creates an autoscale policy for a provision or deprovision action, the action is taken when the all the conditions evaluates to true for the specified duration. The policy is in effect once it is attached to a autscale vm group.
+// Creates an autoscale policy for a provision or deprovision action, the action is taken when the all the conditions evaluates to true for the specified duration. The policy is in effect once it is attached to a autscale Instance group.
 func (s *AutoScaleService) CreateAutoScalePolicy(p *CreateAutoScalePolicyParams) (*CreateAutoScalePolicyResponse, error) {
 	resp, err := s.cs.newPostRequest("createAutoScalePolicy", p.toURLValues())
 	if err != nil {
@@ -529,7 +529,7 @@ func (s *AutoScaleService) NewCreateAutoScaleVmGroupParams(lbruleid string, maxm
 	return p
 }
 
-// Creates and automatically starts a virtual machine based on a service offering, disk offering, and template.
+// Creates and automatically starts an Instance based on a service offering, disk offering, and Template.
 func (s *AutoScaleService) CreateAutoScaleVmGroup(p *CreateAutoScaleVmGroupParams) (*CreateAutoScaleVmGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("createAutoScaleVmGroup", p.toURLValues())
 	if err != nil {
@@ -968,7 +968,7 @@ func (s *AutoScaleService) NewCreateAutoScaleVmProfileParams(serviceofferingid s
 	return p
 }
 
-// Creates a profile that contains information about the virtual machine which will be provisioned automatically by autoscale feature.
+// Creates a profile that contains information about the Instance which will be provisioned automatically by autoscale feature.
 func (s *AutoScaleService) CreateAutoScaleVmProfile(p *CreateAutoScaleVmProfileParams) (*CreateAutoScaleVmProfileResponse, error) {
 	resp, err := s.cs.newPostRequest("createAutoScaleVmProfile", p.toURLValues())
 	if err != nil {
@@ -1195,7 +1195,7 @@ func (s *AutoScaleService) NewCreateConditionParams(counterid string, relational
 	return p
 }
 
-// Creates a condition for VM auto scaling
+// Creates a condition for Instance auto scaling
 func (s *AutoScaleService) CreateCondition(p *CreateConditionParams) (*CreateConditionResponse, error) {
 	resp, err := s.cs.newPostRequest("createCondition", p.toURLValues())
 	if err != nil {
@@ -1368,7 +1368,7 @@ func (s *AutoScaleService) NewCreateCounterParams(name string, provider string, 
 	return p
 }
 
-// Adds metric counter for VM auto scaling
+// Adds metric counter for Instance auto scaling
 func (s *AutoScaleService) CreateCounter(p *CreateCounterParams) (*CreateCounterResponse, error) {
 	resp, err := s.cs.newPostRequest("createCounter", p.toURLValues())
 	if err != nil {
@@ -1566,7 +1566,7 @@ func (s *AutoScaleService) NewDeleteAutoScaleVmGroupParams(id string) *DeleteAut
 	return p
 }
 
-// Deletes a autoscale vm group.
+// Deletes an autoscale Instance group.
 func (s *AutoScaleService) DeleteAutoScaleVmGroup(p *DeleteAutoScaleVmGroupParams) (*DeleteAutoScaleVmGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteAutoScaleVmGroup", p.toURLValues())
 	if err != nil {
@@ -1648,7 +1648,7 @@ func (s *AutoScaleService) NewDeleteAutoScaleVmProfileParams(id string) *DeleteA
 	return p
 }
 
-// Deletes a autoscale vm profile.
+// Deletes a autoscale Instance profile.
 func (s *AutoScaleService) DeleteAutoScaleVmProfile(p *DeleteAutoScaleVmProfileParams) (*DeleteAutoScaleVmProfileResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteAutoScaleVmProfile", p.toURLValues())
 	if err != nil {
@@ -1730,7 +1730,7 @@ func (s *AutoScaleService) NewDeleteConditionParams(id string) *DeleteConditionP
 	return p
 }
 
-// Removes a condition for VM auto scaling
+// Removes a condition for Instance auto scaling
 func (s *AutoScaleService) DeleteCondition(p *DeleteConditionParams) (*DeleteConditionResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteCondition", p.toURLValues())
 	if err != nil {
@@ -1812,7 +1812,7 @@ func (s *AutoScaleService) NewDeleteCounterParams(id string) *DeleteCounterParam
 	return p
 }
 
-// Deletes a counter for VM auto scaling
+// Deletes a counter for Instance auto scaling
 func (s *AutoScaleService) DeleteCounter(p *DeleteCounterParams) (*DeleteCounterResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteCounter", p.toURLValues())
 	if err != nil {
@@ -1894,7 +1894,7 @@ func (s *AutoScaleService) NewDisableAutoScaleVmGroupParams(id string) *DisableA
 	return p
 }
 
-// Disables an AutoScale Vm Group
+// Disables an AutoScale Instance Group
 func (s *AutoScaleService) DisableAutoScaleVmGroup(p *DisableAutoScaleVmGroupParams) (*DisableAutoScaleVmGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("disableAutoScaleVmGroup", p.toURLValues())
 	if err != nil {
@@ -2006,7 +2006,7 @@ func (s *AutoScaleService) NewEnableAutoScaleVmGroupParams(id string) *EnableAut
 	return p
 }
 
-// Enables an AutoScale Vm Group
+// Enables an AutoScale Instance Group
 func (s *AutoScaleService) EnableAutoScaleVmGroup(p *EnableAutoScaleVmGroupParams) (*EnableAutoScaleVmGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("enableAutoScaleVmGroup", p.toURLValues())
 	if err != nil {
@@ -2997,7 +2997,7 @@ func (s *AutoScaleService) GetAutoScaleVmGroupByID(id string, opts ...OptionFunc
 	return nil, l.Count, fmt.Errorf("There is more then one result for AutoScaleVmGroup UUID: %s!", id)
 }
 
-// Lists autoscale vm groups.
+// Lists autoscale Instance groups.
 func (s *AutoScaleService) ListAutoScaleVmGroups(p *ListAutoScaleVmGroupsParams) (*ListAutoScaleVmGroupsResponse, error) {
 	resp, err := s.cs.newRequest("listAutoScaleVmGroups", p.toURLValues())
 	if err != nil {
@@ -3443,7 +3443,7 @@ func (s *AutoScaleService) GetAutoScaleVmProfileByID(id string, opts ...OptionFu
 	return nil, l.Count, fmt.Errorf("There is more then one result for AutoScaleVmProfile UUID: %s!", id)
 }
 
-// Lists autoscale vm profiles.
+// Lists autoscale Instance profiles.
 func (s *AutoScaleService) ListAutoScaleVmProfiles(p *ListAutoScaleVmProfilesParams) (*ListAutoScaleVmProfilesResponse, error) {
 	resp, err := s.cs.newRequest("listAutoScaleVmProfiles", p.toURLValues())
 	if err != nil {
@@ -3808,7 +3808,7 @@ func (s *AutoScaleService) GetConditionByID(id string, opts ...OptionFunc) (*Con
 	return nil, l.Count, fmt.Errorf("There is more then one result for Condition UUID: %s!", id)
 }
 
-// List Conditions for VM auto scaling
+// List Conditions for Instance auto scaling
 func (s *AutoScaleService) ListConditions(p *ListConditionsParams) (*ListConditionsResponse, error) {
 	resp, err := s.cs.newRequest("listConditions", p.toURLValues())
 	if err != nil {
@@ -4119,7 +4119,7 @@ func (s *AutoScaleService) GetCounterByID(id string, opts ...OptionFunc) (*Count
 	return nil, l.Count, fmt.Errorf("There is more then one result for Counter UUID: %s!", id)
 }
 
-// List the counters for VM auto scaling
+// List the counters for Instance auto scaling
 func (s *AutoScaleService) ListCounters(p *ListCountersParams) (*ListCountersResponse, error) {
 	resp, err := s.cs.newRequest("listCounters", p.toURLValues())
 	if err != nil {
@@ -4589,7 +4589,7 @@ func (s *AutoScaleService) NewUpdateAutoScaleVmGroupParams(id string) *UpdateAut
 	return p
 }
 
-// Updates an existing autoscale vm group.
+// Updates an existing autoscale Instance group.
 func (s *AutoScaleService) UpdateAutoScaleVmGroup(p *UpdateAutoScaleVmGroupParams) (*UpdateAutoScaleVmGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("updateAutoScaleVmGroup", p.toURLValues())
 	if err != nil {
@@ -4978,7 +4978,7 @@ func (s *AutoScaleService) NewUpdateAutoScaleVmProfileParams(id string) *UpdateA
 	return p
 }
 
-// Updates an existing autoscale vm profile.
+// Updates an existing autoscale Instance profile.
 func (s *AutoScaleService) UpdateAutoScaleVmProfile(p *UpdateAutoScaleVmProfileParams) (*UpdateAutoScaleVmProfileResponse, error) {
 	resp, err := s.cs.newPostRequest("updateAutoScaleVmProfile", p.toURLValues())
 	if err != nil {
@@ -5133,7 +5133,7 @@ func (s *AutoScaleService) NewUpdateConditionParams(id string, relationaloperato
 	return p
 }
 
-// Updates a condition for VM auto scaling
+// Updates a condition for Instance auto scaling
 func (s *AutoScaleService) UpdateCondition(p *UpdateConditionParams) (*UpdateConditionResponse, error) {
 	resp, err := s.cs.newPostRequest("updateCondition", p.toURLValues())
 	if err != nil {

@@ -151,7 +151,7 @@ func (s *ISOService) NewAttachIsoParams(id string, virtualmachineid string) *Att
 	return p
 }
 
-// Attaches an ISO to a virtual machine.
+// Attaches an ISO to  an Instance.
 func (s *ISOService) AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error) {
 	resp, err := s.cs.newPostRequest("attachIso", p.toURLValues())
 	if err != nil {
@@ -189,6 +189,7 @@ func (s *ISOService) AttachIso(p *AttachIsoParams) (*AttachIsoResponse, error) {
 type AttachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []AttachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                           `json:"alloweddetails"`
 	Arch                  string                           `json:"arch"`
 	Autoscalevmgroupid    string                           `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                           `json:"autoscalevmgroupname"`
@@ -485,7 +486,7 @@ func (s *ISOService) NewCopyIsoParams(id string) *CopyIsoParams {
 	return p
 }
 
-// Copies an iso from one zone to another.
+// Copies an ISO from one zone to another.
 func (s *ISOService) CopyIso(p *CopyIsoParams) (*CopyIsoResponse, error) {
 	resp, err := s.cs.newPostRequest("copyIso", p.toURLValues())
 	if err != nil {
@@ -785,7 +786,7 @@ func (s *ISOService) NewDetachIsoParams(virtualmachineid string) *DetachIsoParam
 	return p
 }
 
-// Detaches any ISO file (if any) currently attached to a virtual machine.
+// Detaches any ISO file (if any) currently attached to  an Instance.
 func (s *ISOService) DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error) {
 	resp, err := s.cs.newPostRequest("detachIso", p.toURLValues())
 	if err != nil {
@@ -823,6 +824,7 @@ func (s *ISOService) DetachIso(p *DetachIsoParams) (*DetachIsoResponse, error) {
 type DetachIsoResponse struct {
 	Account               string                           `json:"account"`
 	Affinitygroup         []DetachIsoResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                           `json:"alloweddetails"`
 	Arch                  string                           `json:"arch"`
 	Autoscalevmgroupid    string                           `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                           `json:"autoscalevmgroupname"`
@@ -1512,7 +1514,7 @@ func (s *ISOService) NewGetUploadParamsForIsoParams(format string, name string, 
 	return p
 }
 
-// upload an existing ISO into the CloudStack cloud.
+// Upload an existing ISO into the CloudStack cloud.
 func (s *ISOService) GetUploadParamsForIso(p *GetUploadParamsForIsoParams) (*GetUploadParamsForIsoResponse, error) {
 	resp, err := s.cs.newRequest("getUploadParamsForIso", p.toURLValues())
 	if err != nil {
@@ -1615,7 +1617,7 @@ func (s *ISOService) GetIsoPermissionByID(id string, opts ...OptionFunc) (*IsoPe
 	return nil, l.Count, fmt.Errorf("There is more then one result for IsoPermission UUID: %s!", id)
 }
 
-// List iso visibility and all accounts that have permissions to view this iso.
+// List ISO visibility and all accounts that have permissions to view this ISO.
 func (s *ISOService) ListIsoPermissions(p *ListIsoPermissionsParams) (*ListIsoPermissionsResponse, error) {
 	resp, err := s.cs.newRequest("listIsoPermissions", p.toURLValues())
 	if err != nil {

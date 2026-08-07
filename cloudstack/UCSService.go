@@ -308,7 +308,7 @@ func (s *UCSService) NewAssociateUcsProfileToBladeParams(bladeid string, profile
 	return p
 }
 
-// associate a profile to a blade
+// Associate a profile to a blade
 func (s *UCSService) AssociateUcsProfileToBlade(p *AssociateUcsProfileToBladeParams) (*AssociateUcsProfileToBladeResponse, error) {
 	resp, err := s.cs.newPostRequest("associateUcsProfileToBlade", p.toURLValues())
 	if err != nil {

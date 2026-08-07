@@ -257,7 +257,7 @@ func (s *SystemVMService) NewDestroySystemVmParams(id string) *DestroySystemVmPa
 	return p
 }
 
-// Destroys a system virtual machine.
+// Destroys a System VM.
 func (s *SystemVMService) DestroySystemVm(p *DestroySystemVmParams) (*DestroySystemVmResponse, error) {
 	resp, err := s.cs.newPostRequest("destroySystemVm", p.toURLValues())
 	if err != nil {
@@ -729,7 +729,7 @@ func (s *SystemVMService) GetSystemVmByID(id string, opts ...OptionFunc) (*Syste
 	return nil, l.Count, fmt.Errorf("There is more then one result for SystemVm UUID: %s!", id)
 }
 
-// List system virtual machines.
+// List System VMs.
 func (s *SystemVMService) ListSystemVms(p *ListSystemVmsParams) (*ListSystemVmsResponse, error) {
 	resp, err := s.cs.newRequest("listSystemVms", p.toURLValues())
 	if err != nil {
@@ -1255,7 +1255,7 @@ func (s *SystemVMService) NewMigrateSystemVmParams(virtualmachineid string) *Mig
 	return p
 }
 
-// Attempts Migration of a system virtual machine to the host specified.
+// Attempts Migration of a System VM to the host specified.
 func (s *SystemVMService) MigrateSystemVm(p *MigrateSystemVmParams) (*MigrateSystemVmResponse, error) {
 	resp, err := s.cs.newPostRequest("migrateSystemVm", p.toURLValues())
 	if err != nil {
@@ -1704,7 +1704,7 @@ func (s *SystemVMService) NewStartSystemVmParams(id string) *StartSystemVmParams
 	return p
 }
 
-// Starts a system virtual machine.
+// Starts a System VM.
 func (s *SystemVMService) StartSystemVm(p *StartSystemVmParams) (*StartSystemVmResponse, error) {
 	resp, err := s.cs.newPostRequest("startSystemVm", p.toURLValues())
 	if err != nil {

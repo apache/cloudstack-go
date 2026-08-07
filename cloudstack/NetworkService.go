@@ -1766,7 +1766,7 @@ func (s *NetworkService) NewCreateNetworkParams(name string, networkofferingid s
 	return p
 }
 
-// Creates a network
+// Creates a Network
 func (s *NetworkService) CreateNetwork(p *CreateNetworkParams) (*CreateNetworkResponse, error) {
 	resp, err := s.cs.newPostRequest("createNetwork", p.toURLValues())
 	if err != nil {
@@ -2105,7 +2105,7 @@ func (s *NetworkService) NewCreatePhysicalNetworkParams(name string, zoneid stri
 	return p
 }
 
-// Creates a physical network
+// Creates a physical Network
 func (s *NetworkService) CreatePhysicalNetwork(p *CreatePhysicalNetworkParams) (*CreatePhysicalNetworkResponse, error) {
 	resp, err := s.cs.newPostRequest("createPhysicalNetwork", p.toURLValues())
 	if err != nil {
@@ -2981,7 +2981,7 @@ func (s *NetworkService) NewDeleteNetworkParams(id string) *DeleteNetworkParams 
 	return p
 }
 
-// Deletes a network
+// Deletes a Network
 func (s *NetworkService) DeleteNetwork(p *DeleteNetworkParams) (*DeleteNetworkResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteNetwork", p.toURLValues())
 	if err != nil {
@@ -5212,7 +5212,7 @@ func (s *NetworkService) GetNiciraNvpDeviceNetworkID(keyword string, nvpdeviceid
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// lists network that are using a nicira nvp device
+// Lists network that are using a nicira nvp device
 func (s *NetworkService) ListNiciraNvpDeviceNetworks(p *ListNiciraNvpDeviceNetworksParams) (*ListNiciraNvpDeviceNetworksResponse, error) {
 	resp, err := s.cs.newRequest("listNiciraNvpDeviceNetworks", p.toURLValues())
 	if err != nil {
@@ -5623,7 +5623,7 @@ func (s *NetworkService) GetPaloAltoFirewallNetworkID(keyword string, lbdeviceid
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// lists network that are using Palo Alto firewall device
+// Lists Network that are using Palo Alto firewall device
 func (s *NetworkService) ListPaloAltoFirewallNetworks(p *ListPaloAltoFirewallNetworksParams) (*ListPaloAltoFirewallNetworksResponse, error) {
 	resp, err := s.cs.newRequest("listPaloAltoFirewallNetworks", p.toURLValues())
 	if err != nil {
@@ -6546,7 +6546,7 @@ func (s *NetworkService) NewMigrateNetworkParams(networkid string, networkofferi
 	return p
 }
 
-// moves a network to another physical network
+// Moves a network to another physical network
 func (s *NetworkService) MigrateNetwork(p *MigrateNetworkParams) (*MigrateNetworkResponse, error) {
 	resp, err := s.cs.newPostRequest("migrateNetwork", p.toURLValues())
 	if err != nil {
@@ -6899,7 +6899,7 @@ func (s *NetworkService) NewRestartNetworkParams(id string) *RestartNetworkParam
 	return p
 }
 
-// Restarts the network; includes 1) restarting network elements - virtual routers, DHCP servers 2) reapplying all public IPs 3) reapplying loadBalancing/portForwarding rules
+// Restarts the Network; includes 1) restarting network elements - virtual routers, DHCP servers 2) reapplying all public IPs 3) reapplying loadBalancing/portForwarding rules
 func (s *NetworkService) RestartNetwork(p *RestartNetworkParams) (*RestartNetworkResponse, error) {
 	resp, err := s.cs.newPostRequest("restartNetwork", p.toURLValues())
 	if err != nil {
@@ -8704,7 +8704,7 @@ func (s *NetworkService) NewResetNetworkPermissionsParams(networkid string) *Res
 	return p
 }
 
-// Resets network permissions.
+// Resets Network permissions.
 func (s *NetworkService) ResetNetworkPermissions(p *ResetNetworkPermissionsParams) (*ResetNetworkPermissionsResponse, error) {
 	resp, err := s.cs.newPostRequest("resetNetworkPermissions", p.toURLValues())
 	if err != nil {
@@ -8798,7 +8798,7 @@ func (s *NetworkService) NewListNetworkPermissionsParams(networkid string) *List
 	return p
 }
 
-// List network visibility and all accounts that have permissions to view this network.
+// List Network visibility and all Accounts that have permissions to view this Network.
 func (s *NetworkService) ListNetworkPermissions(p *ListNetworkPermissionsParams) (*ListNetworkPermissionsResponse, error) {
 	resp, err := s.cs.newRequest("listNetworkPermissions", p.toURLValues())
 	if err != nil {
@@ -8950,7 +8950,7 @@ func (s *NetworkService) NewRemoveNetworkPermissionsParams(networkid string) *Re
 	return p
 }
 
-// Removes network permissions.
+// Removes Network permissions.
 func (s *NetworkService) RemoveNetworkPermissions(p *RemoveNetworkPermissionsParams) (*RemoveNetworkPermissionsResponse, error) {
 	resp, err := s.cs.newPostRequest("removeNetworkPermissions", p.toURLValues())
 	if err != nil {

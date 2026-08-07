@@ -158,7 +158,7 @@ func (s *VMGroupService) NewCreateInstanceGroupParams(name string) *CreateInstan
 	return p
 }
 
-// Creates a vm group
+// Creates an Instance group
 func (s *VMGroupService) CreateInstanceGroup(p *CreateInstanceGroupParams) (*CreateInstanceGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("createInstanceGroup", p.toURLValues())
 	if err != nil {
@@ -233,7 +233,7 @@ func (s *VMGroupService) NewDeleteInstanceGroupParams(id string) *DeleteInstance
 	return p
 }
 
-// Deletes a vm group
+// Deletes an Instance group
 func (s *VMGroupService) DeleteInstanceGroup(p *DeleteInstanceGroupParams) (*DeleteInstanceGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteInstanceGroup", p.toURLValues())
 	if err != nil {
@@ -629,7 +629,7 @@ func (s *VMGroupService) GetInstanceGroupByID(id string, opts ...OptionFunc) (*I
 	return nil, l.Count, fmt.Errorf("There is more then one result for InstanceGroup UUID: %s!", id)
 }
 
-// Lists vm groups
+// Lists Instance groups
 func (s *VMGroupService) ListInstanceGroups(p *ListInstanceGroupsParams) (*ListInstanceGroupsResponse, error) {
 	resp, err := s.cs.newRequest("listInstanceGroups", p.toURLValues())
 	if err != nil {
@@ -733,7 +733,7 @@ func (s *VMGroupService) NewUpdateInstanceGroupParams(id string) *UpdateInstance
 	return p
 }
 
-// Updates a vm group
+// Updates an Instance group
 func (s *VMGroupService) UpdateInstanceGroup(p *UpdateInstanceGroupParams) (*UpdateInstanceGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("updateInstanceGroup", p.toURLValues())
 	if err != nil {

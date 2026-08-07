@@ -492,7 +492,7 @@ func (s *NetscalerService) NewConfigureNetscalerLoadBalancerParams(lbdeviceid st
 	return p
 }
 
-// configures a netscaler load balancer device
+// Configures a netscaler load balancer device
 func (s *NetscalerService) ConfigureNetscalerLoadBalancer(p *ConfigureNetscalerLoadBalancerParams) (*NetscalerLoadBalancerResponse, error) {
 	resp, err := s.cs.newPostRequest("configureNetscalerLoadBalancer", p.toURLValues())
 	if err != nil {
@@ -817,7 +817,7 @@ func (s *NetscalerService) NewListNetscalerControlCenterParams() *ListNetscalerC
 	return p
 }
 
-// list control center
+// List control center
 func (s *NetscalerService) ListNetscalerControlCenter(p *ListNetscalerControlCenterParams) (*ListNetscalerControlCenterResponse, error) {
 	resp, err := s.cs.newRequest("listNetscalerControlCenter", p.toURLValues())
 	if err != nil {
@@ -1003,7 +1003,7 @@ func (s *NetscalerService) GetNetscalerLoadBalancerNetworkID(keyword string, lbd
 	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", keyword, l)
 }
 
-// lists network that are using a netscaler load balancer device
+// Lists network that are using a netscaler load balancer device
 func (s *NetscalerService) ListNetscalerLoadBalancerNetworks(p *ListNetscalerLoadBalancerNetworksParams) (*ListNetscalerLoadBalancerNetworksResponse, error) {
 	resp, err := s.cs.newRequest("listNetscalerLoadBalancerNetworks", p.toURLValues())
 	if err != nil {
@@ -1269,7 +1269,7 @@ func (s *NetscalerService) NewListNetscalerLoadBalancersParams() *ListNetscalerL
 	return p
 }
 
-// lists netscaler load balancer devices
+// Lists netscaler load balancer devices
 func (s *NetscalerService) ListNetscalerLoadBalancers(p *ListNetscalerLoadBalancersParams) (*ListNetscalerLoadBalancersResponse, error) {
 	resp, err := s.cs.newRequest("listNetscalerLoadBalancers", p.toURLValues())
 	if err != nil {

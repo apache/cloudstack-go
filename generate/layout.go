@@ -504,6 +504,8 @@ var layout = apiInfo{
 		"listStoragePools",
 		"syncStoragePool",
 		"updateStoragePool",
+		"configureStorageAccess",
+		"listStorageAccessGroups",
 	},
 	"NetworkACLService": {
 		"createNetworkACL",
@@ -528,6 +530,9 @@ var layout = apiInfo{
 		"updateGuestOs",
 		"updateGuestOsMapping",
 		"getHypervisorGuestOsNames",
+		"addOsCategory",
+		"deleteOsCategory",
+		"updateOsCategory",
 	},
 	"ClusterService": {
 		"addCluster",
@@ -912,6 +917,7 @@ var layout = apiInfo{
 		"removeVirtualMachinesFromKubernetesCluster",
 		"addNodesToKubernetesCluster",
 		"removeNodesFromKubernetesCluster",
+		"getUploadParamsForKubernetesSupportedVersion",
 	},
 	"InfrastructureUsageService": {
 		"listDbMetrics",

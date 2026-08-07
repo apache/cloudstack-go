@@ -1093,7 +1093,7 @@ func (s *AffinityGroupService) NewUpdateVMAffinityGroupParams(id string) *Update
 	return p
 }
 
-// Updates the affinity/anti-affinity group associations of a virtual machine. The VM has to be stopped and restarted for the new properties to take effect.
+// Updates the affinity/anti-affinity group associations of an Instance. The Instance has to be stopped and restarted for the new properties to take effect.
 func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupParams) (*UpdateVMAffinityGroupResponse, error) {
 	resp, err := s.cs.newPostRequest("updateVMAffinityGroup", p.toURLValues())
 	if err != nil {
@@ -1131,6 +1131,7 @@ func (s *AffinityGroupService) UpdateVMAffinityGroup(p *UpdateVMAffinityGroupPar
 type UpdateVMAffinityGroupResponse struct {
 	Account               string                                       `json:"account"`
 	Affinitygroup         []UpdateVMAffinityGroupResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                                       `json:"alloweddetails"`
 	Arch                  string                                       `json:"arch"`
 	Autoscalevmgroupid    string                                       `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                       `json:"autoscalevmgroupname"`

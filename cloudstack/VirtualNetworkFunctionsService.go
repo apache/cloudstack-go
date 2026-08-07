@@ -1769,6 +1769,7 @@ func (s *VirtualNetworkFunctionsService) DeployVnfAppliance(p *DeployVnfApplianc
 type DeployVnfApplianceResponse struct {
 	Account               string                                    `json:"account"`
 	Affinitygroup         []DeployVnfApplianceResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                                    `json:"alloweddetails"`
 	Arch                  string                                    `json:"arch"`
 	Autoscalevmgroupid    string                                    `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                    `json:"autoscalevmgroupname"`
@@ -3077,6 +3078,7 @@ type ListVnfAppliancesResponse struct {
 type VnfAppliance struct {
 	Account               string                      `json:"account"`
 	Affinitygroup         []VnfApplianceAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                      `json:"alloweddetails"`
 	Arch                  string                      `json:"arch"`
 	Autoscalevmgroupid    string                      `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                      `json:"autoscalevmgroupname"`

@@ -73,7 +73,7 @@ func (s *APIDiscoveryService) NewListApisParams() *ListApisParams {
 	return p
 }
 
-// lists all available apis on the server, provided by the Api Discovery plugin
+// Lists all available APIs on the server, provided by the API Discovery plugin
 func (s *APIDiscoveryService) ListApis(p *ListApisParams) (*ListApisResponse, error) {
 	resp, err := s.cs.newRequest("listApis", p.toURLValues())
 	if err != nil {

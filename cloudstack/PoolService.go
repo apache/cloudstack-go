@@ -45,6 +45,11 @@ type PoolServiceIface interface {
 	NewSyncStoragePoolParams(id string) *SyncStoragePoolParams
 	UpdateStoragePool(p *UpdateStoragePoolParams) (*UpdateStoragePoolResponse, error)
 	NewUpdateStoragePoolParams(id string) *UpdateStoragePoolParams
+	ConfigureStorageAccess(p *ConfigureStorageAccessParams) (*StorageAccessResponse, error)
+	NewConfigureStorageAccessParams() *ConfigureStorageAccessParams
+	ListStorageAccessGroups(p *ListStorageAccessGroupsParams) (*ListStorageAccessGroupsResponse, error)
+	NewListStorageAccessGroupsParams() *ListStorageAccessGroupsParams
+	GetStorageAccessGroupID(name string, opts ...OptionFunc) (string, int, error)
 }
 
 type CreateStoragePoolParams struct {
@@ -1805,4 +1810,392 @@ type UpdateStoragePoolResponse struct {
 	Usediops             int64             `json:"usediops"`
 	Zoneid               string            `json:"zoneid"`
 	Zonename             string            `json:"zonename"`
+}
+
+type ConfigureStorageAccessParams struct {
+	p map[string]interface{}
+}
+
+func (p *ConfigureStorageAccessParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["clusterid"]; found {
+		u.Set("clusterid", v.(string))
+	}
+	if v, found := p.p["hostid"]; found {
+		u.Set("hostid", v.(string))
+	}
+	if v, found := p.p["podid"]; found {
+		u.Set("podid", v.(string))
+	}
+	if v, found := p.p["storageaccessgroups"]; found {
+		vv := strings.Join(v.([]string), ",")
+		u.Set("storageaccessgroups", vv)
+	}
+	if v, found := p.p["storageid"]; found {
+		u.Set("storageid", v.(string))
+	}
+	if v, found := p.p["zoneid"]; found {
+		u.Set("zoneid", v.(string))
+	}
+	return u
+}
+
+func (p *ConfigureStorageAccessParams) SetClusterid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["clusterid"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetClusterid() {
+	if p.p != nil && p.p["clusterid"] != nil {
+		delete(p.p, "clusterid")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetClusterid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["clusterid"].(string)
+	return value, ok
+}
+
+func (p *ConfigureStorageAccessParams) SetHostid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["hostid"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetHostid() {
+	if p.p != nil && p.p["hostid"] != nil {
+		delete(p.p, "hostid")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetHostid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["hostid"].(string)
+	return value, ok
+}
+
+func (p *ConfigureStorageAccessParams) SetPodid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["podid"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetPodid() {
+	if p.p != nil && p.p["podid"] != nil {
+		delete(p.p, "podid")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetPodid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["podid"].(string)
+	return value, ok
+}
+
+func (p *ConfigureStorageAccessParams) SetStorageaccessgroups(v []string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageaccessgroups"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetStorageaccessgroups() {
+	if p.p != nil && p.p["storageaccessgroups"] != nil {
+		delete(p.p, "storageaccessgroups")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetStorageaccessgroups() ([]string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageaccessgroups"].([]string)
+	return value, ok
+}
+
+func (p *ConfigureStorageAccessParams) SetStorageid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["storageid"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetStorageid() {
+	if p.p != nil && p.p["storageid"] != nil {
+		delete(p.p, "storageid")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetStorageid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["storageid"].(string)
+	return value, ok
+}
+
+func (p *ConfigureStorageAccessParams) SetZoneid(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["zoneid"] = v
+}
+
+func (p *ConfigureStorageAccessParams) ResetZoneid() {
+	if p.p != nil && p.p["zoneid"] != nil {
+		delete(p.p, "zoneid")
+	}
+}
+
+func (p *ConfigureStorageAccessParams) GetZoneid() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["zoneid"].(string)
+	return value, ok
+}
+
+// You should always use this function to get a new ConfigureStorageAccessParams instance,
+// as then you are sure you have configured all required params
+func (s *PoolService) NewConfigureStorageAccessParams() *ConfigureStorageAccessParams {
+	p := &ConfigureStorageAccessParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// Configure the storage access groups on zone/pod/cluster/host and storage, accordingly connections to the storage pools
+func (s *PoolService) ConfigureStorageAccess(p *ConfigureStorageAccessParams) (*StorageAccessResponse, error) {
+	resp, err := s.cs.newPostRequest("configureStorageAccess", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r StorageAccessResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	// If we have a async client, we need to wait for the async result
+	if s.cs.async {
+		b, err := s.cs.GetAsyncJobResult(r.JobID, s.cs.timeout)
+		if err != nil {
+			if err == AsyncTimeoutErr {
+				return &r, err
+			}
+			return nil, err
+		}
+
+		if err := json.Unmarshal(b, &r); err != nil {
+			return nil, err
+		}
+	}
+
+	return &r, nil
+}
+
+type StorageAccessResponse struct {
+	Displaytext string `json:"displaytext"`
+	JobID       string `json:"jobid"`
+	Jobstatus   int    `json:"jobstatus"`
+	Success     bool   `json:"success"`
+}
+
+type ListStorageAccessGroupsParams struct {
+	p map[string]interface{}
+}
+
+func (p *ListStorageAccessGroupsParams) toURLValues() url.Values {
+	u := url.Values{}
+	if p.p == nil {
+		return u
+	}
+	if v, found := p.p["keyword"]; found {
+		u.Set("keyword", v.(string))
+	}
+	if v, found := p.p["name"]; found {
+		u.Set("name", v.(string))
+	}
+	if v, found := p.p["page"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("page", vv)
+	}
+	if v, found := p.p["pagesize"]; found {
+		vv := strconv.Itoa(v.(int))
+		u.Set("pagesize", vv)
+	}
+	return u
+}
+
+func (p *ListStorageAccessGroupsParams) SetKeyword(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["keyword"] = v
+}
+
+func (p *ListStorageAccessGroupsParams) ResetKeyword() {
+	if p.p != nil && p.p["keyword"] != nil {
+		delete(p.p, "keyword")
+	}
+}
+
+func (p *ListStorageAccessGroupsParams) GetKeyword() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["keyword"].(string)
+	return value, ok
+}
+
+func (p *ListStorageAccessGroupsParams) SetName(v string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["name"] = v
+}
+
+func (p *ListStorageAccessGroupsParams) ResetName() {
+	if p.p != nil && p.p["name"] != nil {
+		delete(p.p, "name")
+	}
+}
+
+func (p *ListStorageAccessGroupsParams) GetName() (string, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["name"].(string)
+	return value, ok
+}
+
+func (p *ListStorageAccessGroupsParams) SetPage(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["page"] = v
+}
+
+func (p *ListStorageAccessGroupsParams) ResetPage() {
+	if p.p != nil && p.p["page"] != nil {
+		delete(p.p, "page")
+	}
+}
+
+func (p *ListStorageAccessGroupsParams) GetPage() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["page"].(int)
+	return value, ok
+}
+
+func (p *ListStorageAccessGroupsParams) SetPagesize(v int) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	p.p["pagesize"] = v
+}
+
+func (p *ListStorageAccessGroupsParams) ResetPagesize() {
+	if p.p != nil && p.p["pagesize"] != nil {
+		delete(p.p, "pagesize")
+	}
+}
+
+func (p *ListStorageAccessGroupsParams) GetPagesize() (int, bool) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	value, ok := p.p["pagesize"].(int)
+	return value, ok
+}
+
+// You should always use this function to get a new ListStorageAccessGroupsParams instance,
+// as then you are sure you have configured all required params
+func (s *PoolService) NewListStorageAccessGroupsParams() *ListStorageAccessGroupsParams {
+	p := &ListStorageAccessGroupsParams{}
+	p.p = make(map[string]interface{})
+	return p
+}
+
+// This is a courtesy helper function, which in some cases may not work as expected!
+func (s *PoolService) GetStorageAccessGroupID(name string, opts ...OptionFunc) (string, int, error) {
+	p := &ListStorageAccessGroupsParams{}
+	p.p = make(map[string]interface{})
+
+	p.p["name"] = name
+
+	for _, fn := range append(s.cs.options, opts...) {
+		if err := fn(s.cs, p); err != nil {
+			return "", -1, err
+		}
+	}
+
+	l, err := s.ListStorageAccessGroups(p)
+	if err != nil {
+		return "", -1, err
+	}
+
+	if l.Count == 0 {
+		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+	}
+
+	if l.Count == 1 {
+		return l.StorageAccessGroups[0].Id, l.Count, nil
+	}
+
+	if l.Count > 1 {
+		for _, v := range l.StorageAccessGroups {
+			if v.Name == name {
+				return v.Id, l.Count, nil
+			}
+		}
+	}
+	return "", l.Count, fmt.Errorf("Could not find an exact match for %s: %+v", name, l)
+}
+
+// Lists storage access groups
+func (s *PoolService) ListStorageAccessGroups(p *ListStorageAccessGroupsParams) (*ListStorageAccessGroupsResponse, error) {
+	resp, err := s.cs.newRequest("listStorageAccessGroups", p.toURLValues())
+	if err != nil {
+		return nil, err
+	}
+
+	var r ListStorageAccessGroupsResponse
+	if err := json.Unmarshal(resp, &r); err != nil {
+		return nil, err
+	}
+
+	return &r, nil
+}
+
+type ListStorageAccessGroupsResponse struct {
+	Count               int                   `json:"count"`
+	StorageAccessGroups []*StorageAccessGroup `json:"storageaccessgroup"`
+}
+
+type StorageAccessGroup struct {
+	Clusters     string `json:"clusters"`
+	Hosts        string `json:"hosts"`
+	Id           string `json:"id"`
+	JobID        string `json:"jobid"`
+	Jobstatus    int    `json:"jobstatus"`
+	Name         string `json:"name"`
+	Pods         string `json:"pods"`
+	Storagepools string `json:"storagepools"`
+	Zones        string `json:"zones"`
 }

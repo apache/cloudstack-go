@@ -4127,7 +4127,7 @@ func (s *VPCService) NewMigrateVPCParams(vpcid string, vpcofferingid string) *Mi
 	return p
 }
 
-// moves a vpc to another physical network
+// Moves a VPC to another physical network
 func (s *VPCService) MigrateVPC(p *MigrateVPCParams) (*MigrateVPCResponse, error) {
 	resp, err := s.cs.newPostRequest("migrateVPC", p.toURLValues())
 	if err != nil {

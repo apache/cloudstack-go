@@ -70,6 +70,9 @@ var requiredParams = map[string][]string{
 	"registerTemplate": {
 		"displaytext",
 	},
+	"queryAsyncJobResult": {
+		"jobid",
+	},
 	"updateGuestOs": {
 		"osdisplayname",
 	},

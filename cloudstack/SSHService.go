@@ -1106,7 +1106,7 @@ func (s *SSHService) NewResetSSHKeyForVirtualMachineParams(id string) *ResetSSHK
 	return p
 }
 
-// Resets the SSH Key for virtual machine. The virtual machine must be in a "Stopped" state. [async]
+// Resets the SSH Key for Instance. The Instance must be in a "Stopped" state. [async]
 func (s *SSHService) ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachineParams) (*ResetSSHKeyForVirtualMachineResponse, error) {
 	resp, err := s.cs.newPostRequest("resetSSHKeyForVirtualMachine", p.toURLValues())
 	if err != nil {
@@ -1144,6 +1144,7 @@ func (s *SSHService) ResetSSHKeyForVirtualMachine(p *ResetSSHKeyForVirtualMachin
 type ResetSSHKeyForVirtualMachineResponse struct {
 	Account               string                                              `json:"account"`
 	Affinitygroup         []ResetSSHKeyForVirtualMachineResponseAffinitygroup `json:"affinitygroup"`
+	Alloweddetails        string                                              `json:"alloweddetails"`
 	Arch                  string                                              `json:"arch"`
 	Autoscalevmgroupid    string                                              `json:"autoscalevmgroupid"`
 	Autoscalevmgroupname  string                                              `json:"autoscalevmgroupname"`

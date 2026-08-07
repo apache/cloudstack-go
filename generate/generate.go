@@ -128,32 +128,35 @@ var mapRequireList = map[string]map[string]bool{
 // that responses fields are nested in a parent object. The map value
 // gives the object field name.
 var nestedResponse = map[string]string{
-	"getUploadParamsForTemplate":       "getuploadparams",
-	"getUploadParamsForVolume":         "getuploadparams",
-	"createRole":                       "role",
-	"createRolePermission":             "rolepermission",
-	"getCloudIdentifier":               "cloudidentifier",
-	"getKubernetesClusterConfig":       "clusterconfig",
-	"getPathForVolume":                 "apipathforvolume",
-	"createConsoleEndpoint":            "consoleendpoint",
-	"addVmwareDc":                      "vmwaredc",
-	"updateVmwareDc":                   "vmwaredc",
-	"createProjectRole":                "projectrole",
-	"updateProjectRole":                "projectrole",
-	"registerUserData":                 "userdata",
-	"updateSecurityGroup":              "securitygroup",
-	"updateOauthProvider":              "oauthprovider",
-	"readyForShutdown":                 "readyforshutdown",
-	"updateObjectStoragePool":          "objectstore",
-	"addObjectStoragePool":             "objectstore",
-	"updateImageStore":                 "imagestore",
-	"linkUserDataToTemplate":           "template",
-	"assignVolume":                     "volume",
-	"createVMSchedule":                 "vmschedule",
-	"updateVMSchedule":                 "vmschedule",
-	"setupUserTwoFactorAuthentication": "setup2fa",
-	"updateSecondaryStorageSelector":   "heuristics",
-	"createSecondaryStorageSelector":   "heuristics",
+	"getUploadParamsForTemplate":                   "getuploadparams",
+	"getUploadParamsForVolume":                     "getuploadparams",
+	"createRole":                                   "role",
+	"createRolePermission":                         "rolepermission",
+	"getCloudIdentifier":                           "cloudidentifier",
+	"getKubernetesClusterConfig":                   "clusterconfig",
+	"getPathForVolume":                             "apipathforvolume",
+	"createConsoleEndpoint":                        "consoleendpoint",
+	"addVmwareDc":                                  "vmwaredc",
+	"updateVmwareDc":                               "vmwaredc",
+	"createProjectRole":                            "projectrole",
+	"updateProjectRole":                            "projectrole",
+	"registerUserData":                             "userdata",
+	"updateSecurityGroup":                          "securitygroup",
+	"updateOauthProvider":                          "oauthprovider",
+	"readyForShutdown":                             "readyforshutdown",
+	"updateObjectStoragePool":                      "objectstore",
+	"addObjectStoragePool":                         "objectstore",
+	"updateImageStore":                             "imagestore",
+	"linkUserDataToTemplate":                       "template",
+	"assignVolume":                                 "volume",
+	"createVMSchedule":                             "vmschedule",
+	"updateVMSchedule":                             "vmschedule",
+	"setupUserTwoFactorAuthentication":             "setup2fa",
+	"updateSecondaryStorageSelector":               "heuristics",
+	"createSecondaryStorageSelector":               "heuristics",
+	"getUploadParamsForKubernetesSupportedVersion": "getuploadparams",
+	"addOsCategory":                                "oscategory",
+	"updateOsCategory":                             "oscategory",
 }
 
 // longToStringConvertedParams is a prefilled map with the list of
@@ -551,7 +554,9 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("	currentTime := time.Now().Unix()")
 	pn("")
 	pn("		for {")
-	pn("		p := cs.Asyncjob.NewQueryAsyncJobResultParams(jobid)")
+	pn("		p := &QueryAsyncJobResultParams{}")
+	pn("		p.p = make(map[string]interface{})")
+	pn("		p.SetJobID(jobid)")
 	pn("		r, err := cs.Asyncjob.QueryAsyncJobResult(p)")
 	pn("		if err != nil {")
 	pn("			return nil, err")
@@ -1984,6 +1989,19 @@ func (s *service) generateResponseType(a *API) {
 	tn := capitalize(strings.TrimPrefix(a.Name, "configure") + "Response")
 
 	// add custom response types for some specific API calls
+	if a.Name == "getUploadParamsForKubernetesSupportedVersion" {
+		pn("type GetUploadParamsForKubernetesSupportedVersionResponse struct {")
+		pn("    Expires   string `json:\"expires\"`")
+		pn("    Id        string `json:\"id\"`")
+		pn("    JobID     string `json:\"jobid\"`")
+		pn("    Jobstatus int    `json:\"jobstatus\"`")
+		pn("    Metadata  string `json:\"metadata\"`")
+		pn("    PostURL   string `json:\"postURL\"`")
+		pn("    Signature string `json:\"signature\"`")
+		pn("}")
+		pn("")
+		return
+	}
 	if a.Name == "quotaBalance" {
 		pn("type QuotaBalanceResponse struct {")
 		pn("    Statement QuotaBalanceResponseType `json:\"balance\"`")

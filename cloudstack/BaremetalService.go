@@ -191,7 +191,7 @@ func (s *BaremetalService) NewAddBaremetalDhcpParams(dhcpservertype string, pass
 	return p
 }
 
-// adds a baremetal dhcp server
+// Adds a baremetal DHCP server
 func (s *BaremetalService) AddBaremetalDhcp(p *AddBaremetalDhcpParams) (*AddBaremetalDhcpResponse, error) {
 	resp, err := s.cs.newPostRequest("addBaremetalDhcp", p.toURLValues())
 	if err != nil {
@@ -430,7 +430,7 @@ func (s *BaremetalService) NewAddBaremetalPxeKickStartServerParams(password stri
 	return p
 }
 
-// add a baremetal pxe server
+// Add a baremetal PXE server
 func (s *BaremetalService) AddBaremetalPxeKickStartServer(p *AddBaremetalPxeKickStartServerParams) (*AddBaremetalPxeKickStartServerResponse, error) {
 	resp, err := s.cs.newPostRequest("addBaremetalPxeKickStartServer", p.toURLValues())
 	if err != nil {
@@ -767,7 +767,7 @@ func (s *BaremetalService) NewAddBaremetalPxePingServerParams(password string, p
 	return p
 }
 
-// add a baremetal ping pxe server
+// Add a baremetal ping PXE server
 func (s *BaremetalService) AddBaremetalPxePingServer(p *AddBaremetalPxePingServerParams) (*AddBaremetalPxePingServerResponse, error) {
 	resp, err := s.cs.newPostRequest("addBaremetalPxePingServer", p.toURLValues())
 	if err != nil {
@@ -859,7 +859,7 @@ func (s *BaremetalService) NewAddBaremetalRctParams(baremetalrcturl string) *Add
 	return p
 }
 
-// adds baremetal rack configuration text
+// Adds baremetal rack configuration text
 func (s *BaremetalService) AddBaremetalRct(p *AddBaremetalRctParams) (*AddBaremetalRctResponse, error) {
 	resp, err := s.cs.newPostRequest("addBaremetalRct", p.toURLValues())
 	if err != nil {
@@ -946,7 +946,7 @@ func (s *BaremetalService) NewDeleteBaremetalRctParams(id string) *DeleteBaremet
 	return p
 }
 
-// deletes baremetal rack configuration text
+// Deletes baremetal rack configuration text
 func (s *BaremetalService) DeleteBaremetalRct(p *DeleteBaremetalRctParams) (*DeleteBaremetalRctResponse, error) {
 	resp, err := s.cs.newPostRequest("deleteBaremetalRct", p.toURLValues())
 	if err != nil {
@@ -1151,7 +1151,7 @@ func (s *BaremetalService) NewListBaremetalDhcpParams(physicalnetworkid string) 
 	return p
 }
 
-// list baremetal dhcp servers
+// List baremetal dhcp servers
 func (s *BaremetalService) ListBaremetalDhcp(p *ListBaremetalDhcpParams) (*ListBaremetalDhcpResponse, error) {
 	resp, err := s.cs.newRequest("listBaremetalDhcp", p.toURLValues())
 	if err != nil {
@@ -1325,7 +1325,7 @@ func (s *BaremetalService) NewListBaremetalPxeServersParams(physicalnetworkid st
 	return p
 }
 
-// list baremetal pxe server
+// List baremetal pxe server
 func (s *BaremetalService) ListBaremetalPxeServers(p *ListBaremetalPxeServersParams) (*ListBaremetalPxeServersResponse, error) {
 	resp, err := s.cs.newRequest("listBaremetalPxeServers", p.toURLValues())
 	if err != nil {
@@ -1448,7 +1448,7 @@ func (s *BaremetalService) NewListBaremetalRctParams() *ListBaremetalRctParams {
 	return p
 }
 
-// list baremetal rack configuration
+// List baremetal rack configuration
 func (s *BaremetalService) ListBaremetalRct(p *ListBaremetalRctParams) (*ListBaremetalRctResponse, error) {
 	resp, err := s.cs.newRequest("listBaremetalRct", p.toURLValues())
 	if err != nil {
