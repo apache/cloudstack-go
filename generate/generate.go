@@ -2048,6 +2048,20 @@ func (s *service) generateResponseType(a *API) {
 		pn("")
 		return
 	}
+	if a.Name == "listVnfAppliances" {
+		// The API docs do not describe the shape of the "vnfnics" field, so this
+		// type is hand maintained to mirror org.apache.cloudstack.api.response.VnfNicResponse.
+		pn("type VnfNic struct {")
+		pn("    Deviceid    int64  `json:\"deviceid\"`")
+		pn("    Description string `json:\"description\"`")
+		pn("    Management  bool   `json:\"management\"`")
+		pn("    Name        string `json:\"name\"`")
+		pn("    Networkid   string `json:\"networkid\"`")
+		pn("    Networkname string `json:\"networkname\"`")
+		pn("    Required    bool   `json:\"required\"`")
+		pn("}")
+		pn("")
+	}
 
 	ln := capitalize(strings.TrimPrefix(a.Name, "list"))
 
@@ -2156,6 +2170,16 @@ func (s *service) generateResponseType(a *API) {
 		case "listLBStickinessPolicies":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
+		case "listVnfTemplates":
+			// ListVnfTemplatesCmd is an empty subclass of ListTemplatesCmd, so the
+			// server returns the items under "template", not "vnftemplate".
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")
+		case "listVnfAppliances":
+			// ListVnfAppliancesCmd inherits execute() from ListVMsCmd, so the server
+			// returns the items under "virtualmachine", not "vnfappliance".
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "virtualmachine")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
@@ -2450,6 +2474,9 @@ func mapType(aName string, pName string, pType string) string {
 		}
 		if pName == "scaledownpolicies" || pName == "scaleuppolicies" {
 			return "[]*AutoScalePolicy"
+		}
+		if pName == "vnfnics" {
+			return "[]*VnfNic"
 		}
 		return "[]string"
 	case "map":

@@ -398,7 +398,7 @@ type AddNicToVirtualMachineResponse struct {
 	Videoram              int64                                         `json:"videoram"`
 	Vmtype                string                                        `json:"vmtype"`
 	Vnfdetails            map[string]string                             `json:"vnfdetails"`
-	Vnfnics               []string                                      `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                     `json:"vnfnics"`
 	Zoneid                string                                        `json:"zoneid"`
 	Zonename              string                                        `json:"zonename"`
 }
@@ -762,7 +762,7 @@ type AssignVirtualMachineResponse struct {
 	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
-	Vnfnics               []string                                    `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                   `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -1156,7 +1156,7 @@ type ChangeServiceForVirtualMachineResponse struct {
 	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
-	Vnfnics               []string                                              `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                             `json:"vnfnics"`
 	Zoneid                string                                                `json:"zoneid"`
 	Zonename              string                                                `json:"zonename"`
 }
@@ -2956,7 +2956,7 @@ type DeployVirtualMachineResponse struct {
 	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
-	Vnfnics               []string                                    `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                   `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -3268,7 +3268,7 @@ type DestroyVirtualMachineResponse struct {
 	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
-	Vnfnics               []string                                     `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                    `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -4821,7 +4821,7 @@ type VirtualMachine struct {
 	Videoram              int64                         `json:"videoram"`
 	Vmtype                string                        `json:"vmtype"`
 	Vnfdetails            map[string]string             `json:"vnfdetails"`
-	Vnfnics               []string                      `json:"vnfnics"`
+	Vnfnics               []*VnfNic                     `json:"vnfnics"`
 	Zoneid                string                        `json:"zoneid"`
 	Zonename              string                        `json:"zonename"`
 }
@@ -6233,7 +6233,7 @@ type VirtualMachinesMetric struct {
 	Videoram              int64                                `json:"videoram"`
 	Vmtype                string                               `json:"vmtype"`
 	Vnfdetails            map[string]string                    `json:"vnfdetails"`
-	Vnfnics               []string                             `json:"vnfnics"`
+	Vnfnics               []*VnfNic                            `json:"vnfnics"`
 	Zoneid                string                               `json:"zoneid"`
 	Zonename              string                               `json:"zonename"`
 }
@@ -6842,7 +6842,7 @@ type MigrateVirtualMachineResponse struct {
 	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
-	Vnfnics               []string                                     `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                    `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -7196,7 +7196,7 @@ type MigrateVirtualMachineWithVolumeResponse struct {
 	Videoram              int64                                                  `json:"videoram"`
 	Vmtype                string                                                 `json:"vmtype"`
 	Vnfdetails            map[string]string                                      `json:"vnfdetails"`
-	Vnfnics               []string                                               `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                              `json:"vnfnics"`
 	Zoneid                string                                                 `json:"zoneid"`
 	Zonename              string                                                 `json:"zonename"`
 }
@@ -7508,7 +7508,7 @@ type RebootVirtualMachineResponse struct {
 	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
-	Vnfnics               []string                                    `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                   `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -7750,7 +7750,7 @@ type RecoverVirtualMachineResponse struct {
 	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
-	Vnfnics               []string                                     `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                    `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -8037,7 +8037,7 @@ type RemoveNicFromVirtualMachineResponse struct {
 	Videoram              int64                                              `json:"videoram"`
 	Vmtype                string                                             `json:"vmtype"`
 	Vnfdetails            map[string]string                                  `json:"vnfdetails"`
-	Vnfnics               []string                                           `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                          `json:"vnfnics"`
 	Zoneid                string                                             `json:"zoneid"`
 	Zonename              string                                             `json:"zonename"`
 }
@@ -8323,7 +8323,7 @@ type ResetPasswordForVirtualMachineResponse struct {
 	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
-	Vnfnics               []string                                              `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                             `json:"vnfnics"`
 	Zoneid                string                                                `json:"zoneid"`
 	Zonename              string                                                `json:"zonename"`
 }
@@ -8712,7 +8712,7 @@ type ResetUserDataForVirtualMachineResponse struct {
 	Videoram              int64                                                 `json:"videoram"`
 	Vmtype                string                                                `json:"vmtype"`
 	Vnfdetails            map[string]string                                     `json:"vnfdetails"`
-	Vnfnics               []string                                              `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                             `json:"vnfnics"`
 	Zoneid                string                                                `json:"zoneid"`
 	Zonename              string                                                `json:"zonename"`
 }
@@ -9099,7 +9099,7 @@ type RestoreVirtualMachineResponse struct {
 	Videoram              int64                                        `json:"videoram"`
 	Vmtype                string                                       `json:"vmtype"`
 	Vnfdetails            map[string]string                            `json:"vnfdetails"`
-	Vnfnics               []string                                     `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                    `json:"vnfnics"`
 	Zoneid                string                                       `json:"zoneid"`
 	Zonename              string                                       `json:"zonename"`
 }
@@ -9741,7 +9741,7 @@ type StartVirtualMachineResponse struct {
 	Videoram              int64                                      `json:"videoram"`
 	Vmtype                string                                     `json:"vmtype"`
 	Vnfdetails            map[string]string                          `json:"vnfdetails"`
-	Vnfnics               []string                                   `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                  `json:"vnfnics"`
 	Zoneid                string                                     `json:"zoneid"`
 	Zonename              string                                     `json:"zonename"`
 }
@@ -10028,7 +10028,7 @@ type StopVirtualMachineResponse struct {
 	Videoram              int64                                     `json:"videoram"`
 	Vmtype                string                                    `json:"vmtype"`
 	Vnfdetails            map[string]string                         `json:"vnfdetails"`
-	Vnfnics               []string                                  `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                 `json:"vnfnics"`
 	Zoneid                string                                    `json:"zoneid"`
 	Zonename              string                                    `json:"zonename"`
 }
@@ -10315,7 +10315,7 @@ type UpdateDefaultNicForVirtualMachineResponse struct {
 	Videoram              int64                                                    `json:"videoram"`
 	Vmtype                string                                                   `json:"vmtype"`
 	Vnfdetails            map[string]string                                        `json:"vnfdetails"`
-	Vnfnics               []string                                                 `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                                `json:"vnfnics"`
 	Zoneid                string                                                   `json:"zoneid"`
 	Zonename              string                                                   `json:"zonename"`
 }
@@ -11094,7 +11094,7 @@ type UpdateVirtualMachineResponse struct {
 	Videoram              int64                                       `json:"videoram"`
 	Vmtype                string                                      `json:"vmtype"`
 	Vnfdetails            map[string]string                           `json:"vnfdetails"`
-	Vnfnics               []string                                    `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                   `json:"vnfnics"`
 	Zoneid                string                                      `json:"zoneid"`
 	Zonename              string                                      `json:"zonename"`
 }
@@ -12667,7 +12667,7 @@ type ImportVmResponse struct {
 	Videoram              int64                           `json:"videoram"`
 	Vmtype                string                          `json:"vmtype"`
 	Vnfdetails            map[string]string               `json:"vnfdetails"`
-	Vnfnics               []string                        `json:"vnfnics"`
+	Vnfnics               []*VnfNic                       `json:"vnfnics"`
 	Zoneid                string                          `json:"zoneid"`
 	Zonename              string                          `json:"zonename"`
 }
@@ -13621,7 +13621,7 @@ type ImportUnmanagedInstanceResponse struct {
 	Videoram              int64                                          `json:"videoram"`
 	Vmtype                string                                         `json:"vmtype"`
 	Vnfdetails            map[string]string                              `json:"vnfdetails"`
-	Vnfnics               []string                                       `json:"vnfnics"`
+	Vnfnics               []*VnfNic                                      `json:"vnfnics"`
 	Zoneid                string                                         `json:"zoneid"`
 	Zonename              string                                         `json:"zonename"`
 }
