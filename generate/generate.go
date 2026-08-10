@@ -2122,6 +2122,16 @@ func (s *service) generateResponseType(a *API) {
 		case "listLBStickinessPolicies":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
+		case "listVnfTemplates":
+			// ListVnfTemplatesCmd is an empty subclass of ListTemplatesCmd, so the
+			// server returns the items under "template", not "vnftemplate".
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")
+		case "listVnfAppliances":
+			// ListVnfAppliancesCmd inherits execute() from ListVMsCmd, so the server
+			// returns the items under "virtualmachine", not "vnfappliance".
+			pn("	Count int `json:\"count\"`")
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "virtualmachine")
 		default:
 			pn("	Count int `json:\"count\"`")
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))

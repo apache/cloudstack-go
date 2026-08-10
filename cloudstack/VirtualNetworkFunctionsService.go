@@ -3021,7 +3021,7 @@ type VnfNic struct {
 
 type ListVnfAppliancesResponse struct {
 	Count         int             `json:"count"`
-	VnfAppliances []*VnfAppliance `json:"vnfappliance"`
+	VnfAppliances []*VnfAppliance `json:"virtualmachine"`
 }
 
 type VnfAppliance struct {
@@ -3992,7 +3992,7 @@ func (s *VirtualNetworkFunctionsService) ListVnfTemplates(p *ListVnfTemplatesPar
 
 type ListVnfTemplatesResponse struct {
 	Count        int            `json:"count"`
-	VnfTemplates []*VnfTemplate `json:"vnftemplate"`
+	VnfTemplates []*VnfTemplate `json:"template"`
 }
 
 type VnfTemplate struct {
