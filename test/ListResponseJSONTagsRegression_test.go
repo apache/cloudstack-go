@@ -71,3 +71,193 @@ func TestListResponseJSONTagsPopulateSlices(t *testing.T) {
 		}
 	})
 }
+
+// These assertions exist because the key cannot be derived from the API name, so
+// a regeneration can otherwise quietly reintroduce any of them.
+func TestListResponseKeysObservedFromServer(t *testing.T) {
+	sliceCases := []struct {
+		name   string
+		key    string
+		body   string
+		decode func([]byte) (int, error)
+	}{
+		{
+			name: "ASNRanges", key: "asnumberrange",
+			body: `{"count":1,"asnumberrange":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListASNRangesResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.ASNRanges), err
+			},
+		},
+		{
+			name: "Ipv4SubnetsForZone", key: "zoneipv4subnet",
+			body: `{"count":1,"zoneipv4subnet":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListIpv4SubnetsForZoneResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.Ipv4SubnetsForZone), err
+			},
+		},
+		{
+			name: "BackupProviders", key: "providers",
+			body: `{"count":1,"providers":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListBackupProvidersResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.BackupProviders), err
+			},
+		},
+		{
+			name: "ClustersMetrics", key: "cluster",
+			body: `{"count":1,"cluster":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListClustersMetricsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.ClustersMetrics), err
+			},
+		},
+		{
+			name: "CustomActions", key: "extensioncustomaction",
+			body: `{"count":1,"extensioncustomaction":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListCustomActionsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.CustomActions), err
+			},
+		},
+		{
+			name: "HostsMetrics", key: "host",
+			body: `{"count":1,"host":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListHostsMetricsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.HostsMetrics), err
+			},
+		},
+		{
+			name: "NetworkIsolationMethods", key: "isolationmethod",
+			body: `{"count":1,"isolationmethod":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListNetworkIsolationMethodsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.NetworkIsolationMethods), err
+			},
+		},
+		{
+			name: "RoutingFirewallRules", key: "firewallrule",
+			body: `{"count":1,"firewallrule":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListRoutingFirewallRulesResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.RoutingFirewallRules), err
+			},
+		},
+		{
+			name: "SupportedNetworkServices", key: "networkservice",
+			body: `{"count":1,"networkservice":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListSupportedNetworkServicesResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.SupportedNetworkServices), err
+			},
+		},
+		{
+			name: "SystemVmsUsageHistory", key: "virtualmachine",
+			body: `{"count":1,"virtualmachine":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListSystemVmsUsageHistoryResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.SystemVmsUsageHistory), err
+			},
+		},
+		{
+			name: "TrafficTypeImplementors", key: "traffictypeimplementorresponse",
+			body: `{"count":1,"traffictypeimplementorresponse":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListTrafficTypeImplementorsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.TrafficTypeImplementors), err
+			},
+		},
+		{
+			name: "UserTwoFactorAuthenticatorProviders", key: "providers",
+			body: `{"count":1,"providers":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListUserTwoFactorAuthenticatorProvidersResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.UserTwoFactorAuthenticatorProviders), err
+			},
+		},
+		{
+			name: "VolumesMetrics", key: "volume",
+			body: `{"count":1,"volume":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListVolumesMetricsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.VolumesMetrics), err
+			},
+		},
+		{
+			name: "ZonesMetrics", key: "zone",
+			body: `{"count":1,"zone":[{}]}`,
+			decode: func(b []byte) (int, error) {
+				var r cloudstack.ListZonesMetricsResponse
+				err := json.Unmarshal(b, &r)
+				return len(r.ZonesMetrics), err
+			},
+		},
+	}
+
+	for _, tc := range sliceCases {
+		t.Run(tc.name, func(t *testing.T) {
+			n, err := tc.decode([]byte(tc.body))
+			if err != nil {
+				t.Fatalf("decoding key %q: %v", tc.key, err)
+			}
+			if n != 1 {
+				t.Fatalf("expected 1 item under key %q, got %d (nil slice means the json tag does not match the key the server sends)", tc.key, n)
+			}
+		})
+	}
+
+	// These two return a single object and no count, so the field is a pointer
+	// rather than a slice.
+	objectCases := []struct {
+		name   string
+		key    string
+		body   string
+		decode func([]byte) (bool, error)
+	}{
+		{
+			name: "CaCertificate", key: "cacertificates",
+			body: `{"cacertificates":{}}`,
+			decode: func(b []byte) (bool, error) {
+				var r cloudstack.ListCaCertificateResponse
+				err := json.Unmarshal(b, &r)
+				return r.CaCertificate != nil, err
+			},
+		},
+		{
+			name: "UsageServerMetrics", key: "usageMetrics",
+			body: `{"usageMetrics":{}}`,
+			decode: func(b []byte) (bool, error) {
+				var r cloudstack.ListUsageServerMetricsResponse
+				err := json.Unmarshal(b, &r)
+				return r.UsageServerMetrics != nil, err
+			},
+		},
+	}
+
+	for _, tc := range objectCases {
+		t.Run(tc.name, func(t *testing.T) {
+			ok, err := tc.decode([]byte(tc.body))
+			if err != nil {
+				t.Fatalf("decoding key %q: %v", tc.key, err)
+			}
+			if !ok {
+				t.Fatalf("expected an object under key %q, got nil", tc.key)
+			}
+		})
+	}
+}

@@ -955,7 +955,7 @@ func (s *UserService) ListUserTwoFactorAuthenticatorProviders(p *ListUserTwoFact
 
 type ListUserTwoFactorAuthenticatorProvidersResponse struct {
 	Count                               int                                   `json:"count"`
-	UserTwoFactorAuthenticatorProviders []*UserTwoFactorAuthenticatorProvider `json:"usertwofactorauthenticatorprovider"`
+	UserTwoFactorAuthenticatorProviders []*UserTwoFactorAuthenticatorProvider `json:"providers"`
 }
 
 type UserTwoFactorAuthenticatorProvider struct {

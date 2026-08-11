@@ -3775,7 +3775,7 @@ func (s *NetworkService) ListNetworkIsolationMethods(p *ListNetworkIsolationMeth
 
 type ListNetworkIsolationMethodsResponse struct {
 	Count                   int                       `json:"count"`
-	NetworkIsolationMethods []*NetworkIsolationMethod `json:"networkisolationmethod"`
+	NetworkIsolationMethods []*NetworkIsolationMethod `json:"isolationmethod"`
 }
 
 type NetworkIsolationMethod struct {
@@ -6424,7 +6424,7 @@ func (s *NetworkService) ListSupportedNetworkServices(p *ListSupportedNetworkSer
 
 type ListSupportedNetworkServicesResponse struct {
 	Count                    int                        `json:"count"`
-	SupportedNetworkServices []*SupportedNetworkService `json:"supportednetworkservice"`
+	SupportedNetworkServices []*SupportedNetworkService `json:"networkservice"`
 }
 
 type SupportedNetworkService struct {

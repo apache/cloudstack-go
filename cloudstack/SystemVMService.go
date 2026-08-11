@@ -1108,7 +1108,7 @@ func (s *SystemVMService) ListSystemVmsUsageHistory(p *ListSystemVmsUsageHistory
 
 type ListSystemVmsUsageHistoryResponse struct {
 	Count                 int                      `json:"count"`
-	SystemVmsUsageHistory []*SystemVmsUsageHistory `json:"systemvmsusagehistory"`
+	SystemVmsUsageHistory []*SystemVmsUsageHistory `json:"virtualmachine"`
 }
 
 type SystemVmsUsageHistory struct {

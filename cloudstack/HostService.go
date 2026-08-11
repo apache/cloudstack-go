@@ -4193,7 +4193,7 @@ func (s *HostService) ListHostsMetrics(p *ListHostsMetricsParams) (*ListHostsMet
 
 type ListHostsMetricsResponse struct {
 	Count        int            `json:"count"`
-	HostsMetrics []*HostsMetric `json:"hostsmetric"`
+	HostsMetrics []*HostsMetric `json:"host"`
 }
 
 type HostsMetric struct {

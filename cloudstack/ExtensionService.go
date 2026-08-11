@@ -1197,7 +1197,7 @@ func (s *ExtensionService) ListCustomActions(p *ListCustomActionsParams) (*ListC
 
 type ListCustomActionsResponse struct {
 	Count         int             `json:"count"`
-	CustomActions []*CustomAction `json:"customaction"`
+	CustomActions []*CustomAction `json:"extensioncustomaction"`
 }
 
 type CustomAction struct {

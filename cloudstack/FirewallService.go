@@ -4094,7 +4094,7 @@ func (s *FirewallService) ListRoutingFirewallRules(p *ListRoutingFirewallRulesPa
 
 type ListRoutingFirewallRulesResponse struct {
 	Count                int                    `json:"count"`
-	RoutingFirewallRules []*RoutingFirewallRule `json:"routingfirewallrule"`
+	RoutingFirewallRules []*RoutingFirewallRule `json:"firewallrule"`
 }
 
 type RoutingFirewallRule struct {

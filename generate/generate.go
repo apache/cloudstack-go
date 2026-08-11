@@ -179,6 +179,59 @@ var customResponseStructTypes = map[string]string{
 	"findHostsForMigration": "HostForMigration",
 }
 
+// listResponseKeys records the JSON key CloudStack uses for the items of a list
+// response, for every API where that key differs from the one derived from the
+// API name.
+var listResponseKeys = map[string]string{
+	"listAsyncJobs":                           "asyncjobs",
+	"listDomainChildren":                      "domain",
+	"listEgressFirewallRules":                 "firewallrule",
+	"listGuestNetworkIpv6Prefixes":            "guestnetworkipv6prefix",
+	"listHostHAProviders":                     "haprovider",
+	"listHostHAResources":                     "hostha",
+	"listHypervisorCapabilities":              "hypervisorCapabilities",
+	"listImageStoreObjects":                   "datastoreobject",
+	"listLBHealthCheckPolicies":               "healthcheckpolicies",
+	"listLBStickinessPolicies":                "stickinesspolicies",
+	"listManagementServersMetrics":            "managementserver",
+	"listObjectStoragePools":                  "objectstore",
+	"listSecondaryStorageSelectors":           "heuristics",
+	"listStoragePoolObjects":                  "datastoreobject",
+	"listStoragePoolsMetrics":                 "storagepool",
+	"listVirtualMachinesMetrics":              "virtualmachine",
+	"listVirtualMachinesUsageHistory":         "virtualmachine",
+	"listVmwareDcVms":                         "unmanagedinstance",
+	"listVolumesUsageHistory":                 "volume",
+	"quotaSummary":                            "summary",
+	"quotaTariffList":                         "quotatariff",
+	"registerTemplate":                        "template",
+	"listVnfAppliances":                       "virtualmachine",
+	"listVnfTemplates":                        "template",
+	"listBackupProviders":                     "providers",
+	"listClustersMetrics":                     "cluster",
+	"listCustomActions":                       "extensioncustomaction",
+	"listHostsMetrics":                        "host",
+	"listNetworkIsolationMethods":             "isolationmethod",
+	"listRoutingFirewallRules":                "firewallrule",
+	"listSupportedNetworkServices":            "networkservice",
+	"listSystemVmsUsageHistory":               "virtualmachine",
+	"listTrafficTypeImplementors":             "traffictypeimplementorresponse",
+	"listUserTwoFactorAuthenticatorProviders": "providers",
+	"listVolumesMetrics":                      "volume",
+	"listZonesMetrics":                        "zone",
+	"listASNRanges":                           "asnumberrange",
+	"listIpv4SubnetsForZone":                  "zoneipv4subnet",
+}
+
+// listResponseKey returns the JSON key for an API's list items, preferring an
+// observed key over the one derived from the API name.
+func listResponseKey(apiName, listName string) string {
+	if key, ok := listResponseKeys[apiName]; ok {
+		return key
+	}
+	return strings.ToLower(parseSingular(listName))
+}
+
 // We prefill this one value to make sure it is not
 // created twice, as this is also a top level type.
 var typeNames = map[string]bool{"Nic": true}
@@ -725,6 +778,9 @@ func (as *allServices) GeneralCode() ([]byte, error) {
 	pn("			if k != \"count\" {")
 	pn("				if err := json.Unmarshal(v, &resp); err != nil {")
 	pn("					return nil, err")
+	pn("				}")
+	pn("				if len(resp) == 0 {")
+	pn("					return nil, fmt.Errorf(\"Unable to extract raw value: empty array for key %%q in:\\n\\n%%s\\n\\n\", k, string(b))")
 	pn("				}")
 	pn("				return resp[0], nil")
 	pn("			}")
@@ -2078,40 +2134,28 @@ func (s *service) generateResponseType(a *API) {
 		a.Name == "registerCniConfiguration" || a.Name == "quotaBalance" || a.Name == "quotaSummary" || a.Name == "quotaTariffList" {
 		pn("type %s struct {", tn)
 
-		// This nasty check is for some specific response that do not behave consistent
+		// Responses whose *shape* differs: a single object instead of an array,
+		// no count, more than one collection, or a hand-written field list.
+		// Responses that differ only in the item key are handled by the default
+		// arm through listResponseKeys.
 		switch a.Name {
-		case "listAsyncJobs":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "asyncjobs")
 		case "listCapabilities":
 			pn("    %s *%s `json:\"%s\"`", ln, parseSingular(ln), "capability")
-		case "listEgressFirewallRules":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "firewallrule")
+		case "listCaCertificate":
+			// Returns a single object under "cacertificates", with no count.
+			pn("	%s *%s `json:\"%s\"`", ln, parseSingular(ln), "cacertificates")
+		case "listUsageServerMetrics":
+			// Returns a single object under "usageMetrics", with no count.
+			pn("	%s *%s `json:\"%s\"`", ln, parseSingular(ln), "usageMetrics")
 		case "listLoadBalancerRuleInstances":
 			pn("	Count int `json:\"count\"`")
 			pn("	LBRuleVMIDIPs []*%s `json:\"%s\"`", parseSingular(ln), "lbrulevmidip")
 			pn("	LoadBalancerRuleInstances []*VirtualMachine `json:\"%s\"`", strings.ToLower(parseSingular(ln)))
-		case "listVirtualMachinesMetrics":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "virtualmachine")
-		case "listManagementServersMetrics":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "managementserver")
 		case "listDbMetrics":
 			pn("	%s %s `json:\"%s\"`", ln, parseSingular(ln), "dbMetrics")
-		case "registerTemplate":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")
-		case "listDomainChildren":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "domain")
 		case "findHostsForMigration":
 			pn(" Count int `json:\"count\"`")
 			pn(" Host []*%s `json:\"%s\"`", customResponseStructTypes[a.Name], "host")
-		case "listVmwareDcVms":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "unmanagedinstance")
 		case "registerUserData":
 			pn("    Account string `json:\"account\"`")
 			pn("    Accountid string `json:\"accountid\"`")
@@ -2126,69 +2170,14 @@ func (s *service) generateResponseType(a *API) {
 			pn("    Userdata string `json:\"userdata\"`")
 		case "registerCniConfiguration":
 			pn("    CniConfiguration *UserData `json:\"cniconfig\"`")
-		case "listObjectStoragePools":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "objectstore")
-		case "listStoragePoolObjects":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
-		case "listImageStoreObjects":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "datastoreobject")
-		case "listVolumesUsageHistory":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "volume")
-		case "listHostHAProviders":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "haprovider")
-		case "listSecondaryStorageSelectors":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "heuristics")
-		case "listVirtualMachinesUsageHistory":
-			pn("    Count                       int                            `json:\"count\"`")
-			pn("    VirtualMachinesUsageHistory []*VirtualMachinesUsageHistory `json:\"virtualmachine\"`")
-		case "listHostHAResources":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hostha")
 		case "listInfrastructure":
 			pn("	Count int `json:\"count\"`")
 			pn("	%s *%s `json:\"%s\"`", ln, parseSingular(ln), "infrastructure")
-		case "listStoragePoolsMetrics":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "storagepool")
-		case "quotaTariffList":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "quotatariff")
 		case "quotaBalance":
 			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "balance")
-		case "quotaSummary":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "summary")
-		case "listHypervisorCapabilities":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "hypervisorCapabilities")
-		case "listGuestNetworkIpv6Prefixes":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "guestnetworkipv6prefix")
-		case "listLBHealthCheckPolicies":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "healthcheckpolicies")
-		case "listLBStickinessPolicies":
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "stickinesspolicies")
-		case "listVnfTemplates":
-			// ListVnfTemplatesCmd is an empty subclass of ListTemplatesCmd, so the
-			// server returns the items under "template", not "vnftemplate".
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "template")
-		case "listVnfAppliances":
-			// ListVnfAppliancesCmd inherits execute() from ListVMsCmd, so the server
-			// returns the items under "virtualmachine", not "vnfappliance".
-			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), "virtualmachine")
 		default:
 			pn("	Count int `json:\"count\"`")
-			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), strings.ToLower(parseSingular(ln)))
+			pn("	%s []*%s `json:\"%s\"`", ln, parseSingular(ln), listResponseKey(a.Name, ln))
 		}
 		pn("}")
 		pn("")

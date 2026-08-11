@@ -2113,7 +2113,7 @@ func (s *ZoneService) ListIpv4SubnetsForZone(p *ListIpv4SubnetsForZoneParams) (*
 
 type ListIpv4SubnetsForZoneResponse struct {
 	Count              int                   `json:"count"`
-	Ipv4SubnetsForZone []*Ipv4SubnetsForZone `json:"ipv4subnetsforzone"`
+	Ipv4SubnetsForZone []*Ipv4SubnetsForZone `json:"zoneipv4subnet"`
 }
 
 type Ipv4SubnetsForZone struct {
@@ -3076,7 +3076,7 @@ func (s *ZoneService) ListZonesMetrics(p *ListZonesMetricsParams) (*ListZonesMet
 
 type ListZonesMetricsResponse struct {
 	Count        int            `json:"count"`
-	ZonesMetrics []*ZonesMetric `json:"zonesmetric"`
+	ZonesMetrics []*ZonesMetric `json:"zone"`
 }
 
 type ZonesMetric struct {

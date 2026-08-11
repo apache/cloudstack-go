@@ -3544,7 +3544,7 @@ func (s *BackupService) ListBackupProviders(p *ListBackupProvidersParams) (*List
 
 type ListBackupProvidersResponse struct {
 	Count           int               `json:"count"`
-	BackupProviders []*BackupProvider `json:"backupprovider"`
+	BackupProviders []*BackupProvider `json:"providers"`
 }
 
 type BackupProvider struct {
