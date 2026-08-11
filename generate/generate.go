@@ -108,6 +108,12 @@ var mapRequireList = map[string]map[string]bool{
 		"nicnetworklist":         true,
 		"datadisksdetails":       true,
 	},
+	"createVPCOffering": map[string]bool{
+		"servicecapabilitylist": true,
+	},
+	"createNetworkOffering": map[string]bool{
+		"servicecapabilitylist": true,
+	},
 	"updateVirtualMachine": map[string]bool{
 		"dhcpoptionsnetworklist": true,
 	},

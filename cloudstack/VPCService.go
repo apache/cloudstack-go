@@ -1274,10 +1274,11 @@ func (p *CreateVPCOfferingParams) toURLValues() url.Values {
 		u.Set("routingmode", v.(string))
 	}
 	if v, found := p.p["servicecapabilitylist"]; found {
-		m := v.(map[string]string)
-		for i, k := range getSortedKeysFromMap(m) {
-			u.Set(fmt.Sprintf("servicecapabilitylist[%d].key", i), k)
-			u.Set(fmt.Sprintf("servicecapabilitylist[%d].value", i), m[k])
+		l := v.([]map[string]string)
+		for i, m := range l {
+			for key, val := range m {
+				u.Set(fmt.Sprintf("servicecapabilitylist[%d].%s", i, key), val)
+			}
 		}
 	}
 	if v, found := p.p["serviceofferingid"]; found {
@@ -1515,7 +1516,7 @@ func (p *CreateVPCOfferingParams) GetRoutingmode() (string, bool) {
 	return value, ok
 }
 
-func (p *CreateVPCOfferingParams) SetServicecapabilitylist(v map[string]string) {
+func (p *CreateVPCOfferingParams) SetServicecapabilitylist(v []map[string]string) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
@@ -1528,12 +1529,26 @@ func (p *CreateVPCOfferingParams) ResetServicecapabilitylist() {
 	}
 }
 
-func (p *CreateVPCOfferingParams) GetServicecapabilitylist() (map[string]string, bool) {
+func (p *CreateVPCOfferingParams) GetServicecapabilitylist() ([]map[string]string, bool) {
 	if p.p == nil {
 		p.p = make(map[string]interface{})
 	}
-	value, ok := p.p["servicecapabilitylist"].(map[string]string)
+	value, ok := p.p["servicecapabilitylist"].([]map[string]string)
 	return value, ok
+}
+
+func (p *CreateVPCOfferingParams) AddServicecapabilitylist(item map[string]string) {
+	if p.p == nil {
+		p.p = make(map[string]interface{})
+	}
+	val, found := p.p["servicecapabilitylist"]
+	if !found {
+		p.p["servicecapabilitylist"] = []map[string]string{}
+		val = p.p["servicecapabilitylist"]
+	}
+	l := val.([]map[string]string)
+	l = append(l, item)
+	p.p["servicecapabilitylist"] = l
 }
 
 func (p *CreateVPCOfferingParams) SetServiceofferingid(v string) {
