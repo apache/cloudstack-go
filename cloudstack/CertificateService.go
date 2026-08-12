@@ -366,8 +366,7 @@ func (s *CertificateService) ListCaCertificate(p *ListCaCertificateParams) (*Lis
 }
 
 type ListCaCertificateResponse struct {
-	Count         int              `json:"count"`
-	CaCertificate []*CaCertificate `json:"cacertificate"`
+	CaCertificate *CaCertificate `json:"cacertificates"`
 }
 
 type CaCertificate struct {

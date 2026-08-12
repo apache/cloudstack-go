@@ -385,7 +385,7 @@ func (s *ASNumberRangeService) ListASNRanges(p *ListASNRangesParams) (*ListASNRa
 
 type ListASNRangesResponse struct {
 	Count     int         `json:"count"`
-	ASNRanges []*ASNRange `json:"asnrange"`
+	ASNRanges []*ASNRange `json:"asnumberrange"`
 }
 
 type ASNRange struct {
