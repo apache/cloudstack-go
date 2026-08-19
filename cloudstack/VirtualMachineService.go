@@ -4636,6 +4636,9 @@ func (s *VirtualMachineService) GetVirtualMachineID(name string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachines) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VirtualMachines[0].Id, l.Count, nil
 	}
 
@@ -4691,6 +4694,9 @@ func (s *VirtualMachineService) GetVirtualMachineByID(id string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachines) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VirtualMachines[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VirtualMachine UUID: %s!", id)
@@ -6041,6 +6047,9 @@ func (s *VirtualMachineService) GetVirtualMachinesMetricID(name string, opts ...
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachinesMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VirtualMachinesMetrics[0].Id, l.Count, nil
 	}
 
@@ -6096,6 +6105,9 @@ func (s *VirtualMachineService) GetVirtualMachinesMetricByID(id string, opts ...
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachinesMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VirtualMachinesMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VirtualMachinesMetric UUID: %s!", id)
@@ -11409,6 +11421,9 @@ func (s *VirtualMachineService) GetVirtualMachinesUsageHistoryID(name string, op
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachinesUsageHistory) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VirtualMachinesUsageHistory[0].Id, l.Count, nil
 	}
 
@@ -11464,6 +11479,9 @@ func (s *VirtualMachineService) GetVirtualMachinesUsageHistoryByID(id string, op
 	}
 
 	if l.Count == 1 {
+		if len(l.VirtualMachinesUsageHistory) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VirtualMachinesUsageHistory[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VirtualMachinesUsageHistory UUID: %s!", id)
@@ -14651,6 +14669,9 @@ func (s *VirtualMachineService) GetVMScheduleByID(id string, virtualmachineid st
 	}
 
 	if l.Count == 1 {
+		if len(l.VMSchedule) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VMSchedule[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VMSchedule UUID: %s!", id)

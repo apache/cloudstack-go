@@ -1120,6 +1120,9 @@ func (s *ExtensionService) GetCustomActionID(name string, opts ...OptionFunc) (s
 	}
 
 	if l.Count == 1 {
+		if len(l.CustomActions) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.CustomActions[0].Id, l.Count, nil
 	}
 
@@ -1175,6 +1178,9 @@ func (s *ExtensionService) GetCustomActionByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.CustomActions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.CustomActions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for CustomAction UUID: %s!", id)
@@ -1417,6 +1423,9 @@ func (s *ExtensionService) GetExtensionID(name string, opts ...OptionFunc) (stri
 	}
 
 	if l.Count == 1 {
+		if len(l.Extensions) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Extensions[0].Id, l.Count, nil
 	}
 
@@ -1472,6 +1481,9 @@ func (s *ExtensionService) GetExtensionByID(id string, opts ...OptionFunc) (*Ext
 	}
 
 	if l.Count == 1 {
+		if len(l.Extensions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Extensions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Extension UUID: %s!", id)

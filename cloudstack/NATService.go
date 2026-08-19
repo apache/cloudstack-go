@@ -916,6 +916,9 @@ func (s *NATService) GetIpForwardingRuleByID(id string, opts ...OptionFunc) (*Ip
 	}
 
 	if l.Count == 1 {
+		if len(l.IpForwardingRules) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.IpForwardingRules[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for IpForwardingRule UUID: %s!", id)

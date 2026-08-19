@@ -952,6 +952,9 @@ func (s *EventService) GetEventByID(id string, opts ...OptionFunc) (*Event, int,
 	}
 
 	if l.Count == 1 {
+		if len(l.Events) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Events[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Event UUID: %s!", id)

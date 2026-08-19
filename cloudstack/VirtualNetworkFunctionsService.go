@@ -2995,6 +2995,9 @@ func (s *VirtualNetworkFunctionsService) GetVnfApplianceID(name string, opts ...
 	}
 
 	if l.Count == 1 {
+		if len(l.VnfAppliances) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VnfAppliances[0].Id, l.Count, nil
 	}
 
@@ -3050,6 +3053,9 @@ func (s *VirtualNetworkFunctionsService) GetVnfApplianceByID(id string, opts ...
 	}
 
 	if l.Count == 1 {
+		if len(l.VnfAppliances) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VnfAppliances[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VnfAppliance UUID: %s!", id)
@@ -3976,6 +3982,9 @@ func (s *VirtualNetworkFunctionsService) GetVnfTemplateID(name string, templatef
 	}
 
 	if l.Count == 1 {
+		if len(l.VnfTemplates) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VnfTemplates[0].Id, l.Count, nil
 	}
 
@@ -4032,6 +4041,9 @@ func (s *VirtualNetworkFunctionsService) GetVnfTemplateByID(id string, templatef
 	}
 
 	if l.Count == 1 {
+		if len(l.VnfTemplates) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VnfTemplates[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VnfTemplate UUID: %s!", id)

@@ -1752,6 +1752,9 @@ func (s *KubernetesService) GetKubernetesClusterID(name string, opts ...OptionFu
 	}
 
 	if l.Count == 1 {
+		if len(l.KubernetesClusters) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.KubernetesClusters[0].Id, l.Count, nil
 	}
 
@@ -1807,6 +1810,9 @@ func (s *KubernetesService) GetKubernetesClusterByID(id string, opts ...OptionFu
 	}
 
 	if l.Count == 1 {
+		if len(l.KubernetesClusters) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.KubernetesClusters[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for KubernetesCluster UUID: %s!", id)
@@ -2122,6 +2128,9 @@ func (s *KubernetesService) GetKubernetesSupportedVersionID(keyword string, opts
 	}
 
 	if l.Count == 1 {
+		if len(l.KubernetesSupportedVersions) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.KubernetesSupportedVersions[0].Id, l.Count, nil
 	}
 
@@ -2177,6 +2186,9 @@ func (s *KubernetesService) GetKubernetesSupportedVersionByID(id string, opts ..
 	}
 
 	if l.Count == 1 {
+		if len(l.KubernetesSupportedVersions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.KubernetesSupportedVersions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for KubernetesSupportedVersion UUID: %s!", id)

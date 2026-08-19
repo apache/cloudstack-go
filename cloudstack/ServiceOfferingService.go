@@ -2194,6 +2194,9 @@ func (s *ServiceOfferingService) GetServiceOfferingID(name string, opts ...Optio
 	}
 
 	if l.Count == 1 {
+		if len(l.ServiceOfferings) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ServiceOfferings[0].Id, l.Count, nil
 	}
 
@@ -2249,6 +2252,9 @@ func (s *ServiceOfferingService) GetServiceOfferingByID(id string, opts ...Optio
 	}
 
 	if l.Count == 1 {
+		if len(l.ServiceOfferings) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ServiceOfferings[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ServiceOffering UUID: %s!", id)

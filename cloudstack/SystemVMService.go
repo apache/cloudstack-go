@@ -669,6 +669,9 @@ func (s *SystemVMService) GetSystemVmID(name string, opts ...OptionFunc) (string
 	}
 
 	if l.Count == 1 {
+		if len(l.SystemVms) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.SystemVms[0].Id, l.Count, nil
 	}
 
@@ -724,6 +727,9 @@ func (s *SystemVMService) GetSystemVmByID(id string, opts ...OptionFunc) (*Syste
 	}
 
 	if l.Count == 1 {
+		if len(l.SystemVms) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.SystemVms[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for SystemVm UUID: %s!", id)
@@ -1031,6 +1037,9 @@ func (s *SystemVMService) GetSystemVmsUsageHistoryID(name string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.SystemVmsUsageHistory) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.SystemVmsUsageHistory[0].Id, l.Count, nil
 	}
 
@@ -1086,6 +1095,9 @@ func (s *SystemVMService) GetSystemVmsUsageHistoryByID(id string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.SystemVmsUsageHistory) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.SystemVmsUsageHistory[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for SystemVmsUsageHistory UUID: %s!", id)

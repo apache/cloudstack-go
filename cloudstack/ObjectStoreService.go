@@ -1023,6 +1023,9 @@ func (s *ObjectStoreService) GetBucketID(name string, opts ...OptionFunc) (strin
 	}
 
 	if l.Count == 1 {
+		if len(l.Buckets) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Buckets[0].Id, l.Count, nil
 	}
 
@@ -1078,6 +1081,9 @@ func (s *ObjectStoreService) GetBucketByID(id string, opts ...OptionFunc) (*Buck
 	}
 
 	if l.Count == 1 {
+		if len(l.Buckets) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Buckets[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Bucket UUID: %s!", id)

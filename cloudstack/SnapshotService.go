@@ -2359,6 +2359,9 @@ func (s *SnapshotService) GetSnapshotPolicyByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.SnapshotPolicies) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.SnapshotPolicies[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for SnapshotPolicy UUID: %s!", id)
@@ -2934,6 +2937,9 @@ func (s *SnapshotService) GetSnapshotID(name string, opts ...OptionFunc) (string
 	}
 
 	if l.Count == 1 {
+		if len(l.Snapshots) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Snapshots[0].Id, l.Count, nil
 	}
 
@@ -2989,6 +2995,9 @@ func (s *SnapshotService) GetSnapshotByID(id string, opts ...OptionFunc) (*Snaps
 	}
 
 	if l.Count == 1 {
+		if len(l.Snapshots) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Snapshots[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Snapshot UUID: %s!", id)
@@ -3469,6 +3478,9 @@ func (s *SnapshotService) GetVMSnapshotID(name string, opts ...OptionFunc) (stri
 	}
 
 	if l.Count == 1 {
+		if len(l.VMSnapshot) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.VMSnapshot[0].Id, l.Count, nil
 	}
 

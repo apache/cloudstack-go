@@ -761,6 +761,9 @@ func (s *UCSService) GetUcsManagerID(keyword string, opts ...OptionFunc) (string
 	}
 
 	if l.Count == 1 {
+		if len(l.UcsManagers) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.UcsManagers[0].Id, l.Count, nil
 	}
 
@@ -816,6 +819,9 @@ func (s *UCSService) GetUcsManagerByID(id string, opts ...OptionFunc) (*UcsManag
 	}
 
 	if l.Count == 1 {
+		if len(l.UcsManagers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.UcsManagers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for UcsManager UUID: %s!", id)

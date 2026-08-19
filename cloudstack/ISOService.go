@@ -1612,6 +1612,9 @@ func (s *ISOService) GetIsoPermissionByID(id string, opts ...OptionFunc) (*IsoPe
 	}
 
 	if l.Count == 1 {
+		if len(l.IsoPermissions) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.IsoPermissions[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for IsoPermission UUID: %s!", id)
@@ -2282,6 +2285,9 @@ func (s *ISOService) GetIsoID(name string, isofilter string, zoneid string, opts
 	}
 
 	if l.Count == 1 {
+		if len(l.Isos) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Isos[0].Id, l.Count, nil
 	}
 
@@ -2337,6 +2343,9 @@ func (s *ISOService) GetIsoByID(id string, opts ...OptionFunc) (*Iso, int, error
 	}
 
 	if l.Count == 1 {
+		if len(l.Isos) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Isos[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Iso UUID: %s!", id)

@@ -3620,6 +3620,9 @@ func (s *NetworkService) GetIpv4SubnetsForGuestNetworkByID(id string, opts ...Op
 	}
 
 	if l.Count == 1 {
+		if len(l.Ipv4SubnetsForGuestNetwork) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Ipv4SubnetsForGuestNetwork[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Ipv4SubnetsForGuestNetwork UUID: %s!", id)
@@ -4047,6 +4050,9 @@ func (s *NetworkService) GetNetworkServiceProviderID(name string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.NetworkServiceProviders) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.NetworkServiceProviders[0].Id, l.Count, nil
 	}
 
@@ -4872,6 +4878,9 @@ func (s *NetworkService) GetNetworkID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.Networks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Networks[0].Id, l.Count, nil
 	}
 
@@ -4927,6 +4936,9 @@ func (s *NetworkService) GetNetworkByID(id string, opts ...OptionFunc) (*Network
 	}
 
 	if l.Count == 1 {
+		if len(l.Networks) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Networks[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Network UUID: %s!", id)
@@ -5199,6 +5211,9 @@ func (s *NetworkService) GetNiciraNvpDeviceNetworkID(keyword string, nvpdeviceid
 	}
 
 	if l.Count == 1 {
+		if len(l.NiciraNvpDeviceNetworks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.NiciraNvpDeviceNetworks[0].Id, l.Count, nil
 	}
 
@@ -5432,6 +5447,9 @@ func (s *NetworkService) GetOpenDaylightControllerByID(id string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.OpenDaylightControllers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.OpenDaylightControllers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for OpenDaylightController UUID: %s!", id)
@@ -5610,6 +5628,9 @@ func (s *NetworkService) GetPaloAltoFirewallNetworkID(keyword string, lbdeviceid
 	}
 
 	if l.Count == 1 {
+		if len(l.PaloAltoFirewallNetworks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.PaloAltoFirewallNetworks[0].Id, l.Count, nil
 	}
 
@@ -5936,6 +5957,9 @@ func (s *NetworkService) GetPhysicalNetworkID(name string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.PhysicalNetworks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.PhysicalNetworks[0].Id, l.Count, nil
 	}
 
@@ -5991,6 +6015,9 @@ func (s *NetworkService) GetPhysicalNetworkByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.PhysicalNetworks) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.PhysicalNetworks[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for PhysicalNetwork UUID: %s!", id)
@@ -6226,6 +6253,9 @@ func (s *NetworkService) GetStorageNetworkIpRangeByID(id string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.StorageNetworkIpRange) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.StorageNetworkIpRange[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for StorageNetworkIpRange UUID: %s!", id)
@@ -8453,6 +8483,9 @@ func (s *NetworkService) GetGuestNetworkIpv6PrefixeByID(id string, opts ...Optio
 	}
 
 	if l.Count == 1 {
+		if len(l.GuestNetworkIpv6Prefixes) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.GuestNetworkIpv6Prefixes[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for GuestNetworkIpv6Prefixe UUID: %s!", id)

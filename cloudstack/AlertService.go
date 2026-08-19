@@ -745,6 +745,9 @@ func (s *AlertService) GetAlertID(name string, opts ...OptionFunc) (string, int,
 	}
 
 	if l.Count == 1 {
+		if len(l.Alerts) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Alerts[0].Id, l.Count, nil
 	}
 
@@ -800,6 +803,9 @@ func (s *AlertService) GetAlertByID(id string, opts ...OptionFunc) (*Alert, int,
 	}
 
 	if l.Count == 1 {
+		if len(l.Alerts) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Alerts[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Alert UUID: %s!", id)

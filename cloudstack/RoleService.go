@@ -1241,6 +1241,9 @@ func (s *RoleService) GetRoleID(name string, opts ...OptionFunc) (string, int, e
 	}
 
 	if l.Count == 1 {
+		if len(l.Roles) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Roles[0].Id, l.Count, nil
 	}
 
@@ -1296,6 +1299,9 @@ func (s *RoleService) GetRoleByID(id string, opts ...OptionFunc) (*Role, int, er
 	}
 
 	if l.Count == 1 {
+		if len(l.Roles) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Roles[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Role UUID: %s!", id)
@@ -1863,6 +1869,9 @@ func (s *RoleService) GetProjectRoleID(name string, projectid string, opts ...Op
 	}
 
 	if l.Count == 1 {
+		if len(l.ProjectRoles) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ProjectRoles[0].Id, l.Count, nil
 	}
 

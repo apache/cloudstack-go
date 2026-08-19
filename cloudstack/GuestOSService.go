@@ -790,6 +790,9 @@ func (s *GuestOSService) GetGuestOsMappingByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.GuestOsMapping) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.GuestOsMapping[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for GuestOsMapping UUID: %s!", id)
@@ -1167,6 +1170,9 @@ func (s *GuestOSService) GetOsCategoryID(name string, opts ...OptionFunc) (strin
 	}
 
 	if l.Count == 1 {
+		if len(l.OsCategories) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.OsCategories[0].Id, l.Count, nil
 	}
 
@@ -1222,6 +1228,9 @@ func (s *GuestOSService) GetOsCategoryByID(id string, opts ...OptionFunc) (*OsCa
 	}
 
 	if l.Count == 1 {
+		if len(l.OsCategories) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.OsCategories[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for OsCategory UUID: %s!", id)
@@ -1496,6 +1505,9 @@ func (s *GuestOSService) GetOsTypeID(keyword string, opts ...OptionFunc) (string
 	}
 
 	if l.Count == 1 {
+		if len(l.OsTypes) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.OsTypes[0].Id, l.Count, nil
 	}
 
@@ -1551,6 +1563,9 @@ func (s *GuestOSService) GetOsTypeByID(id string, opts ...OptionFunc) (*OsType, 
 	}
 
 	if l.Count == 1 {
+		if len(l.OsTypes) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.OsTypes[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for OsType UUID: %s!", id)

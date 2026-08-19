@@ -443,6 +443,9 @@ func (s *InternalLBService) GetInternalLoadBalancerElementByID(id string, opts .
 	}
 
 	if l.Count == 1 {
+		if len(l.InternalLoadBalancerElements) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.InternalLoadBalancerElements[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for InternalLoadBalancerElement UUID: %s!", id)
@@ -957,6 +960,9 @@ func (s *InternalLBService) GetInternalLoadBalancerVMID(name string, opts ...Opt
 	}
 
 	if l.Count == 1 {
+		if len(l.InternalLoadBalancerVMs) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.InternalLoadBalancerVMs[0].Id, l.Count, nil
 	}
 
@@ -1012,6 +1018,9 @@ func (s *InternalLBService) GetInternalLoadBalancerVMByID(id string, opts ...Opt
 	}
 
 	if l.Count == 1 {
+		if len(l.InternalLoadBalancerVMs) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.InternalLoadBalancerVMs[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for InternalLoadBalancerVM UUID: %s!", id)

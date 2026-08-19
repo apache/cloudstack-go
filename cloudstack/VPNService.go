@@ -1941,6 +1941,9 @@ func (s *VPNService) GetRemoteAccessVpnByID(id string, opts ...OptionFunc) (*Rem
 	}
 
 	if l.Count == 1 {
+		if len(l.RemoteAccessVpns) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.RemoteAccessVpns[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for RemoteAccessVpn UUID: %s!", id)
@@ -2301,6 +2304,9 @@ func (s *VPNService) GetVpnConnectionByID(id string, opts ...OptionFunc) (*VpnCo
 	}
 
 	if l.Count == 1 {
+		if len(l.VpnConnections) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VpnConnections[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VpnConnection UUID: %s!", id)
@@ -2620,6 +2626,9 @@ func (s *VPNService) GetVpnCustomerGatewayID(keyword string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.VpnCustomerGateways) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.VpnCustomerGateways[0].Id, l.Count, nil
 	}
 
@@ -2675,6 +2684,9 @@ func (s *VPNService) GetVpnCustomerGatewayByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.VpnCustomerGateways) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VpnCustomerGateways[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VpnCustomerGateway UUID: %s!", id)
@@ -3044,6 +3056,9 @@ func (s *VPNService) GetVpnGatewayByID(id string, opts ...OptionFunc) (*VpnGatew
 	}
 
 	if l.Count == 1 {
+		if len(l.VpnGateways) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VpnGateways[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VpnGateway UUID: %s!", id)
@@ -3378,6 +3393,9 @@ func (s *VPNService) GetVpnUserByID(id string, opts ...OptionFunc) (*VpnUser, in
 	}
 
 	if l.Count == 1 {
+		if len(l.VpnUsers) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.VpnUsers[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for VpnUser UUID: %s!", id)

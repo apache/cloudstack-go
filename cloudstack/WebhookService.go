@@ -1117,6 +1117,9 @@ func (s *WebhookService) GetWebhookDeliveryID(keyword string, opts ...OptionFunc
 	}
 
 	if l.Count == 1 {
+		if len(l.WebhookDeliveries) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.WebhookDeliveries[0].Id, l.Count, nil
 	}
 
@@ -1172,6 +1175,9 @@ func (s *WebhookService) GetWebhookDeliveryByID(id string, opts ...OptionFunc) (
 	}
 
 	if l.Count == 1 {
+		if len(l.WebhookDeliveries) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.WebhookDeliveries[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for WebhookDelivery UUID: %s!", id)
@@ -1552,6 +1558,9 @@ func (s *WebhookService) GetWebhookID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.Webhooks) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Webhooks[0].Id, l.Count, nil
 	}
 
@@ -1607,6 +1616,9 @@ func (s *WebhookService) GetWebhookByID(id string, opts ...OptionFunc) (*Webhook
 	}
 
 	if l.Count == 1 {
+		if len(l.Webhooks) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Webhooks[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Webhook UUID: %s!", id)

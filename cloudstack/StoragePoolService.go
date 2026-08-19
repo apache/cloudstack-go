@@ -598,6 +598,9 @@ func (s *StoragePoolService) GetAffectedVmsForStorageScopeChangeID(keyword strin
 	}
 
 	if l.Count == 1 {
+		if len(l.AffectedVmsForStorageScopeChange) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.AffectedVmsForStorageScopeChange[0].Id, l.Count, nil
 	}
 
@@ -978,6 +981,9 @@ func (s *StoragePoolService) GetObjectStoragePoolID(name string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.ObjectStoragePools) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.ObjectStoragePools[0].Id, l.Count, nil
 	}
 
@@ -1033,6 +1039,9 @@ func (s *StoragePoolService) GetObjectStoragePoolByID(id string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.ObjectStoragePools) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ObjectStoragePools[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ObjectStoragePool UUID: %s!", id)
@@ -1242,6 +1251,9 @@ func (s *StoragePoolService) GetStoragePoolObjectByID(id string, opts ...OptionF
 	}
 
 	if l.Count == 1 {
+		if len(l.StoragePoolObjects) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.StoragePoolObjects[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for StoragePoolObject UUID: %s!", id)
@@ -2135,6 +2147,9 @@ func (s *StoragePoolService) GetStoragePoolsMetricID(name string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.StoragePoolsMetrics) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.StoragePoolsMetrics[0].Id, l.Count, nil
 	}
 
@@ -2190,6 +2205,9 @@ func (s *StoragePoolService) GetStoragePoolsMetricByID(id string, opts ...Option
 	}
 
 	if l.Count == 1 {
+		if len(l.StoragePoolsMetrics) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.StoragePoolsMetrics[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for StoragePoolsMetric UUID: %s!", id)

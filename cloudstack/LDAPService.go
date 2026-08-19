@@ -1770,6 +1770,9 @@ func (s *LDAPService) GetLdapConfigurationByID(id string, opts ...OptionFunc) (*
 	}
 
 	if l.Count == 1 {
+		if len(l.LdapConfigurations) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.LdapConfigurations[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for LdapConfiguration UUID: %s!", id)

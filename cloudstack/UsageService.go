@@ -1239,6 +1239,9 @@ func (s *UsageService) GetTrafficTypeID(keyword string, physicalnetworkid string
 	}
 
 	if l.Count == 1 {
+		if len(l.TrafficTypes) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", keyword, l)
+		}
 		return l.TrafficTypes[0].Id, l.Count, nil
 	}
 

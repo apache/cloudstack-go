@@ -1590,6 +1590,9 @@ func (s *ProjectService) GetProjectInvitationByID(id string, opts ...OptionFunc)
 	}
 
 	if l.Count == 1 {
+		if len(l.ProjectInvitations) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.ProjectInvitations[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for ProjectInvitation UUID: %s!", id)
@@ -2043,6 +2046,9 @@ func (s *ProjectService) GetProjectID(name string, opts ...OptionFunc) (string, 
 	}
 
 	if l.Count == 1 {
+		if len(l.Projects) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Projects[0].Id, l.Count, nil
 	}
 
@@ -2098,6 +2104,9 @@ func (s *ProjectService) GetProjectByID(id string, opts ...OptionFunc) (*Project
 	}
 
 	if l.Count == 1 {
+		if len(l.Projects) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Projects[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Project UUID: %s!", id)

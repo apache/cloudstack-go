@@ -601,6 +601,9 @@ func (s *DomainService) GetDomainChildrenID(name string, opts ...OptionFunc) (st
 	}
 
 	if l.Count == 1 {
+		if len(l.DomainChildren) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.DomainChildren[0].Id, l.Count, nil
 	}
 
@@ -656,6 +659,9 @@ func (s *DomainService) GetDomainChildrenByID(id string, opts ...OptionFunc) (*D
 	}
 
 	if l.Count == 1 {
+		if len(l.DomainChildren) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.DomainChildren[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for DomainChildren UUID: %s!", id)
@@ -1040,6 +1046,9 @@ func (s *DomainService) GetDomainID(name string, opts ...OptionFunc) (string, in
 	}
 
 	if l.Count == 1 {
+		if len(l.Domains) == 0 {
+			return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
+		}
 		return l.Domains[0].Id, l.Count, nil
 	}
 
@@ -1095,6 +1104,9 @@ func (s *DomainService) GetDomainByID(id string, opts ...OptionFunc) (*Domain, i
 	}
 
 	if l.Count == 1 {
+		if len(l.Domains) == 0 {
+			return nil, l.Count, fmt.Errorf("No match found for %s: %+v", id, l)
+		}
 		return l.Domains[0], l.Count, nil
 	}
 	return nil, l.Count, fmt.Errorf("There is more then one result for Domain UUID: %s!", id)
