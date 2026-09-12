@@ -1666,6 +1666,10 @@ func (s *service) generateHelperFuncs(a *API) {
 			pn("	p.p = make(map[string]interface{})")
 			pn("")
 			pn("	p.p[\"%s\"] = %s", v, v)
+			// CloudStack < 4.22 ignores listNetworks' name filter: https://github.com/apache/cloudstack-go/issues/140.
+			if a.Name == "listNetworks" && v == "name" {
+				pn("	p.p[\"keyword\"] = name")
+			}
 			for _, ap := range a.Params {
 				if ap.Required || isRequiredParam(a, ap) {
 					pn("	p.p[\"%s\"] = %s", ap.Name, s.parseParamName(ap.Name))

@@ -45,10 +45,12 @@ These tests validate that:
 package citest
 
 import (
+	"fmt"
 	"os"
 	"slices"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/apache/cloudstack-go/v2/cloudstack"
 )
@@ -61,6 +63,7 @@ type testResources struct {
 	serviceOfferingID1 string
 	serviceOfferingID2 string
 	networkID          string
+	networkName        string
 	templateID         string
 	networkOfferingID  string
 }
@@ -90,6 +93,38 @@ func TestCloudstackAPI(t *testing.T) {
 	// Set up test environment
 	setupTestEnvironment(t, client, resources)
 
+	t.Run("NetworkNameLookups", func(t *testing.T) {
+		for _, tc := range []struct {
+			name   string
+			wantID string
+		}{
+			{name: resources.networkName, wantID: resources.networkID},
+			{name: "missing-" + resources.networkID},
+		} {
+			t.Run(tc.name, func(t *testing.T) {
+				wantCount := 0
+				if tc.wantID != "" {
+					wantCount = 1
+				}
+				id, count, err := client.Network.GetNetworkID(tc.name)
+				t.Logf("GetNetworkID(%q): id=%q count=%d error=%v", tc.name, id, count, err)
+				if id != tc.wantID || count != wantCount || (err != nil) != (tc.wantID == "") {
+					t.Errorf("wanted network ID %q and count %d", tc.wantID, wantCount)
+				}
+
+				network, count, err := client.Network.GetNetworkByName(tc.name)
+				id = ""
+				if network != nil {
+					id = network.Id
+				}
+				t.Logf("GetNetworkByName(%q): id=%q count=%d error=%v", tc.name, id, count, err)
+				if id != tc.wantID || count != wantCount || (err != nil) != (tc.wantID == "") {
+					t.Errorf("wanted network ID %q and count %d", tc.wantID, wantCount)
+				}
+			})
+		}
+	})
+
 	// Run the actual tests
 	t.Run("BasicTypes", func(t *testing.T) {
 		testBasicTypes(t, client, resources)
@@ -114,7 +149,8 @@ func setupTestEnvironment(t *testing.T, client *cloudstack.CloudStackClient, res
 	resources.networkOfferingID = getTestNetworkOffering(t, client)
 
 	// Create test network
-	resources.networkID = createTestNetwork(t, client, "ci-test-network", resources.networkOfferingID, resources.zoneID)
+	resources.networkName = fmt.Sprintf("ci-test-network-%d", time.Now().UnixNano())
+	resources.networkID = createTestNetwork(t, client, resources.networkName, resources.networkOfferingID, resources.zoneID)
 
 	// Get template ID
 	resources.templateID = getTestTemplate(t, client, resources.zoneID)
