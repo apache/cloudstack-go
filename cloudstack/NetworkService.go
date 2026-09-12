@@ -4855,6 +4855,7 @@ func (s *NetworkService) GetNetworkID(name string, opts ...OptionFunc) (string, 
 	p.p = make(map[string]interface{})
 
 	p.p["name"] = name
+	p.p["keyword"] = name
 
 	for _, fn := range append(s.cs.options, opts...) {
 		if err := fn(s.cs, p); err != nil {
@@ -4871,7 +4872,7 @@ func (s *NetworkService) GetNetworkID(name string, opts ...OptionFunc) (string, 
 		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
 	}
 
-	if l.Count == 1 {
+	if l.Count == 1 && l.Networks[0].Name == name {
 		return l.Networks[0].Id, l.Count, nil
 	}
 
