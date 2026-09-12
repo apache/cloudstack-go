@@ -46,6 +46,7 @@ func TestNetworkLookupCompatibility(t *testing.T) {
 		wantCount int
 	}{
 		{"single match", "existing", []*cloudstack.Network{existing}, networkID, 1},
+		{"single partial match", "exist", []*cloudstack.Network{existing}, "", 1},
 		{"missing with one network", "missing", []*cloudstack.Network{existing}, "", 0},
 		{"exact match among partial matches", "existing", multiple, networkID, 2},
 		{"missing with multiple networks", "missing", multiple, "", 0},
@@ -62,6 +63,9 @@ func TestNetworkLookupCompatibility(t *testing.T) {
 					wantCount := tc.wantCount
 					if supportsName && wantCount > 1 {
 						wantCount = 1
+					}
+					if supportsName && tc.wantID == "" {
+						wantCount = 0
 					}
 					server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 						q := r.URL.Query()
@@ -102,7 +106,7 @@ func TestNetworkLookupCompatibility(t *testing.T) {
 
 					network, count, err := client.Network.GetNetworkByName(tc.lookup, cloudstack.WithZone(zoneID))
 					if tc.wantID == "" {
-						if network != nil || count != 0 || err == nil {
+						if network != nil || count != wantCount || err == nil {
 							t.Errorf("GetNetworkByName(%q) = %+v, %d, %v; want no match",
 								tc.lookup, network, count, err)
 						}

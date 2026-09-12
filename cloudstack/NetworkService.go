@@ -4872,7 +4872,7 @@ func (s *NetworkService) GetNetworkID(name string, opts ...OptionFunc) (string, 
 		return "", l.Count, fmt.Errorf("No match found for %s: %+v", name, l)
 	}
 
-	if l.Count == 1 {
+	if l.Count == 1 && l.Networks[0].Name == name {
 		return l.Networks[0].Id, l.Count, nil
 	}
 

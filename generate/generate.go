@@ -1703,7 +1703,11 @@ func (s *service) generateHelperFuncs(a *API) {
 			pn("	  return \"\", l.Count, fmt.Errorf(\"No match found for %%s: %%+v\", %s, l)", v)
 			pn("	}")
 			pn("")
-			pn("	if l.Count == 1 {")
+			if a.Name == "listNetworks" {
+				pn("	if l.Count == 1 && l.%s[0].Name == %s {", ln, v)
+			} else {
+				pn("	if l.Count == 1 {")
+			}
 			pn("	  return l.%s[0].Id, l.Count, nil", ln)
 			pn("	}")
 			pn("")

@@ -123,6 +123,23 @@ func TestCloudstackAPI(t *testing.T) {
 				}
 			})
 		}
+		t.Run("PartialName", func(t *testing.T) {
+			name := strings.TrimPrefix(resources.networkName, "ci-")
+			id, count, err := client.Network.GetNetworkID(name)
+			t.Logf("GetNetworkID(%q): id=%q count=%d error=%v", name, id, count, err)
+			if id != "" || err == nil || count < 0 || count > 1 {
+				t.Error("partial name must not resolve to a network")
+			}
+			network, count, err := client.Network.GetNetworkByName(name)
+			id = ""
+			if network != nil {
+				id = network.Id
+			}
+			t.Logf("GetNetworkByName(%q): id=%q count=%d error=%v", name, id, count, err)
+			if network != nil || err == nil || count < 0 || count > 1 {
+				t.Error("partial name must not resolve to a network")
+			}
+		})
 	})
 
 	// Run the actual tests
